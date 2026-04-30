@@ -2,7 +2,7 @@ services:
   - type: web
     name: deutsche-nlp-api
     runtime: python
-    buildCommand: "pip install -r requirements.txt && python -m spacy download de_core_news_sm"
+    buildCommand: "pip install --only-binary=:all: -r requirements.txt && python -m spacy download de_core_news_sm"
     startCommand: "uvicorn app:app --host 0.0.0.0 --port $PORT"
     envVars:
       - key: PYTHON_VERSION
