@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deutsche Satzstruktur - Visual Tool</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Deutsche Satzstruktur Visualizer</h1>
+            <div class="subtitle">Visual tool for German sentence structure - Nouns: Color=Gender+Shape=Case | Verbs: Hexagon+Color=Pronoun</div>
+        </div>
+
+
+        <div class="main-content">
+            <div class="sentence-panel">
+                <h3>Sentences</h3>
+                <div class="sentence-input-area">
+                    <textarea id="sentence-input" placeholder="Type a sentence (e.g., ich lese das buch weil ich Zeit habe)"></textarea>
+                    <div class="sentence-buttons">
+                        <button id="add-sentence-btn" class="btn-add-sentence">Add Sentence</button>
+                        <button id="regenerate-btn" class="btn-regenerate">Regenerate</button>
+                    </div>
+                </div>
+                <div class="sentence-list">
+                    <div class="sentence-list-header">Saved Sentences:</div>
+                    <div id="sentence-list-content">
+                        <div class="no-sentences">No sentences yet. Type one above and click "Add Sentence".</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="canvas-container">
+                <svg id="canvas"></svg>
+            </div>
+
+            <div class="properties-panel">
+                <div id="properties-content">
+                    <div class="no-selection">
+                        Click on a word to edit its properties
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <span><strong>NOUNS - COLOR = GENDER:</strong></span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-circle" style="background: #3498db;"></div>
+                <span>Blue = Masculine (♂)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-circle" style="background: #e91e63;"></div>
+                <span>Pink = Feminine (♀)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-circle" style="background: #8e44ad;"></div>
+                <span>Dark Violet = Neuter (⚲)</span>
+            </div>
+            <div class="legend-item">
+                <span><strong>NOUNS - SHAPE = CASE:</strong></span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-circle" style="background: #7f8c8d;"></div>
+                <span>Circle = Nominative</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-square" style="background: #7f8c8d;"></div>
+                <span>Square = Accusative</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-trapezoid" style="background: #7f8c8d;"></div>
+                <span>Trapezoid = Dative</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-diamond" style="background: #7f8c8d;"></div>
+                <span>Diamond = Genitive</span>
+            </div>
+            <div class="legend-item">
+                <span><strong>PRONOUNS - COLOR:</strong>
+                    <span style="color: #27ae60; font-weight: bold;">ich</span>,
+                    <span style="color: #e67e22; font-weight: bold;">du</span>,
+                    <span style="color: #3498db; font-weight: bold;">er♂</span>,
+                    <span style="color: #e91e63; font-weight: bold;">sie♀</span>,
+                    <span style="color: #8e44ad; font-weight: bold;">es⚲</span>,
+                    <span style="color: #2c3e50; font-weight: bold;">wir</span>,
+                    <span style="color: #f39c12; font-weight: bold;">ihr</span>,
+                    <span style="color: #c0392b; font-weight: bold;">sie/Sie(pl.)</span>
+                </span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-circle" style="background: #c0392b;"></div>
+                <span>Red color = Plural nouns/adjectives (uses 'sie' plural color)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-hexagon" style="background: #7f8c8d;"></div>
+                <span>Hexagon = Verb/Modal</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-pentagon" style="background: #7f8c8d;"></div>
+                <span>Pentagon = Subordinating Conj. (weil, dass, etc.)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-star" style="background: #7f8c8d;"></div>
+                <span>Star = Coordinating Conj. (und, aber, etc.)</span>
+            </div>
+            <div class="legend-item">
+                <span><strong>PREPOSITIONS:</strong></span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-triangle" style="background: #7f8c8d;"></div>
+                <span>Triangle = Dative Prep.</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-square-small" style="background: #7f8c8d;"></div>
+                <span>Small Square = Accusative Prep.</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-diamond-small" style="background: #7f8c8d;"></div>
+                <span>Small Diamond = Genitive Prep.</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-parallelogram" style="background: #7f8c8d;"></div>
+                <span>Parallelogram = Wechsel Prep.</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape shape-octagon" style="background: #7f8c8d;"></div>
+                <span>Octagon = Other</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Modules -->
+    <script src="js/wordManager.js"></script>
+    <script src="js/sentenceManager.js"></script>
+    <script src="js/feldermodell.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
