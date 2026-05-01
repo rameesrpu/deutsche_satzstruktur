@@ -29,27 +29,8 @@ class WordManager {
             gen: ['während', 'wegen', 'trotz', 'statt', 'anstatt', 'aufgrund', 'innerhalb', 'außerhalb', 'oberhalb', 'unterhalb', 'diesseits', 'jenseits', 'unweit', 'mittels', 'dank', 'kraft', 'laut', 'angesichts', 'bezüglich', 'hinsichtlich']
         };
 
-        // Gender colors (used for all words - match pronoun colors)
-        this.genderColors = {
-            'none': '#95a5a6',   // Grey - No gender
-            'm': '#3498db',      // Blue - Masculine (matches 'er')
-            'f': '#e91e63',      // Pink - Feminine (matches 'sie♀')
-            'n': '#8e44ad'       // Dark Violet - Neuter (matches 'es')
-        };
-
-        // Pronoun colors (for verb conjugation)
-        // er/sie/es reuse gender colors, others are unique
-        this.pronounColors = {
-            'none': '#95a5a6',     // Grey - No conjugation
-            'ich': '#27ae60',      // Green
-            'du': '#e67e22',       // Orange
-            'er': '#3498db',       // Blue (same as masculine)
-            'sie_fem': '#e91e63',  // Pink (same as feminine)
-            'es': '#8e44ad',       // Dark Violet (same as neuter)
-            'wir': '#2c3e50',      // Dark Blue/Grey
-            'ihr': '#f39c12',      // Gold
-            'sie': '#c0392b'       // Red
-        };
+        // Use centralized grammatical configuration
+        this.config = GrammaticalConfig;
 
     }
 
@@ -235,14 +216,22 @@ class WordManager {
      * Get pronoun color
      */
     getPronounColor(pronoun) {
-        return this.pronounColors[pronoun] || '#666666';
+        return this.config.getPronounColor(pronoun);
     }
 
     /**
      * Get color for a word based on its gender
      */
     getWordColor(word) {
-        return this.genderColors[word.gender] || '#7f8c8d';
+        return this.config.getGenderColor(word.gender);
+    }
+
+    /**
+     * Get color for a word using priority hierarchy
+     * (conjugation > plural > gender > default)
+     */
+    getColorForWord(word) {
+        return this.config.getColorForWord(word);
     }
 
     /**

@@ -38,6 +38,8 @@ class WordAnalysis(BaseModel):
     conjugation_pronoun: str  # Pronoun for verb conjugation (ich, du, er, sie, es, wir, ihr, sie_pl)
     pos: str  # Original POS tag for debugging
     morph: str  # Original morphology for debugging
+    clause_type: str  # 'main' or 'subordinate'
+    clause_id: int  # Unique identifier for each clause
 
 
 def map_pos_to_type(token) -> str:
@@ -234,6 +236,102 @@ def map_conjugation_pronoun(token) -> str:
     return "none"
 
 
+def detect_clauses(doc):
+    """
+    Detect clause boundaries in a German sentence using dependency parsing.
+
+    Returns a dictionary mapping token index to (clause_type, clause_id):
+    - clause_type: 'main' or 'subordinate'
+    - clause_id: unique integer for each clause
+
+    Strategy:
+    1. Find subordinating conjunctions (SCONJ)
+    2. For each SCONJ, identify its subordinate clause span using dependency subtree
+    3. Handle coordinating conjunctions (CCONJ) as clause separators for parallel structures
+    4. Assign remaining words to main clauses
+    """
+    # Map token index → (clause_type, clause_id)
+    token_to_clause = {}
+    clause_counter = 0
+
+    # First, identify subordinate clauses by finding subordinating conjunctions
+    subordinate_clauses = []  # List of (conjunction_token, clause_tokens)
+
+    for token in doc:
+        if token.pos_ == "SCONJ":
+            # This is a subordinating conjunction - it introduces a subordinate clause
+            # The subordinate clause includes the conjunction and its syntactic dependents
+
+            # Find the head verb of the subordinate clause
+            # The SCONJ typically depends on a verb, and that verb is the head of the subordinate clause
+            head = token.head
+
+            # Collect all tokens in the subordinate clause
+            # Strategy: Include the conjunction and all tokens that are part of its clause
+            subordinate_tokens = set()
+            subordinate_tokens.add(token.i)  # Add the conjunction itself
+
+            # If the conjunction has a head that's a verb, include that verb and its dependents
+            if head.pos_ in ["VERB", "AUX"]:
+                # Add the verb
+                subordinate_tokens.add(head.i)
+
+                # Find the first CCONJ after the subordinating conjunction (if any)
+                # This marks the end of the subordinate clause
+                first_cconj_index = None
+                for i in range(token.i + 1, len(doc)):
+                    if doc[i].pos_ == "CCONJ":
+                        first_cconj_index = i
+                        break
+
+                # Add all dependents of the verb (except if they're in another clause)
+                for descendant in head.subtree:
+                    # Only include tokens that come after or at the conjunction
+                    # and before any coordinating conjunction
+                    if descendant.i >= token.i:
+                        # Stop at coordinating conjunctions - they end the subordinate clause
+                        if first_cconj_index is not None and descendant.i >= first_cconj_index:
+                            continue
+                        subordinate_tokens.add(descendant.i)
+            else:
+                # If head is not a verb, include tokens from conjunction onwards
+                # until we hit another clause boundary or sentence end
+                for i in range(token.i, len(doc)):
+                    if doc[i].pos_ == "SCONJ" and i != token.i:
+                        # Another subordinating conjunction - stop here
+                        break
+                    subordinate_tokens.add(i)
+
+            subordinate_clauses.append((token, subordinate_tokens))
+
+    # Assign clause IDs to subordinate clauses
+    for conj_token, clause_tokens in subordinate_clauses:
+        clause_id = clause_counter
+        clause_counter += 1
+
+        for token_idx in clause_tokens:
+            if token_idx not in token_to_clause:
+                token_to_clause[token_idx] = ("subordinate", clause_id)
+
+    # Assign remaining tokens to main clause(s)
+    # Handle coordinating conjunctions as separators between parallel main clauses
+    current_main_clause_id = clause_counter
+    clause_counter += 1
+
+    for token in doc:
+        if token.i not in token_to_clause and not token.is_punct:
+            # Check if this is a coordinating conjunction that splits main clauses
+            if token.pos_ == "CCONJ":
+                # Start a new main clause after this conjunction
+                token_to_clause[token.i] = ("main", current_main_clause_id)
+                current_main_clause_id = clause_counter
+                clause_counter += 1
+            else:
+                token_to_clause[token.i] = ("main", current_main_clause_id)
+
+    return token_to_clause
+
+
 @app.get("/")
 def root():
     """Health check endpoint"""
@@ -277,6 +375,9 @@ def analyze_sentence(request: AnalyzeRequest):
                         verb_subject_map[token.i] = child
                         break
 
+        # Detect clause boundaries
+        token_to_clause = detect_clauses(doc)
+
         # Analyze each token
         results = []
         for token in doc:
@@ -290,10 +391,50 @@ def analyze_sentence(request: AnalyzeRequest):
             # Determine conjugation pronoun
             conj_pronoun = map_conjugation_pronoun(token)
 
-            # For verbs, if we have a subject, use the subject's conjugation
+            # For verbs, use the VERB's morphology (Person+Number) combined with subject info
+            # This is more reliable because verb conjugations are unambiguous in German
             if token.pos_ in ["VERB", "AUX"] and token.i in verb_subject_map:
                 subject = verb_subject_map[token.i]
-                conj_pronoun = map_conjugation_pronoun(subject)
+                verb_person = morph_dict.get("Person", "")
+                verb_number = morph_dict.get("Number", "")
+
+                # Use verb's Person and Number to determine conjugation
+                if verb_person == "1" and verb_number == "Sing":
+                    conj_pronoun = "ich"
+                elif verb_person == "2" and verb_number == "Sing":
+                    conj_pronoun = "du"
+                elif verb_person == "3" and verb_number == "Sing":
+                    # For 3rd person singular, check subject's gender/text
+                    subject_text = subject.text.lower()
+                    subject_morph = subject.morph.to_dict()
+                    subject_gender = subject_morph.get("Gender", "")
+
+                    if subject_text in ["sie"]:
+                        conj_pronoun = "sie"  # she (singular feminine)
+                    elif subject_text in ["es", "das"]:
+                        conj_pronoun = "es"
+                    elif subject_text in ["er", "der"]:
+                        conj_pronoun = "er"
+                    elif subject_gender == "Fem":
+                        conj_pronoun = "sie"
+                    elif subject_gender == "Neut":
+                        conj_pronoun = "es"
+                    elif subject_gender == "Masc":
+                        conj_pronoun = "er"
+                    else:
+                        conj_pronoun = "er"  # default
+                elif verb_person == "1" and verb_number == "Plur":
+                    conj_pronoun = "wir"
+                elif verb_person == "2" and verb_number == "Plur":
+                    conj_pronoun = "ihr"
+                elif verb_person == "3" and verb_number == "Plur":
+                    conj_pronoun = "sie_pl"
+                else:
+                    # Fallback to subject's conjugation
+                    conj_pronoun = map_conjugation_pronoun(subject)
+
+            # Get clause information
+            clause_type, clause_id = token_to_clause.get(token.i, ("main", 0))
 
             word_analysis = WordAnalysis(
                 text=token.text,
@@ -303,7 +444,9 @@ def analyze_sentence(request: AnalyzeRequest):
                 number=map_number(morph_dict),
                 conjugation_pronoun=conj_pronoun,
                 pos=token.pos_,
-                morph=str(token.morph)
+                morph=str(token.morph),
+                clause_type=clause_type,
+                clause_id=clause_id
             )
 
             results.append(word_analysis)

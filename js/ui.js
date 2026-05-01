@@ -283,7 +283,17 @@ class UIController {
         }
 
         const conj = word.conjugation;
-        const pronounColors = this.wordManager.pronounColors;
+
+        // Generate pronoun buttons dynamically from configuration
+        const pronounKeys = GrammaticalConfig.getPronounKeys();
+        const pronounButtons = pronounKeys.map(key => {
+            const pronounConfig = GrammaticalConfig.getPronoun(key);
+            const isActive = conj.pronoun === key ? 'active' : '';
+
+            return `<button class="conj-pronoun-btn ${isActive}"
+                            data-conj-pronoun="${key}"
+                            style="background: ${pronounConfig.color};">${pronounConfig.label}</button>`;
+        }).join('\n                    ');
 
         return `
             <div class="prop-section conj-section">
@@ -291,33 +301,7 @@ class UIController {
 
                 <label class="prop-label">Pronoun:</label>
                 <div class="conj-pronoun-grid">
-                    <button class="conj-pronoun-btn ${conj.pronoun === 'none' ? 'active' : ''}"
-                            data-conj-pronoun="none"
-                            style="background: ${pronounColors['none']};">None</button>
-                    <button class="conj-pronoun-btn ${conj.pronoun === 'ich' ? 'active' : ''}"
-                            data-conj-pronoun="ich"
-                            style="background: ${pronounColors['ich']};">ich</button>
-                    <button class="conj-pronoun-btn ${conj.pronoun === 'du' ? 'active' : ''}"
-                            data-conj-pronoun="du"
-                            style="background: ${pronounColors['du']};">du</button>
-                    <button class="conj-pronoun-btn ${conj.pronoun === 'er' ? 'active' : ''}"
-                            data-conj-pronoun="er"
-                            style="background: ${pronounColors['er']};">er (♂)</button>
-                    <button class="conj-pronoun-btn ${conj.pronoun === 'sie_fem' ? 'active' : ''}"
-                            data-conj-pronoun="sie_fem"
-                            style="background: ${pronounColors['sie_fem']};">sie (♀)</button>
-                    <button class="conj-pronoun-btn ${conj.pronoun === 'es' ? 'active' : ''}"
-                            data-conj-pronoun="es"
-                            style="background: ${pronounColors['es']};">es (⚲)</button>
-                    <button class="conj-pronoun-btn ${conj.pronoun === 'wir' ? 'active' : ''}"
-                            data-conj-pronoun="wir"
-                            style="background: ${pronounColors['wir']};">wir</button>
-                    <button class="conj-pronoun-btn ${conj.pronoun === 'ihr' ? 'active' : ''}"
-                            data-conj-pronoun="ihr"
-                            style="background: ${pronounColors['ihr']};">ihr</button>
-                    <button class="conj-pronoun-btn ${conj.pronoun === 'sie' ? 'active' : ''}"
-                            data-conj-pronoun="sie"
-                            style="background: ${pronounColors['sie']};">sie/Sie (pl.)</button>
+                    ${pronounButtons}
                 </div>
             </div>
         `;

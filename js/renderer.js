@@ -53,25 +53,9 @@ class Renderer {
         group.setAttribute('transform', `translate(${word.x}, ${word.y})`);
         group.style.cursor = 'move';
 
-        // Determine color based on conjugation first, then plural, then gender
-        let color;
-
-        // Check if conjugation is set and not 'none'
-        if (word.conjugation && word.conjugation.pronoun && word.conjugation.pronoun !== 'none') {
-            color = this.wordManager.getPronounColor(word.conjugation.pronoun);
-        }
-        // Check if plural - use 'sie' (plural) color
-        else if (word.number === 'pl') {
-            color = this.wordManager.getPronounColor('sie'); // Red color for plural
-        }
-        // Otherwise check gender
-        else if (word.gender && word.gender !== 'none') {
-            color = this.wordManager.getWordColor(word);
-        }
-        // Default to grey
-        else {
-            color = '#95a5a6';
-        }
+        // Determine color using centralized configuration
+        // Priority: conjugation > plural > gender > default
+        const color = this.wordManager.getColorForWord(word);
 
         // Create shape based on word type and case
         const shape = this.createShape(word);
@@ -80,9 +64,11 @@ class Renderer {
         shape.setAttribute('stroke-width', '2');
 
         // Highlight if selected
-        if (this.wordManager.selectedWord && this.wordManager.selectedWord.id === word.id) {
+        const isSelected = this.wordManager.selectedWord && this.wordManager.selectedWord.id === word.id;
+        if (isSelected) {
             shape.setAttribute('stroke', '#f39c12');
-            shape.setAttribute('stroke-width', word.number === 'pl' ? '5' : '3');
+            const strokeWidth = GrammaticalConfig.getStrokeWidth(word, true);
+            shape.setAttribute('stroke-width', strokeWidth.toString());
         }
 
         group.appendChild(shape);
