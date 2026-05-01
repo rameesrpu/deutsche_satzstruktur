@@ -246,10 +246,19 @@ class SentenceManager {
 
     /**
      * Auto-configure current sentence using spaCy backend
-     * @param {string} backendUrl - URL of the spaCy backend API (default: http://localhost:8000)
+     * @param {string} backendUrl - URL of the spaCy backend API (auto-detects local vs deployed)
      * @returns {Promise<{success: boolean, message: string, wordsAnalyzed?: number}>}
      */
-    async autoConfigureCurrentSentence(backendUrl = 'http://localhost:8000') {
+    async autoConfigureCurrentSentence(backendUrl) {
+        // Auto-detect backend URL: use localhost for local development, Render for deployed site
+        if (!backendUrl) {
+            const isLocal = window.location.hostname === 'localhost' ||
+                          window.location.hostname === '127.0.0.1' ||
+                          window.location.hostname === '';
+            backendUrl = isLocal
+                ? 'http://localhost:8000'
+                : 'https://deutsche-satzstruktur.onrender.com';
+        }
         const currentSentence = this.getCurrentSentence();
 
         if (!currentSentence) {
@@ -285,6 +294,9 @@ class SentenceManager {
             // Update each word's properties with the analyzed data
             const minLength = Math.min(analyzedWords.length, currentSentence.words.length);
 
+            // Track subordinate clauses for automatic vertical alignment
+            const subordinateClauses = new Map(); // clause_id → {startIndex, words}
+
             for (let i = 0; i < minLength; i++) {
                 const analyzed = analyzedWords[i];
                 const word = currentSentence.words[i];
@@ -303,6 +315,26 @@ class SentenceManager {
                     word.conjugation.pronoun = analyzed.conjugation_pronoun;
                 }
 
+                // Store clause information
+                word.clause_type = analyzed.clause_type;
+                word.clause_id = analyzed.clause_id;
+
+                // Automatically set flowDirection based on clause type
+                if (analyzed.clause_type === 'subordinate') {
+                    word.flowDirection = 'down';
+
+                    // Track subordinate clause for vertical alignment
+                    if (!subordinateClauses.has(analyzed.clause_id)) {
+                        subordinateClauses.set(analyzed.clause_id, {
+                            startIndex: i,
+                            words: []
+                        });
+                    }
+                    subordinateClauses.get(analyzed.clause_id).words.push({word, index: i});
+                } else {
+                    word.flowDirection = 'right';
+                }
+
                 // Also update in wordManager (current canvas state)
                 const canvasWord = this.wordManager.getWord(word.id);
                 if (canvasWord) {
@@ -318,8 +350,16 @@ class SentenceManager {
                         }
                         canvasWord.conjugation.pronoun = analyzed.conjugation_pronoun;
                     }
+
+                    // Update clause information
+                    canvasWord.clause_type = analyzed.clause_type;
+                    canvasWord.clause_id = analyzed.clause_id;
+                    canvasWord.flowDirection = word.flowDirection;
                 }
             }
+
+            // Apply vertical alignment for subordinate clauses
+            this.applyVerticalAlignmentForSubordinateClauses(subordinateClauses);
 
             // Save the changes
             this.save();
@@ -345,6 +385,50 @@ class SentenceManager {
                 success: false,
                 message: message
             };
+        }
+    }
+
+    /**
+     * Apply vertical alignment for detected subordinate clauses
+     * @param {Map} subordinateClauses - Map of clause_id to {startIndex, words}
+     */
+    applyVerticalAlignmentForSubordinateClauses(subordinateClauses) {
+        if (subordinateClauses.size === 0) return;
+
+        const gridConfig = {
+            verticalSpacing: 80,
+            horizontalSpacing: 80
+        };
+
+        // Process each subordinate clause
+        for (const [, clauseData] of subordinateClauses) {
+            const {words} = clauseData;
+
+            if (words.length === 0) continue;
+
+            // The first word (usually the conjunction) sets the X position for the entire clause
+            const firstWordData = words[0];
+            const baseX = firstWordData.word.x;
+
+            // Position all words in the clause vertically
+            words.forEach((wordData, idx) => {
+                const {word} = wordData;
+
+                // Set X to the conjunction's position (aligned vertically)
+                word.x = baseX;
+
+                // Set Y position with vertical spacing
+                // First word after conjunction should be 2 blocks down to avoid overlap
+                const verticalOffset = idx === 0 ? 0 : (idx + 1) * gridConfig.verticalSpacing;
+                word.y = firstWordData.word.y + verticalOffset;
+
+                // Also update in wordManager
+                const canvasWord = this.wordManager.getWord(word.id);
+                if (canvasWord) {
+                    canvasWord.x = word.x;
+                    canvasWord.y = word.y;
+                }
+            });
         }
     }
 }
