@@ -989,19 +989,31 @@ button:hover {
     background: #34495e;
     color: white;
     border: none;
-    border-top: 1px solid #95a5a6;
-    border-bottom: 1px solid #95a5a6;
     font-size: 14px;
     font-weight: 600;
     text-align: left;
     cursor: pointer;
     transition: background 0.2s;
     z-index: 10;
+    margin: 0;
+    position: relative;
     /* Better rendering during zoom/transform */
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
+}
+
+/* Use pseudo-element for separator line */
+.mobile-toggle::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; /* Extend 1px below to overlap and prevent gaps */
+    left: 0;
+    right: 0;
+    height: 2px; /* Thicker to ensure coverage */
+    background: #95a5a6;
+    z-index: 1;
 }
 
 .mobile-toggle:hover {
@@ -1019,6 +1031,18 @@ button:hover {
 
 .mobile-toggle-legend {
     background: #7f8c8d;
+}
+
+/* Legend toggle needs both top and bottom lines */
+.mobile-toggle-legend::before {
+    content: '';
+    position: absolute;
+    top: -1px; /* Extend 1px above to overlap and prevent gaps */
+    left: 0;
+    right: 0;
+    height: 2px; /* Thicker to ensure coverage */
+    background: #95a5a6;
+    z-index: 1;
 }
 
 .mobile-toggle-legend:hover {
@@ -1060,6 +1084,15 @@ button:hover {
     /* Header Adjustments */
     .header {
         padding: 12px 15px;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        flex: 0 0 auto; /* Don't participate in flex space distribution */
+        /* Better rendering during zoom/transform */
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
     }
 
     h1 {
@@ -1092,10 +1125,14 @@ button:hover {
         padding: 0;
         margin: 0;
         border-right: none;
-        border-bottom: none;
         visibility: hidden;
         opacity: 0;
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out, border 0.3s ease-out, visibility 0s linear 0.3s, opacity 0.2s ease-out;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out, visibility 0s linear 0.3s, opacity 0.2s ease-out;
+        /* Better rendering during zoom/transform */
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
     }
 
     .sentence-panel.active,
@@ -1103,10 +1140,23 @@ button:hover {
         max-height: 500px;
         padding: 15px;
         overflow-y: auto;
-        border-bottom: 2px solid #bdc3c7;
+        position: relative;
         visibility: visible;
         opacity: 1;
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out, border 0.3s ease-out, visibility 0s linear 0s, opacity 0.2s ease-out;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out, visibility 0s linear 0s, opacity 0.2s ease-out;
+        margin-top: 0;
+    }
+
+    .sentence-panel.active::after,
+    .properties-panel.active::after {
+        content: '';
+        position: absolute;
+        bottom: -1px; /* Extend below to overlap and prevent gaps */
+        left: 0;
+        right: 0;
+        height: 3px; /* Thicker to ensure coverage on all devices */
+        background: #bdc3c7;
+        z-index: 1;
     }
 
     /* Canvas Container */
@@ -1115,8 +1165,23 @@ button:hover {
         height: 400px;
         width: 100%;
         border-right: none;
-        border-bottom: 2px solid #bdc3c7;
-        order: 1;
+        position: relative;
+        /* Better rendering during zoom/transform */
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+    }
+
+    .canvas-container::after {
+        content: '';
+        position: absolute;
+        bottom: -1px; /* Extend below to overlap and prevent gaps */
+        left: 0;
+        right: 0;
+        height: 3px; /* Thicker to ensure coverage on all devices */
+        background: #bdc3c7;
+        z-index: 1;
     }
 
     #canvas {
@@ -1148,20 +1213,37 @@ button:hover {
         overflow: hidden;
         padding: 0;
         margin: 0;
-        border-top: none;
+        width: 100%;
         visibility: hidden;
         opacity: 0;
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out, border 0.3s ease-out, visibility 0s linear 0.3s, opacity 0.2s ease-out;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out, visibility 0s linear 0.3s, opacity 0.2s ease-out;
+        /* Better rendering during zoom/transform */
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
     }
 
     .legend.active {
         max-height: 400px;
         padding: 15px;
         overflow-y: auto;
-        border-top: 2px solid #bdc3c7;
+        position: relative;
         visibility: visible;
         opacity: 1;
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out, border 0.3s ease-out, visibility 0s linear 0s, opacity 0.2s ease-out;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out, visibility 0s linear 0s, opacity 0.2s ease-out;
+        margin-top: 0;
+    }
+
+    .legend.active::before {
+        content: '';
+        position: absolute;
+        top: -1px; /* Extend above to overlap and prevent gaps */
+        left: 0;
+        right: 0;
+        height: 3px; /* Thicker to ensure coverage on all devices */
+        background: #bdc3c7;
+        z-index: 1;
     }
 
     .mobile-toggle-legend {
