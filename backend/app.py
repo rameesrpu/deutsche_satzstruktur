@@ -26,9 +26,32 @@ except OSError:
     nlp = spacy.load("de_core_news_sm")
 
 # Initialize LanguageTool for German grammar checking
-print("Initializing LanguageTool for German...")
-language_tool = language_tool_python.LanguageTool('de-DE')
-print("LanguageTool ready!")
+# Using lazy initialization to handle subprocess issues
+language_tool = None
+
+def get_language_tool():
+    """Get or create LanguageTool instance with error handling"""
+    global language_tool
+    try:
+        # Check if instance exists and is healthy
+        if language_tool is not None:
+            # Try to check if subprocess is alive
+            if hasattr(language_tool, '_server') and language_tool._server is not None:
+                return language_tool
+            else:
+                print("LanguageTool subprocess died, recreating...")
+                language_tool = None
+
+        # Create new instance
+        print("Initializing LanguageTool for German...")
+        language_tool = language_tool_python.LanguageTool('de-DE')
+        print(f"LanguageTool ready! Server: {language_tool._server}")
+        return language_tool
+    except Exception as e:
+        print(f"LanguageTool initialization error: {e}")
+        import traceback
+        traceback.print_exc()
+        raise
 
 
 class AnalyzeRequest(BaseModel):
@@ -534,8 +557,15 @@ def check_grammar(request: AnalyzeRequest):
         raise HTTPException(status_code=400, detail="Text cannot be empty")
 
     try:
+        # Get LanguageTool instance (lazy initialization)
+        lt = get_language_tool()
+
+        # Debug logging
+        print(f"Checking grammar for text: {request.text[:50]}...")
+        print(f"LanguageTool server status: {lt._server}")
+
         # Check the text with LanguageTool
-        matches = language_tool.check(request.text)
+        matches = lt.check(request.text)
 
         # Convert matches to our response format
         errors = []
