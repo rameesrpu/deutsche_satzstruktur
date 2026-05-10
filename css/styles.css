@@ -1345,11 +1345,10 @@ button:hover {
 
     /* Canvas Container */
     .canvas-container {
-        /* PANELS CLOSED: Canvas takes up most of screen, leaving room for header and buttons
-         * Adjust 140px to control space reserved for header + buttons + padding
-         * Increase 140px = smaller canvas, more space for UI elements
-         * Decrease 140px = larger canvas, less space for UI elements */
-        height: calc(60vh - 140px);
+        /* PANELS CLOSED: Canvas takes up a percentage of viewport height
+         * Adjust the vh value to control canvas size (e.g., 60vh, 70vh, 80vh)
+         * Higher value = larger canvas, Lower value = smaller canvas */
+        height: 60vh;
         min-height: 400px;
         width: 100%;
         border-right: none;
@@ -1625,8 +1624,8 @@ button:hover {
 
     /* MOBILE CANVAS SIZING for screens < 480px (same values as above) */
     .canvas-container {
-        /* PANELS CLOSED: Adjust 140px to control reserved space */
-        height: calc(100vh - 140px);
+        /* PANELS CLOSED: Adjust vh percentage to control canvas size */
+        height: 60vh;
         min-height: 400px;
     }
 
