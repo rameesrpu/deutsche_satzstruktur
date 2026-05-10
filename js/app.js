@@ -539,15 +539,36 @@ class DeutschApp {
         const isMobile = window.innerWidth < 768;
         const container = document.querySelector('.canvas-container');
 
+        // Check if any panel is open on mobile
+        let isPanelOpen = false;
+        if (isMobile) {
+            const sentencePanel = document.getElementById('sentence-panel');
+            const propertiesPanel = document.getElementById('properties-panel');
+            isPanelOpen = sentencePanel?.classList.contains('active') ||
+                         propertiesPanel?.classList.contains('active');
+        }
+
         // Get actual container dimensions
         const containerWidth = container ? container.clientWidth : (isMobile ? 400 : 1200);
-        const containerHeight = container ? container.clientHeight : (isMobile ? 300 : 800);
+        const containerHeight = container ? container.clientHeight : (isMobile ? 500 : 800);
+
+        // Mobile: Adjust height based on panel state
+        let effectiveHeight = containerHeight;
+        if (isMobile) {
+            if (isPanelOpen) {
+                // Panel open - smaller canvas (leave room for panel)
+                effectiveHeight = Math.max(400, containerHeight);
+            } else {
+                // Panel closed - larger canvas (use more screen space)
+                effectiveHeight = Math.max(600, containerHeight);
+            }
+        }
 
         if (words.length === 0) {
             // Empty canvas - use actual container size
             return {
                 width: containerWidth,
-                height: containerHeight,
+                height: effectiveHeight,
                 viewBoxX: 0,
                 viewBoxY: 0
             };
@@ -578,7 +599,7 @@ class DeutschApp {
             // Mobile: use container size, but ensure content fits
             return {
                 width: Math.max(containerWidth, contentWidth),
-                height: Math.max(containerHeight, contentHeight),
+                height: Math.max(effectiveHeight, contentHeight),
                 viewBoxX: viewBoxX,
                 viewBoxY: viewBoxY
             };
@@ -710,6 +731,11 @@ function setupMobileToggles() {
                 propertiesPanel.classList.remove('active');
                 togglePropertiesBtn.classList.remove('active');
             }
+
+            // Recalculate canvas size after panel state changes
+            if (window.app) {
+                window.app.redrawAll();
+            }
         });
 
         togglePropertiesBtn.addEventListener('click', () => {
@@ -726,6 +752,11 @@ function setupMobileToggles() {
                 togglePropertiesBtn.classList.add('active');
                 sentencePanel.classList.remove('active');
                 toggleSentenceBtn.classList.remove('active');
+            }
+
+            // Recalculate canvas size after panel state changes
+            if (window.app) {
+                window.app.redrawAll();
             }
         });
     }
