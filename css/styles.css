@@ -1317,7 +1317,7 @@ button:hover {
 
     .sentence-panel.active,
     .properties-panel.active {
-        max-height: calc(45vh - 50px); /* Remaining space when canvas is 50vh */
+        max-height: 55vh; /* Remaining space when canvas is 40vh */
         padding: 15px;
         overflow-y: auto;
         position: relative;
@@ -1341,8 +1341,8 @@ button:hover {
 
     /* Canvas Container */
     .canvas-container {
-        /* Default: panels closed - use 95% of viewport height minus header/tabs */
-        height: calc(95vh - 100px);
+        /* Default: panels closed - use 90% of viewport height */
+        height: 90vh;
         min-height: 400px;
         width: 100%;
         border-right: none;
@@ -1355,9 +1355,9 @@ button:hover {
         flex: 0 0 auto;
     }
 
-    /* When a panel is open, reduce canvas to 50% of viewport */
+    /* When a panel is open, reduce canvas to 40% of viewport */
     .main-content.panel-open .canvas-container {
-        height: 50vh;
+        height: 40vh;
         min-height: 300px;
     }
 
@@ -1615,12 +1615,12 @@ button:hover {
     }
 
     .canvas-container {
-        height: calc(95vh - 100px);
+        height: 90vh;
         min-height: 400px;
     }
 
     .main-content.panel-open .canvas-container {
-        height: 50vh;
+        height: 40vh;
         min-height: 300px;
     }
 
