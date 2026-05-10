@@ -361,7 +361,7 @@ button:hover {
     position: relative;
     overflow: auto;
     border-right: 2px solid #bdc3c7;
-    touch-action: none; /* Disable browser default touch behaviors like pinch-zoom */
+    touch-action: none; /* Disable browser default touch behaviors - we handle touch manually */
 }
 
 #canvas {

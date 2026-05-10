@@ -19,6 +19,10 @@ class DeutschApp {
         this.maxZoom = 3.0;
         this.zoomStep = 0.25;
 
+        // Pan configuration for touch scrolling
+        this.panX = 0;
+        this.panY = 0;
+
         this.wordManager = new WordManager(this.gridConfig);
         this.sentenceManager = new SentenceManager(this.wordManager);
         this.feldermodellRenderer = new FeldermodellRenderer(this.svg);
@@ -49,7 +53,7 @@ class DeutschApp {
     }
 
     /**
-     * Setup pinch-to-zoom gesture support for touch devices
+     * Setup pinch-to-zoom gesture support and touch panning for touch devices
      */
     setupPinchZoom() {
         const canvasContainer = document.querySelector('.canvas-container');
@@ -57,6 +61,9 @@ class DeutschApp {
 
         let initialDistance = 0;
         let initialZoom = 1.0;
+        let lastTouchX = 0;
+        let lastTouchY = 0;
+        let isPanning = false;
 
         const getDistance = (touches) => {
             const dx = touches[0].clientX - touches[1].clientX;
@@ -66,14 +73,22 @@ class DeutschApp {
 
         canvasContainer.addEventListener('touchstart', (e) => {
             if (e.touches.length === 2) {
+                // Two-finger pinch to zoom
                 e.preventDefault();
                 initialDistance = getDistance(e.touches);
                 initialZoom = this.zoomLevel;
+                isPanning = false;
+            } else if (e.touches.length === 1) {
+                // Single finger - prepare for panning
+                lastTouchX = e.touches[0].clientX;
+                lastTouchY = e.touches[0].clientY;
+                isPanning = true;
             }
         }, { passive: false });
 
         canvasContainer.addEventListener('touchmove', (e) => {
             if (e.touches.length === 2) {
+                // Two-finger pinch to zoom
                 e.preventDefault();
                 const currentDistance = getDistance(e.touches);
                 const scale = currentDistance / initialDistance;
@@ -84,6 +99,28 @@ class DeutschApp {
                 // Clamp to min/max zoom
                 this.zoomLevel = Math.max(this.minZoom, Math.min(this.maxZoom, newZoom));
 
+                // Reset pan when zooming back to 1.0
+                if (Math.abs(this.zoomLevel - 1.0) < 0.05) {
+                    this.panX = 0;
+                    this.panY = 0;
+                }
+
+                this.redrawAll();
+                isPanning = false;
+            } else if (e.touches.length === 1 && isPanning) {
+                // Single finger - pan the canvas
+                e.preventDefault();
+                const touch = e.touches[0];
+                const deltaX = touch.clientX - lastTouchX;
+                const deltaY = touch.clientY - lastTouchY;
+
+                // Apply pan offset (scale by zoom level for natural feel)
+                this.panX -= deltaX / this.zoomLevel;
+                this.panY -= deltaY / this.zoomLevel;
+
+                lastTouchX = touch.clientX;
+                lastTouchY = touch.clientY;
+
                 this.redrawAll();
             }
         }, { passive: false });
@@ -91,6 +128,9 @@ class DeutschApp {
         canvasContainer.addEventListener('touchend', (e) => {
             if (e.touches.length < 2) {
                 initialDistance = 0;
+            }
+            if (e.touches.length === 0) {
+                isPanning = false;
             }
         });
     }
@@ -581,8 +621,10 @@ class DeutschApp {
         // Center the zoomed viewBox
         const zoomOffsetX = (canvasSize.width - zoomedWidth) / 2;
         const zoomOffsetY = (canvasSize.height - zoomedHeight) / 2;
-        const viewBoxX = canvasSize.viewBoxX + zoomOffsetX;
-        const viewBoxY = canvasSize.viewBoxY + zoomOffsetY;
+
+        // Apply pan offset for touch scrolling
+        const viewBoxX = canvasSize.viewBoxX + zoomOffsetX + this.panX;
+        const viewBoxY = canvasSize.viewBoxY + zoomOffsetY + this.panY;
 
         if (isMobile) {
             // On mobile: Use viewBox for responsive scaling with zoom
