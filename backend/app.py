@@ -579,13 +579,21 @@ def check_grammar(request: AnalyzeRequest):
         # Debug logging
         print(f"Checking grammar for text: {request.text[:50]}...")
         print(f"LanguageTool server status: {lt._server}")
+        sys.stdout.flush()
 
         # Check the text with LanguageTool
+        print("Calling lt.check()...")
+        sys.stdout.flush()
         matches = lt.check(request.text)
+        print(f"lt.check() returned {len(matches)} matches")
+        sys.stdout.flush()
 
         # Convert matches to our response format
         errors = []
-        for match in matches:
+        for i, match in enumerate(matches):
+            print(f"Processing match {i+1}: {match.ruleId} - {match.message[:50]}")
+            sys.stdout.flush()
+
             # Get context (text around the error)
             context_start = max(0, match.offset - 20)
             context_end = min(len(request.text), match.offset + match.errorLength + 20)
@@ -602,13 +610,20 @@ def check_grammar(request: AnalyzeRequest):
             )
             errors.append(error)
 
-        return GrammarCheckResponse(
+        response = GrammarCheckResponse(
             text=request.text,
             errors=errors,
             error_count=len(errors)
         )
+        print(f"Returning response with {len(errors)} errors")
+        sys.stdout.flush()
+        return response
 
     except Exception as e:
+        print(f"EXCEPTION in grammar check: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        sys.stdout.flush()
         raise HTTPException(status_code=500, detail=f"Grammar check error: {str(e)}")
 
 
