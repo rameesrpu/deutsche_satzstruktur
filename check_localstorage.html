@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LocalStorage Inspector</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            font-family: monospace;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .info {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LocalStorage Inspector & Migrator</h1>
+
+        <div class="info">
+            <strong>Current Origin:</strong> <span id="origin"></span><br>
+            <strong>Sentences Found:</strong> <span id="count">0</span>
+        </div>
+
+        <h3>Export from old location (file://)</h3>
+        <p>1. Open your old <code>index.html</code> file directly (double-click it)</p>
+        <p>2. Press F12 → Console → Copy/paste this:</p>
+        <pre>localStorage.getItem('deutschSentences')</pre>
+        <p>3. Paste the result below:</p>
+        <textarea id="import-data" placeholder='Paste the JSON data here...'></textarea>
+        <button onclick="importData()">Import Sentences</button>
+
+        <h3>Current LocalStorage</h3>
+        <textarea id="current-data" readonly></textarea>
+        <button onclick="showCurrent()">Refresh</button>
+        <button onclick="clearData()">Clear All</button>
+    </div>
+
+    <script>
+        document.getElementById('origin').textContent = window.location.origin;
+
+        function showCurrent() {
+            const data = localStorage.getItem('deutschSentences');
+            const currentId = localStorage.getItem('deutschCurrentSentence');
+
+            document.getElementById('current-data').value = data ?
+                JSON.stringify(JSON.parse(data), null, 2) :
+                'No sentences saved';
+
+            const sentences = data ? JSON.parse(data) : [];
+            document.getElementById('count').textContent = sentences.length;
+        }
+
+        function importData() {
+            const data = document.getElementById('import-data').value.trim();
+            if (!data) {
+                alert('Please paste the data first');
+                return;
+            }
+
+            try {
+                const parsed = JSON.parse(data);
+                localStorage.setItem('deutschSentences', JSON.stringify(parsed));
+                alert('Sentences imported successfully!');
+                showCurrent();
+                window.location.href = '/';
+            } catch (e) {
+                alert('Invalid JSON data: ' + e.message);
+            }
+        }
+
+        function clearData() {
+            if (confirm('Clear all saved sentences?')) {
+                localStorage.removeItem('deutschSentences');
+                localStorage.removeItem('deutschCurrentSentence');
+                showCurrent();
+            }
+        }
+
+        // Load on page load
+        showCurrent();
+    </script>
+</body>
+</html>

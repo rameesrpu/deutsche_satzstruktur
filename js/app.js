@@ -182,7 +182,7 @@ class DeutschApp {
             // Auto-detect backend URL
             const backendUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
                 ? 'http://localhost:8000'
-                : 'https://deutsch-graphic-project.onrender.com';
+                : 'https://deutsche-satzstruktur.onrender.com';
 
             const response = await fetch(`${backendUrl}/check-grammar`, {
                 method: 'POST',
