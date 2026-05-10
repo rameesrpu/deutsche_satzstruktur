@@ -162,6 +162,14 @@ class DeutschApp {
                 console.error('Auto-configure error:', error);
                 // Silently fail - don't show error to user
             }
+
+            // Auto-check grammar after adding sentence
+            try {
+                await this.checkGrammar(text);
+            } catch (error) {
+                console.error('Auto grammar check error:', error);
+                // Silently fail - don't show error to user
+            }
         }
     }
 
