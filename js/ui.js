@@ -163,8 +163,11 @@ class UIController {
 
             <div class="prop-section">
                 <label class="prop-label">Text:</label>
-                <input type="text" class="prop-input" value="${selectedWord.text}"
-                       id="word-text-input">
+                <div class="word-text-input-wrapper">
+                    <input type="text" class="prop-input word-text-input" value="${selectedWord.text}"
+                           id="word-text-input">
+                    <button class="lookup-btn" id="lookup-word-btn" title="Look up in dictionary">📖</button>
+                </div>
             </div>
 
             <div class="prop-section">
@@ -370,6 +373,17 @@ class UIController {
             });
         }
 
+        // Lookup button
+        const lookupBtn = document.getElementById('lookup-word-btn');
+        if (lookupBtn) {
+            lookupBtn.addEventListener('click', () => {
+                const word = textInput.value.trim();
+                if (word) {
+                    this.showDictionaryModal(word);
+                }
+            });
+        }
+
         // Conjugation controls (for all word types)
         this.attachConjugationListeners(selectedWord);
     }
@@ -394,5 +408,144 @@ class UIController {
                 this.onRedraw();
             });
         });
+    }
+
+    /**
+     * Show dictionary modal with word information from Wiktionary
+     */
+    async showDictionaryModal(word) {
+        // Create modal overlay
+        const modal = document.createElement('div');
+        modal.className = 'dictionary-modal-overlay';
+        modal.innerHTML = `
+            <div class="dictionary-modal">
+                <div class="dictionary-modal-header">
+                    <h3>📖 Dictionary: ${word}</h3>
+                    <button class="dictionary-modal-close">✕</button>
+                </div>
+                <div class="dictionary-modal-content">
+                    <div class="dictionary-loading">Looking up word...</div>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        // Close modal on overlay click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.remove();
+            }
+        });
+
+        // Close modal on X button click
+        const closeBtn = modal.querySelector('.dictionary-modal-close');
+        closeBtn.addEventListener('click', () => {
+            modal.remove();
+        });
+
+        // Fetch word info
+        const contentDiv = modal.querySelector('.dictionary-modal-content');
+
+        try {
+            // Auto-detect backend URL
+            const backendUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? 'http://localhost:8000'
+                : 'https://deutsch-graphic-project.onrender.com';
+
+            const response = await fetch(`${backendUrl}/word-info/${encodeURIComponent(word)}`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (!data.found) {
+                contentDiv.innerHTML = `
+                    <div class="dictionary-not-found">
+                        Word not found in Wiktionary
+                    </div>
+                `;
+                return;
+            }
+
+            // Update modal title with lemma (base form) instead of original word
+            const modalTitle = modal.querySelector('.dictionary-modal-header h3');
+            if (data.lemma && data.original_word && data.lemma !== data.original_word) {
+                // Show lemma in title, original word as subtitle
+                modalTitle.innerHTML = `📖 Dictionary: ${data.lemma} <small style="color: #7f8c8d; font-weight: normal;">(looked up: ${data.original_word})</small>`;
+            } else {
+                modalTitle.textContent = `📖 Dictionary: ${data.lemma || word}`;
+            }
+
+            // Build the HTML for the word info
+            let html = '';
+
+            // Note (gender only)
+            if (data.note) {
+                // Convert **text** markdown to <strong>text</strong>
+                const formattedNote = data.note.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                html += `<div class="dictionary-note">${formattedNote}</div>`;
+            }
+
+            // English Translations (from dict.cc) - Most important for learners!
+            if (data.translations && data.translations.length > 0) {
+                const translationsText = data.translations.join(', ');
+                html += `<div class="dictionary-section">
+                    <strong>English:</strong>
+                    <div class="dictionary-translations-inline">${translationsText}</div>
+                </div>`;
+            }
+
+            // Worttrennung (syllable separation)
+            if (data.worttrennung) {
+                // Highlight abbreviations (Komp., Sup., Prät., Part., Pl.)
+                const highlightedWorttrennung = data.worttrennung.replace(
+                    /(Komp\.|Sup\.|Prät\.|Part\.|Pl\.)/g,
+                    '<span class="worttrennung-abbr">$1</span>'
+                );
+                html += `<div class="dictionary-section">
+                    <strong>Syllables:</strong>
+                    <div class="dictionary-worttrennung">${highlightedWorttrennung}</div>
+                </div>`;
+            }
+
+            // Bedeutungen (meanings) - shows case requirements and definitions
+            if (data.bedeutungen) {
+                html += `<div class="dictionary-section">
+                    <strong>Meanings:</strong>
+                    <pre class="dictionary-bedeutungen">${data.bedeutungen}</pre>
+                </div>`;
+            }
+
+            // Examples from Tatoeba (simple DE-EN pairs)
+            if (data.examples && data.examples.length > 0) {
+                html += '<div class="dictionary-section"><strong>Examples:</strong><ul class="dictionary-examples">';
+                data.examples.forEach(example => {
+                    // Tatoeba examples are objects with "de" and "en" fields
+                    if (typeof example === 'object' && example.de && example.en) {
+                        html += `<li>
+                            <div class="example-de">${example.de}</div>
+                            <div class="example-en">${example.en}</div>
+                        </li>`;
+                    } else {
+                        // Fallback for old format (plain text)
+                        html += `<li>${example}</li>`;
+                    }
+                });
+                html += '</ul></div>';
+            }
+
+            contentDiv.innerHTML = html;
+
+        } catch (error) {
+            console.error('Dictionary fetch error:', error);
+            contentDiv.innerHTML = `
+                <div class="dictionary-error">
+                    Failed to load word info. Make sure the backend server is running.
+                </div>
+            `;
+        }
     }
 }

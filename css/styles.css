@@ -163,19 +163,22 @@ button:hover {
 
 .sentence-buttons {
     display: flex;
-    gap: 10px;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .btn-add-sentence {
     flex: 1;
+    min-width: 70px;
     background: #27ae60;
     color: white;
-    padding: 10px;
+    padding: 8px 6px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
+    white-space: nowrap;
 }
 
 .btn-add-sentence:hover {
@@ -186,18 +189,40 @@ button:hover {
 
 .btn-regenerate {
     flex: 1;
+    min-width: 70px;
     background: #3498db;
     color: white;
-    padding: 10px;
+    padding: 8px 6px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
+    white-space: nowrap;
 }
 
 .btn-regenerate:hover {
     background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.btn-check-grammar {
+    flex: 1;
+    min-width: 70px;
+    background: #9b59b6;
+    color: white;
+    padding: 8px 6px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.btn-check-grammar:hover {
+    background: #8e44ad;
     transform: translateY(-2px);
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
@@ -262,15 +287,15 @@ button:hover {
 
 .sentence-item-text {
     color: #2c3e50;
-    padding-right: 80px; /* Make space for buttons */
+    padding-right: 50px; /* Make space for icon buttons */
 }
 
 .sentence-item-actions {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 8px;
+    right: 8px;
     display: flex;
-    gap: 3px;
+    gap: 4px;
     opacity: 0;
     transition: opacity 0.2s;
 }
@@ -283,28 +308,44 @@ button:hover {
     background: #3498db;
     color: white;
     border: none;
-    padding: 3px 6px;
+    padding: 0;
     border-radius: 3px;
     cursor: pointer;
-    font-size: 10px;
+    font-size: 11px;
+    line-height: 1;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
 }
 
 .sentence-item-edit:hover {
     background: #2980b9;
+    transform: scale(1.15);
 }
 
 .sentence-item-delete {
     background: #e74c3c;
     color: white;
     border: none;
-    padding: 3px 6px;
+    padding: 0;
     border-radius: 3px;
     cursor: pointer;
-    font-size: 10px;
+    font-size: 11px;
+    line-height: 1;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
 }
 
 .sentence-item-delete:hover {
     background: #c0392b;
+    transform: scale(1.15);
 }
 
 .no-sentences {
@@ -586,4 +627,351 @@ button:hover {
     border-radius: 5px;
     color: white;
     text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Grammar Check Results */
+.grammar-results {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border-left: 4px solid #9b59b6;
+}
+
+.grammar-results-header {
+    font-size: 13px;
+    font-weight: bold;
+    color: #34495e;
+    margin-bottom: 10px;
+}
+
+.grammar-loading {
+    color: #7f8c8d;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.grammar-success {
+    color: #27ae60;
+    font-weight: 500;
+    font-size: 13px;
+    padding: 10px;
+    background: #d4edda;
+    border-radius: 4px;
+}
+
+.grammar-summary {
+    font-weight: 600;
+    color: #c0392b;
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.grammar-error {
+    background: white;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-left: 3px solid #e74c3c;
+    font-size: 12px;
+}
+
+.grammar-error-header {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.grammar-error-number {
+    font-weight: bold;
+    color: #c0392b;
+}
+
+.grammar-error-message {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.grammar-error-context {
+    background: #ecf0f1;
+    padding: 6px 8px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 11px;
+    margin: 6px 0;
+    color: #34495e;
+}
+
+.grammar-suggestions {
+    margin-top: 6px;
+    font-size: 11px;
+    color: #27ae60;
+}
+
+.suggestion {
+    background: #d4edda;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin: 0 3px;
+    font-weight: 500;
+}
+
+.grammar-error-meta {
+    margin-top: 6px;
+    font-size: 10px;
+    color: #7f8c8d;
+}
+
+.grammar-error-message {
+    color: #c0392b;
+    font-size: 12px;
+    padding: 10px;
+    background: #f8d7da;
+    border-radius: 4px;
+}
+
+/* Word Text Input with Lookup Button */
+.word-text-input-wrapper {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.word-text-input {
+    flex: 1;
+}
+
+.lookup-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.lookup-btn:hover {
+    background: #2980b9;
+    transform: scale(1.1);
+}
+
+/* Dictionary Modal */
+.dictionary-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.dictionary-modal {
+    background: white;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dictionary-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+}
+
+.dictionary-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.dictionary-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #7f8c8d;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.dictionary-modal-close:hover {
+    background: #e0e0e0;
+    color: #2c3e50;
+}
+
+.dictionary-modal-content {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.dictionary-loading {
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+    padding: 20px;
+}
+
+.dictionary-not-found {
+    text-align: center;
+    color: #7f8c8d;
+    padding: 20px;
+}
+
+.dictionary-error {
+    color: #c0392b;
+    padding: 15px;
+    background: #f8d7da;
+    border-radius: 4px;
+    border-left: 3px solid #c0392b;
+}
+
+.dictionary-lemma {
+    background: #e3f2fd;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    color: #1976d2;
+    border-left: 3px solid #2196f3;
+}
+
+.dictionary-note {
+    background: #fff3cd;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: #856404;
+    border-left: 4px solid #ffc107;
+}
+
+.dictionary-section {
+    margin-bottom: 20px;
+}
+
+.dictionary-section strong {
+    display: block;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.dictionary-section p {
+    margin: 0;
+    line-height: 1.6;
+    color: #555;
+}
+
+.dictionary-section ul {
+    margin: 8px 0 0 20px;
+    padding: 0;
+}
+
+.dictionary-section li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.dictionary-worttrennung {
+    background: #f0f8f0;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border-left: 3px solid #27ae60;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    color: #2c3e50;
+    letter-spacing: 1px;
+    margin: 8px 0 0 0;
+}
+
+.worttrennung-abbr {
+    background: #27ae60;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 2px;
+    display: inline-block;
+}
+
+.dictionary-translations-inline {
+    background: #e8f5e9;
+    padding: 10px 12px;
+    margin: 8px 0 0 0;
+    border-radius: 4px;
+    border-left: 3px solid #27ae60;
+    font-size: 14px;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+.dictionary-examples {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+}
+
+.dictionary-examples li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.dictionary-examples li:last-child {
+    border-bottom: none;
+}
+
+.example-de {
+    font-size: 14px;
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 4px;
+}
+
+.example-en {
+    font-size: 13px;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.dictionary-bedeutungen {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 4px;
+    border-left: 3px solid #3498db;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #2c3e50;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: auto;
+    margin: 8px 0 0 0;
 }

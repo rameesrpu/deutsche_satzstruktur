@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import spacy
+import language_tool_python
 from typing import List, Dict
 
 app = FastAPI(title="German NLP Analyzer", version="1.0.0")
@@ -24,6 +25,11 @@ except OSError:
     subprocess.run(["python", "-m", "spacy", "download", "de_core_news_sm"])
     nlp = spacy.load("de_core_news_sm")
 
+# Initialize LanguageTool for German grammar checking
+print("Initializing LanguageTool for German...")
+language_tool = language_tool_python.LanguageTool('de-DE')
+print("LanguageTool ready!")
+
 
 class AnalyzeRequest(BaseModel):
     text: str
@@ -40,6 +46,22 @@ class WordAnalysis(BaseModel):
     morph: str  # Original morphology for debugging
     clause_type: str  # 'main' or 'subordinate'
     clause_id: int  # Unique identifier for each clause
+
+
+class GrammarError(BaseModel):
+    message: str
+    suggestions: List[str]
+    offset: int
+    length: int
+    rule_id: str
+    category: str
+    context: str
+
+
+class GrammarCheckResponse(BaseModel):
+    text: str
+    errors: List[GrammarError]
+    error_count: int
 
 
 def map_pos_to_type(token) -> str:
@@ -487,6 +509,121 @@ def analyze_debug(request: AnalyzeRequest):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Analysis error: {str(e)}")
+
+
+@app.post("/check-grammar", response_model=GrammarCheckResponse)
+def check_grammar(request: AnalyzeRequest):
+    """
+    Check German grammar and spelling using LanguageTool.
+
+    Returns:
+    - text: The original text
+    - errors: List of grammar/spelling errors found
+    - error_count: Total number of errors
+
+    Each error includes:
+    - message: Description of the error
+    - suggestions: Possible corrections
+    - offset: Character position where error starts
+    - length: Length of the error in characters
+    - rule_id: LanguageTool rule identifier
+    - category: Error category (e.g., GRAMMAR, TYPOS)
+    - context: Text snippet showing the error in context
+    """
+    if not request.text or not request.text.strip():
+        raise HTTPException(status_code=400, detail="Text cannot be empty")
+
+    try:
+        # Check the text with LanguageTool
+        matches = language_tool.check(request.text)
+
+        # Convert matches to our response format
+        errors = []
+        for match in matches:
+            # Get context (text around the error)
+            context_start = max(0, match.offset - 20)
+            context_end = min(len(request.text), match.offset + match.errorLength + 20)
+            context = request.text[context_start:context_end]
+
+            error = GrammarError(
+                message=match.message,
+                suggestions=match.replacements[:5],  # Limit to top 5 suggestions
+                offset=match.offset,
+                length=match.errorLength,
+                rule_id=match.ruleId,
+                category=match.category,
+                context=context
+            )
+            errors.append(error)
+
+        return GrammarCheckResponse(
+            text=request.text,
+            errors=errors,
+            error_count=len(errors)
+        )
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Grammar check error: {str(e)}")
+
+
+@app.get("/word-info/{word}")
+def get_word_information(word: str):
+    """
+    Get dictionary information for a German word from Wiktionary.
+
+    Returns comprehensive word information including:
+    - Case requirements (e.g., "mit Dativ" for verbs)
+    - Definition in German
+    - Example sentences
+    - Usage notes
+
+    Args:
+    - word: German word to look up (will be lemmatized automatically)
+
+    Returns:
+    - word: The queried word (original form)
+    - lemma: The lemmatized form used for lookup
+    - found: Whether the word was found in Wiktionary
+    - cases: List of case requirements (e.g., ["mit Dativ"])
+    - definition: First definition from Wiktionary
+    - examples: Up to 3 example sentences
+    - note: User-friendly explanation of case requirements
+    """
+    try:
+        from wiktionary_api import get_word_info
+        from dictcc_api import fetch_dictcc_translations
+        from tatoeba_api import fetch_tatoeba_examples
+
+        # Lemmatize the word using spaCy to get the base form
+        doc = nlp(word)
+        lemma = doc[0].lemma_ if len(doc) > 0 else word
+
+        # Look up the lemma in Wiktionary (for grammar info)
+        info = get_word_info(lemma)
+
+        # Get simple English translations from dict.cc
+        dictcc_translations = fetch_dictcc_translations(lemma, max_results=5)
+
+        # Extract just the English translations for simple display
+        simple_translations = [entry["en"] for entry in dictcc_translations]
+
+        # Get simple example sentences from Tatoeba (instead of Wiktionary)
+        tatoeba_examples = fetch_tatoeba_examples(lemma, max_results=3)
+
+        # Add dict.cc translations and full entries to the response
+        info['translations'] = simple_translations  # Simple English translations
+        info['translation_entries'] = dictcc_translations  # Full entries with DE-EN pairs
+
+        # Replace Wiktionary examples with simpler Tatoeba examples
+        info['examples'] = tatoeba_examples  # Simple DE-EN sentence pairs
+
+        # Add the original word and lemma to the response
+        info['original_word'] = word
+        info['lemma'] = lemma
+
+        return info
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Word lookup error: {str(e)}")
 
 
 if __name__ == "__main__":
