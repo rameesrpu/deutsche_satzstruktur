@@ -6,6 +6,8 @@ import language_tool_python
 from typing import List, Dict
 import sys
 import subprocess
+import threading
+from queue import Queue
 
 app = FastAPI(title="German NLP Analyzer", version="1.0.0")
 
@@ -550,6 +552,42 @@ def analyze_debug(request: AnalyzeRequest):
         raise HTTPException(status_code=500, detail=f"Analysis error: {str(e)}")
 
 
+def check_with_timeout(lt, text, timeout=10):
+    """
+    Run LanguageTool check with timeout to prevent hanging.
+    Returns matches or raises TimeoutError.
+    """
+    result_queue = Queue()
+    exception_queue = Queue()
+
+    def check_worker():
+        try:
+            matches = lt.check(text)
+            result_queue.put(matches)
+        except Exception as e:
+            exception_queue.put(e)
+
+    thread = threading.Thread(target=check_worker)
+    thread.daemon = True
+    thread.start()
+    thread.join(timeout=timeout)
+
+    if thread.is_alive():
+        print(f"LanguageTool check timed out after {timeout}s")
+        sys.stdout.flush()
+        raise TimeoutError(f"Grammar check timed out after {timeout} seconds")
+
+    # Check if there was an exception
+    if not exception_queue.empty():
+        raise exception_queue.get()
+
+    # Return the result
+    if not result_queue.empty():
+        return result_queue.get()
+    else:
+        raise RuntimeError("Grammar check failed without error")
+
+
 @app.post("/check-grammar", response_model=GrammarCheckResponse)
 def check_grammar(request: AnalyzeRequest):
     """
@@ -581,10 +619,10 @@ def check_grammar(request: AnalyzeRequest):
         print(f"LanguageTool server status: {lt._server}")
         sys.stdout.flush()
 
-        # Check the text with LanguageTool
-        print("Calling lt.check()...")
+        # Check the text with LanguageTool (with timeout to prevent hanging)
+        print("Calling lt.check() with 10s timeout...")
         sys.stdout.flush()
-        matches = lt.check(request.text)
+        matches = check_with_timeout(lt, request.text, timeout=10)
         print(f"lt.check() returned {len(matches)} matches")
         sys.stdout.flush()
 
@@ -618,6 +656,22 @@ def check_grammar(request: AnalyzeRequest):
         print(f"Returning response with {len(errors)} errors")
         sys.stdout.flush()
         return response
+
+    except TimeoutError as e:
+        print(f"TIMEOUT in grammar check: {str(e)}")
+        print("Resetting LanguageTool instance due to timeout...")
+        sys.stdout.flush()
+
+        # Reset the global instance to force recreation on next request
+        global language_tool
+        if language_tool:
+            try:
+                language_tool.close()
+            except:
+                pass
+            language_tool = None
+
+        raise HTTPException(status_code=503, detail=f"Grammar check timed out. This may be due to server resource constraints on the free tier. Please try again.")
 
     except Exception as e:
         print(f"EXCEPTION in grammar check: {str(e)}")
