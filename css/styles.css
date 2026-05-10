@@ -1317,7 +1317,11 @@ button:hover {
 
     .sentence-panel.active,
     .properties-panel.active {
-        max-height: 55vh; /* Remaining space when canvas is 40vh */
+        /* PANEL HEIGHT when open
+         * This should leave room for: canvas (40vh) + buttons + header
+         * Adjust to give more/less space to panel content
+         * Example: canvas 40vh + panel 55vh + buttons/header 5vh ≈ 100vh total */
+        max-height: 55vh;
         padding: 15px;
         overflow-y: auto;
         position: relative;
@@ -1341,8 +1345,11 @@ button:hover {
 
     /* Canvas Container */
     .canvas-container {
-        /* Default: panels closed - use 90% of viewport height */
-        height: 90vh;
+        /* PANELS CLOSED: Canvas takes up most of screen, leaving room for header and buttons
+         * Adjust 140px to control space reserved for header + buttons + padding
+         * Increase 140px = smaller canvas, more space for UI elements
+         * Decrease 140px = larger canvas, less space for UI elements */
+        height: calc(80vh - 140px);
         min-height: 400px;
         width: 100%;
         border-right: none;
@@ -1355,7 +1362,9 @@ button:hover {
         flex: 0 0 auto;
     }
 
-    /* When a panel is open, reduce canvas to 40% of viewport */
+    /* PANELS OPEN: Canvas shrinks to make room for panel content
+     * Adjust 40vh to control canvas height when panel is visible
+     * Example: 30vh = smaller canvas, 50vh = larger canvas */
     .main-content.panel-open .canvas-container {
         height: 40vh;
         min-height: 300px;
@@ -1614,12 +1623,15 @@ button:hover {
         padding: 12px;
     }
 
+    /* MOBILE CANVAS SIZING for screens < 480px (same values as above) */
     .canvas-container {
-        height: 90vh;
+        /* PANELS CLOSED: Adjust 140px to control reserved space */
+        height: calc(100vh - 140px);
         min-height: 400px;
     }
 
     .main-content.panel-open .canvas-container {
+        /* PANELS OPEN: Adjust 40vh to control canvas percentage */
         height: 40vh;
         min-height: 300px;
     }
