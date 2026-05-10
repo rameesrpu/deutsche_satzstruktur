@@ -4,6 +4,8 @@ from pydantic import BaseModel
 import spacy
 import language_tool_python
 from typing import List, Dict
+import sys
+import subprocess
 
 app = FastAPI(title="German NLP Analyzer", version="1.0.0")
 
@@ -37,20 +39,34 @@ def get_language_tool():
         if language_tool is not None:
             # Try to check if subprocess is alive
             if hasattr(language_tool, '_server') and language_tool._server is not None:
-                return language_tool
+                poll_result = language_tool._server.poll()
+                if poll_result is None:  # None means process is still running
+                    return language_tool
+                else:
+                    print(f"LanguageTool subprocess died with code {poll_result}, recreating...")
+                    language_tool = None
             else:
-                print("LanguageTool subprocess died, recreating...")
+                print("LanguageTool subprocess is None, recreating...")
                 language_tool = None
 
         # Create new instance
         print("Initializing LanguageTool for German...")
+        sys.stdout.flush()
+
         language_tool = language_tool_python.LanguageTool('de-DE')
-        print(f"LanguageTool ready! Server: {language_tool._server}")
+
+        # Verify the server started properly
+        if not hasattr(language_tool, '_server') or language_tool._server is None:
+            raise RuntimeError("LanguageTool server failed to start - subprocess is None")
+
+        print(f"LanguageTool ready! Server PID: {language_tool._server.pid if hasattr(language_tool._server, 'pid') else 'unknown'}")
+        sys.stdout.flush()
         return language_tool
     except Exception as e:
         print(f"LanguageTool initialization error: {e}")
         import traceback
         traceback.print_exc()
+        sys.stdout.flush()
         raise
 
 
