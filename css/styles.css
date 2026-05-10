@@ -975,3 +975,345 @@ button:hover {
     overflow-x: auto;
     margin: 8px 0 0 0;
 }
+
+/* ========================================
+   MOBILE RESPONSIVE STYLES
+   ======================================== */
+
+/* Mobile Toggle Buttons (hidden on desktop) */
+.mobile-toggle {
+    display: none;
+    width: 100%;
+    padding: 12px 15px;
+    background: #34495e;
+    color: white;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s;
+    z-index: 10;
+}
+
+.mobile-toggle:hover {
+    background: #2c3e50;
+}
+
+.mobile-toggle:active {
+    background: #1a252f;
+}
+
+.toggle-icon {
+    font-size: 16px;
+    margin-right: 8px;
+}
+
+.mobile-toggle-legend {
+    background: #7f8c8d;
+}
+
+.mobile-toggle-legend:hover {
+    background: #6c7a7b;
+}
+
+/* Tablet Styles (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+    h1 {
+        font-size: 18px;
+    }
+
+    .subtitle {
+        font-size: 11px;
+    }
+
+    .sentence-panel,
+    .properties-panel {
+        width: 220px;
+    }
+
+    .legend {
+        font-size: 10px;
+        gap: 10px;
+    }
+}
+
+/* Mobile Styles (< 768px) */
+@media screen and (max-width: 768px) {
+    body {
+        overflow: auto;
+    }
+
+    .container {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    /* Header Adjustments */
+    .header {
+        padding: 12px 15px;
+    }
+
+    h1 {
+        font-size: 18px;
+        margin-bottom: 4px;
+    }
+
+    .subtitle {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    /* Main Content - Stack Vertically */
+    .main-content {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    /* Show Mobile Toggle Buttons */
+    .mobile-toggle {
+        display: block;
+    }
+
+    /* Panels - Full Width and Collapsible */
+    .sentence-panel,
+    .properties-panel {
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        padding: 0;
+        border-right: none;
+        border-bottom: 2px solid #bdc3c7;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+
+    .sentence-panel.active,
+    .properties-panel.active {
+        max-height: 500px;
+        padding: 15px;
+        overflow-y: auto;
+    }
+
+    /* Canvas Container */
+    .canvas-container {
+        min-height: 400px;
+        height: 400px;
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #bdc3c7;
+        order: 1;
+    }
+
+    #canvas {
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 400px;
+    }
+
+    /* Reorder for better mobile UX */
+    .mobile-toggle-left {
+        order: 2;
+    }
+
+    .sentence-panel {
+        order: 3;
+    }
+
+    .mobile-toggle-right {
+        order: 4;
+    }
+
+    .properties-panel {
+        order: 5;
+    }
+
+    /* Legend - Collapsible */
+    .legend {
+        max-height: 0;
+        overflow: hidden;
+        padding: 0;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+
+    .legend.active {
+        max-height: 400px;
+        padding: 15px;
+        overflow-y: auto;
+    }
+
+    .mobile-toggle-legend {
+        order: 6;
+    }
+
+    #legend {
+        order: 7;
+    }
+
+    /* Touch-Friendly Buttons */
+    button {
+        padding: 12px 18px;
+        font-size: 14px;
+        min-height: 44px; /* Apple's recommended minimum touch target */
+    }
+
+    .sentence-buttons {
+        flex-direction: column;
+    }
+
+    .btn-add-sentence,
+    .btn-regenerate,
+    .btn-check-grammar {
+        width: 100%;
+        min-height: 44px;
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    /* Sentence Items */
+    .sentence-item {
+        padding: 12px;
+        font-size: 14px;
+        min-height: 44px;
+    }
+
+    .sentence-item-actions {
+        opacity: 1; /* Always show on mobile */
+    }
+
+    .sentence-item-edit,
+    .sentence-item-delete {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    /* Input Fields */
+    .sentence-input-area textarea {
+        font-size: 16px; /* Prevents iOS zoom on focus */
+        min-height: 100px;
+    }
+
+    .prop-input {
+        font-size: 16px; /* Prevents iOS zoom on focus */
+        padding: 12px;
+        min-height: 44px;
+    }
+
+    /* Properties Panel Buttons */
+    .prop-btn {
+        padding: 10px 12px;
+        font-size: 14px;
+        min-height: 44px;
+    }
+
+    /* Legend Items */
+    .legend-item {
+        font-size: 12px;
+        width: 100%;
+        padding: 5px 0;
+    }
+
+    .legend-shape {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+    }
+
+    /* Conjugation Grid */
+    .conj-pronoun-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .conj-pronoun-btn {
+        padding: 12px;
+        font-size: 14px;
+        min-height: 44px;
+    }
+
+    /* Dictionary Modal */
+    .dictionary-modal {
+        width: 95%;
+        max-height: 90vh;
+    }
+
+    .dictionary-modal-header h3 {
+        font-size: 16px;
+    }
+
+    .dictionary-modal-content {
+        padding: 15px;
+    }
+
+    /* Grammar Results */
+    .grammar-results {
+        padding: 12px;
+    }
+
+    .grammar-error {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    /* No Selection Message */
+    .no-selection {
+        font-size: 14px;
+        margin-top: 30px;
+    }
+
+    .no-sentences {
+        font-size: 13px;
+    }
+}
+
+/* Small Mobile Styles (< 480px) */
+@media screen and (max-width: 480px) {
+    .header {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 16px;
+    }
+
+    .subtitle {
+        font-size: 10px;
+    }
+
+    .sentence-panel,
+    .properties-panel {
+        padding: 12px;
+    }
+
+    .sentence-panel.active,
+    .properties-panel.active {
+        padding: 12px;
+    }
+
+    .legend.active {
+        padding: 12px;
+    }
+
+    .canvas-container {
+        min-height: 300px;
+        height: 300px;
+    }
+
+    #canvas {
+        min-height: 300px;
+    }
+
+    button {
+        font-size: 13px;
+        padding: 10px 15px;
+    }
+
+    .legend-item {
+        font-size: 11px;
+    }
+
+    .dictionary-modal {
+        width: 98%;
+        max-height: 95vh;
+    }
+}

@@ -15,10 +15,13 @@
 
 
         <div class="main-content">
-            <div class="sentence-panel">
+            <button class="mobile-toggle mobile-toggle-left" id="toggle-sentence-panel" aria-label="Toggle sentences panel">
+                <span class="toggle-icon">☰</span> Sentences
+            </button>
+            <div class="sentence-panel" id="sentence-panel">
                 <h3>Sentences</h3>
                 <div class="sentence-input-area">
-                    <textarea id="sentence-input" placeholder="Type a sentence (e.g., ich lese das buch weil ich Zeit habe)"></textarea>
+                    <textarea id="sentence-input" placeholder="Type a sentence"></textarea>
                     <div class="sentence-buttons">
                         <button id="add-sentence-btn" class="btn-add-sentence" title="Add sentence to list">➕ Add</button>
                         <button id="regenerate-btn" class="btn-regenerate" title="Auto-configure with AI">🔄 Auto</button>
@@ -41,7 +44,10 @@
                 <svg id="canvas"></svg>
             </div>
 
-            <div class="properties-panel">
+            <button class="mobile-toggle mobile-toggle-right" id="toggle-properties-panel" aria-label="Toggle properties panel">
+                <span class="toggle-icon">⚙</span> Properties
+            </button>
+            <div class="properties-panel" id="properties-panel">
                 <div id="properties-content">
                     <div class="no-selection">
                         Click on a word to edit its properties
@@ -50,7 +56,10 @@
             </div>
         </div>
 
-        <div class="legend">
+        <button class="mobile-toggle mobile-toggle-legend" id="toggle-legend" aria-label="Toggle legend">
+            <span class="toggle-icon">📖</span> Legend
+        </button>
+        <div class="legend" id="legend">
             <div class="legend-item">
                 <span><strong>NOUNS - COLOR = GENDER:</strong></span>
             </div>

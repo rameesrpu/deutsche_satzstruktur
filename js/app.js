@@ -27,9 +27,24 @@ class DeutschApp {
         this.uiController.init(this.svg);
         this.setupToolbarButtons();
         this.setupSentencePanel();
+        this.setupResizeListener();
         this.loadSentences();
         this.redrawAll();
         this.uiController.updatePropertiesPanel();
+    }
+
+    /**
+     * Setup window resize listener for responsive canvas
+     */
+    setupResizeListener() {
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            // Debounce resize events
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                this.redrawAll();
+            }, 250);
+        });
     }
 
     /**
@@ -447,10 +462,27 @@ class DeutschApp {
         // Clear SVG
         this.svg.innerHTML = '';
 
-        // Calculate and set canvas size for scrolling
+        // Calculate and set canvas size
         const canvasSize = this.calculateCanvasSize();
-        this.svg.setAttribute('width', canvasSize.width);
-        this.svg.setAttribute('height', canvasSize.height);
+
+        // Check if we're on mobile (viewport width < 768px)
+        const isMobile = window.innerWidth < 768;
+
+        if (isMobile) {
+            // On mobile: Use viewBox for responsive scaling
+            this.svg.setAttribute('viewBox', `0 0 ${canvasSize.width} ${canvasSize.height}`);
+            this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+            // Remove fixed width/height to allow responsive sizing
+            this.svg.removeAttribute('width');
+            this.svg.removeAttribute('height');
+        } else {
+            // On desktop: Use fixed dimensions with scrolling
+            this.svg.setAttribute('width', canvasSize.width);
+            this.svg.setAttribute('height', canvasSize.height);
+            // Remove viewBox on desktop
+            this.svg.removeAttribute('viewBox');
+            this.svg.removeAttribute('preserveAspectRatio');
+        }
 
         // Draw Feldermodell zones (both Hauptsatz and Nebensatz)
         this.feldermodellRenderer.draw(this.wordManager);
@@ -497,4 +529,63 @@ class DeutschApp {
 document.addEventListener('DOMContentLoaded', () => {
     window.app = new DeutschApp();
     window.app.init();
+
+    // Setup mobile toggle functionality
+    setupMobileToggles();
 });
+
+/**
+ * Setup mobile panel toggle functionality
+ */
+function setupMobileToggles() {
+    // Toggle Sentence Panel
+    const toggleSentenceBtn = document.getElementById('toggle-sentence-panel');
+    const sentencePanel = document.getElementById('sentence-panel');
+
+    if (toggleSentenceBtn && sentencePanel) {
+        toggleSentenceBtn.addEventListener('click', () => {
+            sentencePanel.classList.toggle('active');
+            // Update button icon
+            const icon = toggleSentenceBtn.querySelector('.toggle-icon');
+            if (sentencePanel.classList.contains('active')) {
+                icon.textContent = '✕';
+            } else {
+                icon.textContent = '☰';
+            }
+        });
+    }
+
+    // Toggle Properties Panel
+    const togglePropertiesBtn = document.getElementById('toggle-properties-panel');
+    const propertiesPanel = document.getElementById('properties-panel');
+
+    if (togglePropertiesBtn && propertiesPanel) {
+        togglePropertiesBtn.addEventListener('click', () => {
+            propertiesPanel.classList.toggle('active');
+            // Update button icon
+            const icon = togglePropertiesBtn.querySelector('.toggle-icon');
+            if (propertiesPanel.classList.contains('active')) {
+                icon.textContent = '✕';
+            } else {
+                icon.textContent = '⚙';
+            }
+        });
+    }
+
+    // Toggle Legend
+    const toggleLegendBtn = document.getElementById('toggle-legend');
+    const legend = document.getElementById('legend');
+
+    if (toggleLegendBtn && legend) {
+        toggleLegendBtn.addEventListener('click', () => {
+            legend.classList.toggle('active');
+            // Update button icon
+            const icon = toggleLegendBtn.querySelector('.toggle-icon');
+            if (legend.classList.contains('active')) {
+                icon.textContent = '✕';
+            } else {
+                icon.textContent = '📖';
+            }
+        });
+    }
+}
