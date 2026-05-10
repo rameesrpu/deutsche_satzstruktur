@@ -431,7 +431,6 @@ button:hover {
 }
 
 .prop-btn-flow {
-    width: 100%;
     margin-bottom: 5px;
 }
 
@@ -1008,12 +1007,13 @@ button:hover {
 .mobile-toggle::after {
     content: '';
     position: absolute;
-    bottom: -1px; /* Extend 1px below to overlap and prevent gaps */
+    bottom: -2px; /* Position fully below toggle to avoid blocking content */
     left: 0;
     right: 0;
     height: 2px; /* Thicker to ensure coverage */
     background: #95a5a6;
-    z-index: 1;
+    z-index: 0; /* Behind content */
+    pointer-events: none; /* Don't block interactions */
 }
 
 .mobile-toggle:hover {
@@ -1037,12 +1037,13 @@ button:hover {
 .mobile-toggle-legend::before {
     content: '';
     position: absolute;
-    top: -1px; /* Extend 1px above to overlap and prevent gaps */
+    top: -2px; /* Position fully above toggle to avoid blocking content */
     left: 0;
     right: 0;
     height: 2px; /* Thicker to ensure coverage */
     background: #95a5a6;
-    z-index: 1;
+    z-index: 0; /* Behind content */
+    pointer-events: none; /* Don't block interactions */
 }
 
 .mobile-toggle-legend:hover {
@@ -1151,12 +1152,13 @@ button:hover {
     .properties-panel.active::after {
         content: '';
         position: absolute;
-        bottom: -1px; /* Extend below to overlap and prevent gaps */
+        bottom: -3px; /* Position fully below panel to avoid blocking content */
         left: 0;
         right: 0;
         height: 3px; /* Thicker to ensure coverage on all devices */
         background: #bdc3c7;
-        z-index: 1;
+        z-index: 0; /* Behind content */
+        pointer-events: none; /* Don't block interactions */
     }
 
     /* Canvas Container */
@@ -1176,12 +1178,13 @@ button:hover {
     .canvas-container::after {
         content: '';
         position: absolute;
-        bottom: -1px; /* Extend below to overlap and prevent gaps */
+        bottom: -3px; /* Position fully below container to avoid blocking content */
         left: 0;
         right: 0;
         height: 3px; /* Thicker to ensure coverage on all devices */
         background: #bdc3c7;
-        z-index: 1;
+        z-index: 0; /* Behind content */
+        pointer-events: none; /* Don't block interactions */
     }
 
     #canvas {
@@ -1238,12 +1241,13 @@ button:hover {
     .legend.active::before {
         content: '';
         position: absolute;
-        top: -1px; /* Extend above to overlap and prevent gaps */
+        top: -3px; /* Position fully above legend to avoid blocking content */
         left: 0;
         right: 0;
         height: 3px; /* Thicker to ensure coverage on all devices */
         background: #bdc3c7;
-        z-index: 1;
+        z-index: 0; /* Behind content */
+        pointer-events: none; /* Don't block interactions */
     }
 
     .mobile-toggle-legend {
@@ -1262,16 +1266,19 @@ button:hover {
     }
 
     .sentence-buttons {
-        flex-direction: column;
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
     }
 
     .btn-add-sentence,
     .btn-regenerate,
     .btn-check-grammar {
-        width: 100%;
+        flex: 1;
+        min-width: 0; /* Allow buttons to shrink */
         min-height: 44px;
-        font-size: 14px;
-        padding: 12px;
+        font-size: 13px;
+        padding: 10px 6px;
     }
 
     /* Sentence Items */
@@ -1283,13 +1290,20 @@ button:hover {
 
     .sentence-item-actions {
         opacity: 1; /* Always show on mobile */
+        right: 10px; /* Position inside the border */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%);
     }
 
     .sentence-item-edit,
     .sentence-item-delete {
-        width: 32px;
-        height: 32px;
-        font-size: 14px;
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+    }
+
+    .sentence-item-text {
+        padding-right: 65px; /* More space for smaller buttons on mobile */
     }
 
     /* Input Fields */
@@ -1307,8 +1321,14 @@ button:hover {
     /* Properties Panel Buttons */
     .prop-btn {
         padding: 10px 12px;
-        font-size: 14px;
+        font-size: 13px;
         min-height: 44px;
+    }
+
+    /* Flow Direction Buttons - 2 per line on mobile */
+    .prop-btn-flow {
+        flex: 1 !important; /* Equal width buttons */
+        margin-bottom: 0;
     }
 
     /* Legend Items */
@@ -1326,13 +1346,13 @@ button:hover {
 
     /* Conjugation Grid */
     .conj-pronoun-grid {
-        grid-template-columns: 1fr;
-        gap: 8px;
+        grid-template-columns: 1fr 1fr 1fr; /* 3 columns on mobile */
+        gap: 6px;
     }
 
     .conj-pronoun-btn {
-        padding: 12px;
-        font-size: 14px;
+        padding: 10px 6px;
+        font-size: 12px;
         min-height: 44px;
     }
 

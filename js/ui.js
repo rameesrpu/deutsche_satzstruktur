@@ -228,10 +228,12 @@ class UIController {
 
             <div class="prop-section">
                 <label class="prop-label">Flow Direction:</label>
-                <button class="prop-btn prop-btn-flow ${selectedWord.flowDirection === 'right' ? 'active' : ''}"
-                        data-property="flowDirection" data-value="right">→ Right (Hauptsatz)</button>
-                <button class="prop-btn prop-btn-flow ${selectedWord.flowDirection === 'down' ? 'active' : ''}"
-                        data-property="flowDirection" data-value="down">↓ Down (Nebensatz)</button>
+                <div class="prop-buttons">
+                    <button class="prop-btn prop-btn-flow ${selectedWord.flowDirection === 'right' ? 'active' : ''}"
+                            data-property="flowDirection" data-value="right">→ Right</button>
+                    <button class="prop-btn prop-btn-flow ${selectedWord.flowDirection === 'down' ? 'active' : ''}"
+                            data-property="flowDirection" data-value="down">↓ Down</button>
+                </div>
             </div>
 
             ${this.getPrepositionCaseUI(selectedWord)}
