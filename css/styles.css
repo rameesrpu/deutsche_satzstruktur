@@ -138,11 +138,7 @@ button:hover {
 }
 
 .sentence-panel h3 {
-    font-size: 16px;
-    color: #2c3e50;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #bdc3c7;
+    display: none;
 }
 
 .sentence-input-area {
@@ -157,7 +153,7 @@ button:hover {
     font-size: 13px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     resize: vertical;
-    min-height: 80px;
+    min-height: 50px;
     margin-bottom: 10px;
 }
 
@@ -381,11 +377,7 @@ button:hover {
 }
 
 .properties-panel h3 {
-    font-size: 16px;
-    color: #2c3e50;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #bdc3c7;
+    display: none;
 }
 
 .prop-section {
@@ -1332,15 +1324,7 @@ button:hover {
     }
 
     .sentence-panel.active::after {
-        content: '';
-        position: absolute;
-        bottom: -3px; /* Position fully below panel to avoid blocking content */
-        left: 0;
-        right: 0;
-        height: 3px; /* Thicker to ensure coverage on all devices */
-        background: #bdc3c7;
-        z-index: 0; /* Behind content */
-        pointer-events: none; /* Don't block interactions */
+        display: none;
     }
 
     /* Canvas Container */
@@ -1348,7 +1332,7 @@ button:hover {
         /* PANELS CLOSED: Canvas takes up a percentage of viewport height
          * Adjust the vh value to control canvas size (e.g., 60vh, 70vh, 80vh)
          * Higher value = larger canvas, Lower value = smaller canvas */
-        height: 92vh;
+        height: 90vh;
         min-height: 400px;
         width: 100%;
         border-right: none;
@@ -1365,7 +1349,7 @@ button:hover {
      * Adjust 40vh to control canvas height when panel is visible
      * Example: 30vh = smaller canvas, 50vh = larger canvas */
     .main-content.panel-open .canvas-container {
-        height: 60vh;
+        height: 58vh;
         min-height: 300px;
     }
 
@@ -1488,7 +1472,7 @@ button:hover {
     /* Input Fields */
     .sentence-input-area textarea {
         font-size: 16px; /* Prevents iOS zoom on focus */
-        min-height: 100px;
+        min-height: 60px;
     }
 
     .prop-input {

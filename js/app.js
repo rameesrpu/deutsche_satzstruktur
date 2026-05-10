@@ -734,6 +734,12 @@ function setupMobileToggles() {
                 // Remove panel-open class since no panel is active
                 mainContent?.classList.remove('panel-open');
             } else {
+                // Check if a word is selected before opening
+                if (!window.app?.wordManager?.selectedWord) {
+                    // No word selected - don't open the panel
+                    return;
+                }
+
                 // Activate properties panel, deactivate sentence
                 propertiesPanel.classList.add('active');
                 togglePropertiesBtn.classList.add('active');
