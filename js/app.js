@@ -539,36 +539,15 @@ class DeutschApp {
         const isMobile = window.innerWidth < 768;
         const container = document.querySelector('.canvas-container');
 
-        // Check if any panel is open on mobile
-        let isPanelOpen = false;
-        if (isMobile) {
-            const sentencePanel = document.getElementById('sentence-panel');
-            const propertiesPanel = document.getElementById('properties-panel');
-            isPanelOpen = sentencePanel?.classList.contains('active') ||
-                         propertiesPanel?.classList.contains('active');
-        }
-
         // Get actual container dimensions
         const containerWidth = container ? container.clientWidth : (isMobile ? 400 : 1200);
         const containerHeight = container ? container.clientHeight : (isMobile ? 500 : 800);
-
-        // Mobile: Adjust height based on panel state
-        let effectiveHeight = containerHeight;
-        if (isMobile) {
-            if (isPanelOpen) {
-                // Panel open - smaller canvas (leave room for panel)
-                effectiveHeight = Math.max(400, containerHeight);
-            } else {
-                // Panel closed - larger canvas (use more screen space)
-                effectiveHeight = Math.max(600, containerHeight);
-            }
-        }
 
         if (words.length === 0) {
             // Empty canvas - use actual container size
             return {
                 width: containerWidth,
-                height: effectiveHeight,
+                height: containerHeight,
                 viewBoxX: 0,
                 viewBoxY: 0
             };
@@ -599,7 +578,7 @@ class DeutschApp {
             // Mobile: use container size, but ensure content fits
             return {
                 width: Math.max(containerWidth, contentWidth),
-                height: Math.max(effectiveHeight, contentHeight),
+                height: Math.max(containerHeight, contentHeight),
                 viewBoxX: viewBoxX,
                 viewBoxY: viewBoxY
             };
@@ -719,17 +698,22 @@ function setupMobileToggles() {
         toggleSentenceBtn.addEventListener('click', () => {
             // Toggle sentence panel
             const isActive = sentencePanel.classList.contains('active');
+            const mainContent = document.querySelector('.main-content');
 
             if (isActive) {
                 // If clicking the active tab, close it
                 sentencePanel.classList.remove('active');
                 toggleSentenceBtn.classList.remove('active');
+                // Remove panel-open class since no panel is active
+                mainContent?.classList.remove('panel-open');
             } else {
                 // Activate sentence panel, deactivate properties
                 sentencePanel.classList.add('active');
                 toggleSentenceBtn.classList.add('active');
                 propertiesPanel.classList.remove('active');
                 togglePropertiesBtn.classList.remove('active');
+                // Add panel-open class
+                mainContent?.classList.add('panel-open');
             }
 
             // Recalculate canvas size after panel state changes
@@ -741,17 +725,22 @@ function setupMobileToggles() {
         togglePropertiesBtn.addEventListener('click', () => {
             // Toggle properties panel
             const isActive = propertiesPanel.classList.contains('active');
+            const mainContent = document.querySelector('.main-content');
 
             if (isActive) {
                 // If clicking the active tab, close it
                 propertiesPanel.classList.remove('active');
                 togglePropertiesBtn.classList.remove('active');
+                // Remove panel-open class since no panel is active
+                mainContent?.classList.remove('panel-open');
             } else {
                 // Activate properties panel, deactivate sentence
                 propertiesPanel.classList.add('active');
                 togglePropertiesBtn.classList.add('active');
                 sentencePanel.classList.remove('active');
                 toggleSentenceBtn.classList.remove('active');
+                // Add panel-open class
+                mainContent?.classList.add('panel-open');
             }
 
             // Recalculate canvas size after panel state changes

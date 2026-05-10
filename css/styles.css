@@ -1174,6 +1174,8 @@ button:hover {
         height: auto;
         min-height: 100vh;
         position: relative;
+        display: flex;
+        flex-direction: column;
     }
 
     /* Header Adjustments */
@@ -1205,6 +1207,7 @@ button:hover {
         flex-direction: row;
         flex-wrap: wrap;
         min-height: auto;
+        flex: 1; /* Grow to fill available space */
     }
 
     /* Tab-style Toggle Buttons Container */
@@ -1304,6 +1307,7 @@ button:hover {
         visibility: hidden;
         opacity: 0;
         transition: max-height 0.3s ease-out, padding 0.3s ease-out, visibility 0s linear 0.3s, opacity 0.2s ease-out;
+        height: auto;
         /* Better rendering during zoom/transform */
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
@@ -1313,7 +1317,7 @@ button:hover {
 
     .sentence-panel.active,
     .properties-panel.active {
-        max-height: 500px;
+        max-height: calc(45vh - 50px); /* Remaining space when canvas is 50vh */
         padding: 15px;
         overflow-y: auto;
         position: relative;
@@ -1337,8 +1341,9 @@ button:hover {
 
     /* Canvas Container */
     .canvas-container {
-        min-height: 300px;
-        height: 300px;
+        /* Default: panels closed - use 95% of viewport height minus header/tabs */
+        height: calc(95vh - 100px);
+        min-height: 400px;
         width: 100%;
         border-right: none;
         position: relative;
@@ -1347,6 +1352,13 @@ button:hover {
         -webkit-backface-visibility: hidden;
         transform: translateZ(0);
         -webkit-transform: translateZ(0);
+        flex: 0 0 auto;
+    }
+
+    /* When a panel is open, reduce canvas to 50% of viewport */
+    .main-content.panel-open .canvas-container {
+        height: 50vh;
+        min-height: 300px;
     }
 
     .canvas-container::after {
@@ -1364,14 +1376,14 @@ button:hover {
     #canvas {
         width: 100% !important;
         height: 100% !important;
-        min-height: 300px;
+        min-height: 400px;
     }
 
     /* Reorder for better mobile UX */
     .canvas-container {
         order: 1;
         width: 100%;
-        flex: 0 0 100%;
+        /* Allow canvas to grow and fill available vertical space */
     }
 
     .mobile-toggle-left {
@@ -1603,12 +1615,17 @@ button:hover {
     }
 
     .canvas-container {
+        height: calc(95vh - 100px);
+        min-height: 400px;
+    }
+
+    .main-content.panel-open .canvas-container {
+        height: 50vh;
         min-height: 300px;
-        height: 300px;
     }
 
     #canvas {
-        min-height: 300px;
+        min-height: 400px;
     }
 
     button {
