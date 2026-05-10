@@ -13,6 +13,12 @@ class DeutschApp {
             snapToGrid: true
         };
 
+        // Zoom configuration
+        this.zoomLevel = 1.0;
+        this.minZoom = 0.5;
+        this.maxZoom = 3.0;
+        this.zoomStep = 0.25;
+
         this.wordManager = new WordManager(this.gridConfig);
         this.sentenceManager = new SentenceManager(this.wordManager);
         this.feldermodellRenderer = new FeldermodellRenderer(this.svg);
@@ -28,9 +34,65 @@ class DeutschApp {
         this.setupToolbarButtons();
         this.setupSentencePanel();
         this.setupResizeListener();
+        this.setupZoomControls();
         this.loadSentences();
         this.redrawAll();
         this.uiController.updatePropertiesPanel();
+    }
+
+    /**
+     * Setup zoom controls (pinch-to-zoom)
+     */
+    setupZoomControls() {
+        // Setup pinch-to-zoom gesture support
+        this.setupPinchZoom();
+    }
+
+    /**
+     * Setup pinch-to-zoom gesture support for touch devices
+     */
+    setupPinchZoom() {
+        const canvasContainer = document.querySelector('.canvas-container');
+        if (!canvasContainer) return;
+
+        let initialDistance = 0;
+        let initialZoom = 1.0;
+
+        const getDistance = (touches) => {
+            const dx = touches[0].clientX - touches[1].clientX;
+            const dy = touches[0].clientY - touches[1].clientY;
+            return Math.sqrt(dx * dx + dy * dy);
+        };
+
+        canvasContainer.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                initialDistance = getDistance(e.touches);
+                initialZoom = this.zoomLevel;
+            }
+        }, { passive: false });
+
+        canvasContainer.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const currentDistance = getDistance(e.touches);
+                const scale = currentDistance / initialDistance;
+
+                // Calculate new zoom level
+                const newZoom = initialZoom * scale;
+
+                // Clamp to min/max zoom
+                this.zoomLevel = Math.max(this.minZoom, Math.min(this.maxZoom, newZoom));
+
+                this.redrawAll();
+            }
+        }, { passive: false });
+
+        canvasContainer.addEventListener('touchend', (e) => {
+            if (e.touches.length < 2) {
+                initialDistance = 0;
+            }
+        });
     }
 
     /**
@@ -439,17 +501,19 @@ class DeutschApp {
         if (words.length === 0) {
             // Empty canvas - use container size or reasonable minimum
             if (isMobile) {
-                return { width: 600, height: 400 };
+                return { width: 600, height: 400, viewBoxX: 0, viewBoxY: 0 };
             } else {
                 // Desktop: use container dimensions or minimum
                 const container = document.querySelector('.canvas-container');
                 if (container) {
                     return {
                         width: Math.max(1200, container.clientWidth),
-                        height: Math.max(800, container.clientHeight)
+                        height: Math.max(800, container.clientHeight),
+                        viewBoxX: 0,
+                        viewBoxY: 0
                     };
                 }
-                return { width: 1200, height: 800 };
+                return { width: 1200, height: 800, viewBoxX: 0, viewBoxY: 0 };
             }
         }
 
@@ -470,11 +534,17 @@ class DeutschApp {
         const contentWidth = maxX - minX + (padding * 2);
         const contentHeight = maxY - minY + (padding * 2);
 
+        // Calculate viewBox origin (top-left corner with padding)
+        const viewBoxX = Math.max(0, minX - padding);
+        const viewBoxY = Math.max(0, minY - padding);
+
         if (isMobile) {
             // Mobile: tight fit around content with minimum size
             return {
                 width: Math.max(400, contentWidth),
-                height: Math.max(300, contentHeight)
+                height: Math.max(300, contentHeight),
+                viewBoxX: viewBoxX,
+                viewBoxY: viewBoxY
             };
         } else {
             // Desktop: use container size or content size, whichever is larger
@@ -484,7 +554,9 @@ class DeutschApp {
 
             return {
                 width: Math.max(containerWidth, contentWidth, 1200),
-                height: Math.max(containerHeight, contentHeight, 800)
+                height: Math.max(containerHeight, contentHeight, 800),
+                viewBoxX: 0,
+                viewBoxY: 0
             };
         }
     }
@@ -502,20 +574,29 @@ class DeutschApp {
         // Check if we're on mobile (viewport width < 768px)
         const isMobile = window.innerWidth < 768;
 
+        // Apply zoom to viewBox dimensions
+        const zoomedWidth = canvasSize.width / this.zoomLevel;
+        const zoomedHeight = canvasSize.height / this.zoomLevel;
+
+        // Center the zoomed viewBox
+        const zoomOffsetX = (canvasSize.width - zoomedWidth) / 2;
+        const zoomOffsetY = (canvasSize.height - zoomedHeight) / 2;
+        const viewBoxX = canvasSize.viewBoxX + zoomOffsetX;
+        const viewBoxY = canvasSize.viewBoxY + zoomOffsetY;
+
         if (isMobile) {
-            // On mobile: Use viewBox for responsive scaling
-            this.svg.setAttribute('viewBox', `0 0 ${canvasSize.width} ${canvasSize.height}`);
+            // On mobile: Use viewBox for responsive scaling with zoom
+            this.svg.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${zoomedWidth} ${zoomedHeight}`);
             this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
             // Remove fixed width/height to allow responsive sizing
             this.svg.removeAttribute('width');
             this.svg.removeAttribute('height');
         } else {
-            // On desktop: Use fixed dimensions with scrolling
+            // On desktop: Use viewBox with zoom (allows zoom without scrolling issues)
+            this.svg.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${zoomedWidth} ${zoomedHeight}`);
+            this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
             this.svg.setAttribute('width', canvasSize.width);
             this.svg.setAttribute('height', canvasSize.height);
-            // Remove viewBox on desktop
-            this.svg.removeAttribute('viewBox');
-            this.svg.removeAttribute('preserveAspectRatio');
         }
 
         // Draw Feldermodell zones (both Hauptsatz and Nebensatz)

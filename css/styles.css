@@ -361,6 +361,7 @@ button:hover {
     position: relative;
     overflow: auto;
     border-right: 2px solid #bdc3c7;
+    touch-action: none; /* Disable browser default touch behaviors like pinch-zoom */
 }
 
 #canvas {
@@ -988,12 +989,19 @@ button:hover {
     background: #34495e;
     color: white;
     border: none;
+    border-top: 1px solid #95a5a6;
+    border-bottom: 1px solid #95a5a6;
     font-size: 14px;
     font-weight: 600;
     text-align: left;
     cursor: pointer;
     transition: background 0.2s;
     z-index: 10;
+    /* Better rendering during zoom/transform */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 .mobile-toggle:hover {
@@ -1082,9 +1090,12 @@ button:hover {
         max-height: 0;
         overflow: hidden;
         padding: 0;
+        margin: 0;
         border-right: none;
-        border-bottom: 2px solid #bdc3c7;
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        border-bottom: none;
+        visibility: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out, border 0.3s ease-out, visibility 0s linear 0.3s, opacity 0.2s ease-out;
     }
 
     .sentence-panel.active,
@@ -1092,6 +1103,10 @@ button:hover {
         max-height: 500px;
         padding: 15px;
         overflow-y: auto;
+        border-bottom: 2px solid #bdc3c7;
+        visibility: visible;
+        opacity: 1;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out, border 0.3s ease-out, visibility 0s linear 0s, opacity 0.2s ease-out;
     }
 
     /* Canvas Container */
@@ -1132,13 +1147,21 @@ button:hover {
         max-height: 0;
         overflow: hidden;
         padding: 0;
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        margin: 0;
+        border-top: none;
+        visibility: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out, border 0.3s ease-out, visibility 0s linear 0.3s, opacity 0.2s ease-out;
     }
 
     .legend.active {
         max-height: 400px;
         padding: 15px;
         overflow-y: auto;
+        border-top: 2px solid #bdc3c7;
+        visibility: visible;
+        opacity: 1;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out, border 0.3s ease-out, visibility 0s linear 0s, opacity 0.2s ease-out;
     }
 
     .mobile-toggle-legend {
