@@ -2,12 +2,10 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import spacy
-import language_tool_python
 from typing import List, Dict
 import sys
 import subprocess
-import threading
-from queue import Queue
+import requests
 
 app = FastAPI(title="German NLP Analyzer", version="1.0.0")
 
@@ -29,47 +27,8 @@ except OSError:
     subprocess.run(["python", "-m", "spacy", "download", "de_core_news_sm"])
     nlp = spacy.load("de_core_news_sm")
 
-# Initialize LanguageTool for German grammar checking
-# Using lazy initialization to handle subprocess issues
-language_tool = None
-
-def get_language_tool():
-    """Get or create LanguageTool instance with error handling"""
-    global language_tool
-    try:
-        # Check if instance exists and is healthy
-        if language_tool is not None:
-            # Try to check if subprocess is alive
-            if hasattr(language_tool, '_server') and language_tool._server is not None:
-                poll_result = language_tool._server.poll()
-                if poll_result is None:  # None means process is still running
-                    return language_tool
-                else:
-                    print(f"LanguageTool subprocess died with code {poll_result}, recreating...")
-                    language_tool = None
-            else:
-                print("LanguageTool subprocess is None, recreating...")
-                language_tool = None
-
-        # Create new instance
-        print("Initializing LanguageTool for German...")
-        sys.stdout.flush()
-
-        language_tool = language_tool_python.LanguageTool('de-DE')
-
-        # Verify the server started properly
-        if not hasattr(language_tool, '_server') or language_tool._server is None:
-            raise RuntimeError("LanguageTool server failed to start - subprocess is None")
-
-        print(f"LanguageTool ready! Server PID: {language_tool._server.pid if hasattr(language_tool._server, 'pid') else 'unknown'}")
-        sys.stdout.flush()
-        return language_tool
-    except Exception as e:
-        print(f"LanguageTool initialization error: {e}")
-        import traceback
-        traceback.print_exc()
-        sys.stdout.flush()
-        raise
+# LanguageTool Public API Configuration
+LANGUAGETOOL_API_URL = "https://api.languagetool.org/v2/check"
 
 
 class AnalyzeRequest(BaseModel):
@@ -552,46 +511,10 @@ def analyze_debug(request: AnalyzeRequest):
         raise HTTPException(status_code=500, detail=f"Analysis error: {str(e)}")
 
 
-def check_with_timeout(lt, text, timeout=10):
-    """
-    Run LanguageTool check with timeout to prevent hanging.
-    Returns matches or raises TimeoutError.
-    """
-    result_queue = Queue()
-    exception_queue = Queue()
-
-    def check_worker():
-        try:
-            matches = lt.check(text)
-            result_queue.put(matches)
-        except Exception as e:
-            exception_queue.put(e)
-
-    thread = threading.Thread(target=check_worker)
-    thread.daemon = True
-    thread.start()
-    thread.join(timeout=timeout)
-
-    if thread.is_alive():
-        print(f"LanguageTool check timed out after {timeout}s")
-        sys.stdout.flush()
-        raise TimeoutError(f"Grammar check timed out after {timeout} seconds")
-
-    # Check if there was an exception
-    if not exception_queue.empty():
-        raise exception_queue.get()
-
-    # Return the result
-    if not result_queue.empty():
-        return result_queue.get()
-    else:
-        raise RuntimeError("Grammar check failed without error")
-
-
 @app.post("/check-grammar", response_model=GrammarCheckResponse)
 def check_grammar(request: AnalyzeRequest):
     """
-    Check German grammar and spelling using LanguageTool.
+    Check German grammar and spelling using LanguageTool Public API.
 
     Returns:
     - text: The original text
@@ -611,67 +534,72 @@ def check_grammar(request: AnalyzeRequest):
         raise HTTPException(status_code=400, detail="Text cannot be empty")
 
     try:
-        # Get LanguageTool instance (lazy initialization)
-        lt = get_language_tool()
-
-        # Debug logging
+        # Call LanguageTool Public API
         print(f"Checking grammar for text: {request.text[:50]}...")
-        print(f"LanguageTool server status: {lt._server}")
         sys.stdout.flush()
 
-        # Check the text with LanguageTool (with timeout to prevent hanging)
-        print("Calling lt.check() with 10s timeout...")
-        sys.stdout.flush()
-        matches = check_with_timeout(lt, request.text, timeout=10)
-        print(f"lt.check() returned {len(matches)} matches")
+        response = requests.post(
+            LANGUAGETOOL_API_URL,
+            data={
+                'text': request.text,
+                'language': 'de-DE'
+            },
+            timeout=10
+        )
+
+        if response.status_code != 200:
+            raise HTTPException(
+                status_code=response.status_code,
+                detail=f"LanguageTool API error: {response.text}"
+            )
+
+        result = response.json()
+        matches = result.get('matches', [])
+
+        print(f"API returned {len(matches)} matches")
         sys.stdout.flush()
 
         # Convert matches to our response format
         errors = []
-        for i, match in enumerate(matches):
-            print(f"Processing match {i+1}: {match.ruleId} - {match.message[:50]}")
-            sys.stdout.flush()
-
+        for match in matches:
             # Get context (text around the error)
-            context_start = max(0, match.offset - 20)
-            context_end = min(len(request.text), match.offset + match.errorLength + 20)
+            offset = match.get('offset', 0)
+            length = match.get('length', 0)
+            context_start = max(0, offset - 20)
+            context_end = min(len(request.text), offset + length + 20)
             context = request.text[context_start:context_end]
 
+            # Get suggestions
+            replacements = match.get('replacements', [])
+            suggestions = [r.get('value', '') for r in replacements[:5]]
+
             error = GrammarError(
-                message=match.message,
-                suggestions=match.replacements[:5],  # Limit to top 5 suggestions
-                offset=match.offset,
-                length=match.errorLength,
-                rule_id=match.ruleId,
-                category=match.category,
+                message=match.get('message', ''),
+                suggestions=suggestions,
+                offset=offset,
+                length=length,
+                rule_id=match.get('rule', {}).get('id', ''),
+                category=match.get('rule', {}).get('category', {}).get('id', ''),
                 context=context
             )
             errors.append(error)
 
-        response = GrammarCheckResponse(
+        response_data = GrammarCheckResponse(
             text=request.text,
             errors=errors,
             error_count=len(errors)
         )
         print(f"Returning response with {len(errors)} errors")
         sys.stdout.flush()
-        return response
+        return response_data
 
-    except TimeoutError as e:
-        print(f"TIMEOUT in grammar check: {str(e)}")
-        print("Resetting LanguageTool instance due to timeout...")
+    except requests.RequestException as e:
+        print(f"LanguageTool API request error: {str(e)}")
         sys.stdout.flush()
-
-        # Reset the global instance to force recreation on next request
-        global language_tool
-        if language_tool:
-            try:
-                language_tool.close()
-            except:
-                pass
-            language_tool = None
-
-        raise HTTPException(status_code=503, detail=f"Grammar check timed out. This may be due to server resource constraints on the free tier. Please try again.")
+        raise HTTPException(
+            status_code=503,
+            detail="Grammar check service temporarily unavailable. Please try again."
+        )
 
     except Exception as e:
         print(f"EXCEPTION in grammar check: {str(e)}")
