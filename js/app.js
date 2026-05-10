@@ -116,6 +116,26 @@ class DeutschApp {
                 }
             });
         }
+
+        // Check Grammar button
+        const checkGrammarBtn = document.getElementById('check-grammar-btn');
+        if (checkGrammarBtn) {
+            checkGrammarBtn.addEventListener('click', async () => {
+                const text = sentenceInput.value.trim();
+                if (text) {
+                    await this.checkGrammar(text);
+                } else if (this.sentenceManager.currentSentenceId) {
+                    const currentSentence = this.sentenceManager.sentences.find(
+                        s => s.id === this.sentenceManager.currentSentenceId
+                    );
+                    if (currentSentence) {
+                        await this.checkGrammar(currentSentence.text);
+                    }
+                } else {
+                    alert('Please type a sentence or select one from the list.');
+                }
+            });
+        }
     }
 
     /**
@@ -142,6 +162,87 @@ class DeutschApp {
                 console.error('Auto-configure error:', error);
                 // Silently fail - don't show error to user
             }
+        }
+    }
+
+    /**
+     * Check grammar using the backend API
+     */
+    async checkGrammar(text) {
+        const resultsContainer = document.getElementById('grammar-results');
+        const resultsContent = document.getElementById('grammar-results-content');
+
+        if (!resultsContainer || !resultsContent) return;
+
+        // Show loading state
+        resultsContainer.style.display = 'block';
+        resultsContent.innerHTML = '<div class="grammar-loading">Checking grammar...</div>';
+
+        try {
+            // Auto-detect backend URL
+            const backendUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? 'http://localhost:8000'
+                : 'https://deutsch-graphic-project.onrender.com';
+
+            const response = await fetch(`${backendUrl}/check-grammar`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            // Display results
+            if (data.error_count === 0) {
+                resultsContent.innerHTML = `
+                    <div class="grammar-success">
+                        <span style="color: green; font-weight: bold;">✓</span> No grammar errors found!
+                    </div>
+                `;
+            } else {
+                const errorsHtml = data.errors.map((error, index) => {
+                    const suggestionsHtml = error.suggestions.length > 0
+                        ? `<div class="grammar-suggestions">
+                             Suggestions: ${error.suggestions.map(s => `<span class="suggestion">${s}</span>`).join(', ')}
+                           </div>`
+                        : '';
+
+                    return `
+                        <div class="grammar-error">
+                            <div class="grammar-error-header">
+                                <span class="grammar-error-number">${index + 1}.</span>
+                                <span class="grammar-error-message">${error.message}</span>
+                            </div>
+                            <div class="grammar-error-context">"${error.context}"</div>
+                            ${suggestionsHtml}
+                            <div class="grammar-error-meta">
+                                Category: ${error.category} | Rule: ${error.rule_id}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                resultsContent.innerHTML = `
+                    <div class="grammar-summary">
+                        Found ${data.error_count} potential issue${data.error_count > 1 ? 's' : ''}:
+                    </div>
+                    ${errorsHtml}
+                `;
+            }
+        } catch (error) {
+            console.error('Grammar check error:', error);
+            resultsContent.innerHTML = `
+                <div class="grammar-error-message">
+                    Failed to check grammar. Make sure the backend server is running.
+                    <br><small>Error: ${error.message}</small>
+                </div>
+            `;
         }
     }
 
@@ -225,8 +326,8 @@ class DeutschApp {
                 <div class="sentence-item ${isActive ? 'active' : ''}" data-sentence-id="${sentence.id}">
                     <div class="sentence-item-text">${sentence.text}</div>
                     <div class="sentence-item-actions">
-                        <button class="sentence-item-edit" data-sentence-id="${sentence.id}">Edit</button>
-                        <button class="sentence-item-delete" data-sentence-id="${sentence.id}">Delete</button>
+                        <button class="sentence-item-edit" data-sentence-id="${sentence.id}" title="Edit sentence">✏</button>
+                        <button class="sentence-item-delete" data-sentence-id="${sentence.id}" title="Delete sentence">✕</button>
                     </div>
                 </div>
             `;

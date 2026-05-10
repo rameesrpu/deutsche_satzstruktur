@@ -20,9 +20,14 @@
                 <div class="sentence-input-area">
                     <textarea id="sentence-input" placeholder="Type a sentence (e.g., ich lese das buch weil ich Zeit habe)"></textarea>
                     <div class="sentence-buttons">
-                        <button id="add-sentence-btn" class="btn-add-sentence">Add Sentence</button>
-                        <button id="regenerate-btn" class="btn-regenerate">Regenerate</button>
+                        <button id="add-sentence-btn" class="btn-add-sentence" title="Add sentence to list">➕ Add</button>
+                        <button id="regenerate-btn" class="btn-regenerate" title="Auto-configure with AI">🔄 Auto</button>
+                        <button id="check-grammar-btn" class="btn-check-grammar" title="Check grammar">✓ Check</button>
                     </div>
+                </div>
+                <div id="grammar-results" class="grammar-results" style="display: none;">
+                    <div class="grammar-results-header">Grammar Check Results:</div>
+                    <div id="grammar-results-content"></div>
                 </div>
                 <div class="sentence-list">
                     <div class="sentence-list-header">Saved Sentences:</div>
