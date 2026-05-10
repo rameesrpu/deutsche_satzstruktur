@@ -434,25 +434,59 @@ class DeutschApp {
      */
     calculateCanvasSize() {
         const words = this.wordManager.getAllWords();
+        const isMobile = window.innerWidth < 768;
+
         if (words.length === 0) {
-            return { width: 1200, height: 800 }; // Default size
+            // Empty canvas - use container size or reasonable minimum
+            if (isMobile) {
+                return { width: 600, height: 400 };
+            } else {
+                // Desktop: use container dimensions or minimum
+                const container = document.querySelector('.canvas-container');
+                if (container) {
+                    return {
+                        width: Math.max(1200, container.clientWidth),
+                        height: Math.max(800, container.clientHeight)
+                    };
+                }
+                return { width: 1200, height: 800 };
+            }
         }
 
-        let maxX = 0;
-        let maxY = 0;
+        // Find the bounding box of all words
+        let minX = Infinity, minY = Infinity;
+        let maxX = -Infinity, maxY = -Infinity;
 
         words.forEach(word => {
-            // Add word width (50) and some padding (100)
-            maxX = Math.max(maxX, word.x + 150);
-            // Add word height (50) and some padding (100)
-            maxY = Math.max(maxY, word.y + 150);
+            // Word dimensions are approximately 50x50
+            minX = Math.min(minX, word.x - 25);
+            minY = Math.min(minY, word.y - 25);
+            maxX = Math.max(maxX, word.x + 75);
+            maxY = Math.max(maxY, word.y + 75);
         });
 
-        // Ensure minimum size
-        return {
-            width: Math.max(1200, maxX),
-            height: Math.max(800, maxY)
-        };
+        // Add padding around content
+        const padding = isMobile ? 50 : 100;
+        const contentWidth = maxX - minX + (padding * 2);
+        const contentHeight = maxY - minY + (padding * 2);
+
+        if (isMobile) {
+            // Mobile: tight fit around content with minimum size
+            return {
+                width: Math.max(400, contentWidth),
+                height: Math.max(300, contentHeight)
+            };
+        } else {
+            // Desktop: use container size or content size, whichever is larger
+            const container = document.querySelector('.canvas-container');
+            const containerWidth = container ? container.clientWidth : 1200;
+            const containerHeight = container ? container.clientHeight : 800;
+
+            return {
+                width: Math.max(containerWidth, contentWidth, 1200),
+                height: Math.max(containerHeight, contentHeight, 800)
+            };
+        }
     }
 
     /**
