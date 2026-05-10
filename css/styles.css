@@ -1348,7 +1348,7 @@ button:hover {
         /* PANELS CLOSED: Canvas takes up a percentage of viewport height
          * Adjust the vh value to control canvas size (e.g., 60vh, 70vh, 80vh)
          * Higher value = larger canvas, Lower value = smaller canvas */
-        height: 80vh;
+        height: 92vh;
         min-height: 400px;
         width: 100%;
         border-right: none;
@@ -1365,7 +1365,7 @@ button:hover {
      * Adjust 40vh to control canvas height when panel is visible
      * Example: 30vh = smaller canvas, 50vh = larger canvas */
     .main-content.panel-open .canvas-container {
-        height: 50vh;
+        height: 60vh;
         min-height: 300px;
     }
 
