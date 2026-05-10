@@ -161,17 +161,18 @@ class UIController {
         container.innerHTML = `
             <h3>Word Properties</h3>
 
-            <div class="prop-section">
-                <label class="prop-label">Text:</label>
-                <div class="word-text-input-wrapper">
-                    <input type="text" class="prop-input word-text-input" value="${selectedWord.text}"
-                           id="word-text-input">
-                    <button class="lookup-btn" id="lookup-word-btn" title="Look up in dictionary">📖</button>
-                </div>
-            </div>
+        <div class="prop-section">
+            <label class="prop-label">Text:</label>
 
-            <div class="prop-section">
-                <label class="prop-label">Type:</label>
+            <div class="word-text-input-wrapper">
+
+                <input
+                    type="text"
+                    class="prop-input word-text-input"
+                    value="${selectedWord.text}"
+                    id="word-text-input"
+                >
+
                 <select id="word-type-select" class="prop-input">
                     <option value="subject" ${selectedWord.type === 'subject' ? 'selected' : ''}>Subject (Nominative)</option>
                     <option value="verb" ${selectedWord.type === 'verb' ? 'selected' : ''}>Verb</option>
@@ -186,10 +187,20 @@ class UIController {
                     <option value="preposition" ${selectedWord.type === 'preposition' ? 'selected' : ''}>Preposition</option>
                     <option value="other" ${selectedWord.type === 'other' ? 'selected' : ''}>Other</option>
                 </select>
+
+                <button
+                    class="lookup-btn"
+                    id="lookup-word-btn"
+                    title="Look up in dictionary"
+                >
+                    📖
+                </button>
+
             </div>
+        </div>
 
             <div class="prop-section">
-                <label class="prop-label">Gender:</label>
+                <label class="prop-label">Gender / Number:</label>
                 <div class="prop-buttons">
                     <button class="prop-btn ${selectedWord.gender === 'none' ? 'active' : ''}"
                             data-property="gender" data-value="none">None</button>
@@ -199,14 +210,6 @@ class UIController {
                             data-property="gender" data-value="f">♀ Fem.</button>
                     <button class="prop-btn ${selectedWord.gender === 'n' ? 'active' : ''}"
                             data-property="gender" data-value="n">⚲ Neut.</button>
-                </div>
-            </div>
-
-            <div class="prop-section">
-                <label class="prop-label">Number:</label>
-                <div class="prop-buttons">
-                    <button class="prop-btn ${selectedWord.number === 'sg' ? 'active' : ''}"
-                            data-property="number" data-value="sg">Singular</button>
                     <button class="prop-btn ${selectedWord.number === 'pl' ? 'active' : ''}"
                             data-property="number" data-value="pl">Plural</button>
                 </div>
@@ -226,6 +229,10 @@ class UIController {
                 </div>
             </div>
 
+            ${this.getPrepositionCaseUI(selectedWord)}
+
+            ${this.getConjugationUI(selectedWord)}
+
             <div class="prop-section">
                 <label class="prop-label">Flow Direction:</label>
                 <div class="prop-buttons">
@@ -235,10 +242,6 @@ class UIController {
                             data-property="flowDirection" data-value="down">↓ Down</button>
                 </div>
             </div>
-
-            ${this.getPrepositionCaseUI(selectedWord)}
-
-            ${this.getConjugationUI(selectedWord)}
 
             <button class="delete-btn" id="delete-word-btn">Delete Word</button>
         `;

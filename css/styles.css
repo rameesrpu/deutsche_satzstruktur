@@ -1033,17 +1033,9 @@ button:hover {
     background: #7f8c8d;
 }
 
-/* Legend toggle needs both top and bottom lines */
-.mobile-toggle-legend::before {
-    content: '';
-    position: absolute;
-    top: -2px; /* Position fully above toggle to avoid blocking content */
-    left: 0;
-    right: 0;
-    height: 2px; /* Thicker to ensure coverage */
-    background: #95a5a6;
-    z-index: 0; /* Behind content */
-    pointer-events: none; /* Don't block interactions */
+/* Remove bottom line from legend toggle since properties panel already has one */
+.mobile-toggle-legend::after {
+    display: none;
 }
 
 .mobile-toggle-legend:hover {
@@ -1148,8 +1140,7 @@ button:hover {
         margin-top: 0;
     }
 
-    .sentence-panel.active::after,
-    .properties-panel.active::after {
+    .sentence-panel.active::after {
         content: '';
         position: absolute;
         bottom: -3px; /* Position fully below panel to avoid blocking content */
@@ -1163,8 +1154,8 @@ button:hover {
 
     /* Canvas Container */
     .canvas-container {
-        min-height: 400px;
-        height: 400px;
+        min-height: 300px;
+        height: 300px;
         width: 100%;
         border-right: none;
         position: relative;
@@ -1190,7 +1181,7 @@ button:hover {
     #canvas {
         width: 100% !important;
         height: 100% !important;
-        min-height: 400px;
+        min-height: 300px;
     }
 
     /* Reorder for better mobile UX */
@@ -1318,6 +1309,48 @@ button:hover {
         min-height: 44px;
     }
 
+./* Main horizontal row */
+.word-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+
+    /* Debug border */
+    border: 2px solid red;
+}
+
+/* Debug borders for children */
+.word-row > * {
+    border: 2px solid blue;
+}
+
+/* Text input expands */
+.word-text-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.word-text-input {
+    flex: 1 1 300px;
+    min-width: 220px;
+    height: 44px;
+}
+
+#word-type-select {
+    flex: 1;
+    width: 100px;
+    height: 44px;
+}
+
+.lookup-btn {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+}
     /* Properties Panel Buttons */
     .prop-btn {
         padding: 10px 12px;
