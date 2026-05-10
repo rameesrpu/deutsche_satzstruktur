@@ -431,4 +431,115 @@ class SentenceManager {
             });
         }
     }
+
+    /**
+     * Export all sentences to a JSON file
+     * @returns {void}
+     */
+    exportSentences() {
+        // Save current sentence before exporting
+        if (this.currentSentenceId) {
+            this.saveCurrentSentence();
+        }
+
+        // Create export data with metadata
+        const exportData = {
+            version: '1.0',
+            exportDate: new Date().toISOString(),
+            sentenceCount: this.sentences.length,
+            sentences: this.sentences
+        };
+
+        // Convert to JSON string
+        const jsonString = JSON.stringify(exportData, null, 2);
+
+        // Create blob and download link
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        // Create download link
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `deutsch-sentences-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+
+        // Cleanup
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        return true;
+    }
+
+    /**
+     * Import sentences from a JSON file
+     * @param {File} file - The JSON file to import
+     * @param {string} mode - Import mode: 'replace' or 'merge' (default: 'merge')
+     * @returns {Promise<{success: boolean, message: string, count?: number}>}
+     */
+    async importSentences(file, mode = 'merge') {
+        try {
+            // Read file content
+            const text = await file.text();
+            const importData = JSON.parse(text);
+
+            // Validate import data structure
+            if (!importData.sentences || !Array.isArray(importData.sentences)) {
+                return {
+                    success: false,
+                    message: 'Invalid file format: missing sentences array'
+                };
+            }
+
+            // Save current sentence before importing
+            if (this.currentSentenceId) {
+                this.saveCurrentSentence();
+            }
+
+            let importedCount = 0;
+
+            if (mode === 'replace') {
+                // Replace all existing sentences
+                this.sentences = importData.sentences;
+                importedCount = this.sentences.length;
+                this.currentSentenceId = null;
+                this.wordManager.clearAll();
+            } else {
+                // Merge mode: add new sentences
+                importData.sentences.forEach(sentence => {
+                    // Generate new IDs to avoid conflicts
+                    const newSentence = {
+                        ...sentence,
+                        id: Date.now() + importedCount,
+                        createdAt: sentence.createdAt || new Date().toISOString()
+                    };
+
+                    // Update word IDs to avoid conflicts
+                    newSentence.words = sentence.words.map((word, idx) => ({
+                        ...word,
+                        id: Date.now() + importedCount + idx + 1000
+                    }));
+
+                    this.sentences.push(newSentence);
+                    importedCount++;
+                });
+            }
+
+            // Save to localStorage
+            this.save();
+
+            return {
+                success: true,
+                message: `Successfully imported ${importedCount} sentence${importedCount !== 1 ? 's' : ''}`,
+                count: importedCount
+            };
+
+        } catch (error) {
+            console.error('Import error:', error);
+            return {
+                success: false,
+                message: `Failed to import: ${error.message}`
+            };
+        }
+    }
 }

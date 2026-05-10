@@ -352,6 +352,53 @@ button:hover {
     padding: 20px 10px;
 }
 
+/* Export/Import Buttons */
+.sentence-export-import {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #bdc3c7;
+    display: flex;
+    gap: 8px;
+}
+
+.btn-export {
+    flex: 1;
+    background: #16a085;
+    color: white;
+    padding: 8px 6px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.btn-export:hover {
+    background: #138d75;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.btn-import {
+    flex: 1;
+    background: #d68910;
+    color: white;
+    padding: 8px 6px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.btn-import:hover {
+    background: #b9770e;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
 .canvas-container {
     flex: 1;
     position: relative;
@@ -1467,6 +1514,14 @@ button:hover {
 
     .sentence-item-text {
         padding-right: 65px; /* More space for smaller buttons on mobile */
+    }
+
+    /* Export/Import Buttons on Mobile */
+    .btn-export,
+    .btn-import {
+        min-height: 44px;
+        font-size: 13px;
+        padding: 10px 6px;
     }
 
     /* Input Fields */

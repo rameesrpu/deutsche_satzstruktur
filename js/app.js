@@ -253,6 +253,32 @@ class DeutschApp {
                 }
             });
         }
+
+        // Export Sentences button
+        const exportBtn = document.getElementById('export-sentences-btn');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => {
+                this.exportSentences();
+            });
+        }
+
+        // Import Sentences button
+        const importBtn = document.getElementById('import-sentences-btn');
+        const fileInput = document.getElementById('import-file-input');
+        if (importBtn && fileInput) {
+            importBtn.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    await this.importSentences(file);
+                    // Reset file input
+                    fileInput.value = '';
+                }
+            });
+        }
     }
 
     /**
@@ -368,6 +394,56 @@ class DeutschApp {
                     <br><small>Error: ${error.message}</small>
                 </div>
             `;
+        }
+    }
+
+    /**
+     * Export all sentences to a JSON file
+     */
+    exportSentences() {
+        if (this.sentenceManager.sentences.length === 0) {
+            alert('No sentences to export. Add some sentences first.');
+            return;
+        }
+
+        try {
+            this.sentenceManager.exportSentences();
+            alert(`Successfully exported ${this.sentenceManager.sentences.length} sentence${this.sentenceManager.sentences.length !== 1 ? 's' : ''}!`);
+        } catch (error) {
+            console.error('Export error:', error);
+            alert('Failed to export sentences. Check the console for details.');
+        }
+    }
+
+    /**
+     * Import sentences from a JSON file
+     */
+    async importSentences(file) {
+        // Ask user if they want to replace or merge
+        const mode = confirm(
+            'Click OK to MERGE with existing sentences, or Cancel to REPLACE all existing sentences.\n\n' +
+            'MERGE: Add imported sentences to your current list\n' +
+            'REPLACE: Delete all current sentences and import new ones'
+        ) ? 'merge' : 'replace';
+
+        if (mode === 'replace' && this.sentenceManager.sentences.length > 0) {
+            const confirmReplace = confirm(
+                `Are you sure you want to DELETE all ${this.sentenceManager.sentences.length} existing sentence${this.sentenceManager.sentences.length !== 1 ? 's' : ''}?\n\n` +
+                'This action cannot be undone!'
+            );
+            if (!confirmReplace) {
+                return;
+            }
+        }
+
+        const result = await this.sentenceManager.importSentences(file, mode);
+
+        if (result.success) {
+            this.updateSentenceList();
+            this.redrawAll();
+            alert(result.message);
+        } else {
+            alert(`Import failed: ${result.message}`);
         }
     }
 
