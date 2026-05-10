@@ -453,7 +453,105 @@ button:hover {
     background: #c0392b;
 }
 
-/* Legend */
+/* Legend Modal */
+.legend-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.legend-modal {
+    background: white;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.legend-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+}
+
+.legend-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.legend-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #7f8c8d;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.legend-modal-close:hover {
+    background: #e0e0e0;
+    color: #2c3e50;
+}
+
+.legend-modal-content {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.legend-section {
+    margin-bottom: 20px;
+}
+
+.legend-section:last-child {
+    margin-bottom: 0;
+}
+
+.legend-section h4 {
+    font-size: 14px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.legend-shape {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333;
+    flex-shrink: 0;
+}
+
+/* Desktop legend (still shown at bottom on desktop) */
 .legend {
     padding: 10px 15px;
     background: #ecf0f1;
@@ -465,18 +563,6 @@ button:hover {
     flex-shrink: 0;
     max-height: 120px;
     overflow-y: auto;
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.legend-shape {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #333;
 }
 
 .shape-circle { border-radius: 50%; }
@@ -522,6 +608,9 @@ button:hover {
 }
 .shape-star {
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+.shape-plus {
+    clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
 }
 
 /* Info Panel */
@@ -730,15 +819,22 @@ button:hover {
     border-radius: 4px;
 }
 
-/* Word Text Input with Lookup Button */
+/* Word Text Input with Type Select and Lookup Button */
 .word-text-input-wrapper {
     display: flex;
     gap: 5px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .word-text-input {
+    flex: 2; /* Takes twice the space of type select */
+    min-width: 120px;
+}
+
+#word-type-select {
     flex: 1;
+    min-width: 100px;
 }
 
 .lookup-btn {
@@ -1003,6 +1099,11 @@ button:hover {
     -webkit-transform: translateZ(0);
 }
 
+/* Legend button specifically hidden on desktop */
+.mobile-toggle-legend {
+    display: none;
+}
+
 /* Use pseudo-element for separator line */
 .mobile-toggle::after {
     content: '';
@@ -1072,11 +1173,12 @@ button:hover {
     .container {
         height: auto;
         min-height: 100vh;
+        position: relative;
     }
 
     /* Header Adjustments */
     .header {
-        padding: 12px 15px;
+        padding: 12px 50px 12px 15px; /* Extra padding-right for legend button */
         width: 100%;
         max-width: 100%;
         min-width: 100%;
@@ -1098,21 +1200,102 @@ button:hover {
         line-height: 1.4;
     }
 
-    /* Main Content - Stack Vertically */
+    /* Main Content - Row layout with wrapping for tabs */
     .main-content {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
         min-height: auto;
     }
 
-    /* Show Mobile Toggle Buttons */
-    .mobile-toggle {
+    /* Tab-style Toggle Buttons Container */
+    .mobile-toggle-left,
+    .mobile-toggle-right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        flex: 0 0 50%; /* Don't grow or shrink, fixed at 50% */
+        padding: 8px 15px;
+        background: #34495e;
+        color: white;
+        border: none;
+        font-size: 13px;
+        font-weight: 600;
+        text-align: center;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin: 0;
+        position: relative;
+        border-right: 1px solid #2c3e50;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+    }
+
+    /* Active tab styling */
+    .mobile-toggle-left.active,
+    .mobile-toggle-right.active {
+        background: #2c3e50;
+        box-shadow: inset 0 -3px 0 #3498db;
+    }
+
+    .mobile-toggle-right {
+        border-right: none;
+        border-left: 1px solid #2c3e50;
+    }
+
+    /* Remove border separator pseudo-elements for tabs */
+    .mobile-toggle-left::after,
+    .mobile-toggle-right::after {
+        display: none;
+    }
+
+    /* Legend Button - Inside Properties Panel */
+    .mobile-toggle-legend {
+        display: none; /* Hidden by default on mobile */
+    }
+
+    .properties-panel.active .mobile-toggle-legend {
         display: block;
+        width: 100%;
+        padding: 10px 15px;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        transition: background 0.2s;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        position: relative;
+        z-index: 1;
+    }
+
+    .properties-panel.active .mobile-toggle-legend:hover {
+        background: #2980b9;
+    }
+
+    .properties-panel.active .mobile-toggle-legend:active {
+        background: #2980b9;
+        transform: scale(0.98);
+    }
+
+    .properties-panel.active .mobile-toggle-legend .toggle-icon {
+        margin-right: 5px;
     }
 
     /* Panels - Full Width and Collapsible */
     .sentence-panel,
     .properties-panel {
         width: 100%;
+        flex: 0 0 100%;
         max-height: 0;
         overflow: hidden;
         padding: 0;
@@ -1185,68 +1368,53 @@ button:hover {
     }
 
     /* Reorder for better mobile UX */
+    .canvas-container {
+        order: 1;
+        width: 100%;
+        flex: 0 0 100%;
+    }
+
     .mobile-toggle-left {
         order: 2;
+    }
+
+    .mobile-toggle-right {
+        order: 2; /* Same order as left to keep them on same row */
     }
 
     .sentence-panel {
         order: 3;
     }
 
-    .mobile-toggle-right {
-        order: 4;
-    }
-
     .properties-panel {
-        order: 5;
+        order: 3; /* Same order as sentence to overlap (only one shows at a time) */
     }
 
-    /* Legend - Collapsible */
+    /* Hide desktop legend on mobile - use modal instead */
     .legend {
-        max-height: 0;
-        overflow: hidden;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        visibility: hidden;
-        opacity: 0;
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out, visibility 0s linear 0.3s, opacity 0.2s ease-out;
-        /* Better rendering during zoom/transform */
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
+        display: none;
     }
 
-    .legend.active {
-        max-height: 400px;
+    /* Legend Modal on Mobile */
+    .legend-modal {
+        width: 95%;
+        max-height: 90vh;
+    }
+
+    .legend-modal-header h3 {
+        font-size: 16px;
+    }
+
+    .legend-modal-content {
         padding: 15px;
-        overflow-y: auto;
-        position: relative;
-        visibility: visible;
-        opacity: 1;
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out, visibility 0s linear 0s, opacity 0.2s ease-out;
-        margin-top: 0;
     }
 
-    .legend.active::before {
-        content: '';
-        position: absolute;
-        top: -3px; /* Position fully above legend to avoid blocking content */
-        left: 0;
-        right: 0;
-        height: 3px; /* Thicker to ensure coverage on all devices */
-        background: #bdc3c7;
-        z-index: 0; /* Behind content */
-        pointer-events: none; /* Don't block interactions */
+    .legend-section h4 {
+        font-size: 13px;
     }
 
-    .mobile-toggle-legend {
-        order: 6;
-    }
-
-    #legend {
-        order: 7;
+    .legend-item {
+        font-size: 12px;
     }
 
     /* Touch-Friendly Buttons */
@@ -1309,48 +1477,30 @@ button:hover {
         min-height: 44px;
     }
 
-./* Main horizontal row */
-.word-row {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
+    /* Mobile: All three elements on same line - text input | type dropdown | lookup button */
+    .word-text-input-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        width: 100%;
+    }
 
-    /* Debug border */
-    border: 2px solid red;
-}
+    .word-text-input {
+        flex: 1;
+        min-width: 0;
+    }
 
-/* Debug borders for children */
-.word-row > * {
-    border: 2px solid blue;
-}
+    #word-type-select {
+        flex: 1;
+        min-width: 0;
+    }
 
-/* Text input expands */
-.word-text-input-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-}
+    .lookup-btn {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+    }
 
-.word-text-input {
-    flex: 1 1 300px;
-    min-width: 220px;
-    height: 44px;
-}
-
-#word-type-select {
-    flex: 1;
-    width: 100px;
-    height: 44px;
-}
-
-.lookup-btn {
-    width: 44px;
-    height: 44px;
-    flex-shrink: 0;
-}
     /* Properties Panel Buttons */
     .prop-btn {
         padding: 10px 12px;
@@ -1473,5 +1623,27 @@ button:hover {
     .dictionary-modal {
         width: 98%;
         max-height: 95vh;
+    }
+
+    .legend-modal {
+        width: 98%;
+        max-height: 95vh;
+    }
+
+    .legend-modal-header h3 {
+        font-size: 15px;
+    }
+
+    .legend-section h4 {
+        font-size: 12px;
+    }
+
+    .legend-item {
+        font-size: 11px;
+    }
+
+    .legend-shape {
+        width: 18px;
+        height: 18px;
     }
 }

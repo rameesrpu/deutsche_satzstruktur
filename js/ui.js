@@ -356,10 +356,17 @@ class UIController {
                 const value = btn.dataset.value;
                 this.wordManager.updateWordProperty(selectedWord.id, property, value);
 
-                // Mutual exclusion: if gender is set to non-none, set conjugation to none
-                if (property === 'gender' && value !== 'none') {
-                    if (selectedWord.conjugation) {
-                        selectedWord.conjugation.pronoun = 'none';
+                // Handle gender property changes
+                if (property === 'gender') {
+                    // Mutual exclusion: if gender is set to non-none, set conjugation to none
+                    if (value !== 'none') {
+                        if (selectedWord.conjugation) {
+                            selectedWord.conjugation.pronoun = 'none';
+                        }
+                    }
+                    // Auto-set to singular when any gender (m, f, n, or none) is selected
+                    if (value === 'm' || value === 'f' || value === 'n' || value === 'none') {
+                        this.wordManager.updateWordProperty(selectedWord.id, 'number', 'sg');
                     }
                 }
 

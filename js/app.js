@@ -537,24 +537,20 @@ class DeutschApp {
     calculateCanvasSize() {
         const words = this.wordManager.getAllWords();
         const isMobile = window.innerWidth < 768;
+        const container = document.querySelector('.canvas-container');
+
+        // Get actual container dimensions
+        const containerWidth = container ? container.clientWidth : (isMobile ? 400 : 1200);
+        const containerHeight = container ? container.clientHeight : (isMobile ? 300 : 800);
 
         if (words.length === 0) {
-            // Empty canvas - use container size or reasonable minimum
-            if (isMobile) {
-                return { width: 600, height: 400, viewBoxX: 0, viewBoxY: 0 };
-            } else {
-                // Desktop: use container dimensions or minimum
-                const container = document.querySelector('.canvas-container');
-                if (container) {
-                    return {
-                        width: Math.max(1200, container.clientWidth),
-                        height: Math.max(800, container.clientHeight),
-                        viewBoxX: 0,
-                        viewBoxY: 0
-                    };
-                }
-                return { width: 1200, height: 800, viewBoxX: 0, viewBoxY: 0 };
-            }
+            // Empty canvas - use actual container size
+            return {
+                width: containerWidth,
+                height: containerHeight,
+                viewBoxX: 0,
+                viewBoxY: 0
+            };
         }
 
         // Find the bounding box of all words
@@ -579,19 +575,15 @@ class DeutschApp {
         const viewBoxY = Math.max(0, minY - padding);
 
         if (isMobile) {
-            // Mobile: tight fit around content with minimum size
+            // Mobile: use container size, but ensure content fits
             return {
-                width: Math.max(400, contentWidth),
-                height: Math.max(300, contentHeight),
+                width: Math.max(containerWidth, contentWidth),
+                height: Math.max(containerHeight, contentHeight),
                 viewBoxX: viewBoxX,
                 viewBoxY: viewBoxY
             };
         } else {
             // Desktop: use container size or content size, whichever is larger
-            const container = document.querySelector('.canvas-container');
-            const containerWidth = container ? container.clientWidth : 1200;
-            const containerHeight = container ? container.clientHeight : 800;
-
             return {
                 width: Math.max(containerWidth, contentWidth, 1200),
                 height: Math.max(containerHeight, contentHeight, 800),
@@ -695,53 +687,71 @@ document.addEventListener('DOMContentLoaded', () => {
  * Setup mobile panel toggle functionality
  */
 function setupMobileToggles() {
-    // Toggle Sentence Panel
+    // Get all tab elements
     const toggleSentenceBtn = document.getElementById('toggle-sentence-panel');
     const sentencePanel = document.getElementById('sentence-panel');
-
-    if (toggleSentenceBtn && sentencePanel) {
-        toggleSentenceBtn.addEventListener('click', () => {
-            sentencePanel.classList.toggle('active');
-            // Update button icon
-            const icon = toggleSentenceBtn.querySelector('.toggle-icon');
-            if (sentencePanel.classList.contains('active')) {
-                icon.textContent = '✕';
-            } else {
-                icon.textContent = '☰';
-            }
-        });
-    }
-
-    // Toggle Properties Panel
     const togglePropertiesBtn = document.getElementById('toggle-properties-panel');
     const propertiesPanel = document.getElementById('properties-panel');
 
-    if (togglePropertiesBtn && propertiesPanel) {
-        togglePropertiesBtn.addEventListener('click', () => {
-            propertiesPanel.classList.toggle('active');
-            // Update button icon
-            const icon = togglePropertiesBtn.querySelector('.toggle-icon');
-            if (propertiesPanel.classList.contains('active')) {
-                icon.textContent = '✕';
+    // Tab behavior for Sentence and Properties panels
+    if (toggleSentenceBtn && sentencePanel && togglePropertiesBtn && propertiesPanel) {
+        toggleSentenceBtn.addEventListener('click', () => {
+            // Toggle sentence panel
+            const isActive = sentencePanel.classList.contains('active');
+
+            if (isActive) {
+                // If clicking the active tab, close it
+                sentencePanel.classList.remove('active');
+                toggleSentenceBtn.classList.remove('active');
             } else {
-                icon.textContent = '⚙';
+                // Activate sentence panel, deactivate properties
+                sentencePanel.classList.add('active');
+                toggleSentenceBtn.classList.add('active');
+                propertiesPanel.classList.remove('active');
+                togglePropertiesBtn.classList.remove('active');
+            }
+        });
+
+        togglePropertiesBtn.addEventListener('click', () => {
+            // Toggle properties panel
+            const isActive = propertiesPanel.classList.contains('active');
+
+            if (isActive) {
+                // If clicking the active tab, close it
+                propertiesPanel.classList.remove('active');
+                togglePropertiesBtn.classList.remove('active');
+            } else {
+                // Activate properties panel, deactivate sentence
+                propertiesPanel.classList.add('active');
+                togglePropertiesBtn.classList.add('active');
+                sentencePanel.classList.remove('active');
+                toggleSentenceBtn.classList.remove('active');
             }
         });
     }
 
-    // Toggle Legend
+    // Toggle Legend Modal
     const toggleLegendBtn = document.getElementById('toggle-legend');
-    const legend = document.getElementById('legend');
+    const legendModal = document.getElementById('legend-modal');
+    const legendModalClose = document.getElementById('legend-modal-close');
 
-    if (toggleLegendBtn && legend) {
+    if (toggleLegendBtn && legendModal) {
+        // Open legend modal
         toggleLegendBtn.addEventListener('click', () => {
-            legend.classList.toggle('active');
-            // Update button icon
-            const icon = toggleLegendBtn.querySelector('.toggle-icon');
-            if (legend.classList.contains('active')) {
-                icon.textContent = '✕';
-            } else {
-                icon.textContent = '📖';
+            legendModal.style.display = 'flex';
+        });
+
+        // Close modal when clicking the X button
+        if (legendModalClose) {
+            legendModalClose.addEventListener('click', () => {
+                legendModal.style.display = 'none';
+            });
+        }
+
+        // Close modal when clicking outside (on overlay)
+        legendModal.addEventListener('click', (e) => {
+            if (e.target === legendModal) {
+                legendModal.style.display = 'none';
             }
         });
     }
