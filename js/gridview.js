@@ -103,6 +103,7 @@ class GridViewModel {
             rect.setAttribute('stroke', '#555');
             rect.setAttribute('stroke-width', 2);
             rect.setAttribute('opacity', 0.4);
+            rect.setAttribute('pointer-events', 'none');
             group.appendChild(rect);
 
             // Draw cell label with white border
@@ -118,6 +119,7 @@ class GridViewModel {
                 textStroke.setAttribute('stroke-width', '2');
                 textStroke.setAttribute('fill', 'none');
                 textStroke.setAttribute('opacity', '0.7');
+                textStroke.setAttribute('pointer-events', 'none');
                 textStroke.textContent = cell.label;
                 group.appendChild(textStroke);
 
@@ -130,6 +132,7 @@ class GridViewModel {
                 text.setAttribute('font-weight', 'normal');
                 text.setAttribute('fill', '#999');
                 text.setAttribute('opacity', '0.7');
+                text.setAttribute('pointer-events', 'none');
                 text.textContent = cell.label;
                 group.appendChild(text);
             }
@@ -646,6 +649,7 @@ class GridViewModel {
         text.setAttribute('paint-order', 'stroke');
         text.setAttribute('font-size', '14px');
         text.setAttribute('font-weight', 'bold');
+        text.setAttribute('pointer-events', 'none');
         text.textContent = phraseText;
         group.appendChild(text);
     }
@@ -744,6 +748,7 @@ class GridViewModel {
         path.setAttribute('stroke-width', '2');
         path.setAttribute('fill', 'none');
         path.setAttribute('marker-end', 'url(#arrowhead)');
+        path.setAttribute('pointer-events', 'none');
         group.appendChild(path);
 
         // Draw connection words on arrow
@@ -766,6 +771,7 @@ class GridViewModel {
                 text.setAttribute('paint-order', 'stroke');
                 text.setAttribute('font-size', '14px');
                 text.setAttribute('font-weight', 'normal');
+                text.setAttribute('pointer-events', 'none');
                 text.textContent = word.text;
                 group.appendChild(text);
             });
@@ -796,6 +802,7 @@ class GridViewModel {
         path.setAttribute('stroke-width', '2');
         path.setAttribute('fill', 'none');
         path.setAttribute('marker-end', 'url(#arrowhead)');
+        path.setAttribute('pointer-events', 'none');
         group.appendChild(path);
 
         // Draw leading words on arrow (stacked vertically)
@@ -818,6 +825,7 @@ class GridViewModel {
                 text.setAttribute('paint-order', 'stroke');
                 text.setAttribute('font-size', '14px');
                 text.setAttribute('font-weight', 'normal');
+                text.setAttribute('pointer-events', 'none');
                 text.textContent = word.text;
                 group.appendChild(text);
             });
@@ -848,6 +856,7 @@ class GridViewModel {
         path.setAttribute('stroke-width', '2');
         path.setAttribute('fill', 'none');
         path.setAttribute('marker-end', 'url(#arrowhead)');
+        path.setAttribute('pointer-events', 'none');
         group.appendChild(path);
 
         // Draw trailing words on arrow (stacked vertically)
@@ -870,6 +879,7 @@ class GridViewModel {
                 text.setAttribute('paint-order', 'stroke');
                 text.setAttribute('font-size', '14px');
                 text.setAttribute('font-weight', 'normal');
+                text.setAttribute('pointer-events', 'none');
                 text.textContent = word.text;
                 group.appendChild(text);
             });
@@ -928,6 +938,7 @@ class GridViewModel {
         shape.setAttribute('fill', fillColor);
         shape.setAttribute('stroke', '#2c3e50');
         shape.setAttribute('stroke-width', '2');
+        shape.setAttribute('pointer-events', 'none');
 
         return shape;
     }
