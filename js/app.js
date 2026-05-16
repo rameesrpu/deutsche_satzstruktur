@@ -13,15 +13,24 @@ class DeutschApp {
             snapToGrid: true
         };
 
-        // Zoom configuration
-        this.zoomLevel = 1.0;
+        // Zoom and pan configuration - separate state for each view
         this.minZoom = 0.5;
         this.maxZoom = 3.0;
         this.zoomStep = 0.25;
 
-        // Pan configuration for touch scrolling
-        this.panX = 0;
-        this.panY = 0;
+        // Separate pan and zoom state for each view
+        this.viewState = {
+            felder: {
+                zoomLevel: 1.0,
+                panX: 0,
+                panY: 0
+            },
+            grid: {
+                zoomLevel: 1.0,
+                panX: 0,
+                panY: 0
+            }
+        };
 
         this.wordManager = new WordManager(this.gridConfig);
         this.sentenceManager = new SentenceManager(this.wordManager);
@@ -47,6 +56,13 @@ class DeutschApp {
         this.loadSentences();
         this.redrawAll();
         this.uiController.updatePropertiesPanel();
+    }
+
+    /**
+     * Get current view's zoom and pan state
+     */
+    getCurrentViewState() {
+        return this.viewState[this.currentView];
     }
 
     /**
@@ -96,7 +112,7 @@ class DeutschApp {
                 // Two-finger pinch to zoom
                 e.preventDefault();
                 initialDistance = getDistance(e.touches);
-                initialZoom = this.zoomLevel;
+                initialZoom = this.getCurrentViewState().zoomLevel;
                 isPanning = false;
             } else if (e.touches.length === 1) {
                 // Single finger - prepare for panning
@@ -107,6 +123,8 @@ class DeutschApp {
         }, { passive: false });
 
         canvasContainer.addEventListener('touchmove', (e) => {
+            const currentState = this.getCurrentViewState();
+
             if (e.touches.length === 2) {
                 // Two-finger pinch to zoom
                 e.preventDefault();
@@ -117,12 +135,12 @@ class DeutschApp {
                 const newZoom = initialZoom * scale;
 
                 // Clamp to min/max zoom
-                this.zoomLevel = Math.max(this.minZoom, Math.min(this.maxZoom, newZoom));
+                currentState.zoomLevel = Math.max(this.minZoom, Math.min(this.maxZoom, newZoom));
 
                 // Reset pan when zooming back to 1.0
-                if (Math.abs(this.zoomLevel - 1.0) < 0.05) {
-                    this.panX = 0;
-                    this.panY = 0;
+                if (Math.abs(currentState.zoomLevel - 1.0) < 0.05) {
+                    currentState.panX = 0;
+                    currentState.panY = 0;
                 }
 
                 this.redrawAll();
@@ -134,9 +152,11 @@ class DeutschApp {
                 const deltaX = touch.clientX - lastTouchX;
                 const deltaY = touch.clientY - lastTouchY;
 
-                // Apply pan offset (scale by zoom level for natural feel)
-                this.panX -= deltaX / this.zoomLevel;
-                this.panY -= deltaY / this.zoomLevel;
+                // Apply pan offset with responsive scaling
+                // Multiply by factor for more responsive feel (adjust based on view)
+                const panSpeed = this.currentView === 'grid' ? 2.5 : 1.0;
+                currentState.panX -= (deltaX / currentState.zoomLevel) * panSpeed;
+                currentState.panY -= (deltaY / currentState.zoomLevel) * panSpeed;
 
                 lastTouchX = touch.clientX;
                 lastTouchY = touch.clientY;
@@ -712,6 +732,9 @@ class DeutschApp {
         // Check if we're on mobile (viewport width < 768px)
         const isMobile = window.innerWidth < 768;
 
+        // Get current view's zoom and pan state
+        const currentState = this.getCurrentViewState();
+
         // Both Grid and Felder views now support zoom and pan
         if (this.currentView === 'grid') {
             // Grid view: Fixed content size (1250 x 950) with zoom and pan
@@ -719,16 +742,16 @@ class DeutschApp {
             const gridHeight = 950;
 
             // Apply zoom to viewBox dimensions
-            const zoomedWidth = gridWidth / this.zoomLevel;
-            const zoomedHeight = gridHeight / this.zoomLevel;
+            const zoomedWidth = gridWidth / currentState.zoomLevel;
+            const zoomedHeight = gridHeight / currentState.zoomLevel;
 
             // Center the zoomed viewBox
             const zoomOffsetX = (gridWidth - zoomedWidth) / 2;
             const zoomOffsetY = (gridHeight - zoomedHeight) / 2;
 
             // Apply pan offset for touch scrolling
-            const viewBoxX = zoomOffsetX + this.panX;
-            const viewBoxY = zoomOffsetY + this.panY;
+            const viewBoxX = zoomOffsetX + currentState.panX;
+            const viewBoxY = zoomOffsetY + currentState.panY;
 
             this.svg.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${zoomedWidth} ${zoomedHeight}`);
             this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
@@ -738,16 +761,16 @@ class DeutschApp {
         } else {
             // Felder view uses zoom and pan
             // Apply zoom to viewBox dimensions
-            const zoomedWidth = canvasSize.width / this.zoomLevel;
-            const zoomedHeight = canvasSize.height / this.zoomLevel;
+            const zoomedWidth = canvasSize.width / currentState.zoomLevel;
+            const zoomedHeight = canvasSize.height / currentState.zoomLevel;
 
             // Center the zoomed viewBox
             const zoomOffsetX = (canvasSize.width - zoomedWidth) / 2;
             const zoomOffsetY = (canvasSize.height - zoomedHeight) / 2;
 
             // Apply pan offset for touch scrolling
-            const viewBoxX = canvasSize.viewBoxX + zoomOffsetX + this.panX;
-            const viewBoxY = canvasSize.viewBoxY + zoomOffsetY + this.panY;
+            const viewBoxX = canvasSize.viewBoxX + zoomOffsetX + currentState.panX;
+            const viewBoxY = canvasSize.viewBoxY + zoomOffsetY + currentState.panY;
 
             if (isMobile) {
                 // On mobile: Use viewBox for responsive scaling with zoom

@@ -129,7 +129,7 @@ class GridViewModel {
                 text.setAttribute('y', y + 20);
                 text.setAttribute('text-anchor', 'middle');
                 text.setAttribute('font-size', '10px');
-                text.setAttribute('font-weight', 'normal');
+                text.setAttribute('font-weight', 'bold');
                 text.setAttribute('fill', '#999');
                 text.setAttribute('opacity', '0.7');
                 text.setAttribute('pointer-events', 'none');
@@ -770,7 +770,7 @@ class GridViewModel {
                 text.setAttribute('stroke-width', '3');
                 text.setAttribute('paint-order', 'stroke');
                 text.setAttribute('font-size', '14px');
-                text.setAttribute('font-weight', 'normal');
+                text.setAttribute('font-weight', 'bold');
                 text.setAttribute('pointer-events', 'none');
                 text.textContent = word.text;
                 group.appendChild(text);
@@ -824,7 +824,7 @@ class GridViewModel {
                 text.setAttribute('stroke-width', '3');
                 text.setAttribute('paint-order', 'stroke');
                 text.setAttribute('font-size', '14px');
-                text.setAttribute('font-weight', 'normal');
+                text.setAttribute('font-weight', 'bold');
                 text.setAttribute('pointer-events', 'none');
                 text.textContent = word.text;
                 group.appendChild(text);
@@ -878,7 +878,7 @@ class GridViewModel {
                 text.setAttribute('stroke-width', '3');
                 text.setAttribute('paint-order', 'stroke');
                 text.setAttribute('font-size', '14px');
-                text.setAttribute('font-weight', 'normal');
+                text.setAttribute('font-weight', 'bold');
                 text.setAttribute('pointer-events', 'none');
                 text.textContent = word.text;
                 group.appendChild(text);
