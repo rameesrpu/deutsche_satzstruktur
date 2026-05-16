@@ -712,10 +712,25 @@ class DeutschApp {
         // Check if we're on mobile (viewport width < 768px)
         const isMobile = window.innerWidth < 768;
 
-        // Grid view uses fixed viewBox for automatic scaling
+        // Both Grid and Felder views now support zoom and pan
         if (this.currentView === 'grid') {
-            // Fixed viewBox matches grid content size (50 + 3×350 + 150 = 1250 width, 50 + 3×250 + 150 = 950 height)
-            this.svg.setAttribute('viewBox', '0 0 1250 950');
+            // Grid view: Fixed content size (1250 x 950) with zoom and pan
+            const gridWidth = 1250;
+            const gridHeight = 950;
+
+            // Apply zoom to viewBox dimensions
+            const zoomedWidth = gridWidth / this.zoomLevel;
+            const zoomedHeight = gridHeight / this.zoomLevel;
+
+            // Center the zoomed viewBox
+            const zoomOffsetX = (gridWidth - zoomedWidth) / 2;
+            const zoomOffsetY = (gridHeight - zoomedHeight) / 2;
+
+            // Apply pan offset for touch scrolling
+            const viewBoxX = zoomOffsetX + this.panX;
+            const viewBoxY = zoomOffsetY + this.panY;
+
+            this.svg.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${zoomedWidth} ${zoomedHeight}`);
             this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
             // Remove width/height to allow responsive scaling on all devices
             this.svg.removeAttribute('width');
