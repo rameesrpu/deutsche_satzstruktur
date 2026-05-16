@@ -407,6 +407,42 @@ button:hover {
     touch-action: none; /* Disable browser default touch behaviors - we handle touch manually */
 }
 
+.view-toggle-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.btn-view-toggle {
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 12px;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-view-toggle:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.btn-view-toggle:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
 #canvas {
     min-width: 100%;
     min-height: 100%;

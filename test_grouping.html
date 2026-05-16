@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Phrase Grouping</title>
+</head>
+<body>
+    <h1>Testing Phrase Grouping</h1>
+    <pre id="output"></pre>
+
+    <script src="js/gridview.js"></script>
+    <script>
+        // Create a mock SVG element
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', '800');
+        svg.setAttribute('height', '600');
+        document.body.appendChild(svg);
+
+        const gridView = new GridViewModel(svg);
+
+        // Mock word data for "Nina will Zeichentrickfilme mit den großen Kindern sehen"
+        const testWords = [
+            { id: 1, text: 'Nina', type: 'subject', case: 'nom', gender: 'f', number: 'sg' },
+            { id: 2, text: 'will', type: 'modal' },
+            { id: 3, text: 'Zeichentrickfilme', type: 'direct-object', case: 'akk', gender: 'm', number: 'pl' },
+            { id: 4, text: 'mit', type: 'preposition' },
+            { id: 5, text: 'den', type: 'article', case: 'dat' },
+            { id: 6, text: 'großen', type: 'adjective', case: 'dat' },
+            { id: 7, text: 'Kindern', type: 'direct-object', case: 'dat', gender: 'n', number: 'pl' },
+            { id: 8, text: 'sehen', type: 'verb' }
+        ];
+
+        console.log('Input words:');
+        console.log(testWords);
+
+        const result = gridView.parseSentenceFlow(testWords);
+
+        console.log('\nParsed flow:');
+        console.log(result);
+
+        // Format output for display
+        let output = 'INPUT WORDS:\n';
+        output += '============\n';
+        testWords.forEach(w => {
+            output += `${w.id}: "${w.text}" - type: ${w.type}, case: ${w.case}\n`;
+        });
+
+        output += '\n\nBOXES:\n';
+        output += '======\n';
+        result.boxes.forEach((box, idx) => {
+            const wordTexts = box.words.map(w => w.text).join(' ');
+            output += `Box ${idx + 1}: "${wordTexts}" (case: ${box.case})\n`;
+        });
+
+        output += '\n\nCONNECTIONS:\n';
+        output += '============\n';
+        result.connections.forEach((conn, idx) => {
+            const connTexts = conn.map(w => w.text).join(' ');
+            output += `Connection ${idx + 1}: "${connTexts}"\n`;
+        });
+
+        output += '\n\nLEADING WORDS:\n';
+        output += '==============\n';
+        if (result.leadingWords.length > 0) {
+            const leadingTexts = result.leadingWords.map(w => w.text).join(' ');
+            output += `"${leadingTexts}"\n`;
+        } else {
+            output += 'None\n';
+        }
+
+        output += '\n\nTRAILING WORDS:\n';
+        output += '===============\n';
+        if (result.trailingWords.length > 0) {
+            const trailingTexts = result.trailingWords.map(w => w.text).join(' ');
+            output += `"${trailingTexts}"\n`;
+        } else {
+            output += 'None\n';
+        }
+
+        document.getElementById('output').textContent = output;
+    </script>
+</body>
+</html>

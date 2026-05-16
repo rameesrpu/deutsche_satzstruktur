@@ -26,8 +26,12 @@ class DeutschApp {
         this.wordManager = new WordManager(this.gridConfig);
         this.sentenceManager = new SentenceManager(this.wordManager);
         this.feldermodellRenderer = new FeldermodellRenderer(this.svg);
+        this.gridViewModel = new GridViewModel(this.svg);
         this.renderer = new Renderer(this.svg, this.wordManager);
         this.uiController = new UIController(this.wordManager, () => this.redrawAll(), this.gridConfig);
+
+        // View state: 'felder' or 'grid'
+        this.currentView = 'felder';
     }
 
     /**
@@ -37,11 +41,27 @@ class DeutschApp {
         this.uiController.init(this.svg);
         this.setupToolbarButtons();
         this.setupSentencePanel();
+        this.setupViewToggle();
         this.setupResizeListener();
         this.setupZoomControls();
         this.loadSentences();
         this.redrawAll();
         this.uiController.updatePropertiesPanel();
+    }
+
+    /**
+     * Setup view toggle button
+     */
+    setupViewToggle() {
+        const viewToggleBtn = document.getElementById('view-toggle-btn');
+
+        if (viewToggleBtn) {
+            viewToggleBtn.addEventListener('click', () => {
+                // Toggle between views
+                this.currentView = this.currentView === 'felder' ? 'grid' : 'felder';
+                this.redrawAll();
+            });
+        }
     }
 
     /**
@@ -619,6 +639,16 @@ class DeutschApp {
         const containerWidth = container ? container.clientWidth : (isMobile ? 400 : 1200);
         const containerHeight = container ? container.clientHeight : (isMobile ? 500 : 800);
 
+        // Grid view has fixed dimensions
+        if (this.currentView === 'grid') {
+            return {
+                width: Math.max(containerWidth, 850),
+                height: Math.max(containerHeight, 640),
+                viewBoxX: 0,
+                viewBoxY: 0
+            };
+        }
+
         if (words.length === 0) {
             // Empty canvas - use actual container size
             return {
@@ -682,44 +712,61 @@ class DeutschApp {
         // Check if we're on mobile (viewport width < 768px)
         const isMobile = window.innerWidth < 768;
 
-        // Apply zoom to viewBox dimensions
-        const zoomedWidth = canvasSize.width / this.zoomLevel;
-        const zoomedHeight = canvasSize.height / this.zoomLevel;
-
-        // Center the zoomed viewBox
-        const zoomOffsetX = (canvasSize.width - zoomedWidth) / 2;
-        const zoomOffsetY = (canvasSize.height - zoomedHeight) / 2;
-
-        // Apply pan offset for touch scrolling
-        const viewBoxX = canvasSize.viewBoxX + zoomOffsetX + this.panX;
-        const viewBoxY = canvasSize.viewBoxY + zoomOffsetY + this.panY;
-
-        if (isMobile) {
-            // On mobile: Use viewBox for responsive scaling with zoom
-            this.svg.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${zoomedWidth} ${zoomedHeight}`);
+        // Grid view uses fixed viewBox for automatic scaling
+        if (this.currentView === 'grid') {
+            // Fixed viewBox matches grid content size (50 + 3×350 + 150 = 1250 width, 50 + 3×250 + 150 = 950 height)
+            this.svg.setAttribute('viewBox', '0 0 1250 950');
             this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-            // Remove fixed width/height to allow responsive sizing
+            // Remove width/height to allow responsive scaling on all devices
             this.svg.removeAttribute('width');
             this.svg.removeAttribute('height');
         } else {
-            // On desktop: Use viewBox with zoom (allows zoom without scrolling issues)
-            this.svg.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${zoomedWidth} ${zoomedHeight}`);
-            this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-            this.svg.setAttribute('width', canvasSize.width);
-            this.svg.setAttribute('height', canvasSize.height);
+            // Felder view uses zoom and pan
+            // Apply zoom to viewBox dimensions
+            const zoomedWidth = canvasSize.width / this.zoomLevel;
+            const zoomedHeight = canvasSize.height / this.zoomLevel;
+
+            // Center the zoomed viewBox
+            const zoomOffsetX = (canvasSize.width - zoomedWidth) / 2;
+            const zoomOffsetY = (canvasSize.height - zoomedHeight) / 2;
+
+            // Apply pan offset for touch scrolling
+            const viewBoxX = canvasSize.viewBoxX + zoomOffsetX + this.panX;
+            const viewBoxY = canvasSize.viewBoxY + zoomOffsetY + this.panY;
+
+            if (isMobile) {
+                // On mobile: Use viewBox for responsive scaling with zoom
+                this.svg.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${zoomedWidth} ${zoomedHeight}`);
+                this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                // Remove fixed width/height to allow responsive sizing
+                this.svg.removeAttribute('width');
+                this.svg.removeAttribute('height');
+            } else {
+                // On desktop: Use viewBox with zoom (allows zoom without scrolling issues)
+                this.svg.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${zoomedWidth} ${zoomedHeight}`);
+                this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                this.svg.setAttribute('width', canvasSize.width);
+                this.svg.setAttribute('height', canvasSize.height);
+            }
         }
 
-        // Draw Feldermodell zones (both Hauptsatz and Nebensatz)
-        this.feldermodellRenderer.draw(this.wordManager);
+        // Draw view based on current view state
+        if (this.currentView === 'felder') {
+            // Draw Feldermodell zones (both Hauptsatz and Nebensatz)
+            this.feldermodellRenderer.draw(this.wordManager);
 
-        // Draw connections
-        this.renderer.drawConnections();
+            // Draw connections
+            this.renderer.drawConnections();
 
-        // Draw words
-        this.renderer.drawAllWords(
-            (word) => this.uiController.handleWordClick(word),
-            (e, word) => this.uiController.handleDragStart(e, word)
-        );
+            // Draw words
+            this.renderer.drawAllWords(
+                (word) => this.uiController.handleWordClick(word),
+                (e, word) => this.uiController.handleDragStart(e, word)
+            );
+        } else if (this.currentView === 'grid') {
+            // Draw Grid view
+            this.gridViewModel.draw(this.wordManager);
+        }
 
         // Auto-save current sentence after redrawing
         if (this.sentenceManager && this.sentenceManager.currentSentenceId) {

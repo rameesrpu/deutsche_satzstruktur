@@ -22,7 +22,7 @@
                     <textarea id="sentence-input" placeholder="Type a sentence"></textarea>
                     <div class="sentence-buttons">
                         <button id="add-sentence-btn" class="btn-add-sentence" title="Add sentence to list">➕ Add</button>
-                        <button id="regenerate-btn" class="btn-regenerate" title="Auto-configure with AI">🔄 Auto</button>
+                        <button id="regenerate-btn" class="btn-regenerate" title="Parse sentence with AI">🔄 Parse</button>
                         <button id="check-grammar-btn" class="btn-check-grammar" title="Check grammar">✓ Check</button>
                     </div>
                 </div>
@@ -44,6 +44,9 @@
             </div>
 
             <div class="canvas-container">
+                <div class="view-toggle-container">
+                    <button id="view-toggle-btn" class="btn-view-toggle" title="Toggle between Felder Model and Grid View">⇄</button>
+                </div>
                 <svg id="canvas"></svg>
             </div>
 
@@ -173,6 +176,7 @@
     <script src="js/wordManager.js"></script>
     <script src="js/sentenceManager.js"></script>
     <script src="js/feldermodell.js"></script>
+    <script src="js/gridview.js"></script>
     <script src="js/renderer.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/app.js"></script>
