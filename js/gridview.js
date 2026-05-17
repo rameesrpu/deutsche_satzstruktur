@@ -3,7 +3,7 @@ class GridViewModel {
         this.svg = svg;
         this.gridSize = 3; // 3x3 grid
         this.cellWidth = 350;
-        this.cellHeight = 250;
+        this.cellHeight = 400; // Increased height to accommodate more words per cell
         this.padding = 20;
 
         // Define grid positions for different categories
@@ -49,23 +49,23 @@ class GridViewModel {
 
         // Categorize and position words (only if words exist)
         if (words.length > 0) {
-            this.positionWords(words, gridGroup, startX, startY);
+            this.positionWords(words, gridGroup, startX, startY, wordManager);
         }
     }
 
     createArrowMarker(group) {
-        // Create a marker definition for arrowheads
+        // Create a marker definition for arrowheads - 7x7 for mobile readability
         const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
         const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
         marker.setAttribute('id', 'arrowhead');
-        marker.setAttribute('markerWidth', '10');
-        marker.setAttribute('markerHeight', '10');
-        marker.setAttribute('refX', '9');
-        marker.setAttribute('refY', '3');
+        marker.setAttribute('markerWidth', '7');
+        marker.setAttribute('markerHeight', '7');
+        marker.setAttribute('refX', '6.5'); // Adjusted for 7x7 size
+        marker.setAttribute('refY', '3.5'); // Center of 7x7 arrow
         marker.setAttribute('orient', 'auto');
 
         const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-        polygon.setAttribute('points', '0 0, 10 3, 0 6');
+        polygon.setAttribute('points', '0 0, 7 3.5, 0 7'); // True 7x7 arrow
         polygon.setAttribute('fill', '#2c3e50');
 
         marker.appendChild(polygon);
@@ -101,45 +101,16 @@ class GridViewModel {
             rect.setAttribute('height', this.cellHeight);
             rect.setAttribute('fill', cell.color);
             rect.setAttribute('stroke', '#555');
-            rect.setAttribute('stroke-width', 2);
+            rect.setAttribute('stroke-width', '4'); // Increased to match larger elements
             rect.setAttribute('opacity', 0.4);
             rect.setAttribute('pointer-events', 'none');
             group.appendChild(rect);
 
-            // Draw cell label with white border
-            if (cell.label) {
-                // White stroke (border) - more subtle
-                const textStroke = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                textStroke.setAttribute('x', x + this.cellWidth / 2);
-                textStroke.setAttribute('y', y + 20);
-                textStroke.setAttribute('text-anchor', 'middle');
-                textStroke.setAttribute('font-size', '10px');
-                textStroke.setAttribute('font-weight', 'normal');
-                textStroke.setAttribute('stroke', 'white');
-                textStroke.setAttribute('stroke-width', '2');
-                textStroke.setAttribute('fill', 'none');
-                textStroke.setAttribute('opacity', '0.7');
-                textStroke.setAttribute('pointer-events', 'none');
-                textStroke.textContent = cell.label;
-                group.appendChild(textStroke);
-
-                // Text fill - lighter and more subtle
-                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', x + this.cellWidth / 2);
-                text.setAttribute('y', y + 20);
-                text.setAttribute('text-anchor', 'middle');
-                text.setAttribute('font-size', '10px');
-                text.setAttribute('font-weight', 'bold');
-                text.setAttribute('fill', '#999');
-                text.setAttribute('opacity', '0.7');
-                text.setAttribute('pointer-events', 'none');
-                text.textContent = cell.label;
-                group.appendChild(text);
-            }
+            // Cell labels removed for cleaner view
         });
     }
 
-    positionWords(words, group, startX, startY) {
+    positionWords(words, group, startX, startY, wordManager) {
         console.log('=== FLOW DIAGRAM: Parsing sentence ===');
 
         // Parse sentence into boxes and connecting words
@@ -177,20 +148,20 @@ class GridViewModel {
 
             // Calculate dynamic spacing based on number of boxes
             const totalBoxesInCell = cellOccupancy[cellKey];
-            const boxHeight = 40;
-            const cellPadding = 60; // 30px top + 30px bottom
+            const boxHeight = 65; // Updated to match larger boxes
+            const cellPadding = 80; // Increased padding for taller cells (40px top + 40px bottom)
             const availableHeight = this.cellHeight - cellPadding - (totalBoxesInCell * boxHeight);
 
-            // Calculate spacing based on number of boxes
-            let boxSpacing = 120;
+            // Calculate spacing based on number of boxes - increased for taller cells
+            let boxSpacing = 180;
             if (totalBoxesInCell === 2) {
-                boxSpacing = 120;
+                boxSpacing = 180; // Increased spacing for 2 boxes
             } else if (totalBoxesInCell === 3) {
-                boxSpacing = 60;
+                boxSpacing = 100; // Increased spacing for 3 boxes
             } else if (totalBoxesInCell > 3) {
-                // For 4+ boxes, calculate dynamically with min 20px
+                // For 4+ boxes, calculate dynamically with min 30px
                 const maxPossibleSpacing = availableHeight / (totalBoxesInCell - 1);
-                boxSpacing = Math.max(20, maxPossibleSpacing);
+                boxSpacing = Math.max(30, maxPossibleSpacing);
             }
 
             const centerX = cellX + this.cellWidth / 2;
@@ -209,7 +180,7 @@ class GridViewModel {
 
         // Draw incoming arrow if there are leading words
         if (leadingWords.length > 0 && boxPositions.length > 0) {
-            this.drawIncomingArrow(group, boxPositions[0], leadingWords, startX);
+            this.drawIncomingArrow(group, boxPositions[0], leadingWords, startX, wordManager);
         }
 
         // Draw arrows between boxes with connecting words
@@ -218,7 +189,7 @@ class GridViewModel {
             const toBox = boxPositions[i + 1];
             const connectionWords = connections[i] || [];
 
-            this.drawArrow(group, fromBox, toBox, connectionWords);
+            this.drawArrow(group, fromBox, toBox, connectionWords, wordManager);
         }
 
         // Draw outgoing arrow for final connection (e.g., sentence-final verbs)
@@ -226,13 +197,13 @@ class GridViewModel {
         if (boxPositions.length > 0 && connections.length === boxPositions.length) {
             const finalConnection = connections[connections.length - 1];
             if (finalConnection && finalConnection.length > 0) {
-                this.drawOutgoingArrow(group, boxPositions[boxPositions.length - 1], finalConnection, startX);
+                this.drawOutgoingArrow(group, boxPositions[boxPositions.length - 1], finalConnection, startX, wordManager);
             }
         }
 
         // Draw outgoing arrow if there are trailing words (legacy support)
         if (trailingWords.length > 0 && boxPositions.length > 0) {
-            this.drawOutgoingArrow(group, boxPositions[boxPositions.length - 1], trailingWords, startX);
+            this.drawOutgoingArrow(group, boxPositions[boxPositions.length - 1], trailingWords, startX, wordManager);
         }
 
         console.log('=== END FLOW DIAGRAM ===\n');
@@ -638,31 +609,31 @@ class GridViewModel {
             group.appendChild(box);
         }
 
-        // Text with white stroke outline (matching Feldermodell style)
+        // Text with white stroke outline (matching Feldermodell style) - Consistent large size
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', centerX);
-        text.setAttribute('y', centerY + 5);
+        text.setAttribute('y', centerY + 12);
         text.setAttribute('text-anchor', 'middle');
         text.setAttribute('fill', '#2c3e50');
         text.setAttribute('stroke', 'white');
-        text.setAttribute('stroke-width', '3');
+        text.setAttribute('stroke-width', '8'); // Consistent with connection words
         text.setAttribute('paint-order', 'stroke');
-        text.setAttribute('font-size', '14px');
+        text.setAttribute('font-size', '34px'); // Consistent with connection words
         text.setAttribute('font-weight', 'bold');
         text.setAttribute('pointer-events', 'none');
         text.textContent = phraseText;
         group.appendChild(text);
     }
 
-    drawArrow(group, fromBox, toBox, connectionWords) {
+    drawArrow(group, fromBox, toBox, connectionWords, wordManager) {
         const fromX = fromBox.centerX;
         const fromY = fromBox.centerY;
         const toX = toBox.centerX;
         const toY = toBox.centerY;
 
         // Calculate arrow start and end points (adjust for box boundaries)
-        const boxWidth = 200;
-        const boxHeight = 40;
+        const boxWidth = 280; // Updated to match larger boxes
+        const boxHeight = 65; // Updated to match larger boxes
 
         // Determine if arrow is primarily vertical
         const deltaX = Math.abs(toX - fromX);
@@ -741,45 +712,33 @@ class GridViewModel {
             midY = (startY + endY) / 2 + curveOffset;
         }
 
-        // Draw arrow path
+        // Draw arrow path - thicker for better visibility
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', pathD);
         path.setAttribute('stroke', '#2c3e50');
-        path.setAttribute('stroke-width', '2');
+        path.setAttribute('stroke-width', '5'); // Increased for better visibility with larger elements
         path.setAttribute('fill', 'none');
         path.setAttribute('marker-end', 'url(#arrowhead)');
         path.setAttribute('pointer-events', 'none');
         group.appendChild(path);
 
-        // Draw connection words on arrow
+        // Draw connection words on arrow with shapes
         if (connectionWords.length > 0) {
-            // Place text at the midpoint of the curve (already calculated above)
+            // Place at the midpoint of the curve (already calculated above)
             const textX = midX;
             const textY = midY;
 
             connectionWords.forEach((word, index) => {
-                const offsetY = (index - (connectionWords.length - 1) / 2) * 18;
+                const offsetY = (index - (connectionWords.length - 1) / 2) * 110; // Increased spacing for larger 90px shapes
 
-                // Text with white stroke outline (matching Feldermodell style)
-                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', textX);
-                text.setAttribute('y', textY + offsetY);
-                text.setAttribute('text-anchor', 'middle');
-                text.setAttribute('fill', '#2c3e50');
-                text.setAttribute('stroke', 'white');
-                text.setAttribute('stroke-width', '3');
-                text.setAttribute('paint-order', 'stroke');
-                text.setAttribute('font-size', '14px');
-                text.setAttribute('font-weight', 'bold');
-                text.setAttribute('pointer-events', 'none');
-                text.textContent = word.text;
-                group.appendChild(text);
+                // Draw word with shape
+                this.drawWordWithShape(group, word, textX, textY + offsetY, wordManager);
             });
         }
     }
 
-    drawIncomingArrow(group, firstBox, leadingWords, startX) {
-        const boxWidth = 200;
+    drawIncomingArrow(group, firstBox, leadingWords, startX, wordManager) {
+        const boxWidth = 280; // Updated to match larger boxes
 
         // Arrow comes from the left edge
         const arrowStartX = startX - 100;
@@ -795,45 +754,32 @@ class GridViewModel {
         const controlY2 = arrowEndY + curveOffset;
         const pathD = `M ${arrowStartX} ${arrowStartY} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${arrowEndX} ${arrowEndY}`;
 
-        // Draw curved arrow path
+        // Draw curved arrow path - thicker for better visibility
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', pathD);
         path.setAttribute('stroke', '#2c3e50');
-        path.setAttribute('stroke-width', '2');
+        path.setAttribute('stroke-width', '5'); // Increased for better visibility with larger elements
         path.setAttribute('fill', 'none');
         path.setAttribute('marker-end', 'url(#arrowhead)');
         path.setAttribute('pointer-events', 'none');
         group.appendChild(path);
 
-        // Draw leading words on arrow (stacked vertically)
+        // Draw leading words on arrow with shapes
         if (leadingWords.length > 0) {
             const midX = (arrowStartX + arrowEndX) / 2;
             const midY = (arrowStartY + arrowEndY) / 2 + curveOffset;
-            const textOffset = 15;
 
             leadingWords.forEach((word, index) => {
-                const offsetY = (index - (leadingWords.length - 1) / 2) * 18;
+                const offsetY = (index - (leadingWords.length - 1) / 2) * 110; // Increased spacing for larger 90px shapes
 
-                // Text with white stroke outline (matching Feldermodell style)
-                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', midX);
-                text.setAttribute('y', midY - textOffset + offsetY);
-                text.setAttribute('text-anchor', 'middle');
-                text.setAttribute('fill', '#2c3e50');
-                text.setAttribute('stroke', 'white');
-                text.setAttribute('stroke-width', '3');
-                text.setAttribute('paint-order', 'stroke');
-                text.setAttribute('font-size', '14px');
-                text.setAttribute('font-weight', 'bold');
-                text.setAttribute('pointer-events', 'none');
-                text.textContent = word.text;
-                group.appendChild(text);
+                // Draw word with shape
+                this.drawWordWithShape(group, word, midX, midY + offsetY, wordManager);
             });
         }
     }
 
-    drawOutgoingArrow(group, lastBox, trailingWords, startX) {
-        const boxWidth = 200;
+    drawOutgoingArrow(group, lastBox, trailingWords, startX, wordManager) {
+        const boxWidth = 280; // Updated to match larger boxes
 
         // Arrow goes to the right edge
         const arrowStartX = lastBox.centerX + boxWidth / 2;
@@ -849,48 +795,144 @@ class GridViewModel {
         const controlY2 = arrowEndY + curveOffset;
         const pathD = `M ${arrowStartX} ${arrowStartY} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${arrowEndX} ${arrowEndY}`;
 
-        // Draw curved arrow path
+        // Draw curved arrow path - thicker for better visibility
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', pathD);
         path.setAttribute('stroke', '#2c3e50');
-        path.setAttribute('stroke-width', '2');
+        path.setAttribute('stroke-width', '5'); // Increased for better visibility with larger elements
         path.setAttribute('fill', 'none');
         path.setAttribute('marker-end', 'url(#arrowhead)');
         path.setAttribute('pointer-events', 'none');
         group.appendChild(path);
 
-        // Draw trailing words on arrow (stacked vertically)
+        // Draw trailing words on arrow with shapes
         if (trailingWords.length > 0) {
             const midX = (arrowStartX + arrowEndX) / 2;
             const midY = (arrowStartY + arrowEndY) / 2 + curveOffset;
-            const textOffset = 15;
 
             trailingWords.forEach((word, index) => {
-                const offsetY = (index - (trailingWords.length - 1) / 2) * 18;
+                const offsetY = (index - (trailingWords.length - 1) / 2) * 110; // Increased spacing for larger 90px shapes
 
-                // Text with white stroke outline (matching Feldermodell style)
-                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', midX);
-                text.setAttribute('y', midY - textOffset + offsetY);
-                text.setAttribute('text-anchor', 'middle');
-                text.setAttribute('fill', '#2c3e50');
-                text.setAttribute('stroke', 'white');
-                text.setAttribute('stroke-width', '3');
-                text.setAttribute('paint-order', 'stroke');
-                text.setAttribute('font-size', '14px');
-                text.setAttribute('font-weight', 'bold');
-                text.setAttribute('pointer-events', 'none');
-                text.textContent = word.text;
-                group.appendChild(text);
+                // Draw word with shape
+                this.drawWordWithShape(group, word, midX, midY + offsetY, wordManager);
             });
         }
     }
 
 
+    /**
+     * Draw a word with its shape (for connection words on arrows)
+     * Based on renderer.js createShape logic, but scaled larger for excellent mobile visibility
+     */
+    drawWordWithShape(group, word, centerX, centerY, wordManager) {
+        const shapeSize = 90; // 80% larger than main view (50px) for maximum mobile visibility
+        const scale = shapeSize / 50; // Scale factor from original 50px shapes
+        const halfSize = shapeSize / 2;
+
+        // Create a group for the word (shape + text)
+        const wordGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        wordGroup.setAttribute('transform', `translate(${centerX - halfSize}, ${centerY - halfSize})`);
+
+        let shape;
+
+        // Use the same color logic as the felder model
+        const fillColor = wordManager.getColorForWord(word);
+
+        // Helper function to scale points
+        const scalePoints = (points) => {
+            return points.split(' ').map(pair => {
+                const [x, y] = pair.split(',').map(Number);
+                return `${x * scale},${y * scale}`;
+            }).join(' ');
+        };
+
+        // Create shape based on word type (same as renderer.js but scaled up)
+        if (word.type === 'verb' || word.type === 'modal') {
+            // Hexagon for verbs
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            shape.setAttribute('points', scalePoints('25,0 45,12.5 45,37.5 25,50 5,37.5 5,12.5'));
+        } else if (word.type === 'conjunction') {
+            // Pentagon for subordinating conjunctions
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            shape.setAttribute('points', scalePoints('25,0 50,19 40,50 10,50 0,19'));
+        } else if (word.type === 'coord-conjunction') {
+            // Star/cross for coordinating conjunctions
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            shape.setAttribute('points', scalePoints('25,0 30,20 50,25 30,30 25,50 20,30 0,25 20,20'));
+        } else if (word.type === 'preposition') {
+            // Different shapes based on case
+            const prepCase = wordManager.getPrepositionCase(word.text);
+
+            if (prepCase === 'akk') {
+                // Rectangle for accusative prepositions
+                shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                shape.setAttribute('x', 10 * scale);
+                shape.setAttribute('y', 10 * scale);
+                shape.setAttribute('width', 30 * scale);
+                shape.setAttribute('height', 30 * scale);
+                shape.setAttribute('rx', 3 * scale);
+            } else if (prepCase === 'dat') {
+                // Triangle for dative prepositions
+                shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                shape.setAttribute('points', scalePoints('25,5 45,45 5,45'));
+            } else if (prepCase === 'wechsel') {
+                // Parallelogram for wechsel prepositions
+                shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                shape.setAttribute('points', scalePoints('18,10 43,10 32,40 7,40'));
+            } else if (prepCase === 'gen') {
+                // Diamond for genitive prepositions
+                shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                shape.setAttribute('x', 12.5 * scale);
+                shape.setAttribute('y', 12.5 * scale);
+                shape.setAttribute('width', 25 * scale);
+                shape.setAttribute('height', 25 * scale);
+                shape.setAttribute('transform', `rotate(45 ${halfSize} ${halfSize})`);
+            } else {
+                // Default triangle
+                shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                shape.setAttribute('points', scalePoints('25,5 45,45 5,45'));
+            }
+        } else if (word.type === 'other') {
+            // Octagon for "other"
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            shape.setAttribute('points', scalePoints('15,0 35,0 50,15 50,35 35,50 15,50 0,35 0,15'));
+        } else {
+            // Default circle for other types
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            shape.setAttribute('cx', halfSize);
+            shape.setAttribute('cy', halfSize);
+            shape.setAttribute('r', halfSize);
+        }
+
+        // Apply styling to shape
+        shape.setAttribute('fill', fillColor);
+        shape.setAttribute('stroke', '#2c3e50');
+        shape.setAttribute('stroke-width', '4'); // Extra thick stroke for larger shape
+        shape.setAttribute('pointer-events', 'none');
+        wordGroup.appendChild(shape);
+
+        // Add text on top of shape
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', halfSize);
+        text.setAttribute('y', halfSize + 12); // Centered vertically in larger shape
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('fill', '#2c3e50');
+        text.setAttribute('stroke', 'white');
+        text.setAttribute('stroke-width', '8'); // Extra thick outline for maximum visibility
+        text.setAttribute('paint-order', 'stroke');
+        text.setAttribute('font-size', '34px'); // Maximum font size for crystal-clear mobile reading
+        text.setAttribute('font-weight', 'bold');
+        text.setAttribute('pointer-events', 'none');
+        text.textContent = word.text;
+        wordGroup.appendChild(text);
+
+        group.appendChild(wordGroup);
+    }
+
     createCaseBox(caseType, centerX, centerY, fillColor = 'rgba(255, 255, 255, 0.9)') {
         let shape;
-        const boxWidth = 200;
-        const boxHeight = 40;
+        const boxWidth = 280; // Increased from 200 for larger text
+        const boxHeight = 65; // Increased from 40 for larger text
         const boxX = centerX - boxWidth / 2;
         const boxY = centerY - boxHeight / 2;
 
@@ -937,7 +979,7 @@ class GridViewModel {
 
         shape.setAttribute('fill', fillColor);
         shape.setAttribute('stroke', '#2c3e50');
-        shape.setAttribute('stroke-width', '2');
+        shape.setAttribute('stroke-width', '4'); // Increased to match larger elements
         shape.setAttribute('pointer-events', 'none');
 
         return shape;
