@@ -44,6 +44,9 @@ class GameMode {
         // Controller state (tap-based)
         this.selectedCase = null; // 'nom', 'akk', or 'dat' - selected when user taps case button
 
+        // Attempt tracking (auto-place after 3 wrong attempts)
+        this.currentWordAttempts = 0;
+
         // Grid positions (from gridview)
         this.positions = {
             'ich': { row: 2, col: 2, label: 'ICH' },
@@ -105,6 +108,7 @@ class GameMode {
         this.feedbackAnimation = null;
         this.accumulatedAutoWords = [];
         this.currentWordDisplay = null;
+        this.currentWordAttempts = 0;
 
         // Parse current sentence
         this.parseSentence();
@@ -666,51 +670,61 @@ class GameMode {
 
             // Center the current word box
             const centerX = currentWordBoxLeft;
-            const centerWordX = 625; // Center of the word area
 
-            // Create background shape based on selected case
+            // Create background shape based on selected case (using gridview styles)
             let bgShape;
             const activeItem = this.gameSequence[this.currentBoxIndex];
             const itemToCheck = activeItem.type === 'box' ? activeItem.item.mainWord : activeItem.item;
             const isObject = itemToCheck.type.includes('object');
 
-            // Only show shape variation if this is an object and a case is selected
+            // Determine which case to show
+            // For objects: show selected case if any, otherwise default rounded rectangle
+            // For subjects: always show nominative style
+            let displayCase = null;
             if (isObject && this.selectedCase) {
-                if (this.selectedCase === 'nom') {
-                    // Circle/ellipse for nominative
-                    bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
-                    bgShape.setAttribute('cx', centerWordX);
-                    bgShape.setAttribute('cy', topY + barHeight / 2);
-                    bgShape.setAttribute('rx', wordWidth / 2);
-                    bgShape.setAttribute('ry', barHeight / 2);
-                } else if (this.selectedCase === 'akk') {
-                    // Square for accusative
-                    const squareSize = Math.max(wordWidth, barHeight);
-                    bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                    bgShape.setAttribute('x', centerWordX - squareSize / 2);
-                    bgShape.setAttribute('y', topY + (barHeight - squareSize) / 2);
-                    bgShape.setAttribute('width', squareSize);
-                    bgShape.setAttribute('height', squareSize);
-                    bgShape.setAttribute('rx', '8');
-                } else if (this.selectedCase === 'dat') {
-                    // Trapezoid for dative
-                    bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-                    const slope = wordWidth * 0.15;
-                    const left = centerX;
-                    const right = centerX + wordWidth;
-                    const top = topY;
-                    const bottom = topY + barHeight;
-                    const points = `${left + slope},${top} ${right - slope},${top} ${right},${bottom} ${left},${bottom}`;
-                    bgShape.setAttribute('points', points);
-                }
+                displayCase = this.selectedCase;
+            } else if (itemToCheck.type === 'subject') {
+                displayCase = 'nom';
+            }
+
+            // Create shape based on case (matching gridview's createCaseBox)
+            if (displayCase === 'nom') {
+                // Rounded rectangle for Nominative (rx/ry = 20)
+                bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                bgShape.setAttribute('x', centerX);
+                bgShape.setAttribute('y', topY);
+                bgShape.setAttribute('width', wordWidth);
+                bgShape.setAttribute('height', barHeight);
+                bgShape.setAttribute('rx', '20');
+                bgShape.setAttribute('ry', '20');
+            } else if (displayCase === 'akk') {
+                // Rectangle with slight rounding for Accusative (rx/ry = 5)
+                bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                bgShape.setAttribute('x', centerX);
+                bgShape.setAttribute('y', topY);
+                bgShape.setAttribute('width', wordWidth);
+                bgShape.setAttribute('height', barHeight);
+                bgShape.setAttribute('rx', '5');
+                bgShape.setAttribute('ry', '5');
+            } else if (displayCase === 'dat') {
+                // Trapezoid for Dative (matching gridview slope)
+                bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                const slope = 15;
+                const left = centerX;
+                const right = centerX + wordWidth;
+                const top = topY;
+                const bottom = topY + barHeight;
+                const points = `${left + slope},${top} ${right - slope},${top} ${right},${bottom} ${left},${bottom}`;
+                bgShape.setAttribute('points', points);
             } else {
-                // Default rounded rectangle (for subjects or when no case selected)
+                // Default rounded rectangle (when no case selected)
                 bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
                 bgShape.setAttribute('x', centerX);
                 bgShape.setAttribute('y', topY);
                 bgShape.setAttribute('width', wordWidth);
                 bgShape.setAttribute('height', barHeight);
                 bgShape.setAttribute('rx', '10');
+                bgShape.setAttribute('ry', '10');
             }
 
             bgShape.setAttribute('fill', 'rgba(44, 62, 80, 0.9)'); // Dark for current word
@@ -996,10 +1010,10 @@ class GameMode {
         // Determine case type
         let caseType;
         if (itemToValidate.type === 'subject') {
-            // Subjects always use nominative
+            // Subjects default to nominative
             caseType = 'nom';
         } else {
-            // Objects use selected case (if none selected, invalid)
+            // Objects require case selection
             if (!this.selectedCase) {
                 console.log('Please select a case first (NOM/AKK/DAT)');
                 return;
@@ -1049,6 +1063,9 @@ class GameMode {
             this.totalScore += 10;
             console.log('✓ Correct placement!');
 
+            // Reset attempts counter
+            this.currentWordAttempts = 0;
+
             // Show tick feedback
             this.showFeedback('✓', feedbackX, feedbackY, true);
 
@@ -1084,8 +1101,19 @@ class GameMode {
         } else {
             console.log('✗ Incorrect placement!');
 
+            // Increment attempts
+            this.currentWordAttempts++;
+
             // Show cross feedback (no score penalty, but don't advance)
             this.showFeedback('✗', feedbackX, feedbackY, false);
+
+            // After 3 failed attempts, auto-place correctly
+            if (this.currentWordAttempts >= 3) {
+                console.log('Auto-placing after 3 attempts...');
+                setTimeout(() => {
+                    this.autoPlaceCurrentWord();
+                }, 800);
+            }
         }
     }
 
@@ -1181,6 +1209,9 @@ class GameMode {
 
         const currentItem = this.gameSequence[this.currentBoxIndex];
         this.currentWordDisplay = this.getItemText(currentItem);
+
+        // Reset attempts for new word
+        this.currentWordAttempts = 0;
     }
 
     /**
@@ -1210,6 +1241,32 @@ class GameMode {
         const caseMatch = !word.case || word.case === caseType;
 
         return positionMatch && caseMatch;
+    }
+
+    /**
+     * Auto-place current word after 3 failed attempts
+     */
+    autoPlaceCurrentWord() {
+        if (this.currentBoxIndex >= this.gameSequence.length) {
+            return;
+        }
+
+        const currentItem = this.gameSequence[this.currentBoxIndex];
+        const itemToValidate = currentItem.type === 'box' ? currentItem.item.mainWord : currentItem.item;
+
+        // Get the correct position
+        const expectedPosition = this.gridViewModel.getWordPosition(itemToValidate);
+        if (!expectedPosition) {
+            console.error('Cannot auto-place: no expected position found');
+            return;
+        }
+
+        // Get the correct case
+        const correctCase = itemToValidate.case || 'nom';
+
+        // Place it correctly (this will trigger the success path)
+        console.log(`Auto-placing at correct position: row ${expectedPosition.row}, col ${expectedPosition.col}, case: ${correctCase}`);
+        this.placeWord(expectedPosition.row, expectedPosition.col, correctCase);
     }
 
     /**
