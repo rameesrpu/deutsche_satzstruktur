@@ -412,6 +412,9 @@ button:hover {
     top: 10px;
     right: 10px;
     z-index: 1000;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
 }
 
 .btn-view-toggle {
@@ -439,6 +442,34 @@ button:hover {
 }
 
 .btn-view-toggle:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.btn-game-mode {
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.btn-game-mode:hover {
+    background: #229954;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.btn-game-mode:active {
     transform: translateY(0);
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
@@ -1748,5 +1779,17 @@ button:hover {
     .legend-shape {
         width: 18px;
         height: 18px;
+    }
+}
+
+/* Game Mode Animations */
+@keyframes word-appear {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
     }
 }

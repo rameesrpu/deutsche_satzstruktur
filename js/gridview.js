@@ -2,8 +2,54 @@ class GridViewModel {
     constructor(svg) {
         this.svg = svg;
         this.gridSize = 3; // 3x3 grid
-        this.cellWidth = 350;
-        this.cellHeight = 400; // Increased height to accommodate more words per cell
+
+        // Responsive configuration for mobile and desktop
+        this.config = {
+            mobile: {
+                cellWidth: 350,
+                cellHeight: 400,
+                boxWidth: 280,
+                boxHeight: 65,
+                fontSize: '34px',
+                shapeSize: 90,
+                strokeWidth: '8',
+                arrowWidth: 5,
+                boxStrokeWidth: '4',
+                cellStrokeWidth: '4',
+                cellPadding: 80,
+                spacing: {
+                    two: 180,
+                    three: 100,
+                    min: 30
+                }
+            },
+            desktop: {
+                cellWidth: 250,
+                cellHeight: 250,
+                boxWidth: 200,
+                boxHeight: 40,
+                fontSize: '20px',
+                shapeSize: 50,
+                strokeWidth: '4',
+                arrowWidth: 3,
+                boxStrokeWidth: '3',
+                cellStrokeWidth: '2',
+                cellPadding: 60,
+                spacing: {
+                    two: 120,
+                    three: 60,
+                    min: 20
+                }
+            }
+        };
+
+        // Detect if mobile or desktop (based on viewport width)
+        this.isMobile = window.innerWidth <= 768;
+        this.currentConfig = this.isMobile ? this.config.mobile : this.config.desktop;
+
+        // Apply current config
+        this.cellWidth = this.currentConfig.cellWidth;
+        this.cellHeight = this.currentConfig.cellHeight;
         this.padding = 20;
 
         // Define grid positions for different categories
@@ -26,6 +72,12 @@ class GridViewModel {
     }
 
     draw(wordManager) {
+        // Update configuration based on current window size
+        this.isMobile = window.innerWidth <= 768;
+        this.currentConfig = this.isMobile ? this.config.mobile : this.config.desktop;
+        this.cellWidth = this.currentConfig.cellWidth;
+        this.cellHeight = this.currentConfig.cellHeight;
+
         // Clear existing grid elements
         const existingGroups = this.svg.querySelectorAll('.grid-view-group');
         existingGroups.forEach(g => g.remove());
@@ -101,7 +153,7 @@ class GridViewModel {
             rect.setAttribute('height', this.cellHeight);
             rect.setAttribute('fill', cell.color);
             rect.setAttribute('stroke', '#555');
-            rect.setAttribute('stroke-width', '4'); // Increased to match larger elements
+            rect.setAttribute('stroke-width', this.currentConfig.cellStrokeWidth);
             rect.setAttribute('opacity', 0.4);
             rect.setAttribute('pointer-events', 'none');
             group.appendChild(rect);
@@ -148,20 +200,20 @@ class GridViewModel {
 
             // Calculate dynamic spacing based on number of boxes
             const totalBoxesInCell = cellOccupancy[cellKey];
-            const boxHeight = 65; // Updated to match larger boxes
-            const cellPadding = 80; // Increased padding for taller cells (40px top + 40px bottom)
+            const boxHeight = this.currentConfig.boxHeight;
+            const cellPadding = this.currentConfig.cellPadding;
             const availableHeight = this.cellHeight - cellPadding - (totalBoxesInCell * boxHeight);
 
-            // Calculate spacing based on number of boxes - increased for taller cells
-            let boxSpacing = 180;
+            // Calculate spacing based on number of boxes
+            let boxSpacing = this.currentConfig.spacing.two;
             if (totalBoxesInCell === 2) {
-                boxSpacing = 180; // Increased spacing for 2 boxes
+                boxSpacing = this.currentConfig.spacing.two;
             } else if (totalBoxesInCell === 3) {
-                boxSpacing = 100; // Increased spacing for 3 boxes
+                boxSpacing = this.currentConfig.spacing.three;
             } else if (totalBoxesInCell > 3) {
-                // For 4+ boxes, calculate dynamically with min 30px
+                // For 4+ boxes, calculate dynamically
                 const maxPossibleSpacing = availableHeight / (totalBoxesInCell - 1);
-                boxSpacing = Math.max(30, maxPossibleSpacing);
+                boxSpacing = Math.max(this.currentConfig.spacing.min, maxPossibleSpacing);
             }
 
             const centerX = cellX + this.cellWidth / 2;
@@ -609,16 +661,17 @@ class GridViewModel {
             group.appendChild(box);
         }
 
-        // Text with white stroke outline (matching Feldermodell style) - Consistent large size
+        // Text with white stroke outline (matching Feldermodell style)
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', centerX);
-        text.setAttribute('y', centerY + 12);
+        const yOffset = this.isMobile ? 12 : 7; // Adjust y offset based on font size
+        text.setAttribute('y', centerY + yOffset);
         text.setAttribute('text-anchor', 'middle');
         text.setAttribute('fill', '#2c3e50');
         text.setAttribute('stroke', 'white');
-        text.setAttribute('stroke-width', '8'); // Consistent with connection words
+        text.setAttribute('stroke-width', this.currentConfig.strokeWidth);
         text.setAttribute('paint-order', 'stroke');
-        text.setAttribute('font-size', '34px'); // Consistent with connection words
+        text.setAttribute('font-size', this.currentConfig.fontSize);
         text.setAttribute('font-weight', 'bold');
         text.setAttribute('pointer-events', 'none');
         text.textContent = phraseText;
@@ -632,8 +685,8 @@ class GridViewModel {
         const toY = toBox.centerY;
 
         // Calculate arrow start and end points (adjust for box boundaries)
-        const boxWidth = 280; // Updated to match larger boxes
-        const boxHeight = 65; // Updated to match larger boxes
+        const boxWidth = this.currentConfig.boxWidth;
+        const boxHeight = this.currentConfig.boxHeight;
 
         // Determine if arrow is primarily vertical
         const deltaX = Math.abs(toX - fromX);
@@ -712,11 +765,11 @@ class GridViewModel {
             midY = (startY + endY) / 2 + curveOffset;
         }
 
-        // Draw arrow path - thicker for better visibility
+        // Draw arrow path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', pathD);
         path.setAttribute('stroke', '#2c3e50');
-        path.setAttribute('stroke-width', '5'); // Increased for better visibility with larger elements
+        path.setAttribute('stroke-width', this.currentConfig.arrowWidth);
         path.setAttribute('fill', 'none');
         path.setAttribute('marker-end', 'url(#arrowhead)');
         path.setAttribute('pointer-events', 'none');
@@ -728,8 +781,11 @@ class GridViewModel {
             const textX = midX;
             const textY = midY;
 
+            // Spacing based on shape size (add 20px gap between shapes)
+            const shapeSpacing = this.currentConfig.shapeSize + 20;
+
             connectionWords.forEach((word, index) => {
-                const offsetY = (index - (connectionWords.length - 1) / 2) * 110; // Increased spacing for larger 90px shapes
+                const offsetY = (index - (connectionWords.length - 1) / 2) * shapeSpacing;
 
                 // Draw word with shape
                 this.drawWordWithShape(group, word, textX, textY + offsetY, wordManager);
@@ -738,7 +794,7 @@ class GridViewModel {
     }
 
     drawIncomingArrow(group, firstBox, leadingWords, startX, wordManager) {
-        const boxWidth = 280; // Updated to match larger boxes
+        const boxWidth = this.currentConfig.boxWidth;
 
         // Arrow comes from the left edge
         const arrowStartX = startX - 100;
@@ -754,11 +810,11 @@ class GridViewModel {
         const controlY2 = arrowEndY + curveOffset;
         const pathD = `M ${arrowStartX} ${arrowStartY} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${arrowEndX} ${arrowEndY}`;
 
-        // Draw curved arrow path - thicker for better visibility
+        // Draw curved arrow path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', pathD);
         path.setAttribute('stroke', '#2c3e50');
-        path.setAttribute('stroke-width', '5'); // Increased for better visibility with larger elements
+        path.setAttribute('stroke-width', this.currentConfig.arrowWidth);
         path.setAttribute('fill', 'none');
         path.setAttribute('marker-end', 'url(#arrowhead)');
         path.setAttribute('pointer-events', 'none');
@@ -769,8 +825,11 @@ class GridViewModel {
             const midX = (arrowStartX + arrowEndX) / 2;
             const midY = (arrowStartY + arrowEndY) / 2 + curveOffset;
 
+            // Spacing based on shape size (add 20px gap between shapes)
+            const shapeSpacing = this.currentConfig.shapeSize + 20;
+
             leadingWords.forEach((word, index) => {
-                const offsetY = (index - (leadingWords.length - 1) / 2) * 110; // Increased spacing for larger 90px shapes
+                const offsetY = (index - (leadingWords.length - 1) / 2) * shapeSpacing;
 
                 // Draw word with shape
                 this.drawWordWithShape(group, word, midX, midY + offsetY, wordManager);
@@ -779,7 +838,7 @@ class GridViewModel {
     }
 
     drawOutgoingArrow(group, lastBox, trailingWords, startX, wordManager) {
-        const boxWidth = 280; // Updated to match larger boxes
+        const boxWidth = this.currentConfig.boxWidth;
 
         // Arrow goes to the right edge
         const arrowStartX = lastBox.centerX + boxWidth / 2;
@@ -795,11 +854,11 @@ class GridViewModel {
         const controlY2 = arrowEndY + curveOffset;
         const pathD = `M ${arrowStartX} ${arrowStartY} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${arrowEndX} ${arrowEndY}`;
 
-        // Draw curved arrow path - thicker for better visibility
+        // Draw curved arrow path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', pathD);
         path.setAttribute('stroke', '#2c3e50');
-        path.setAttribute('stroke-width', '5'); // Increased for better visibility with larger elements
+        path.setAttribute('stroke-width', this.currentConfig.arrowWidth);
         path.setAttribute('fill', 'none');
         path.setAttribute('marker-end', 'url(#arrowhead)');
         path.setAttribute('pointer-events', 'none');
@@ -810,8 +869,11 @@ class GridViewModel {
             const midX = (arrowStartX + arrowEndX) / 2;
             const midY = (arrowStartY + arrowEndY) / 2 + curveOffset;
 
+            // Spacing based on shape size (add 20px gap between shapes)
+            const shapeSpacing = this.currentConfig.shapeSize + 20;
+
             trailingWords.forEach((word, index) => {
-                const offsetY = (index - (trailingWords.length - 1) / 2) * 110; // Increased spacing for larger 90px shapes
+                const offsetY = (index - (trailingWords.length - 1) / 2) * shapeSpacing;
 
                 // Draw word with shape
                 this.drawWordWithShape(group, word, midX, midY + offsetY, wordManager);
@@ -822,10 +884,10 @@ class GridViewModel {
 
     /**
      * Draw a word with its shape (for connection words on arrows)
-     * Based on renderer.js createShape logic, but scaled larger for excellent mobile visibility
+     * Based on renderer.js createShape logic, with responsive sizing
      */
     drawWordWithShape(group, word, centerX, centerY, wordManager) {
-        const shapeSize = 90; // 80% larger than main view (50px) for maximum mobile visibility
+        const shapeSize = this.currentConfig.shapeSize;
         const scale = shapeSize / 50; // Scale factor from original 50px shapes
         const halfSize = shapeSize / 2;
 
@@ -907,20 +969,21 @@ class GridViewModel {
         // Apply styling to shape
         shape.setAttribute('fill', fillColor);
         shape.setAttribute('stroke', '#2c3e50');
-        shape.setAttribute('stroke-width', '4'); // Extra thick stroke for larger shape
+        shape.setAttribute('stroke-width', this.currentConfig.arrowWidth);
         shape.setAttribute('pointer-events', 'none');
         wordGroup.appendChild(shape);
 
         // Add text on top of shape
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', halfSize);
-        text.setAttribute('y', halfSize + 12); // Centered vertically in larger shape
+        const yOffset = this.isMobile ? 12 : 7; // Adjust y offset based on font size
+        text.setAttribute('y', halfSize + yOffset);
         text.setAttribute('text-anchor', 'middle');
         text.setAttribute('fill', '#2c3e50');
         text.setAttribute('stroke', 'white');
-        text.setAttribute('stroke-width', '8'); // Extra thick outline for maximum visibility
+        text.setAttribute('stroke-width', this.currentConfig.strokeWidth);
         text.setAttribute('paint-order', 'stroke');
-        text.setAttribute('font-size', '34px'); // Maximum font size for crystal-clear mobile reading
+        text.setAttribute('font-size', this.currentConfig.fontSize);
         text.setAttribute('font-weight', 'bold');
         text.setAttribute('pointer-events', 'none');
         text.textContent = word.text;
@@ -931,8 +994,8 @@ class GridViewModel {
 
     createCaseBox(caseType, centerX, centerY, fillColor = 'rgba(255, 255, 255, 0.9)') {
         let shape;
-        const boxWidth = 280; // Increased from 200 for larger text
-        const boxHeight = 65; // Increased from 40 for larger text
+        const boxWidth = this.currentConfig.boxWidth;
+        const boxHeight = this.currentConfig.boxHeight;
         const boxX = centerX - boxWidth / 2;
         const boxY = centerY - boxHeight / 2;
 
@@ -979,7 +1042,7 @@ class GridViewModel {
 
         shape.setAttribute('fill', fillColor);
         shape.setAttribute('stroke', '#2c3e50');
-        shape.setAttribute('stroke-width', '4'); // Increased to match larger elements
+        shape.setAttribute('stroke-width', this.currentConfig.boxStrokeWidth);
         shape.setAttribute('pointer-events', 'none');
 
         return shape;

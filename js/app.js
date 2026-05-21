@@ -29,6 +29,11 @@ class DeutschApp {
                 zoomLevel: 1.0,
                 panX: 0,
                 panY: 0
+            },
+            game: {
+                zoomLevel: 1.0,
+                panX: 0,
+                panY: 0
             }
         };
 
@@ -36,10 +41,11 @@ class DeutschApp {
         this.sentenceManager = new SentenceManager(this.wordManager);
         this.feldermodellRenderer = new FeldermodellRenderer(this.svg);
         this.gridViewModel = new GridViewModel(this.svg);
+        this.gameMode = new GameMode(this.svg, this.wordManager, this.gridViewModel);
         this.renderer = new Renderer(this.svg, this.wordManager);
         this.uiController = new UIController(this.wordManager, () => this.redrawAll(), this.gridConfig);
 
-        // View state: 'felder' or 'grid'
+        // View state: 'felder', 'grid', or 'game'
         this.currentView = 'felder';
     }
 
@@ -51,6 +57,7 @@ class DeutschApp {
         this.setupToolbarButtons();
         this.setupSentencePanel();
         this.setupViewToggle();
+        this.setupGameMode();
         this.setupResizeListener();
         this.setupZoomControls();
         this.loadSentences();
@@ -73,9 +80,59 @@ class DeutschApp {
 
         if (viewToggleBtn) {
             viewToggleBtn.addEventListener('click', () => {
-                // Toggle between views
+                // If in game mode, exit it first
+                if (this.currentView === 'game') {
+                    this.gameMode.stop();
+                }
+
+                // Toggle between felder and grid views
                 this.currentView = this.currentView === 'felder' ? 'grid' : 'felder';
                 this.redrawAll();
+            });
+        }
+    }
+
+    /**
+     * Setup game mode button
+     */
+    setupGameMode() {
+        const gameModeBtn = document.getElementById('game-mode-btn');
+
+        if (gameModeBtn) {
+            gameModeBtn.addEventListener('click', () => {
+                if (this.currentView === 'game') {
+                    // Exit game mode
+                    this.currentView = 'grid';
+                    this.gameMode.stop();
+                    gameModeBtn.textContent = '🎮';
+                    gameModeBtn.title = 'Start Game Mode';
+                    this.redrawAll();
+                } else {
+                    // Check if there's a current sentence with words
+                    if (!this.sentenceManager.currentSentenceId) {
+                        alert('Please add or select a sentence first before starting the game!');
+                        return;
+                    }
+
+                    const words = this.wordManager.getAllWords();
+                    if (words.length === 0) {
+                        alert('The current sentence has no words. Please add a sentence with words first!');
+                        return;
+                    }
+
+                    // Switch to game view
+                    this.currentView = 'game';
+
+                    // Start game mode
+                    this.gameMode.start();
+
+                    // Change button to exit
+                    gameModeBtn.textContent = '✕';
+                    gameModeBtn.title = 'Exit Game Mode';
+
+                    // Redraw in game view
+                    this.redrawAll();
+                }
             });
         }
     }
@@ -659,8 +716,8 @@ class DeutschApp {
         const containerWidth = container ? container.clientWidth : (isMobile ? 400 : 1200);
         const containerHeight = container ? container.clientHeight : (isMobile ? 500 : 800);
 
-        // Grid view has fixed dimensions
-        if (this.currentView === 'grid') {
+        // Grid view and Game view have fixed dimensions
+        if (this.currentView === 'grid' || this.currentView === 'game') {
             return {
                 width: Math.max(containerWidth, 850),
                 height: Math.max(containerHeight, 640),
@@ -736,8 +793,8 @@ class DeutschApp {
         const currentState = this.getCurrentViewState();
 
         // Both Grid and Felder views now support zoom and pan
-        if (this.currentView === 'grid') {
-            // Grid view: Fixed content size (1250 x 950) with zoom and pan
+        if (this.currentView === 'grid' || this.currentView === 'game') {
+            // Grid/Game view: Fixed content size (1250 x 950) with zoom and pan
             const gridWidth = 1250;
             const gridHeight = 950;
 
@@ -804,6 +861,9 @@ class DeutschApp {
         } else if (this.currentView === 'grid') {
             // Draw Grid view
             this.gridViewModel.draw(this.wordManager);
+        } else if (this.currentView === 'game') {
+            // Draw Game view
+            this.gameMode.draw();
         }
 
         // Auto-save current sentence after redrawing
