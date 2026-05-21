@@ -693,13 +693,18 @@ class GameMode {
         const isMobile = window.innerWidth <= 768;
         const controllerSize = isMobile ? 120 : 100;
 
+        // Calculate controller Y position based on SVG height
+        // Get the SVG viewBox or use default
+        const svgHeight = this.svg.viewBox.baseVal.height || 950;
+        const controllerY = svgHeight - controllerSize - 20; // 20px padding from bottom
+
         // Right controller (subject/verb)
         this.rightController = this.drawController(controllersGroup, {
             type: 'right',
             caseType: 'nom',
             shape: 'circle',
             x: 1100,
-            y: 800,
+            y: controllerY,
             size: controllerSize,
             color: 'rgba(255, 255, 255, 0.7)'
         });
@@ -720,7 +725,7 @@ class GameMode {
                 shape: config.shape,
                 label: config.label,
                 x: 100 + (index * spacing),
-                y: 800,
+                y: controllerY,
                 size: controllerSize,
                 color: config.color
             });
@@ -778,29 +783,10 @@ class GameMode {
         shape.setAttribute('filter', 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))');
         controllerGroup.appendChild(shape);
 
-        // Add case label
-        const labelText = config.label || config.caseType.toUpperCase();
-        const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        label.setAttribute('x', center);
-        label.setAttribute('y', center + 6);
-        label.setAttribute('text-anchor', 'middle');
-        label.setAttribute('fill', 'white');
-        label.setAttribute('font-size', '18');
-        label.setAttribute('font-weight', 'bold');
-        label.textContent = labelText;
-        controllerGroup.appendChild(label);
-
-        // Arrow indicator (hidden by default)
-        const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        arrow.setAttribute('class', 'controller-arrow');
-        arrow.setAttribute('x', center);
-        arrow.setAttribute('y', center + 8);
-        arrow.setAttribute('text-anchor', 'middle');
-        arrow.setAttribute('font-size', '40');
-        arrow.setAttribute('opacity', '0');
-        arrow.setAttribute('pointer-events', 'none');
-        arrow.textContent = '→';
-        controllerGroup.appendChild(arrow);
+        // Prevent text selection
+        controllerGroup.style.userSelect = 'none';
+        controllerGroup.style.webkitUserSelect = 'none';
+        controllerGroup.style.msUserSelect = 'none';
 
         // Touch event handlers
         this.setupControllerEvents(controllerGroup, config);
@@ -810,8 +796,7 @@ class GameMode {
         return {
             element: controllerGroup,
             config: config,
-            shape: shape,
-            arrow: arrow
+            shape: shape
         };
     }
 
