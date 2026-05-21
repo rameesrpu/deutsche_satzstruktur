@@ -581,31 +581,35 @@ class GameMode {
         overlayGroup.setAttribute('class', 'game-ui-overlay');
         this.gameGroup.appendChild(overlayGroup);
 
-        // Score display (top-right) - show both total and current sentence score
+        // Position word bar just above the grid
+        const barHeight = 60;
+        const gridStartY = this.getGridStartY();
+        const topY = Math.max(10, gridStartY - barHeight - 10); // 10px gap above grid, minimum Y=10
+
+        // Score display (aligned with word bar on the right)
         const scoreText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        scoreText.setAttribute('x', 1100);
-        scoreText.setAttribute('y', 30);
+        const gridStartX = 50;
+        const cellWidth = this.gridViewModel.cellWidth;
+        const gridEndX = gridStartX + (3 * cellWidth);
+        scoreText.setAttribute('x', gridEndX - 10);
+        scoreText.setAttribute('y', topY + barHeight / 2 - 8);
         scoreText.setAttribute('text-anchor', 'end');
         scoreText.setAttribute('fill', '#2c3e50');
-        scoreText.setAttribute('font-size', '24');
+        scoreText.setAttribute('font-size', '20');
         scoreText.setAttribute('font-weight', 'bold');
-        scoreText.textContent = `Total: ${this.totalScore}/${this.targetScore}`;
+        scoreText.textContent = `${this.totalScore}/${this.targetScore}`;
         overlayGroup.appendChild(scoreText);
 
-        // Current sentence score
+        // Current sentence score (below total score)
         const sentenceScoreText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        sentenceScoreText.setAttribute('x', 1100);
-        sentenceScoreText.setAttribute('y', 55);
+        sentenceScoreText.setAttribute('x', gridEndX - 10);
+        sentenceScoreText.setAttribute('y', topY + barHeight / 2 + 12);
         sentenceScoreText.setAttribute('text-anchor', 'end');
         sentenceScoreText.setAttribute('fill', '#7f8c8d');
-        sentenceScoreText.setAttribute('font-size', '18');
+        sentenceScoreText.setAttribute('font-size', '14');
         sentenceScoreText.setAttribute('font-weight', 'normal');
-        sentenceScoreText.textContent = `Sentence: +${this.currentSentenceScore}`;
+        sentenceScoreText.textContent = `+${this.currentSentenceScore}`;
         overlayGroup.appendChild(sentenceScoreText);
-
-        // Top bar for words
-        const topY = 10;
-        const barHeight = 60;
 
         // Calculate current word box position first
         let currentWordBoxLeft = 625; // Default center if no current word
@@ -749,7 +753,7 @@ class GameMode {
             }
 
             if (nextWordText) {
-                const nextWordWidth = Math.max(nextWordText.length * 15 + 30, 150);
+                const nextWordWidth = Math.max(nextWordText.length * 20 + 40, 150);
                 const nextWordX = currentWordBoxLeft + wordWidth + 15; // 15px gap
 
                 // Background for next word (grey)
@@ -764,13 +768,13 @@ class GameMode {
                 nextBgRect.setAttribute('rx', '10');
                 overlayGroup.appendChild(nextBgRect);
 
-                // Next word text
+                // Next word text (same font size as current word)
                 const nextText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 nextText.setAttribute('x', nextWordX + nextWordWidth / 2);
-                nextText.setAttribute('y', topY + barHeight / 2 + 8);
+                nextText.setAttribute('y', topY + barHeight / 2 + 10);
                 nextText.setAttribute('text-anchor', 'middle');
                 nextText.setAttribute('fill', '#fff');
-                nextText.setAttribute('font-size', '20');
+                nextText.setAttribute('font-size', '32');
                 nextText.setAttribute('font-weight', 'normal');
                 nextText.textContent = nextWordText;
                 overlayGroup.appendChild(nextText);
@@ -828,15 +832,15 @@ class GameMode {
             x: rightX,
             y: controllerY,
             size: controllerSize,
-            color: 'rgba(255, 255, 255, 0.7)'
+            color: 'rgba(96, 125, 139, 0.9)' // Elegant blue-grey
         });
 
         // Left controllers (objects - nom/acc/dat)
         this.leftControllers = [];
         const leftControllerConfigs = [
-            { caseType: 'nom', shape: 'circle', color: 'rgba(255, 255, 255, 0.7)', label: 'NOM' },
-            { caseType: 'akk', shape: 'square', color: 'rgba(255, 255, 255, 0.7)', label: 'AKK' },
-            { caseType: 'dat', shape: 'trapezoid', color: 'rgba(255, 255, 255, 0.7)', label: 'DAT' }
+            { caseType: 'nom', shape: 'circle', color: 'rgba(96, 125, 139, 0.9)', label: 'NOM' },
+            { caseType: 'akk', shape: 'square', color: 'rgba(96, 125, 139, 0.9)', label: 'AKK' },
+            { caseType: 'dat', shape: 'trapezoid', color: 'rgba(96, 125, 139, 0.9)', label: 'DAT' }
         ];
 
         const spacing = isMobile ? controllerSize + 10 : controllerSize + 20;
@@ -854,15 +858,8 @@ class GameMode {
             this.leftControllers.push(controller);
         });
 
-        // Update controller states based on current item
-        if (this.currentBoxIndex < this.gameSequence.length) {
-            const currentItem = this.gameSequence[this.currentBoxIndex];
-            if (currentItem.type === 'box') {
-                this.updateControllerStates(currentItem.item.mainWord);
-            } else {
-                this.updateControllerStates(currentItem.item);
-            }
-        }
+        // Update controller states
+        this.updateControllerStates();
 
         this.controllersGroup = controllersGroup;
     }
@@ -1218,24 +1215,17 @@ class GameMode {
     /**
      * Update controller enabled/disabled states
      */
-    updateControllerStates(word) {
-        const isObject = word.type.includes('object');
-
+    updateControllerStates() {
         // Hide right controller - subjects are placed by tapping grid directly
         if (this.rightController) {
             this.rightController.element.setAttribute('opacity', '0');
             this.rightController.element.style.pointerEvents = 'none';
         }
 
-        // Left controllers (case selectors): only enabled for objects
+        // Left controllers (case selectors): always enabled
         this.leftControllers.forEach(controller => {
-            if (isObject) {
-                controller.element.setAttribute('opacity', '1');
-                controller.element.style.pointerEvents = 'all';
-            } else {
-                controller.element.setAttribute('opacity', '0.3');
-                controller.element.style.pointerEvents = 'none';
-            }
+            controller.element.setAttribute('opacity', '1');
+            controller.element.style.pointerEvents = 'all';
         });
     }
 
