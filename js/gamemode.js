@@ -41,11 +41,8 @@ class GameMode {
         // Auto-placed words display
         this.currentAutoPlacedText = null;
 
-        // Controller state
-        this.activeController = null;
-        this.isDragging = false;
-        this.dragStartPos = { x: 0, y: 0 };
-        this.currentDirection = 'center';
+        // Controller state (tap-based)
+        this.selectedCase = null; // 'nom', 'akk', or 'dat' - selected when user taps case button
 
         // Grid positions (from gridview)
         this.positions = {
@@ -172,16 +169,13 @@ class GameMode {
         // Draw empty grid
         this.drawEmptyGrid();
 
-        // Draw cell highlight (if any)
-        this.drawCellHighlight();
-
         // Draw revealed boxes/words (using pre-calculated gridview positions)
         this.drawPlacedItems();
 
         // Draw tick/cross feedback animation (if active)
         this.drawFeedbackAnimation();
 
-        // Draw controllers
+        // Draw controllers (now positioned below grid)
         this.drawControllers();
 
         // Draw UI overlays (score, current word, etc.)
@@ -497,6 +491,29 @@ class GameMode {
                 label.textContent = cell.label;
                 gridGroup.appendChild(label);
             }
+
+            // Add clickable overlay for cell interaction
+            const clickArea = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            clickArea.setAttribute('x', x);
+            clickArea.setAttribute('y', y);
+            clickArea.setAttribute('width', cellWidth);
+            clickArea.setAttribute('height', cellHeight);
+            clickArea.setAttribute('fill', 'transparent');
+            clickArea.setAttribute('cursor', 'pointer');
+            clickArea.setAttribute('data-row', cell.row);
+            clickArea.setAttribute('data-col', cell.col);
+
+            // Add click/tap handler
+            const handleCellClick = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.handleCellTap(cell.row, cell.col);
+            };
+
+            clickArea.addEventListener('click', handleCellClick);
+            clickArea.addEventListener('touchend', handleCellClick);
+
+            gridGroup.appendChild(clickArea);
         });
 
         this.gridGroup = gridGroup;
@@ -602,8 +619,8 @@ class GameMode {
 
         // Draw accumulated auto-placed words to the left of current word
         if (this.accumulatedAutoWords.length > 0) {
-            // Calculate total width of all auto words
-            const autoWordWidths = this.accumulatedAutoWords.map(word => word.length * 15 + 30);
+            // Calculate total width of all auto words (using same font size as current word)
+            const autoWordWidths = this.accumulatedAutoWords.map(word => word.length * 20 + 40);
             const totalAutoWidth = autoWordWidths.reduce((sum, w) => sum + w + 10, 0) - 10; // -10 to remove last gap
 
             // Start position: just to the left of current word box
@@ -623,13 +640,13 @@ class GameMode {
                 bgRect.setAttribute('rx', '10');
                 overlayGroup.appendChild(bgRect);
 
-                // Auto word text
+                // Auto word text (same font size as current word)
                 const autoText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 autoText.setAttribute('x', currentX + wordWidth / 2);
-                autoText.setAttribute('y', topY + barHeight / 2 + 8);
+                autoText.setAttribute('y', topY + barHeight / 2 + 10);
                 autoText.setAttribute('text-anchor', 'middle');
                 autoText.setAttribute('fill', '#fff');
-                autoText.setAttribute('font-size', '24');
+                autoText.setAttribute('font-size', '32');
                 autoText.setAttribute('font-weight', 'normal');
                 autoText.textContent = word;
                 overlayGroup.appendChild(autoText);
@@ -645,18 +662,57 @@ class GameMode {
 
             // Center the current word box
             const centerX = currentWordBoxLeft;
+            const centerWordX = 625; // Center of the word area
 
-            // Background box for current word
-            const bgRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            bgRect.setAttribute('x', centerX);
-            bgRect.setAttribute('y', topY);
-            bgRect.setAttribute('width', wordWidth);
-            bgRect.setAttribute('height', barHeight);
-            bgRect.setAttribute('fill', 'rgba(44, 62, 80, 0.9)'); // Dark for current word
-            bgRect.setAttribute('stroke', '#2c3e50');
-            bgRect.setAttribute('stroke-width', '3');
-            bgRect.setAttribute('rx', '10');
-            overlayGroup.appendChild(bgRect);
+            // Create background shape based on selected case
+            let bgShape;
+            const activeItem = this.gameSequence[this.currentBoxIndex];
+            const itemToCheck = activeItem.type === 'box' ? activeItem.item.mainWord : activeItem.item;
+            const isObject = itemToCheck.type.includes('object');
+
+            // Only show shape variation if this is an object and a case is selected
+            if (isObject && this.selectedCase) {
+                if (this.selectedCase === 'nom') {
+                    // Circle/ellipse for nominative
+                    bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+                    bgShape.setAttribute('cx', centerWordX);
+                    bgShape.setAttribute('cy', topY + barHeight / 2);
+                    bgShape.setAttribute('rx', wordWidth / 2);
+                    bgShape.setAttribute('ry', barHeight / 2);
+                } else if (this.selectedCase === 'akk') {
+                    // Square for accusative
+                    const squareSize = Math.max(wordWidth, barHeight);
+                    bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    bgShape.setAttribute('x', centerWordX - squareSize / 2);
+                    bgShape.setAttribute('y', topY + (barHeight - squareSize) / 2);
+                    bgShape.setAttribute('width', squareSize);
+                    bgShape.setAttribute('height', squareSize);
+                    bgShape.setAttribute('rx', '8');
+                } else if (this.selectedCase === 'dat') {
+                    // Trapezoid for dative
+                    bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                    const slope = wordWidth * 0.15;
+                    const left = centerX;
+                    const right = centerX + wordWidth;
+                    const top = topY;
+                    const bottom = topY + barHeight;
+                    const points = `${left + slope},${top} ${right - slope},${top} ${right},${bottom} ${left},${bottom}`;
+                    bgShape.setAttribute('points', points);
+                }
+            } else {
+                // Default rounded rectangle (for subjects or when no case selected)
+                bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                bgShape.setAttribute('x', centerX);
+                bgShape.setAttribute('y', topY);
+                bgShape.setAttribute('width', wordWidth);
+                bgShape.setAttribute('height', barHeight);
+                bgShape.setAttribute('rx', '10');
+            }
+
+            bgShape.setAttribute('fill', 'rgba(44, 62, 80, 0.9)'); // Dark for current word
+            bgShape.setAttribute('stroke', '#2c3e50');
+            bgShape.setAttribute('stroke-width', '3');
+            overlayGroup.appendChild(bgShape);
 
             // Current word text
             const wordText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -746,23 +802,23 @@ class GameMode {
         const isMobile = window.innerWidth <= 768;
         const controllerSize = isMobile ? 120 : 100;
 
-        // Calculate controller Y position based on SVG height
-        const svgHeight = this.svg.viewBox.baseVal.height || 950;
-        const svgWidth = this.svg.viewBox.baseVal.width || 1250;
-        const controllerY = svgHeight - controllerSize - 20; // 20px padding from bottom
+        // Calculate controller Y position based on grid end (not canvas/viewBox height)
+        // This ensures controllers are always below the grid regardless of zoom/pan
+        const gridStartY = this.getGridStartY();
+        const cellHeight = this.gridViewModel.cellHeight;
+        const gridEndY = gridStartY + (3 * cellHeight); // 3 rows
+        const controllerY = gridEndY + 30; // 30px padding below grid
 
-        // Adjust horizontal positions for mobile
-        let leftStartX, rightX;
-        if (isMobile) {
-            // Mobile: bring controllers closer together
-            const viewportWidth = Math.min(svgWidth, window.innerWidth);
-            leftStartX = 20; // Small padding from left edge
-            rightX = viewportWidth - controllerSize - 20; // Small padding from right edge
-        } else {
-            // Desktop: use wider spacing
-            leftStartX = 100;
-            rightX = 1100;
-        }
+        // Position controllers within the grid's horizontal bounds
+        const gridStartX = 50;
+        const cellWidth = this.gridViewModel.cellWidth;
+        const gridEndX = gridStartX + (3 * cellWidth); // 3 columns
+
+        // Left controllers start near the left edge of the grid
+        const leftStartX = gridStartX + 10; // 10px padding from grid edge
+
+        // Right controller ends near the right edge of the grid
+        const rightX = gridEndX - controllerSize - 10; // 10px padding from grid edge
 
         // Right controller (subject/verb)
         this.rightController = this.drawController(controllersGroup, {
@@ -812,6 +868,38 @@ class GameMode {
     }
 
     /**
+     * Create a case shape indicator (circle for nom, square for akk, trapezoid for dat)
+     */
+    createCaseShape(caseType, x, y, size) {
+        let shape;
+
+        if (caseType === 'nom') {
+            // Circle for nominative
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            shape.setAttribute('cx', x);
+            shape.setAttribute('cy', y);
+            shape.setAttribute('r', size / 2);
+        } else if (caseType === 'akk') {
+            // Square for accusative
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            shape.setAttribute('x', x - size / 2);
+            shape.setAttribute('y', y - size / 2);
+            shape.setAttribute('width', size);
+            shape.setAttribute('height', size);
+            shape.setAttribute('rx', 4);
+        } else if (caseType === 'dat') {
+            // Trapezoid for dative
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            const slope = size * 0.15;
+            const half = size / 2;
+            const points = `${x - half + slope},${y - half} ${x + half - slope},${y - half} ${x + half},${y + half} ${x - half},${y + half}`;
+            shape.setAttribute('points', points);
+        }
+
+        return shape;
+    }
+
+    /**
      * Draw a single controller as SVG
      */
     drawController(group, config) {
@@ -843,9 +931,11 @@ class GameMode {
             shape.setAttribute('points', points);
         }
 
-        shape.setAttribute('fill', config.color);
-        shape.setAttribute('stroke', 'white');
-        shape.setAttribute('stroke-width', '4');
+        // Highlight selected controller
+        const isSelected = this.selectedCase === config.caseType;
+        shape.setAttribute('fill', isSelected ? 'rgba(255, 215, 0, 0.9)' : config.color); // Gold when selected
+        shape.setAttribute('stroke', isSelected ? '#FFD700' : 'white');
+        shape.setAttribute('stroke-width', isSelected ? '6' : '4');
         shape.setAttribute('filter', 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))');
         controllerGroup.appendChild(shape);
 
@@ -867,238 +957,37 @@ class GameMode {
     }
 
     /**
-     * Setup touch/mouse events for controller (SVG elements)
+     * Setup tap/click events for controller (case selector buttons)
      */
     setupControllerEvents(element, config) {
-        const svg = this.svg;
-        let isActive = false;
-
-        const getSVGPoint = (clientX, clientY) => {
-            const pt = svg.createSVGPoint();
-            pt.x = clientX;
-            pt.y = clientY;
-            return pt.matrixTransform(svg.getScreenCTM().inverse());
-        };
-
-        const handleStart = (e) => {
+        const handleTap = (e) => {
             e.preventDefault();
             e.stopPropagation();
 
-            const touch = e.touches ? e.touches[0] : e;
-            const pt = getSVGPoint(touch.clientX, touch.clientY);
-
-            isActive = true;
-            this.activeController = element;
-            this.activeControllerConfig = config;
-            this.isDragging = false;
-            this.dragStartPos = { x: pt.x, y: pt.y };
-            this.currentDirection = 'center';
-
-            // Highlight center cell by default
-            this.highlightCell('center');
-
-            // Redraw to show highlight
-            if (window.app) {
-                window.app.redrawAll();
-            }
-        };
-
-        const handleMove = (e) => {
-            if (!isActive) return;
-            e.preventDefault();
-            e.stopPropagation();
-
-            const touch = e.touches ? e.touches[0] : e;
-            const pt = getSVGPoint(touch.clientX, touch.clientY);
-
-            const deltaX = pt.x - this.dragStartPos.x;
-            const deltaY = pt.y - this.dragStartPos.y;
-            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-            // Check if drag threshold exceeded
-            if (distance > 30) {
-                this.isDragging = true;
-
-                // Calculate angle in degrees (0 = right, 90 = up)
-                const angle = Math.atan2(-deltaY, deltaX) * (180 / Math.PI);
-                const normalizedAngle = (angle + 360) % 360;
-
-                // Map angle to direction
-                const direction = this.getDirectionFromAngle(normalizedAngle);
-
-                if (direction !== this.currentDirection) {
-                    this.currentDirection = direction;
-                    this.highlightCell(direction);
-                    this.updateControllerArrow(element, direction);
-
-                    // Redraw to show updates
-                    if (window.app) {
-                        window.app.redrawAll();
-                    }
-                }
+            // Toggle case selection
+            if (this.selectedCase === config.caseType) {
+                // Deselect if already selected
+                this.selectedCase = null;
             } else {
-                // Still in center
-                if (this.currentDirection !== 'center') {
-                    this.currentDirection = 'center';
-                    this.highlightCell('center');
-                    this.updateControllerArrow(element, 'center');
-
-                    // Redraw to show updates
-                    if (window.app) {
-                        window.app.redrawAll();
-                    }
-                }
+                // Select this case
+                this.selectedCase = config.caseType;
             }
-        };
 
-        const handleEnd = (e) => {
-            if (!isActive) return;
-            e.preventDefault();
-            e.stopPropagation();
-
-            // Place word in highlighted cell
-            this.placeWord(this.currentDirection, config.caseType);
-
-            // Reset
-            isActive = false;
-            this.activeController = null;
-            this.activeControllerConfig = null;
-            this.isDragging = false;
-            this.currentDirection = 'center';
-            this.clearHighlight();
-            this.updateControllerArrow(element, null);
-
-            // Redraw to show placed item
+            // Redraw to show selection state
             if (window.app) {
                 window.app.redrawAll();
             }
         };
 
-        // SVG events
-        element.addEventListener('touchstart', handleStart, { passive: false });
-        element.addEventListener('mousedown', handleStart);
-
-        // Use document for move/end to handle dragging outside element
-        svg.addEventListener('touchmove', (e) => {
-            if (isActive && this.activeController === element) {
-                handleMove(e);
-            }
-        }, { passive: false });
-        svg.addEventListener('mousemove', (e) => {
-            if (isActive && this.activeController === element) {
-                handleMove(e);
-            }
-        });
-
-        svg.addEventListener('touchend', (e) => {
-            if (isActive && this.activeController === element) {
-                handleEnd(e);
-            }
-        }, { passive: false });
-        svg.addEventListener('mouseup', (e) => {
-            if (isActive && this.activeController === element) {
-                handleEnd(e);
-            }
-        });
+        // Add tap/click handlers
+        element.addEventListener('click', handleTap);
+        element.addEventListener('touchend', handleTap);
     }
 
     /**
-     * Get direction from angle (in degrees)
+     * Handle cell tap/click
      */
-    getDirectionFromAngle(angle) {
-        // 8 directions + center
-        // East: 337.5-22.5, NE: 22.5-67.5, North: 67.5-112.5, etc.
-        if (angle >= 337.5 || angle < 22.5) return 'east';
-        if (angle >= 22.5 && angle < 67.5) return 'northeast';
-        if (angle >= 67.5 && angle < 112.5) return 'north';
-        if (angle >= 112.5 && angle < 157.5) return 'northwest';
-        if (angle >= 157.5 && angle < 202.5) return 'west';
-        if (angle >= 202.5 && angle < 247.5) return 'southwest';
-        if (angle >= 247.5 && angle < 292.5) return 'south';
-        if (angle >= 292.5 && angle < 337.5) return 'southeast';
-        return 'center';
-    }
-
-    /**
-     * Update controller arrow indicator
-     */
-    updateControllerArrow(element, direction) {
-        const arrow = element.querySelector('.controller-arrow');
-        if (!arrow) return;
-
-        if (!direction || direction === 'center') {
-            arrow.setAttribute('opacity', '0');
-            return;
-        }
-
-        const directionData = this.directionMap[direction];
-        if (!directionData || directionData.angle === null) {
-            arrow.setAttribute('opacity', '0');
-            return;
-        }
-
-        arrow.setAttribute('opacity', '1');
-        const transform = `rotate(${-directionData.angle})`;
-        arrow.setAttribute('transform', transform);
-    }
-
-    /**
-     * Highlight target cell in grid
-     */
-    highlightCell(direction) {
-        // Store the highlighted cell direction for drawing
-        this.highlightedCell = direction;
-    }
-
-    /**
-     * Clear cell highlight
-     */
-    clearHighlight() {
-        this.highlightedCell = null;
-    }
-
-    /**
-     * Draw cell highlight if one is active
-     */
-    drawCellHighlight() {
-        if (!this.highlightedCell) return;
-
-        const directionData = this.directionMap[this.highlightedCell];
-        if (!directionData) return;
-
-        const { row, col } = directionData;
-        const cellWidth = this.gridViewModel.cellWidth;
-        const cellHeight = this.gridViewModel.cellHeight;
-        const startX = 50;
-        const startY = this.getGridStartY();
-
-        const x = startX + (col - 1) * cellWidth;
-        const y = startY + (row - 1) * cellHeight;
-
-        // Draw highlight in grid group
-        const highlight = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        highlight.setAttribute('class', 'cell-highlight');
-        highlight.setAttribute('x', x);
-        highlight.setAttribute('y', y);
-        highlight.setAttribute('width', cellWidth);
-        highlight.setAttribute('height', cellHeight);
-        highlight.setAttribute('fill', 'rgba(255, 255, 0, 0.3)');
-        highlight.setAttribute('stroke', 'yellow');
-        highlight.setAttribute('stroke-width', '4');
-        highlight.setAttribute('pointer-events', 'none');
-
-        // Insert at beginning of grid group so it's behind everything
-        if (this.gridGroup && this.gridGroup.firstChild) {
-            this.gridGroup.insertBefore(highlight, this.gridGroup.firstChild);
-        } else if (this.gridGroup) {
-            this.gridGroup.appendChild(highlight);
-        }
-    }
-
-    /**
-     * Place current item in selected cell
-     */
-    placeWord(direction, caseType) {
+    handleCellTap(row, col) {
         if (this.currentBoxIndex >= this.gameSequence.length) {
             console.log('Game complete!');
             return;
@@ -1107,17 +996,54 @@ class GameMode {
         const currentItem = this.gameSequence[this.currentBoxIndex];
         const itemToValidate = currentItem.type === 'box' ? currentItem.item.mainWord : currentItem.item;
 
-        console.log(`Placing ${currentItem.type}: ${this.getItemText(currentItem)} in direction: ${direction}, case: ${caseType}`);
+        // Determine case type
+        let caseType;
+        if (itemToValidate.type === 'subject') {
+            // Subjects always use nominative
+            caseType = 'nom';
+        } else {
+            // Objects use selected case (if none selected, invalid)
+            if (!this.selectedCase) {
+                console.log('Please select a case first (NOM/AKK/DAT)');
+                return;
+            }
+            caseType = this.selectedCase;
+        }
+
+        // Place the word at this cell
+        this.placeWord(row, col, caseType);
+
+        // Reset selected case after placement
+        this.selectedCase = null;
+
+        // Redraw to clear case selection highlight
+        if (window.app) {
+            window.app.redrawAll();
+        }
+    }
+
+    /**
+     * Place current item in selected cell
+     */
+    placeWord(row, col, caseType) {
+        if (this.currentBoxIndex >= this.gameSequence.length) {
+            console.log('Game complete!');
+            return;
+        }
+
+        const currentItem = this.gameSequence[this.currentBoxIndex];
+        const itemToValidate = currentItem.type === 'box' ? currentItem.item.mainWord : currentItem.item;
+
+        console.log(`Placing ${currentItem.type}: ${this.getItemText(currentItem)} at row ${row}, col ${col}, case: ${caseType}`);
 
         // Validate placement
-        const isCorrect = this.validatePlacement(itemToValidate, direction, caseType);
+        const isCorrect = this.validatePlacement(itemToValidate, row, col, caseType);
 
         // Get the cell position for feedback display
-        const directionData = this.directionMap[direction];
         const startX = 50;
         const startY = this.getGridStartY();
-        const cellX = startX + (directionData.col - 1) * this.gridViewModel.cellWidth;
-        const cellY = startY + (directionData.row - 1) * this.gridViewModel.cellHeight;
+        const cellX = startX + (col - 1) * this.gridViewModel.cellWidth;
+        const cellY = startY + (row - 1) * this.gridViewModel.cellHeight;
         const feedbackX = cellX + this.gridViewModel.cellWidth / 2;
         const feedbackY = cellY + this.gridViewModel.cellHeight / 2;
 
@@ -1274,16 +1200,14 @@ class GameMode {
     /**
      * Validate word placement
      */
-    validatePlacement(word, direction, caseType) {
+    validatePlacement(word, row, col, caseType) {
         // Get expected position based on word properties
         const expectedPosition = this.gridViewModel.getWordPosition(word);
-        const directionData = this.directionMap[direction];
 
-        if (!expectedPosition || !directionData) return false;
+        if (!expectedPosition) return false;
 
         // Check if row/col match
-        const positionMatch = expectedPosition.row === directionData.row &&
-                              expectedPosition.col === directionData.col;
+        const positionMatch = expectedPosition.row === row && expectedPosition.col === col;
 
         // Check if case matches (for objects)
         const caseMatch = !word.case || word.case === caseType;
@@ -1295,22 +1219,15 @@ class GameMode {
      * Update controller enabled/disabled states
      */
     updateControllerStates(word) {
-        const isSubject = word.type === 'subject';
-        const isVerb = word.type === 'verb' || word.type === 'modal';
         const isObject = word.type.includes('object');
 
-        // Right controller: enabled for subjects and verbs
+        // Hide right controller - subjects are placed by tapping grid directly
         if (this.rightController) {
-            if (isSubject || isVerb) {
-                this.rightController.element.setAttribute('opacity', '1');
-                this.rightController.element.style.pointerEvents = 'all';
-            } else {
-                this.rightController.element.setAttribute('opacity', '0.3');
-                this.rightController.element.style.pointerEvents = 'none';
-            }
+            this.rightController.element.setAttribute('opacity', '0');
+            this.rightController.element.style.pointerEvents = 'none';
         }
 
-        // Left controllers: enabled for objects
+        // Left controllers (case selectors): only enabled for objects
         this.leftControllers.forEach(controller => {
             if (isObject) {
                 controller.element.setAttribute('opacity', '1');
