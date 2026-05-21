@@ -74,6 +74,14 @@ class GameMode {
     }
 
     /**
+     * Get grid starting Y position
+     */
+    getGridStartY() {
+        const isMobile = window.innerWidth <= 768;
+        return isMobile ? 160 : 50;
+    }
+
+    /**
      * Start the game mode
      */
     start() {
@@ -205,7 +213,7 @@ class GameMode {
     preCalculateGridView() {
         const { boxes, connections, leadingWords, trailingWords } = this.parsedSentence;
         const startX = 50;
-        const startY = 50;
+        const startY = this.getGridStartY();
 
         // First pass: Count how many boxes go in each cell (same as gridview)
         const cellOccupancy = {};
@@ -270,8 +278,8 @@ class GameMode {
 
     /**
      * Build game sequence from parsed sentence
-     * According to spec: word-by-word in original sentence order
-     * But boxes are single units, and some words auto-place
+     * IMPORTANT: Preserves original sentence word order
+     * Boxes are single units, and some words auto-place
      */
     buildGameSequence() {
         const { boxes, connections, leadingWords, trailingWords } = this.parsedSentence;
@@ -279,63 +287,106 @@ class GameMode {
         this.gameSequence = [];
         this.autoPlacedConnections = []; // Track auto-placed words per box
 
-        // Add leading words (if any) - these require manual placement
-        if (leadingWords && leadingWords.length > 0) {
-            leadingWords.forEach(word => {
-                if (this.isManualWord(word)) {
-                    this.gameSequence.push({
-                        type: 'word',
-                        item: word,
-                        isLeading: true
-                    });
-                }
-            });
-        }
+        // Create maps to track which words belong to which box
+        const wordToBoxIndex = new Map(); // Maps word object to box index
+        const boxProcessed = new Set(); // Track which boxes we've already added
 
-        // Interleave boxes and connections
-        boxes.forEach((box, index) => {
-            // Add the box (noun phrase)
-            this.gameSequence.push({
-                type: 'box',
-                item: box,
-                boxIndex: index
+        // Map all words in boxes to their box index
+        boxes.forEach((box, boxIndex) => {
+            box.words.forEach(word => {
+                wordToBoxIndex.set(word, boxIndex);
             });
-
-            // Track connection words for this box
-            const autoWords = [];
-            if (connections[index] && connections[index].length > 0) {
-                connections[index].forEach(word => {
-                    // Check if word requires manual placement
-                    if (this.isManualWord(word)) {
-                        this.gameSequence.push({
-                            type: 'word',
-                            item: word,
-                            isConnection: true,
-                            afterBoxIndex: index
-                        });
-                    } else {
-                        // Track auto-placed words
-                        autoWords.push(word);
-                    }
-                });
-            }
-            this.autoPlacedConnections[index] = autoWords;
         });
 
-        // Add trailing words (if any) - these require manual placement
-        if (trailingWords && trailingWords.length > 0) {
-            trailingWords.forEach(word => {
-                if (this.isManualWord(word)) {
+        // Create a map of word to its role (leading/connection/trailing)
+        const wordRoles = new Map();
+        leadingWords.forEach(word => wordRoles.set(word, 'leading'));
+        trailingWords.forEach(word => wordRoles.set(word, 'trailing'));
+        connections.forEach((connWords, boxIndex) => {
+            connWords.forEach(word => wordRoles.set(word, `connection-${boxIndex}`));
+        });
+
+        // Track auto-placed words for each position in sequence
+        let currentAutoWords = [];
+
+        // Iterate through words in original sentence order
+        for (let i = 0; i < this.words.length; i++) {
+            const word = this.words[i];
+
+            // Check if this word is the first word of a box
+            if (wordToBoxIndex.has(word)) {
+                const boxIndex = wordToBoxIndex.get(word);
+                const box = boxes[boxIndex];
+
+                // Only add the box if it's the first word of the box and we haven't processed it yet
+                if (box.words[0] === word && !boxProcessed.has(boxIndex)) {
+                    // Before adding the box, flush any accumulated auto words
+                    if (currentAutoWords.length > 0) {
+                        // Find the appropriate connection array to store these in
+                        // They should be associated with the previous box
+                        const prevBoxIndex = boxProcessed.size > 0 ? boxProcessed.size - 1 : -1;
+                        if (prevBoxIndex >= 0) {
+                            if (!this.autoPlacedConnections[prevBoxIndex]) {
+                                this.autoPlacedConnections[prevBoxIndex] = [];
+                            }
+                            this.autoPlacedConnections[prevBoxIndex].push(...currentAutoWords);
+                        }
+                        currentAutoWords = [];
+                    }
+
+                    // Add the box to sequence
                     this.gameSequence.push({
-                        type: 'word',
-                        item: word,
-                        isTrailing: true
+                        type: 'box',
+                        item: box,
+                        boxIndex: boxIndex
                     });
+                    boxProcessed.add(boxIndex);
+
+                    // Initialize auto-placed connections array for this box
+                    if (!this.autoPlacedConnections[boxIndex]) {
+                        this.autoPlacedConnections[boxIndex] = [];
+                    }
                 }
-            });
+            }
+            // Check if this word is a leading/connection/trailing word
+            else if (wordRoles.has(word)) {
+                const role = wordRoles.get(word);
+
+                if (this.isManualWord(word)) {
+                    // Manual word - add to sequence
+                    const itemData = {
+                        type: 'word',
+                        item: word
+                    };
+
+                    if (role === 'leading') {
+                        itemData.isLeading = true;
+                    } else if (role === 'trailing') {
+                        itemData.isTrailing = true;
+                    } else if (role.startsWith('connection-')) {
+                        itemData.isConnection = true;
+                        const connBoxIndex = parseInt(role.split('-')[1]);
+                        itemData.afterBoxIndex = connBoxIndex;
+                    }
+
+                    this.gameSequence.push(itemData);
+                } else {
+                    // Auto-placed word - accumulate it
+                    currentAutoWords.push(word);
+                }
+            }
         }
 
-        console.log('Game sequence built:', this.gameSequence);
+        // Flush any remaining auto words (trailing auto words)
+        if (currentAutoWords.length > 0 && boxes.length > 0) {
+            const lastBoxIndex = boxes.length - 1;
+            if (!this.autoPlacedConnections[lastBoxIndex]) {
+                this.autoPlacedConnections[lastBoxIndex] = [];
+            }
+            this.autoPlacedConnections[lastBoxIndex].push(...currentAutoWords);
+        }
+
+        console.log('Game sequence built (preserving original order):', this.gameSequence);
         console.log('Auto-placed connections:', this.autoPlacedConnections);
     }
 
@@ -394,8 +445,10 @@ class GameMode {
 
         const cellWidth = this.gridViewModel.cellWidth;
         const cellHeight = this.gridViewModel.cellHeight;
+
+        // Adjust grid position for portrait mode to avoid overlap with word buttons
         const startX = 50;
-        const startY = 50;
+        const startY = this.getGridStartY();
 
         const cellData = [
             // Row 1
@@ -694,16 +747,29 @@ class GameMode {
         const controllerSize = isMobile ? 120 : 100;
 
         // Calculate controller Y position based on SVG height
-        // Get the SVG viewBox or use default
         const svgHeight = this.svg.viewBox.baseVal.height || 950;
+        const svgWidth = this.svg.viewBox.baseVal.width || 1250;
         const controllerY = svgHeight - controllerSize - 20; // 20px padding from bottom
+
+        // Adjust horizontal positions for mobile
+        let leftStartX, rightX;
+        if (isMobile) {
+            // Mobile: bring controllers closer together
+            const viewportWidth = Math.min(svgWidth, window.innerWidth);
+            leftStartX = 20; // Small padding from left edge
+            rightX = viewportWidth - controllerSize - 20; // Small padding from right edge
+        } else {
+            // Desktop: use wider spacing
+            leftStartX = 100;
+            rightX = 1100;
+        }
 
         // Right controller (subject/verb)
         this.rightController = this.drawController(controllersGroup, {
             type: 'right',
             caseType: 'nom',
             shape: 'circle',
-            x: 1100,
+            x: rightX,
             y: controllerY,
             size: controllerSize,
             color: 'rgba(255, 255, 255, 0.7)'
@@ -717,14 +783,14 @@ class GameMode {
             { caseType: 'dat', shape: 'trapezoid', color: 'rgba(255, 255, 255, 0.7)', label: 'DAT' }
         ];
 
-        const spacing = controllerSize + 20;
+        const spacing = isMobile ? controllerSize + 10 : controllerSize + 20;
         leftControllerConfigs.forEach((config, index) => {
             const controller = this.drawController(controllersGroup, {
                 type: 'left',
                 caseType: config.caseType,
                 shape: config.shape,
                 label: config.label,
-                x: 100 + (index * spacing),
+                x: leftStartX + (index * spacing),
                 y: controllerY,
                 size: controllerSize,
                 color: config.color
@@ -815,6 +881,7 @@ class GameMode {
         };
 
         const handleStart = (e) => {
+            e.preventDefault();
             e.stopPropagation();
 
             const touch = e.touches ? e.touches[0] : e;
@@ -838,6 +905,7 @@ class GameMode {
 
         const handleMove = (e) => {
             if (!isActive) return;
+            e.preventDefault();
             e.stopPropagation();
 
             const touch = e.touches ? e.touches[0] : e;
@@ -885,6 +953,7 @@ class GameMode {
 
         const handleEnd = (e) => {
             if (!isActive) return;
+            e.preventDefault();
             e.stopPropagation();
 
             // Place word in highlighted cell
@@ -1001,7 +1070,7 @@ class GameMode {
         const cellWidth = this.gridViewModel.cellWidth;
         const cellHeight = this.gridViewModel.cellHeight;
         const startX = 50;
-        const startY = 50;
+        const startY = this.getGridStartY();
 
         const x = startX + (col - 1) * cellWidth;
         const y = startY + (row - 1) * cellHeight;
@@ -1046,7 +1115,7 @@ class GameMode {
         // Get the cell position for feedback display
         const directionData = this.directionMap[direction];
         const startX = 50;
-        const startY = 50;
+        const startY = this.getGridStartY();
         const cellX = startX + (directionData.col - 1) * this.gridViewModel.cellWidth;
         const cellY = startY + (directionData.row - 1) * this.gridViewModel.cellHeight;
         const feedbackX = cellX + this.gridViewModel.cellWidth / 2;
