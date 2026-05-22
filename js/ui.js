@@ -199,35 +199,9 @@ class UIController {
             </div>
         </div>
 
-            <div class="prop-section">
-                <label class="prop-label">Gender / Number:</label>
-                <div class="prop-buttons">
-                    <button class="prop-btn ${selectedWord.gender === 'none' ? 'active' : ''}"
-                            data-property="gender" data-value="none">None</button>
-                    <button class="prop-btn ${selectedWord.gender === 'm' ? 'active' : ''}"
-                            data-property="gender" data-value="m">♂ Mask.</button>
-                    <button class="prop-btn ${selectedWord.gender === 'f' ? 'active' : ''}"
-                            data-property="gender" data-value="f">♀ Fem.</button>
-                    <button class="prop-btn ${selectedWord.gender === 'n' ? 'active' : ''}"
-                            data-property="gender" data-value="n">⚲ Neut.</button>
-                    <button class="prop-btn ${selectedWord.number === 'pl' ? 'active' : ''}"
-                            data-property="number" data-value="pl">Plural</button>
-                </div>
-            </div>
+            ${this.getGenderUI(selectedWord)}
 
-            <div class="prop-section">
-                <label class="prop-label">Case:</label>
-                <div class="prop-buttons">
-                    <button class="prop-btn ${selectedWord.case === 'nom' ? 'active' : ''}"
-                            data-property="case" data-value="nom">Nom</button>
-                    <button class="prop-btn ${selectedWord.case === 'akk' ? 'active' : ''}"
-                            data-property="case" data-value="akk">Akk</button>
-                    <button class="prop-btn ${selectedWord.case === 'dat' ? 'active' : ''}"
-                            data-property="case" data-value="dat">Dat</button>
-                    <button class="prop-btn ${selectedWord.case === 'gen' ? 'active' : ''}"
-                            data-property="case" data-value="gen">Gen</button>
-                </div>
-            </div>
+            ${this.getCaseUI(selectedWord)}
 
             ${this.getPrepositionCaseUI(selectedWord)}
 
@@ -248,6 +222,34 @@ class UIController {
 
         // Attach event listeners
         this.attachPropertyListeners();
+    }
+
+    /**
+     * Generate case UI for subjects, objects, and adjectives
+     * Case is NOT available for verbs/modals
+     */
+    getCaseUI(word) {
+        // Hide case section for verbs, modals, and other non-declined word types
+        if (word.type === 'verb' || word.type === 'modal' || word.type === 'conjunction' ||
+            word.type === 'coord-conjunction' || word.type === 'preposition' || word.type === 'other') {
+            return ''; // Case doesn't apply to these types
+        }
+
+        return `
+            <div class="prop-section">
+                <label class="prop-label">Case:</label>
+                <div class="prop-buttons">
+                    <button class="prop-btn ${word.case === 'nom' ? 'active' : ''}"
+                            data-property="case" data-value="nom">Nom</button>
+                    <button class="prop-btn ${word.case === 'akk' ? 'active' : ''}"
+                            data-property="case" data-value="akk">Akk</button>
+                    <button class="prop-btn ${word.case === 'dat' ? 'active' : ''}"
+                            data-property="case" data-value="dat">Dat</button>
+                    <button class="prop-btn ${word.case === 'gen' ? 'active' : ''}"
+                            data-property="case" data-value="gen">Gen</button>
+                </div>
+            </div>
+        `;
     }
 
     /**
@@ -281,9 +283,91 @@ class UIController {
     }
 
     /**
-     * Generate conjugation UI for all word types
+     * Generate gender/number UI for subjects, objects, and adjectives
+     * Gender is NOT available for:
+     * - Verbs/modals (they use conjugation instead)
+     * - Personal pronouns (subjects with conjugation set - they already have pronoun color)
+     * - Object pronouns (accusative/dative objects with conjugation set)
+     */
+    getGenderUI(word) {
+        // Hide gender section for verbs and modals
+        if (word.type === 'verb' || word.type === 'modal') {
+            return ''; // Gender doesn't apply to verbs/modals
+        }
+
+        // Hide gender section for personal pronouns (subjects with conjugation set)
+        // Personal pronouns like 'ich', 'du', 'er', 'sie', 'es' already have conjugation color
+        if (word.type === 'subject' && word.conjugation?.pronoun && word.conjugation.pronoun !== 'none') {
+            return ''; // Personal pronouns don't need gender - they have conjugation
+        }
+
+        // Hide gender section for object pronouns (accusative/dative objects with conjugation set)
+        // Object pronouns like 'mich', 'mir', 'dich', 'dir' already have conjugation color
+        if ((word.type === 'object-akk' || word.type === 'object-dat') &&
+            word.conjugation?.pronoun && word.conjugation.pronoun !== 'none') {
+            return ''; // Object pronouns don't need gender - they have conjugation
+        }
+
+        return `
+            <div class="prop-section">
+                <label class="prop-label">Gender / Number:</label>
+                <div class="prop-buttons">
+                    <button class="prop-btn ${word.gender === 'none' ? 'active' : ''}"
+                            data-property="gender" data-value="none">None</button>
+                    <button class="prop-btn ${word.gender === 'm' ? 'active' : ''}"
+                            data-property="gender" data-value="m">♂ Mask.</button>
+                    <button class="prop-btn ${word.gender === 'f' ? 'active' : ''}"
+                            data-property="gender" data-value="f">♀ Fem.</button>
+                    <button class="prop-btn ${word.gender === 'n' ? 'active' : ''}"
+                            data-property="gender" data-value="n">⚲ Neut.</button>
+                    <button class="prop-btn ${word.number === 'pl' ? 'active' : ''}"
+                            data-property="number" data-value="pl">Plural</button>
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * Check if a word is a personal/reflexive pronoun
+     */
+    isPersonalPronoun(word) {
+        const personalPronouns = [
+            'ich', 'mich', 'mir',
+            'du', 'dich', 'dir',
+            'er', 'ihn', 'ihm',
+            'sie', 'ihr',
+            'es', 'ihm',
+            'wir', 'uns',
+            'ihr', 'euch',
+            'sie', 'ihnen'
+        ];
+        // Remove punctuation from the end of the word before checking
+        const cleanedText = word.text.toLowerCase().trim().replace(/[.,!?;:]+$/, '');
+        return personalPronouns.includes(cleanedText);
+    }
+
+    /**
+     * Generate conjugation UI for verbs, modals, and personal/reflexive pronouns (subjects/objects)
+     * Conjugation is available ONLY for:
+     * - Verbs and modals (always)
+     * - Subjects when they are personal pronouns (ich, du, er, sie, etc.)
+     * - Accusative/dative objects when they are personal pronouns (mich, mir, dich, dir, etc.)
      */
     getConjugationUI(word) {
+        // Always show conjugation for verbs and modals
+        const isVerbOrModal = word.type === 'verb' || word.type === 'modal';
+
+        // Show conjugation for subjects only if they are personal pronouns (ich, du, er, sie, es, etc.)
+        const isPersonalPronounSubject = word.type === 'subject' && this.isPersonalPronoun(word);
+
+        // Show conjugation for accusative/dative objects only if they are personal pronouns (mich, mir, dich, dir, etc.)
+        const isPersonalPronounObject = (word.type === 'object-akk' || word.type === 'object-dat') &&
+                                        this.isPersonalPronoun(word);
+
+        if (!isVerbOrModal && !isPersonalPronounSubject && !isPersonalPronounObject) {
+            return ''; // Hide conjugation section for regular nouns and other word types
+        }
+
         if (!word.conjugation) {
             word.conjugation = {
                 pronoun: 'none'

@@ -536,6 +536,11 @@ class GridViewModel {
                     return this.positions[pronoun] || this.positions['ich'];
                 }
 
+                // Handle sie_pl format (backend returns this for plural sie)
+                if (pronoun === 'sie_pl') {
+                    return this.positions['plural'];
+                }
+
                 // Otherwise (er, sie, es, sie-plural), use gender/number of the noun
                 // Check number first (plural takes precedence)
                 if (word.number === 'pl') {
@@ -612,8 +617,39 @@ class GridViewModel {
             return this.positions['masculine'];
         }
 
-        // Verbs go with their subject - this is handled in positionWords() now
-        // We don't position verbs independently
+        // Verbs and modals are positioned based on their conjugation pronoun
+        if (word.type === 'verb' || word.type === 'modal') {
+            if (word.conjugation && word.conjugation.pronoun) {
+                const pronoun = word.conjugation.pronoun.toLowerCase();
+
+                // If it's a personal pronoun (ich, du, wir, ihr), use the pronoun cell
+                if (pronoun === 'ich' || pronoun === 'du' || pronoun === 'wir' || pronoun === 'we' || pronoun === 'ihr') {
+                    return this.positions[pronoun] || this.positions['ich'];
+                }
+
+                // Handle sie_pl format (backend returns this for plural sie)
+                if (pronoun === 'sie_pl') {
+                    return this.positions['plural'];
+                }
+
+                // For er/sie/es (3rd person singular), map to gender-based cells
+                // er → masculine, sie → feminine, es → neutral
+                if (pronoun === 'er') {
+                    return this.positions['masculine'];
+                } else if (pronoun === 'sie' && word.number !== 'pl') {
+                    return this.positions['feminine'];
+                } else if (pronoun === 'es') {
+                    return this.positions['neutral'];
+                } else if (pronoun === 'sie' && word.number === 'pl') {
+                    // sie (plural)
+                    return this.positions['plural'];
+                }
+            }
+
+            // Fallback: if verb has no conjugation info, default to ICH position
+            console.warn(`⚠️  Verb "${word.text}" has no conjugation info - defaulting to ICH position`);
+            return this.positions['ich'];
+        }
 
         // Prepositions and other words go with objects they relate to
         // This is handled in positionWords()

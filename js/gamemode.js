@@ -28,8 +28,8 @@ class GameMode {
         this.revealedBoxIndices = new Set();
         this.feedbackAnimation = null;
 
-        // Auto-placed words accumulation
-        this.accumulatedAutoWords = []; // All auto-words shown so far (stays on left)
+        // Auto-placed words display
+        this.accumulatedAutoWords = []; // DEPRECATED: Now calculated dynamically via getVisibleAutoWords()
         this.currentWordDisplay = null; // Current word being placed (center)
 
         // SVG groups for drawing
@@ -46,6 +46,12 @@ class GameMode {
 
         // Attempt tracking (auto-place after 3 wrong attempts)
         this.currentWordAttempts = 0;
+
+        // Waiting for user to continue to next sentence
+        this.waitingForContinue = false;
+
+        // Keyboard event handler (bound for proper removal)
+        this.keyboardHandler = null;
 
         // Grid positions (from gridview)
         this.positions = {
@@ -89,6 +95,35 @@ class GameMode {
 
         this.isActive = true;
         this.totalScore = 0; // Reset total score when starting fresh
+
+        // Add keyboard event listener for case selection (PC only)
+        this.keyboardHandler = (e) => {
+            if (!this.isActive) return;
+
+            const key = e.key.toLowerCase();
+
+            // A = Nominative, S = Accusative, D = Dative, F = Genitive
+            if (key === 'a') {
+                // Toggle nominative
+                this.selectedCase = this.selectedCase === 'nom' ? null : 'nom';
+                if (window.app) window.app.redrawAll();
+            } else if (key === 's') {
+                // Toggle accusative
+                this.selectedCase = this.selectedCase === 'akk' ? null : 'akk';
+                if (window.app) window.app.redrawAll();
+            } else if (key === 'd') {
+                // Toggle dative
+                this.selectedCase = this.selectedCase === 'dat' ? null : 'dat';
+                if (window.app) window.app.redrawAll();
+            } else if (key === 'f') {
+                // Toggle genitive
+                this.selectedCase = this.selectedCase === 'gen' ? null : 'gen';
+                if (window.app) window.app.redrawAll();
+            }
+        };
+
+        document.addEventListener('keydown', this.keyboardHandler);
+
         this.startNewSentence();
     }
 
@@ -103,12 +138,13 @@ class GameMode {
         this.placedWords = new Map();
         this.placedVerbs = [];
         this.autoPlacedWords = [];
-        this.autoPlacedConnections = [];
+        this.autoWordsBySeqIndex = [];
         this.gameSequence = [];
         this.feedbackAnimation = null;
         this.accumulatedAutoWords = [];
         this.currentWordDisplay = null;
         this.currentWordAttempts = 0;
+        this.waitingForContinue = false;
 
         // Parse current sentence
         this.parseSentence();
@@ -119,13 +155,8 @@ class GameMode {
         // Pre-calculate gridview layout
         this.preCalculateGridView();
 
-        // Show any leading auto-placed words at the start
-        if (this.parsedSentence.leadingWords && this.parsedSentence.leadingWords.length > 0) {
-            const autoLeadingWords = this.parsedSentence.leadingWords.filter(word => !this.isManualWord(word));
-            if (autoLeadingWords.length > 0) {
-                this.showAutoPlacedWords(autoLeadingWords);
-            }
-        }
+        // Note: Auto-placed words (including leading words) are now shown dynamically via getVisibleAutoWords()
+        // No need to call showAutoPlacedWords here
 
         // Initialize current word display
         this.updateCurrentWordDisplay();
@@ -139,11 +170,17 @@ class GameMode {
 
         this.isActive = false;
 
+        // Remove keyboard event listener
+        if (this.keyboardHandler) {
+            document.removeEventListener('keydown', this.keyboardHandler);
+            this.keyboardHandler = null;
+        }
+
         // Clear all state
         this.placedWords.clear();
         this.placedBoxes = [];
         this.placedVerbs = [];
-        this.autoPlacedConnections = [];
+        this.autoWordsBySeqIndex = [];
         this.gameSequence = [];
         this.currentAutoPlacedText = null;
         this.feedbackAnimation = null;
@@ -184,6 +221,11 @@ class GameMode {
 
         // Draw UI overlays (score, current word, etc.)
         this.drawUIOverlay();
+
+        // Draw full-screen tap overlay when waiting for continue
+        if (this.waitingForContinue) {
+            this.drawContinueOverlay();
+        }
     }
 
     /**
@@ -283,7 +325,8 @@ class GameMode {
         const { boxes, connections, leadingWords, trailingWords } = this.parsedSentence;
 
         this.gameSequence = [];
-        this.autoPlacedConnections = []; // Track auto-placed words per box
+        // autoWordsBySeqIndex[i] = auto-placed words that follow gameSequence[i] in sentence order
+        this.autoWordsBySeqIndex = [];
 
         // Create maps to track which words belong to which box
         const wordToBoxIndex = new Map(); // Maps word object to box index
@@ -304,8 +347,17 @@ class GameMode {
             connWords.forEach(word => wordRoles.set(word, `connection-${boxIndex}`));
         });
 
-        // Track auto-placed words for each position in sequence
         let currentAutoWords = [];
+
+        // Flush accumulated auto-words onto the most recently added sequence item.
+        const flushAutoWords = () => {
+            const seqIdx = this.gameSequence.length - 1;
+            if (seqIdx >= 0 && currentAutoWords.length > 0) {
+                if (!this.autoWordsBySeqIndex[seqIdx]) this.autoWordsBySeqIndex[seqIdx] = [];
+                this.autoWordsBySeqIndex[seqIdx].push(...currentAutoWords);
+            }
+            currentAutoWords = [];
+        };
 
         // Iterate through words in original sentence order
         for (let i = 0; i < this.words.length; i++) {
@@ -318,32 +370,13 @@ class GameMode {
 
                 // Only add the box if it's the first word of the box and we haven't processed it yet
                 if (box.words[0] === word && !boxProcessed.has(boxIndex)) {
-                    // Before adding the box, flush any accumulated auto words
-                    if (currentAutoWords.length > 0) {
-                        // Find the appropriate connection array to store these in
-                        // They should be associated with the previous box
-                        const prevBoxIndex = boxProcessed.size > 0 ? boxProcessed.size - 1 : -1;
-                        if (prevBoxIndex >= 0) {
-                            if (!this.autoPlacedConnections[prevBoxIndex]) {
-                                this.autoPlacedConnections[prevBoxIndex] = [];
-                            }
-                            this.autoPlacedConnections[prevBoxIndex].push(...currentAutoWords);
-                        }
-                        currentAutoWords = [];
-                    }
-
-                    // Add the box to sequence
+                    flushAutoWords();
                     this.gameSequence.push({
                         type: 'box',
                         item: box,
                         boxIndex: boxIndex
                     });
                     boxProcessed.add(boxIndex);
-
-                    // Initialize auto-placed connections array for this box
-                    if (!this.autoPlacedConnections[boxIndex]) {
-                        this.autoPlacedConnections[boxIndex] = [];
-                    }
                 }
             }
             // Check if this word is a leading/connection/trailing word
@@ -351,7 +384,7 @@ class GameMode {
                 const role = wordRoles.get(word);
 
                 if (this.isManualWord(word)) {
-                    // Manual word - add to sequence
+                    flushAutoWords();
                     const itemData = {
                         type: 'word',
                         item: word
@@ -363,37 +396,29 @@ class GameMode {
                         itemData.isTrailing = true;
                     } else if (role.startsWith('connection-')) {
                         itemData.isConnection = true;
-                        const connBoxIndex = parseInt(role.split('-')[1]);
-                        itemData.afterBoxIndex = connBoxIndex;
+                        itemData.afterBoxIndex = parseInt(role.split('-')[1]);
                     }
 
                     this.gameSequence.push(itemData);
                 } else {
-                    // Auto-placed word - accumulate it
                     currentAutoWords.push(word);
                 }
             }
         }
 
-        // Flush any remaining auto words (trailing auto words)
-        if (currentAutoWords.length > 0 && boxes.length > 0) {
-            const lastBoxIndex = boxes.length - 1;
-            if (!this.autoPlacedConnections[lastBoxIndex]) {
-                this.autoPlacedConnections[lastBoxIndex] = [];
-            }
-            this.autoPlacedConnections[lastBoxIndex].push(...currentAutoWords);
-        }
+        // Flush any remaining auto words after the last sequence item
+        flushAutoWords();
 
         console.log('Game sequence built (preserving original order):', this.gameSequence);
-        console.log('Auto-placed connections:', this.autoPlacedConnections);
+        console.log('Auto-placed words by sequence index:', this.autoWordsBySeqIndex);
     }
 
     /**
      * Check if word requires manual placement
-     * Manual: subjects and objects (these have grid positions)
-     * Auto: verbs, prepositions, conjunctions, infinitives, adjectives, adverbs, articles
+     * Manual: subjects, objects, verbs, and modals (these have grid positions)
+     * Auto: prepositions, conjunctions, infinitives, adjectives, adverbs, articles
      *
-     * Note: Verbs are auto-placed because they appear on arrows, not in grid cells
+     * Note: Verbs and modals are now manual-place objects - their target tile is based on conjugation
      */
     isManualWord(word) {
         const type = word.type;
@@ -401,11 +426,46 @@ class GameMode {
         // Manual placement types (only these require user interaction)
         if (type === 'subject') return true;
         if (type.includes('object')) return true;
+        if (type === 'verb') return word.conjugation && word.conjugation.pronoun !== 'none';
+        if (type === 'modal') return word.conjugation && word.conjugation.pronoun !== 'none';
 
         // Everything else is auto-placed
-        // This includes: verbs, modals, prepositions, conjunctions, adjectives, adverbs, articles, etc.
-        // Verbs are auto-placed because they appear on arrows between boxes, not in cells
+        // This includes: prepositions, conjunctions, adjectives, adverbs, articles, etc.
         return false;
+    }
+
+    /**
+     * Filter words to only show those that should be visible:
+     * - Auto-placed words are always visible
+     * - Manual words are only visible if they've been placed (currentBoxIndex passed them in sequence)
+     */
+    filterVisibleWords(words) {
+        return words.filter(word => {
+            // Auto-placed words are always visible
+            if (!this.isManualWord(word)) {
+                return true;
+            }
+
+            // Manual words: check if we've reached them in the game sequence
+            // Find this word in the game sequence
+            for (let i = 0; i < this.gameSequence.length; i++) {
+                const item = this.gameSequence[i];
+
+                // Check if this sequence item matches the word
+                if (item.type === 'word' && item.item === word) {
+                    // Only show if we've passed this point in the sequence
+                    return i < this.currentBoxIndex;
+                } else if (item.type === 'box') {
+                    // Check if word is part of this box
+                    if (item.item.words.includes(word)) {
+                        return i < this.currentBoxIndex;
+                    }
+                }
+            }
+
+            // If word not found in sequence (shouldn't happen), don't show it
+            return false;
+        });
     }
 
     /**
@@ -547,13 +607,18 @@ class GameMode {
             const toBox = revealedBoxes[i + 1];
             const connectionWords = this.preCalculatedConnections[fromBox.boxIndex] || [];
 
-            this.gridViewModel.drawArrow(this.gridGroup, fromBox, toBox, connectionWords, this.wordManager);
+            // Filter connection words: only show auto-placed words and manual words that have been placed
+            const visibleConnectionWords = this.filterVisibleWords(connectionWords);
+
+            this.gridViewModel.drawArrow(this.gridGroup, fromBox, toBox, visibleConnectionWords, this.wordManager);
         }
 
         // Draw incoming arrow if first box is revealed and there are leading words
         if (this.revealedBoxIndices.has(0) && this.preCalculatedLeadingWords.length > 0) {
+            // Filter leading words: only show auto-placed words and manual words that have been placed
+            const visibleLeadingWords = this.filterVisibleWords(this.preCalculatedLeadingWords);
             const firstBox = this.preCalculatedBoxes[0];
-            this.gridViewModel.drawIncomingArrow(this.gridGroup, firstBox, this.preCalculatedLeadingWords, startX, this.wordManager);
+            this.gridViewModel.drawIncomingArrow(this.gridGroup, firstBox, visibleLeadingWords, startX, this.wordManager);
         }
 
         // Draw outgoing arrow if last box is revealed
@@ -565,17 +630,96 @@ class GameMode {
             if (this.preCalculatedConnections.length === this.preCalculatedBoxes.length) {
                 const finalConnection = this.preCalculatedConnections[this.preCalculatedConnections.length - 1];
                 if (finalConnection && finalConnection.length > 0) {
-                    this.gridViewModel.drawOutgoingArrow(this.gridGroup, lastBox, finalConnection, startX, this.wordManager);
+                    // Filter final connection words: only show auto-placed words and manual words that have been placed
+                    const visibleFinalConnection = this.filterVisibleWords(finalConnection);
+                    if (visibleFinalConnection.length > 0) {
+                        this.gridViewModel.drawOutgoingArrow(this.gridGroup, lastBox, visibleFinalConnection, startX, this.wordManager);
+                    }
                 }
             }
 
             // Check for trailing words
             if (this.preCalculatedTrailingWords.length > 0) {
-                this.gridViewModel.drawOutgoingArrow(this.gridGroup, lastBox, this.preCalculatedTrailingWords, startX, this.wordManager);
+                // Filter trailing words: only show auto-placed words and manual words that have been placed
+                const visibleTrailingWords = this.filterVisibleWords(this.preCalculatedTrailingWords);
+                if (visibleTrailingWords.length > 0) {
+                    this.gridViewModel.drawOutgoingArrow(this.gridGroup, lastBox, visibleTrailingWords, startX, this.wordManager);
+                }
             }
         }
     }
 
+
+    /**
+     * Create the shaped container for the center word in the top bar.
+     * Default (no case): dashed outline, transparent fill.
+     * Selected case mirrors the gridview case-box shapes.
+     */
+    createTopBarWordShape(caseType, centerX, topY, width, height) {
+        const x = centerX - width / 2;
+        let shape;
+
+        if (!caseType) {
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            shape.setAttribute('x', x);
+            shape.setAttribute('y', topY);
+            shape.setAttribute('width', width);
+            shape.setAttribute('height', height);
+            shape.setAttribute('rx', '8');
+            shape.setAttribute('fill', 'rgba(100, 100, 100, 1.0)');
+            shape.setAttribute('stroke', 'rgba(255, 255, 255, 0.55)');
+            shape.setAttribute('stroke-width', '2');
+            shape.setAttribute('stroke-dasharray', '8,5');
+        } else if (caseType === 'nom') {
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            shape.setAttribute('x', x);
+            shape.setAttribute('y', topY);
+            shape.setAttribute('width', width);
+            shape.setAttribute('height', height);
+            shape.setAttribute('rx', '20');
+            shape.setAttribute('ry', '20');
+            shape.setAttribute('fill', 'rgba(100, 100, 100, 1.0)');
+            shape.setAttribute('stroke', '#FFD700');
+            shape.setAttribute('stroke-width', '3');
+        } else if (caseType === 'akk') {
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            shape.setAttribute('x', x);
+            shape.setAttribute('y', topY);
+            shape.setAttribute('width', width);
+            shape.setAttribute('height', height);
+            shape.setAttribute('rx', '5');
+            shape.setAttribute('ry', '5');
+            shape.setAttribute('fill', 'rgba(100, 100, 100, 1.0)');
+            shape.setAttribute('stroke', '#FFD700');
+            shape.setAttribute('stroke-width', '3');
+        } else if (caseType === 'dat') {
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            const slope = 15;
+            const points = `${x + slope},${topY} ${x + width - slope},${topY} ${x + width},${topY + height} ${x},${topY + height}`;
+            shape.setAttribute('points', points);
+            shape.setAttribute('fill', 'rgba(100, 100, 100, 1.0)');
+            shape.setAttribute('stroke', '#FFD700');
+            shape.setAttribute('stroke-width', '3');
+        } else if (caseType === 'gen') {
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            const slant = 10;
+            const points = `${x + slant},${topY} ${x + width + slant},${topY} ${x + width - slant},${topY + height} ${x - slant},${topY + height}`;
+            shape.setAttribute('points', points);
+            shape.setAttribute('fill', 'rgba(100, 100, 100, 1.0)');
+            shape.setAttribute('stroke', '#FFD700');
+            shape.setAttribute('stroke-width', '3');
+        }
+
+        return shape;
+    }
+
+    /**
+     * Estimate display width for a text string at the given font size (px).
+     * Uses ~0.62 em per character as a generous average for bold/normal Latin text.
+     */
+    estimateTextWidth(text, fontSize, padding = 40) {
+        return Math.max(text.length * (fontSize * 0.62) + padding, padding + 60);
+    }
 
     /**
      * Draw UI overlay (score, accumulated auto-words on left, current word in center)
@@ -615,198 +759,216 @@ class GameMode {
         sentenceScoreText.textContent = `+${this.currentSentenceScore}`;
         overlayGroup.appendChild(sentenceScoreText);
 
-        // Calculate current word box position first
+        // Calculate current word box position first (for positioning auto-words on left)
         let currentWordBoxLeft = 625; // Default center if no current word
         let currentWordBoxWidth = 0;
 
         if (this.currentWordDisplay && this.currentBoxIndex < this.gameSequence.length) {
-            const displayText = this.currentWordDisplay;
-            currentWordBoxWidth = Math.max(displayText.length * 18 + 40, 200);
+            const activeItem = this.gameSequence[this.currentBoxIndex];
+
+            if (activeItem.type === 'box') {
+                const phraseText = activeItem.item.words.map(w => w.text).join(' ');
+                currentWordBoxWidth = this.estimateTextWidth(phraseText, 32);
+            } else {
+                currentWordBoxWidth = this.estimateTextWidth(activeItem.item.text, 32);
+            }
             currentWordBoxLeft = 625 - currentWordBoxWidth / 2;
         }
 
-        // Draw accumulated auto-placed words to the left of current word
-        if (this.accumulatedAutoWords.length > 0) {
-            // Calculate total width of all auto words (using same font size as current word)
-            const autoWordWidths = this.accumulatedAutoWords.map(word => word.length * 20 + 40);
+        // Get visible auto-placed words in original sentence order
+        const visibleAutoWords = this.getVisibleAutoWords();
+
+        // Draw accumulated auto-placed words to the left of current word (as dark grey boxes)
+        if (visibleAutoWords.length > 0) {
+            // Calculate total width of all auto words
+            const autoWordWidths = visibleAutoWords.map(word => this.estimateTextWidth(word, 28));
             const totalAutoWidth = autoWordWidths.reduce((sum, w) => sum + w + 10, 0) - 10; // -10 to remove last gap
 
             // Start position: just to the left of current word box
             let currentX = currentWordBoxLeft - totalAutoWidth - 15; // 15px gap between auto words and current word
 
-            this.accumulatedAutoWords.forEach((word, index) => {
-                // Background for each auto word
+            visibleAutoWords.forEach((wordText, index) => {
                 const wordWidth = autoWordWidths[index];
+                const centerX = currentX + wordWidth / 2;
+                const centerY = topY + barHeight / 2;
+
+                // Draw dark grey rectangular box for each word
                 const bgRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
                 bgRect.setAttribute('x', currentX);
                 bgRect.setAttribute('y', topY);
                 bgRect.setAttribute('width', wordWidth);
                 bgRect.setAttribute('height', barHeight);
-                bgRect.setAttribute('fill', 'rgba(149, 165, 166, 0.8)'); // Gray for auto-placed
-                bgRect.setAttribute('stroke', '#95a5a6');
-                bgRect.setAttribute('stroke-width', '2');
-                bgRect.setAttribute('rx', '10');
+                bgRect.setAttribute('fill', 'rgba(100, 100, 100, 0.55)');
+                bgRect.setAttribute('stroke', 'rgba(255,255,255,0.25)');
+                bgRect.setAttribute('stroke-width', '1.5');
+                bgRect.setAttribute('rx', '8');
                 overlayGroup.appendChild(bgRect);
 
-                // Auto word text (same font size as current word)
                 const autoText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                autoText.setAttribute('x', currentX + wordWidth / 2);
-                autoText.setAttribute('y', topY + barHeight / 2 + 10);
+                autoText.setAttribute('x', centerX);
+                autoText.setAttribute('y', centerY + 10);
                 autoText.setAttribute('text-anchor', 'middle');
                 autoText.setAttribute('fill', '#fff');
-                autoText.setAttribute('font-size', '32');
+                autoText.setAttribute('font-size', '28');
                 autoText.setAttribute('font-weight', 'normal');
-                autoText.textContent = word;
+                autoText.textContent = wordText;
                 overlayGroup.appendChild(autoText);
 
                 currentX += wordWidth + 10; // Move right for next word
             });
         }
 
-        // Draw current word (manual placement) in center
+        // Draw current word (manual placement) in center as dark grey box
         if (this.currentWordDisplay && this.currentBoxIndex < this.gameSequence.length) {
-            const displayText = this.currentWordDisplay;
-            const wordWidth = currentWordBoxWidth;
-
-            // Center the current word box
-            const centerX = currentWordBoxLeft;
-
-            // Create background shape based on selected case (using gridview styles)
-            let bgShape;
             const activeItem = this.gameSequence[this.currentBoxIndex];
-            const itemToCheck = activeItem.type === 'box' ? activeItem.item.mainWord : activeItem.item;
-            const isObject = itemToCheck.type.includes('object');
+            const centerX = 625;
+            const centerY = topY + barHeight / 2;
 
-            // Determine which case to show
-            // For objects: show selected case if any, otherwise default rounded rectangle
-            // For subjects: always show nominative style
-            let displayCase = null;
-            if (isObject && this.selectedCase) {
-                displayCase = this.selectedCase;
-            } else if (itemToCheck.type === 'subject') {
-                displayCase = 'nom';
-            }
+            // Calculate word width for positioning (needed for next word preview)
+            let wordWidth;
+            let displayText;
 
-            // Create shape based on case (matching gridview's createCaseBox)
-            if (displayCase === 'nom') {
-                // Rounded rectangle for Nominative (rx/ry = 20)
-                bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                bgShape.setAttribute('x', centerX);
-                bgShape.setAttribute('y', topY);
-                bgShape.setAttribute('width', wordWidth);
-                bgShape.setAttribute('height', barHeight);
-                bgShape.setAttribute('rx', '20');
-                bgShape.setAttribute('ry', '20');
-            } else if (displayCase === 'akk') {
-                // Rectangle with slight rounding for Accusative (rx/ry = 5)
-                bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                bgShape.setAttribute('x', centerX);
-                bgShape.setAttribute('y', topY);
-                bgShape.setAttribute('width', wordWidth);
-                bgShape.setAttribute('height', barHeight);
-                bgShape.setAttribute('rx', '5');
-                bgShape.setAttribute('ry', '5');
-            } else if (displayCase === 'dat') {
-                // Trapezoid for Dative (matching gridview slope)
-                bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-                const slope = 15;
-                const left = centerX;
-                const right = centerX + wordWidth;
-                const top = topY;
-                const bottom = topY + barHeight;
-                const points = `${left + slope},${top} ${right - slope},${top} ${right},${bottom} ${left},${bottom}`;
-                bgShape.setAttribute('points', points);
+            if (activeItem.type === 'box') {
+                displayText = activeItem.item.words.map(w => w.text).join(' ');
+                wordWidth = this.estimateTextWidth(displayText, 32);
             } else {
-                // Default rounded rectangle (when no case selected)
-                bgShape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                bgShape.setAttribute('x', centerX);
-                bgShape.setAttribute('y', topY);
-                bgShape.setAttribute('width', wordWidth);
-                bgShape.setAttribute('height', barHeight);
-                bgShape.setAttribute('rx', '10');
-                bgShape.setAttribute('ry', '10');
+                displayText = activeItem.item.text;
+                wordWidth = this.estimateTextWidth(displayText, 32);
             }
 
-            bgShape.setAttribute('fill', 'rgba(44, 62, 80, 0.9)'); // Dark for current word
-            bgShape.setAttribute('stroke', '#2c3e50');
-            bgShape.setAttribute('stroke-width', '3');
-            overlayGroup.appendChild(bgShape);
+            // Draw center word shape — shape and fill depend on currently selected case
+            const centerShape = this.createTopBarWordShape(this.selectedCase, centerX, topY, wordWidth, barHeight);
+            overlayGroup.appendChild(centerShape);
 
-            // Current word text
-            const wordText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            wordText.setAttribute('x', 625);
-            wordText.setAttribute('y', topY + barHeight / 2 + 10);
-            wordText.setAttribute('text-anchor', 'middle');
-            wordText.setAttribute('fill', '#fff');
-            wordText.setAttribute('font-size', '32');
-            wordText.setAttribute('font-weight', 'bold');
-            wordText.textContent = displayText;
-            overlayGroup.appendChild(wordText);
+            // Text color: dark with outline when no case selected (transparent bg), white otherwise
+            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.setAttribute('x', centerX);
+            text.setAttribute('y', centerY + 10);
+            text.setAttribute('text-anchor', 'middle');
+            if (this.selectedCase) {
+                text.setAttribute('fill', '#fff');
+                text.setAttribute('font-size', '32');
+                text.setAttribute('font-weight', 'bold');
+            } else {
+                text.setAttribute('fill', '#2c3e50');
+                text.setAttribute('stroke', 'white');
+                text.setAttribute('stroke-width', '4');
+                text.setAttribute('paint-order', 'stroke');
+                text.setAttribute('font-size', '32');
+                text.setAttribute('font-weight', 'bold');
+            }
+            text.textContent = displayText;
+            overlayGroup.appendChild(text);
 
             // Draw next word preview (to the right, in grey)
-            // The next word can be either:
-            // 1. An auto-placed word that will appear after placing current box
-            // 2. The next manual word in the game sequence
-            let nextWordText = null;
+            let nextItem = null;
 
-            const currentItem = this.gameSequence[this.currentBoxIndex];
+            // Show the first auto-placed word that follows the current item in sentence order,
+            // or the next manual item if no auto-words come immediately after.
+            const autoWordsAfter = this.autoWordsBySeqIndex[this.currentBoxIndex];
+            if (autoWordsAfter && autoWordsAfter.length > 0) {
+                nextItem = autoWordsAfter[0];
+            }
 
-            // If current item is a box, check for auto-placed words that come after it
-            if (currentItem.type === 'box' && currentItem.boxIndex !== undefined) {
-                const autoWords = this.autoPlacedConnections[currentItem.boxIndex];
-                if (autoWords && autoWords.length > 0) {
-                    // Next word is the first auto-placed word after this box
-                    nextWordText = autoWords[0].text;
+            if (!nextItem && this.currentBoxIndex + 1 < this.gameSequence.length) {
+                nextItem = this.gameSequence[this.currentBoxIndex + 1].item;
+            }
+
+            if (nextItem) {
+                let nextWordWidth;
+                let nextWordText;
+
+                // Check if next item is a box (has 'words' property) or a single word
+                const isNextItemBox = nextItem.words && nextItem.words.length > 1;
+
+                if (isNextItemBox) {
+                    nextWordText = nextItem.words.map(w => w.text).join(' ');
+                    nextWordWidth = this.estimateTextWidth(nextWordText, 28);
+                } else {
+                    nextWordText = nextItem.text;
+                    nextWordWidth = this.estimateTextWidth(nextWordText, 28);
                 }
-            }
 
-            // If no auto-placed word, show next manual word from game sequence
-            if (!nextWordText && this.currentBoxIndex + 1 < this.gameSequence.length) {
-                const nextItem = this.gameSequence[this.currentBoxIndex + 1];
-                nextWordText = this.getItemText(nextItem);
-            }
-
-            if (nextWordText) {
-                const nextWordWidth = Math.max(nextWordText.length * 20 + 40, 150);
                 const nextWordX = currentWordBoxLeft + wordWidth + 15; // 15px gap
+                const centerX = nextWordX + nextWordWidth / 2;
+                const centerY = topY + barHeight / 2;
 
-                // Background for next word (grey)
-                const nextBgRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                nextBgRect.setAttribute('x', nextWordX);
-                nextBgRect.setAttribute('y', topY);
-                nextBgRect.setAttribute('width', nextWordWidth);
-                nextBgRect.setAttribute('height', barHeight);
-                nextBgRect.setAttribute('fill', 'rgba(149, 165, 166, 0.6)'); // Light grey
-                nextBgRect.setAttribute('stroke', '#95a5a6');
-                nextBgRect.setAttribute('stroke-width', '2');
-                nextBgRect.setAttribute('rx', '10');
-                overlayGroup.appendChild(nextBgRect);
+                // Draw dark grey rectangular box for next word (darker than current)
+                const boxWidth = nextWordWidth;
+                const boxHeight = barHeight;
+                const bgRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                bgRect.setAttribute('x', centerX - boxWidth / 2);
+                bgRect.setAttribute('y', topY);
+                bgRect.setAttribute('width', boxWidth);
+                bgRect.setAttribute('height', boxHeight);
+                bgRect.setAttribute('fill', 'rgba(100, 100, 100, 0.38)');
+                bgRect.setAttribute('stroke', 'rgba(255,255,255,0.2)');
+                bgRect.setAttribute('stroke-width', '1.5');
+                bgRect.setAttribute('rx', '8');
+                overlayGroup.appendChild(bgRect);
 
-                // Next word text (same font size as current word)
-                const nextText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                nextText.setAttribute('x', nextWordX + nextWordWidth / 2);
-                nextText.setAttribute('y', topY + barHeight / 2 + 10);
-                nextText.setAttribute('text-anchor', 'middle');
-                nextText.setAttribute('fill', '#fff');
-                nextText.setAttribute('font-size', '32');
-                nextText.setAttribute('font-weight', 'normal');
-                nextText.textContent = nextWordText;
-                overlayGroup.appendChild(nextText);
+                // Text
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', centerX);
+                text.setAttribute('y', centerY + 10);
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('fill', '#fff');
+                text.setAttribute('font-size', '28');
+                text.setAttribute('font-weight', 'normal');
+                text.textContent = nextWordText;
+                overlayGroup.appendChild(text);
             }
         } else if (this.currentBoxIndex >= this.gameSequence.length) {
-            // Game complete - show completion message
+            // Game complete - show completion message or "tap to continue"
             const completeText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             completeText.setAttribute('x', 625);
-            completeText.setAttribute('y', 48);
+            completeText.setAttribute('y', topY + barHeight / 2 + 10);
             completeText.setAttribute('text-anchor', 'middle');
-            completeText.setAttribute('fill', '#27ae60');
-            completeText.setAttribute('font-size', '36');
             completeText.setAttribute('font-weight', 'bold');
-            completeText.textContent = '🎉 Complete!';
+
+            if (this.waitingForContinue) {
+                // Show "Tap to continue" message
+                completeText.setAttribute('fill', '#3498db');
+                completeText.setAttribute('font-size', '32');
+                completeText.textContent = 'Tap to continue';
+            } else {
+                // Show brief "Complete!" message
+                completeText.setAttribute('fill', '#27ae60');
+                completeText.setAttribute('font-size', '36');
+                completeText.textContent = '🎉 Complete!';
+            }
             overlayGroup.appendChild(completeText);
         }
 
         this.overlayGroup = overlayGroup;
+    }
+
+    /**
+     * Draw full-screen overlay for "tap to continue"
+     */
+    drawContinueOverlay() {
+        // Create a full-screen transparent overlay that captures all taps
+        const overlay = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        overlay.setAttribute('x', 0);
+        overlay.setAttribute('y', 0);
+        overlay.setAttribute('width', '100%');
+        overlay.setAttribute('height', '100%');
+        overlay.setAttribute('fill', 'transparent');
+        overlay.setAttribute('cursor', 'pointer');
+
+        // Add tap handlers
+        const handleTap = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (this.waitingForContinue) {
+                this.loadRandomSentenceAndContinue();
+            }
+        };
+
+        overlay.addEventListener('click', handleTap);
+        overlay.addEventListener('touchend', handleTap);
+
+        this.gameGroup.appendChild(overlay);
     }
 
     /**
@@ -849,12 +1011,13 @@ class GameMode {
             color: 'rgba(96, 125, 139, 0.9)' // Elegant blue-grey
         });
 
-        // Left controllers (objects - nom/acc/dat)
+        // Left controllers (objects - nom/acc/dat/gen)
         this.leftControllers = [];
         const leftControllerConfigs = [
             { caseType: 'nom', shape: 'circle', color: 'rgba(96, 125, 139, 0.9)', label: 'NOM' },
             { caseType: 'akk', shape: 'square', color: 'rgba(96, 125, 139, 0.9)', label: 'AKK' },
-            { caseType: 'dat', shape: 'trapezoid', color: 'rgba(96, 125, 139, 0.9)', label: 'DAT' }
+            { caseType: 'dat', shape: 'trapezoid', color: 'rgba(96, 125, 139, 0.9)', label: 'DAT' },
+            { caseType: 'gen', shape: 'diamond', color: 'rgba(96, 125, 139, 0.9)', label: 'GEN' }
         ];
 
         const spacing = isMobile ? controllerSize + 10 : controllerSize + 20;
@@ -879,7 +1042,7 @@ class GameMode {
     }
 
     /**
-     * Create a case shape indicator (circle for nom, square for akk, trapezoid for dat)
+     * Create a case shape indicator (circle for nom, square for akk, trapezoid for dat, diamond for gen)
      */
     createCaseShape(caseType, x, y, size) {
         let shape;
@@ -905,6 +1068,15 @@ class GameMode {
             const half = size / 2;
             const points = `${x - half + slope},${y - half} ${x + half - slope},${y - half} ${x + half},${y + half} ${x - half},${y + half}`;
             shape.setAttribute('points', points);
+        } else if (caseType === 'gen') {
+            // Diamond (rotated square) for genitive - smaller to match height of other shapes
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            const diamondSize = size * 0.707; // Adjust for 45° rotation
+            shape.setAttribute('x', x - diamondSize / 2);
+            shape.setAttribute('y', y - diamondSize / 2);
+            shape.setAttribute('width', diamondSize);
+            shape.setAttribute('height', diamondSize);
+            shape.setAttribute('transform', `rotate(45 ${x} ${y})`);
         }
 
         return shape;
@@ -940,6 +1112,16 @@ class GameMode {
             const slope = 15;
             const points = `${slope + 10},10 ${config.size - slope - 10},10 ${config.size - 10},${config.size - 10} 10,${config.size - 10}`;
             shape.setAttribute('points', points);
+        } else if (config.shape === 'diamond') {
+            // Diamond (rotated square) for genitive - smaller to match height of other shapes
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            const diamondSize = (config.size - 20) * 0.707; // Adjust for 45° rotation
+            const offset = (config.size - diamondSize) / 2;
+            shape.setAttribute('x', offset);
+            shape.setAttribute('y', offset);
+            shape.setAttribute('width', diamondSize);
+            shape.setAttribute('height', diamondSize);
+            shape.setAttribute('transform', `rotate(45 ${center} ${center})`);
         }
 
         // Highlight selected controller
@@ -999,6 +1181,12 @@ class GameMode {
      * Handle cell tap/click
      */
     handleCellTap(row, col) {
+        // If waiting for user to continue to next sentence, load next sentence on any tap
+        if (this.waitingForContinue) {
+            this.loadRandomSentenceAndContinue();
+            return;
+        }
+
         if (this.currentBoxIndex >= this.gameSequence.length) {
             console.log('Game complete!');
             return;
@@ -1008,17 +1196,19 @@ class GameMode {
         const itemToValidate = currentItem.type === 'box' ? currentItem.item.mainWord : currentItem.item;
 
         // Determine case type
+        // Subjects and verbs don't need case selection, objects require explicit case selection
         let caseType;
-        if (itemToValidate.type === 'subject') {
-            // Subjects default to nominative
+
+        if (this.selectedCase) {
+            // User explicitly selected a case - use it
+            caseType = this.selectedCase;
+        } else if (itemToValidate.type === 'subject' || itemToValidate.type === 'verb' || itemToValidate.type === 'modal') {
+            // Subjects, verbs, and modals default to nominative (no case selection required)
             caseType = 'nom';
         } else {
-            // Objects require case selection
-            if (!this.selectedCase) {
-                console.log('Please select a case first (NOM/AKK/DAT)');
-                return;
-            }
-            caseType = this.selectedCase;
+            // All other words (objects, etc.) require explicit case selection
+            console.log('Please select a case first (NOM/AKK/DAT/GEN)');
+            return;
         }
 
         // Place the word at this cell
@@ -1072,18 +1262,8 @@ class GameMode {
             // Reveal the corresponding box in the gridview
             if (currentItem.type === 'box') {
                 this.revealedBoxIndices.add(currentItem.boxIndex);
-
-                // Clear previously accumulated auto-words (they're now visible on arrows in diagram)
-                this.accumulatedAutoWords = [];
-
-                // Auto-place any connection words after this box
-                if (currentItem.boxIndex !== undefined && this.autoPlacedConnections[currentItem.boxIndex]) {
-                    const autoWords = this.autoPlacedConnections[currentItem.boxIndex];
-                    if (autoWords.length > 0) {
-                        // Show auto-placed words on the left
-                        this.showAutoPlacedWords(autoWords);
-                    }
-                }
+                // Note: Auto-words are now calculated dynamically via getVisibleAutoWords()
+                // No need to manage accumulatedAutoWords manually
             }
 
             // Move to next item
@@ -1182,20 +1362,21 @@ class GameMode {
     }
 
     /**
-     * Show auto-placed words - they accumulate on the left until next box is placed
+     * Get all auto-placed words that should be visible based on current progress
+     * This maintains original sentence order
      */
-    showAutoPlacedWords(words) {
-        words.forEach(word => {
-            console.log(`Auto-placing: ${word.text}`);
-
-            // Add to accumulated auto words
-            this.accumulatedAutoWords.push(word.text);
-        });
-
-        // Redraw to show the auto-placed words on the left
-        if (window.app) {
-            window.app.redrawAll();
+    getVisibleAutoWords() {
+        if (this.currentBoxIndex >= this.gameSequence.length) return [];
+        // Show auto-words that follow the most recent completed sequence item.
+        // These are words that appear in sentence order between the last placed item
+        // and the current one, so they belong on the left side of the word bar.
+        for (let i = this.currentBoxIndex - 1; i >= 0; i--) {
+            const autoWords = this.autoWordsBySeqIndex[i];
+            if (autoWords && autoWords.length > 0) {
+                return autoWords.map(w => w.text);
+            }
         }
+        return [];
     }
 
     /**
@@ -1237,8 +1418,18 @@ class GameMode {
         // Check if row/col match
         const positionMatch = expectedPosition.row === row && expectedPosition.col === col;
 
-        // Check if case matches (for objects)
-        const caseMatch = !word.case || word.case === caseType;
+        // Check if case matches
+        // - Verbs and modals: no case, so only check position
+        // - Subjects: always nominative case
+        // - Objects: check the specific case (accusative, dative, genitive)
+        let caseMatch = true;
+        if (word.type === 'verb' || word.type === 'modal') {
+            // Verbs and modals have no case - skip case check
+            caseMatch = true;
+        } else {
+            // Subjects and objects: validate case
+            caseMatch = !word.case || word.case === caseType;
+        }
 
         return positionMatch && caseMatch;
     }
@@ -1314,10 +1505,13 @@ class GameMode {
                 }
             }, 1000);
         } else {
-            // Load next random sentence and continue
+            // Wait for user to tap to continue
             setTimeout(() => {
-                this.loadRandomSentenceAndContinue();
-            }, 1500);
+                this.waitingForContinue = true;
+                if (window.app) {
+                    window.app.redrawAll();
+                }
+            }, 800);
         }
     }
 

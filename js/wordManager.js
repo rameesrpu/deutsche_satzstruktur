@@ -69,14 +69,18 @@ class WordManager {
             flowDirection: flowDirection
         };
 
-        // Add conjugation data for all word types
+        // Add conjugation data for verbs, modals, subjects, and accusative/dative objects
         if (type === 'verb' || type === 'modal') {
             word.conjugation = {
-                pronoun: 'ich'  // Default pronoun for verbs
+                pronoun: 'none'  // Default none - user must explicitly set conjugation
             };
         } else if (type === 'subject') {
             word.conjugation = {
                 pronoun: 'none'  // Default none for subjects (can be set to match verb)
+            };
+        } else if (type === 'object-akk' || type === 'object-dat') {
+            word.conjugation = {
+                pronoun: 'none'  // Default none for accusative/dative objects (for personal pronouns like mich, mir, dich, dir)
             };
         } else {
             word.conjugation = {

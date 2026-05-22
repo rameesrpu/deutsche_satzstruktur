@@ -90,27 +90,32 @@ const GrammaticalConfig = {
 
     /**
      * Get color for a word based on priority hierarchy:
-     * 1. Conjugation pronoun (if set and not 'none')
-     * 2. Plural (if number is 'pl')
-     * 3. Gender (if set and not 'none')
-     * 4. Default grey
+     * - Verbs/modals/personal pronouns/object pronouns: Use conjugation pronoun color
+     * - Subjects/objects/adjectives: Use plural (if pl) or gender color
+     * - Other: Default grey
      *
-     * @param {Object} word - Word object with conjugation, number, and gender properties
+     * IMPORTANT: Conjugation and gender are mutually exclusive by word type:
+     * - Conjugation for: verb, modal, subject (when it's a personal pronoun), object-akk/object-dat (when personal pronouns like mich, mir, dich, dir)
+     * - Gender for: subject, object, adjective (but NOT verb/modal, and NOT when conjugation is set)
+     *
+     * @param {Object} word - Word object with type, conjugation, number, and gender properties
      * @returns {string} Hex color code
      */
     getColorForWord(word) {
-        // Priority 1: Conjugation takes highest priority
-        if (word.conjugation?.pronoun && word.conjugation.pronoun !== 'none') {
+        // Priority 1: Conjugation for verbs, modals, subjects, and accusative/dative objects (personal pronouns)
+        if ((word.type === 'verb' || word.type === 'modal' || word.type === 'subject' ||
+             word.type === 'object-akk' || word.type === 'object-dat') &&
+            word.conjugation?.pronoun && word.conjugation.pronoun !== 'none') {
             const pronounConfig = this.pronouns[word.conjugation.pronoun];
             return pronounConfig ? pronounConfig.color : this.genders['none'];
         }
 
-        // Priority 2: Plural (without specific conjugation)
+        // Priority 2: Plural (for subjects/objects/adjectives without specific conjugation)
         if (word.number === 'pl') {
             return this.pronouns['sie_pl'].color;
         }
 
-        // Priority 3: Gender
+        // Priority 3: Gender (for subjects/objects/adjectives)
         if (word.gender && word.gender !== 'none') {
             return this.genders[word.gender];
         }

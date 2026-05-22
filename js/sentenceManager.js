@@ -307,8 +307,10 @@ class SentenceManager {
                 word.case = analyzed.case;
                 word.number = analyzed.number;
 
-                // Update conjugation pronoun for verbs and pronouns
-                if (analyzed.conjugation_pronoun && analyzed.conjugation_pronoun !== 'none') {
+                // Update conjugation pronoun ONLY for verbs, modals, and subjects (personal pronouns)
+                // Objects and adjectives should NOT receive conjugation
+                if ((analyzed.type === 'verb' || analyzed.type === 'modal' || analyzed.type === 'subject') &&
+                    analyzed.conjugation_pronoun && analyzed.conjugation_pronoun !== 'none') {
                     if (!word.conjugation) {
                         word.conjugation = {};
                     }
@@ -343,8 +345,9 @@ class SentenceManager {
                     canvasWord.case = analyzed.case;
                     canvasWord.number = analyzed.number;
 
-                    // Update conjugation pronoun
-                    if (analyzed.conjugation_pronoun && analyzed.conjugation_pronoun !== 'none') {
+                    // Update conjugation pronoun ONLY for verbs, modals, and subjects
+                    if ((analyzed.type === 'verb' || analyzed.type === 'modal' || analyzed.type === 'subject') &&
+                        analyzed.conjugation_pronoun && analyzed.conjugation_pronoun !== 'none') {
                         if (!canvasWord.conjugation) {
                             canvasWord.conjugation = {};
                         }
