@@ -132,33 +132,17 @@ class GameMode {
      */
     startNewSentence() {
         this.currentSentenceScore = 0;
-        this.currentBoxIndex = 0;
-        this.currentConnectionIndex = 0;
-        this.placedBoxes = [];
-        this.placedWords = new Map();
-        this.placedVerbs = [];
-        this.autoPlacedWords = [];
-        this.autoWordsBySeqIndex = [];
-        this.gameSequence = [];
+        this.currentIndex = 0;
+        this.manualItems = [];
+        this.wordToManualItem = new Map();
         this.feedbackAnimation = null;
-        this.accumulatedAutoWords = [];
         this.currentWordDisplay = null;
         this.currentWordAttempts = 0;
         this.waitingForContinue = false;
 
-        // Parse current sentence
         this.parseSentence();
-
-        // Build game sequence (boxes + connections in order)
-        this.buildGameSequence();
-
-        // Pre-calculate gridview layout
+        this.buildManualItems();
         this.preCalculateGridView();
-
-        // Note: Auto-placed words (including leading words) are now shown dynamically via getVisibleAutoWords()
-        // No need to call showAutoPlacedWords here
-
-        // Initialize current word display
         this.updateCurrentWordDisplay();
     }
 
@@ -176,20 +160,14 @@ class GameMode {
             this.keyboardHandler = null;
         }
 
-        // Clear all state
-        this.placedWords.clear();
-        this.placedBoxes = [];
-        this.placedVerbs = [];
-        this.autoWordsBySeqIndex = [];
-        this.gameSequence = [];
-        this.currentAutoPlacedText = null;
+        this.manualItems = [];
+        this.wordToManualItem = new Map();
         this.feedbackAnimation = null;
         this.preCalculatedBoxes = [];
         this.preCalculatedConnections = [];
         this.preCalculatedLeadingWords = [];
         this.preCalculatedTrailingWords = [];
         this.revealedBoxIndices = new Set();
-        this.accumulatedAutoWords = [];
         this.currentWordDisplay = null;
     }
 
@@ -321,96 +299,37 @@ class GameMode {
      * IMPORTANT: Preserves original sentence word order
      * Boxes are single units, and some words auto-place
      */
-    buildGameSequence() {
-        const { boxes, connections, leadingWords, trailingWords } = this.parsedSentence;
+    buildManualItems() {
+        const { boxes } = this.parsedSentence;
+        this.manualItems = [];
+        this.wordToManualItem = new Map();
 
-        this.gameSequence = [];
-        // autoWordsBySeqIndex[i] = auto-placed words that follow gameSequence[i] in sentence order
-        this.autoWordsBySeqIndex = [];
+        const coveredWords = new Set();
+        const coveredBoxIndices = new Set();
 
-        // Create maps to track which words belong to which box
-        const wordToBoxIndex = new Map(); // Maps word object to box index
-        const boxProcessed = new Set(); // Track which boxes we've already added
+        for (const word of this.words) {
+            if (coveredWords.has(word)) continue;
 
-        // Map all words in boxes to their box index
-        boxes.forEach((box, boxIndex) => {
-            box.words.forEach(word => {
-                wordToBoxIndex.set(word, boxIndex);
-            });
-        });
+            // Is this the first word of an unprocessed box?
+            const boxIndex = boxes.findIndex((box, i) =>
+                !coveredBoxIndices.has(i) && box.words[0] === word
+            );
 
-        // Create a map of word to its role (leading/connection/trailing)
-        const wordRoles = new Map();
-        leadingWords.forEach(word => wordRoles.set(word, 'leading'));
-        trailingWords.forEach(word => wordRoles.set(word, 'trailing'));
-        connections.forEach((connWords, boxIndex) => {
-            connWords.forEach(word => wordRoles.set(word, `connection-${boxIndex}`));
-        });
-
-        let currentAutoWords = [];
-
-        // Flush accumulated auto-words onto the most recently added sequence item.
-        const flushAutoWords = () => {
-            const seqIdx = this.gameSequence.length - 1;
-            if (seqIdx >= 0 && currentAutoWords.length > 0) {
-                if (!this.autoWordsBySeqIndex[seqIdx]) this.autoWordsBySeqIndex[seqIdx] = [];
-                this.autoWordsBySeqIndex[seqIdx].push(...currentAutoWords);
-            }
-            currentAutoWords = [];
-        };
-
-        // Iterate through words in original sentence order
-        for (let i = 0; i < this.words.length; i++) {
-            const word = this.words[i];
-
-            // Check if this word is the first word of a box
-            if (wordToBoxIndex.has(word)) {
-                const boxIndex = wordToBoxIndex.get(word);
+            if (boxIndex >= 0) {
                 const box = boxes[boxIndex];
-
-                // Only add the box if it's the first word of the box and we haven't processed it yet
-                if (box.words[0] === word && !boxProcessed.has(boxIndex)) {
-                    flushAutoWords();
-                    this.gameSequence.push({
-                        type: 'box',
-                        item: box,
-                        boxIndex: boxIndex
-                    });
-                    boxProcessed.add(boxIndex);
-                }
-            }
-            // Check if this word is a leading/connection/trailing word
-            else if (wordRoles.has(word)) {
-                const role = wordRoles.get(word);
-
-                if (this.isManualWord(word)) {
-                    flushAutoWords();
-                    const itemData = {
-                        type: 'word',
-                        item: word
-                    };
-
-                    if (role === 'leading') {
-                        itemData.isLeading = true;
-                    } else if (role === 'trailing') {
-                        itemData.isTrailing = true;
-                    } else if (role.startsWith('connection-')) {
-                        itemData.isConnection = true;
-                        itemData.afterBoxIndex = parseInt(role.split('-')[1]);
-                    }
-
-                    this.gameSequence.push(itemData);
-                } else {
-                    currentAutoWords.push(word);
-                }
+                const item = { type: 'box', item: box, boxIndex };
+                this.manualItems.push(item);
+                box.words.forEach(w => { this.wordToManualItem.set(w, item); coveredWords.add(w); });
+                coveredBoxIndices.add(boxIndex);
+            } else if (this.isManualWord(word)) {
+                const item = { type: 'word', item: word };
+                this.manualItems.push(item);
+                this.wordToManualItem.set(word, item);
+                coveredWords.add(word);
             }
         }
 
-        // Flush any remaining auto words after the last sequence item
-        flushAutoWords();
-
-        console.log('Game sequence built (preserving original order):', this.gameSequence);
-        console.log('Auto-placed words by sequence index:', this.autoWordsBySeqIndex);
+        console.log('Manual items (sentence order):', this.manualItems);
     }
 
     /**
@@ -437,34 +356,14 @@ class GameMode {
     /**
      * Filter words to only show those that should be visible:
      * - Auto-placed words are always visible
-     * - Manual words are only visible if they've been placed (currentBoxIndex passed them in sequence)
+     * - Manual words are only visible if they've been placed (currentIndex passed them in manualItems)
      */
     filterVisibleWords(words) {
         return words.filter(word => {
-            // Auto-placed words are always visible
-            if (!this.isManualWord(word)) {
-                return true;
-            }
-
-            // Manual words: check if we've reached them in the game sequence
-            // Find this word in the game sequence
-            for (let i = 0; i < this.gameSequence.length; i++) {
-                const item = this.gameSequence[i];
-
-                // Check if this sequence item matches the word
-                if (item.type === 'word' && item.item === word) {
-                    // Only show if we've passed this point in the sequence
-                    return i < this.currentBoxIndex;
-                } else if (item.type === 'box') {
-                    // Check if word is part of this box
-                    if (item.item.words.includes(word)) {
-                        return i < this.currentBoxIndex;
-                    }
-                }
-            }
-
-            // If word not found in sequence (shouldn't happen), don't show it
-            return false;
+            if (!this.isManualWord(word)) return true;
+            const item = this.wordToManualItem.get(word);
+            if (!item) return false;
+            return this.manualItems.indexOf(item) < this.currentIndex;
         });
     }
 
@@ -763,8 +662,8 @@ class GameMode {
         let currentWordBoxLeft = 625; // Default center if no current word
         let currentWordBoxWidth = 0;
 
-        if (this.currentWordDisplay && this.currentBoxIndex < this.gameSequence.length) {
-            const activeItem = this.gameSequence[this.currentBoxIndex];
+        if (this.currentWordDisplay && this.currentIndex < this.manualItems.length) {
+            const activeItem = this.manualItems[this.currentIndex];
 
             if (activeItem.type === 'box') {
                 const phraseText = activeItem.item.words.map(w => w.text).join(' ');
@@ -819,8 +718,8 @@ class GameMode {
         }
 
         // Draw current word (manual placement) in center as dark grey box
-        if (this.currentWordDisplay && this.currentBoxIndex < this.gameSequence.length) {
-            const activeItem = this.gameSequence[this.currentBoxIndex];
+        if (this.currentWordDisplay && this.currentIndex < this.manualItems.length) {
+            const activeItem = this.manualItems[this.currentIndex];
             const centerX = 625;
             const centerY = topY + barHeight / 2;
 
@@ -860,34 +759,21 @@ class GameMode {
             text.textContent = displayText;
             overlayGroup.appendChild(text);
 
-            // Draw next word preview (to the right, in grey)
-            let nextItem = null;
-
-            // Show the first auto-placed word that follows the current item in sentence order,
-            // or the next manual item if no auto-words come immediately after.
-            const autoWordsAfter = this.autoWordsBySeqIndex[this.currentBoxIndex];
-            if (autoWordsAfter && autoWordsAfter.length > 0) {
-                nextItem = autoWordsAfter[0];
+            // Draw next word preview (to the right, in grey).
+            // Look at the word immediately after the current item in sentence order.
+            // If that word is the start of a box, show the full box phrase.
+            const nextWordInSentence = this.words[this.getItemWordRange(activeItem)[1] + 1];
+            let nextWordText = null;
+            if (nextWordInSentence) {
+                const nextManual = this.wordToManualItem.get(nextWordInSentence);
+                nextWordText = (nextManual && nextManual.type === 'box')
+                    ? nextManual.item.words.map(w => w.text).join(' ')
+                    : nextWordInSentence.text;
             }
 
-            if (!nextItem && this.currentBoxIndex + 1 < this.gameSequence.length) {
-                nextItem = this.gameSequence[this.currentBoxIndex + 1].item;
-            }
-
-            if (nextItem) {
+            if (nextWordText) {
                 let nextWordWidth;
-                let nextWordText;
-
-                // Check if next item is a box (has 'words' property) or a single word
-                const isNextItemBox = nextItem.words && nextItem.words.length > 1;
-
-                if (isNextItemBox) {
-                    nextWordText = nextItem.words.map(w => w.text).join(' ');
-                    nextWordWidth = this.estimateTextWidth(nextWordText, 28);
-                } else {
-                    nextWordText = nextItem.text;
-                    nextWordWidth = this.estimateTextWidth(nextWordText, 28);
-                }
+                nextWordWidth = this.estimateTextWidth(nextWordText, 28);
 
                 const nextWordX = currentWordBoxLeft + wordWidth + 15; // 15px gap
                 const centerX = nextWordX + nextWordWidth / 2;
@@ -918,7 +804,7 @@ class GameMode {
                 text.textContent = nextWordText;
                 overlayGroup.appendChild(text);
             }
-        } else if (this.currentBoxIndex >= this.gameSequence.length) {
+        } else if (this.currentIndex >= this.manualItems.length) {
             // Game complete - show completion message or "tap to continue"
             const completeText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             completeText.setAttribute('x', 625);
@@ -1187,12 +1073,12 @@ class GameMode {
             return;
         }
 
-        if (this.currentBoxIndex >= this.gameSequence.length) {
+        if (this.currentIndex >= this.manualItems.length) {
             console.log('Game complete!');
             return;
         }
 
-        const currentItem = this.gameSequence[this.currentBoxIndex];
+        const currentItem = this.manualItems[this.currentIndex];
         const itemToValidate = currentItem.type === 'box' ? currentItem.item.mainWord : currentItem.item;
 
         // Determine case type
@@ -1227,12 +1113,12 @@ class GameMode {
      * Place current item in selected cell
      */
     placeWord(row, col, caseType) {
-        if (this.currentBoxIndex >= this.gameSequence.length) {
+        if (this.currentIndex >= this.manualItems.length) {
             console.log('Game complete!');
             return;
         }
 
-        const currentItem = this.gameSequence[this.currentBoxIndex];
+        const currentItem = this.manualItems[this.currentIndex];
         const itemToValidate = currentItem.type === 'box' ? currentItem.item.mainWord : currentItem.item;
 
         console.log(`Placing ${currentItem.type}: ${this.getItemText(currentItem)} at row ${row}, col ${col}, case: ${caseType}`);
@@ -1267,13 +1153,13 @@ class GameMode {
             }
 
             // Move to next item
-            this.currentBoxIndex++;
+            this.currentIndex++;
 
             // Update current word display
             this.updateCurrentWordDisplay();
 
             // Check if game is complete
-            if (this.currentBoxIndex >= this.gameSequence.length) {
+            if (this.currentIndex >= this.manualItems.length) {
                 setTimeout(() => {
                     this.showGameComplete();
                 }, 600);
@@ -1365,30 +1251,42 @@ class GameMode {
      * Get all auto-placed words that should be visible based on current progress
      * This maintains original sentence order
      */
-    getVisibleAutoWords() {
-        if (this.currentBoxIndex >= this.gameSequence.length) return [];
-        // Show auto-words that follow the most recent completed sequence item.
-        // These are words that appear in sentence order between the last placed item
-        // and the current one, so they belong on the left side of the word bar.
-        for (let i = this.currentBoxIndex - 1; i >= 0; i--) {
-            const autoWords = this.autoWordsBySeqIndex[i];
-            if (autoWords && autoWords.length > 0) {
-                return autoWords.map(w => w.text);
-            }
+    // Returns the [start, end] indices into this.words for a manual item.
+    getItemWordRange(item) {
+        if (item.type === 'box') {
+            const ws = item.item.words;
+            return [this.words.indexOf(ws[0]), this.words.indexOf(ws[ws.length - 1])];
         }
-        return [];
+        const idx = this.words.indexOf(item.item);
+        return [idx, idx];
+    }
+
+    // Auto-placed words that sit in the sentence between the previously placed item
+    // and the current one — shown on the left side of the word bar.
+    getVisibleAutoWords() {
+        if (this.currentIndex === 0 || this.currentIndex > this.manualItems.length) return [];
+        const prev = this.manualItems[this.currentIndex - 1];
+        const curr = this.manualItems[this.currentIndex];
+        if (!prev || !curr) return [];
+        const prevEnd = this.getItemWordRange(prev)[1];
+        const currStart = this.getItemWordRange(curr)[0];
+        const result = [];
+        for (let i = prevEnd + 1; i < currStart; i++) {
+            if (!this.isManualWord(this.words[i])) result.push(this.words[i].text);
+        }
+        return result;
     }
 
     /**
      * Update the current word display (what the player needs to place)
      */
     updateCurrentWordDisplay() {
-        if (this.currentBoxIndex >= this.gameSequence.length) {
+        if (this.currentIndex >= this.manualItems.length) {
             this.currentWordDisplay = null;
             return;
         }
 
-        const currentItem = this.gameSequence[this.currentBoxIndex];
+        const currentItem = this.manualItems[this.currentIndex];
         this.currentWordDisplay = this.getItemText(currentItem);
 
         // Reset attempts for new word
@@ -1438,11 +1336,11 @@ class GameMode {
      * Auto-place current word after 3 failed attempts
      */
     autoPlaceCurrentWord() {
-        if (this.currentBoxIndex >= this.gameSequence.length) {
+        if (this.currentIndex >= this.manualItems.length) {
             return;
         }
 
-        const currentItem = this.gameSequence[this.currentBoxIndex];
+        const currentItem = this.manualItems[this.currentIndex];
         const itemToValidate = currentItem.type === 'box' ? currentItem.item.mainWord : currentItem.item;
 
         // Get the correct position
