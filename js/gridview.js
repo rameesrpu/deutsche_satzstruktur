@@ -163,23 +163,15 @@ class GridViewModel {
     }
 
     positionWords(words, group, startX, startY, wordManager) {
-        console.log('=== FLOW DIAGRAM: Parsing sentence ===');
-
         // Parse sentence into boxes and connecting words
         const { boxes, connections, leadingWords, trailingWords } = this.parseSentenceFlow(words);
-
-        console.log('Boxes:', boxes.map(b => `[${b.words.map(w => w.text).join(' ')}]`).join(' -> '));
-        console.log('Connections:', connections);
-        console.log('Leading words:', leadingWords);
-        console.log('Trailing words:', trailingWords);
 
         // First pass: Count how many boxes go in each cell
         const cellOccupancy = {};
         const boxCellAssignments = [];
 
-        boxes.forEach((box, index) => {
+        boxes.forEach((box) => {
             const position = this.getWordPosition(box.mainWord);
-            console.log(`Box ${index} "${box.words.map(w => w.text).join(' ')}" -> position:`, position);
             if (position) {
                 const cellKey = `${position.row}-${position.col}`;
                 if (!cellOccupancy[cellKey]) {
@@ -187,8 +179,6 @@ class GridViewModel {
                 }
                 boxCellAssignments.push({ box, position, cellKey, indexInCell: cellOccupancy[cellKey] });
                 cellOccupancy[cellKey]++;
-            } else {
-                console.warn(`⚠️  Box ${index} "${box.words.map(w => w.text).join(' ')}" has NO POSITION - will not be drawn!`);
             }
         });
 
@@ -262,266 +252,89 @@ class GridViewModel {
     }
 
     parseSentenceFlow(words) {
-        console.log('📦 Starting improved phrase parsing...');
-
-        // Phase 1: Expanded word class lists
-        const DETERMINERS = new Set([
-            // Definite articles
-            'der', 'die', 'das', 'den', 'dem', 'des',
-            // Indefinite articles
-            'ein', 'eine', 'einen', 'einem', 'eines', 'einer',
-            // Negative articles
-            'kein', 'keine', 'keinen', 'keinem', 'keines', 'keiner',
-            // Possessive pronouns
-            'mein', 'meine', 'meinen', 'meinem', 'meines', 'meiner',
-            'dein', 'deine', 'deinen', 'deinem', 'deines', 'deiner',
-            'sein', 'seine', 'seinen', 'seinem', 'seines', 'seiner',
-            'ihr', 'ihre', 'ihren', 'ihrem', 'ihres', 'ihrer',
-            'unser', 'unsere', 'unseren', 'unserem', 'unseres', 'unserer',
-            'euer', 'eure', 'euren', 'eurem', 'eures', 'eurer',
-            // Demonstratives
-            'dieser', 'diese', 'dieses', 'diesen', 'diesem',
-            'jener', 'jene', 'jenes', 'jenen', 'jenem',
-            'solcher', 'solche', 'solches', 'solchen', 'solchem',
-            'mancher', 'manche', 'manches', 'manchen', 'manchem',
-            // Quantifiers
-            'alle', 'aller', 'allen', 'allem', 'alles',
-            'viele', 'vieler', 'vielen', 'vielem',
-            'einige', 'einiger', 'einigen', 'einigem',
-            'mehrere', 'mehrerer', 'mehreren', 'mehrerem',
-            'wenige', 'weniger', 'wenigen', 'wenigem',
-            'beide', 'beider', 'beiden', 'beidem'
+        // Words that connect clauses — not part of any noun cluster
+        const CONNECTOR_TYPES = new Set([
+            'verb', 'modal', 'preposition', 'conjunction', 'coord-conjunction', 'other'
         ]);
 
-        // Helper functions (Phase 2)
-        const isNoun = (word) => {
-            const text = word.text.toLowerCase();
-            // CRITICAL: First check if it's a determiner - determiners are NOT nouns
-            // even if they're tagged as 'subject' or 'object' types
-            if (DETERMINERS.has(text) || word.type === 'article') {
-                return false;
-            }
-            // Then check if it has a noun type
-            return word.type === 'subject' ||
-                   word.type === 'direct-object' ||
-                   word.type === 'indirect-object' ||
-                   word.type === 'prepositional-object' ||
-                   word.type.includes('object');
-        };
+        const isConnector = (word) => CONNECTOR_TYPES.has(word.type);
 
-        const isVerb = (word) => {
-            return word.type === 'verb' || word.type === 'modal';
-        };
+        // A word is noun-typed if it carries a grammatical role (subject or any object variant).
+        // Adjectives and determiners share the same case but not this role — the last noun-typed
+        // word in a cluster is used as mainWord for grid-cell positioning.
+        const isNounType = (word) =>
+            word.type === 'subject' ||
+            word.type === 'direct-object' ||
+            word.type.includes('object');
 
-        const isPreposition = (word) => {
-            return word.type === 'preposition';
-        };
-
-        const canBeInNounPhrase = (word) => {
-            const text = word.text.toLowerCase();
-
-            // Exclude adverbs explicitly - they modify verbs, not nouns
-            if (word.type === 'adverb') {
-                return false;
-            }
-
-            // Exclude verbs and modals
-            if (word.type === 'verb' || word.type === 'modal') {
-                return false;
-            }
-
-            return (
-                DETERMINERS.has(text) ||           // Articles, possessives, demonstratives, quantifiers
-                word.type === 'adjective' ||       // Adjectives
-                word.type === 'article'            // Explicitly tagged articles
-                // NOTE: Removed 'other' type - it was too permissive and caught adverbs
-            );
-        };
-
-        const isNounPhraseBoundary = (word) => {
-            // These word types mark the end of a noun phrase
-            return isNoun(word) || isVerb(word);
-        };
-
-        const collectNounPhrase = (words, nounIndex, processedIndices) => {
-            // Collect all words that form a noun phrase with this noun
-            const phraseWords = [];
-            const phraseIndices = [];
-
-            // Look backwards from the noun to find modifiers
-            let startIdx = nounIndex;
-            for (let j = nounIndex - 1; j >= 0; j--) {
-                // Skip already processed words
-                if (processedIndices.has(j)) {
-                    break;
-                }
-
-                const prevWord = words[j];
-
-                // Stop at phrase boundaries (other nouns, verbs)
-                if (isNounPhraseBoundary(prevWord)) {
-                    break;
-                }
-
-                // Stop at prepositions (they connect phrases, not part of the phrase)
-                if (isPreposition(prevWord)) {
-                    break;
-                }
-
-                // Check if this word can be part of the noun phrase
-                if (canBeInNounPhrase(prevWord)) {
-                    startIdx = j;
-                } else {
-                    // Stop at words that don't belong in noun phrases
-                    break;
-                }
-            }
-
-            // Collect all words from startIdx to nounIndex
-            for (let j = startIdx; j <= nounIndex; j++) {
-                phraseWords.push(words[j]);
-                phraseIndices.push(j);
-            }
-
-            // Log the collected phrase
-            console.log(`  📦 Collected phrase: "${phraseWords.map(w => w.text).join(' ')}" (indices ${startIdx}-${nounIndex})`);
-
-            return { phraseWords, phraseIndices };
-        };
-
-        // Phase 3: Validation helper
-        const validateNounPhrase = (phraseWords, mainWord) => {
-            // Find article/determiner in the phrase
-            const determiner = phraseWords.find(w =>
-                DETERMINERS.has(w.text.toLowerCase()) || w.type === 'article'
-            );
-
-            if (determiner && mainWord) {
-                // Check case agreement
-                if (determiner.case && mainWord.case && determiner.case !== mainWord.case) {
-                    console.warn(`  ⚠️  Case mismatch: "${determiner.text}" (${determiner.case}) vs "${mainWord.text}" (${mainWord.case})`);
-                }
-
-                // Check gender agreement (if both have gender info)
-                if (determiner.gender && mainWord.gender && determiner.gender !== mainWord.gender) {
-                    console.warn(`  ⚠️  Gender mismatch: "${determiner.text}" (${determiner.gender}) vs "${mainWord.text}" (${mainWord.gender})`);
-                }
-
-                // Check number agreement
-                if (determiner.number && mainWord.number && determiner.number !== mainWord.number) {
-                    console.warn(`  ⚠️  Number mismatch: "${determiner.text}" (${determiner.number}) vs "${mainWord.text}" (${mainWord.number})`);
-                }
-            }
-        };
-
-        // Main parsing logic (Phase 2: Simplified)
         const boxes = [];
         const connections = [];
         const leadingWords = [];
-        const trailingWords = [];
-        const processedIndices = new Set();
+        const trailingWords = []; // kept for API compatibility
+        let currentCluster = null;
+        let pendingConnectors = [];
 
-        // Step 1: Identify all noun phrases (boxes)
-        console.log('🔍 Step 1: Identifying noun phrases...');
-        for (let i = 0; i < words.length; i++) {
-            const word = words[i];
-
-            if (isNoun(word) && !processedIndices.has(i)) {
-                console.log(`  Found noun: "${word.text}" at index ${i}`);
-
-                // Collect the complete noun phrase
-                const { phraseWords, phraseIndices } = collectNounPhrase(words, i, processedIndices);
-
-                // Mark all words in the phrase as processed
-                phraseIndices.forEach(idx => processedIndices.add(idx));
-
-                // Validate the noun phrase (Phase 3)
-                validateNounPhrase(phraseWords, word);
-
-                // Create the box
-                boxes.push({
-                    words: phraseWords,
-                    mainWord: word,
-                    case: word.case || 'nom'
-                });
+        const finalizeCluster = () => {
+            if (!currentCluster.mainWord) {
+                currentCluster.mainWord = currentCluster.words[currentCluster.words.length - 1];
             }
-        }
+            boxes.push(currentCluster);
+            currentCluster = null;
+        };
 
-        console.log(`✅ Found ${boxes.length} noun phrases`);
+        // Cluster key combines case and gender: "dem grünen Gras" (dat/n) and "einem Filmstar"
+        // (dat/m) share the same case but differ in gender, so they form separate clusters.
+        const clusterKey = (word) => `${word.case || 'nom'}/${word.gender || 'none'}`;
 
-        // Step 2: Collect connection words between boxes
-        console.log('🔍 Step 2: Collecting connections...');
-        if (boxes.length > 0) {
-            for (let boxIdx = 0; boxIdx < boxes.length - 1; boxIdx++) {
-                const currentBoxLastWordIdx = words.indexOf(boxes[boxIdx].words[boxes[boxIdx].words.length - 1]);
-                const nextBoxFirstWordIdx = words.indexOf(boxes[boxIdx + 1].words[0]);
-
-                const connectionWords = [];
-                for (let i = currentBoxLastWordIdx + 1; i < nextBoxFirstWordIdx; i++) {
-                    if (!processedIndices.has(i)) {
-                        connectionWords.push(words[i]);
-                        processedIndices.add(i);
-                        console.log(`  ➡️  Connection word: "${words[i].text}" (between box ${boxIdx} and ${boxIdx + 1})`);
-                    }
-                }
-                connections.push(connectionWords);
+        const startCluster = (word) => {
+            // Flush accumulated connectors into the right bucket
+            if (boxes.length === 0) {
+                leadingWords.push(...pendingConnectors);
+            } else {
+                connections.push([...pendingConnectors]);
             }
+            pendingConnectors = [];
+            currentCluster = {
+                words: [word],
+                key: clusterKey(word),
+                case: word.case || 'nom',
+                mainWord: isNounType(word) ? word : null
+            };
+        };
 
-            // PHASE 1 FIX: Collect connection words AFTER the last box
-            // (This is where sentence-final verbs like "sehen" go)
-            const lastBoxLastWordIdx = words.indexOf(boxes[boxes.length - 1].words[boxes[boxes.length - 1].words.length - 1]);
-            const finalConnectionWords = [];
-            for (let i = lastBoxLastWordIdx + 1; i < words.length; i++) {
-                if (!processedIndices.has(i)) {
-                    // Check if it's a verb or other connecting word (not a modifier)
-                    if (!canBeInNounPhrase(words[i])) {
-                        finalConnectionWords.push(words[i]);
-                        processedIndices.add(i);
-                        console.log(`  ➡️  Final connection word: "${words[i].text}"`);
-                    }
-                }
-            }
-            if (finalConnectionWords.length > 0) {
-                connections.push(finalConnectionWords);
-            }
-        }
-
-        console.log(`✅ Found ${connections.length} connections`);
-
-        // Step 3: Collect leading words (before first box)
-        console.log('🔍 Step 3: Collecting leading/trailing words...');
-        if (boxes.length > 0) {
-            const firstBoxFirstWordIdx = words.indexOf(boxes[0].words[0]);
-            for (let i = 0; i < firstBoxFirstWordIdx; i++) {
-                if (!processedIndices.has(i)) {
-                    leadingWords.push(words[i]);
-                    processedIndices.add(i);
-                    console.log(`  ⬅️  Leading word: "${words[i].text}"`);
+        for (const word of words) {
+            if (isConnector(word)) {
+                if (currentCluster) finalizeCluster();
+                pendingConnectors.push(word);
+            } else {
+                if (currentCluster && currentCluster.key === clusterKey(word)) {
+                    currentCluster.words.push(word);
+                    // Always track the last noun-typed word so mainWord is the head noun,
+                    // not the preceding determiner
+                    if (isNounType(word)) currentCluster.mainWord = word;
+                } else {
+                    if (currentCluster) finalizeCluster();
+                    startCluster(word);
                 }
             }
         }
 
-        // Step 4: Collect trailing words (after last box, if not already collected as connections)
-        if (boxes.length > 0) {
-            const lastBoxLastWordIdx = words.indexOf(boxes[boxes.length - 1].words[boxes[boxes.length - 1].words.length - 1]);
-            for (let i = lastBoxLastWordIdx + 1; i < words.length; i++) {
-                if (!processedIndices.has(i)) {
-                    trailingWords.push(words[i]);
-                    processedIndices.add(i);
-                    console.log(`  ➡️  Trailing word: "${words[i].text}"`);
-                }
-            }
-        } else {
-            // No boxes found - all unprocessed words are leading
-            for (let i = 0; i < words.length; i++) {
-                if (!processedIndices.has(i)) {
-                    leadingWords.push(words[i]);
-                    processedIndices.add(i);
-                }
+        if (currentCluster) finalizeCluster();
+
+        // Connectors after the last box go as a final connection entry so
+        // positionWords draws them on the outgoing arrow (connections.length === boxes.length)
+        if (pendingConnectors.length > 0) {
+            if (boxes.length === 0) {
+                leadingWords.push(...pendingConnectors);
+            } else {
+                connections.push([...pendingConnectors]);
             }
         }
 
-        console.log('✨ Parsing complete!\n');
+        console.log('Boxes:', boxes.map(b => `[${b.words.map(w => w.text).join(' ')}]`).join(' -> '));
+        console.log('Connections:', connections.map(c => c.map(w => w.text).join(' ')));
+        console.log('Leading:', leadingWords.map(w => w.text));
+
         return { boxes, connections, leadingWords, trailingWords };
     }
 

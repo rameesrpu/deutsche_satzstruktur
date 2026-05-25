@@ -812,17 +812,9 @@ class GameMode {
             completeText.setAttribute('text-anchor', 'middle');
             completeText.setAttribute('font-weight', 'bold');
 
-            if (this.waitingForContinue) {
-                // Show "Tap to continue" message
-                completeText.setAttribute('fill', '#3498db');
-                completeText.setAttribute('font-size', '32');
-                completeText.textContent = 'Tap to continue';
-            } else {
-                // Show brief "Complete!" message
-                completeText.setAttribute('fill', '#27ae60');
-                completeText.setAttribute('font-size', '36');
-                completeText.textContent = '🎉 Complete!';
-            }
+            completeText.setAttribute('fill', '#27ae60');
+            completeText.setAttribute('font-size', '32');
+            completeText.textContent = '🎉 Complete! Tap to continue';
             overlayGroup.appendChild(completeText);
         }
 
@@ -1409,13 +1401,10 @@ class GameMode {
                 }
             }, 1000);
         } else {
-            // Wait for user to tap to continue
-            setTimeout(() => {
-                this.waitingForContinue = true;
-                if (window.app) {
-                    window.app.redrawAll();
-                }
-            }, 800);
+            this.waitingForContinue = true;
+            if (window.app) {
+                window.app.redrawAll();
+            }
         }
     }
 

@@ -111,7 +111,8 @@ const GrammaticalConfig = {
         }
 
         // Priority 2: Plural (for subjects/objects/adjectives without specific conjugation)
-        if (word.number === 'pl') {
+        // Note: Verbs and modals should NEVER use plural color - they use conjugation color only
+        if (word.number === 'pl' && word.type !== 'verb' && word.type !== 'modal') {
             return this.pronouns['sie_pl'].color;
         }
 

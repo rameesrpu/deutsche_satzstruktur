@@ -305,7 +305,10 @@ class SentenceManager {
                 word.type = analyzed.type;
                 word.gender = analyzed.gender;
                 word.case = analyzed.case;
-                word.number = analyzed.number;
+                // Don't set number on verbs/modals - they use conjugation only for coloring
+                if (analyzed.type !== 'verb' && analyzed.type !== 'modal') {
+                    word.number = analyzed.number;
+                }
 
                 // Update conjugation pronoun ONLY for verbs, modals, and subjects (personal pronouns)
                 // Objects and adjectives should NOT receive conjugation
