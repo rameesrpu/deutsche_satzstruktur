@@ -422,6 +422,17 @@ class UIController {
                 const newType = e.target.value;
                 this.wordManager.updateWordProperty(selectedWord.id, 'type', newType);
 
+                // Sync case to match the new type so the shape updates correctly
+                const typeCaseMap = {
+                    'subject': 'nom',
+                    'object-akk': 'akk',
+                    'object-dat': 'dat',
+                    'object-gen': 'gen',
+                };
+                if (typeCaseMap[newType] !== undefined) {
+                    this.wordManager.updateWordProperty(selectedWord.id, 'case', typeCaseMap[newType]);
+                }
+
                 // If changed to conjunction, set this word and all following to vertical flow
                 if (newType === 'conjunction') {
                     this.applyVerticalFlowFromConjunction(selectedWord.id);

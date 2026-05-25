@@ -302,7 +302,8 @@ class DeutschApp {
 
             // Also allow Enter key to add sentence
             sentenceInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' && e.ctrlKey) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
                     const text = sentenceInput.value.trim();
                     if (text) {
                         this.addSentence(text);

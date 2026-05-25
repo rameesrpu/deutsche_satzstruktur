@@ -1264,15 +1264,21 @@ class GameMode {
     // Auto-placed words that sit in the sentence between the previously placed item
     // and the current one — shown on the left side of the word bar.
     getVisibleAutoWords() {
-        if (this.currentIndex === 0 || this.currentIndex > this.manualItems.length) return [];
-        const prev = this.manualItems[this.currentIndex - 1];
+        if (this.currentIndex > this.manualItems.length) return [];
         const curr = this.manualItems[this.currentIndex];
-        if (!prev || !curr) return [];
-        const prevEnd = this.getItemWordRange(prev)[1];
+        if (!curr) return [];
         const currStart = this.getItemWordRange(curr)[0];
         const result = [];
-        for (let i = prevEnd + 1; i < currStart; i++) {
-            if (!this.isManualWord(this.words[i])) result.push(this.words[i].text);
+        if (this.currentIndex === 0) {
+            for (let i = 0; i < currStart; i++) {
+                if (!this.isManualWord(this.words[i])) result.push(this.words[i].text);
+            }
+        } else {
+            const prev = this.manualItems[this.currentIndex - 1];
+            const prevEnd = this.getItemWordRange(prev)[1];
+            for (let i = prevEnd + 1; i < currStart; i++) {
+                if (!this.isManualWord(this.words[i])) result.push(this.words[i].text);
+            }
         }
         return result;
     }
@@ -1445,9 +1451,16 @@ class GameMode {
         // Start new sentence in game mode
         this.startNewSentence();
 
-        // Redraw
+        // Update sentence panel selection and redraw
         if (window.app) {
+            window.app.updateSentenceList();
             window.app.redrawAll();
+
+            // Scroll active sentence into view in the panel
+            const activeItem = document.querySelector('.sentence-item.active');
+            if (activeItem) {
+                activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
         }
 
         console.log('Loaded new sentence:', randomSentence.sentence);
