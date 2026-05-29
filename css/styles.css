@@ -132,9 +132,11 @@ button:hover {
     width: 250px;
     background: #ecf0f1;
     padding: 15px;
-    overflow-y: auto;
     border-right: 2px solid #bdc3c7;
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .sentence-panel h3 {
@@ -143,6 +145,7 @@ button:hover {
 
 .sentence-input-area {
     margin-bottom: 20px;
+    flex-shrink: 0;
 }
 
 .sentence-input-area textarea {
@@ -352,6 +355,122 @@ button:hover {
     padding: 20px 10px;
 }
 
+/* Sentence Library */
+.sentence-library {
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid #bdc3c7;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.library-header {
+    font-size: 12px;
+    font-weight: bold;
+    color: #34495e;
+    margin-bottom: 8px;
+}
+
+.library-controls {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.library-controls select {
+    flex: 1;
+    padding: 5px 6px;
+    font-size: 11px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    background: white;
+    color: #2c3e50;
+    cursor: pointer;
+    min-width: 0;
+}
+
+.library-controls select:disabled {
+    background: #f0f0f0;
+    color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.library-sentence-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    border: 1px solid #dde;
+    border-radius: 4px;
+    background: #fafafa;
+}
+
+.library-sentence-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 10px;
+    font-size: 11px;
+    color: #2c3e50;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: background 0.15s;
+}
+
+.library-sentence-item:last-child {
+    border-bottom: none;
+}
+
+.library-sentence-item:hover {
+    background: #e8f4fd;
+}
+
+.library-sentence-item.library-sentence-cached {
+    background: #f0faf4;
+}
+
+.library-sentence-item.library-sentence-cached:hover {
+    background: #d5f0e0;
+}
+
+.library-sentence-text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.library-cached-mark {
+    color: #27ae60;
+    font-size: 11px;
+    font-weight: bold;
+    margin-left: 6px;
+    flex-shrink: 0;
+}
+
+.library-status {
+    padding: 12px 10px;
+    font-size: 11px;
+    color: #7f8c8d;
+    font-style: italic;
+    text-align: center;
+}
+
+.library-error {
+    color: #e74c3c;
+}
+
+.sentence-item.library-uncached {
+    color: #555;
+    font-style: italic;
+}
+
+.sentence-item.library-uncached:hover {
+    border-color: #3498db;
+}
+
 /* Export/Import Buttons */
 .sentence-export-import {
     margin-top: 15px;
@@ -359,6 +478,7 @@ button:hover {
     border-top: 1px solid #bdc3c7;
     display: flex;
     gap: 8px;
+    flex-shrink: 0;
 }
 
 .btn-export {
@@ -831,6 +951,7 @@ button:hover {
     background: #f8f9fa;
     border-radius: 5px;
     border-left: 4px solid #9b59b6;
+    flex-shrink: 0;
 }
 
 .grammar-results-header {

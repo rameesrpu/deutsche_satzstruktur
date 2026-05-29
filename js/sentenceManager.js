@@ -10,15 +10,18 @@ class SentenceManager {
 
     /**
      * Add a new sentence from text input
+     * @param {string} text
+     * @param {Object} meta - optional extra fields (e.g. source, level, category)
      */
-    addSentence(text) {
+    addSentence(text, meta = {}) {
         if (!text || text.trim() === '') return null;
 
         const sentence = {
             id: Date.now(),
             text: text.trim(),
             words: [],
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString(),
+            ...meta
         };
 
         // Parse the sentence into words
@@ -188,6 +191,18 @@ class SentenceManager {
         }
 
         return true;
+    }
+
+    /**
+     * Find a library sentence by level, category, and text (for cache lookup)
+     */
+    findLibrarySentence(level, category, text) {
+        return this.sentences.find(s =>
+            s.source === 'library' &&
+            s.level === level &&
+            s.category === category &&
+            s.text === text.trim()
+        ) || null;
     }
 
     /**

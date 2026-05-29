@@ -30,11 +30,21 @@
                     <div class="grammar-results-header">Grammar Check Results:</div>
                     <div id="grammar-results-content"></div>
                 </div>
-                <div class="sentence-list">
-                    <div class="sentence-list-header">Saved Sentences:</div>
-                    <div id="sentence-list-content">
-                        <div class="no-sentences">No sentences yet. Type one above and click "Add Sentence".</div>
+                <div class="sentence-library">
+                    <div class="library-header">Sentence Library</div>
+                    <div class="library-controls">
+                        <select id="library-level-select">
+                            <option value="">-- Level --</option>
+                            <option value="A1">A1 – Beginner</option>
+                            <option value="A2">A2 – Elementary</option>
+                            <option value="B1">B1 – Intermediate</option>
+                            <option value="custom">My Sentences</option>
+                        </select>
+                        <select id="library-category-select" disabled>
+                            <option value="">-- Category --</option>
+                        </select>
                     </div>
+                    <div id="library-sentence-list" class="library-sentence-list"></div>
                 </div>
                 <div class="sentence-export-import">
                     <button id="export-sentences-btn" class="btn-export" title="Export all sentences to JSON file">📥 Export</button>
@@ -174,6 +184,8 @@
 
     <!-- JavaScript Modules -->
     <script src="js/grammaticalConfig.js"></script>
+    <script src="js/levelContent.js"></script>
+    <script src="js/levelSelector.js"></script>
     <script src="js/wordManager.js"></script>
     <script src="js/sentenceManager.js"></script>
     <script src="js/feldermodell.js"></script>

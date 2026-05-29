@@ -1418,20 +1418,45 @@ class GameMode {
         }
 
         const sentenceManager = window.app.sentenceManager;
-        const allSentences = sentenceManager.getAllSentences();
+        const levelSelector = window.app.levelSelector;
 
-        if (allSentences.length === 0) {
-            console.error('No sentences available');
+        // Get sentences from the currently active list only
+        let availableSentences;
+
+        if (levelSelector && levelSelector.currentLevel) {
+            if (levelSelector.currentLevel === 'custom') {
+                // Custom sentences: filter to user-created sentences (no source)
+                availableSentences = sentenceManager.getAllSentences().filter(s => !s.source);
+            } else if (levelSelector.currentCategory) {
+                // Library sentences: filter by current level and category
+                availableSentences = sentenceManager.getAllSentences().filter(s =>
+                    s.source === 'library' &&
+                    s.level === levelSelector.currentLevel &&
+                    s.category === levelSelector.currentCategory
+                );
+            } else {
+                // Level selected but no category - use all sentences as fallback
+                availableSentences = sentenceManager.getAllSentences();
+            }
+        } else {
+            // No active list - use all sentences as fallback
+            availableSentences = sentenceManager.getAllSentences();
+        }
+
+        if (availableSentences.length === 0) {
+            console.error('No sentences available in current list');
             return;
         }
 
         // Pick a random sentence (exclude current one if possible)
         let randomSentence;
-        if (allSentences.length > 1) {
-            const otherSentences = allSentences.filter(s => s.id !== sentenceManager.currentSentenceId);
-            randomSentence = otherSentences[Math.floor(Math.random() * otherSentences.length)];
+        if (availableSentences.length > 1) {
+            const otherSentences = availableSentences.filter(s => s.id !== sentenceManager.currentSentenceId);
+            randomSentence = otherSentences.length > 0
+                ? otherSentences[Math.floor(Math.random() * otherSentences.length)]
+                : availableSentences[0];
         } else {
-            randomSentence = allSentences[0];
+            randomSentence = availableSentences[0];
         }
 
         // Load the random sentence
@@ -1452,6 +1477,6 @@ class GameMode {
             }
         }
 
-        console.log('Loaded new sentence:', randomSentence.sentence);
+        console.log('Loaded new sentence from active list:', randomSentence.text);
     }
 }

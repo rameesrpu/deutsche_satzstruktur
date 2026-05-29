@@ -44,6 +44,14 @@ class DeutschApp {
         this.gameMode = new GameMode(this.svg, this.wordManager, this.gridViewModel);
         this.renderer = new Renderer(this.svg, this.wordManager);
         this.uiController = new UIController(this.wordManager, () => this.redrawAll(), this.gridConfig);
+        this.levelSelector = new LevelSelector(LEVEL_CONTENT, {
+            onSelect:           (sel) => this.handleLibrarySelect(sel),
+            getCachedSentence:  (level, category, text) => this.sentenceManager.findLibrarySentence(level, category, text),
+            getUserSentences:   () => this.sentenceManager.sentences.filter(s => !s.source),
+            onEdit:             (id, e) => this.editSentenceFromList(id, e),
+            onDelete:           (id, e) => this.deleteSentenceFromList(id, e),
+            getCurrentSentenceId: () => this.sentenceManager.currentSentenceId
+        });
 
         // View state: 'felder', 'grid', or 'game'
         this.currentView = 'felder';
@@ -61,6 +69,7 @@ class DeutschApp {
         this.setupResizeListener();
         this.setupZoomControls();
         this.loadSentences();
+        this.levelSelector.init();
         this.redrawAll();
         this.uiController.updatePropertiesPanel();
     }
@@ -546,6 +555,50 @@ class DeutschApp {
     }
 
     /**
+     * Dispatch a selection from the library panel
+     */
+    handleLibrarySelect(selection) {
+        if (selection.type === 'custom') {
+            this.loadSentenceFromList(selection.sentenceId);
+        } else {
+            this.loadLibrarySentence(selection.level, selection.category, selection.text);
+        }
+    }
+
+    /**
+     * Load a library sentence: use cached version if available, otherwise parse fresh
+     */
+    async loadLibrarySentence(level, category, text) {
+        if (this.sentenceManager.currentSentenceId) {
+            this.sentenceManager.saveCurrentSentence();
+            this.saveSentences();
+        }
+
+        const cached = this.sentenceManager.findLibrarySentence(level, category, text);
+        if (cached) {
+            this.sentenceManager.loadSentence(cached.id);
+            this.updateSentenceList();
+            this.redrawAll();
+            return;
+        }
+
+        const sentence = this.sentenceManager.addSentence(text, { source: 'library', level, category });
+        this.sentenceManager.loadSentence(sentence.id);
+        this.updateSentenceList();
+        this.redrawAll();
+        this.saveSentences();
+
+        try {
+            await this.sentenceManager.autoConfigureCurrentSentence();
+            this.redrawAll();
+            this.saveSentences();
+            this.levelSelector.refresh();
+        } catch (error) {
+            console.error('Library sentence auto-configure error:', error);
+        }
+    }
+
+    /**
      * Load a sentence from the list
      */
     loadSentenceFromList(sentenceId) {
@@ -608,59 +661,7 @@ class DeutschApp {
      * Update the sentence list UI
      */
     updateSentenceList() {
-        const listContent = document.getElementById('sentence-list-content');
-        if (!listContent) return;
-
-        const sentences = this.sentenceManager.getAllSentences();
-
-        if (sentences.length === 0) {
-            listContent.innerHTML = '<div class="no-sentences">No sentences yet. Type one above and click "Add Sentence".</div>';
-            return;
-        }
-
-        // Reverse to show most recent first
-        listContent.innerHTML = sentences.slice().reverse().map(sentence => {
-            const isActive = sentence.id === this.sentenceManager.currentSentenceId;
-            return `
-                <div class="sentence-item ${isActive ? 'active' : ''}" data-sentence-id="${sentence.id}">
-                    <div class="sentence-item-text">${sentence.text}</div>
-                    <div class="sentence-item-actions">
-                        <button class="sentence-item-edit" data-sentence-id="${sentence.id}" title="Edit sentence">✏</button>
-                        <button class="sentence-item-delete" data-sentence-id="${sentence.id}" title="Delete sentence">✕</button>
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        // Attach event listeners to sentence items
-        const sentenceItems = listContent.querySelectorAll('.sentence-item');
-        sentenceItems.forEach(item => {
-            const sentenceId = parseInt(item.dataset.sentenceId);
-            item.addEventListener('click', (e) => {
-                if (!e.target.classList.contains('sentence-item-delete') &&
-                    !e.target.classList.contains('sentence-item-edit')) {
-                    this.loadSentenceFromList(sentenceId);
-                }
-            });
-        });
-
-        // Attach event listeners to edit buttons
-        const editButtons = listContent.querySelectorAll('.sentence-item-edit');
-        editButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const sentenceId = parseInt(btn.dataset.sentenceId);
-                this.editSentenceFromList(sentenceId, e);
-            });
-        });
-
-        // Attach event listeners to delete buttons
-        const deleteButtons = listContent.querySelectorAll('.sentence-item-delete');
-        deleteButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const sentenceId = parseInt(btn.dataset.sentenceId);
-                this.deleteSentenceFromList(sentenceId, e);
-            });
-        });
+        if (this.levelSelector) this.levelSelector.refresh();
     }
 
     /**
