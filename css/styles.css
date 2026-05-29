@@ -1548,7 +1548,7 @@ button:hover {
          * This gives more space to the sentence list while keeping canvas visible */
         max-height: 55vh;
         padding: 15px;
-        overflow: hidden; /* Changed from auto - let inner elements handle scrolling */
+        overflow-y: auto; /* Allow scrolling to see export/import buttons below */
         position: relative;
         visibility: visible;
         opacity: 1;
@@ -1575,8 +1575,7 @@ button:hover {
     }
 
     .sentence-panel.active .sentence-library {
-        flex: 1; /* Take remaining space */
-        min-height: 0; /* Important for flex scrolling */
+        flex: none; /* Override desktop flex: 1 - don't grow to fill space */
         display: flex;
         flex-direction: column;
     }
@@ -1587,9 +1586,9 @@ button:hover {
     }
 
     .sentence-panel.active .sentence-library .library-sentence-list {
-        flex: 1; /* Take all available space in library section */
+        flex: none; /* Override desktop flex: 1 - use natural content height */
         min-height: 250px; /* Ensure minimum visible height */
-        overflow-y: auto; /* Enable scrolling */
+        overflow-y: visible; /* Override desktop overflow: auto - let panel handle scrolling */
     }
 
     .sentence-panel.active .sentence-export-import {
