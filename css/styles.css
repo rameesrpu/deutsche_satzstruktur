@@ -1544,22 +1544,61 @@ button:hover {
 
     .sentence-panel.active,
     .properties-panel.active {
-        /* PANEL HEIGHT when open
-         * This should leave room for: canvas (40vh) + buttons + header
-         * Adjust to give more/less space to panel content
-         * Example: canvas 40vh + panel 55vh + buttons/header 5vh ≈ 100vh total */
-        max-height: 40vh;
+        /* PANEL HEIGHT when open - increased for better sentence list visibility
+         * This gives more space to the sentence list while keeping canvas visible */
+        max-height: 55vh;
         padding: 15px;
-        overflow-y: auto;
+        overflow: hidden; /* Changed from auto - let inner elements handle scrolling */
         position: relative;
         visibility: visible;
         opacity: 1;
         transition: max-height 0.3s ease-out, padding 0.3s ease-out, visibility 0s linear 0s, opacity 0.2s ease-out;
         margin-top: 0;
+        /* Use flexbox to properly distribute space to child elements */
+        display: flex;
+        flex-direction: column;
     }
 
     .sentence-panel.active::after {
         display: none;
+    }
+
+    /* Mobile: Sentence panel internal layout for proper scrolling */
+    .sentence-panel.active .sentence-input-area {
+        flex-shrink: 0; /* Don't shrink */
+    }
+
+    .sentence-panel.active #grammar-results {
+        flex-shrink: 0; /* Don't shrink */
+        max-height: 200px; /* Limit grammar results height */
+        overflow-y: auto;
+    }
+
+    .sentence-panel.active .sentence-library {
+        flex: 1; /* Take remaining space */
+        min-height: 0; /* Important for flex scrolling */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sentence-panel.active .sentence-library .library-header,
+    .sentence-panel.active .sentence-library .library-controls {
+        flex-shrink: 0; /* Don't shrink */
+    }
+
+    .sentence-panel.active .sentence-library .library-sentence-list {
+        flex: 1; /* Take all available space in library section */
+        min-height: 150px; /* Ensure minimum visible height */
+        overflow-y: auto; /* Enable scrolling */
+    }
+
+    .sentence-panel.active .sentence-export-import {
+        flex-shrink: 0; /* Don't shrink */
+    }
+
+    /* Mobile: Properties panel should also scroll properly */
+    .properties-panel.active {
+        overflow-y: auto;
     }
 
     /* Canvas Container */
@@ -1581,11 +1620,10 @@ button:hover {
     }
 
     /* PANELS OPEN: Canvas shrinks to make room for panel content
-     * Adjust 40vh to control canvas height when panel is visible
-     * Example: 30vh = smaller canvas, 50vh = larger canvas */
+     * Adjusted to accommodate the 55vh panel height */
     .main-content.panel-open .canvas-container {
-        height: 58vh;
-        min-height: 300px;
+        height: 43vh;
+        min-height: 250px;
     }
 
     .canvas-container::after {
@@ -1849,17 +1887,17 @@ button:hover {
         padding: 12px;
     }
 
-    /* MOBILE CANVAS SIZING for screens < 480px (same values as above) */
+    /* MOBILE CANVAS SIZING for screens < 480px */
     .canvas-container {
         /* PANELS CLOSED: Adjust vh percentage to control canvas size */
-        height: 60vh;
+        height: 90vh;
         min-height: 400px;
     }
 
     .main-content.panel-open .canvas-container {
-        /* PANELS OPEN: Adjust 40vh to control canvas percentage */
-        height: 40vh;
-        min-height: 300px;
+        /* PANELS OPEN: Adjusted for 55vh panel height */
+        height: 43vh;
+        min-height: 250px;
     }
 
     #canvas {
