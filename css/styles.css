@@ -1620,10 +1620,11 @@ button:hover {
     }
 
     /* PANELS OPEN: Canvas shrinks to make room for panel content
-     * Adjusted to accommodate the 55vh panel height */
+     * Adjust 40vh to control canvas height when panel is visible
+     * Example: 30vh = smaller canvas, 50vh = larger canvas */
     .main-content.panel-open .canvas-container {
-        height: 43vh;
-        min-height: 250px;
+        height: 58vh;
+        min-height: 300px;
     }
 
     .canvas-container::after {
@@ -1887,17 +1888,17 @@ button:hover {
         padding: 12px;
     }
 
-    /* MOBILE CANVAS SIZING for screens < 480px */
+    /* MOBILE CANVAS SIZING for screens < 480px (same values as above) */
     .canvas-container {
         /* PANELS CLOSED: Adjust vh percentage to control canvas size */
-        height: 90vh;
+        height: 60vh;
         min-height: 400px;
     }
 
     .main-content.panel-open .canvas-container {
-        /* PANELS OPEN: Adjusted for 55vh panel height */
-        height: 43vh;
-        min-height: 250px;
+        /* PANELS OPEN: Adjust 40vh to control canvas percentage */
+        height: 40vh;
+        min-height: 300px;
     }
 
     #canvas {
