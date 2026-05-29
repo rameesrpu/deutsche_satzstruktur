@@ -1588,7 +1588,7 @@ button:hover {
 
     .sentence-panel.active .sentence-library .library-sentence-list {
         flex: 1; /* Take all available space in library section */
-        min-height: 150px; /* Ensure minimum visible height */
+        min-height: 250px; /* Ensure minimum visible height */
         overflow-y: auto; /* Enable scrolling */
     }
 
