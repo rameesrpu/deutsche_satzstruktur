@@ -31,25 +31,20 @@
                     <div id="grammar-results-content"></div>
                 </div>
                 <div class="sentence-library">
-                    <div class="library-header">Sentence Library</div>
                     <div class="library-controls">
+                        <div class="library-header">Library:</div>
                         <select id="library-level-select">
-                            <option value="">-- Level --</option>
-                            <option value="A1">A1 – Beginner</option>
-                            <option value="A2">A2 – Elementary</option>
-                            <option value="B1">B1 – Intermediate</option>
+                            <option value="">Level</option>
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
+                            <option value="B1">B1</option>
                             <option value="custom">My Sentences</option>
                         </select>
                         <select id="library-category-select" disabled>
-                            <option value="">-- Category --</option>
+                            <option value="">Category</option>
                         </select>
                     </div>
                     <div id="library-sentence-list" class="library-sentence-list"></div>
-                </div>
-                <div class="sentence-export-import">
-                    <button id="export-sentences-btn" class="btn-export" title="Export all sentences to JSON file">📥 Export</button>
-                    <button id="import-sentences-btn" class="btn-import" title="Import sentences from JSON file">📤 Import</button>
-                    <input type="file" id="import-file-input" accept=".json" style="display: none;">
                 </div>
             </div>
 
@@ -61,8 +56,30 @@
                 <svg id="canvas"></svg>
             </div>
 
+            <button class="mobile-toggle mobile-toggle-right" id="toggle-settings-panel" aria-label="Toggle settings panel">
+                <span class="toggle-icon">⚙</span> Settings
+            </button>
+            <div class="settings-panel" id="settings-panel">
+                <div class="settings-section">
+                    <h3>Sentence Settings</h3>
+                    <div class="sentence-export-import">
+                        <button id="export-sentences-btn" class="btn-export" title="Export all sentences to JSON file">📥 Export</button>
+                        <button id="import-sentences-btn" class="btn-import" title="Import sentences from JSON file">📤 Import</button>
+                        <input type="file" id="import-file-input" accept=".json" style="display: none;">
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h3>Game Settings</h3>
+                    <div class="settings-toggle-row">
+                        <label for="time-challenge-toggle">Time Challenge</label>
+                        <input type="checkbox" id="time-challenge-toggle" disabled title="Coming soon">
+                        <span class="placeholder-label">(Coming soon)</span>
+                    </div>
+                </div>
+            </div>
+
             <button class="mobile-toggle mobile-toggle-right" id="toggle-properties-panel" aria-label="Toggle properties panel">
-                <span class="toggle-icon">⚙</span> Properties
+                <span class="toggle-icon">📝</span> Properties
             </button>
             <div class="properties-panel" id="properties-panel">
                 <div id="properties-content">

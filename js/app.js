@@ -914,11 +914,13 @@ function setupMobileToggles() {
     // Get all tab elements
     const toggleSentenceBtn = document.getElementById('toggle-sentence-panel');
     const sentencePanel = document.getElementById('sentence-panel');
+    const toggleSettingsBtn = document.getElementById('toggle-settings-panel');
+    const settingsPanel = document.getElementById('settings-panel');
     const togglePropertiesBtn = document.getElementById('toggle-properties-panel');
     const propertiesPanel = document.getElementById('properties-panel');
 
-    // Tab behavior for Sentence and Properties panels
-    if (toggleSentenceBtn && sentencePanel && togglePropertiesBtn && propertiesPanel) {
+    // Tab behavior for Sentence, Settings, and Properties panels
+    if (toggleSentenceBtn && sentencePanel && toggleSettingsBtn && settingsPanel && togglePropertiesBtn && propertiesPanel) {
         toggleSentenceBtn.addEventListener('click', () => {
             // Toggle sentence panel
             const isActive = sentencePanel.classList.contains('active');
@@ -931,9 +933,40 @@ function setupMobileToggles() {
                 // Remove panel-open class since no panel is active
                 mainContent?.classList.remove('panel-open');
             } else {
-                // Activate sentence panel, deactivate properties
+                // Activate sentence panel, deactivate others
                 sentencePanel.classList.add('active');
                 toggleSentenceBtn.classList.add('active');
+                settingsPanel.classList.remove('active');
+                toggleSettingsBtn.classList.remove('active');
+                propertiesPanel.classList.remove('active');
+                togglePropertiesBtn.classList.remove('active');
+                // Add panel-open class
+                mainContent?.classList.add('panel-open');
+            }
+
+            // Recalculate canvas size after panel state changes
+            if (window.app) {
+                window.app.redrawAll();
+            }
+        });
+
+        toggleSettingsBtn.addEventListener('click', () => {
+            // Toggle settings panel
+            const isActive = settingsPanel.classList.contains('active');
+            const mainContent = document.querySelector('.main-content');
+
+            if (isActive) {
+                // If clicking the active tab, close it
+                settingsPanel.classList.remove('active');
+                toggleSettingsBtn.classList.remove('active');
+                // Remove panel-open class since no panel is active
+                mainContent?.classList.remove('panel-open');
+            } else {
+                // Activate settings panel, deactivate others
+                settingsPanel.classList.add('active');
+                toggleSettingsBtn.classList.add('active');
+                sentencePanel.classList.remove('active');
+                toggleSentenceBtn.classList.remove('active');
                 propertiesPanel.classList.remove('active');
                 togglePropertiesBtn.classList.remove('active');
                 // Add panel-open class
@@ -964,11 +997,13 @@ function setupMobileToggles() {
                     return;
                 }
 
-                // Activate properties panel, deactivate sentence
+                // Activate properties panel, deactivate others
                 propertiesPanel.classList.add('active');
                 togglePropertiesBtn.classList.add('active');
                 sentencePanel.classList.remove('active');
                 toggleSentenceBtn.classList.remove('active');
+                settingsPanel.classList.remove('active');
+                toggleSettingsBtn.classList.remove('active');
                 // Add panel-open class
                 mainContent?.classList.add('panel-open');
             }

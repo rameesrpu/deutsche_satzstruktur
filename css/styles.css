@@ -144,7 +144,7 @@ button:hover {
 }
 
 .sentence-input-area {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     flex-shrink: 0;
 }
 
@@ -357,8 +357,8 @@ button:hover {
 
 /* Sentence Library */
 .sentence-library {
-    margin-top: 15px;
-    padding-top: 12px;
+    margin-top: 10px;
+    padding-top: 10px;
     border-top: 1px solid #bdc3c7;
     display: flex;
     flex-direction: column;
@@ -367,24 +367,27 @@ button:hover {
 }
 
 .library-header {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: bold;
     color: #34495e;
-    margin-bottom: 8px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
 }
 
 .library-controls {
     display: flex;
     gap: 6px;
     margin-bottom: 8px;
+    align-items: center;
 }
 
 .library-controls select {
     flex: 1;
-    padding: 5px 6px;
+    padding: 4px 5px;
     font-size: 11px;
     border: 1px solid #bdc3c7;
-    border-radius: 4px;
+    border-radius: 3px;
     background: white;
     color: #2c3e50;
     cursor: pointer;
@@ -677,6 +680,68 @@ button:hover {
 
 .delete-btn:hover {
     background: #c0392b;
+}
+
+/* Settings Panel */
+.settings-panel {
+    width: 250px;
+    background: #ecf0f1;
+    padding: 15px;
+    overflow-y: auto;
+    flex-shrink: 0;
+    border-left: 2px solid #bdc3c7;
+}
+
+.settings-panel h3 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    margin-top: 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #bdc3c7;
+}
+
+.settings-section {
+    margin-bottom: 25px;
+}
+
+.settings-section:last-child {
+    margin-bottom: 0;
+}
+
+.settings-toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #bdc3c7;
+}
+
+.settings-toggle-row label {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.settings-toggle-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.settings-toggle-row input[type="checkbox"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.settings-toggle-row .placeholder-label {
+    font-size: 11px;
+    color: #95a5a6;
+    font-style: italic;
 }
 
 /* Legend Modal */
@@ -1381,6 +1446,7 @@ button:hover {
     }
 
     .sentence-panel,
+    .settings-panel,
     .properties-panel {
         width: 220px;
     }
@@ -1443,13 +1509,13 @@ button:hover {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 50%;
-        flex: 0 0 50%; /* Don't grow or shrink, fixed at 50% */
-        padding: 8px 15px;
+        width: 33.333%;
+        flex: 0 0 33.333%; /* Don't grow or shrink, fixed at 33.333% for 3 buttons */
+        padding: 8px 10px;
         background: #34495e;
         color: white;
         border: none;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 600;
         text-align: center;
         cursor: pointer;
@@ -1470,9 +1536,9 @@ button:hover {
         box-shadow: inset 0 -3px 0 #3498db;
     }
 
-    .mobile-toggle-right {
+    /* Remove border from last toggle button */
+    .mobile-toggle-right:last-of-type {
         border-right: none;
-        border-left: 1px solid #2c3e50;
     }
 
     /* Remove border separator pseudo-elements for tabs */
@@ -1523,6 +1589,7 @@ button:hover {
 
     /* Panels - Full Width and Collapsible */
     .sentence-panel,
+    .settings-panel,
     .properties-panel {
         width: 100%;
         flex: 0 0 100%;
@@ -1531,6 +1598,7 @@ button:hover {
         padding: 0;
         margin: 0;
         border-right: none;
+        border-left: none;
         visibility: hidden;
         opacity: 0;
         transition: max-height 0.3s ease-out, padding 0.3s ease-out, visibility 0s linear 0.3s, opacity 0.2s ease-out;
@@ -1543,6 +1611,7 @@ button:hover {
     }
 
     .sentence-panel.active,
+    .settings-panel.active,
     .properties-panel.active {
         /* PANEL HEIGHT when open - increased for better sentence list visibility
          * This gives more space to the sentence list while keeping canvas visible */
@@ -1663,6 +1732,10 @@ button:hover {
         order: 3;
     }
 
+    .settings-panel {
+        order: 3; /* Same order as sentence and properties to overlap (only one shows at a time) */
+    }
+
     .properties-panel {
         order: 3; /* Same order as sentence to overlap (only one shows at a time) */
     }
@@ -1712,9 +1785,9 @@ button:hover {
     .btn-check-grammar {
         flex: 1;
         min-width: 0; /* Allow buttons to shrink */
-        min-height: 44px;
-        font-size: 13px;
-        padding: 10px 6px;
+        min-height: 28px;
+        font-size: 10px;
+        padding: 3px 5px;
     }
 
     /* Sentence Items */
@@ -1745,9 +1818,9 @@ button:hover {
     /* Export/Import Buttons on Mobile */
     .btn-export,
     .btn-import {
-        min-height: 44px;
-        font-size: 13px;
-        padding: 10px 6px;
+        min-height: 28px;
+        font-size: 10px;
+        padding: 3px 5px;
     }
 
     /* Input Fields */
