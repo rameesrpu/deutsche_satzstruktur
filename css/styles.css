@@ -744,6 +744,13 @@ button:hover {
     font-style: italic;
 }
 
+/* Remove extra border when export/import is inside settings panel */
+.settings-section .sentence-export-import {
+    border-top: none;
+    margin-top: 10px;
+    padding-top: 0;
+}
+
 /* Legend Modal */
 .legend-modal-overlay {
     position: fixed;
@@ -1785,9 +1792,9 @@ button:hover {
     .btn-check-grammar {
         flex: 1;
         min-width: 0; /* Allow buttons to shrink */
-        min-height: 28px;
-        font-size: 10px;
-        padding: 3px 5px;
+        min-height: 32px;
+        font-size: 12px;
+        padding: 5px 8px;
     }
 
     /* Sentence Items */
@@ -1818,9 +1825,9 @@ button:hover {
     /* Export/Import Buttons on Mobile */
     .btn-export,
     .btn-import {
-        min-height: 28px;
-        font-size: 10px;
-        padding: 3px 5px;
+        min-height: 32px;
+        font-size: 12px;
+        padding: 5px 8px;
     }
 
     /* Input Fields */
@@ -1833,6 +1840,17 @@ button:hover {
         font-size: 16px; /* Prevents iOS zoom on focus */
         padding: 12px;
         min-height: 44px;
+    }
+
+    /* Library Header and Dropdowns */
+    .library-header {
+        font-size: 13px; /* Readable font size for mobile */
+    }
+
+    .library-controls select {
+        font-size: 13px; /* Readable font size for mobile */
+        padding: 6px 8px;
+        min-height: 32px;
     }
 
     /* Mobile: All three elements on same line - text input | type dropdown | lookup button */

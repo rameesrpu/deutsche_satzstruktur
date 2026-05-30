@@ -429,9 +429,15 @@ def analyze_sentence(request: AnalyzeRequest):
                     # For 3rd person singular, check subject's gender/text
                     subject_text = subject.text.lower()
                     subject_morph = subject.morph.to_dict()
+                    subject_person = subject_morph.get("Person", "")
                     subject_gender = subject_morph.get("Gender", "")
 
-                    if subject_text in ["sie"]:
+                    # spaCy sometimes assigns Person=3 to verb forms shared by 2nd and 3rd
+                    # person (e.g. "heißt", "kommst"). Use the subject's own Person morph
+                    # as a correction when the subject is a known pronoun.
+                    if subject_person == "2":
+                        conj_pronoun = "du"
+                    elif subject_text in ["sie"]:
                         conj_pronoun = "sie"  # she (singular feminine)
                     elif subject_text in ["es", "das"]:
                         conj_pronoun = "es"

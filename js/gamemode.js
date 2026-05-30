@@ -20,6 +20,11 @@ class GameMode {
         this.placedWords = new Map(); // Track which boxes/words have been placed
         this.autoPlacedWords = [];
 
+        // Time challenge mode
+        this.timeChallengeMode = false;
+        this.wordStartTime = null;
+        this.timeAnimationId = null;
+
         // Pre-calculated gridview state
         this.preCalculatedBoxes = [];
         this.preCalculatedConnections = [];
@@ -131,6 +136,8 @@ class GameMode {
      * Start a new sentence within the game session
      */
     startNewSentence() {
+        this.stopTimerAnimation();
+        this.wordStartTime = null;
         this.currentSentenceScore = 0;
         this.currentIndex = 0;
         this.manualItems = [];
@@ -153,6 +160,8 @@ class GameMode {
         if (!this.isActive) return;
 
         this.isActive = false;
+        this.stopTimerAnimation();
+        this.wordStartTime = null;
 
         // Remove keyboard event listener
         if (this.keyboardHandler) {
@@ -739,6 +748,11 @@ class GameMode {
             const centerShape = this.createTopBarWordShape(this.selectedCase, centerX, topY, wordWidth, barHeight);
             overlayGroup.appendChild(centerShape);
 
+            // Timer bar for time challenge mode
+            if (this.timeChallengeMode && this.wordStartTime !== null) {
+                this.drawTimerBar(overlayGroup, centerX, topY, barHeight, wordWidth);
+            }
+
             // Text color: dark with outline when no case selected (transparent bg), white otherwise
             const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             text.setAttribute('x', centerX);
@@ -1127,15 +1141,27 @@ class GameMode {
         const feedbackY = cellY + this.gridViewModel.cellHeight / 2;
 
         if (isCorrect) {
-            this.currentSentenceScore += 10;
-            this.totalScore += 10;
-            console.log('✓ Correct placement!');
+            let points = 10;
+            let feedbackSymbol = '✓';
+            let feedbackColor = '#27ae60';
+
+            if (this.timeChallengeMode && this.wordStartTime !== null) {
+                const elapsed = Date.now() - this.wordStartTime;
+                const timeResult = this.getTimePoints(elapsed);
+                points = timeResult.points;
+                feedbackColor = timeResult.color;
+                feedbackSymbol = `+${points}`;
+            }
+
+            this.currentSentenceScore += points;
+            this.totalScore += points;
+            console.log('✓ Correct placement!', points, 'points');
 
             // Reset attempts counter
             this.currentWordAttempts = 0;
 
-            // Show tick feedback
-            this.showFeedback('✓', feedbackX, feedbackY, true);
+            // Show feedback
+            this.showFeedback(feedbackSymbol, feedbackX, feedbackY, true, feedbackColor);
 
             // Reveal the corresponding box in the gridview
             if (currentItem.type === 'box') {
@@ -1178,12 +1204,13 @@ class GameMode {
     /**
      * Show tick/cross feedback animation
      */
-    showFeedback(symbol, x, y, isCorrect) {
+    showFeedback(symbol, x, y, isCorrect, color) {
         this.feedbackAnimation = {
             symbol: symbol,
             x: x,
             y: y,
             isCorrect: isCorrect,
+            color: color || (isCorrect ? '#27ae60' : '#e74c3c'),
             startTime: Date.now()
         };
 
@@ -1207,29 +1234,29 @@ class GameMode {
     drawFeedbackAnimation() {
         if (!this.feedbackAnimation) return;
 
-        const { symbol, x, y, isCorrect, startTime } = this.feedbackAnimation;
+        const { symbol, x, y, color, startTime } = this.feedbackAnimation;
         const elapsed = Date.now() - startTime;
         const duration = 600;
         const progress = Math.min(elapsed / duration, 1);
 
-        // Animate: scale up and fade out
-        const scale = 1 + progress * 0.5;
+        const isScorePopup = symbol.startsWith('+');
+        const scale = 1 + progress * (isScorePopup ? 0.2 : 0.5);
         const opacity = 1 - progress;
+        const floatY = isScorePopup ? -50 * progress : 0;
 
         const feedbackGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         feedbackGroup.setAttribute('class', 'feedback-animation');
-        feedbackGroup.setAttribute('transform', `translate(${x}, ${y}) scale(${scale})`);
+        feedbackGroup.setAttribute('transform', `translate(${x}, ${y + floatY}) scale(${scale})`);
         feedbackGroup.setAttribute('opacity', opacity);
 
-        // Draw symbol
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', 0);
         text.setAttribute('y', 0);
         text.setAttribute('text-anchor', 'middle');
         text.setAttribute('dominant-baseline', 'middle');
-        text.setAttribute('font-size', '100');
+        text.setAttribute('font-size', isScorePopup ? '64' : '100');
         text.setAttribute('font-weight', 'bold');
-        text.setAttribute('fill', isCorrect ? '#27ae60' : '#e74c3c');
+        text.setAttribute('fill', color);
         text.setAttribute('stroke', 'white');
         text.setAttribute('stroke-width', '4');
         text.setAttribute('paint-order', 'stroke');
@@ -1281,6 +1308,8 @@ class GameMode {
     updateCurrentWordDisplay() {
         if (this.currentIndex >= this.manualItems.length) {
             this.currentWordDisplay = null;
+            this.stopTimerAnimation();
+            this.wordStartTime = null;
             return;
         }
 
@@ -1289,6 +1318,111 @@ class GameMode {
 
         // Reset attempts for new word
         this.currentWordAttempts = 0;
+
+        if (this.timeChallengeMode) {
+            this.wordStartTime = Date.now();
+            this.startTimerAnimation();
+        }
+    }
+
+    startTimerAnimation() {
+        if (this.timeAnimationId) return;
+        const animate = () => {
+            if (!this.isActive || !this.timeChallengeMode || !this.wordStartTime) {
+                this.timeAnimationId = null;
+                return;
+            }
+            this.updateTimerVisuals();
+            this.timeAnimationId = requestAnimationFrame(animate);
+        };
+        this.timeAnimationId = requestAnimationFrame(animate);
+    }
+
+    stopTimerAnimation() {
+        if (this.timeAnimationId) {
+            cancelAnimationFrame(this.timeAnimationId);
+            this.timeAnimationId = null;
+        }
+    }
+
+    updateTimerVisuals() {
+        // Update timer bar fill width and color in-place (no SVG rebuild)
+        const trackEl = this.svg.querySelector('#game-timer-bar-track');
+        const fillEl = this.svg.querySelector('#game-timer-bar-fill');
+        if (trackEl && fillEl && this.wordStartTime) {
+            const elapsed = Date.now() - this.wordStartTime;
+            const remaining = Math.max(0, 1 - elapsed / 3000);
+            const totalWidth = parseFloat(trackEl.getAttribute('data-width') || '0');
+            fillEl.setAttribute('width', Math.max(0, totalWidth * remaining));
+            fillEl.setAttribute('fill', this.getTimerColor(1 - remaining));
+        }
+
+        // Update floating feedback animation in-place
+        const feedbackEl = this.svg.querySelector('.feedback-animation');
+        if (feedbackEl && this.feedbackAnimation) {
+            const elapsed = Date.now() - this.feedbackAnimation.startTime;
+            const progress = Math.min(elapsed / 600, 1);
+            const { x, y, symbol } = this.feedbackAnimation;
+            const isScorePopup = symbol.startsWith('+');
+            const scale = 1 + progress * (isScorePopup ? 0.2 : 0.5);
+            const floatY = isScorePopup ? -50 * progress : 0;
+            feedbackEl.setAttribute('transform', `translate(${x}, ${y + floatY}) scale(${scale})`);
+            feedbackEl.setAttribute('opacity', 1 - progress);
+        }
+    }
+
+    getTimePoints(elapsedMs) {
+        const s = elapsedMs / 1000;
+        if (s < 0.5) return { points: 30, color: '#27ae60' };
+        if (s < 1.0) return { points: 25, color: '#52be80' };
+        if (s < 1.5) return { points: 20, color: '#f1c40f' };
+        if (s < 2.0) return { points: 15, color: '#e67e22' };
+        if (s < 2.5) return { points: 10, color: '#d35400' };
+        if (s < 3.0) return { points: 5,  color: '#e74c3c' };
+        return { points: 0, color: '#c0392b' };
+    }
+
+    getTimerColor(t) {
+        // t: 0 (fresh/green) → 1 (expired/red)
+        if (t < 0.5) {
+            const tt = t / 0.5;
+            return `rgb(${Math.round(39 + (230-39)*tt)},${Math.round(174 + (126-174)*tt)},${Math.round(96 + (34-96)*tt)})`;
+        }
+        const tt = (t - 0.5) / 0.5;
+        return `rgb(${Math.round(230 + (231-230)*tt)},${Math.round(126 + (76-126)*tt)},${Math.round(34 + (60-34)*tt)})`;
+    }
+
+    drawTimerBar(group, centerX, topY, barHeight, wordWidth) {
+        const elapsed = this.wordStartTime ? Date.now() - this.wordStartTime : 0;
+        const remaining = Math.max(0, 1 - elapsed / 3000);
+        const t = 1 - remaining;
+
+        const barX = centerX - wordWidth / 2;
+        const barY = topY + barHeight + 2;
+        const trackHeight = 4;
+
+        const track = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        track.setAttribute('id', 'game-timer-bar-track');
+        track.setAttribute('data-width', wordWidth);
+        track.setAttribute('x', barX);
+        track.setAttribute('y', barY);
+        track.setAttribute('width', wordWidth);
+        track.setAttribute('height', trackHeight);
+        track.setAttribute('rx', '2');
+        track.setAttribute('fill', 'rgba(0,0,0,0.15)');
+        track.setAttribute('pointer-events', 'none');
+        group.appendChild(track);
+
+        const fill = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        fill.setAttribute('id', 'game-timer-bar-fill');
+        fill.setAttribute('x', barX);
+        fill.setAttribute('y', barY);
+        fill.setAttribute('width', Math.max(0, wordWidth * remaining));
+        fill.setAttribute('height', trackHeight);
+        fill.setAttribute('rx', '2');
+        fill.setAttribute('fill', this.getTimerColor(t));
+        fill.setAttribute('pointer-events', 'none');
+        group.appendChild(fill);
     }
 
     /**

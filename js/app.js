@@ -144,6 +144,23 @@ class DeutschApp {
                 }
             });
         }
+
+        const timeChallengeToggle = document.getElementById('time-challenge-toggle');
+        if (timeChallengeToggle) {
+            timeChallengeToggle.addEventListener('change', () => {
+                this.gameMode.timeChallengeMode = timeChallengeToggle.checked;
+                if (this.gameMode.isActive) {
+                    if (timeChallengeToggle.checked) {
+                        this.gameMode.wordStartTime = Date.now();
+                        this.gameMode.startTimerAnimation();
+                    } else {
+                        this.gameMode.stopTimerAnimation();
+                        this.gameMode.wordStartTime = null;
+                        this.redrawAll();
+                    }
+                }
+            });
+        }
     }
 
     /**

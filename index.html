@@ -56,6 +56,20 @@
                 <svg id="canvas"></svg>
             </div>
 
+            <button class="mobile-toggle mobile-toggle-right" id="toggle-properties-panel" aria-label="Toggle properties panel">
+                <span class="toggle-icon">📝</span> Properties
+            </button>
+            <div class="properties-panel" id="properties-panel">
+                <div id="properties-content">
+                    <div class="no-selection">
+                        Click on a word to edit its properties
+                    </div>
+                </div>
+                <button class="mobile-toggle mobile-toggle-legend" id="toggle-legend" aria-label="Toggle legend">
+                    <span class="toggle-icon">📖</span> Legend
+                </button>
+            </div>
+
             <button class="mobile-toggle mobile-toggle-right" id="toggle-settings-panel" aria-label="Toggle settings panel">
                 <span class="toggle-icon">⚙</span> Settings
             </button>
@@ -72,24 +86,9 @@
                     <h3>Game Settings</h3>
                     <div class="settings-toggle-row">
                         <label for="time-challenge-toggle">Time Challenge</label>
-                        <input type="checkbox" id="time-challenge-toggle" disabled title="Coming soon">
-                        <span class="placeholder-label">(Coming soon)</span>
+                        <input type="checkbox" id="time-challenge-toggle">
                     </div>
                 </div>
-            </div>
-
-            <button class="mobile-toggle mobile-toggle-right" id="toggle-properties-panel" aria-label="Toggle properties panel">
-                <span class="toggle-icon">📝</span> Properties
-            </button>
-            <div class="properties-panel" id="properties-panel">
-                <div id="properties-content">
-                    <div class="no-selection">
-                        Click on a word to edit its properties
-                    </div>
-                </div>
-                <button class="mobile-toggle mobile-toggle-legend" id="toggle-legend" aria-label="Toggle legend">
-                    <span class="toggle-icon">📖</span> Legend
-                </button>
             </div>
         </div>
 
