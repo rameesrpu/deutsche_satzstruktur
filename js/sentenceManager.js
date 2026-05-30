@@ -62,10 +62,10 @@ class SentenceManager {
 
         this.currentSentenceId = sentenceId;
 
-        // Clear current words and load sentence words
+        // Clear current words and load sentence words (normalize legacy types on load)
         this.wordManager.clearAll();
         sentence.words.forEach(wordData => {
-            this.wordManager.words.push({ ...wordData });
+            this.wordManager.words.push(this.wordManager.normalizeLegacyType({ ...wordData }));
         });
 
         return true;

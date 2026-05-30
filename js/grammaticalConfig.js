@@ -95,7 +95,7 @@ const GrammaticalConfig = {
      * - Other: Default grey
      *
      * IMPORTANT: Conjugation and gender are mutually exclusive by word type:
-     * - Conjugation for: verb, modal, subject (when it's a personal pronoun), object-akk/object-dat (when personal pronouns like mich, mir, dich, dir)
+     * - Conjugation for: verb, modal, subject (when it's a personal pronoun), object (when personal pronouns like mich, mir, dich, dir)
      * - Gender for: subject, object, adjective (but NOT verb/modal, and NOT when conjugation is set)
      *
      * @param {Object} word - Word object with type, conjugation, number, and gender properties
@@ -104,7 +104,7 @@ const GrammaticalConfig = {
     getColorForWord(word) {
         // Priority 1: Conjugation for verbs, modals, subjects, and accusative/dative objects (personal pronouns)
         if ((word.type === 'verb' || word.type === 'modal' || word.type === 'subject' ||
-             word.type === 'object-akk' || word.type === 'object-dat') &&
+             word.type === 'object') &&
             word.conjugation?.pronoun && word.conjugation.pronoun !== 'none') {
             const pronounConfig = this.pronouns[word.conjugation.pronoun];
             return pronounConfig ? pronounConfig.color : this.genders['none'];

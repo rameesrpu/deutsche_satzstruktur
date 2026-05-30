@@ -10,9 +10,6 @@ class WordManager {
             'subject': { label: 'ich' },
             'verb': { label: 'verb' },
             'object': { label: 'obj' },
-            'object-akk': { label: 'obj(akk)' },
-            'object-dat': { label: 'obj(dat)' },
-            'object-gen': { label: 'obj(gen)' },
             'adjective': { label: 'adj' },
             'modal': { label: 'modal' },
             'conjunction': { label: 'conj' },
@@ -78,9 +75,9 @@ class WordManager {
             word.conjugation = {
                 pronoun: 'none'  // Default none for subjects (can be set to match verb)
             };
-        } else if (type === 'object-akk' || type === 'object-dat') {
+        } else if (type === 'object') {
             word.conjugation = {
-                pronoun: 'none'  // Default none for accusative/dative objects (for personal pronouns like mich, mir, dich, dir)
+                pronoun: 'none'  // Default none for objects (for personal pronouns like mich, mir, dich, dir)
             };
         } else {
             word.conjugation = {
@@ -200,10 +197,21 @@ class WordManager {
     load() {
         const saved = localStorage.getItem('deutschWords');
         if (saved) {
-            this.words = JSON.parse(saved);
+            this.words = JSON.parse(saved).map(w => this.normalizeLegacyType(w));
             return true;
         }
         return false;
+    }
+
+    /**
+     * Normalize legacy object-akk/dat/gen types to plain "object".
+     * Case is already stored separately so no information is lost.
+     */
+    normalizeLegacyType(word) {
+        if (word.type === 'object-akk' || word.type === 'object-dat' || word.type === 'object-gen') {
+            word.type = 'object';
+        }
+        return word;
     }
 
     /**

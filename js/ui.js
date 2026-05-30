@@ -176,10 +176,7 @@ class UIController {
                 <select id="word-type-select" class="prop-input">
                     <option value="subject" ${selectedWord.type === 'subject' ? 'selected' : ''}>Subject (Nominative)</option>
                     <option value="verb" ${selectedWord.type === 'verb' ? 'selected' : ''}>Verb</option>
-                    <option value="object" ${selectedWord.type === 'object' ? 'selected' : ''}>Object (Generic)</option>
-                    <option value="object-akk" ${selectedWord.type === 'object-akk' ? 'selected' : ''}>Object (Accusative)</option>
-                    <option value="object-dat" ${selectedWord.type === 'object-dat' ? 'selected' : ''}>Object (Dative)</option>
-                    <option value="object-gen" ${selectedWord.type === 'object-gen' ? 'selected' : ''}>Object (Genitive)</option>
+                    <option value="object" ${selectedWord.type === 'object' ? 'selected' : ''}>Object</option>
                     <option value="adjective" ${selectedWord.type === 'adjective' ? 'selected' : ''}>Adjective</option>
                     <option value="modal" ${selectedWord.type === 'modal' ? 'selected' : ''}>Modal/Verb2</option>
                     <option value="conjunction" ${selectedWord.type === 'conjunction' ? 'selected' : ''}>Subordinating Conjunction (Nebensatz)</option>
@@ -303,7 +300,7 @@ class UIController {
 
         // Hide gender section for object pronouns (accusative/dative objects with conjugation set)
         // Object pronouns like 'mich', 'mir', 'dich', 'dir' already have conjugation color
-        if ((word.type === 'object-akk' || word.type === 'object-dat') &&
+        if (word.type === 'object' &&
             word.conjugation?.pronoun && word.conjugation.pronoun !== 'none') {
             return ''; // Object pronouns don't need gender - they have conjugation
         }
@@ -361,8 +358,7 @@ class UIController {
         const isPersonalPronounSubject = word.type === 'subject' && this.isPersonalPronoun(word);
 
         // Show conjugation for accusative/dative objects only if they are personal pronouns (mich, mir, dich, dir, etc.)
-        const isPersonalPronounObject = (word.type === 'object-akk' || word.type === 'object-dat') &&
-                                        this.isPersonalPronoun(word);
+        const isPersonalPronounObject = word.type === 'object' && this.isPersonalPronoun(word);
 
         if (!isVerbOrModal && !isPersonalPronounSubject && !isPersonalPronounObject) {
             return ''; // Hide conjugation section for regular nouns and other word types
@@ -422,15 +418,9 @@ class UIController {
                 const newType = e.target.value;
                 this.wordManager.updateWordProperty(selectedWord.id, 'type', newType);
 
-                // Sync case to match the new type so the shape updates correctly
-                const typeCaseMap = {
-                    'subject': 'nom',
-                    'object-akk': 'akk',
-                    'object-dat': 'dat',
-                    'object-gen': 'gen',
-                };
-                if (typeCaseMap[newType] !== undefined) {
-                    this.wordManager.updateWordProperty(selectedWord.id, 'case', typeCaseMap[newType]);
+                // Auto-set case to nom when switching to subject
+                if (newType === 'subject') {
+                    this.wordManager.updateWordProperty(selectedWord.id, 'case', 'nom');
                 }
 
                 // If changed to conjunction, set this word and all following to vertical flow

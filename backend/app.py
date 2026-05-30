@@ -85,35 +85,25 @@ def map_pos_to_type(token) -> str:
     """
     Map spaCy POS tags to project word types.
 
-    Types: subject, verb, object, object-akk, object-dat, object-gen, adjective, modal,
+    Types: subject, verb, object, adjective, modal,
            conjunction (subordinating), coord-conjunction (coordinating), preposition, other
 
-    Enhanced to distinguish between different object types based on case and conjunction types.
+    Case (nom/akk/dat/gen) is stored separately in the case field — type only encodes the role.
     """
     pos = token.pos_
     morph_dict = token.morph.to_dict()
     case = morph_dict.get("Case", "")
 
-    # Pronouns (especially personal pronouns) → subject (unless dative/accusative)
+    # Pronouns → subject (nominative) or object (all other cases)
     if pos == "PRON":
-        # Personal pronouns in nominative are subjects
         if case == "Nom":
             return "subject"
-        # Accusative pronouns are objects
-        elif case == "Acc":
-            return "object-akk"
-        # Dative pronouns are indirect objects
-        elif case == "Dat":
-            return "object-dat"
-        # Genitive pronouns
-        elif case == "Gen":
-            return "object-gen"
-        # Default to subject if case is unclear
+        elif case in ("Acc", "Dat", "Gen"):
+            return "object"
         return "subject"
 
     # Modal auxiliaries → modal
     if pos == "AUX":
-        # Check if it's a modal verb (können, müssen, sollen, wollen, dürfen, mögen)
         lemma = token.lemma_.lower()
         modals = ["können", "müssen", "sollen", "wollen", "dürfen", "mögen", "möchten"]
         if lemma in modals:
@@ -124,25 +114,15 @@ def map_pos_to_type(token) -> str:
     if pos == "VERB":
         return "verb"
 
-    # Nouns and proper nouns → case-specific object types
+    # Nouns and proper nouns → subject (nominative) or object (all other cases)
     if pos in ["NOUN", "PROPN"]:
-        # Distinguish based on grammatical case
         if case == "Nom":
-            return "subject"  # Nominative nouns are subjects
-        elif case == "Acc":
-            return "object-akk"  # Accusative nouns are direct objects
-        elif case == "Dat":
-            return "object-dat"  # Dative nouns are indirect objects
-        elif case == "Gen":
-            return "object-gen"  # Genitive nouns show possession
+            return "subject"
         else:
-            return "object"  # Default to generic object if case unclear
+            return "object"
 
-    # Determiners (articles) → also use case-specific types for proper shape rendering
+    # Determiners → inherit case from head noun when ambiguous (e.g. "welche" Nom/Acc)
     if pos == "DET":
-        # Prefer the head noun's case when the DET is a modifier (dep=nk), because
-        # interrogative/demonstrative determiners like "welche" are ambiguous between
-        # Nom and Acc for feminine/plural forms — the head noun's case is more reliable.
         effective_case = case
         if token.dep_ == "nk" and token.head.pos_ in ["NOUN", "PROPN"]:
             head_case = token.head.morph.to_dict().get("Case", "")
@@ -151,12 +131,8 @@ def map_pos_to_type(token) -> str:
 
         if effective_case == "Nom":
             return "subject"
-        elif effective_case == "Acc":
-            return "object-akk"
-        elif effective_case == "Dat":
-            return "object-dat"
-        elif effective_case == "Gen":
-            return "object-gen"
+        elif effective_case in ("Acc", "Dat", "Gen"):
+            return "object"
         else:
             return "other"
 

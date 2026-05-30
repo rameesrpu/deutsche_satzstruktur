@@ -103,7 +103,7 @@ class Renderer {
 
         group.appendChild(text);
         // Show case indicator only for subjects, objects, and adjectives (NOT verbs/modals)
-        if (word.type === 'subject' || word.type === 'object' || word.type === 'object-akk' || word.type === 'object-dat' || word.type === 'object-gen' || word.type === 'adjective') {
+        if (word.type === 'subject' || word.type === 'object' || word.type === 'adjective') {
             group.appendChild(caseText);
         }
 
