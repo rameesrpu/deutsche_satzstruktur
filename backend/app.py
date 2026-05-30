@@ -30,6 +30,23 @@ except OSError:
 # LanguageTool Public API Configuration
 LANGUAGETOOL_API_URL = "https://api.languagetool.org/v2/check"
 
+W_WORDS = frozenset({
+    "wie", "was", "wo", "wer", "warum", "woher", "wohin", "wann",
+    "welche", "welcher", "welches", "welchem", "welchen", "wessen", "wen", "wem"
+})
+PERSONAL_PRONOUNS = frozenset({"ich", "du", "er", "sie", "es", "wir", "ihr"})
+
+
+def detect_v1_question(text: str) -> bool:
+    """Return True for verb-initial yes/no questions like 'Sprichst du Deutsch?'"""
+    text = text.strip()
+    if not text.endswith('?'):
+        return False
+    words = text[:-1].strip().split()
+    if len(words) < 2:
+        return False
+    return words[0].lower() not in W_WORDS and words[1].lower() in PERSONAL_PRONOUNS
+
 
 class AnalyzeRequest(BaseModel):
     text: str
@@ -123,14 +140,22 @@ def map_pos_to_type(token) -> str:
 
     # Determiners (articles) → also use case-specific types for proper shape rendering
     if pos == "DET":
-        # Map determiners to same case-specific types as nouns
-        if case == "Nom":
+        # Prefer the head noun's case when the DET is a modifier (dep=nk), because
+        # interrogative/demonstrative determiners like "welche" are ambiguous between
+        # Nom and Acc for feminine/plural forms — the head noun's case is more reliable.
+        effective_case = case
+        if token.dep_ == "nk" and token.head.pos_ in ["NOUN", "PROPN"]:
+            head_case = token.head.morph.to_dict().get("Case", "")
+            if head_case:
+                effective_case = head_case
+
+        if effective_case == "Nom":
             return "subject"
-        elif case == "Acc":
+        elif effective_case == "Acc":
             return "object-akk"
-        elif case == "Dat":
+        elif effective_case == "Dat":
             return "object-dat"
-        elif case == "Gen":
+        elif effective_case == "Gen":
             return "object-gen"
         else:
             return "other"
@@ -383,13 +408,38 @@ def analyze_sentence(request: AnalyzeRequest):
         raise HTTPException(status_code=400, detail="Text cannot be empty")
 
     try:
-        # Process the text with spaCy
-        doc = nlp(request.text)
+        # For V1 questions where spaCy completely fails (first token pos=X), reorder to SVO.
+        # e.g. "Sprichst du Deutsch?" → "Du sprichst Deutsch?" so spaCy parses correctly.
+        # We do a quick pre-parse first to check — only reorder when truly needed.
+        parse_text = request.text.strip()
+        v1_orig_words = None
 
-        # Build a map of verbs to their subjects for better conjugation detection
+        if detect_v1_question(parse_text):
+            probe = nlp(parse_text)
+            first_content = next((t for t in probe if not t.is_punct), None)
+            if first_content and first_content.pos_ == "X":
+                body_words = parse_text[:-1].strip().split()
+                v1_orig_words = body_words
+                reordered = (
+                    [body_words[1].capitalize()]
+                    + [body_words[0].lower()]
+                    + body_words[2:]
+                )
+                parse_text = ' '.join(reordered) + '?'
+
+        # Process the text with spaCy
+        doc = nlp(parse_text)
+
+        # Build a map of predicate tokens to their subjects.
+        # Covers VERB/AUX and ROOT tokens that have sb children but were misclassified
+        # (e.g. "Magst" getting pos=ADV in "Magst du Kaffee?").
         verb_subject_map = {}
         for token in doc:
-            if token.pos_ in ["VERB", "AUX"]:
+            is_predicate = token.pos_ in ["VERB", "AUX"] or (
+                token.dep_ == "ROOT"
+                and any(c.dep_ in ["sb", "ep"] for c in token.children)
+            )
+            if is_predicate:
                 # Find the subject of this verb
                 # 'sb' = subject, 'ep' = expletive pronoun (like "Es regnet")
                 for child in token.children:
@@ -413,9 +463,9 @@ def analyze_sentence(request: AnalyzeRequest):
             # Determine conjugation pronoun
             conj_pronoun = map_conjugation_pronoun(token)
 
-            # For verbs, use the VERB's morphology (Person+Number) combined with subject info
-            # This is more reliable because verb conjugations are unambiguous in German
-            if token.pos_ in ["VERB", "AUX"] and token.i in verb_subject_map:
+            # For predicate tokens (VERB/AUX or misclassified ROOT with subject), determine
+            # conjugation from the verb's morphology + subject info.
+            if token.i in verb_subject_map:
                 subject = verb_subject_map[token.i]
                 verb_person = morph_dict.get("Person", "")
                 verb_number = morph_dict.get("Number", "")
@@ -464,9 +514,15 @@ def analyze_sentence(request: AnalyzeRequest):
             # Get clause information
             clause_type, clause_id = token_to_clause.get(token.i, ("main", 0))
 
+            word_type = map_pos_to_type(token)
+            # If spaCy misclassified a predicate token (has a subject but wrong POS),
+            # override the type to "verb" so it renders correctly.
+            if token.i in verb_subject_map and word_type not in ["verb", "modal"]:
+                word_type = "verb"
+
             word_analysis = WordAnalysis(
                 text=token.text,
-                type=map_pos_to_type(token),
+                type=word_type,
                 gender=map_gender(morph_dict),
                 case=map_case(morph_dict),
                 number=map_number(morph_dict),
@@ -478,6 +534,20 @@ def analyze_sentence(request: AnalyzeRequest):
             )
 
             results.append(word_analysis)
+
+        # If we reordered a V1 question, restore original word order and original casing.
+        # results[0] = subject (reordered pos 0, orig pos 1)
+        # results[1] = verb   (reordered pos 1, orig pos 0)
+        # results[2..n] = rest (unchanged)
+        if v1_orig_words and len(results) >= 2:
+            reorder_map = {0: 1, 1: 0, **{i: i for i in range(2, len(v1_orig_words))}}
+            remapped = [None] * len(results)
+            for new_idx, word in enumerate(results):
+                orig_idx = reorder_map.get(new_idx, new_idx)
+                if orig_idx < len(v1_orig_words):
+                    word.text = v1_orig_words[orig_idx]
+                remapped[orig_idx] = word
+            results = [r for r in remapped if r is not None]
 
         return results
 
