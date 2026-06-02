@@ -89,13 +89,18 @@ class DeutschApp {
 
         if (viewToggleBtn) {
             viewToggleBtn.addEventListener('click', () => {
-                // If in game mode, exit it first
                 if (this.currentView === 'game') {
-                    this.gameMode.stop();
+                    // Pause game and switch to felder for corrections (score preserved)
+                    this.gameMode.pause();
+                    this.currentView = 'felder';
+                } else if (this.gameMode.isPaused) {
+                    // Return to the paused game
+                    this.gameMode.resume();
+                    this.currentView = 'game';
+                } else {
+                    // Normal toggle between felder and grid
+                    this.currentView = this.currentView === 'felder' ? 'grid' : 'felder';
                 }
-
-                // Toggle between felder and grid views
-                this.currentView = this.currentView === 'felder' ? 'grid' : 'felder';
                 this.redrawAll();
             });
         }
@@ -109,8 +114,8 @@ class DeutschApp {
 
         if (gameModeBtn) {
             gameModeBtn.addEventListener('click', () => {
-                if (this.currentView === 'game') {
-                    // Exit game mode
+                if (this.gameMode.isActive) {
+                    // Exit game mode — stop() resets score for next fresh session
                     this.currentView = 'grid';
                     this.gameMode.stop();
                     gameModeBtn.textContent = '🎮';
@@ -129,17 +134,11 @@ class DeutschApp {
                         return;
                     }
 
-                    // Switch to game view
+                    // Switch to game view and start fresh
                     this.currentView = 'game';
-
-                    // Start game mode
                     this.gameMode.start();
-
-                    // Change button to exit
                     gameModeBtn.textContent = '✕';
                     gameModeBtn.title = 'Exit Game Mode';
-
-                    // Redraw in game view
                     this.redrawAll();
                 }
             });

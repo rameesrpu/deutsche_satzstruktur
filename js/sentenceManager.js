@@ -325,9 +325,9 @@ class SentenceManager {
                     word.number = analyzed.number;
                 }
 
-                // Update conjugation pronoun ONLY for verbs, modals, and subjects (personal pronouns)
-                // Objects and adjectives should NOT receive conjugation
-                if ((analyzed.type === 'verb' || analyzed.type === 'modal' || analyzed.type === 'subject') &&
+                // Update conjugation pronoun for verbs, modals, subjects, and personal pronoun objects
+                // Backend only sends conjugation_pronoun for personal pronouns (mich, uns, etc.)
+                if ((analyzed.type === 'verb' || analyzed.type === 'modal' || analyzed.type === 'subject' || analyzed.type === 'object') &&
                     analyzed.conjugation_pronoun && analyzed.conjugation_pronoun !== 'none') {
                     if (!word.conjugation) {
                         word.conjugation = {};
@@ -363,8 +363,8 @@ class SentenceManager {
                     canvasWord.case = analyzed.case;
                     canvasWord.number = analyzed.number;
 
-                    // Update conjugation pronoun ONLY for verbs, modals, and subjects
-                    if ((analyzed.type === 'verb' || analyzed.type === 'modal' || analyzed.type === 'subject') &&
+                    // Update conjugation pronoun for verbs, modals, subjects, and personal pronoun objects
+                    if ((analyzed.type === 'verb' || analyzed.type === 'modal' || analyzed.type === 'subject' || analyzed.type === 'object') &&
                         analyzed.conjugation_pronoun && analyzed.conjugation_pronoun !== 'none') {
                         if (!canvasWord.conjugation) {
                             canvasWord.conjugation = {};

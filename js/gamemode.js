@@ -10,6 +10,7 @@ class GameMode {
 
         // Game state
         this.isActive = false;
+        this.isPaused = false; // True when temporarily switched to felder view
         this.totalScore = 0; // Total score across all sentences
         this.currentSentenceScore = 0; // Score for current sentence only
         this.targetScore = 500; // Goal to reach
@@ -99,7 +100,7 @@ class GameMode {
         if (this.isActive) return;
 
         this.isActive = true;
-        this.totalScore = 0; // Reset total score when starting fresh
+        this.isPaused = false;
 
         // Add keyboard event listener for case selection (PC only)
         this.keyboardHandler = (e) => {
@@ -154,12 +155,41 @@ class GameMode {
     }
 
     /**
-     * Stop the game mode
+     * Pause the game (e.g. when switching to felder view for corrections).
+     * Preserves all state including score.
+     */
+    pause() {
+        if (!this.isActive || this.isPaused) return;
+        this.isPaused = true;
+        this.stopTimerAnimation();
+        if (this.keyboardHandler) {
+            document.removeEventListener('keydown', this.keyboardHandler);
+        }
+    }
+
+    /**
+     * Resume a paused game, restoring keyboard/timer state.
+     */
+    resume() {
+        if (!this.isActive || !this.isPaused) return;
+        this.isPaused = false;
+        if (this.keyboardHandler) {
+            document.addEventListener('keydown', this.keyboardHandler);
+        }
+        if (this.timeChallengeMode && this.wordStartTime !== null) {
+            this.startTimerAnimation();
+        }
+    }
+
+    /**
+     * Stop the game mode and reset score for next session.
      */
     stop() {
         if (!this.isActive) return;
 
         this.isActive = false;
+        this.isPaused = false;
+        this.totalScore = 0; // Reset score so the next start() is fresh
         this.stopTimerAnimation();
         this.wordStartTime = null;
 
@@ -1519,6 +1549,7 @@ class GameMode {
             setTimeout(() => {
                 if (window.app) {
                     // Exit game mode and show the completed gridview
+                    const finalScore = this.totalScore;
                     window.app.currentView = 'grid';
                     this.stop();
 
@@ -1531,7 +1562,7 @@ class GameMode {
 
                     window.app.redrawAll();
 
-                    alert(`🎉 Congratulations!\n\nYou reached ${this.totalScore} points and mastered German sentence structure!`);
+                    alert(`🎉 Congratulations!\n\nYou reached ${finalScore} points and mastered German sentence structure!`);
                 }
             }, 1000);
         } else {
