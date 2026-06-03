@@ -151,7 +151,10 @@ def map_pos_to_type(token) -> str:
         return "conjunction"
 
     # Prepositions → preposition
+    # "als" is a comparative particle, not a preposition — spaCy sometimes mislabels it as ADP
     if pos == "ADP":
+        if token.lemma_.lower() == "als":
+            return "other"
         return "preposition"
 
     # Everything else → other (ADV, NUM, PART, etc.)
