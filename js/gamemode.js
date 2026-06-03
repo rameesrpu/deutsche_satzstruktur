@@ -1398,7 +1398,7 @@ class GameMode {
         const fillEl = this.svg.querySelector('#game-timer-bar-fill');
         if (trackEl && fillEl && this.wordStartTime) {
             const elapsed = Date.now() - this.wordStartTime;
-            const remaining = Math.max(0, 1 - elapsed / 3000);
+            const remaining = Math.max(0, 1 - elapsed / 10000);
             const totalWidth = parseFloat(trackEl.getAttribute('data-width') || '0');
             fillEl.setAttribute('width', Math.max(0, totalWidth * remaining));
             fillEl.setAttribute('fill', this.getTimerColor(1 - remaining));
@@ -1420,12 +1420,12 @@ class GameMode {
 
     getTimePoints(elapsedMs) {
         const s = elapsedMs / 1000;
-        if (s < 0.5) return { points: 30, color: '#27ae60' };
-        if (s < 1.0) return { points: 25, color: '#52be80' };
-        if (s < 1.5) return { points: 20, color: '#f1c40f' };
-        if (s < 2.0) return { points: 15, color: '#e67e22' };
-        if (s < 2.5) return { points: 10, color: '#d35400' };
-        if (s < 3.0) return { points: 5,  color: '#e74c3c' };
+        if (s < 1.0) return { points: 30, color: '#27ae60' };
+        if (s < 2.0) return { points: 25, color: '#52be80' };
+        if (s < 3.0) return { points: 20, color: '#a9d96c' };
+        if (s < 5.0) return { points: 15, color: '#f1c40f' };
+        if (s < 7.0) return { points: 10, color: '#e67e22' };
+        if (s < 10.0) return { points: 5,  color: '#e74c3c' };
         return { points: 0, color: '#c0392b' };
     }
 
@@ -1441,7 +1441,7 @@ class GameMode {
 
     drawTimerBar(group, centerX, topY, barHeight, wordWidth) {
         const elapsed = this.wordStartTime ? Date.now() - this.wordStartTime : 0;
-        const remaining = Math.max(0, 1 - elapsed / 3000);
+        const remaining = Math.max(0, 1 - elapsed / 10000);
         const t = 1 - remaining;
 
         const barX = centerX - wordWidth / 2;
