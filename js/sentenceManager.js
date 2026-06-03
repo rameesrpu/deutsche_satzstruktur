@@ -326,9 +326,8 @@ class SentenceManager {
                 }
 
                 // Update conjugation pronoun for verbs, modals, subjects, and personal pronoun objects
-                // Backend only sends conjugation_pronoun for personal pronouns (mich, uns, etc.)
                 if ((analyzed.type === 'verb' || analyzed.type === 'modal' || analyzed.type === 'subject' || analyzed.type === 'object') &&
-                    analyzed.conjugation_pronoun && analyzed.conjugation_pronoun !== 'none') {
+                    analyzed.conjugation_pronoun) {
                     if (!word.conjugation) {
                         word.conjugation = {};
                     }
@@ -365,7 +364,7 @@ class SentenceManager {
 
                     // Update conjugation pronoun for verbs, modals, subjects, and personal pronoun objects
                     if ((analyzed.type === 'verb' || analyzed.type === 'modal' || analyzed.type === 'subject' || analyzed.type === 'object') &&
-                        analyzed.conjugation_pronoun && analyzed.conjugation_pronoun !== 'none') {
+                        analyzed.conjugation_pronoun) {
                         if (!canvasWord.conjugation) {
                             canvasWord.conjugation = {};
                         }

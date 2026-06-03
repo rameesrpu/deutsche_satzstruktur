@@ -160,6 +160,41 @@ class DeutschApp {
                 }
             });
         }
+
+        const multiCategoryToggle = document.getElementById('multi-category-toggle');
+        const multiCategoryLevels = document.getElementById('multi-category-levels');
+        const multiCategoryA1 = document.getElementById('multi-category-a1');
+        const multiCategoryA2 = document.getElementById('multi-category-a2');
+        const multiCategoryB1 = document.getElementById('multi-category-b1');
+
+        if (multiCategoryToggle) {
+            const updateSelectedLevels = () => {
+                const levels = [];
+                if (multiCategoryA1 && multiCategoryA1.checked) levels.push('A1');
+                if (multiCategoryA2 && multiCategoryA2.checked) levels.push('A2');
+                if (multiCategoryB1 && multiCategoryB1.checked) levels.push('B1');
+                this.gameMode.selectedLevels = levels;
+            };
+
+            multiCategoryToggle.addEventListener('change', () => {
+                this.gameMode.multiCategoryMode = multiCategoryToggle.checked;
+                if (multiCategoryLevels) {
+                    multiCategoryLevels.style.display = multiCategoryToggle.checked ? 'block' : 'none';
+                }
+                if (multiCategoryToggle.checked) {
+                    if (multiCategoryA1) multiCategoryA1.checked = true;
+                    if (multiCategoryA2) multiCategoryA2.checked = true;
+                    if (multiCategoryB1) multiCategoryB1.checked = true;
+                    this.gameMode.selectedLevels = ['A1', 'A2', 'B1'];
+                    this.gameMode.batchSentencesPlayed = 0;
+                    this.gameMode.batchCurrentCategory = null;
+                }
+            });
+
+            if (multiCategoryA1) multiCategoryA1.addEventListener('change', updateSelectedLevels);
+            if (multiCategoryA2) multiCategoryA2.addEventListener('change', updateSelectedLevels);
+            if (multiCategoryB1) multiCategoryB1.addEventListener('change', updateSelectedLevels);
+        }
     }
 
     /**

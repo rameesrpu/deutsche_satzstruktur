@@ -744,6 +744,20 @@ button:hover {
     font-style: italic;
 }
 
+.settings-sub-options {
+    margin-top: 6px;
+    padding-left: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.settings-sub-row {
+    padding: 6px 10px;
+    background: #f8f9fa;
+    border-color: #dde1e5;
+}
+
 /* Remove extra border when export/import is inside settings panel */
 .settings-section .sentence-export-import {
     border-top: none;

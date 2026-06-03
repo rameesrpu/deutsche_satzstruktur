@@ -26,6 +26,12 @@ class GameMode {
         this.wordStartTime = null;
         this.timeAnimationId = null;
 
+        // Multiple categories mode
+        this.multiCategoryMode = false;
+        this.selectedLevels = ['A1', 'A2', 'B1'];
+        this.batchSentencesPlayed = 0;
+        this.batchCurrentCategory = null; // { level, category }
+
         // Pre-calculated gridview state
         this.preCalculatedBoxes = [];
         this.preCalculatedConnections = [];
@@ -55,6 +61,9 @@ class GameMode {
 
         // Waiting for user to continue to next sentence
         this.waitingForContinue = false;
+
+        // Track sentences played this session to avoid repeats
+        this.usedSentenceIds = new Set();
 
         // Keyboard event handler (bound for proper removal)
         this.keyboardHandler = null;
@@ -131,6 +140,11 @@ class GameMode {
         document.addEventListener('keydown', this.keyboardHandler);
 
         this.startNewSentence();
+
+        // Record the initial sentence as used
+        if (window.app && window.app.sentenceManager) {
+            this.usedSentenceIds.add(window.app.sentenceManager.currentSentenceId);
+        }
     }
 
     /**
@@ -190,8 +204,11 @@ class GameMode {
         this.isActive = false;
         this.isPaused = false;
         this.totalScore = 0; // Reset score so the next start() is fresh
+        this.usedSentenceIds = new Set();
         this.stopTimerAnimation();
         this.wordStartTime = null;
+        this.batchSentencesPlayed = 0;
+        this.batchCurrentCategory = null;
 
         // Remove keyboard event listener
         if (this.keyboardHandler) {
@@ -1582,6 +1599,16 @@ class GameMode {
             return;
         }
 
+        if (this.multiCategoryMode && this.selectedLevels.length > 0) {
+            const hasMultiSentences = window.app.sentenceManager.getAllSentences().some(s =>
+                s.source === 'library' && this.selectedLevels.includes(s.level)
+            );
+            if (hasMultiSentences) {
+                this.loadRandomSentenceMultiCategory();
+                return;
+            }
+        }
+
         const sentenceManager = window.app.sentenceManager;
         const levelSelector = window.app.levelSelector;
 
@@ -1613,16 +1640,21 @@ class GameMode {
             return;
         }
 
-        // Pick a random sentence (exclude current one if possible)
-        let randomSentence;
-        if (availableSentences.length > 1) {
-            const otherSentences = availableSentences.filter(s => s.id !== sentenceManager.currentSentenceId);
-            randomSentence = otherSentences.length > 0
-                ? otherSentences[Math.floor(Math.random() * otherSentences.length)]
-                : availableSentences[0];
-        } else {
-            randomSentence = availableSentences[0];
+        // Mark current sentence as used before picking the next
+        this.usedSentenceIds.add(sentenceManager.currentSentenceId);
+
+        // Pick a random sentence not yet played this session
+        let unseenSentences = availableSentences.filter(s => !this.usedSentenceIds.has(s.id));
+
+        // If all sentences have been seen, reset and allow repeats (but still avoid the just-played one)
+        if (unseenSentences.length === 0) {
+            this.usedSentenceIds.clear();
+            this.usedSentenceIds.add(sentenceManager.currentSentenceId);
+            unseenSentences = availableSentences.filter(s => !this.usedSentenceIds.has(s.id));
         }
+
+        const pool = unseenSentences.length > 0 ? unseenSentences : availableSentences;
+        const randomSentence = pool[Math.floor(Math.random() * pool.length)];
 
         // Load the random sentence
         sentenceManager.loadSentence(randomSentence.id);
@@ -1643,5 +1675,84 @@ class GameMode {
         }
 
         console.log('Loaded new sentence from active list:', randomSentence.text);
+    }
+
+    /**
+     * Load a random sentence in multi-category mode.
+     * Plays 5 sentences from one category, then switches to a random new category.
+     */
+    loadRandomSentenceMultiCategory() {
+        const sentenceManager = window.app.sentenceManager;
+
+        this.batchSentencesPlayed++;
+
+        const needNewCategory = !this.batchCurrentCategory || this.batchSentencesPlayed > 5;
+
+        if (needNewCategory) {
+            const allSentences = sentenceManager.getAllSentences().filter(s =>
+                s.source === 'library' && this.selectedLevels.includes(s.level)
+            );
+
+            // Collect unique {level, category} pairs
+            const seen = new Set();
+            const categories = [];
+            allSentences.forEach(s => {
+                const key = `${s.level}/${s.category}`;
+                if (!seen.has(key)) {
+                    seen.add(key);
+                    categories.push({ level: s.level, category: s.category });
+                }
+            });
+
+            if (categories.length === 0) return;
+
+            const currentKey = this.batchCurrentCategory
+                ? `${this.batchCurrentCategory.level}/${this.batchCurrentCategory.category}`
+                : null;
+            const others = categories.filter(c => `${c.level}/${c.category}` !== currentKey);
+            const pool = others.length > 0 ? others : categories;
+
+            this.batchCurrentCategory = pool[Math.floor(Math.random() * pool.length)];
+            this.batchSentencesPlayed = 1;
+        }
+
+        const { level, category } = this.batchCurrentCategory;
+        const availableSentences = sentenceManager.getAllSentences().filter(s =>
+            s.source === 'library' && s.level === level && s.category === category
+        );
+
+        if (availableSentences.length === 0) {
+            // Category emptied, reset and retry with normal path
+            this.batchCurrentCategory = null;
+            this.batchSentencesPlayed = 0;
+            this.loadRandomSentenceAndContinue();
+            return;
+        }
+
+        this.usedSentenceIds.add(sentenceManager.currentSentenceId);
+
+        let unseen = availableSentences.filter(s => !this.usedSentenceIds.has(s.id));
+        if (unseen.length === 0) {
+            // All sentences in this category used — clear just this category's history
+            availableSentences.forEach(s => this.usedSentenceIds.delete(s.id));
+            this.usedSentenceIds.add(sentenceManager.currentSentenceId);
+            unseen = availableSentences.filter(s => !this.usedSentenceIds.has(s.id));
+        }
+
+        const randomSentence = (unseen.length > 0 ? unseen : availableSentences)[
+            Math.floor(Math.random() * (unseen.length > 0 ? unseen.length : availableSentences.length))
+        ];
+
+        sentenceManager.loadSentence(randomSentence.id);
+        this.startNewSentence();
+
+        if (window.app) {
+            window.app.updateSentenceList();
+            window.app.redrawAll();
+            const activeItem = document.querySelector('.sentence-item.active');
+            if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+
+        console.log(`Multi-category: ${level}/${category} (${this.batchSentencesPlayed}/5)`);
     }
 }

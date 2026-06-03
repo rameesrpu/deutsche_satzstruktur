@@ -20,12 +20,12 @@ app.add_middleware(
 
 # Load German spaCy model (will be downloaded on first run)
 try:
-    nlp = spacy.load("de_core_news_sm")
+    nlp = spacy.load("de_dep_news_trf")
 except OSError:
     print("Downloading German spaCy model...")
     import subprocess
-    subprocess.run(["python", "-m", "spacy", "download", "de_core_news_sm"])
-    nlp = spacy.load("de_core_news_sm")
+    subprocess.run(["python", "-m", "spacy", "download", "de_dep_news_trf"])
+    nlp = spacy.load("de_dep_news_trf")
 
 # LanguageTool Public API Configuration
 LANGUAGETOOL_API_URL = "https://api.languagetool.org/v2/check"
@@ -96,6 +96,8 @@ def map_pos_to_type(token) -> str:
 
     # Pronouns → subject (nominative) or object (all other cases)
     if pos == "PRON":
+        if token.text.lower() == "sich":
+            return "other"
         if case == "Nom":
             return "subject"
         elif case in ("Acc", "Dat", "Gen"):
@@ -226,7 +228,9 @@ def map_conjugation_pronoun(token) -> str:
         # For pronouns, check the actual text
         if pos == "PRON":
             text_lower = token.text.lower()
-            if text_lower in ["er", "der"]:
+            if text_lower == "sich":
+                return "none"  # Reflexive pronoun — doesn't conjugate
+            elif text_lower in ["er", "der"]:
                 return "er"
             elif text_lower in ["sie"]:
                 return "sie"
@@ -361,7 +365,7 @@ def root():
     return {
         "status": "running",
         "message": "German NLP Analyzer API",
-        "model": "de_core_news_sm"
+        "model": "de_dep_news_trf"
     }
 
 
@@ -499,7 +503,7 @@ def analyze_sentence(request: AnalyzeRequest):
             word_analysis = WordAnalysis(
                 text=token.text,
                 type=word_type,
-                gender=map_gender(morph_dict),
+                gender="none" if token.text.lower() == "sich" else map_gender(morph_dict),
                 case=map_case(morph_dict),
                 number=map_number(morph_dict),
                 conjugation_pronoun=conj_pronoun,
