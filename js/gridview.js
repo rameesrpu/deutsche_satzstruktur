@@ -67,7 +67,10 @@ class GridViewModel {
             'feminine': { row: 1, col: 3, label: 'FEMININE' },
             'neutral': { row: 2, col: 1, label: 'NEUTRAL' },
             'neuter': { row: 2, col: 1, label: 'NEUTRAL' },
-            'plural': { row: 2, col: 3, label: 'PLURAL' }
+            'plural': { row: 2, col: 3, label: 'PLURAL' },
+
+            // Imperative (no subject / conjugation = none)
+            'imperative': { row: 3, col: 3, label: 'IMPERATIV' }
         };
     }
 
@@ -138,7 +141,7 @@ class GridViewModel {
             // Row 3
             { row: 3, col: 1, label: 'IHR', color: '#f39c12' },         // Orange/yellow (ihr)
             { row: 3, col: 2, label: 'WIR', color: '#2c3e50' },         // Dark gray (wir)
-            { row: 3, col: 3, label: '', color: '#f5f5f5' }             // Light gray
+            { row: 3, col: 3, label: 'IMPERATIV', color: '#7f8c8d' }    // Gray (imperative)
         ];
 
         cellData.forEach(cell => {
@@ -434,6 +437,11 @@ class GridViewModel {
         if (word.type === 'verb' || word.type === 'modal') {
             if (word.conjugation && word.conjugation.pronoun) {
                 const pronoun = word.conjugation.pronoun.toLowerCase();
+
+                // Imperative (no subject) → row 3, col 3
+                if (pronoun === 'none') {
+                    return this.positions['imperative'];
+                }
 
                 // If it's a personal pronoun (ich, du, wir, ihr), use the pronoun cell
                 if (pronoun === 'ich' || pronoun === 'du' || pronoun === 'wir' || pronoun === 'we' || pronoun === 'ihr') {

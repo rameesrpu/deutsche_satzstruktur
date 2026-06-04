@@ -166,6 +166,11 @@ class GameMode {
         this.buildManualItems();
         this.preCalculateGridView();
         this.updateCurrentWordDisplay();
+
+        // Nothing to place (e.g. imperative sentence) — go straight to tap-to-continue
+        if (this.manualItems.length === 0) {
+            this.waitingForContinue = true;
+        }
     }
 
     /**
@@ -1295,6 +1300,7 @@ class GameMode {
         feedbackGroup.setAttribute('class', 'feedback-animation');
         feedbackGroup.setAttribute('transform', `translate(${x}, ${y + floatY}) scale(${scale})`);
         feedbackGroup.setAttribute('opacity', opacity);
+        feedbackGroup.setAttribute('pointer-events', 'none');
 
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', 0);

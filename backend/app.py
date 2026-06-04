@@ -20,12 +20,12 @@ app.add_middleware(
 
 # Load German spaCy model (will be downloaded on first run)
 try:
-    nlp = spacy.load("de_dep_news_trf")
+    nlp = spacy.load("de_core_news_sm")
 except OSError:
     print("Downloading German spaCy model...")
     import subprocess
-    subprocess.run(["python", "-m", "spacy", "download", "de_dep_news_trf"])
-    nlp = spacy.load("de_dep_news_trf")
+    subprocess.run(["python", "-m", "spacy", "download", "de_core_news_sm"])
+    nlp = spacy.load("de_core_news_sm")
 
 # LanguageTool Public API Configuration
 LANGUAGETOOL_API_URL = "https://api.languagetool.org/v2/check"
@@ -214,6 +214,10 @@ def map_conjugation_pronoun(token) -> str:
     if pos not in ["VERB", "AUX", "PRON"]:
         return "none"
 
+    # Imperative mood has no subject → no conjugation pronoun
+    if morph_dict.get("Mood", "") == "Imp":
+        return "none"
+
     person = morph_dict.get("Person", "")
     number = morph_dict.get("Number", "")
     gender = morph_dict.get("Gender", "")
@@ -368,7 +372,7 @@ def root():
     return {
         "status": "running",
         "message": "German NLP Analyzer API",
-        "model": "de_dep_news_trf"
+        "model": "de_core_news_sm"
     }
 
 
