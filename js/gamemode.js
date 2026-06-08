@@ -32,6 +32,9 @@ class GameMode {
         this.batchSentencesPlayed = 0;
         this.batchCurrentCategory = null; // { level, category }
 
+        // Story mode: advance sequentially through the current category
+        this.storyMode = false;
+
         // Pre-calculated gridview state
         this.preCalculatedBoxes = [];
         this.preCalculatedConnections = [];
@@ -1605,6 +1608,11 @@ class GameMode {
             return;
         }
 
+        if (this.storyMode) {
+            this.loadNextSentenceInOrder();
+            return;
+        }
+
         if (this.multiCategoryMode && this.selectedLevels.length > 0) {
             const hasMultiSentences = window.app.sentenceManager.getAllSentences().some(s =>
                 s.source === 'library' && this.selectedLevels.includes(s.level)
@@ -1681,6 +1689,47 @@ class GameMode {
         }
 
         console.log('Loaded new sentence from active list:', randomSentence.text);
+    }
+
+    /**
+     * Story mode: advance to the next sentence in order within the current category.
+     * Wraps back to the first sentence after the last one.
+     */
+    loadNextSentenceInOrder() {
+        const sentenceManager = window.app.sentenceManager;
+        const levelSelector = window.app.levelSelector;
+
+        if (!levelSelector || !levelSelector.currentLevel || !levelSelector.currentCategory) {
+            // No category context — fall back to random within whatever is loaded
+            this.storyMode = false;
+            this.loadRandomSentenceAndContinue();
+            return;
+        }
+
+        const { currentLevel, currentCategory } = levelSelector;
+        const categorySentences = sentenceManager.getAllSentences().filter(s =>
+            s.source === 'library' &&
+            s.level === currentLevel &&
+            s.category === currentCategory
+        );
+
+        if (categorySentences.length === 0) return;
+
+        const currentIdx = categorySentences.findIndex(s => s.id === sentenceManager.currentSentenceId);
+        const nextIdx = (currentIdx + 1) % categorySentences.length;
+        const nextSentence = categorySentences[nextIdx];
+
+        sentenceManager.loadSentence(nextSentence.id);
+        this.startNewSentence();
+
+        if (window.app) {
+            window.app.updateSentenceList();
+            window.app.redrawAll();
+            const activeItem = document.querySelector('.sentence-item.active');
+            if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+
+        console.log(`Story mode: ${currentLevel}/${currentCategory} [${nextIdx + 1}/${categorySentences.length}]`);
     }
 
     /**

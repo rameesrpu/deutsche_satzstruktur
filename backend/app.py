@@ -142,6 +142,10 @@ def map_pos_to_type(token) -> str:
     if pos == "ADJ":
         return "adjective"
 
+    # Em/en dash used as coordinating conjunction
+    if token.text in ("–", "—"):
+        return "coord-conjunction"
+
     # Coordinating conjunctions (und, aber, oder, denn, sondern) → coord-conjunction
     if pos == "CCONJ":
         return "coord-conjunction"
@@ -440,8 +444,8 @@ def analyze_sentence(request: AnalyzeRequest):
         # Analyze each token
         results = []
         for token in doc:
-            # Skip punctuation
-            if token.is_punct:
+            # Skip punctuation, but keep dashes used as coordinating conjunctions
+            if token.is_punct and token.text not in ("–", "—"):
                 continue
 
             # Extract morphological features

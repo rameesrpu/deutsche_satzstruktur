@@ -10,7 +10,9 @@ const LEVEL_CONTENT = {
             possessivartikel: { label: 'Possessivartikel',  file: 'data/levels/A1_possessivartikel.json' },
             praepositionen:   { label: 'Präpositionen',     file: 'data/levels/A1_praepositionen.json'   },
             zahlen_zeit:      { label: 'Zahlen & Zeit',     file: 'data/levels/A1_zahlen_zeit.json'      },
-            alltag:           { label: 'Alltag',            file: 'data/levels/A1_alltag.json'           }
+            alltag:           { label: 'Alltag',            file: 'data/levels/A1_alltag.json'           },
+            story_neue_nachbarn:    { label: 'Story: Neue Nachbarn',    file: 'data/levels/A1_story_neue_nachbarn.json'    },
+            story_der_herbstmarkt: { label: 'Story: Der Herbstmarkt', file: 'data/levels/A1_story_der_herbstmarkt.json' }
         }
     },
     A2: {

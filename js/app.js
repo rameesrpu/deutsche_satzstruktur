@@ -166,6 +166,7 @@ class DeutschApp {
         const multiCategoryA1 = document.getElementById('multi-category-a1');
         const multiCategoryA2 = document.getElementById('multi-category-a2');
         const multiCategoryB1 = document.getElementById('multi-category-b1');
+        const storyModeToggle = document.getElementById('story-mode-toggle');
 
         if (multiCategoryToggle) {
             const updateSelectedLevels = () => {
@@ -188,12 +189,27 @@ class DeutschApp {
                     this.gameMode.selectedLevels = ['A1', 'A2', 'B1'];
                     this.gameMode.batchSentencesPlayed = 0;
                     this.gameMode.batchCurrentCategory = null;
+                    // Mutually exclusive with story mode
+                    if (storyModeToggle) storyModeToggle.checked = false;
+                    this.gameMode.storyMode = false;
                 }
             });
 
             if (multiCategoryA1) multiCategoryA1.addEventListener('change', updateSelectedLevels);
             if (multiCategoryA2) multiCategoryA2.addEventListener('change', updateSelectedLevels);
             if (multiCategoryB1) multiCategoryB1.addEventListener('change', updateSelectedLevels);
+        }
+
+        if (storyModeToggle) {
+            storyModeToggle.addEventListener('change', () => {
+                this.gameMode.storyMode = storyModeToggle.checked;
+                // Mutually exclusive with multi-category mode
+                if (storyModeToggle.checked && multiCategoryToggle && multiCategoryToggle.checked) {
+                    multiCategoryToggle.checked = false;
+                    this.gameMode.multiCategoryMode = false;
+                    if (multiCategoryLevels) multiCategoryLevels.style.display = 'none';
+                }
+            });
         }
     }
 
