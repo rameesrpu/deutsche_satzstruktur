@@ -13,7 +13,7 @@ class GameMode {
         this.isPaused = false; // True when temporarily switched to felder view
         this.totalScore = 0; // Total score across all sentences
         this.currentSentenceScore = 0; // Score for current sentence only
-        this.targetScore = 500; // Goal to reach
+        this.targetScore = 2000; // Goal to reach
         this.currentWordIndex = 0;
         this.words = [];
         this.parsedSentence = null;
@@ -64,6 +64,9 @@ class GameMode {
 
         // Waiting for user to continue to next sentence
         this.waitingForContinue = false;
+
+        // First tap shows felder view; second tap loads next sentence
+        this.pendingFelderReview = false;
 
         // Track sentences played this session to avoid repeats
         this.usedSentenceIds = new Set();
@@ -164,6 +167,7 @@ class GameMode {
         this.currentWordDisplay = null;
         this.currentWordAttempts = 0;
         this.waitingForContinue = false;
+        this.pendingFelderReview = false;
 
         this.parseSentence();
         this.buildManualItems();
@@ -211,6 +215,7 @@ class GameMode {
 
         this.isActive = false;
         this.isPaused = false;
+        this.pendingFelderReview = false;
         this.totalScore = 0; // Reset score so the next start() is fresh
         this.usedSentenceIds = new Set();
         this.stopTimerAnimation();
@@ -907,7 +912,17 @@ class GameMode {
         const handleTap = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            if (this.waitingForContinue) {
+            if (!this.waitingForContinue) return;
+            if (this.pendingFelderReview) {
+                // First tap: show felder view so user can see the sentence structure
+                this.pendingFelderReview = false;
+                this.pause();
+                if (window.app) {
+                    window.app.currentView = 'felder';
+                    window.app.redrawAll();
+                }
+            } else {
+                // Second tap (after felder review): load next sentence
                 this.loadRandomSentenceAndContinue();
             }
         };
@@ -1593,6 +1608,7 @@ class GameMode {
             }, 1000);
         } else {
             this.waitingForContinue = true;
+            this.pendingFelderReview = true;
             if (window.app) {
                 window.app.redrawAll();
             }

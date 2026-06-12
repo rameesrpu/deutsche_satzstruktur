@@ -1,0 +1,2891 @@
+{
+  "level": "B1",
+  "category": "Zweiteilige Konnektoren",
+  "version": "2026-06-12",
+  "sentences": [
+    {
+      "text": "Sowohl Deutsch als auch Englisch sind wichtig.",
+      "words": [
+        {
+          "id": 1781001882584,
+          "type": "coord-conjunction",
+          "text": "Sowohl",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882585,
+          "type": "subject",
+          "text": "Deutsch",
+          "x": 240,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882586,
+          "type": "coord-conjunction",
+          "text": "als",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882587,
+          "type": "other",
+          "text": "auch",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882588,
+          "type": "subject",
+          "text": "Englisch",
+          "x": 480,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882589,
+          "type": "verb",
+          "text": "sind",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882590,
+          "type": "other",
+          "text": "wichtig.",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        }
+      ]
+    },
+    {
+      "text": "Entweder du kommst mit, oder du bleibst zu Hause.",
+      "words": [
+        {
+          "id": 1781001882585,
+          "type": "coord-conjunction",
+          "text": "Entweder",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882586,
+          "type": "subject",
+          "text": "du",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882587,
+          "type": "verb",
+          "text": "kommst",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882588,
+          "type": "preposition",
+          "text": "mit,",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882589,
+          "type": "coord-conjunction",
+          "text": "oder",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882590,
+          "type": "subject",
+          "text": "du",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882591,
+          "type": "verb",
+          "text": "bleibst",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882592,
+          "type": "preposition",
+          "text": "zu",
+          "x": 720,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882593,
+          "type": "object",
+          "text": "Hause.",
+          "x": 800,
+          "y": 160,
+          "gender": "n",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        }
+      ]
+    },
+    {
+      "text": "Er spricht weder Spanisch noch Italienisch.",
+      "words": [
+        {
+          "id": 1781001882586,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882587,
+          "type": "verb",
+          "text": "spricht",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882588,
+          "type": "coord-conjunction",
+          "text": "weder",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882589,
+          "type": "object",
+          "text": "Spanisch",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882590,
+          "type": "coord-conjunction",
+          "text": "noch",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882591,
+          "type": "object",
+          "text": "Italienisch.",
+          "x": 560,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        }
+      ]
+    },
+    {
+      "text": "Nicht nur die Eltern, sondern auch die Kinder waren eingeladen.",
+      "words": [
+        {
+          "id": 1781001882587,
+          "type": "other",
+          "text": "Nicht",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882588,
+          "type": "other",
+          "text": "nur",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882589,
+          "type": "subject",
+          "text": "die",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882590,
+          "type": "subject",
+          "text": "Eltern,",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882591,
+          "type": "coord-conjunction",
+          "text": "sondern",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882592,
+          "type": "other",
+          "text": "auch",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882593,
+          "type": "subject",
+          "text": "die",
+          "x": 640,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882594,
+          "type": "subject",
+          "text": "Kinder",
+          "x": 720,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882595,
+          "type": "verb",
+          "text": "waren",
+          "x": 800,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882596,
+          "type": "verb",
+          "text": "eingeladen.",
+          "x": 880,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    },
+    {
+      "text": "Zwar ist das Angebot günstig, aber die Qualität ist schlecht.",
+      "words": [
+        {
+          "id": 1781001882588,
+          "type": "other",
+          "text": "Zwar",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882589,
+          "type": "verb",
+          "text": "ist",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882590,
+          "type": "subject",
+          "text": "das",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882591,
+          "type": "subject",
+          "text": "Angebot",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882592,
+          "type": "other",
+          "text": "günstig,",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882593,
+          "type": "coord-conjunction",
+          "text": "aber",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882594,
+          "type": "subject",
+          "text": "die",
+          "x": 640,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882595,
+          "type": "subject",
+          "text": "Qualität",
+          "x": 720,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882596,
+          "type": "verb",
+          "text": "ist",
+          "x": 800,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882597,
+          "type": "other",
+          "text": "schlecht.",
+          "x": 880,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    },
+    {
+      "text": "Sowohl mein Bruder als auch meine Schwester studieren Medizin.",
+      "words": [
+        {
+          "id": 1781001882589,
+          "type": "coord-conjunction",
+          "text": "Sowohl",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882590,
+          "type": "subject",
+          "text": "mein",
+          "x": 240,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882591,
+          "type": "subject",
+          "text": "Bruder",
+          "x": 320,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882592,
+          "type": "coord-conjunction",
+          "text": "als",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882593,
+          "type": "other",
+          "text": "auch",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882594,
+          "type": "subject",
+          "text": "meine",
+          "x": 560,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882595,
+          "type": "subject",
+          "text": "Schwester",
+          "x": 640,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882596,
+          "type": "verb",
+          "text": "studieren",
+          "x": 720,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882597,
+          "type": "object",
+          "text": "Medizin.",
+          "x": 800,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        }
+      ]
+    },
+    {
+      "text": "Entweder wir nehmen den Zug, oder wir fahren mit dem Auto.",
+      "words": [
+        {
+          "id": 1781001882590,
+          "type": "coord-conjunction",
+          "text": "Entweder",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882591,
+          "type": "subject",
+          "text": "wir",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882592,
+          "type": "verb",
+          "text": "nehmen",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882593,
+          "type": "object",
+          "text": "den",
+          "x": 400,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882594,
+          "type": "object",
+          "text": "Zug,",
+          "x": 480,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882595,
+          "type": "coord-conjunction",
+          "text": "oder",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882596,
+          "type": "subject",
+          "text": "wir",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882597,
+          "type": "verb",
+          "text": "fahren",
+          "x": 720,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882598,
+          "type": "preposition",
+          "text": "mit",
+          "x": 800,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882599,
+          "type": "object",
+          "text": "dem",
+          "x": 880,
+          "y": 160,
+          "gender": "n",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882600,
+          "type": "object",
+          "text": "Auto.",
+          "x": 960,
+          "y": 160,
+          "gender": "n",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        }
+      ]
+    },
+    {
+      "text": "Sie ist weder hungrig noch durstig.",
+      "words": [
+        {
+          "id": 1781001882591,
+          "type": "subject",
+          "text": "Sie",
+          "x": 160,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882592,
+          "type": "verb",
+          "text": "ist",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882593,
+          "type": "coord-conjunction",
+          "text": "weder",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882594,
+          "type": "other",
+          "text": "hungrig",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882595,
+          "type": "coord-conjunction",
+          "text": "noch",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882596,
+          "type": "other",
+          "text": "durstig.",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        }
+      ]
+    },
+    {
+      "text": "Er ist nicht nur klug, sondern auch fleißig.",
+      "words": [
+        {
+          "id": 1781001882592,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882593,
+          "type": "verb",
+          "text": "ist",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882594,
+          "type": "other",
+          "text": "nicht",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882595,
+          "type": "other",
+          "text": "nur",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882596,
+          "type": "other",
+          "text": "klug,",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882597,
+          "type": "coord-conjunction",
+          "text": "sondern",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882598,
+          "type": "other",
+          "text": "auch",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882599,
+          "type": "other",
+          "text": "fleißig.",
+          "x": 720,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    },
+    {
+      "text": "Zwar hat er wenig Zeit, aber er hilft uns trotzdem.",
+      "words": [
+        {
+          "id": 1781001882593,
+          "type": "other",
+          "text": "Zwar",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882594,
+          "type": "verb",
+          "text": "hat",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882595,
+          "type": "subject",
+          "text": "er",
+          "x": 320,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882596,
+          "type": "object",
+          "text": "wenig",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882597,
+          "type": "object",
+          "text": "Zeit,",
+          "x": 480,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882598,
+          "type": "coord-conjunction",
+          "text": "aber",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882599,
+          "type": "subject",
+          "text": "er",
+          "x": 640,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882600,
+          "type": "verb",
+          "text": "hilft",
+          "x": 720,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882601,
+          "type": "object",
+          "text": "uns",
+          "x": 800,
+          "y": 160,
+          "gender": "none",
+          "case": "dat",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882602,
+          "type": "other",
+          "text": "trotzdem.",
+          "x": 880,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    },
+    {
+      "text": "Sowohl der Preis als auch die Qualität überzeugen mich.",
+      "words": [
+        {
+          "id": 1781001882594,
+          "type": "coord-conjunction",
+          "text": "Sowohl",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882595,
+          "type": "subject",
+          "text": "der",
+          "x": 240,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882596,
+          "type": "subject",
+          "text": "Preis",
+          "x": 320,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882597,
+          "type": "coord-conjunction",
+          "text": "als",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882598,
+          "type": "other",
+          "text": "auch",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882599,
+          "type": "subject",
+          "text": "die",
+          "x": 560,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882600,
+          "type": "subject",
+          "text": "Qualität",
+          "x": 640,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882601,
+          "type": "verb",
+          "text": "überzeugen",
+          "x": 720,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882602,
+          "type": "object",
+          "text": "mich.",
+          "x": 800,
+          "y": 160,
+          "gender": "none",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        }
+      ]
+    },
+    {
+      "text": "Entweder du entschuldigst dich, oder ich gehe.",
+      "words": [
+        {
+          "id": 1781001882595,
+          "type": "coord-conjunction",
+          "text": "Entweder",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882596,
+          "type": "subject",
+          "text": "du",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882597,
+          "type": "verb",
+          "text": "entschuldigst",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882598,
+          "type": "object",
+          "text": "dich,",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882599,
+          "type": "coord-conjunction",
+          "text": "oder",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882600,
+          "type": "subject",
+          "text": "ich",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882601,
+          "type": "verb",
+          "text": "gehe.",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        }
+      ]
+    },
+    {
+      "text": "Weder das Wetter noch die Stimmung war gut.",
+      "words": [
+        {
+          "id": 1781001882596,
+          "type": "coord-conjunction",
+          "text": "Weder",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882597,
+          "type": "subject",
+          "text": "das",
+          "x": 240,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882598,
+          "type": "subject",
+          "text": "Wetter",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882599,
+          "type": "coord-conjunction",
+          "text": "noch",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882600,
+          "type": "subject",
+          "text": "die",
+          "x": 480,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882601,
+          "type": "subject",
+          "text": "Stimmung",
+          "x": 560,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882602,
+          "type": "verb",
+          "text": "war",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882603,
+          "type": "other",
+          "text": "gut.",
+          "x": 720,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        }
+      ]
+    },
+    {
+      "text": "Nicht nur das Essen, sondern auch der Service war ausgezeichnet.",
+      "words": [
+        {
+          "id": 1781001882597,
+          "type": "other",
+          "text": "Nicht",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882598,
+          "type": "other",
+          "text": "nur",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882599,
+          "type": "subject",
+          "text": "das",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882600,
+          "type": "subject",
+          "text": "Essen,",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882601,
+          "type": "coord-conjunction",
+          "text": "sondern",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882602,
+          "type": "other",
+          "text": "auch",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882603,
+          "type": "subject",
+          "text": "der",
+          "x": 640,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882604,
+          "type": "subject",
+          "text": "Service",
+          "x": 720,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882605,
+          "type": "verb",
+          "text": "war",
+          "x": 800,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882606,
+          "type": "other",
+          "text": "ausgezeichnet.",
+          "x": 880,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    },
+    {
+      "text": "Zwar ist die Aufgabe schwer, aber sie ist lösbar.",
+      "words": [
+        {
+          "id": 1781001882598,
+          "type": "other",
+          "text": "Zwar",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882599,
+          "type": "verb",
+          "text": "ist",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882600,
+          "type": "subject",
+          "text": "die",
+          "x": 320,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882601,
+          "type": "subject",
+          "text": "Aufgabe",
+          "x": 400,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882602,
+          "type": "other",
+          "text": "schwer,",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882603,
+          "type": "coord-conjunction",
+          "text": "aber",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882604,
+          "type": "subject",
+          "text": "sie",
+          "x": 640,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882605,
+          "type": "verb",
+          "text": "ist",
+          "x": 720,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882606,
+          "type": "other",
+          "text": "lösbar.",
+          "x": 800,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    },
+    {
+      "text": "Sowohl auf der Arbeit als auch zu Hause ist er entspannt.",
+      "words": [
+        {
+          "id": 1781001882599,
+          "type": "coord-conjunction",
+          "text": "Sowohl",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882600,
+          "type": "preposition",
+          "text": "auf",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882601,
+          "type": "object",
+          "text": "der",
+          "x": 320,
+          "y": 160,
+          "gender": "f",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882602,
+          "type": "object",
+          "text": "Arbeit",
+          "x": 400,
+          "y": 160,
+          "gender": "f",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882603,
+          "type": "coord-conjunction",
+          "text": "als",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882604,
+          "type": "other",
+          "text": "auch",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882605,
+          "type": "preposition",
+          "text": "zu",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882606,
+          "type": "object",
+          "text": "Hause",
+          "x": 720,
+          "y": 160,
+          "gender": "n",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882607,
+          "type": "verb",
+          "text": "ist",
+          "x": 800,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882608,
+          "type": "subject",
+          "text": "er",
+          "x": 880,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882609,
+          "type": "other",
+          "text": "entspannt.",
+          "x": 960,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        }
+      ]
+    },
+    {
+      "text": "Entweder wir lösen das Problem, oder wir müssen aufgeben.",
+      "words": [
+        {
+          "id": 1781001882600,
+          "type": "coord-conjunction",
+          "text": "Entweder",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882601,
+          "type": "subject",
+          "text": "wir",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882602,
+          "type": "verb",
+          "text": "lösen",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882603,
+          "type": "object",
+          "text": "das",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882604,
+          "type": "object",
+          "text": "Problem,",
+          "x": 480,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882605,
+          "type": "coord-conjunction",
+          "text": "oder",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882606,
+          "type": "subject",
+          "text": "wir",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882607,
+          "type": "modal",
+          "text": "müssen",
+          "x": 720,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        },
+        {
+          "id": 1781001882608,
+          "type": "verb",
+          "text": "aufgeben.",
+          "x": 800,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        }
+      ]
+    },
+    {
+      "text": "Sie hat weder geschrieben noch angerufen.",
+      "words": [
+        {
+          "id": 1781001882601,
+          "type": "subject",
+          "text": "Sie",
+          "x": 160,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882602,
+          "type": "verb",
+          "text": "hat",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882603,
+          "type": "coord-conjunction",
+          "text": "weder",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882604,
+          "type": "verb",
+          "text": "geschrieben",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882605,
+          "type": "coord-conjunction",
+          "text": "noch",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882606,
+          "type": "verb",
+          "text": "angerufen.",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 2
+        }
+      ]
+    },
+    {
+      "text": "Er ist nicht nur mein Kollege, sondern auch mein Freund.",
+      "words": [
+        {
+          "id": 1781001882602,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882603,
+          "type": "verb",
+          "text": "ist",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882604,
+          "type": "other",
+          "text": "nicht",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882605,
+          "type": "other",
+          "text": "nur",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882606,
+          "type": "subject",
+          "text": "mein",
+          "x": 480,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882607,
+          "type": "subject",
+          "text": "Kollege,",
+          "x": 560,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882608,
+          "type": "coord-conjunction",
+          "text": "sondern",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882609,
+          "type": "other",
+          "text": "auch",
+          "x": 720,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882610,
+          "type": "subject",
+          "text": "mein",
+          "x": 800,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882611,
+          "type": "subject",
+          "text": "Freund.",
+          "x": 880,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    },
+    {
+      "text": "Zwar kenne ich ihn kaum, aber ich vertraue ihm.",
+      "words": [
+        {
+          "id": 1781001882603,
+          "type": "other",
+          "text": "Zwar",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882604,
+          "type": "verb",
+          "text": "kenne",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882605,
+          "type": "subject",
+          "text": "ich",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882606,
+          "type": "object",
+          "text": "ihn",
+          "x": 400,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882607,
+          "type": "other",
+          "text": "kaum,",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882608,
+          "type": "coord-conjunction",
+          "text": "aber",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882609,
+          "type": "subject",
+          "text": "ich",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882610,
+          "type": "verb",
+          "text": "vertraue",
+          "x": 720,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882611,
+          "type": "object",
+          "text": "ihm.",
+          "x": 800,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    }
+  ]
+}

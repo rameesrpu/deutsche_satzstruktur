@@ -1,0 +1,1963 @@
+{
+  "level": "A2",
+  "category": "Wechselpräpositionen",
+  "version": "2026-06-12",
+  "sentences": [
+    {
+      "text": "Ich lege das Buch auf den Tisch.",
+      "words": [
+        {
+          "id": 1781001882499,
+          "type": "subject",
+          "text": "Ich",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882500,
+          "type": "verb",
+          "text": "lege",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882501,
+          "type": "object",
+          "text": "das",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882502,
+          "type": "object",
+          "text": "Buch",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882503,
+          "type": "preposition",
+          "text": "auf",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882504,
+          "type": "object",
+          "text": "den",
+          "x": 560,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882505,
+          "type": "object",
+          "text": "Tisch.",
+          "x": 640,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Das Buch liegt auf dem Tisch.",
+      "words": [
+        {
+          "id": 1781001882500,
+          "type": "subject",
+          "text": "Das",
+          "x": 160,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882501,
+          "type": "subject",
+          "text": "Buch",
+          "x": 240,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882502,
+          "type": "verb",
+          "text": "liegt",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882503,
+          "type": "preposition",
+          "text": "auf",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882504,
+          "type": "object",
+          "text": "dem",
+          "x": 480,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882505,
+          "type": "object",
+          "text": "Tisch.",
+          "x": 560,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Er hängt das Bild an die Wand.",
+      "words": [
+        {
+          "id": 1781001882501,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882502,
+          "type": "verb",
+          "text": "hängt",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882503,
+          "type": "object",
+          "text": "das",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882504,
+          "type": "object",
+          "text": "Bild",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882505,
+          "type": "preposition",
+          "text": "an",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882506,
+          "type": "object",
+          "text": "die",
+          "x": 560,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882507,
+          "type": "object",
+          "text": "Wand.",
+          "x": 640,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Das Bild hängt an der Wand.",
+      "words": [
+        {
+          "id": 1781001882502,
+          "type": "subject",
+          "text": "Das",
+          "x": 160,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882503,
+          "type": "subject",
+          "text": "Bild",
+          "x": 240,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882504,
+          "type": "verb",
+          "text": "hängt",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882505,
+          "type": "preposition",
+          "text": "an",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882506,
+          "type": "object",
+          "text": "der",
+          "x": 480,
+          "y": 160,
+          "gender": "f",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882507,
+          "type": "object",
+          "text": "Wand.",
+          "x": 560,
+          "y": 160,
+          "gender": "f",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Sie stellt die Vase auf das Regal.",
+      "words": [
+        {
+          "id": 1781001882503,
+          "type": "subject",
+          "text": "Sie",
+          "x": 160,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882504,
+          "type": "verb",
+          "text": "stellt",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882505,
+          "type": "object",
+          "text": "die",
+          "x": 320,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882506,
+          "type": "object",
+          "text": "Vase",
+          "x": 400,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882507,
+          "type": "preposition",
+          "text": "auf",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882508,
+          "type": "object",
+          "text": "das",
+          "x": 560,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882509,
+          "type": "object",
+          "text": "Regal.",
+          "x": 640,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Die Vase steht auf dem Regal.",
+      "words": [
+        {
+          "id": 1781001882504,
+          "type": "subject",
+          "text": "Die",
+          "x": 160,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882505,
+          "type": "subject",
+          "text": "Vase",
+          "x": 240,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882506,
+          "type": "verb",
+          "text": "steht",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882507,
+          "type": "preposition",
+          "text": "auf",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882508,
+          "type": "object",
+          "text": "dem",
+          "x": 480,
+          "y": 160,
+          "gender": "n",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882509,
+          "type": "object",
+          "text": "Regal.",
+          "x": 560,
+          "y": 160,
+          "gender": "n",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Ich gehe in die Schule.",
+      "words": [
+        {
+          "id": 1781001882505,
+          "type": "subject",
+          "text": "Ich",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882506,
+          "type": "verb",
+          "text": "gehe",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882507,
+          "type": "preposition",
+          "text": "in",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882508,
+          "type": "object",
+          "text": "die",
+          "x": 400,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882509,
+          "type": "object",
+          "text": "Schule.",
+          "x": 480,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Ich bin in der Schule.",
+      "words": [
+        {
+          "id": 1781001882506,
+          "type": "subject",
+          "text": "Ich",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882507,
+          "type": "verb",
+          "text": "bin",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882508,
+          "type": "preposition",
+          "text": "in",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882509,
+          "type": "object",
+          "text": "der",
+          "x": 400,
+          "y": 160,
+          "gender": "f",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882510,
+          "type": "object",
+          "text": "Schule.",
+          "x": 480,
+          "y": 160,
+          "gender": "f",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Er legt sich ins Bett.",
+      "words": [
+        {
+          "id": 1781001882507,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882508,
+          "type": "verb",
+          "text": "legt",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882509,
+          "type": "other",
+          "text": "sich",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882510,
+          "type": "preposition",
+          "text": "ins",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882511,
+          "type": "object",
+          "text": "Bett.",
+          "x": 480,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Er liegt im Bett.",
+      "words": [
+        {
+          "id": 1781001882508,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882509,
+          "type": "verb",
+          "text": "liegt",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882510,
+          "type": "preposition",
+          "text": "im",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882511,
+          "type": "object",
+          "text": "Bett.",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wir gehen in den Park.",
+      "words": [
+        {
+          "id": 1781001882509,
+          "type": "subject",
+          "text": "Wir",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882510,
+          "type": "verb",
+          "text": "gehen",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882511,
+          "type": "preposition",
+          "text": "in",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882512,
+          "type": "object",
+          "text": "den",
+          "x": 400,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882513,
+          "type": "object",
+          "text": "Park.",
+          "x": 480,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wir sind im Park.",
+      "words": [
+        {
+          "id": 1781001882510,
+          "type": "subject",
+          "text": "Wir",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882511,
+          "type": "verb",
+          "text": "sind",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882512,
+          "type": "preposition",
+          "text": "im",
+          "x": 320,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882513,
+          "type": "object",
+          "text": "Park.",
+          "x": 400,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Sie hängt die Jacke an den Haken.",
+      "words": [
+        {
+          "id": 1781001882511,
+          "type": "subject",
+          "text": "Sie",
+          "x": 160,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882512,
+          "type": "verb",
+          "text": "hängt",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882513,
+          "type": "object",
+          "text": "die",
+          "x": 320,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882514,
+          "type": "object",
+          "text": "Jacke",
+          "x": 400,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882515,
+          "type": "preposition",
+          "text": "an",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882516,
+          "type": "object",
+          "text": "den",
+          "x": 560,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882517,
+          "type": "object",
+          "text": "Haken.",
+          "x": 640,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Die Jacke hängt am Haken.",
+      "words": [
+        {
+          "id": 1781001882512,
+          "type": "subject",
+          "text": "Die",
+          "x": 160,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882513,
+          "type": "subject",
+          "text": "Jacke",
+          "x": 240,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882514,
+          "type": "verb",
+          "text": "hängt",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882515,
+          "type": "preposition",
+          "text": "am",
+          "x": 400,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882516,
+          "type": "object",
+          "text": "Haken.",
+          "x": 480,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Ich stelle das Auto in die Garage.",
+      "words": [
+        {
+          "id": 1781001882513,
+          "type": "subject",
+          "text": "Ich",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882514,
+          "type": "verb",
+          "text": "stelle",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882515,
+          "type": "object",
+          "text": "das",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882516,
+          "type": "object",
+          "text": "Auto",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882517,
+          "type": "preposition",
+          "text": "in",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882518,
+          "type": "object",
+          "text": "die",
+          "x": 560,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882519,
+          "type": "object",
+          "text": "Garage.",
+          "x": 640,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Das Auto steht in der Garage.",
+      "words": [
+        {
+          "id": 1781001882514,
+          "type": "subject",
+          "text": "Das",
+          "x": 160,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882515,
+          "type": "subject",
+          "text": "Auto",
+          "x": 240,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882516,
+          "type": "verb",
+          "text": "steht",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882517,
+          "type": "preposition",
+          "text": "in",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882518,
+          "type": "object",
+          "text": "der",
+          "x": 480,
+          "y": 160,
+          "gender": "f",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882519,
+          "type": "object",
+          "text": "Garage.",
+          "x": 560,
+          "y": 160,
+          "gender": "f",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Er legt das Heft unter den Stuhl.",
+      "words": [
+        {
+          "id": 1781001882515,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882516,
+          "type": "verb",
+          "text": "legt",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882517,
+          "type": "object",
+          "text": "das",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882518,
+          "type": "object",
+          "text": "Heft",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882519,
+          "type": "preposition",
+          "text": "unter",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882520,
+          "type": "object",
+          "text": "den",
+          "x": 560,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882521,
+          "type": "object",
+          "text": "Stuhl.",
+          "x": 640,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Das Heft liegt unter dem Stuhl.",
+      "words": [
+        {
+          "id": 1781001882516,
+          "type": "subject",
+          "text": "Das",
+          "x": 160,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882517,
+          "type": "subject",
+          "text": "Heft",
+          "x": 240,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882518,
+          "type": "verb",
+          "text": "liegt",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882519,
+          "type": "preposition",
+          "text": "unter",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882520,
+          "type": "object",
+          "text": "dem",
+          "x": 480,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882521,
+          "type": "object",
+          "text": "Stuhl.",
+          "x": 560,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wir setzen uns an den Tisch.",
+      "words": [
+        {
+          "id": 1781001882517,
+          "type": "subject",
+          "text": "Wir",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882518,
+          "type": "verb",
+          "text": "setzen",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882519,
+          "type": "object",
+          "text": "uns",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "akk",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882520,
+          "type": "preposition",
+          "text": "an",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882521,
+          "type": "object",
+          "text": "den",
+          "x": 480,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882522,
+          "type": "object",
+          "text": "Tisch.",
+          "x": 560,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wir sitzen an dem Tisch.",
+      "words": [
+        {
+          "id": 1781001882518,
+          "type": "subject",
+          "text": "Wir",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882519,
+          "type": "verb",
+          "text": "sitzen",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882520,
+          "type": "preposition",
+          "text": "an",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882521,
+          "type": "object",
+          "text": "dem",
+          "x": 400,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882522,
+          "type": "object",
+          "text": "Tisch.",
+          "x": 480,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    }
+  ]
+}

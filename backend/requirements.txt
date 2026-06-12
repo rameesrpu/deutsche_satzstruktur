@@ -1,6 +1,6 @@
 fastapi==0.115.0
 uvicorn[standard]==0.32.0
-spacy==3.8.2
+spacy==3.8.13
 python-multipart==0.0.9
 requests==2.32.3
 mwparserfromhell==0.6.6

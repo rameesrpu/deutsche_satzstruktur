@@ -1,0 +1,1355 @@
+{
+  "level": "A1",
+  "category": "Fragen",
+  "version": "2026-06-12",
+  "sentences": [
+    {
+      "text": "Wie heißt du?",
+      "words": [
+        {
+          "id": 1781001882135,
+          "type": "other",
+          "text": "Wie",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882136,
+          "type": "verb",
+          "text": "heißt",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882137,
+          "type": "subject",
+          "text": "du?",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wo wohnst du?",
+      "words": [
+        {
+          "id": 1781001882136,
+          "type": "other",
+          "text": "Wo",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882137,
+          "type": "verb",
+          "text": "wohnst",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882138,
+          "type": "subject",
+          "text": "du?",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Was machst du beruflich?",
+      "words": [
+        {
+          "id": 1781001882137,
+          "type": "object",
+          "text": "Was",
+          "x": 160,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882138,
+          "type": "verb",
+          "text": "machst",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882139,
+          "type": "subject",
+          "text": "du",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882140,
+          "type": "other",
+          "text": "beruflich?",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Woher kommst du?",
+      "words": [
+        {
+          "id": 1781001882138,
+          "type": "other",
+          "text": "Woher",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882139,
+          "type": "verb",
+          "text": "kommst",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882140,
+          "type": "subject",
+          "text": "du?",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wie alt bist du?",
+      "words": [
+        {
+          "id": 1781001882139,
+          "type": "other",
+          "text": "Wie",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882140,
+          "type": "other",
+          "text": "alt",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882141,
+          "type": "verb",
+          "text": "bist",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882142,
+          "type": "subject",
+          "text": "du?",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Hast du Geschwister?",
+      "words": [
+        {
+          "id": 1781001882140,
+          "type": "verb",
+          "text": "Hast",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882141,
+          "type": "subject",
+          "text": "du",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882142,
+          "type": "object",
+          "text": "Geschwister?",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "akk",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Sprichst du Deutsch?",
+      "words": [
+        {
+          "id": 1781001882141,
+          "type": "verb",
+          "text": "Sprichst",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882142,
+          "type": "subject",
+          "text": "du",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882143,
+          "type": "object",
+          "text": "Deutsch?",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Magst du Kaffee?",
+      "words": [
+        {
+          "id": 1781001882142,
+          "type": "verb",
+          "text": "Magst",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882143,
+          "type": "subject",
+          "text": "du",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882144,
+          "type": "object",
+          "text": "Kaffee?",
+          "x": 320,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wann kommst du nach Hause?",
+      "words": [
+        {
+          "id": 1781001882143,
+          "type": "other",
+          "text": "Wann",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882144,
+          "type": "verb",
+          "text": "kommst",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882145,
+          "type": "subject",
+          "text": "du",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882146,
+          "type": "preposition",
+          "text": "nach",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882147,
+          "type": "object",
+          "text": "Hause?",
+          "x": 480,
+          "y": 160,
+          "gender": "n",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wer ist das?",
+      "words": [
+        {
+          "id": 1781001882144,
+          "type": "subject",
+          "text": "Wer",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882145,
+          "type": "verb",
+          "text": "ist",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882146,
+          "type": "subject",
+          "text": "das?",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Was kostet das?",
+      "words": [
+        {
+          "id": 1781001882145,
+          "type": "object",
+          "text": "Was",
+          "x": 160,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882146,
+          "type": "verb",
+          "text": "kostet",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882147,
+          "type": "subject",
+          "text": "das?",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Haben Sie einen Tisch für zwei?",
+      "words": [
+        {
+          "id": 1781001882146,
+          "type": "verb",
+          "text": "Haben",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882147,
+          "type": "subject",
+          "text": "Sie",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882148,
+          "type": "object",
+          "text": "einen",
+          "x": 320,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882149,
+          "type": "object",
+          "text": "Tisch",
+          "x": 400,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882150,
+          "type": "preposition",
+          "text": "für",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882151,
+          "type": "other",
+          "text": "zwei?",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wie komme ich zum Bahnhof?",
+      "words": [
+        {
+          "id": 1781001882147,
+          "type": "other",
+          "text": "Wie",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882148,
+          "type": "verb",
+          "text": "komme",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882149,
+          "type": "subject",
+          "text": "ich",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882150,
+          "type": "preposition",
+          "text": "zum",
+          "x": 400,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882151,
+          "type": "object",
+          "text": "Bahnhof?",
+          "x": 480,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Welche Farbe hat das Auto?",
+      "words": [
+        {
+          "id": 1781001882148,
+          "type": "object",
+          "text": "Welche",
+          "x": 160,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882149,
+          "type": "object",
+          "text": "Farbe",
+          "x": 240,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882150,
+          "type": "verb",
+          "text": "hat",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882151,
+          "type": "subject",
+          "text": "das",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882152,
+          "type": "subject",
+          "text": "Auto?",
+          "x": 480,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Warum lernst du Deutsch?",
+      "words": [
+        {
+          "id": 1781001882149,
+          "type": "other",
+          "text": "Warum",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882150,
+          "type": "verb",
+          "text": "lernst",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882151,
+          "type": "subject",
+          "text": "du",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882152,
+          "type": "object",
+          "text": "Deutsch?",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wie lange dauert die Fahrt?",
+      "words": [
+        {
+          "id": 1781001882150,
+          "type": "other",
+          "text": "Wie",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882151,
+          "type": "other",
+          "text": "lange",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882152,
+          "type": "verb",
+          "text": "dauert",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882153,
+          "type": "subject",
+          "text": "die",
+          "x": 400,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882154,
+          "type": "subject",
+          "text": "Fahrt?",
+          "x": 480,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Gehst du morgen zur Schule?",
+      "words": [
+        {
+          "id": 1781001882151,
+          "type": "verb",
+          "text": "Gehst",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882152,
+          "type": "subject",
+          "text": "du",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882153,
+          "type": "other",
+          "text": "morgen",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882154,
+          "type": "preposition",
+          "text": "zur",
+          "x": 400,
+          "y": 160,
+          "gender": "f",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882155,
+          "type": "object",
+          "text": "Schule?",
+          "x": 480,
+          "y": 160,
+          "gender": "f",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Was trinken Sie?",
+      "words": [
+        {
+          "id": 1781001882152,
+          "type": "object",
+          "text": "Was",
+          "x": 160,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882153,
+          "type": "verb",
+          "text": "trinken",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882154,
+          "type": "subject",
+          "text": "Sie?",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wo ist die nächste Apotheke?",
+      "words": [
+        {
+          "id": 1781001882153,
+          "type": "other",
+          "text": "Wo",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882154,
+          "type": "verb",
+          "text": "ist",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882155,
+          "type": "subject",
+          "text": "die",
+          "x": 320,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882156,
+          "type": "adjective",
+          "text": "nächste",
+          "x": 400,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882157,
+          "type": "subject",
+          "text": "Apotheke?",
+          "x": 480,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Sprechen Sie Englisch?",
+      "words": [
+        {
+          "id": 1781001882154,
+          "type": "verb",
+          "text": "Sprechen",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882155,
+          "type": "subject",
+          "text": "Sie",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882156,
+          "type": "object",
+          "text": "Englisch?",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1691 @@
+{
+  "level": "A2",
+  "category": "Futur I",
+  "version": "2026-06-12",
+  "sentences": [
+    {
+      "text": "Ich werde morgen früh aufstehen.",
+      "words": [
+        {
+          "id": 1781001882479,
+          "type": "subject",
+          "text": "Ich",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882480,
+          "type": "verb",
+          "text": "werde",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882481,
+          "type": "other",
+          "text": "morgen",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882482,
+          "type": "other",
+          "text": "früh",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882483,
+          "type": "verb",
+          "text": "aufstehen.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Er wird nächstes Jahr heiraten.",
+      "words": [
+        {
+          "id": 1781001882480,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882481,
+          "type": "verb",
+          "text": "wird",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882482,
+          "type": "adjective",
+          "text": "nächstes",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882483,
+          "type": "object",
+          "text": "Jahr",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882484,
+          "type": "verb",
+          "text": "heiraten.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Sie werden nach Berlin umziehen.",
+      "words": [
+        {
+          "id": 1781001882481,
+          "type": "subject",
+          "text": "Sie",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882482,
+          "type": "verb",
+          "text": "werden",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882483,
+          "type": "preposition",
+          "text": "nach",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882484,
+          "type": "object",
+          "text": "Berlin",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882485,
+          "type": "verb",
+          "text": "umziehen.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wir werden das Problem lösen.",
+      "words": [
+        {
+          "id": 1781001882482,
+          "type": "subject",
+          "text": "Wir",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882483,
+          "type": "verb",
+          "text": "werden",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882484,
+          "type": "object",
+          "text": "das",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882485,
+          "type": "object",
+          "text": "Problem",
+          "x": 400,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882486,
+          "type": "verb",
+          "text": "lösen.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Du wirst es schaffen.",
+      "words": [
+        {
+          "id": 1781001882483,
+          "type": "subject",
+          "text": "Du",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882484,
+          "type": "verb",
+          "text": "wirst",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882485,
+          "type": "object",
+          "text": "es",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882486,
+          "type": "verb",
+          "text": "schaffen.",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Das Wetter wird morgen besser.",
+      "words": [
+        {
+          "id": 1781001882484,
+          "type": "subject",
+          "text": "Das",
+          "x": 160,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882485,
+          "type": "subject",
+          "text": "Wetter",
+          "x": 240,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882486,
+          "type": "verb",
+          "text": "wird",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882487,
+          "type": "other",
+          "text": "morgen",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882488,
+          "type": "other",
+          "text": "besser.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Ich werde dir eine E-Mail schicken.",
+      "words": [
+        {
+          "id": 1781001882485,
+          "type": "subject",
+          "text": "Ich",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882486,
+          "type": "verb",
+          "text": "werde",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882487,
+          "type": "object",
+          "text": "dir",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882488,
+          "type": "object",
+          "text": "eine",
+          "x": 400,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882489,
+          "type": "object",
+          "text": "E-Mail",
+          "x": 480,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882490,
+          "type": "verb",
+          "text": "schicken.",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Er wird die Prüfung bestehen.",
+      "words": [
+        {
+          "id": 1781001882486,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882487,
+          "type": "verb",
+          "text": "wird",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882488,
+          "type": "object",
+          "text": "die",
+          "x": 320,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882489,
+          "type": "object",
+          "text": "Prüfung",
+          "x": 400,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882490,
+          "type": "verb",
+          "text": "bestehen.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Sie wird bald zurückkommen.",
+      "words": [
+        {
+          "id": 1781001882487,
+          "type": "subject",
+          "text": "Sie",
+          "x": 160,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882488,
+          "type": "verb",
+          "text": "wird",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882489,
+          "type": "other",
+          "text": "bald",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882490,
+          "type": "verb",
+          "text": "zurückkommen.",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wir werden das feiern müssen.",
+      "words": [
+        {
+          "id": 1781001882488,
+          "type": "subject",
+          "text": "Wir",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882489,
+          "type": "verb",
+          "text": "werden",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882490,
+          "type": "object",
+          "text": "das",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882491,
+          "type": "verb",
+          "text": "feiern",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882492,
+          "type": "modal",
+          "text": "müssen.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Ich werde mehr Sport treiben.",
+      "words": [
+        {
+          "id": 1781001882489,
+          "type": "subject",
+          "text": "Ich",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882490,
+          "type": "verb",
+          "text": "werde",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882491,
+          "type": "object",
+          "text": "mehr",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882492,
+          "type": "object",
+          "text": "Sport",
+          "x": 400,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882493,
+          "type": "verb",
+          "text": "treiben.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Du wirst dich sicher wohlfühlen.",
+      "words": [
+        {
+          "id": 1781001882490,
+          "type": "subject",
+          "text": "Du",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882491,
+          "type": "verb",
+          "text": "wirst",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882492,
+          "type": "object",
+          "text": "dich",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882493,
+          "type": "other",
+          "text": "sicher",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882494,
+          "type": "verb",
+          "text": "wohlfühlen.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Er wird das verstehen.",
+      "words": [
+        {
+          "id": 1781001882491,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882492,
+          "type": "verb",
+          "text": "wird",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882493,
+          "type": "object",
+          "text": "das",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882494,
+          "type": "verb",
+          "text": "verstehen.",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Sie wird eine tolle Ärztin werden.",
+      "words": [
+        {
+          "id": 1781001882492,
+          "type": "subject",
+          "text": "Sie",
+          "x": 160,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882493,
+          "type": "verb",
+          "text": "wird",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882494,
+          "type": "subject",
+          "text": "eine",
+          "x": 320,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882495,
+          "type": "adjective",
+          "text": "tolle",
+          "x": 400,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882496,
+          "type": "subject",
+          "text": "Ärztin",
+          "x": 480,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882497,
+          "type": "verb",
+          "text": "werden.",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wir werden pünktlich ankommen.",
+      "words": [
+        {
+          "id": 1781001882493,
+          "type": "subject",
+          "text": "Wir",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882494,
+          "type": "verb",
+          "text": "werden",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882495,
+          "type": "other",
+          "text": "pünktlich",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882496,
+          "type": "verb",
+          "text": "ankommen.",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Das wird nicht einfach sein.",
+      "words": [
+        {
+          "id": 1781001882494,
+          "type": "subject",
+          "text": "Das",
+          "x": 160,
+          "y": 160,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882495,
+          "type": "verb",
+          "text": "wird",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882496,
+          "type": "other",
+          "text": "nicht",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882497,
+          "type": "other",
+          "text": "einfach",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882498,
+          "type": "verb",
+          "text": "sein.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Ich werde dir helfen.",
+      "words": [
+        {
+          "id": 1781001882495,
+          "type": "subject",
+          "text": "Ich",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882496,
+          "type": "verb",
+          "text": "werde",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882497,
+          "type": "object",
+          "text": "dir",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882498,
+          "type": "verb",
+          "text": "helfen.",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Er wird sicher Hunger haben.",
+      "words": [
+        {
+          "id": 1781001882496,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882497,
+          "type": "verb",
+          "text": "wird",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882498,
+          "type": "other",
+          "text": "sicher",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882499,
+          "type": "object",
+          "text": "Hunger",
+          "x": 400,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882500,
+          "type": "verb",
+          "text": "haben.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Sie werden sich sehr freuen.",
+      "words": [
+        {
+          "id": 1781001882497,
+          "type": "subject",
+          "text": "Sie",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882498,
+          "type": "verb",
+          "text": "werden",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882499,
+          "type": "other",
+          "text": "sich",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "akk",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882500,
+          "type": "other",
+          "text": "sehr",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882501,
+          "type": "verb",
+          "text": "freuen.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Nächsten Sommer werde ich nach Spanien reisen.",
+      "words": [
+        {
+          "id": 1781001882498,
+          "type": "adjective",
+          "text": "Nächsten",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882499,
+          "type": "object",
+          "text": "Sommer",
+          "x": 240,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882500,
+          "type": "verb",
+          "text": "werde",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882501,
+          "type": "subject",
+          "text": "ich",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882502,
+          "type": "preposition",
+          "text": "nach",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882503,
+          "type": "object",
+          "text": "Spanien",
+          "x": 560,
+          "y": 160,
+          "gender": "n",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882504,
+          "type": "verb",
+          "text": "reisen.",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    }
+  ]
+}

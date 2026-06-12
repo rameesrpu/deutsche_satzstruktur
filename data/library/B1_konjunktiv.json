@@ -1,0 +1,2165 @@
+{
+  "level": "B1",
+  "category": "Konjunktiv II",
+  "version": "2026-06-12",
+  "sentences": [
+    {
+      "text": "Wenn ich reich wäre, würde ich reisen.",
+      "words": [
+        {
+          "id": 1781001882215,
+          "type": "conjunction",
+          "text": "Wenn",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882216,
+          "type": "subject",
+          "text": "ich",
+          "x": 160,
+          "y": 320,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882217,
+          "type": "other",
+          "text": "reich",
+          "x": 160,
+          "y": 400,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882218,
+          "type": "verb",
+          "text": "wäre,",
+          "x": 160,
+          "y": 480,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882219,
+          "type": "verb",
+          "text": "würde",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882220,
+          "type": "subject",
+          "text": "ich",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882221,
+          "type": "verb",
+          "text": "reisen.",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    },
+    {
+      "text": "Ich würde gern nach Japan fahren.",
+      "words": [
+        {
+          "id": 1781001882216,
+          "type": "subject",
+          "text": "Ich",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882217,
+          "type": "verb",
+          "text": "würde",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882218,
+          "type": "other",
+          "text": "gern",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882219,
+          "type": "preposition",
+          "text": "nach",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882220,
+          "type": "object",
+          "text": "Japan",
+          "x": 480,
+          "y": 160,
+          "gender": "n",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882221,
+          "type": "verb",
+          "text": "fahren.",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Er hätte mehr lernen sollen.",
+      "words": [
+        {
+          "id": 1781001882217,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882218,
+          "type": "verb",
+          "text": "hätte",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882219,
+          "type": "other",
+          "text": "mehr",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882220,
+          "type": "verb",
+          "text": "lernen",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882221,
+          "type": "modal",
+          "text": "sollen.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wenn sie Zeit hätte, würde sie kommen.",
+      "words": [
+        {
+          "id": 1781001882519,
+          "type": "conjunction",
+          "text": "Wenn",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882520,
+          "type": "subject",
+          "text": "sie",
+          "x": 160,
+          "y": 320,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882521,
+          "type": "object",
+          "text": "Zeit",
+          "x": 160,
+          "y": 400,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882522,
+          "type": "verb",
+          "text": "hätte,",
+          "x": 160,
+          "y": 480,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882523,
+          "type": "verb",
+          "text": "würde",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882524,
+          "type": "subject",
+          "text": "sie",
+          "x": 560,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882525,
+          "type": "verb",
+          "text": "kommen.",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    },
+    {
+      "text": "Ich würde das anders machen.",
+      "words": [
+        {
+          "id": 1781001882219,
+          "type": "subject",
+          "text": "Ich",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882220,
+          "type": "verb",
+          "text": "würde",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882221,
+          "type": "object",
+          "text": "das",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882222,
+          "type": "other",
+          "text": "anders",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882223,
+          "type": "verb",
+          "text": "machen.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wenn es nicht so kalt wäre, würden wir spazieren gehen.",
+      "words": [
+        {
+          "id": 1781001882220,
+          "type": "conjunction",
+          "text": "Wenn",
+          "x": 100,
+          "y": 150,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882221,
+          "type": "subject",
+          "text": "es",
+          "x": 180,
+          "y": 150,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882222,
+          "type": "other",
+          "text": "nicht",
+          "x": 260,
+          "y": 150,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882223,
+          "type": "other",
+          "text": "so",
+          "x": 340,
+          "y": 150,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882224,
+          "type": "other",
+          "text": "kalt",
+          "x": 420,
+          "y": 150,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882225,
+          "type": "verb",
+          "text": "wäre,",
+          "x": 500,
+          "y": 150,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882226,
+          "type": "other",
+          "text": "würden",
+          "x": 580,
+          "y": 150,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          }
+        },
+        {
+          "id": 1781001882227,
+          "type": "subject",
+          "text": "wir",
+          "x": 660,
+          "y": 150,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882228,
+          "type": "other",
+          "text": "spazieren",
+          "x": 740,
+          "y": 150,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          }
+        },
+        {
+          "id": 1781001882229,
+          "type": "other",
+          "text": "gehen.",
+          "x": 820,
+          "y": 150,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          }
+        }
+      ]
+    },
+    {
+      "text": "Er wäre gern Arzt geworden.",
+      "words": [
+        {
+          "id": 1781001882221,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882222,
+          "type": "verb",
+          "text": "wäre",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882223,
+          "type": "other",
+          "text": "gern",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882224,
+          "type": "subject",
+          "text": "Arzt",
+          "x": 400,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882225,
+          "type": "verb",
+          "text": "geworden.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Ich würde dir gern helfen.",
+      "words": [
+        {
+          "id": 1781001882222,
+          "type": "subject",
+          "text": "Ich",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882223,
+          "type": "verb",
+          "text": "würde",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882224,
+          "type": "object",
+          "text": "dir",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882225,
+          "type": "other",
+          "text": "gern",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882226,
+          "type": "verb",
+          "text": "helfen.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich du wäre, würde ich das nicht tun.",
+      "words": [
+        {
+          "id": 1781001882223,
+          "type": "conjunction",
+          "text": "Wenn",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882224,
+          "type": "subject",
+          "text": "ich",
+          "x": 160,
+          "y": 320,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882225,
+          "type": "subject",
+          "text": "du",
+          "x": 160,
+          "y": 400,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882226,
+          "type": "verb",
+          "text": "wäre,",
+          "x": 160,
+          "y": 480,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882227,
+          "type": "verb",
+          "text": "würde",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882228,
+          "type": "subject",
+          "text": "ich",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882229,
+          "type": "object-akk",
+          "text": "das",
+          "x": 640,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882230,
+          "type": "other",
+          "text": "nicht",
+          "x": 720,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882231,
+          "type": "verb",
+          "text": "tun.",
+          "x": 800,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    },
+    {
+      "text": "Sie hätte früher kommen sollen.",
+      "words": [
+        {
+          "id": 1781001882224,
+          "type": "subject",
+          "text": "Sie",
+          "x": 160,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882225,
+          "type": "verb",
+          "text": "hätte",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882226,
+          "type": "other",
+          "text": "früher",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882227,
+          "type": "verb",
+          "text": "kommen",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882228,
+          "type": "modal",
+          "text": "sollen.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wir würden das gerne unterstützen.",
+      "words": [
+        {
+          "id": 1781001882225,
+          "type": "subject",
+          "text": "Wir",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882226,
+          "type": "verb",
+          "text": "würden",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882227,
+          "type": "object-akk",
+          "text": "das",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882228,
+          "type": "other",
+          "text": "gerne",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882229,
+          "type": "verb",
+          "text": "unterstützen.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich könnte, würde ich bleiben.",
+      "words": [
+        {
+          "id": 1781001882226,
+          "type": "conjunction",
+          "text": "Wenn",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882227,
+          "type": "subject",
+          "text": "ich",
+          "x": 160,
+          "y": 320,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882228,
+          "type": "modal",
+          "text": "könnte,",
+          "x": 160,
+          "y": 400,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882229,
+          "type": "verb",
+          "text": "würde",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882230,
+          "type": "subject",
+          "text": "ich",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882231,
+          "type": "verb",
+          "text": "bleiben.",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    },
+    {
+      "text": "Er wünschte, er hätte mehr Zeit.",
+      "words": [
+        {
+          "id": 1781001882227,
+          "type": "subject",
+          "text": "Er",
+          "x": 160,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882228,
+          "type": "verb",
+          "text": "wünschte,",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882229,
+          "type": "subject",
+          "text": "er",
+          "x": 320,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882230,
+          "type": "verb",
+          "text": "hätte",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882231,
+          "type": "other",
+          "text": "mehr",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882232,
+          "type": "object-akk",
+          "text": "Zeit.",
+          "x": 560,
+          "y": 160,
+          "gender": "f",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Könnten Sie mir bitte helfen?",
+      "words": [
+        {
+          "id": 1781001882228,
+          "type": "modal",
+          "text": "Könnten",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882229,
+          "type": "subject",
+          "text": "Sie",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882230,
+          "type": "object",
+          "text": "mir",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882231,
+          "type": "other",
+          "text": "bitte",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882232,
+          "type": "verb",
+          "text": "helfen?",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Würden Sie das bitte wiederholen?",
+      "words": [
+        {
+          "id": 1781001882229,
+          "type": "verb",
+          "text": "Würden",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882230,
+          "type": "subject",
+          "text": "Sie",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie_pl"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882231,
+          "type": "object-akk",
+          "text": "das",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882232,
+          "type": "other",
+          "text": "bitte",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882233,
+          "type": "verb",
+          "text": "wiederholen?",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wenn das Wetter besser wäre, würden wir grillen.",
+      "words": [
+        {
+          "id": 1781001882230,
+          "type": "conjunction",
+          "text": "Wenn",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882231,
+          "type": "subject",
+          "text": "das",
+          "x": 160,
+          "y": 320,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882232,
+          "type": "subject",
+          "text": "Wetter",
+          "x": 160,
+          "y": 400,
+          "gender": "n",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882233,
+          "type": "other",
+          "text": "besser",
+          "x": 160,
+          "y": 480,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882234,
+          "type": "verb",
+          "text": "wäre,",
+          "x": 160,
+          "y": 560,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "es"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882235,
+          "type": "verb",
+          "text": "würden",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882236,
+          "type": "subject",
+          "text": "wir",
+          "x": 640,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882237,
+          "type": "verb",
+          "text": "grillen.",
+          "x": 720,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    },
+    {
+      "text": "Ich hätte das nicht gesagt.",
+      "words": [
+        {
+          "id": 1781001882231,
+          "type": "subject",
+          "text": "Ich",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882232,
+          "type": "verb",
+          "text": "hätte",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882233,
+          "type": "object",
+          "text": "das",
+          "x": 320,
+          "y": 160,
+          "gender": "n",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882234,
+          "type": "other",
+          "text": "nicht",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882235,
+          "type": "verb",
+          "text": "gesagt.",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Sie würde lieber zu Hause bleiben.",
+      "words": [
+        {
+          "id": 1781001882232,
+          "type": "subject",
+          "text": "Sie",
+          "x": 160,
+          "y": 160,
+          "gender": "f",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882233,
+          "type": "verb",
+          "text": "würde",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "sie"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882234,
+          "type": "other",
+          "text": "lieber",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882235,
+          "type": "preposition",
+          "text": "zu",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882236,
+          "type": "object-dat",
+          "text": "Hause",
+          "x": 480,
+          "y": 160,
+          "gender": "n",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882237,
+          "type": "verb",
+          "text": "bleiben.",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 0
+        }
+      ]
+    },
+    {
+      "text": "Wenn er früher aufgestanden wäre, hätte er den Zug nicht verpasst.",
+      "words": [
+        {
+          "id": 1781001882233,
+          "type": "conjunction",
+          "text": "Wenn",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882234,
+          "type": "subject",
+          "text": "er",
+          "x": 160,
+          "y": 320,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882235,
+          "type": "other",
+          "text": "früher",
+          "x": 160,
+          "y": 400,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882236,
+          "type": "verb",
+          "text": "aufgestanden",
+          "x": 160,
+          "y": 480,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882237,
+          "type": "verb",
+          "text": "wäre,",
+          "x": 160,
+          "y": 560,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882238,
+          "type": "verb",
+          "text": "hätte",
+          "x": 560,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882239,
+          "type": "subject",
+          "text": "er",
+          "x": 640,
+          "y": 160,
+          "gender": "m",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "er"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882240,
+          "type": "object-akk",
+          "text": "den",
+          "x": 720,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882241,
+          "type": "object-akk",
+          "text": "Zug",
+          "x": 800,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882242,
+          "type": "other",
+          "text": "nicht",
+          "x": 880,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882243,
+          "type": "verb",
+          "text": "verpasst.",
+          "x": 960,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        }
+      ]
+    },
+    {
+      "text": "Wir würden uns freuen, wenn du kommen würdest.",
+      "words": [
+        {
+          "id": 1781001882520,
+          "type": "subject",
+          "text": "Wir",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882521,
+          "type": "verb",
+          "text": "würden",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882522,
+          "type": "object",
+          "text": "uns",
+          "x": 320,
+          "y": 160,
+          "gender": "none",
+          "case": "akk",
+          "number": "pl",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "wir"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882523,
+          "type": "verb",
+          "text": "freuen,",
+          "x": 400,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "main",
+          "clause_id": 1
+        },
+        {
+          "id": 1781001882524,
+          "type": "conjunction",
+          "text": "wenn",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882525,
+          "type": "subject",
+          "text": "du",
+          "x": 480,
+          "y": 320,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882526,
+          "type": "verb",
+          "text": "kommen",
+          "x": 480,
+          "y": 400,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "none"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        },
+        {
+          "id": 1781001882527,
+          "type": "verb",
+          "text": "würdest.",
+          "x": 480,
+          "y": 480,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "down",
+          "conjugation": {
+            "pronoun": "du"
+          },
+          "clause_type": "subordinate",
+          "clause_id": 0
+        }
+      ]
+    }
+  ]
+}

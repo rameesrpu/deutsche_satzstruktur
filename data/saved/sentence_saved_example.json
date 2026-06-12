@@ -1,0 +1,110 @@
+{
+  "version": "1.0",
+  "exportDate": "2026-06-08T18:02:02.669Z",
+  "sentenceCount": 918,
+  "sentences": [
+    {
+      "id": 1778455918129,
+      "text": "ich lerne heute Deutsch mit meinem Freund",
+      "words": [
+        {
+          "id": 1778455919129,
+          "type": "subject",
+          "text": "ich",
+          "x": 80,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          }
+        },
+        {
+          "id": 1778455919130,
+          "type": "verb",
+          "text": "lerne",
+          "x": 160,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "ich"
+          }
+        },
+        {
+          "id": 1778455919131,
+          "type": "other",
+          "text": "heute",
+          "x": 240,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          }
+        },
+        {
+          "id": 1778455919132,
+          "type": "object",
+          "text": "Deutsch",
+          "x": 320,
+          "y": 160,
+          "gender": "m",
+          "case": "akk",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          }
+        },
+        {
+          "id": 1778455919133,
+          "type": "preposition",
+          "text": "mit",
+          "x": 480,
+          "y": 160,
+          "gender": "none",
+          "case": "nom",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          }
+        },
+        {
+          "id": 1778455919134,
+          "type": "object",
+          "text": "meinem",
+          "x": 560,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          }
+        },
+        {
+          "id": 1778455919135,
+          "type": "object",
+          "text": "Freund",
+          "x": 640,
+          "y": 160,
+          "gender": "m",
+          "case": "dat",
+          "number": "sg",
+          "flowDirection": "right",
+          "conjugation": {
+            "pronoun": "none"
+          }
+        }
+      ],
+      "createdAt": "2026-04-21T06:23:10.405Z"
+    },

@@ -211,6 +211,18 @@ class DeutschApp {
                 }
             });
         }
+
+        const maxPointsInput = document.getElementById('max-points-input');
+        if (maxPointsInput) {
+            maxPointsInput.addEventListener('change', () => {
+                const val = parseInt(maxPointsInput.value, 10);
+                if (!isNaN(val) && val >= 50) {
+                    this.gameMode.targetScore = val;
+                } else {
+                    maxPointsInput.value = this.gameMode.targetScore;
+                }
+            });
+        }
     }
 
     /**
@@ -928,6 +940,39 @@ class DeutschApp {
                 (word) => this.uiController.handleWordClick(word),
                 (e, word) => this.uiController.handleDragStart(e, word)
             );
+
+            // If game paused for felder review, overlay a tap-to-continue prompt
+            if (this.gameMode && this.gameMode.isPaused && this.gameMode.waitingForContinue) {
+                const overlay = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                overlay.setAttribute('x', 0);
+                overlay.setAttribute('y', 0);
+                overlay.setAttribute('width', '100%');
+                overlay.setAttribute('height', '100%');
+                overlay.setAttribute('fill', 'transparent');
+                overlay.setAttribute('cursor', 'pointer');
+                const handleTap = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.gameMode.resume();
+                    this.currentView = 'game';
+                    this.gameMode.loadRandomSentenceAndContinue();
+                };
+                overlay.addEventListener('click', handleTap);
+                overlay.addEventListener('touchend', handleTap);
+                this.svg.appendChild(overlay);
+
+                // "Tap to continue" hint at the bottom
+                const hint = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                hint.setAttribute('x', '50%');
+                hint.setAttribute('y', '96%');
+                hint.setAttribute('text-anchor', 'middle');
+                hint.setAttribute('fill', '#27ae60');
+                hint.setAttribute('font-size', '22');
+                hint.setAttribute('font-weight', 'bold');
+                hint.setAttribute('pointer-events', 'none');
+                hint.textContent = 'Tap anywhere to continue →';
+                this.svg.appendChild(hint);
+            }
         } else if (this.currentView === 'grid') {
             // Draw Grid view
             this.gridViewModel.draw(this.wordManager);

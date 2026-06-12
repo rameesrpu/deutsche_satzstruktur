@@ -117,4 +117,4 @@ Subjects use pronoun → cell. Objects use gender/number → cell. Verbs use the
 - No penalty for wrong attempts
 - Auto-place after 3 failed attempts (0 points for that item)
 - Sentence ends when `currentIndex >= manualItems.length`
-- Game ends when `totalScore >= targetScore` (500)
+- Game ends when `totalScore >= targetScore` (2000)
