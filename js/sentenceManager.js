@@ -206,6 +206,51 @@ class SentenceManager {
     }
 
     /**
+     * Bulk-load pre-analyzed sentences from a library JSON into sentenceManager.
+     * - Skips sentences with no words array (not yet analyzed).
+     * - Adds sentences not yet in localStorage.
+     * - Updates words on existing sentences only when the library version has changed
+     *   (i.e. the developer pushed corrections), preserving user edits otherwise.
+     */
+    bulkLoadLibraryCategory(level, category, libraryData) {
+        const { version, sentences } = libraryData;
+        const versionKey = `library_version_${level}_${category}`;
+        const storedVersion = localStorage.getItem(versionKey);
+        const versionChanged = version && version !== storedVersion;
+
+        let idCounter = Date.now();
+
+        (sentences || []).forEach(entry => {
+            const text = typeof entry === 'string' ? entry : entry.text;
+            const libraryWords = entry.words;
+
+            if (!libraryWords) return; // Not yet analyzed — skip, falls back to backend on click
+
+            const existing = this.findLibrarySentence(level, category, text);
+
+            if (existing) {
+                if (versionChanged) {
+                    existing.words = libraryWords.map(w => ({ ...w, id: idCounter++ }));
+                }
+            } else {
+                this.sentences.push({
+                    id: idCounter++,
+                    text: text.trim(),
+                    words: libraryWords.map(w => ({ ...w, id: idCounter++ })),
+                    createdAt: new Date().toISOString(),
+                    source: 'library',
+                    level,
+                    category
+                });
+            }
+        });
+
+        if (version) {
+            localStorage.setItem(versionKey, version);
+        }
+    }
+
+    /**
      * Get all sentences
      */
     getAllSentences() {

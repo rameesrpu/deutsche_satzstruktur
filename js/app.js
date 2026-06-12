@@ -50,7 +50,8 @@ class DeutschApp {
             getUserSentences:   () => this.sentenceManager.sentences.filter(s => !s.source),
             onEdit:             (id, e) => this.editSentenceFromList(id, e),
             onDelete:           (id, e) => this.deleteSentenceFromList(id, e),
-            getCurrentSentenceId: () => this.sentenceManager.currentSentenceId
+            getCurrentSentenceId: () => this.sentenceManager.currentSentenceId,
+            onLibraryLoad:      (level, category, data) => this.handleLibraryLoad(level, category, data)
         });
 
         // View state: 'felder', 'grid', or 'game'
@@ -175,6 +176,7 @@ class DeutschApp {
                 if (multiCategoryA2 && multiCategoryA2.checked) levels.push('A2');
                 if (multiCategoryB1 && multiCategoryB1.checked) levels.push('B1');
                 this.gameMode.selectedLevels = levels;
+                this.bulkLoadLibraryForLevels(levels);
             };
 
             multiCategoryToggle.addEventListener('change', () => {
@@ -192,6 +194,7 @@ class DeutschApp {
                     // Mutually exclusive with story mode
                     if (storyModeToggle) storyModeToggle.checked = false;
                     this.gameMode.storyMode = false;
+                    this.bulkLoadLibraryForLevels(['A1', 'A2', 'B1']);
                 }
             });
 
@@ -642,6 +645,35 @@ class DeutschApp {
         } else {
             this.loadLibrarySentence(selection.level, selection.category, selection.text);
         }
+    }
+
+    /**
+     * Called when a library JSON is fetched for a category.
+     * Bulk-loads pre-analyzed sentences into sentenceManager, then persists and refreshes the UI.
+     */
+    handleLibraryLoad(level, category, data) {
+        this.sentenceManager.bulkLoadLibraryCategory(level, category, data);
+        this.saveSentences();
+        this.levelSelector.refresh();
+    }
+
+    async bulkLoadLibraryForLevels(levels) {
+        const fetches = [];
+        for (const level of levels) {
+            const levelData = LEVEL_CONTENT[level];
+            if (!levelData) continue;
+            for (const [cat, catData] of Object.entries(levelData.categories)) {
+                const libraryFile = catData.file.replace('data/levels/', 'data/library/');
+                fetches.push(
+                    fetch(libraryFile)
+                        .then(r => r.ok ? r.json() : null)
+                        .then(data => { if (data) this.sentenceManager.bulkLoadLibraryCategory(level, cat, data); })
+                        .catch(() => {})
+                );
+            }
+        }
+        await Promise.all(fetches);
+        this.saveSentences();
     }
 
     /**

@@ -7,6 +7,7 @@ class LevelSelector {
         this.onEdit = callbacks.onEdit;
         this.onDelete = callbacks.onDelete;
         this.getCurrentSentenceId = callbacks.getCurrentSentenceId;
+        this.onLibraryLoad = callbacks.onLibraryLoad || null;
 
         this.currentLevel = '';
         this.currentCategory = '';
@@ -73,10 +74,21 @@ class LevelSelector {
         this.sentenceList.innerHTML = '<div class="library-status">Loading...</div>';
 
         try {
-            const response = await fetch(catData.file);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            const data = await response.json();
-            this.currentSentences = data.sentences || [];
+            const libraryFile = catData.file.replace('data/levels/', 'data/library/');
+            const [levelsResponse, libraryResponse] = await Promise.all([
+                fetch(catData.file),
+                fetch(libraryFile).catch(() => null)
+            ]);
+
+            if (!levelsResponse.ok) throw new Error(`HTTP ${levelsResponse.status}`);
+            const levelsData = await levelsResponse.json();
+            this.currentSentences = levelsData.sentences || [];
+
+            if (libraryResponse && libraryResponse.ok && this.onLibraryLoad) {
+                const libraryData = await libraryResponse.json();
+                this.onLibraryLoad(this.currentLevel, category, libraryData);
+            }
+
             this.renderLibrarySentences();
         } catch (error) {
             console.error('Level content load error:', error);
