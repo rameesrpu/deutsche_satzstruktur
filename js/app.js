@@ -230,6 +230,23 @@ class DeutschApp {
             });
         }
 
+        const speechToggle = document.getElementById('speech-toggle');
+        if (speechToggle && typeof gameSounds !== 'undefined') {
+            speechToggle.checked = gameSounds.speechEnabled;
+            speechToggle.addEventListener('change', () => {
+                gameSounds.setSpeechEnabled(speechToggle.checked);
+                if (speechToggle.checked) gameSounds.speak('Los geht\'s!'); // audible confirmation
+            });
+        }
+
+        const listenToggle = document.getElementById('listen-toggle');
+        if (listenToggle && typeof gameSounds !== 'undefined') {
+            listenToggle.checked = gameSounds.promptEnabled;
+            listenToggle.addEventListener('change', () => {
+                gameSounds.setPromptEnabled(listenToggle.checked);
+            });
+        }
+
         const multiCategoryToggle = document.getElementById('multi-category-toggle');
         const multiCategoryLevels = document.getElementById('multi-category-levels');
         const multiCategoryA1 = document.getElementById('multi-category-a1');

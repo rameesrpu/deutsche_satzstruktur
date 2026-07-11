@@ -185,6 +185,10 @@ class GameMode {
 
         document.addEventListener('keydown', this.keyboardHandler);
 
+        // Detect TTS word-boundary support (silent, inside this user gesture)
+        // before the first fill-in-the-blank prompt needs it
+        if (typeof gameSounds !== 'undefined') gameSounds.probeBoundary();
+
         this.startNewSentence();
 
         // Record the initial sentence as used
@@ -262,6 +266,8 @@ class GameMode {
         this.isActive = false;
         this.isPaused = false;
         this.pendingFelderReview = false;
+        // Drop any paused/in-flight fill-in-the-blank audio
+        if (typeof gameSounds !== 'undefined') gameSounds.cancelPrompt();
         this.totalScore = 0; // Reset score so the next start() is fresh
         this.usedSentenceIds = new Set();
         this.stopTimerAnimation();
@@ -1466,7 +1472,32 @@ class GameMode {
             this.showFeedback(feedbackSymbol, feedbackX, feedbackY, true, feedbackColor);
 
             // Confetti burst + floating points + score count-up (all self-cleaning)
-            if (typeof gameSounds !== 'undefined') gameSounds.correct(this.displayStreak);
+            // Sound: the tile's own note (pitch encodes the grid position),
+            // then the GROWING SENTENCE PREFIX spoken in German — everything
+            // from the sentence start through the placed word plus the
+            // auto-words it reveals. Speaking a real phrase (not an isolated
+            // word) lets the TTS engine apply natural sentence intonation,
+            // so each placement sounds like the sentence assembling itself.
+            if (typeof gameSounds !== 'undefined') {
+                gameSounds.correct(this.displayStreak, row, col);
+                // Confirmation speech (growing prefix) only when listening
+                // mode is off — in listening mode the paused sentence audio
+                // resumes instead (see updateCurrentWordDisplay), which
+                // speaks the placed word with the sentence's own intonation
+                if (!gameSounds.promptEnabled) {
+                    const range = this.getItemWordRange(currentItem);
+                    let endIdx = range[1];
+                    while (endIdx + 1 < this.words.length && !this.isManualWord(this.words[endIdx + 1])) {
+                        endIdx++;
+                    }
+                    // On long sentences start from the current clause instead
+                    // of re-speaking everything from the beginning
+                    const texts = this.words.map(w => w.text);
+                    const from = gameSounds.promptStartIndex(texts, range[0]);
+                    gameSounds.speak(texts.slice(from, endIdx + 1).join(' '));
+                }
+            }
+            if (navigator.vibrate) navigator.vibrate(15); // subtle tactile confirm
             this.spawnConfetti(feedbackX, feedbackY, 8, 90);
             if (!feedbackSymbol.startsWith('+')) {
                 // Timer mode already floats "+N" as the feedback symbol itself
@@ -1503,6 +1534,7 @@ class GameMode {
             this.displayStreak = 0;
             this.wrongShakeUntil = Date.now() + 350;
             if (typeof gameSounds !== 'undefined') gameSounds.wrong();
+            if (navigator.vibrate) navigator.vibrate([30, 40, 30]); // distinct double-buzz
 
             // Show cross feedback (no score penalty, but don't advance)
             this.showFeedback('✗', feedbackX, feedbackY, false);
@@ -1910,11 +1942,22 @@ class GameMode {
             this.currentWordDisplay = null;
             this.stopTimerAnimation();
             this.wordStartTime = null;
+            // Listening mode: sentence done — let the audio play out its tail
+            if (typeof gameSounds !== 'undefined' && this.words && this.words.length > 0) {
+                gameSounds.promptSentence(this.words.map(w => w.text), null);
+            }
             return;
         }
 
         const currentItem = this.manualItems[this.currentIndex];
         this.currentWordDisplay = this.getItemText(currentItem);
+
+        // Listening mode (audio fill-in-the-blank): play the sentence up to
+        // the blank, pausing right where the current word belongs
+        if (typeof gameSounds !== 'undefined' && this.words && this.words.length > 0) {
+            const blankIdx = this.getItemWordRange(currentItem)[0];
+            gameSounds.promptSentence(this.words.map(w => w.text), blankIdx);
+        }
 
         // Reset attempts for new word
         this.currentWordAttempts = 0;
@@ -2151,8 +2194,22 @@ class GameMode {
                 window.app.redrawAll();
             }
 
-            // Sentence-complete celebration: bigger confetti burst across the grid
-            if (typeof gameSounds !== 'undefined') gameSounds.sentenceComplete();
+            // Sentence-complete celebration: bigger confetti burst across the
+            // grid, then the whole sentence read aloud (the melody resolved
+            // it; the speech consolidates it)
+            if (typeof gameSounds !== 'undefined') {
+                gameSounds.sentenceComplete();
+                if (this.words && this.words.length > 0) {
+                    const sentence = this.words.map(w => w.text).join(' ');
+                    // The final placement's prefix speech already covers the
+                    // full sentence — only read it out here if it wasn't just
+                    // spoken (e.g. the last word was auto-placed). queue:
+                    // waits for in-flight speech instead of cutting it off.
+                    if (gameSounds.lastSpoken !== sentence) {
+                        setTimeout(() => gameSounds.speak(sentence, { queue: true }), 500);
+                    }
+                }
+            }
             const cw = this.gridViewModel.cellWidth;
             const ch = this.gridViewModel.cellHeight;
             const gridCenterX = this.getGridStartX() + cw * 1.5;
