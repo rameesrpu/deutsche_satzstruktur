@@ -1875,9 +1875,8 @@ button:active {
     }
 
     .container {
-        height: auto;
-        min-height: 100vh;
-        min-height: 100dvh; /* real phones: track the visible viewport as browser toolbars show/hide */
+        height: 100vh;
+        height: 100dvh; /* real phones: track the visible viewport as browser toolbars show/hide */
         position: relative;
         display: flex;
         flex-direction: column;
@@ -1908,13 +1907,16 @@ button:active {
         line-height: 1.4;
     }
 
-    /* Main Content - Row layout with wrapping for tabs */
+    /* Main Content - grid: canvas takes ALL remaining height (1fr), the
+       tab row and panels anchor to the bottom. No hard-coded vh heights, so
+       there is never dead space below the tabs, and opening a panel shrinks
+       the canvas automatically. */
     .main-content {
-        flex-direction: row;
-        flex-wrap: wrap;
-        min-height: auto;
-        flex: 1; /* Grow to fill available space */
-        align-content: flex-start; /* pack rows to the top; no stretched gaps */
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: minmax(0, 1fr) auto auto;
+        flex: 1; /* Fill the container below the header */
+        min-height: 0;
         padding-bottom: env(safe-area-inset-bottom, 0px); /* gesture-bar phones */
     }
 
@@ -1924,8 +1926,8 @@ button:active {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 33.333%;
-        flex: 0 0 33.333%; /* Don't grow or shrink, fixed at 33.333% for 3 buttons */
+        width: 100%;
+        grid-row: 2;
         padding: 10px;
         background: var(--surface-0);
         color: var(--ink-500);
@@ -2009,7 +2011,8 @@ button:active {
     .settings-panel,
     .properties-panel {
         width: 100%;
-        flex: 0 0 100%;
+        grid-row: 3;
+        grid-column: 1 / -1;
         max-height: 0;
         overflow: hidden;
         padding: 0;
@@ -2089,12 +2092,12 @@ button:active {
 
     /* Canvas Container */
     .canvas-container {
-        /* PANELS CLOSED: Canvas takes up a percentage of viewport height
-         * Adjust the vh value to control canvas size (e.g., 60vh, 70vh, 80vh)
-         * Higher value = larger canvas, Lower value = smaller canvas */
-        height: 90vh;
-        height: 90dvh;
-        min-height: 400px;
+        /* Sized by the grid's 1fr row: fills whatever the tabs/panels don't
+           use. height must stay auto so the grid track can stretch it. */
+        grid-row: 1;
+        grid-column: 1 / -1;
+        height: auto;
+        min-height: 0;
         width: 100%;
         border-right: none;
         position: relative;
@@ -2103,16 +2106,6 @@ button:active {
         -webkit-backface-visibility: hidden;
         transform: translateZ(0);
         -webkit-transform: translateZ(0);
-        flex: 0 0 auto;
-    }
-
-    /* PANELS OPEN: Canvas shrinks to make room for panel content
-     * Adjust 40vh to control canvas height when panel is visible
-     * Example: 30vh = smaller canvas, 50vh = larger canvas */
-    .main-content.panel-open .canvas-container {
-        height: 58vh;
-        height: 58dvh;
-        min-height: 300px;
     }
 
     .canvas-container::after {
@@ -2130,35 +2123,11 @@ button:active {
     #canvas {
         width: 100% !important;
         height: 100% !important;
-        min-height: 400px;
+        min-height: 0;
     }
 
-    /* Reorder for better mobile UX */
-    .canvas-container {
-        order: 1;
-        width: 100%;
-        /* Allow canvas to grow and fill available vertical space */
-    }
-
-    .mobile-toggle-left {
-        order: 2;
-    }
-
-    .mobile-toggle-right {
-        order: 2; /* Same order as left to keep them on same row */
-    }
-
-    .sentence-panel {
-        order: 3;
-    }
-
-    .settings-panel {
-        order: 3; /* Same order as sentence and properties to overlap (only one shows at a time) */
-    }
-
-    .properties-panel {
-        order: 3; /* Same order as sentence to overlap (only one shows at a time) */
-    }
+    /* (Row placement is handled by the grid on .main-content above:
+       canvas row 1, toggle tabs row 2, panels row 3) */
 
     /* Hide desktop legend on mobile - use modal instead */
     .legend {
@@ -2414,24 +2383,8 @@ button:active {
         padding: 12px;
     }
 
-    /* MOBILE CANVAS SIZING for screens < 480px (same values as above) */
-    .canvas-container {
-        /* PANELS CLOSED: Adjust vh percentage to control canvas size */
-        height: 60vh;
-        height: 60dvh;
-        min-height: 400px;
-    }
-
-    .main-content.panel-open .canvas-container {
-        /* PANELS OPEN: Adjust 40vh to control canvas percentage */
-        height: 40vh;
-        height: 40dvh;
-        min-height: 300px;
-    }
-
-    #canvas {
-        min-height: 400px;
-    }
+    /* Canvas height is fully managed by the .main-content grid (1fr row);
+       no vh overrides needed on small screens */
 
     button {
         font-size: 13px;
