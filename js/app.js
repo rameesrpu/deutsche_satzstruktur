@@ -939,11 +939,12 @@ class DeutschApp {
         // Both Grid and Felder views now support zoom and pan
         if (this.currentView === 'grid' || this.currentView === 'game') {
             // Grid/Game view: Fixed content size with zoom and pan
-            // Mobile needs more height for taller grid (160 + 1200 + 120 + 30 = 1510)
+            // Mobile height fits the taller grid: 160 + 3*460 + 30 + 120
+            // controllers = 1690, plus margin
             // Mobile width trimmed to the actual content extent (grid ends at
             // x=1100 + margin) so the scene scales up larger on small screens
             const gridWidth = isMobile ? 1170 : 1250;
-            const gridHeight = isMobile ? 1550 : 950;
+            const gridHeight = isMobile ? 1720 : 950;
 
             // Apply zoom to viewBox dimensions
             const zoomedWidth = gridWidth / currentState.zoomLevel;

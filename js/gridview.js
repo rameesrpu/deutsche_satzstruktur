@@ -7,7 +7,10 @@ class GridViewModel {
         this.config = {
             mobile: {
                 cellWidth: 350,
-                cellHeight: 400,
+                // Taller cells on mobile: the fit-to-width scaling leaves
+                // vertical headroom, so this renders larger without shrinking
+                // anything else
+                cellHeight: 460,
                 boxWidth: 280,
                 boxHeight: 65,
                 fontSize: '34px',
