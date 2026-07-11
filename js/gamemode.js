@@ -817,11 +817,11 @@ class GameMode {
         scorePill.setAttribute('y', scorePillY);
         scorePill.setAttribute('width', scorePillW);
         scorePill.setAttribute('height', scorePillH);
-        scorePill.setAttribute('rx', '12');
+        scorePill.setAttribute('rx', '14');
         scorePill.setAttribute('fill', GM_UI.white);
-        scorePill.setAttribute('fill-opacity', '0.95');
-        scorePill.setAttribute('stroke', GM_UI.border);
-        scorePill.setAttribute('stroke-width', '1.5');
+        scorePill.setAttribute('stroke', GM_UI.indigoSoft); // indigo-200 accent
+        scorePill.setAttribute('stroke-width', '2');
+        scorePill.setAttribute('filter', 'url(#gm-shadow)');
         scorePill.setAttribute('pointer-events', 'none');
         overlayGroup.appendChild(scorePill);
 
@@ -830,7 +830,7 @@ class GameMode {
         scoreText.setAttribute('x', gridEndX - 14);
         scoreText.setAttribute('y', scorePillY + (isMobile ? 33 : 21));
         scoreText.setAttribute('text-anchor', 'end');
-        scoreText.setAttribute('fill', GM_UI.text);
+        scoreText.setAttribute('fill', GM_UI.indigo); // brand accent for the headline stat
         scoreText.setAttribute('font-size', scoreFont);
         scoreText.setAttribute('font-weight', 'bold');
         scoreText.setAttribute('font-family', "'Inter', sans-serif");
@@ -851,38 +851,20 @@ class GameMode {
         sentenceScoreText.textContent = `+${this.currentSentenceScore}`;
         overlayGroup.appendChild(sentenceScoreText);
 
-        // Streak indicator: small 🔥×N pill left of the score pill (display
-        // only, never feeds back into scoring)
+        // Streak indicator (display only, never feeds back into scoring):
+        // small 🔥×N tucked inside the score pill, on the second line next
+        // to the sentence score
         if (this.displayStreak >= 2) {
-            const streakLabel = `🔥×${this.displayStreak}`;
-            const pillH = isMobile ? 44 : 28;
-            const pillW = streakLabel.length * (isMobile ? 18 : 11) + 18;
-            const pillX = scorePillX - pillW - 10;
-            const pillY = topY + barHeight / 2 - pillH / 2;
-
-            const pill = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            pill.setAttribute('x', pillX);
-            pill.setAttribute('y', pillY);
-            pill.setAttribute('width', pillW);
-            pill.setAttribute('height', pillH);
-            pill.setAttribute('rx', pillH / 2);
-            pill.setAttribute('fill', '#fff7ed');   // amber-50 (mirrors CSS tokens)
-            pill.setAttribute('stroke', '#fdba74'); // amber-300
-            pill.setAttribute('stroke-width', '1.5');
-            pill.setAttribute('pointer-events', 'none');
-            overlayGroup.appendChild(pill);
-
             const streakText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            streakText.setAttribute('x', pillX + pillW / 2);
-            streakText.setAttribute('y', pillY + pillH / 2 + 1);
-            streakText.setAttribute('text-anchor', 'middle');
-            streakText.setAttribute('dominant-baseline', 'middle');
+            streakText.setAttribute('x', scorePillX + 14);
+            streakText.setAttribute('y', scorePillY + (isMobile ? 62 : 40));
+            streakText.setAttribute('text-anchor', 'start');
             streakText.setAttribute('fill', '#c2410c'); // amber-700
-            streakText.setAttribute('font-size', isMobile ? 22 : 14);
+            streakText.setAttribute('font-size', scoreSubFont);
             streakText.setAttribute('font-weight', 'bold');
             streakText.setAttribute('font-family', "'Inter', sans-serif");
             streakText.setAttribute('pointer-events', 'none');
-            streakText.textContent = streakLabel;
+            streakText.textContent = `🔥×${this.displayStreak}`;
             overlayGroup.appendChild(streakText);
         }
 
