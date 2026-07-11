@@ -280,29 +280,38 @@ class UIController {
     }
 
     /**
-     * Generate gender/number UI for subjects, objects, and adjectives
-     * Gender is NOT available for:
-     * - Verbs/modals (they use conjugation instead)
-     * - Personal pronouns (subjects with conjugation set - they already have pronoun color)
-     * - Object pronouns (accusative/dative objects with conjugation set)
+     * Generate gender/number UI for subjects, objects, and adjectives.
+     *
+     * Gender and conjugation are mutually exclusive — a word gets exactly one
+     * of the two sections (see getConjugationUI for the other half):
+     *
+     * | Word                                  | Gender UI | Conjugation UI |
+     * |---------------------------------------|-----------|----------------|
+     * | verb / modal                          | no        | yes            |
+     * | personal pronoun (ich, du, mich, mir) | no        | yes            |
+     * | everything else (nouns, articles,     | yes       | no             |
+     * |   possessives like "seine", adjectives)|          |                |
+     *
+     * "Is it a personal pronoun?" is decided by the word's TEXT
+     * (isPersonalPronoun), never by the stored conjugation.pronoun value.
+     * The auto-configure backend sometimes stamps a conjugation pronoun onto
+     * possessive articles (e.g. "seine" got pronoun 'sie'); trusting that
+     * stored value used to hide the gender buttons for such words, leaving
+     * them uneditable — and with gender stuck at 'none' they never clustered
+     * with their noun ("seine Arbeit"). Deciding by text keeps the gender UI
+     * available; picking a gender then clears the stale conjugation via the
+     * mutual-exclusion handler in attachPropertyListeners.
      */
     getGenderUI(word) {
-        // Hide gender section for verbs and modals
+        // Verbs/modals conjugate, they have no gender
         if (word.type === 'verb' || word.type === 'modal') {
-            return ''; // Gender doesn't apply to verbs/modals
+            return '';
         }
 
-        // Hide gender section for personal pronouns (subjects with conjugation set)
-        // Personal pronouns like 'ich', 'du', 'er', 'sie', 'es' already have conjugation color
-        if (word.type === 'subject' && word.conjugation?.pronoun && word.conjugation.pronoun !== 'none') {
-            return ''; // Personal pronouns don't need gender - they have conjugation
-        }
-
-        // Hide gender section for object pronouns (accusative/dative objects with conjugation set)
-        // Object pronouns like 'mich', 'mir', 'dich', 'dir' already have conjugation color
-        if (word.type === 'object' &&
-            word.conjugation?.pronoun && word.conjugation.pronoun !== 'none') {
-            return ''; // Object pronouns don't need gender - they have conjugation
+        // Personal pronouns (ich, du, er, mich, mir, ...) are colored by
+        // conjugation, not gender — decided by text, see doc comment above
+        if (this.isPersonalPronoun(word)) {
+            return '';
         }
 
         return `

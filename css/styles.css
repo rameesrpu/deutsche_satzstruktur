@@ -2492,6 +2492,16 @@ button:active {
     stroke-opacity: 0.5;
 }
 
+/* Keyboard tile cursor (arrow keys; W places). Same glow as hover but
+   persistent, so the selected cell stays visible without the mouse. */
+.gm-cell-hit.gm-cell-kbd {
+    fill: var(--gm-cell-color, #4f46e5);
+    fill-opacity: 0.16;
+    stroke: var(--gm-cell-color, #4f46e5);
+    stroke-opacity: 0.55;
+    stroke-width: 8;
+}
+
 /* Placed word boxes: German text in Nunito 700 */
 .gm-placed text {
     font-family: 'Nunito', 'Inter', sans-serif;

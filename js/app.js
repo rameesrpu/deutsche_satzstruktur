@@ -106,18 +106,23 @@ class DeutschApp {
     }
 
     /**
-     * Keyboard shortcuts. Enter advances the game's continue states:
+     * Keyboard shortcuts. Enter or "/" advances the game's continue states:
      * - game view, sentence complete → go to the Felder review
      * - Felder review → next sentence (same as the "Next sentence" button)
-     * Ignored while typing in inputs or when a button has focus (the button
-     * already handles Enter natively — avoids double-advancing).
+     * ("/" matches the game's keyboard placement key — right hand stays on
+     * the arrow cluster.) Ignored while typing in inputs. Enter is also
+     * ignored when a button has focus (the button already handles Enter
+     * natively — avoids double-advancing); "/" has no native button behavior,
+     * so it still works.
      */
     setupKeyboardShortcuts() {
         document.addEventListener('keydown', (e) => {
-            if (e.key !== 'Enter' || e.isComposing) return;
+            const isAdvanceKey = e.key === 'Enter' || e.key === '/';
+            if (!isAdvanceKey || e.isComposing) return;
             const tag = e.target.tagName;
             if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' ||
-                tag === 'BUTTON' || e.target.isContentEditable) return;
+                e.target.isContentEditable) return;
+            if (tag === 'BUTTON' && e.key === 'Enter') return;
             if (!this.gameMode || !this.gameMode.waitingForContinue) return;
 
             if (this.currentView === 'game' && this.gameMode.isActive && !this.gameMode.isPaused) {

@@ -81,6 +81,9 @@ class GameMode {
         // Controller state (tap-based)
         this.selectedCase = null; // 'nom', 'akk', or 'dat' - selected when user taps case button
 
+        // Keyboard tile cursor: { row, col } selected via arrow keys, placed with W
+        this.keyboardSelectedCell = null;
+
         // Attempt tracking (auto-place after 3 wrong attempts)
         this.currentWordAttempts = 0;
 
@@ -157,11 +160,44 @@ class GameMode {
         this.isActive = true;
         this.isPaused = false;
 
-        // Add keyboard event listener for case selection (PC only)
+        // Add keyboard event listener for case selection and tile cursor (PC only)
         this.keyboardHandler = (e) => {
             if (!this.isActive) return;
 
+            // Don't hijack keys while the user types in a form field
+            const tag = e.target.tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || e.target.isContentEditable) return;
+
             const key = e.key.toLowerCase();
+
+            // Arrow keys move the tile cursor; "/" places the current word there
+            // (right-hand friendly on a US layout, next to the arrow cluster).
+            // Inactive while waiting to continue ("/" advances there — see app.js).
+            if (!this.waitingForContinue) {
+                const arrowDeltas = {
+                    'arrowup': [-1, 0], 'arrowdown': [1, 0],
+                    'arrowleft': [0, -1], 'arrowright': [0, 1]
+                };
+                if (arrowDeltas[key]) {
+                    e.preventDefault(); // keep the page from scrolling
+                    if (!this.keyboardSelectedCell) {
+                        this.keyboardSelectedCell = { row: 2, col: 2 }; // start at center (ICH)
+                    } else {
+                        const [dr, dc] = arrowDeltas[key];
+                        this.keyboardSelectedCell = {
+                            row: Math.min(3, Math.max(1, this.keyboardSelectedCell.row + dr)),
+                            col: Math.min(3, Math.max(1, this.keyboardSelectedCell.col + dc))
+                        };
+                    }
+                    if (window.app) window.app.redrawAll();
+                    return;
+                }
+                if (key === '/' && this.keyboardSelectedCell) {
+                    e.preventDefault(); // also blocks Firefox quick-find
+                    this.handleCellTap(this.keyboardSelectedCell.row, this.keyboardSelectedCell.col);
+                    return;
+                }
+            }
 
             // A = Nominative, S = Accusative, D = Dative, F = Genitive
             if (key === 'a') {
@@ -290,6 +326,7 @@ class GameMode {
         this.preCalculatedTrailingWords = [];
         this.revealedBoxIndices = new Set();
         this.currentWordDisplay = null;
+        this.keyboardSelectedCell = null;
 
         // Reset visual-only state
         this.displayStreak = 0;
@@ -604,7 +641,10 @@ class GameMode {
             clickArea.setAttribute('height', cellHeight);
             clickArea.setAttribute('fill', 'transparent');
             clickArea.setAttribute('cursor', 'pointer');
-            clickArea.setAttribute('class', 'gm-cell-hit');
+            const isKbdSelected = this.keyboardSelectedCell &&
+                this.keyboardSelectedCell.row === cell.row &&
+                this.keyboardSelectedCell.col === cell.col;
+            clickArea.setAttribute('class', isKbdSelected ? 'gm-cell-hit gm-cell-kbd' : 'gm-cell-hit');
             clickArea.style.setProperty('--gm-cell-color', isEmpty ? GM_UI.muted : cell.color);
             clickArea.setAttribute('data-row', cell.row);
             clickArea.setAttribute('data-col', cell.col);
@@ -1491,10 +1531,13 @@ class GameMode {
                         endIdx++;
                     }
                     // On long sentences start from the current clause instead
-                    // of re-speaking everything from the beginning
+                    // of re-speaking everything from the beginning. Mid-
+                    // sentence prefixes get a trailing comma so the last word
+                    // keeps continuation intonation instead of a final fall.
                     const texts = this.words.map(w => w.text);
                     const from = gameSounds.promptStartIndex(texts, range[0]);
-                    gameSounds.speak(texts.slice(from, endIdx + 1).join(' '));
+                    const isSentenceEnd = endIdx >= this.words.length - 1;
+                    gameSounds.speak(texts.slice(from, endIdx + 1).join(' ') + (isSentenceEnd ? '' : ','));
                 }
             }
             if (navigator.vibrate) navigator.vibrate(15); // subtle tactile confirm

@@ -178,7 +178,10 @@ class SoundManager {
             const prefix = blankIndex === null
                 ? full
                 : words.slice(this.promptStartIndex(words, blankIndex), blankIndex).join(' ');
-            if (prefix) this.speak(prefix);
+            // Trailing comma biases the engine toward continuation intonation
+            // (pitch held up, "more coming") instead of a sentence-final fall
+            // on the last word before the blank
+            if (prefix) this.speak(blankIndex === null ? prefix : prefix + ',');
         }
     }
 
