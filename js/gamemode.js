@@ -953,17 +953,14 @@ class GameMode {
             const centerX = currentWordBoxLeft + currentWordBoxWidth / 2;
             const centerY = topY + barHeight / 2;
 
-            // Calculate word width for positioning (needed for next word preview)
-            let wordWidth;
-            let displayText;
-
-            if (activeItem.type === 'box') {
-                displayText = activeItem.item.words.map(w => w.text).join(' ');
-                wordWidth = this.estimateTextWidth(displayText, 32);
-            } else {
-                displayText = activeItem.item.text;
-                wordWidth = this.estimateTextWidth(displayText, 32);
-            }
+            // Reuse the width computed before the auto-words (same font size)
+            // so the pill shape, its text, and the preview offset all agree —
+            // a second measurement here with a different size shifts the pill
+            // off its slot and overlaps the neighbors
+            const wordWidth = currentWordBoxWidth;
+            const displayText = activeItem.type === 'box'
+                ? activeItem.item.words.map(w => w.text).join(' ')
+                : activeItem.item.text;
 
             // Wrapper group so a wrong placement can trigger a brief CSS shake
             // (purely visual; coordinates unchanged)
