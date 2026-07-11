@@ -721,7 +721,7 @@ class GameMode {
             shape.setAttribute('width', width);
             shape.setAttribute('height', height);
             shape.setAttribute('rx', '14');
-            shape.setAttribute('fill', GM_UI.white);
+            shape.setAttribute('fill', 'url(#gm-pill-grad)');
             shape.setAttribute('stroke', GM_UI.indigoSoft);
             shape.setAttribute('stroke-width', '2');
             shape.setAttribute('stroke-dasharray', '8,5');
@@ -733,7 +733,7 @@ class GameMode {
             shape.setAttribute('height', height);
             shape.setAttribute('rx', '20');
             shape.setAttribute('ry', '20');
-            shape.setAttribute('fill', GM_UI.white);
+            shape.setAttribute('fill', 'url(#gm-pill-grad)');
             shape.setAttribute('stroke', GM_UI.indigo);
             shape.setAttribute('stroke-width', '3');
         } else if (caseType === 'akk') {
@@ -744,7 +744,7 @@ class GameMode {
             shape.setAttribute('height', height);
             shape.setAttribute('rx', '5');
             shape.setAttribute('ry', '5');
-            shape.setAttribute('fill', GM_UI.white);
+            shape.setAttribute('fill', 'url(#gm-pill-grad)');
             shape.setAttribute('stroke', GM_UI.indigo);
             shape.setAttribute('stroke-width', '3');
         } else if (caseType === 'dat') {
@@ -752,7 +752,7 @@ class GameMode {
             const slope = 15;
             const points = `${x + slope},${topY} ${x + width - slope},${topY} ${x + width},${topY + height} ${x},${topY + height}`;
             shape.setAttribute('points', points);
-            shape.setAttribute('fill', GM_UI.white);
+            shape.setAttribute('fill', 'url(#gm-pill-grad)');
             shape.setAttribute('stroke', GM_UI.indigo);
             shape.setAttribute('stroke-width', '3');
         } else if (caseType === 'gen') {
@@ -760,7 +760,7 @@ class GameMode {
             const slant = 10;
             const points = `${x + slant},${topY} ${x + width + slant},${topY} ${x + width - slant},${topY + height} ${x - slant},${topY + height}`;
             shape.setAttribute('points', points);
-            shape.setAttribute('fill', GM_UI.white);
+            shape.setAttribute('fill', 'url(#gm-pill-grad)');
             shape.setAttribute('stroke', GM_UI.indigo);
             shape.setAttribute('stroke-width', '3');
         }
@@ -1003,8 +1003,9 @@ class GameMode {
                 bgRect.setAttribute('height', boxHeight);
                 bgRect.setAttribute('fill', GM_UI.white);
                 bgRect.setAttribute('fill-opacity', '0.55');
-                bgRect.setAttribute('stroke', GM_UI.border);
+                bgRect.setAttribute('stroke', GM_UI.muted);
                 bgRect.setAttribute('stroke-width', '1.5');
+                bgRect.setAttribute('stroke-dasharray', '7,5');
                 bgRect.setAttribute('rx', '14');
                 bgRect.setAttribute('opacity', '0.75');
                 overlayGroup.appendChild(bgRect);
@@ -1288,13 +1289,33 @@ class GameMode {
             shape.setAttribute('transform', `rotate(45 ${center} ${center})`);
         }
 
-        // Highlight selected controller
+        // Button styling in the app design language: white card with slate
+        // border; selected = indigo tint + saturated indigo border (matches
+        // the selection language used across the app, replacing the old gold)
         const isSelected = this.selectedCase === config.caseType;
-        shape.setAttribute('fill', isSelected ? 'rgba(255, 215, 0, 0.9)' : config.color); // Gold when selected
-        shape.setAttribute('stroke', isSelected ? '#FFD700' : 'white');
-        shape.setAttribute('stroke-width', isSelected ? '6' : '4');
-        shape.setAttribute('filter', 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))');
+        shape.setAttribute('fill', isSelected ? '#eef2ff' : GM_UI.white);   // brand-50 tint when active
+        shape.setAttribute('stroke', isSelected ? GM_UI.indigo : GM_UI.muted);
+        shape.setAttribute('stroke-width', isSelected ? '5' : '3');
+        shape.setAttribute('stroke-linejoin', 'round');
+        shape.setAttribute('filter', 'url(#gm-shadow)');
         controllerGroup.appendChild(shape);
+
+        // Case label inside the shape (was passed in config but never drawn)
+        if (config.label) {
+            const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            label.setAttribute('x', center);
+            label.setAttribute('y', center + 1);
+            label.setAttribute('text-anchor', 'middle');
+            label.setAttribute('dominant-baseline', 'middle');
+            label.setAttribute('fill', isSelected ? GM_UI.indigo : GM_UI.secondary);
+            label.setAttribute('font-size', Math.round(config.size * 0.2));
+            label.setAttribute('font-weight', '700');
+            label.setAttribute('font-family', "'Inter', sans-serif");
+            label.setAttribute('letter-spacing', '1');
+            label.setAttribute('pointer-events', 'none');
+            label.textContent = config.label;
+            controllerGroup.appendChild(label);
+        }
 
         // Prevent text selection
         controllerGroup.style.userSelect = 'none';
@@ -1597,6 +1618,24 @@ class GameMode {
         filter.appendChild(shadow);
 
         defs.appendChild(filter);
+
+        // Gentle vertical gradient for the current-word pill (white → indigo-50)
+        const grad = document.createElementNS(svgNS, 'linearGradient');
+        grad.setAttribute('id', 'gm-pill-grad');
+        grad.setAttribute('x1', '0');
+        grad.setAttribute('y1', '0');
+        grad.setAttribute('x2', '0');
+        grad.setAttribute('y2', '1');
+        const stop1 = document.createElementNS(svgNS, 'stop');
+        stop1.setAttribute('offset', '0%');
+        stop1.setAttribute('stop-color', '#ffffff');
+        const stop2 = document.createElementNS(svgNS, 'stop');
+        stop2.setAttribute('offset', '100%');
+        stop2.setAttribute('stop-color', '#eef2ff'); // mirrors CSS token --brand-50
+        grad.appendChild(stop1);
+        grad.appendChild(stop2);
+        defs.appendChild(grad);
+
         this.gameGroup.appendChild(defs);
     }
 
