@@ -1349,6 +1349,7 @@ class GameMode {
             } else {
                 // Select this case
                 this.selectedCase = config.caseType;
+                if (typeof gameSounds !== 'undefined') gameSounds.select();
             }
 
             // Redraw to show selection state
@@ -1465,6 +1466,7 @@ class GameMode {
             this.showFeedback(feedbackSymbol, feedbackX, feedbackY, true, feedbackColor);
 
             // Confetti burst + floating points + score count-up (all self-cleaning)
+            if (typeof gameSounds !== 'undefined') gameSounds.correct(this.displayStreak);
             this.spawnConfetti(feedbackX, feedbackY, 8, 90);
             if (!feedbackSymbol.startsWith('+')) {
                 // Timer mode already floats "+N" as the feedback symbol itself
@@ -1500,6 +1502,7 @@ class GameMode {
             // Visual only: reset streak display and shake the word pill
             this.displayStreak = 0;
             this.wrongShakeUntil = Date.now() + 350;
+            if (typeof gameSounds !== 'undefined') gameSounds.wrong();
 
             // Show cross feedback (no score penalty, but don't advance)
             this.showFeedback('✗', feedbackX, feedbackY, false);
@@ -2137,6 +2140,7 @@ class GameMode {
 
                     // Restyled celebration screen (replaces the old alert;
                     // same flow: game already stopped, grid view shown behind)
+                    if (typeof gameSounds !== 'undefined') gameSounds.gameComplete();
                     this.showFinalCelebration(finalScore);
                 }
             }, 1000);
@@ -2148,6 +2152,7 @@ class GameMode {
             }
 
             // Sentence-complete celebration: bigger confetti burst across the grid
+            if (typeof gameSounds !== 'undefined') gameSounds.sentenceComplete();
             const cw = this.gridViewModel.cellWidth;
             const ch = this.gridViewModel.cellHeight;
             const gridCenterX = this.getGridStartX() + cw * 1.5;

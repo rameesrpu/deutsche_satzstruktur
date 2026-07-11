@@ -184,6 +184,15 @@ class DeutschApp {
             });
         }
 
+        const soundToggle = document.getElementById('sound-toggle');
+        if (soundToggle && typeof gameSounds !== 'undefined') {
+            soundToggle.checked = gameSounds.enabled;
+            soundToggle.addEventListener('change', () => {
+                gameSounds.setEnabled(soundToggle.checked);
+                if (soundToggle.checked) gameSounds.select(); // audible confirmation
+            });
+        }
+
         const multiCategoryToggle = document.getElementById('multi-category-toggle');
         const multiCategoryLevels = document.getElementById('multi-category-levels');
         const multiCategoryA1 = document.getElementById('multi-category-a1');
