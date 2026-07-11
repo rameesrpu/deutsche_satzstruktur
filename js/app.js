@@ -70,6 +70,7 @@ class DeutschApp {
         this.setupResizeListener();
         this.setupZoomControls();
         this.setupSidebarTabs();
+        this.setupKeyboardShortcuts();
         this.loadSentences();
         this.levelSelector.init();
         this.redrawAll();
@@ -101,6 +102,42 @@ class DeutschApp {
         ['properties-panel', 'settings-panel'].forEach(id => {
             const panel = document.getElementById(id);
             if (panel) panel.classList.toggle('sidebar-active', id === panelId);
+        });
+    }
+
+    /**
+     * Keyboard shortcuts. Enter advances the game's continue states:
+     * - game view, sentence complete → go to the Felder review
+     * - Felder review → next sentence (same as the "Next sentence" button)
+     * Ignored while typing in inputs or when a button has focus (the button
+     * already handles Enter natively — avoids double-advancing).
+     */
+    setupKeyboardShortcuts() {
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Enter' || e.isComposing) return;
+            const tag = e.target.tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' ||
+                tag === 'BUTTON' || e.target.isContentEditable) return;
+            if (!this.gameMode || !this.gameMode.waitingForContinue) return;
+
+            if (this.currentView === 'game' && this.gameMode.isActive && !this.gameMode.isPaused) {
+                e.preventDefault();
+                if (this.gameMode.pendingFelderReview) {
+                    // Mirror of the game-view tap: show the Felder review
+                    this.gameMode.pendingFelderReview = false;
+                    this.gameMode.pause();
+                    this.currentView = 'felder';
+                    this.redrawAll();
+                } else {
+                    this.gameMode.loadRandomSentenceAndContinue();
+                }
+            } else if (this.currentView === 'felder' && this.gameMode.isPaused) {
+                // Mirror of the "Next sentence" button
+                e.preventDefault();
+                this.gameMode.resume();
+                this.currentView = 'game';
+                this.gameMode.loadRandomSentenceAndContinue();
+            }
         });
     }
 
@@ -1035,34 +1072,25 @@ class DeutschApp {
                 (e, word) => this.uiController.handleDragStart(e, word)
             );
 
-            // If game paused for felder review, overlay a tap-to-continue prompt
+            // If game paused for felder review, show a "Next sentence" button
+            // at the bottom. No full-screen overlay: the canvas stays fully
+            // interactive so words can be selected and corrected before
+            // continuing. (Button removed by the next redraw when the review
+            // state ends.)
             if (this.gameMode && this.gameMode.isPaused && this.gameMode.waitingForContinue) {
-                const overlay = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                overlay.setAttribute('x', 0);
-                overlay.setAttribute('y', 0);
-                overlay.setAttribute('width', '100%');
-                overlay.setAttribute('height', '100%');
-                overlay.setAttribute('fill', 'transparent');
-                overlay.setAttribute('cursor', 'pointer');
-                const handleTap = (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.gameMode.resume();
-                    this.currentView = 'game';
-                    this.gameMode.loadRandomSentenceAndContinue();
-                };
-                overlay.addEventListener('click', handleTap);
-                overlay.addEventListener('touchend', handleTap);
-                this.svg.appendChild(overlay);
-
-                // Bottom hint pill (HTML overlay on the canvas container;
-                // styled by .gm-felder-hint, removed on the next redraw
-                // once the review state ends)
                 if (!document.getElementById('gm-felder-hint')) {
-                    const hint = document.createElement('div');
+                    const hint = document.createElement('button');
+                    hint.type = 'button';
                     hint.id = 'gm-felder-hint';
                     hint.className = 'gm-felder-hint';
-                    hint.textContent = 'Tap anywhere for the next sentence →';
+                    hint.textContent = 'Next sentence →';
+                    hint.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.gameMode.resume();
+                        this.currentView = 'game';
+                        this.gameMode.loadRandomSentenceAndContinue();
+                    });
                     const container = document.querySelector('.canvas-container');
                     if (container) container.appendChild(hint);
                 }
