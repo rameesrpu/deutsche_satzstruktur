@@ -109,23 +109,58 @@ class GridViewModel {
     }
 
     createArrowMarker(group) {
-        // Create a marker definition for arrowheads - 7x7 for mobile readability
+        // Delegates to the shared, guarded 'gv-' defs (kept for API compatibility)
+        this.ensureGvDefs();
+    }
+
+    /**
+     * Ensure shared grid-view <defs> exist on the SVG (arrowhead marker + drop shadow).
+     * Guarded against duplicates since the SVG canvas is shared across views;
+     * ids are prefixed 'gv-' so other views' defs ('tok-'/'fm-'/'gm-') are untouched.
+     * Colors are hard-coded hex mirroring the CSS design tokens (var(--x) is
+     * unreliable in SVG presentation attributes).
+     */
+    ensureGvDefs() {
+        if (this.svg.querySelector('#gv-defs')) return;
+
         const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        defs.setAttribute('id', 'gv-defs');
+
+        // Sleek arrowhead marker — narrow triangle, same slate as the arrow lines
         const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
-        marker.setAttribute('id', 'arrowhead');
-        marker.setAttribute('markerWidth', '7');
+        marker.setAttribute('id', 'gv-arrowhead');
+        marker.setAttribute('markerWidth', '9');
         marker.setAttribute('markerHeight', '7');
-        marker.setAttribute('refX', '6.5'); // Adjusted for 7x7 size
-        marker.setAttribute('refY', '3.5'); // Center of 7x7 arrow
+        marker.setAttribute('refX', '8');
+        marker.setAttribute('refY', '3.5');
         marker.setAttribute('orient', 'auto');
 
         const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-        polygon.setAttribute('points', '0 0, 7 3.5, 0 7'); // True 7x7 arrow
-        polygon.setAttribute('fill', '#2c3e50');
+        polygon.setAttribute('points', '0 0.5, 9 3.5, 0 6.5, 2 3.5'); // Narrow swallow-tail triangle
+        polygon.setAttribute('fill', '#94a3b8'); // slate-400 (mirrors CSS design tokens)
 
         marker.appendChild(polygon);
         defs.appendChild(marker);
-        group.appendChild(defs);
+
+        // Soft drop shadow shared by all grid-view boxes/shapes
+        const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
+        filter.setAttribute('id', 'gv-shadow');
+        filter.setAttribute('x', '-20%');
+        filter.setAttribute('y', '-20%');
+        filter.setAttribute('width', '140%');
+        filter.setAttribute('height', '140%');
+
+        const shadow = document.createElementNS('http://www.w3.org/2000/svg', 'feDropShadow');
+        shadow.setAttribute('dx', '0');
+        shadow.setAttribute('dy', '1.5');
+        shadow.setAttribute('stdDeviation', '2');
+        shadow.setAttribute('flood-color', '#0f172a'); // text/ink token
+        shadow.setAttribute('flood-opacity', '0.18');
+
+        filter.appendChild(shadow);
+        defs.appendChild(filter);
+
+        this.svg.appendChild(defs);
     }
 
     drawGridCells(group, startX, startY) {
@@ -148,16 +183,20 @@ class GridViewModel {
             const x = startX + (cell.col - 1) * this.cellWidth;
             const y = startY + (cell.row - 1) * this.cellHeight;
 
-            // Draw cell background
+            // Draw cell background — very low alpha tint of the semantic color,
+            // rounded corners and a soft same-hue border for a clean tile look
             const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             rect.setAttribute('x', x);
             rect.setAttribute('y', y);
             rect.setAttribute('width', this.cellWidth);
             rect.setAttribute('height', this.cellHeight);
+            rect.setAttribute('rx', '12');
+            rect.setAttribute('ry', '12');
             rect.setAttribute('fill', cell.color);
-            rect.setAttribute('stroke', '#555');
+            rect.setAttribute('fill-opacity', '0.08');
+            rect.setAttribute('stroke', cell.color);
+            rect.setAttribute('stroke-opacity', '0.3');
             rect.setAttribute('stroke-width', this.currentConfig.cellStrokeWidth);
-            rect.setAttribute('opacity', 0.4);
             rect.setAttribute('pointer-events', 'none');
             group.appendChild(rect);
 
@@ -512,30 +551,46 @@ class GridViewModel {
             }
         }
 
+        // Ensure shared 'gv-' defs exist (this method is also called directly by gamemode.js)
+        this.ensureGvDefs();
+
         // Create box based on case
         const box = this.createCaseBox(caseType, centerX, centerY, boxColor);
         if (box) {
+            // Opaque white base under the tinted box so the low-alpha fill reads
+            // cleanly over cell tints, and carries the soft drop shadow
+            const base = box.cloneNode(false);
+            base.setAttribute('fill', '#ffffff');
+            base.setAttribute('fill-opacity', '1');
+            base.setAttribute('stroke', 'none');
+            base.setAttribute('filter', 'url(#gv-shadow)');
+            group.appendChild(base);
             group.appendChild(box);
         }
 
-        // Text with white stroke outline (matching Feldermodell style)
+        // German word text — Nunito, dark ink, subtle white halo for crispness
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', centerX);
         const yOffset = this.isMobile ? 12 : 7; // Adjust y offset based on font size
         text.setAttribute('y', centerY + yOffset);
         text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('fill', '#2c3e50');
+        text.setAttribute('fill', '#0f172a'); // ink token
         text.setAttribute('stroke', 'white');
         text.setAttribute('stroke-width', this.currentConfig.strokeWidth);
+        text.setAttribute('stroke-linejoin', 'round');
         text.setAttribute('paint-order', 'stroke');
+        text.setAttribute('font-family', "'Nunito', 'Inter', sans-serif");
         text.setAttribute('font-size', this.currentConfig.fontSize);
-        text.setAttribute('font-weight', 'bold');
+        text.setAttribute('font-weight', '700');
         text.setAttribute('pointer-events', 'none');
         text.textContent = phraseText;
         group.appendChild(text);
     }
 
     drawArrow(group, fromBox, toBox, connectionWords, wordManager) {
+        // Ensure shared 'gv-' defs exist (this method is also called directly by gamemode.js)
+        this.ensureGvDefs();
+
         const fromX = fromBox.centerX;
         const fromY = fromBox.centerY;
         const toX = toBox.centerX;
@@ -625,10 +680,11 @@ class GridViewModel {
         // Draw arrow path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', pathD);
-        path.setAttribute('stroke', '#2c3e50');
+        path.setAttribute('stroke', '#94a3b8'); // slate-400 (mirrors CSS design tokens)
         path.setAttribute('stroke-width', this.currentConfig.arrowWidth);
+        path.setAttribute('stroke-linecap', 'round');
         path.setAttribute('fill', 'none');
-        path.setAttribute('marker-end', 'url(#arrowhead)');
+        path.setAttribute('marker-end', 'url(#gv-arrowhead)');
         path.setAttribute('pointer-events', 'none');
         group.appendChild(path);
 
@@ -651,6 +707,9 @@ class GridViewModel {
     }
 
     drawIncomingArrow(group, firstBox, leadingWords, startX, wordManager) {
+        // Ensure shared 'gv-' defs exist (this method is also called directly by gamemode.js)
+        this.ensureGvDefs();
+
         const boxWidth = this.currentConfig.boxWidth;
 
         // Arrow comes from the left edge
@@ -670,10 +729,11 @@ class GridViewModel {
         // Draw curved arrow path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', pathD);
-        path.setAttribute('stroke', '#2c3e50');
+        path.setAttribute('stroke', '#94a3b8'); // slate-400 (mirrors CSS design tokens)
         path.setAttribute('stroke-width', this.currentConfig.arrowWidth);
+        path.setAttribute('stroke-linecap', 'round');
         path.setAttribute('fill', 'none');
-        path.setAttribute('marker-end', 'url(#arrowhead)');
+        path.setAttribute('marker-end', 'url(#gv-arrowhead)');
         path.setAttribute('pointer-events', 'none');
         group.appendChild(path);
 
@@ -695,6 +755,9 @@ class GridViewModel {
     }
 
     drawOutgoingArrow(group, lastBox, trailingWords, startX, wordManager) {
+        // Ensure shared 'gv-' defs exist (this method is also called directly by gamemode.js)
+        this.ensureGvDefs();
+
         const boxWidth = this.currentConfig.boxWidth;
 
         // Arrow goes to the right edge
@@ -714,10 +777,11 @@ class GridViewModel {
         // Draw curved arrow path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', pathD);
-        path.setAttribute('stroke', '#2c3e50');
+        path.setAttribute('stroke', '#94a3b8'); // slate-400 (mirrors CSS design tokens)
         path.setAttribute('stroke-width', this.currentConfig.arrowWidth);
+        path.setAttribute('stroke-linecap', 'round');
         path.setAttribute('fill', 'none');
-        path.setAttribute('marker-end', 'url(#arrowhead)');
+        path.setAttribute('marker-end', 'url(#gv-arrowhead)');
         path.setAttribute('pointer-events', 'none');
         group.appendChild(path);
 
@@ -823,25 +887,39 @@ class GridViewModel {
             shape.setAttribute('r', halfSize);
         }
 
-        // Apply styling to shape
+        // Opaque white base under the tinted shape so the label reads cleanly
+        // over the arrow line, and carries the soft drop shadow
+        const base = shape.cloneNode(false);
+        base.setAttribute('fill', '#ffffff');
+        base.setAttribute('stroke', 'none');
+        base.setAttribute('filter', 'url(#gv-shadow)');
+        base.setAttribute('pointer-events', 'none');
+        wordGroup.appendChild(base);
+
+        // Tinted rendering: low-alpha fill + saturated same-color border.
+        // Shape semantics (word type / preposition case) are unchanged.
         shape.setAttribute('fill', fillColor);
-        shape.setAttribute('stroke', '#2c3e50');
+        shape.setAttribute('fill-opacity', '0.14');
+        shape.setAttribute('stroke', fillColor);
         shape.setAttribute('stroke-width', this.currentConfig.arrowWidth);
+        shape.setAttribute('stroke-linejoin', 'round');
         shape.setAttribute('pointer-events', 'none');
         wordGroup.appendChild(shape);
 
-        // Add text on top of shape
+        // German word text — Nunito, dark ink, subtle white halo for crispness
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', halfSize);
         const yOffset = this.isMobile ? 12 : 7; // Adjust y offset based on font size
         text.setAttribute('y', halfSize + yOffset);
         text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('fill', '#2c3e50');
+        text.setAttribute('fill', '#0f172a'); // ink token
         text.setAttribute('stroke', 'white');
         text.setAttribute('stroke-width', this.currentConfig.strokeWidth);
+        text.setAttribute('stroke-linejoin', 'round');
         text.setAttribute('paint-order', 'stroke');
+        text.setAttribute('font-family', "'Nunito', 'Inter', sans-serif");
         text.setAttribute('font-size', this.currentConfig.fontSize);
-        text.setAttribute('font-weight', 'bold');
+        text.setAttribute('font-weight', '700');
         text.setAttribute('pointer-events', 'none');
         text.textContent = word.text;
         wordGroup.appendChild(text);
@@ -897,9 +975,19 @@ class GridViewModel {
             shape.setAttribute('ry', '10');
         }
 
-        shape.setAttribute('fill', fillColor);
-        shape.setAttribute('stroke', '#2c3e50');
+        // Tinted rendering: low-alpha fill of the semantic color + saturated border.
+        // Case is still encoded by SHAPE; color encoding stays via the border/tint.
+        if (fillColor === 'rgba(255, 255, 255, 0.9)') {
+            // No semantic color found — plain white box with a neutral slate border
+            shape.setAttribute('fill', '#ffffff');
+            shape.setAttribute('stroke', '#94a3b8'); // slate-400 (mirrors CSS design tokens)
+        } else {
+            shape.setAttribute('fill', fillColor);
+            shape.setAttribute('fill-opacity', '0.13');
+            shape.setAttribute('stroke', fillColor);
+        }
         shape.setAttribute('stroke-width', this.currentConfig.boxStrokeWidth);
+        shape.setAttribute('stroke-linejoin', 'round');
         shape.setAttribute('pointer-events', 'none');
 
         return shape;

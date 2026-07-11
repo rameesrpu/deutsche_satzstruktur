@@ -69,6 +69,7 @@ class DeutschApp {
         this.setupGameMode();
         this.setupResizeListener();
         this.setupZoomControls();
+        this.setupSidebarTabs();
         this.loadSentences();
         this.levelSelector.init();
         this.redrawAll();
@@ -80,6 +81,27 @@ class DeutschApp {
      */
     getCurrentViewState() {
         return this.viewState[this.currentView];
+    }
+
+    /**
+     * Desktop right-sidebar tabs (Properties | Settings).
+     * On mobile the sidebar dissolves (display: contents) and the existing
+     * toggle tabs drive the panels, so these classes have no effect there.
+     */
+    setupSidebarTabs() {
+        document.querySelectorAll('.sidebar-tab').forEach(tab => {
+            tab.addEventListener('click', () => this.showSidebarTab(tab.dataset.panel));
+        });
+    }
+
+    showSidebarTab(panelId) {
+        document.querySelectorAll('.sidebar-tab').forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.panel === panelId);
+        });
+        ['properties-panel', 'settings-panel'].forEach(id => {
+            const panel = document.getElementById(id);
+            if (panel) panel.classList.toggle('sidebar-active', id === panelId);
+        });
     }
 
     /**
@@ -893,6 +915,15 @@ class DeutschApp {
      * Redraw all elements on the canvas
      */
     redrawAll() {
+        // Sidebar tab follows word selection: switch back to Settings when
+        // the selection is cleared (deselect click, delete, clear). Only the
+        // transition is handled so manual tab clicks aren't overridden.
+        const selectedNow = this.wordManager.selectedWord;
+        if (this.lastSelectedWord && !selectedNow) {
+            this.showSidebarTab('settings-panel');
+        }
+        this.lastSelectedWord = selectedNow;
+
         // Clear SVG
         this.svg.innerHTML = '';
 
@@ -959,6 +990,12 @@ class DeutschApp {
             }
         }
 
+        // Remove the felder-review hint pill when not in the review state
+        const felderHintEl = document.getElementById('gm-felder-hint');
+        const inFelderReview = this.currentView === 'felder' &&
+            this.gameMode && this.gameMode.isPaused && this.gameMode.waitingForContinue;
+        if (felderHintEl && !inFelderReview) felderHintEl.remove();
+
         // Draw view based on current view state
         if (this.currentView === 'felder') {
             // Draw Feldermodell zones (both Hauptsatz and Nebensatz)
@@ -967,9 +1004,12 @@ class DeutschApp {
             // Draw connections
             this.renderer.drawConnections();
 
-            // Draw words
+            // Draw words (clicking a word focuses the Properties tab on desktop)
             this.renderer.drawAllWords(
-                (word) => this.uiController.handleWordClick(word),
+                (word) => {
+                    this.uiController.handleWordClick(word);
+                    this.showSidebarTab('properties-panel');
+                },
                 (e, word) => this.uiController.handleDragStart(e, word)
             );
 
@@ -993,17 +1033,17 @@ class DeutschApp {
                 overlay.addEventListener('touchend', handleTap);
                 this.svg.appendChild(overlay);
 
-                // "Tap to continue" hint at the bottom
-                const hint = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                hint.setAttribute('x', '50%');
-                hint.setAttribute('y', '96%');
-                hint.setAttribute('text-anchor', 'middle');
-                hint.setAttribute('fill', '#27ae60');
-                hint.setAttribute('font-size', '22');
-                hint.setAttribute('font-weight', 'bold');
-                hint.setAttribute('pointer-events', 'none');
-                hint.textContent = 'Tap anywhere to continue →';
-                this.svg.appendChild(hint);
+                // Bottom hint pill (HTML overlay on the canvas container;
+                // styled by .gm-felder-hint, removed on the next redraw
+                // once the review state ends)
+                if (!document.getElementById('gm-felder-hint')) {
+                    const hint = document.createElement('div');
+                    hint.id = 'gm-felder-hint';
+                    hint.className = 'gm-felder-hint';
+                    hint.textContent = 'Tap anywhere for the next sentence →';
+                    const container = document.querySelector('.canvas-container');
+                    if (container) container.appendChild(hint);
+                }
             }
         } else if (this.currentView === 'grid') {
             // Draw Grid view

@@ -8,6 +8,22 @@ class FeldermodellRenderer {
     }
 
     /**
+     * Style a zone label as a modern uppercase eyebrow chip.
+     * Inline styles are used so the shared .feldermodell-label CSS class
+     * cannot override the design-system typography.
+     * Colors are hard-coded hex mirroring the CSS design tokens
+     * (#64748b = secondary text) since var(--x) is unreliable in SVG.
+     */
+    styleZoneLabel(text, fontSize = 10) {
+        text.setAttribute('class', 'feldermodell-label');
+        text.setAttribute('fill', '#64748b'); // mirrors CSS design token: secondary text
+        text.setAttribute('pointer-events', 'none');
+        text.setAttribute('style',
+            `font-family: 'Inter', sans-serif; font-size: ${fontSize}px; font-weight: 600; ` +
+            `letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.9;`);
+    }
+
+    /**
      * Draw all Feldermodell zones
      */
     draw(wordManager) {
@@ -169,13 +185,15 @@ class FeldermodellRenderer {
             };
         }
 
-        // Define zones with calculated boundaries
+        // Define zones with calculated boundaries.
+        // Fills are very-low-alpha indigo/slate tints (mirroring CSS design
+        // tokens #4f46e5 indigo and #64748b slate) so word colors still pop.
         const zones = [
-            { label: 'Vorfeld', x: boundaries.vorfeld.start, width: boundaries.vorfeld.end - boundaries.vorfeld.start, color: '#fff3cd' },
-            { label: 'LK', x: boundaries.linkeKlammer.start, width: boundaries.linkeKlammer.end - boundaries.linkeKlammer.start, color: '#f8d7da' },
-            { label: 'Mittelfeld', x: boundaries.mittelfeld.start, width: boundaries.mittelfeld.end - boundaries.mittelfeld.start, color: '#d1ecf1' },
-            { label: 'RK', x: boundaries.rechteKlammer.start, width: boundaries.rechteKlammer.end - boundaries.rechteKlammer.start, color: '#f8d7da' },
-            { label: 'Nachfeld', x: boundaries.nachfeld.start, width: boundaries.nachfeld.end - boundaries.nachfeld.start, color: '#d4edda' }
+            { label: 'Vorfeld', x: boundaries.vorfeld.start, width: boundaries.vorfeld.end - boundaries.vorfeld.start, color: 'rgba(99, 102, 241, 0.05)' },
+            { label: 'LK', x: boundaries.linkeKlammer.start, width: boundaries.linkeKlammer.end - boundaries.linkeKlammer.start, color: 'rgba(79, 70, 229, 0.06)' },
+            { label: 'Mittelfeld', x: boundaries.mittelfeld.start, width: boundaries.mittelfeld.end - boundaries.mittelfeld.start, color: 'rgba(100, 116, 139, 0.05)' },
+            { label: 'RK', x: boundaries.rechteKlammer.start, width: boundaries.rechteKlammer.end - boundaries.rechteKlammer.start, color: 'rgba(79, 70, 229, 0.06)' },
+            { label: 'Nachfeld', x: boundaries.nachfeld.start, width: boundaries.nachfeld.end - boundaries.nachfeld.start, color: 'rgba(99, 102, 241, 0.05)' }
         ];
 
         // Use provided y position or first word's y position for hauptsatz
@@ -186,25 +204,25 @@ class FeldermodellRenderer {
         zones.forEach(zone => {
             if (zone.width <= 0) return; // Skip zones with no width
 
-            // Draw zone rectangle
+            // Draw zone rectangle (soft tint, rounded corners, subtle border)
             const rect = document.createElementNS(this.svgNS, 'rect');
             rect.setAttribute('x', zone.x);
             rect.setAttribute('y', yStart);
             rect.setAttribute('width', zone.width);
             rect.setAttribute('height', height);
+            rect.setAttribute('rx', '10');
             rect.setAttribute('fill', zone.color);
-            rect.setAttribute('opacity', '0.25');
+            rect.setAttribute('stroke', '#e2e8f0'); // mirrors CSS design token: border
+            rect.setAttribute('stroke-width', '1');
             rect.setAttribute('pointer-events', 'none'); // Don't block clicks
             this.svg.appendChild(rect);
 
-            // Draw zone label
+            // Draw zone label (uppercase eyebrow chip style)
             const text = document.createElementNS(this.svgNS, 'text');
             text.setAttribute('x', zone.x + zone.width / 2);
             text.setAttribute('y', yStart + 20);
             text.setAttribute('text-anchor', 'middle');
-            text.setAttribute('class', 'feldermodell-label');
-            text.setAttribute('fill', '#333');
-            text.setAttribute('pointer-events', 'none'); // Don't block clicks
+            this.styleZoneLabel(text, 10);
             text.textContent = zone.label;
             this.svg.appendChild(text);
         });
@@ -223,10 +241,11 @@ class FeldermodellRenderer {
             line.setAttribute('y1', yStart);
             line.setAttribute('x2', x);
             line.setAttribute('y2', yStart + height);
-            line.setAttribute('stroke', '#2c3e50');
-            line.setAttribute('stroke-width', '2');
-            line.setAttribute('stroke-dasharray', '5,5');
-            line.setAttribute('opacity', '0.6');
+            line.setAttribute('stroke', '#cbd5e1'); // mirrors CSS design token: border (darker step)
+            line.setAttribute('stroke-width', '1');
+            line.setAttribute('stroke-dasharray', '3,6');
+            line.setAttribute('stroke-linecap', 'round');
+            line.setAttribute('opacity', '0.9');
             line.setAttribute('pointer-events', 'none'); // Don't block clicks
             this.svg.appendChild(line);
         });
@@ -366,39 +385,37 @@ class FeldermodellRenderer {
                 }
             }
 
-            // Define zones with calculated boundaries
+            // Define zones with calculated boundaries.
+            // Low-alpha indigo/slate tints mirroring CSS design tokens
+            // (#4f46e5 indigo, #64748b slate) so word colors still pop.
             const zones = [
-                { label: 'Konj.', y: boundaries.konj.start, height: boundaries.konj.end - boundaries.konj.start, color: '#f8d7da' },
-                { label: 'Mittelfeld', y: boundaries.mittelfeld.start, height: boundaries.mittelfeld.end - boundaries.mittelfeld.start, color: '#d1ecf1' },
-                { label: 'Verben', y: boundaries.verben.start, height: boundaries.verben.end - boundaries.verben.start, color: '#f8d7da' }
+                { label: 'Konj.', y: boundaries.konj.start, height: boundaries.konj.end - boundaries.konj.start, color: 'rgba(79, 70, 229, 0.06)' },
+                { label: 'Mittelfeld', y: boundaries.mittelfeld.start, height: boundaries.mittelfeld.end - boundaries.mittelfeld.start, color: 'rgba(100, 116, 139, 0.05)' },
+                { label: 'Verben', y: boundaries.verben.start, height: boundaries.verben.end - boundaries.verben.start, color: 'rgba(79, 70, 229, 0.06)' }
             ];
 
             zones.forEach(zone => {
                 if (zone.height <= 0) return; // Skip zones with no height
 
-                // Draw zone rectangle
+                // Draw zone rectangle (soft tint, rounded corners, subtle border)
                 const rect = document.createElementNS(this.svgNS, 'rect');
                 rect.setAttribute('x', xStart);
                 rect.setAttribute('y', zone.y);
                 rect.setAttribute('width', width);
                 rect.setAttribute('height', zone.height);
+                rect.setAttribute('rx', '10');
                 rect.setAttribute('fill', zone.color);
-                rect.setAttribute('opacity', '0.25');
-                rect.setAttribute('stroke', '#95a5a6');
+                rect.setAttribute('stroke', '#e2e8f0'); // mirrors CSS design token: border
                 rect.setAttribute('stroke-width', '1');
-                rect.setAttribute('stroke-dasharray', '5,5');
                 rect.setAttribute('pointer-events', 'none'); // Don't block clicks
                 this.svg.appendChild(rect);
 
-                // Draw zone label
+                // Draw zone label (uppercase eyebrow chip style)
                 const text = document.createElementNS(this.svgNS, 'text');
                 text.setAttribute('x', xStart + width - 10);
                 text.setAttribute('y', zone.y + 15);
                 text.setAttribute('text-anchor', 'end');
-                text.setAttribute('class', 'feldermodell-label');
-                text.setAttribute('fill', '#555');
-                text.setAttribute('font-size', '10px');
-                text.setAttribute('pointer-events', 'none'); // Don't block clicks
+                this.styleZoneLabel(text, 9);
                 text.textContent = zone.label;
                 this.svg.appendChild(text);
             });
@@ -415,10 +432,11 @@ class FeldermodellRenderer {
                 line.setAttribute('y1', y);
                 line.setAttribute('x2', xStart + width);
                 line.setAttribute('y2', y);
-                line.setAttribute('stroke', '#2c3e50');
-                line.setAttribute('stroke-width', '2');
-                line.setAttribute('stroke-dasharray', '5,5');
-                line.setAttribute('opacity', '0.6');
+                line.setAttribute('stroke', '#cbd5e1'); // mirrors CSS design token: border (darker step)
+                line.setAttribute('stroke-width', '1');
+                line.setAttribute('stroke-dasharray', '3,6');
+                line.setAttribute('stroke-linecap', 'round');
+                line.setAttribute('opacity', '0.9');
                 line.setAttribute('pointer-events', 'none'); // Don't block clicks
                 this.svg.appendChild(line);
             });
@@ -431,26 +449,28 @@ class FeldermodellRenderer {
      * Draw "NEBENSATZ" label for a subordinate clause
      */
     drawNebensatzLabel(x, y, width = 150) {
-        // Background
+        // Background: rounded pill with a soft indigo tint
+        // (colors mirror CSS design token #4f46e5 indigo accent)
         const labelBg = document.createElementNS(this.svgNS, 'rect');
         labelBg.setAttribute('x', x);
         labelBg.setAttribute('y', y - 35);
         labelBg.setAttribute('width', width);
         labelBg.setAttribute('height', '20');
-        labelBg.setAttribute('fill', '#e74c3c');
-        labelBg.setAttribute('opacity', '0.8');
-        labelBg.setAttribute('rx', '3');
+        labelBg.setAttribute('fill', 'rgba(79, 70, 229, 0.08)');
+        labelBg.setAttribute('stroke', 'rgba(79, 70, 229, 0.2)');
+        labelBg.setAttribute('stroke-width', '1');
+        labelBg.setAttribute('rx', '10'); // half of height = full pill
         labelBg.setAttribute('pointer-events', 'none'); // Don't block clicks
         this.svg.appendChild(labelBg);
 
-        // Text
+        // Text: indigo eyebrow label
         const labelText = document.createElementNS(this.svgNS, 'text');
         labelText.setAttribute('x', x + width / 2);
-        labelText.setAttribute('y', y - 20);
+        labelText.setAttribute('y', y - 21);
         labelText.setAttribute('text-anchor', 'middle');
-        labelText.setAttribute('fill', 'white');
-        labelText.setAttribute('font-size', '11px');
-        labelText.setAttribute('font-weight', 'bold');
+        labelText.setAttribute('fill', '#4f46e5'); // mirrors CSS design token: indigo accent
+        labelText.setAttribute('style',
+            "font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.08em;");
         labelText.setAttribute('pointer-events', 'none'); // Don't block clicks
         labelText.textContent = 'NEBENSATZ';
         this.svg.appendChild(labelText);
