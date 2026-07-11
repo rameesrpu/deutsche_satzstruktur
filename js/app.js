@@ -940,7 +940,9 @@ class DeutschApp {
         if (this.currentView === 'grid' || this.currentView === 'game') {
             // Grid/Game view: Fixed content size with zoom and pan
             // Mobile needs more height for taller grid (160 + 1200 + 120 + 30 = 1510)
-            const gridWidth = 1250;
+            // Mobile width trimmed to the actual content extent (grid ends at
+            // x=1100 + margin) so the scene scales up larger on small screens
+            const gridWidth = isMobile ? 1170 : 1250;
             const gridHeight = isMobile ? 1550 : 950;
 
             // Apply zoom to viewBox dimensions

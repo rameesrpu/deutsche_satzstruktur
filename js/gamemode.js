@@ -785,9 +785,10 @@ class GameMode {
         overlayGroup.setAttribute('class', 'game-ui-overlay');
         this.gameGroup.appendChild(overlayGroup);
 
-        // Position word bar just above the grid (compact band to leave
-        // vertical room for grid + controllers on desktop screens)
-        const barHeight = 48;
+        // Position word bar just above the grid. Compact on desktop; much
+        // larger on mobile, where the viewBox down-scaling shrinks everything
+        const isMobile = window.innerWidth <= 768;
+        const barHeight = isMobile ? 84 : 48;
         const gridStartY = this.getGridStartY();
         const topY = Math.max(6, gridStartY - barHeight - 10); // 10px gap above grid
 
@@ -804,8 +805,10 @@ class GameMode {
         // #gm-score-text is updated in place by the score rAF loop between
         // full redraws.
         const scoreLabel = `${this.getDisplayedScore()}/${this.targetScore}`;
-        const scorePillW = Math.max(scoreLabel.length * 12 + 28, 100);
-        const scorePillH = 48;
+        const scoreFont = isMobile ? 30 : 18;
+        const scoreSubFont = isMobile ? 20 : 13;
+        const scorePillW = Math.max(scoreLabel.length * scoreFont * 0.67 + 28, isMobile ? 150 : 100);
+        const scorePillH = isMobile ? 76 : 48;
         const scorePillX = gridEndX - scorePillW;
         const scorePillY = topY + (barHeight - scorePillH) / 2;
 
@@ -825,10 +828,10 @@ class GameMode {
         const scoreText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         scoreText.setAttribute('id', 'gm-score-text');
         scoreText.setAttribute('x', gridEndX - 14);
-        scoreText.setAttribute('y', scorePillY + 21);
+        scoreText.setAttribute('y', scorePillY + (isMobile ? 33 : 21));
         scoreText.setAttribute('text-anchor', 'end');
         scoreText.setAttribute('fill', GM_UI.text);
-        scoreText.setAttribute('font-size', '18');
+        scoreText.setAttribute('font-size', scoreFont);
         scoreText.setAttribute('font-weight', 'bold');
         scoreText.setAttribute('font-family', "'Inter', sans-serif");
         scoreText.setAttribute('pointer-events', 'none');
@@ -838,10 +841,10 @@ class GameMode {
         // Current sentence score (below total score)
         const sentenceScoreText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         sentenceScoreText.setAttribute('x', gridEndX - 14);
-        sentenceScoreText.setAttribute('y', scorePillY + 40);
+        sentenceScoreText.setAttribute('y', scorePillY + (isMobile ? 62 : 40));
         sentenceScoreText.setAttribute('text-anchor', 'end');
         sentenceScoreText.setAttribute('fill', GM_UI.secondary);
-        sentenceScoreText.setAttribute('font-size', '13');
+        sentenceScoreText.setAttribute('font-size', scoreSubFont);
         sentenceScoreText.setAttribute('font-weight', 'normal');
         sentenceScoreText.setAttribute('font-family', "'Inter', sans-serif");
         sentenceScoreText.setAttribute('pointer-events', 'none');
@@ -852,8 +855,8 @@ class GameMode {
         // only, never feeds back into scoring)
         if (this.displayStreak >= 2) {
             const streakLabel = `🔥×${this.displayStreak}`;
-            const pillH = 28;
-            const pillW = streakLabel.length * 11 + 18;
+            const pillH = isMobile ? 44 : 28;
+            const pillW = streakLabel.length * (isMobile ? 18 : 11) + 18;
             const pillX = scorePillX - pillW - 10;
             const pillY = topY + barHeight / 2 - pillH / 2;
 
@@ -875,7 +878,7 @@ class GameMode {
             streakText.setAttribute('text-anchor', 'middle');
             streakText.setAttribute('dominant-baseline', 'middle');
             streakText.setAttribute('fill', '#c2410c'); // amber-700
-            streakText.setAttribute('font-size', '14');
+            streakText.setAttribute('font-size', isMobile ? 22 : 14);
             streakText.setAttribute('font-weight', 'bold');
             streakText.setAttribute('font-family', "'Inter', sans-serif");
             streakText.setAttribute('pointer-events', 'none');
@@ -894,9 +897,9 @@ class GameMode {
 
             if (activeItem.type === 'box') {
                 const phraseText = activeItem.item.words.map(w => w.text).join(' ');
-                currentWordBoxWidth = this.estimateTextWidth(phraseText, 28);
+                currentWordBoxWidth = this.estimateTextWidth(phraseText, isMobile ? 42 : 28);
             } else {
-                currentWordBoxWidth = this.estimateTextWidth(activeItem.item.text, 28);
+                currentWordBoxWidth = this.estimateTextWidth(activeItem.item.text, isMobile ? 42 : 28);
             }
         }
 
@@ -905,7 +908,7 @@ class GameMode {
 
         // Draw accumulated auto-placed words first (muted pills, left to right)
         if (visibleAutoWords.length > 0) {
-            const autoWordWidths = visibleAutoWords.map(word => this.estimateTextWidth(word, 24));
+            const autoWordWidths = visibleAutoWords.map(word => this.estimateTextWidth(word, isMobile ? 34 : 24));
 
             let currentX = gridStartX;
 
@@ -928,10 +931,10 @@ class GameMode {
 
                 const autoText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 autoText.setAttribute('x', centerX);
-                autoText.setAttribute('y', centerY + 8);
+                autoText.setAttribute('y', centerY + (isMobile ? 12 : 8));
                 autoText.setAttribute('text-anchor', 'middle');
                 autoText.setAttribute('fill', GM_UI.secondary);
-                autoText.setAttribute('font-size', '24');
+                autoText.setAttribute('font-size', isMobile ? 34 : 24);
                 autoText.setAttribute('font-weight', '600');
                 autoText.setAttribute('font-family', "'Nunito', sans-serif");
                 autoText.textContent = wordText;
@@ -982,10 +985,10 @@ class GameMode {
             // German word in Nunito 700 on the white pill
             const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             text.setAttribute('x', centerX);
-            text.setAttribute('y', centerY + 9);
+            text.setAttribute('y', centerY + (isMobile ? 15 : 9));
             text.setAttribute('text-anchor', 'middle');
             text.setAttribute('fill', GM_UI.text);
-            text.setAttribute('font-size', '28');
+            text.setAttribute('font-size', isMobile ? 42 : 28);
             text.setAttribute('font-weight', '700');
             text.setAttribute('font-family', "'Nunito', sans-serif");
             text.textContent = displayText;
@@ -1005,7 +1008,7 @@ class GameMode {
 
             if (nextWordText) {
                 let nextWordWidth;
-                nextWordWidth = this.estimateTextWidth(nextWordText, 24);
+                nextWordWidth = this.estimateTextWidth(nextWordText, isMobile ? 34 : 24);
 
                 const nextWordX = currentWordBoxLeft + wordWidth + 15; // 15px gap
                 const centerX = nextWordX + nextWordWidth / 2;
@@ -1030,10 +1033,10 @@ class GameMode {
                 // Text
                 const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 text.setAttribute('x', centerX);
-                text.setAttribute('y', centerY + 8);
+                text.setAttribute('y', centerY + (isMobile ? 12 : 8));
                 text.setAttribute('text-anchor', 'middle');
                 text.setAttribute('fill', GM_UI.muted);
-                text.setAttribute('font-size', '24');
+                text.setAttribute('font-size', isMobile ? 34 : 24);
                 text.setAttribute('font-weight', '600');
                 text.setAttribute('font-family', "'Nunito', sans-serif");
                 text.setAttribute('opacity', '0.85');
@@ -1051,11 +1054,13 @@ class GameMode {
             const hint = this.pendingFelderReview
                 ? 'Tap to review the structure'
                 : 'Tap for the next sentence';
+            const headFont = isMobile ? 40 : 26;
+            const hintFont = isMobile ? 20 : 14;
             const cardW = Math.max(
-                this.estimateTextWidth(headline, 26),
-                this.estimateTextWidth(hint, 14)
+                this.estimateTextWidth(headline, headFont),
+                this.estimateTextWidth(hint, hintFont)
             ) + 56;
-            const cardH = 56;
+            const cardH = isMobile ? 100 : 56;
             // Anchor the card just above the grid so it never covers tiles
             const cardY = Math.max(4, gridStartY - cardH - 6);
 
@@ -1084,10 +1089,10 @@ class GameMode {
 
             const completeText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             completeText.setAttribute('x', barCenterX);
-            completeText.setAttribute('y', cardY + 24);
+            completeText.setAttribute('y', cardY + (isMobile ? 44 : 24));
             completeText.setAttribute('text-anchor', 'middle');
             completeText.setAttribute('fill', '#059669'); // mirrors CSS token --success-600
-            completeText.setAttribute('font-size', '26');
+            completeText.setAttribute('font-size', headFont);
             completeText.setAttribute('font-weight', '700');
             completeText.setAttribute('font-family', "'Nunito', sans-serif");
             completeText.textContent = headline;
@@ -1095,10 +1100,10 @@ class GameMode {
 
             const hintText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             hintText.setAttribute('x', barCenterX);
-            hintText.setAttribute('y', cardY + 45);
+            hintText.setAttribute('y', cardY + (isMobile ? 82 : 45));
             hintText.setAttribute('text-anchor', 'middle');
             hintText.setAttribute('fill', GM_UI.secondary);
-            hintText.setAttribute('font-size', '14');
+            hintText.setAttribute('font-size', hintFont);
             hintText.setAttribute('font-weight', '500');
             hintText.setAttribute('font-family', "'Inter', sans-serif");
             hintText.setAttribute('class', 'gm-hint-pulse');
