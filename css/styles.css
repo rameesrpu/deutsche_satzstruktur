@@ -2363,7 +2363,16 @@ button:active {
         font-size: 13px;
     }
 
-    /* Floating canvas controls: keep clear of thumbs, slightly larger */
+    /* Floating canvas controls: bottom-right on mobile so they don't
+       overlap the grid/word bar at the top; horizontal row */
+    .view-toggle-container {
+        top: auto;
+        bottom: 12px;
+        right: 12px;
+        flex-direction: row;
+        align-items: center;
+    }
+
     .btn-view-toggle {
         width: 48px;
         height: 48px;

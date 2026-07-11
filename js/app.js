@@ -957,9 +957,19 @@ class DeutschApp {
 
             this.svg.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${zoomedWidth} ${zoomedHeight}`);
             this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-            // Remove width/height to allow responsive scaling on all devices
-            this.svg.removeAttribute('width');
-            this.svg.removeAttribute('height');
+            if (isMobile) {
+                // Mobile: remove width/height for responsive scaling
+                // (canvas container scrolls; taller mobile layout expects it)
+                this.svg.removeAttribute('width');
+                this.svg.removeAttribute('height');
+            } else {
+                // Desktop: pin the SVG to the container size so the whole
+                // grid/game scales to FIT (preserveAspectRatio meet) instead
+                // of deriving its height from the viewBox aspect ratio and
+                // overflowing the container (which hid the controllers)
+                this.svg.setAttribute('width', canvasSize.width);
+                this.svg.setAttribute('height', canvasSize.height);
+            }
         } else {
             // Felder view uses zoom and pan
             // Apply zoom to viewBox dimensions
