@@ -1877,6 +1877,7 @@ button:active {
     .container {
         height: auto;
         min-height: 100vh;
+        min-height: 100dvh; /* real phones: track the visible viewport as browser toolbars show/hide */
         position: relative;
         display: flex;
         flex-direction: column;
@@ -1913,6 +1914,8 @@ button:active {
         flex-wrap: wrap;
         min-height: auto;
         flex: 1; /* Grow to fill available space */
+        align-content: flex-start; /* pack rows to the top; no stretched gaps */
+        padding-bottom: env(safe-area-inset-bottom, 0px); /* gesture-bar phones */
     }
 
     /* Tab-style Toggle Buttons Container */
@@ -2030,6 +2033,7 @@ button:active {
         /* PANEL HEIGHT when open - increased for better sentence list visibility
          * This gives more space to the sentence list while keeping canvas visible */
         max-height: 55vh;
+        max-height: 55dvh;
         padding: 15px;
         overflow-y: auto; /* Allow scrolling to see export/import buttons below */
         position: relative;
@@ -2089,6 +2093,7 @@ button:active {
          * Adjust the vh value to control canvas size (e.g., 60vh, 70vh, 80vh)
          * Higher value = larger canvas, Lower value = smaller canvas */
         height: 90vh;
+        height: 90dvh;
         min-height: 400px;
         width: 100%;
         border-right: none;
@@ -2106,6 +2111,7 @@ button:active {
      * Example: 30vh = smaller canvas, 50vh = larger canvas */
     .main-content.panel-open .canvas-container {
         height: 58vh;
+        height: 58dvh;
         min-height: 300px;
     }
 
@@ -2412,12 +2418,14 @@ button:active {
     .canvas-container {
         /* PANELS CLOSED: Adjust vh percentage to control canvas size */
         height: 60vh;
+        height: 60dvh;
         min-height: 400px;
     }
 
     .main-content.panel-open .canvas-container {
         /* PANELS OPEN: Adjust 40vh to control canvas percentage */
         height: 40vh;
+        height: 40dvh;
         min-height: 300px;
     }
 
