@@ -6,6 +6,7 @@ import { SentenceManager } from './sentenceManager.js';
 import { FeldermodellRenderer } from './feldermodell.js';
 import { GridViewModel } from './gridview.js';
 import { GameMode } from './gamemode.js';
+import { progressStore } from './progressStore.js';
 import { Renderer } from './renderer.js';
 import { UIController } from './ui.js';
 
@@ -703,7 +704,7 @@ class DeutschApp {
         }
 
         try {
-            this.sentenceManager.exportSentences();
+            this.sentenceManager.exportSentences({ progress: progressStore.exportData() });
             alert(`Successfully exported ${this.sentenceManager.sentences.length} sentence${this.sentenceManager.sentences.length !== 1 ? 's' : ''}!`);
         } catch (error) {
             console.error('Export error:', error);
@@ -735,6 +736,7 @@ class DeutschApp {
         const result = await this.sentenceManager.importSentences(file, mode);
 
         if (result.success) {
+            if (result.progress) progressStore.importData(result.progress, mode);
             this.updateSentenceList();
             this.redrawAll();
             alert(result.message);

@@ -9,6 +9,7 @@ import { runGameRuleTests } from './gameRules.test.js';
 import { runLibrarySnapshot } from './snapshot.test.js';
 import { runIdTests } from './ids.test.js';
 import { runSentencePickerTests } from './sentencePicker.test.js';
+import { runProgressStoreTests } from './progressStore.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -23,6 +24,7 @@ runGridTests();
 runGameRuleTests();
 runIdTests();
 runSentencePickerTests();
+runProgressStoreTests();
 runLibrarySnapshot({ update });
 
 System.exit(summary() > 0 ? 1 : 0);

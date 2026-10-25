@@ -105,3 +105,29 @@
  * @property {number} attempts      new wrong-attempt count (0 after success)
  * @property {boolean} autoPlace    true once MAX_WRONG_ATTEMPTS is reached
  */
+
+/**
+ * Wrong placements, from progressStore.addMistake (one PlacementResult each).
+ * @typedef {Object} SentenceMistakes
+ * @property {Object<Case, number>} case  wrong case, counted by the expected case
+ * @property {number} cell          wrong grid cell
+ */
+
+/**
+ * Play history of one sentence (progressStore.js).
+ * @typedef {Object} SentenceProgress
+ * @property {number} plays
+ * @property {number} perfect       plays with no mistakes
+ * @property {number} perfectStreak consecutive perfect plays up to the last one
+ * @property {number} lastPlayed    ms timestamp
+ * @property {number} lastMistakes  mistake count of the last play
+ * @property {SentenceMistakes} mistakes  summed over all plays
+ */
+
+/**
+ * localStorage `gameProgress`; also the `progress` field of a sentence export.
+ * @typedef {Object} GameProgress
+ * @property {number} version       format version (1)
+ * @property {Object<string, SentenceProgress>} sentences  keyed by sentenceKey(): level/category/text
+ * @property {{bestScore: number, bestStreak: number, sentencesPlayed: number}} totals
+ */

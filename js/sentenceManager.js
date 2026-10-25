@@ -546,9 +546,10 @@ export class SentenceManager {
 
     /**
      * Export all sentences to a JSON file
+     * @param {Object} [extra]  extra top-level fields, e.g. { progress } (see progressStore.js)
      * @returns {void}
      */
-    exportSentences() {
+    exportSentences(extra = {}) {
         // Save current sentence before exporting
         if (this.currentSentenceId) {
             this.saveCurrentSentence();
@@ -559,7 +560,8 @@ export class SentenceManager {
             version: '1.0',
             exportDate: new Date().toISOString(),
             sentenceCount: this.sentences.length,
-            sentences: this.sentences
+            sentences: this.sentences,
+            ...extra
         };
 
         // Convert to JSON string
@@ -587,7 +589,7 @@ export class SentenceManager {
      * Import sentences from a JSON file
      * @param {File} file - The JSON file to import
      * @param {string} mode - Import mode: 'replace' or 'merge' (default: 'merge')
-     * @returns {Promise<{success: boolean, message: string, count?: number}>}
+     * @returns {Promise<{success: boolean, message: string, count?: number, progress?: ?GameProgress}>}
      */
     async importSentences(file, mode = 'merge') {
         try {
@@ -644,7 +646,8 @@ export class SentenceManager {
             return {
                 success: true,
                 message: `Successfully imported ${importedCount} sentence${importedCount !== 1 ? 's' : ''}`,
-                count: importedCount
+                count: importedCount,
+                progress: importData.progress || null
             };
 
         } catch (error) {

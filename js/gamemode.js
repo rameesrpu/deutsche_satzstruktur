@@ -1,6 +1,7 @@
 import { gameSounds } from './sound.js';
 import { pickNextSentence } from './sentencePicker.js';
 import { evaluatePlacement, getAutoPlacement, MAX_WRONG_ATTEMPTS } from './gameRules.js';
+import { progressStore, sentenceKey, emptyMistakes, addMistake } from './progressStore.js';
 
 /**
  * Game Mode - Interactive German sentence placement game
@@ -95,6 +96,10 @@ export class GameMode {
 
         // Attempt tracking (auto-place after MAX_WRONG_ATTEMPTS wrong attempts, see gameRules.js)
         this.currentWordAttempts = 0;
+
+        // Wrong placements in the current sentence, recorded to progressStore on completion
+        this.sentenceMistakes = emptyMistakes();
+        this.bestSessionStreak = 0;
 
         // Waiting for user to continue to next sentence
         this.waitingForContinue = false;
@@ -253,6 +258,7 @@ export class GameMode {
         this.feedbackAnimation = null;
         this.currentWordDisplay = null;
         this.currentWordAttempts = 0;
+        this.sentenceMistakes = emptyMistakes();
         this.waitingForContinue = false;
         this.pendingFelderReview = false;
 
@@ -312,6 +318,7 @@ export class GameMode {
         // Drop any paused/in-flight fill-in-the-blank audio
         if (typeof gameSounds !== 'undefined') gameSounds.cancelPrompt();
         this.totalScore = 0; // Reset score so the next start() is fresh
+        this.bestSessionStreak = 0;
         this.usedSentenceIds = new Set();
         this.stopTimerAnimation();
         this.wordStartTime = null;
@@ -1504,6 +1511,7 @@ export class GameMode {
             // --- Visual juice (display only, no effect on scoring/validation) ---
             this.displayStreak = this.suppressStreak ? 0 : this.displayStreak + 1;
             this.suppressStreak = false;
+            this.bestSessionStreak = Math.max(this.bestSessionStreak, this.displayStreak);
             this.scoreAnim = { from: this.totalScore - points, to: this.totalScore, start: Date.now() };
             if (currentItem.type === 'box') {
                 this.lastReveal = { boxIndex: currentItem.boxIndex, time: Date.now() };
@@ -1570,6 +1578,7 @@ export class GameMode {
             }
         } else {
             console.log('✗ Incorrect placement!', outcome.result);
+            addMistake(this.sentenceMistakes, outcome.result);
 
             // Visual only: reset streak display and shake the word pill
             this.displayStreak = 0;
@@ -2151,10 +2160,20 @@ export class GameMode {
     }
 
     /**
+     * Persist the finished sentence's mistakes and the session's score/streak bests.
+     */
+    recordProgress() {
+        const sentence = this.host.sentenceManager.getCurrentSentence();
+        if (sentence) progressStore.recordSentence(sentenceKey(sentence), this.sentenceMistakes);
+        progressStore.recordSession({ score: this.totalScore, streak: this.bestSessionStreak });
+    }
+
+    /**
      * Show game complete message
      */
     showGameComplete() {
         console.log('🎉 Sentence Complete! Sentence Score:', this.currentSentenceScore, 'Total Score:', this.totalScore);
+        this.recordProgress();
 
         // Check if player reached target score
         if (this.totalScore >= this.targetScore) {

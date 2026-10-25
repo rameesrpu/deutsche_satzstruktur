@@ -294,7 +294,7 @@ mobile.
 
 ## Phase 3 — Game-mode improvements
 
-### [ ] I1 Persist game progress across sessions
+### [x] I1 Persist game progress across sessions
 **Why**: score, streak and `usedSentenceIds` are in-memory only; nothing records what the learner
 gets wrong. Foundation for I2 and I4.
 
@@ -309,6 +309,14 @@ gets wrong. Foundation for I2 and I4.
 
 **Done when**: progress survives reload; tests pass.
 **Depends on**: R2, F1.
+
+> 2026-10-25 done (R6 skipped — optional, not painful yet). `js/progressStore.js`: `ProgressStore` (injectable
+> storage, all access try/caught, malformed data normalized) + app-wide `progressStore`. Per sentence:
+> `plays, perfect, perfectStreak, lastPlayed, lastMistakes, mistakes{case, cell}` (perfectStreak/lastMistakes
+> added for I4/I2); totals `bestScore, bestStreak, sentencesPlayed`. GameMode tallies each wrong
+> PlacementResult (`addMistake`) and records in `showGameComplete`; sentences with nothing to place aren't
+> recorded. Export adds a `progress` field; import merges (newest entry per sentence, max bests) or replaces
+> with the sentence mode. 7 tests; verified in headless Chrome: one wrong + correct play stored, survives reload.
 
 ### [ ] I2 "Review weak spots" mode
 **Steps**: add a picker mode in `sentencePicker.js` that weights sentences by recent mistakes and
