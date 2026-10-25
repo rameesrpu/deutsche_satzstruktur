@@ -7,6 +7,7 @@ import { test, summary } from './assert.js';
 import { runGridTests } from './grid.test.js';
 import { runGameRuleTests } from './gameRules.test.js';
 import { runLibrarySnapshot } from './snapshot.test.js';
+import { runIdTests } from './ids.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -17,6 +18,7 @@ for (const name of listDir('js').filter(n => n.endsWith('.js'))) {
 
 runGridTests();
 runGameRuleTests();
+runIdTests();
 runLibrarySnapshot({ update });
 
 System.exit(summary() > 0 ? 1 : 0);

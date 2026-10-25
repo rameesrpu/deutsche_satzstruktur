@@ -55,7 +55,7 @@ class WordManager {
         }
 
         const word = {
-            id: Date.now(),
+            id: nextId(),
             type: type,
             text: this.wordConfig[type].label,
             x: x,

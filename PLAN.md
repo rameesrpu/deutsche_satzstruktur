@@ -130,7 +130,7 @@ section at the end of styles.css); "don't touch `backend/` unless asked"; link t
 
 ## Phase 1 — Bug fixes
 
-### [ ] F1 Duplicate sentence/word IDs when the library bulk-loads
+### [x] F1 Duplicate sentence/word IDs when the library bulk-loads
 **Why**: likely causes wrong sentences to load and breaks "already played" tracking, especially in
 multi-category mode. Diagnosed from code reading; not yet reproduced in a browser.
 
@@ -155,6 +155,12 @@ match wins; game mode's `usedSentenceIds` is keyed by id.
 **Done when**: test passes; existing `localStorage` with duplicates is repaired on load; game mode
 still loads and plays sentences (screenshot check).
 **Depends on**: P0.2 (recommended, not strictly required).
+
+> 2026-10-25 done. Confirmed: bulk-loading all 31 categories back to back gave 782 sentences with only
+> 330 unique ids. New `js/ids.js` (`nextId()`, `reserveIdsAbove()`) replaces every `Date.now()` id
+> (incl. wordManager.addWord and import-merge, whose word ids also overlapped). `SentenceManager.load()`
+> and replace-import run `repairDuplicateIds()` (keeps first occurrence). Verified in headless Chrome
+> with a seeded duplicate-id localStorage: repaired, 782/5041 unique after full bulk load, game starts.
 
 ---
 

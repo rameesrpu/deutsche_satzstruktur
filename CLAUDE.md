@@ -8,6 +8,7 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 (`backend/`) is rarely used — **don't touch `backend/` unless asked.** Work items: [PLAN.md](PLAN.md).
 
 ## Files (`js/`, loaded by `<script>` tags at the bottom of index.html — order matters)
+- `ids.js` — `nextId()`: the one source of sentence/word ids (never use `Date.now()` as an id)
 - `sound.js` — SoundManager: Web Audio effects + German text-to-speech
 - `grammaticalConfig.js` — gender/number/pronoun properties and colors
 - `levelContent.js` — `LEVEL_CONTENT`: levels → categories → sentence-list files (`data/levels/`; pre-parsed twins in `data/library/`)

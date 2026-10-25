@@ -17,7 +17,7 @@ class SentenceManager {
         if (!text || text.trim() === '') return null;
 
         const sentence = {
-            id: Date.now(),
+            id: nextId(),
             text: text.trim(),
             words: [],
             createdAt: new Date().toISOString(),
@@ -31,7 +31,7 @@ class SentenceManager {
 
         wordTexts.forEach((wordText, index) => {
             const word = {
-                id: Date.now() + index,
+                id: nextId(),
                 type: 'other',  // Default type, user can change
                 text: wordText,
                 x: x,
@@ -134,7 +134,7 @@ class SentenceManager {
                     word = { ...matchedWord };
                     word.x = x; // Update position
                     word.y = y;
-                    word.id = Date.now() + index; // Give it a new ID
+                    word.id = nextId(); // Give it a new ID
                 } else {
                     // All instances of this word were already used, create new
                     word = this.createNewWord(wordText, x, y, index);
@@ -160,7 +160,7 @@ class SentenceManager {
      */
     createNewWord(text, x, y, index) {
         return {
-            id: Date.now() + index,
+            id: nextId(),
             type: 'other',
             text: text,
             x: x,
@@ -218,8 +218,6 @@ class SentenceManager {
         const storedVersion = localStorage.getItem(versionKey);
         const versionChanged = version && version !== storedVersion;
 
-        let idCounter = Date.now();
-
         (sentences || []).forEach(entry => {
             const text = typeof entry === 'string' ? entry : entry.text;
             const libraryWords = entry.words;
@@ -230,13 +228,13 @@ class SentenceManager {
 
             if (existing) {
                 if (versionChanged) {
-                    existing.words = libraryWords.map(w => ({ ...w, id: idCounter++ }));
+                    existing.words = libraryWords.map(w => ({ ...w, id: nextId() }));
                 }
             } else {
                 this.sentences.push({
-                    id: idCounter++,
+                    id: nextId(),
                     text: text.trim(),
-                    words: libraryWords.map(w => ({ ...w, id: idCounter++ })),
+                    words: libraryWords.map(w => ({ ...w, id: nextId() })),
                     createdAt: new Date().toISOString(),
                     source: 'library',
                     level,
@@ -285,6 +283,9 @@ class SentenceManager {
         const saved = localStorage.getItem('deutschSentences');
         if (saved) {
             this.sentences = JSON.parse(saved);
+            if (this.repairDuplicateIds() > 0) {
+                localStorage.setItem('deutschSentences', JSON.stringify(this.sentences));
+            }
         }
 
         const currentId = localStorage.getItem('deutschCurrentSentence');
@@ -294,6 +295,43 @@ class SentenceManager {
         }
 
         return this.sentences.length > 0;
+    }
+
+    /**
+     * Give unique ids to sentences/words that share an id with an earlier one
+     * (older versions bulk-loaded library categories with overlapping id ranges).
+     * Keeps the first occurrence, so currentSentenceId still resolves the same way.
+     * Idempotent. Returns the number of sentences changed.
+     */
+    repairDuplicateIds() {
+        const maxId = this.sentences
+            .flatMap(s => [s.id, ...(s.words || []).map(w => w.id)])
+            .reduce((max, id) => (Number.isFinite(id) && id > max ? id : max), 0);
+        reserveIdsAbove(maxId);
+
+        const seenSentenceIds = new Set();
+        const seenWordIds = new Set();
+        let changed = 0;
+
+        this.sentences.forEach(sentence => {
+            let touched = false;
+            if (seenSentenceIds.has(sentence.id)) {
+                sentence.id = nextId();
+                touched = true;
+            }
+            seenSentenceIds.add(sentence.id);
+
+            (sentence.words || []).forEach(word => {
+                if (seenWordIds.has(word.id)) {
+                    word.id = nextId();
+                    touched = true;
+                }
+                seenWordIds.add(word.id);
+            });
+            if (touched) changed++;
+        });
+
+        return changed;
     }
 
     /**
@@ -566,6 +604,7 @@ class SentenceManager {
             if (mode === 'replace') {
                 // Replace all existing sentences
                 this.sentences = importData.sentences;
+                this.repairDuplicateIds();
                 importedCount = this.sentences.length;
                 this.currentSentenceId = null;
                 this.wordManager.clearAll();
@@ -575,14 +614,14 @@ class SentenceManager {
                     // Generate new IDs to avoid conflicts
                     const newSentence = {
                         ...sentence,
-                        id: Date.now() + importedCount,
+                        id: nextId(),
                         createdAt: sentence.createdAt || new Date().toISOString()
                     };
 
                     // Update word IDs to avoid conflicts
                     newSentence.words = sentence.words.map((word, idx) => ({
                         ...word,
-                        id: Date.now() + importedCount + idx + 1000
+                        id: nextId()
                     }));
 
                     this.sentences.push(newSentence);
