@@ -1,3 +1,14 @@
+import { gameSounds } from './sound.js';
+import { LEVEL_CONTENT } from './levelContent.js';
+import { LevelSelector } from './levelSelector.js';
+import { WordManager } from './wordManager.js';
+import { SentenceManager } from './sentenceManager.js';
+import { FeldermodellRenderer } from './feldermodell.js';
+import { GridViewModel } from './gridview.js';
+import { GameMode } from './gamemode.js';
+import { Renderer } from './renderer.js';
+import { UIController } from './ui.js';
+
 /**
  * Main Application
  * Coordinates all components and handles application flow
@@ -41,9 +52,6 @@ class DeutschApp {
         this.sentenceManager = new SentenceManager(this.wordManager);
         this.feldermodellRenderer = new FeldermodellRenderer(this.svg);
         this.gridViewModel = new GridViewModel(this.svg);
-        this.gameMode = new GameMode(this.svg, this.wordManager, this.gridViewModel);
-        this.renderer = new Renderer(this.svg, this.wordManager);
-        this.uiController = new UIController(this.wordManager, () => this.redrawAll(), this.gridConfig);
         this.levelSelector = new LevelSelector(LEVEL_CONTENT, {
             onSelect:           (sel) => this.handleLibrarySelect(sel),
             getCachedSentence:  (level, category, text) => this.sentenceManager.findLibrarySentence(level, category, text),
@@ -53,6 +61,15 @@ class DeutschApp {
             getCurrentSentenceId: () => this.sentenceManager.currentSentenceId,
             onLibraryLoad:      (level, category, data) => this.handleLibraryLoad(level, category, data)
         });
+        this.gameMode = new GameMode(this.svg, this.wordManager, this.gridViewModel, {
+            sentenceManager:    this.sentenceManager,
+            levelSelector:      this.levelSelector,
+            redraw:             () => this.redrawAll(),
+            setView:            (view) => { this.currentView = view; },
+            updateSentenceList: () => this.updateSentenceList()
+        });
+        this.renderer = new Renderer(this.svg, this.wordManager);
+        this.uiController = new UIController(this.wordManager, () => this.redrawAll(), this.gridConfig);
 
         // View state: 'felder', 'grid', or 'game'
         this.currentView = 'felder';
@@ -1155,9 +1172,12 @@ class DeutschApp {
 }
 
 // Initialize app when DOM is ready
+let app = null;
+
 document.addEventListener('DOMContentLoaded', () => {
-    window.app = new DeutschApp();
-    window.app.init();
+    app = new DeutschApp();
+    window.app = app; // debug handle only — modules get their dependencies explicitly
+    app.init();
 
     // Setup mobile toggle functionality
     setupMobileToggles();
@@ -1201,9 +1221,7 @@ function setupMobileToggles() {
             }
 
             // Recalculate canvas size after panel state changes
-            if (window.app) {
-                window.app.redrawAll();
-            }
+            app.redrawAll();
         });
 
         toggleSettingsBtn.addEventListener('click', () => {
@@ -1230,9 +1248,7 @@ function setupMobileToggles() {
             }
 
             // Recalculate canvas size after panel state changes
-            if (window.app) {
-                window.app.redrawAll();
-            }
+            app.redrawAll();
         });
 
         togglePropertiesBtn.addEventListener('click', () => {
@@ -1248,7 +1264,7 @@ function setupMobileToggles() {
                 mainContent?.classList.remove('panel-open');
             } else {
                 // Check if a word is selected before opening
-                if (!window.app?.wordManager?.selectedWord) {
+                if (!app.wordManager.selectedWord) {
                     // No word selected - don't open the panel
                     return;
                 }
@@ -1265,9 +1281,7 @@ function setupMobileToggles() {
             }
 
             // Recalculate canvas size after panel state changes
-            if (window.app) {
-                window.app.redrawAll();
-            }
+            app.redrawAll();
         });
     }
 

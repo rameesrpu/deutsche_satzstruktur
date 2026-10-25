@@ -1,7 +1,9 @@
+import { GrammaticalConfig } from './grammaticalConfig.js';
+
 /**
  * Renderer - Handles SVG drawing of words and connections
  */
-class Renderer {
+export class Renderer {
     constructor(svgElement, wordManager) {
         this.svg = svgElement;
         this.wordManager = wordManager;

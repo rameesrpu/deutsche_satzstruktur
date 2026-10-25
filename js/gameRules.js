@@ -2,8 +2,8 @@
 // DOM, no window.app — the caller looks up the expected grid cell (via
 // GridViewModel.getWordPosition) and applies the returned state.
 
-const BASE_POINTS = 10;          // points for a correct placement outside time challenge
-const MAX_WRONG_ATTEMPTS = 3;    // wrong placements before the word is auto-placed
+export const BASE_POINTS = 10;          // points for a correct placement outside time challenge
+export const MAX_WRONG_ATTEMPTS = 3;    // wrong placements before the word is auto-placed
 
 /**
  * Check a placement of `word` at row/col with the selected case.
@@ -17,7 +17,7 @@ const MAX_WRONG_ATTEMPTS = 3;    // wrong placements before the word is auto-pla
  * @param {?GridCell} expectedCell  from getWordPosition(word); null = no cell
  * @returns {PlacementResult}
  */
-function validatePlacement(word, row, col, caseType, expectedCell) {
+export function validatePlacement(word, row, col, caseType, expectedCell) {
     const cellOk = !!expectedCell && expectedCell.row === row && expectedCell.col === col;
     const caseChecked = word.type !== 'verb' && word.type !== 'modal' && !!word.case;
     const caseOk = !caseChecked || word.case === caseType;
@@ -31,7 +31,7 @@ function validatePlacement(word, row, col, caseType, expectedCell) {
 }
 
 /** Time-challenge points (and feedback color) for answering after `elapsedMs`. */
-function getTimePoints(elapsedMs) {
+export function getTimePoints(elapsedMs) {
     const s = elapsedMs / 1000;
     if (s < 1.0) return { points: 30, color: '#27ae60' };
     if (s < 2.0) return { points: 25, color: '#52be80' };
@@ -51,7 +51,7 @@ function getTimePoints(elapsedMs) {
  * @param {?number} p.elapsedMs time since the word appeared in time challenge; null otherwise
  * @returns {PlacementOutcome}
  */
-function evaluatePlacement({ word, row, col, caseType, expectedCell, attempts = 0, elapsedMs = null }) {
+export function evaluatePlacement({ word, row, col, caseType, expectedCell, attempts = 0, elapsedMs = null }) {
     const result = validatePlacement(word, row, col, caseType, expectedCell);
     if (result.ok) {
         const timed = elapsedMs !== null ? getTimePoints(elapsedMs) : null;
@@ -74,7 +74,7 @@ function evaluatePlacement({ word, row, col, caseType, expectedCell, attempts = 
  * @param {?GridCell} expectedCell
  * @returns {?{row: number, col: number, caseType: Case}}
  */
-function getAutoPlacement(word, expectedCell) {
+export function getAutoPlacement(word, expectedCell) {
     if (!expectedCell) return null;
     return { row: expectedCell.row, col: expectedCell.col, caseType: word.case || 'nom' };
 }

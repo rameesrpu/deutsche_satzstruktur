@@ -9,7 +9,7 @@
  * The AudioContext is created lazily inside a user gesture (placement
  * taps), which satisfies mobile autoplay policies.
  */
-class SoundManager {
+export class SoundManager {
     constructor() {
         this.ctx = null;
         this.enabled = localStorage.getItem('gameSoundEnabled') !== 'false';
@@ -276,4 +276,4 @@ class SoundManager {
     }
 }
 
-const gameSounds = new SoundManager();
+export const gameSounds = new SoundManager();

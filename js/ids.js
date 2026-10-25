@@ -8,11 +8,11 @@
  */
 let lastIssuedId = Date.now();
 
-function nextId() {
+export function nextId() {
     lastIssuedId = Math.max(lastIssuedId + 1, Date.now());
     return lastIssuedId;
 }
 
-function reserveIdsAbove(id) {
+export function reserveIdsAbove(id) {
     if (Number.isFinite(id) && id > lastIssuedId) lastIssuedId = id;
 }

@@ -1,7 +1,6 @@
-import { loadScripts } from './stubs.js';
 import { test, assertEqual, assert } from './assert.js';
 
-const { pickNextSentence } = loadScripts(['js/sentencePicker.js'], ['pickNextSentence']);
+import { pickNextSentence } from '../js/sentencePicker.js';
 
 const lib = (id, level, category) => ({ id, text: `s${id}`, source: 'library', level, category });
 const SENTENCES = [

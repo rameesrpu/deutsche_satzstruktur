@@ -1,7 +1,7 @@
 /**
  * FeldermodellRenderer - Renders Feldermodell zones for both Hauptsatz and Nebensatz
  */
-class FeldermodellRenderer {
+export class FeldermodellRenderer {
     constructor(svgElement) {
         this.svg = svgElement;
         this.svgNS = 'http://www.w3.org/2000/svg';

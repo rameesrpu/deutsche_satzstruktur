@@ -1,7 +1,9 @@
+import { nextId, reserveIdsAbove } from './ids.js';
+
 /**
  * SentenceManager - Manages multiple sentences and their diagrams
  */
-class SentenceManager {
+export class SentenceManager {
     constructor(wordManager) {
         this.wordManager = wordManager;
         this.sentences = [];

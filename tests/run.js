@@ -2,7 +2,7 @@
 //   --update  rewrite tests/snapshots/library.json from current behavior
 
 import System from 'system';
-import { listDir, readText } from './stubs.js';
+import { listDir } from './stubs.js'; // first: installs browser stubs
 import { test, summary } from './assert.js';
 import { runGridTests } from './grid.test.js';
 import { runGameRuleTests } from './gameRules.test.js';
@@ -12,9 +12,11 @@ import { runSentencePickerTests } from './sentencePicker.test.js';
 
 const update = System.programArgs.includes('--update');
 
-// Syntax-check every app script (same as loading it in the browser, minus execution)
+// Import every app module: catches syntax errors and missing/misspelled imports or exports
 for (const name of listDir('js').filter(n => n.endsWith('.js'))) {
-    test(`syntax: js/${name}`, () => { new Function(readText(`js/${name}`)); });
+    let error = null;
+    try { await import(`../js/${name}`); } catch (e) { error = e; }
+    test(`module loads: js/${name}`, () => { if (error) throw error; });
 }
 
 runGridTests();

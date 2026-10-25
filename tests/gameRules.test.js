@@ -1,10 +1,8 @@
-import { loadScripts } from './stubs.js';
 import { test, assertEqual } from './assert.js';
 
-const { GridViewModel, validatePlacement, getTimePoints, evaluatePlacement, getAutoPlacement,
-    MAX_WRONG_ATTEMPTS } = loadScripts(['js/gridview.js', 'js/gameRules.js'],
-    ['GridViewModel', 'validatePlacement', 'getTimePoints', 'evaluatePlacement', 'getAutoPlacement',
-        'MAX_WRONG_ATTEMPTS']);
+import { GridViewModel } from '../js/gridview.js';
+import { validatePlacement, getTimePoints, evaluatePlacement, getAutoPlacement, MAX_WRONG_ATTEMPTS }
+    from '../js/gameRules.js';
 
 export function runGameRuleTests() {
     const grid = new GridViewModel(null);

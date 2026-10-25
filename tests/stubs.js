@@ -1,6 +1,6 @@
-// Minimal browser stubs + loader for running app scripts under gjs.
-// App files are plain scripts that define globals; we evaluate them inside a
-// Function whose parameters shadow the browser globals they touch.
+// Minimal browser stubs + file helpers for running the app's ES modules under gjs.
+// Import this module first (tests/run.js does): it installs window/document/
+// localStorage/console stubs on globalThis before any js/ module is evaluated.
 
 import GLib from 'gi://GLib';
 
@@ -38,10 +38,12 @@ export function makeLocalStorage() {
     };
 }
 
-export function makeEnv({ innerWidth = 1024 } = {}) {
+export function installBrowserStubs({ innerWidth = 1024 } = {}) {
     const quiet = () => {};
-    return {
-        window: { innerWidth, innerHeight: 768, addEventListener: quiet },
+    // gjs predefines a read-only `window` that is globalThis, so window.* stubs go on globalThis
+    Object.assign(globalThis, {
+        innerWidth, innerHeight: 768, addEventListener: quiet,
+        location: { hostname: 'localhost', protocol: 'http:' },
         document: {
             createElementNS: () => { throw new Error('DOM not stubbed: createElementNS'); },
             getElementById: () => null,
@@ -50,18 +52,15 @@ export function makeEnv({ innerWidth = 1024 } = {}) {
             addEventListener: quiet,
         },
         localStorage: makeLocalStorage(),
-        // App code logs heavily; keep test output readable
-        console: { log: quiet, warn: quiet, info: quiet, debug: quiet, error: quiet },
-    };
+    });
+    // App code logs heavily; keep test output readable (results use print()). gjs's
+    // `console` is frozen, so drop its messages at the GLib log writer instead and
+    // pass everything else (e.g. uncaught JS errors) through to stderr.
+    GLib.log_set_writer_func((level, fields) => {
+        const field = name => (fields[name] ? decoder.decode(fields[name]) : '');
+        if (field('GLIB_DOMAIN') !== 'Gjs-Console') printerr(`${field('GLIB_DOMAIN')}: ${field('MESSAGE')}`);
+        return GLib.LogWriterOutput.HANDLED;
+    });
 }
 
-/**
- * Evaluate app scripts (paths relative to repo root, in index.html order) and
- * return the requested globals, e.g. loadScripts(['js/gridview.js'], ['GridViewModel']).
- */
-export function loadScripts(files, names, env = makeEnv()) {
-    const source = files.map(readText).join('\n;\n');
-    const params = Object.keys(env);
-    const factory = new Function(...params, `${source}\nreturn { ${names.join(', ')} };`);
-    return factory(...params.map(p => env[p]));
-}
+installBrowserStubs();

@@ -1,7 +1,10 @@
+import { GrammaticalConfig } from './grammaticalConfig.js';
+import { nextId } from './ids.js';
+
 /**
  * WordManager - Manages word data and operations
  */
-class WordManager {
+export class WordManager {
     constructor(gridConfig) {
         this.words = [];
         this.selectedWord = null;

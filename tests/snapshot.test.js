@@ -1,12 +1,12 @@
 // Golden snapshot: parseSentenceFlow + getWordPosition over every library sentence.
 // Any behavior change (refactor, data edit) shows up as a diff in tests/snapshots/library.json.
 
-import { listDir, loadScripts, readText, writeText } from './stubs.js';
+import { listDir, readText, writeText } from './stubs.js';
 import { test, assertEqual } from './assert.js';
 
 const SNAPSHOT = 'tests/snapshots/library.json';
 
-const { GridViewModel } = loadScripts(['js/gridview.js'], ['GridViewModel']);
+import { GridViewModel } from '../js/gridview.js';
 
 // "text@row,col" — compact and diff-friendly; no "@" when the word has no cell
 function describe(gv, word) {

@@ -1,4 +1,4 @@
-const LEVEL_CONTENT = {
+export const LEVEL_CONTENT = {
     A1: {
         label: 'A1 – Beginner',
         categories: {

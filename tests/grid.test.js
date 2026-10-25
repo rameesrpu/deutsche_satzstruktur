@@ -1,7 +1,6 @@
-import { loadScripts } from './stubs.js';
 import { test, assertEqual } from './assert.js';
 
-const { GridViewModel } = loadScripts(['js/gridview.js'], ['GridViewModel']);
+import { GridViewModel } from '../js/gridview.js';
 
 // Cell coordinates from GridViewModel.positions
 const CELL = {

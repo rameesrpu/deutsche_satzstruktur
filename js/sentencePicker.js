@@ -1,7 +1,7 @@
 // Game-mode sentence selection. Pure: no DOM, no window.app — the caller loads
 // the returned sentence and stores the returned usedIds/batchState.
 
-const MULTI_CATEGORY_BATCH_SIZE = 5;
+export const MULTI_CATEGORY_BATCH_SIZE = 5;
 
 /**
  * Pick the next sentence to play.
@@ -22,7 +22,7 @@ const MULTI_CATEGORY_BATCH_SIZE = 5;
  * @returns {{ sentence: ?Sentence, usedIds: Set, batchState: {played: number, category: ?{level, category}}, mode: string }}
  *   `mode` is the mode actually used (after fallbacks). Inputs are not mutated.
  */
-function pickNextSentence({
+export function pickNextSentence({
     mode,
     sentences,
     currentId = null,

@@ -1,3 +1,7 @@
+import { gameSounds } from './sound.js';
+import { pickNextSentence } from './sentencePicker.js';
+import { evaluatePlacement, getAutoPlacement, MAX_WRONG_ATTEMPTS } from './gameRules.js';
+
 /**
  * Game Mode - Interactive German sentence placement game
  * Uses dual-controller mechanics (mobile FPS-style) for word placement
@@ -24,8 +28,13 @@ const GM_UI = {
 // Confetti palette (design palette + grammar-semantic accents)
 const GM_CONFETTI_COLORS = ['#4f46e5', '#10b981', '#f59e0b', '#ef4444', '#e91e63', '#3498db', '#8e44ad'];
 
-class GameMode {
-    constructor(svg, wordManager, gridViewModel) {
+export class GameMode {
+    /**
+     * @param {Object} host  app services: { sentenceManager, levelSelector, redraw(),
+     *   setView(view), updateSentenceList() }
+     */
+    constructor(svg, wordManager, gridViewModel, host) {
+        this.host = host;
         this.svg = svg;
         this.wordManager = wordManager;
         this.gridViewModel = gridViewModel;
@@ -189,7 +198,7 @@ class GameMode {
                             col: Math.min(3, Math.max(1, this.keyboardSelectedCell.col + dc))
                         };
                     }
-                    if (window.app) window.app.redrawAll();
+                    this.host.redraw();
                     return;
                 }
                 if (key === '/' && this.keyboardSelectedCell) {
@@ -203,19 +212,19 @@ class GameMode {
             if (key === 'a') {
                 // Toggle nominative
                 this.selectedCase = this.selectedCase === 'nom' ? null : 'nom';
-                if (window.app) window.app.redrawAll();
+                this.host.redraw();
             } else if (key === 's') {
                 // Toggle accusative
                 this.selectedCase = this.selectedCase === 'akk' ? null : 'akk';
-                if (window.app) window.app.redrawAll();
+                this.host.redraw();
             } else if (key === 'd') {
                 // Toggle dative
                 this.selectedCase = this.selectedCase === 'dat' ? null : 'dat';
-                if (window.app) window.app.redrawAll();
+                this.host.redraw();
             } else if (key === 'f') {
                 // Toggle genitive
                 this.selectedCase = this.selectedCase === 'gen' ? null : 'gen';
-                if (window.app) window.app.redrawAll();
+                this.host.redraw();
             }
         };
 
@@ -228,9 +237,7 @@ class GameMode {
         this.startNewSentence();
 
         // Record the initial sentence as used
-        if (window.app && window.app.sentenceManager) {
-            this.usedSentenceIds.add(window.app.sentenceManager.currentSentenceId);
-        }
+        this.usedSentenceIds.add(this.host.sentenceManager.currentSentenceId);
     }
 
     /**
@@ -1162,10 +1169,8 @@ class GameMode {
                 // First tap: show felder view so user can see the sentence structure
                 this.pendingFelderReview = false;
                 this.pause();
-                if (window.app) {
-                    window.app.currentView = 'felder';
-                    window.app.redrawAll();
-                }
+                this.host.setView('felder');
+                this.host.redraw();
             } else {
                 // Second tap (after felder review): load next sentence
                 this.loadRandomSentenceAndContinue();
@@ -1399,9 +1404,7 @@ class GameMode {
             }
 
             // Redraw to show selection state
-            if (window.app) {
-                window.app.redrawAll();
-            }
+            this.host.redraw();
         };
 
         // Add tap/click handlers
@@ -1450,9 +1453,7 @@ class GameMode {
         this.selectedCase = null;
 
         // Redraw to clear case selection highlight
-        if (window.app) {
-            window.app.redrawAll();
-        }
+        this.host.redraw();
     }
 
     /**
@@ -1604,9 +1605,7 @@ class GameMode {
         };
 
         // Redraw to show feedback
-        if (window.app) {
-            window.app.redrawAll();
-        }
+        this.host.redraw();
 
         // Animate the feedback smoothly between redraws (updates attributes
         // in place; ends automatically when feedbackAnimation clears)
@@ -1615,9 +1614,7 @@ class GameMode {
         // Clear feedback after animation
         setTimeout(() => {
             this.feedbackAnimation = null;
-            if (window.app) {
-                window.app.redrawAll();
-            }
+            this.host.redraw();
         }, 600);
     }
 
@@ -2163,33 +2160,29 @@ class GameMode {
         if (this.totalScore >= this.targetScore) {
             // Game fully complete!
             setTimeout(() => {
-                if (window.app) {
-                    // Exit game mode and show the completed gridview
-                    const finalScore = this.totalScore;
-                    window.app.currentView = 'grid';
-                    this.stop();
+                // Exit game mode and show the completed gridview
+                const finalScore = this.totalScore;
+                this.host.setView('grid');
+                this.stop();
 
-                    // Reset button to play icon
-                    const gameModeBtn = document.getElementById('game-mode-btn');
-                    if (gameModeBtn) {
-                        gameModeBtn.textContent = '🎮';
-                        gameModeBtn.title = 'Start Game Mode';
-                    }
-
-                    window.app.redrawAll();
-
-                    // Restyled celebration screen (replaces the old alert;
-                    // same flow: game already stopped, grid view shown behind)
-                    if (typeof gameSounds !== 'undefined') gameSounds.gameComplete();
-                    this.showFinalCelebration(finalScore);
+                // Reset button to play icon
+                const gameModeBtn = document.getElementById('game-mode-btn');
+                if (gameModeBtn) {
+                    gameModeBtn.textContent = '🎮';
+                    gameModeBtn.title = 'Start Game Mode';
                 }
+
+                this.host.redraw();
+
+                // Restyled celebration screen (replaces the old alert;
+                // same flow: game already stopped, grid view shown behind)
+                if (typeof gameSounds !== 'undefined') gameSounds.gameComplete();
+                this.showFinalCelebration(finalScore);
             }, 1000);
         } else {
             this.waitingForContinue = true;
             this.pendingFelderReview = true;
-            if (window.app) {
-                window.app.redrawAll();
-            }
+            this.host.redraw();
 
             // Sentence-complete celebration: bigger confetti burst across the
             // grid, then the whole sentence read aloud (the melody resolved
@@ -2219,13 +2212,7 @@ class GameMode {
      * Load the next sentence (picked per the active mode) and continue the game
      */
     loadRandomSentenceAndContinue() {
-        if (!window.app || !window.app.sentenceManager) {
-            console.error('Cannot load random sentence - app or sentenceManager not available');
-            return;
-        }
-
-        const sentenceManager = window.app.sentenceManager;
-        const levelSelector = window.app.levelSelector;
+        const { sentenceManager, levelSelector } = this.host;
         let mode = 'random-in-category';
         if (this.storyMode) mode = 'story';
         else if (this.multiCategoryMode && this.selectedLevels.length > 0) mode = 'multi-category';
@@ -2257,8 +2244,8 @@ class GameMode {
         sentenceManager.loadSentence(picked.sentence.id);
         this.startNewSentence();
 
-        window.app.updateSentenceList();
-        window.app.redrawAll();
+        this.host.updateSentenceList();
+        this.host.redraw();
         const activeItem = document.querySelector('.sentence-item.active');
         if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 

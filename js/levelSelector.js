@@ -1,4 +1,4 @@
-class LevelSelector {
+export class LevelSelector {
     constructor(levelContent, callbacks) {
         this.levelContent = levelContent;
         this.onSelect = callbacks.onSelect;

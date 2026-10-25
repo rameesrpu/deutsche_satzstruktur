@@ -7,7 +7,7 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 **Main path**: game mode + pre-parsed library sentences (`data/library/*.json`). The spaCy backend
 (`backend/`) is rarely used — **don't touch `backend/` unless asked.** Work items: [PLAN.md](PLAN.md).
 
-## Files (`js/`, loaded by `<script>` tags at the bottom of index.html — order matters)
+## Files (`js/`, ES modules — entry `app.js`; each file imports what it uses)
 - `types.js` — JSDoc typedefs only (Word, Sentence, LibraryFile, ParsedSentence, PlacementResult…; not loaded)
 - `ids.js` — `nextId()`: the one source of sentence/word ids (never use `Date.now()` as an id)
 - `sound.js` — SoundManager: Web Audio effects + German text-to-speech
@@ -23,7 +23,8 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 - `gamemode.js` — GameMode: placement game UI, HUD, feedback/juice (largest file)
 - `renderer.js` — SVG drawing of words/connections in edit view
 - `ui.js` — UIController: editor panels and interactions
-- `app.js` — DeutschApp: wires everything together, backend calls, import/export
+- `app.js` — DeutschApp: wires everything together, backend calls, import/export. Passes GameMode a
+  `host` ({sentenceManager, levelSelector, redraw, setView, updateSentenceList}); `window.app` is a debug handle only
 
 ## Data
 - Shapes and allowed enum values (Word, Sentence, LibraryFile, ParsedSentence, placement results):
@@ -46,4 +47,5 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
   JS mirrors them as hex constants (e.g. `GM_UI` in gamemode.js).
 - SVG `<defs>` ids are prefixed per owner: `tok-`, `gv-` (grid view), `gm-` (game mode).
 - Game-mode CSS lives in the `GAME MODE VISUAL JUICE` section at the end of styles.css.
-- Script tags carry a cache-busting `?v=...` query; bump it in index.html when shipping JS/CSS changes.
+- Cache busting: the import map in index.html adds `?v=...` to every module (plus the entry script
+  and styles.css link); bump all of them when shipping JS/CSS changes. Modules need http, not `file://`.

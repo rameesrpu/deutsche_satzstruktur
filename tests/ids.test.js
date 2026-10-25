@@ -1,7 +1,7 @@
-import { listDir, loadScripts, makeEnv, readText } from './stubs.js';
+import { listDir, makeLocalStorage, readText } from './stubs.js';
 import { test, assertEqual } from './assert.js';
-
-const FILES = ['js/ids.js', 'js/sentenceManager.js'];
+import { nextId, reserveIdsAbove } from '../js/ids.js';
+import { SentenceManager } from '../js/sentenceManager.js';
 
 const allUnique = ids => new Set(ids).size === ids.length;
 const sentenceIds = sm => sm.sentences.map(s => s.id);
@@ -9,7 +9,7 @@ const wordIds = sm => sm.sentences.flatMap(s => s.words.map(w => w.id));
 
 export function runIdTests() {
     test('bulk-loading every library category back to back gives unique ids', () => {
-        const { SentenceManager } = loadScripts(FILES, ['SentenceManager']);
+        globalThis.localStorage = makeLocalStorage();
         const sm = new SentenceManager(null);
         for (const file of listDir('data/library')) {
             const data = JSON.parse(readText(`data/library/${file}`));
@@ -27,7 +27,7 @@ export function runIdTests() {
     ];
 
     test('repairDuplicateIds keeps first occurrence and is idempotent', () => {
-        const { SentenceManager } = loadScripts(FILES, ['SentenceManager']);
+        globalThis.localStorage = makeLocalStorage();
         const sm = new SentenceManager(null);
         sm.sentences = duplicated();
         assertEqual(sm.repairDuplicateIds(), 2, 'sentences changed');
@@ -40,17 +40,15 @@ export function runIdTests() {
     });
 
     test('load() repairs duplicate ids in localStorage and saves them', () => {
-        const env = makeEnv();
-        env.localStorage.setItem('deutschSentences', JSON.stringify(duplicated()));
-        const { SentenceManager } = loadScripts(FILES, ['SentenceManager'], env);
+        globalThis.localStorage = makeLocalStorage();
+        localStorage.setItem('deutschSentences', JSON.stringify(duplicated()));
         const sm = new SentenceManager(null);
         sm.load();
-        const stored = JSON.parse(env.localStorage.getItem('deutschSentences'));
+        const stored = JSON.parse(localStorage.getItem('deutschSentences'));
         assertEqual(allUnique(stored.map(s => s.id)), true, 'stored sentence ids unique');
     });
 
     test('nextId stays above ids reserved from storage', () => {
-        const { nextId, reserveIdsAbove } = loadScripts(['js/ids.js'], ['nextId', 'reserveIdsAbove']);
         const far = Date.now() + 1e9;
         reserveIdsAbove(far);
         assertEqual(nextId(), far + 1);

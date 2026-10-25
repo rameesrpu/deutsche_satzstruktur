@@ -1,4 +1,4 @@
-class GridViewModel {
+export class GridViewModel {
     constructor(svg) {
         this.svg = svg;
         this.gridSize = 3; // 3x3 grid

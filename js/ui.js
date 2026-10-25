@@ -1,7 +1,9 @@
+import { GrammaticalConfig } from './grammaticalConfig.js';
+
 /**
  * UIController - Handles all UI interactions
  */
-class UIController {
+export class UIController {
     constructor(wordManager, onRedraw, gridConfig) {
         this.wordManager = wordManager;
         this.onRedraw = onRedraw;

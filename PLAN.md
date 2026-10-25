@@ -21,8 +21,8 @@ used — do not spend effort there unless an item says so.
 - There is **no `node`** on the dev machine. `gjs` is available. Tests (incl. a syntax check of every
   `js/*.js`): `gjs -m tests/run.js` — see [tests/README.md](tests/README.md).
 - Visual checks: `python3 -m http.server` + `google-chrome --headless=new --screenshot=out.png --virtual-time-budget=8000 <url>`.
-- No build step, no framework. Scripts load via `<script>` tags at the bottom of [index.html](index.html);
-  **order matters** until R4 is done.
+- No build step, no framework. Since R4, `js/*.js` are ES modules loaded from one entry (`js/app.js`)
+  in [index.html](index.html); the page must be served over http.
 
 ---
 
@@ -241,7 +241,7 @@ in gridview/gamemode/sentenceManager. List allowed enum values (types, cases, ge
 > missing on 4 words; library categories are capitalized, e.g. `Hauptsatz`). Referenced from
 > gridview/gameRules/sentenceManager/sentencePicker/placeWord; CLAUDE.md data section now links it.
 
-### [ ] R4 Migrate to ES modules (incrementally)
+### [x] R4 Migrate to ES modules (incrementally)
 **Why**: removes implicit global coupling and `<script>` load-order dependence; makes each file
 state its dependencies. No build step needed.
 
@@ -257,13 +257,24 @@ state its dependencies. No build step needed.
 **Done when**: no file depends on script order; tests + screenshot pass.
 **Depends on**: R1, R2 (smaller surface first). Can be split into several sessions — tick when finished.
 
+> 2026-10-25 done (one session). Every `js/*.js` exports/imports explicitly; index.html loads one module
+> entry (`js/app.js`) plus an import map that adds `?v=` to each module (nested imports can't carry a
+> query). GameMode gets a `host` object instead of 28 `window.app` reach-throughs (app.js now builds
+> LevelSelector before GameMode). Harness imports modules directly; the old `new Function` syntax check
+> became "import every module", which also catches missing exports. gjs surprises: `window` and
+> `console` are read-only globals (window === globalThis) — stubs go on globalThis and console output is
+> filtered via `GLib.log_set_writer_func`. Verified in headless Chrome against HEAD with the same driver
+> (play with wrong + auto placement, overlay tap → Felder, "/" → next, story order, game complete):
+> identical, 0 errors. Pre-existing oddity seen on both: `usedSentenceIds` stays at 1 after advancing via
+> Felder + "/" — not investigated. `test_grouping.html` switched to a module import.
+
 ### [ ] R5 Repo & release hygiene
 **Steps**
 1. Remove or move to `tools/`: `output.md`, `check_localstorage.html`, `test_grouping.html`,
    `test_grammar.py`, `backend/spacy_test.py` (ask the owner before deleting).
 2. Ask the owner whether `data/saved/deutsch-sentences-2026-06-12.json` (personal export) should be in git.
-3. Cache busting: replace the 12 hand-edited `?v=20260711o` strings in [index.html](index.html) with
-   one source (e.g. a tiny `scripts/bump_version.sh`, or a single version constant if R4 is done).
+3. Cache busting: since R4 the `?v=` strings are in the import map + entry script + styles.css link in
+   [index.html](index.html) (17 copies); make bumping one command (e.g. a tiny `scripts/bump_version.sh`).
 
 **Done when**: root contains only real project files; bumping the version is one command.
 

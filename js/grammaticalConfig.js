@@ -6,7 +6,7 @@
  * - Gender-to-color mappings
  * - Color determination logic with clear priority rules
  */
-const GrammaticalConfig = {
+export const GrammaticalConfig = {
     /**
      * Pronoun definitions with all properties
      * Each pronoun has: color, label (for UI), gender (if applicable), number, person
