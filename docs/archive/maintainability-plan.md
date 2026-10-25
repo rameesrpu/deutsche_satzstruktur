@@ -1,8 +1,11 @@
-# Maintainability & Game-Mode Plan
+# Maintainability & Game-Mode Plan (archived)
+
+> **Archived 2026-10-25**: every item below is done. Kept for the notes on what changed and why.
+> Current work: [docs/story-plan.md](../story-plan.md).
 
 > **Audience**: AI coding agents (and the owner) picking up work in a fresh conversation.
 > Each item is self-contained — read "How to use this plan", then the item you pick.
-> Written 2026-10-25. Supersedes the priorities in [IMPROVEMENTS.md](IMPROVEMENTS.md),
+> Written 2026-10-25. Supersedes the priorities in [IMPROVEMENTS.md](../IMPROVEMENTS.md),
 > which stays as a long-term idea backlog (its line counts are outdated).
 
 ## How to use this plan
@@ -19,10 +22,10 @@ used — do not spend effort there unless an item says so.
 
 **Environment notes**
 - There is **no `node`** on the dev machine. `gjs` is available. Tests (incl. a syntax check of every
-  `js/*.js`): `gjs -m tests/run.js` — see [tests/README.md](tests/README.md).
+  `js/*.js`): `gjs -m tests/run.js` — see [tests/README.md](../../tests/README.md).
 - Visual checks: `python3 -m http.server` + `google-chrome --headless=new --screenshot=out.png --virtual-time-budget=8000 <url>`.
 - No build step, no framework. Since R4, `js/*.js` are ES modules loaded from one entry (`js/app.js`)
-  in [index.html](index.html); the page must be served over http.
+  in [index.html](../../index.html); the page must be served over http.
 
 ---
 
@@ -32,7 +35,7 @@ used — do not spend effort there unless an item says so.
 **Why**: game mode trusts library word metadata completely. Wrong `type`/`gender`/`number`
 silently puts words in the wrong grid cell or drops them.
 
-**Context**: grid placement is decided by `getWordPosition()` in [js/gridview.js:386](js/gridview.js#L386).
+**Context**: grid placement is decided by `getWordPosition()` in [js/gridview.js:386](../../js/gridview.js#L386).
 Subjects and objects/adjectives with no gender/number (and not an object pronoun like mich/dir)
 silently fall back to the MASCULINE cell.
 
@@ -55,8 +58,8 @@ silently fall back to the MASCULINE cell.
    - Decide per word: retag (e.g. `sich`/`mehr`/`viel` → `other`), or set gender/number/case correctly.
 3. Bump the `version` field of every library file you edit — otherwise browsers with existing
    `localStorage` will not pick up the corrected words (see `bulkLoadLibraryCategory` in
-   [js/sentenceManager.js:215](js/sentenceManager.js#L215)).
-4. Check whether [scripts/build_library_data.py](scripts/build_library_data.py) regenerates library
+   [js/sentenceManager.js:215](../../js/sentenceManager.js#L215)).
+4. Check whether [scripts/build_library_data.py](../../scripts/build_library_data.py) regenerates library
    files from `data/saved/`; if so, fix the source too or the fixes will be overwritten.
 
 **Done when**: `python3 scripts/audit_library.py` exits 0; touched files have bumped versions.
@@ -86,8 +89,8 @@ measure phrase → `akk`), add to `scripts/library_corrections.py`, optionally a
 enabler for every refactor below.
 
 **Context**: the logic worth testing is pure-ish: `parseSentenceFlow()` and `getWordPosition()` in
-[js/gridview.js](js/gridview.js), `validatePlacement()` / `getTimePoints()` in
-[js/gamemode.js](js/gamemode.js). Classes are globals defined by plain scripts; constructors may
+[js/gridview.js](../../js/gridview.js), `validatePlacement()` / `getTimePoints()` in
+[js/gamemode.js](../../js/gamemode.js). Classes are globals defined by plain scripts; constructors may
 touch the DOM/SVG.
 
 **Steps**
@@ -122,7 +125,7 @@ touch the DOM/SVG.
 **Steps**: write a concise (~40 lines) `CLAUDE.md` at repo root covering: what the app is; that game
 mode + library data is the main path; file map (one line per `js/*.js`); word/sentence data shape
 (point to R3 typedefs once done); how to run tests (P0.2) and the audit (P0.1); gjs syntax check;
-headless screenshot workflow; conventions (CSS tokens in `:root` of [css/styles.css](css/styles.css),
+headless screenshot workflow; conventions (CSS tokens in `:root` of [css/styles.css](../../css/styles.css),
 SVG defs id prefixes `tok-`/`gv-`/`gm-`, game-mode CSS lives in the `GAME MODE VISUAL JUICE`
 section at the end of styles.css); "don't touch `backend/` unless asked"; link to this PLAN.md.
 
@@ -140,11 +143,11 @@ section at the end of styles.css); "don't touch `backend/` unless asked"; link t
 **Why**: likely causes wrong sentences to load and breaks "already played" tracking, especially in
 multi-category mode. Diagnosed from code reading; not yet reproduced in a browser.
 
-**Context**: `bulkLoadLibraryForLevels()` ([js/app.js:750](js/app.js#L750)) fetches all categories in
+**Context**: `bulkLoadLibraryForLevels()` ([js/app.js:750](../../js/app.js#L750)) fetches all categories in
 parallel. Each callback runs `bulkLoadLibraryCategory()`, which starts
-`let idCounter = Date.now()` ([js/sentenceManager.js:221](js/sentenceManager.js#L221)) and consumes
+`let idCounter = Date.now()` ([js/sentenceManager.js:221](../../js/sentenceManager.js#L221)) and consumes
 ~20 sentence ids + ~150 word ids. Callbacks fire milliseconds apart → overlapping id ranges.
-`loadSentence(id)` uses `find()` ([js/sentenceManager.js:60](js/sentenceManager.js#L60)), so the first
+`loadSentence(id)` uses `find()` ([js/sentenceManager.js:60](../../js/sentenceManager.js#L60)), so the first
 match wins; game mode's `usedSentenceIds` is keyed by id.
 
 **Steps**
@@ -177,7 +180,7 @@ Guiding rules: incremental, behavior-preserving, verified by the P0.2 snapshot a
 make a concrete upcoming item (I1–I3) easier.
 
 ### [x] R1 Extract sentence selection into `js/sentencePicker.js`
-**Why**: three near-duplicate loaders at the end of [js/gamemode.js](js/gamemode.js)
+**Why**: three near-duplicate loaders at the end of [js/gamemode.js](../../js/gamemode.js)
 (`loadRandomSentenceAndContinue`, `loadNextSentenceInOrder`, `loadRandomSentenceMultiCategory`,
 ~200 lines) mix selection logic with UI refresh. I1/I2 need a clean place to add weighting.
 
@@ -189,7 +192,7 @@ make a concrete upcoming item (I1–I3) easier.
 2. Game mode keeps one small method that calls the picker, then does `loadSentence`,
    `startNewSentence`, `updateSentenceList`, `redrawAll`, scroll-into-view (currently repeated 3×).
 3. Unit-test every mode, including "all seen → reset but avoid the just-played one".
-4. Add the `<script>` tag before `gamemode.js` in [index.html](index.html).
+4. Add the `<script>` tag before `gamemode.js` in [index.html](../../index.html).
 
 **Done when**: tests pass, game mode behavior unchanged in manual/screenshot check, gamemode.js
 shrinks by ~150+ lines.
@@ -203,7 +206,7 @@ shrinks by ~150+ lines.
 
 ### [x] R2 Extract game rules into `js/gameRules.js`
 **Why**: placement validation, scoring, time points and attempt/auto-place rules are interleaved
-with rendering in `placeWord()` ([js/gamemode.js:1461](js/gamemode.js#L1461)). I3 (explanations) and
+with rendering in `placeWord()` ([js/gamemode.js:1461](../../js/gamemode.js#L1461)). I3 (explanations) and
 I1 (recording results) need these as plain data.
 
 **Steps**
@@ -274,7 +277,7 @@ state its dependencies. No build step needed.
    `test_grammar.py`, `backend/spacy_test.py` (ask the owner before deleting).
 2. Ask the owner whether `data/saved/deutsch-sentences-2026-06-12.json` (personal export) should be in git.
 3. Cache busting: since R4 the `?v=` strings are in the import map + entry script + styles.css link in
-   [index.html](index.html) (17 copies); make bumping one command (e.g. a tiny `scripts/bump_version.sh`).
+   [index.html](../../index.html) (17 copies); make bumping one command (e.g. a tiny `scripts/bump_version.sh`).
 
 **Done when**: root contains only real project files; bumping the version is one command.
 
@@ -349,7 +352,7 @@ challenge). Test the weighting deterministically (inject a random fn).
 1. Using the R2 reason object + word metadata, generate a short message, e.g.
    "*mit* → always Dativ", "*Kinder* is plural → plural cell", "*du* → du cell",
    "Akkusativ after *für*". Keep a small preposition→case table (likely already implied in
-   [js/grammaticalConfig.js](js/grammaticalConfig.js) — check before adding).
+   [js/grammaticalConfig.js](../../js/grammaticalConfig.js) — check before adding).
 2. Show it in the existing feedback area (see `showFeedback`/floating text in gamemode.js);
    keep it short enough for mobile width.
 3. Unit-test message generation.
@@ -367,7 +370,7 @@ challenge). Test the weighting deterministically (inject a random fn).
 
 ### [x] I4 Mastery per category in the level selector
 **Steps**: show a small progress indicator (e.g. "12/20 mastered") per category in
-[js/levelSelector.js](js/levelSelector.js), using I1 data. Mastered = last N plays perfect (pick N=2).
+[js/levelSelector.js](../../js/levelSelector.js), using I1 data. Mastered = last N plays perfect (pick N=2).
 **Depends on**: I1.
 
 > 2026-10-25 done. `isMastered(entry)` / `MASTERY_PLAYS = 2` in progressStore.js (perfectStreak ≥ 2). LevelSelector takes
@@ -378,7 +381,7 @@ challenge). Test the weighting deterministically (inject a random fn).
 > Chrome with seeded progress (2/20, streak-1 sentence not counted).
 
 ### [x] I5 Handle missing German TTS voice
-**Context**: [js/sound.js](js/sound.js) picks a voice whose lang starts with `de`; many browsers
+**Context**: [js/sound.js](../../js/sound.js) picks a voice whose lang starts with `de`; many browsers
 (notably Chrome on Linux) have none, so speech and audio fill-in-the-blank silently do nothing.
 **Steps**: after `voiceschanged`, if no German voice exists, show a one-time notice and
 disable/grey out the audio-dependent options instead of failing silently.
@@ -397,5 +400,5 @@ disable/grey out the audio-dependent options instead of failing silently.
 
 Backend work: CORS config, baking the spaCy model into the Docker image, LanguageTool rate-limit
 handling, larger spaCy models, duplicated backend-URL detection in
-[js/app.js:613](js/app.js#L613) / [js/sentenceManager.js:315](js/sentenceManager.js#L315).
+[js/app.js:613](../../js/app.js#L613) / [js/sentenceManager.js:315](../../js/sentenceManager.js#L315).
 Revisit only if the owner starts using custom sentences again.

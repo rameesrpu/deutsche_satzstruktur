@@ -6,7 +6,7 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 
 **Main path**: game mode + pre-parsed library sentences (`data/library/*.json`), led by the
 **story chapters** (A1 "Ein Zuhause in Stuttgart": `data/stories/`, see its CURRICULUM.md and STORY_BIBLE.md). The spaCy backend
-(`backend/`) is rarely used — **don't touch `backend/` unless asked.** Work items: [PLAN.md](PLAN.md).
+(`backend/`) is rarely used — **don't touch `backend/` unless asked.** Work items: [docs/story-plan.md](docs/story-plan.md) (finished maintainability plan: [docs/archive/](docs/archive/)).
 
 ## Files (`js/`, ES modules — entry `app.js`; each file imports what it uses)
 - `types.js` — JSDoc typedefs only (Word, Sentence, LibraryFile, ParsedSentence, PlacementResult…; not loaded)

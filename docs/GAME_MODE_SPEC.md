@@ -132,7 +132,7 @@ These words automatically place themselves:
 
 The game uses the same clustering mechanism as the gridview to identify which words belong together in a phrase.
 
-**Implementation**: Reuse the existing `parseSentenceFlow()` function from [gridview.js](js/gridview.js):
+**Implementation**: Reuse the existing `parseSentenceFlow()` function from [gridview.js](../js/gridview.js):
 - `collectNounPhrase()` - Collects articles, adjectives, determiners, and nouns together
 - `canBeInNounPhrase()` - Determines if a word can be part of a noun phrase
 - Returns `boxes` array where each box is a complete noun phrase cluster

@@ -51,7 +51,7 @@ This saves you from manually configuring each word!
 
 ### Step 2: Open the Application
 
-1. Open [index.html](index.html) in your web browser
+1. Open [index.html](../index.html) in your web browser
 2. Or use a local server (recommended):
    ```bash
    # If you have Python:
@@ -133,12 +133,12 @@ Der Mann, der dort sitzt, ist mein Vater
 **Problem**: Port 8000 is already in use.
 
 **Solution**:
-1. Change the port in [backend/app.py](backend/app.py):
+1. Change the port in [backend/app.py](../backend/app.py):
    ```python
    uvicorn.run(app, host="0.0.0.0", port=8001)  # Use 8001 instead
    ```
 
-2. Update [js/sentenceManager.js](js/sentenceManager.js) line 260:
+2. Update [js/sentenceManager.js](../js/sentenceManager.js) line 260:
    ```javascript
    async autoConfigureCurrentSentence(backendUrl = 'http://localhost:8001')
    ```
@@ -175,7 +175,7 @@ For better accuracy, use the large German model:
    python -m spacy download de_core_news_lg
    ```
 
-2. Update [backend/app.py](backend/app.py) line 18:
+2. Update [backend/app.py](../backend/app.py) line 18:
    ```python
    nlp = spacy.load("de_core_news_lg")  # Changed from de_core_news_sm
    ```
@@ -208,7 +208,7 @@ Once your words are auto-configured, you can:
 
 ## Getting Help
 
-- **Backend documentation**: See [backend/README.md](backend/README.md)
+- **Backend documentation**: See [backend/README.md](../backend/README.md)
 - **API testing**: Visit http://localhost:8000/docs for interactive API documentation
 - **Debug endpoint**: Use `/analyze/debug` to see full spaCy analysis
 

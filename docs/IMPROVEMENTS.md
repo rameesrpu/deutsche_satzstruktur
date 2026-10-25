@@ -12,32 +12,32 @@
 
 **What the app is**: A browser-based German grammar learning tool centered on sentence
 structure. No framework, no build step — plain JS loaded via `<script>` tags in
-[index.html](index.html). Three views share one SVG canvas:
+[index.html](../index.html). Three views share one SVG canvas:
 
-1. **Feldermodell view** ([js/feldermodell.js](js/feldermodell.js), [js/renderer.js](js/renderer.js)) —
+1. **Feldermodell view** ([js/feldermodell.js](../js/feldermodell.js), [js/renderer.js](../js/renderer.js)) —
    words as colored/shaped tokens (color = gender, shape = case) placed in Vorfeld /
    Linke Klammer / Mittelfeld / Rechte Klammer / Nachfeld zones. Nebensätze flow vertically.
-2. **Grid view** ([js/gridview.js](js/gridview.js)) — sentences parsed into noun-phrase
+2. **Grid view** ([js/gridview.js](../js/gridview.js)) — sentences parsed into noun-phrase
    "boxes" connected by arrows carrying verbs/prepositions. `parseSentenceFlow()` here is
    the shared clustering engine.
-3. **Game mode** ([js/gamemode.js](js/gamemode.js), ~1830 lines) — mobile-oriented game:
+3. **Game mode** ([js/gamemode.js](../js/gamemode.js), ~1830 lines) — mobile-oriented game:
    place noun phrases and conjugated verbs into a 3×3 grid (cells = pronoun/gender:
    masculine, du, feminine / neutral, ich, plural / ihr, wir, unused) choosing the right
    case controller (NOM/AKK/DAT/GEN). Has time-challenge, multi-category, story mode,
    and max-points settings. Spec: [GAME_MODE_SPEC.md](GAME_MODE_SPEC.md),
-   architecture: [docs/gamemode_architecture.md](docs/gamemode_architecture.md).
+   architecture: [docs/gamemode_architecture.md](gamemode_architecture.md).
 
-**Backend** ([backend/app.py](backend/app.py), FastAPI + spaCy `de_core_news_sm`):
+**Backend** ([backend/app.py](../backend/app.py), FastAPI + spaCy `de_core_news_sm`):
 `/analyze` (POS/case/gender/clause detection), `/check-grammar` (proxies the public
 LanguageTool API), `/word-info/{word}` (Wiktionary/dict.cc lookups). Deployed on Render
-([backend/render.yaml](backend/render.yaml)); frontend hard-codes localhost vs. Render URL
-detection in three places ([js/sentenceManager.js:315](js/sentenceManager.js#L315),
-[js/app.js:523](js/app.js#L523), [js/ui.js:549](js/ui.js#L549)).
+([backend/render.yaml](../backend/render.yaml)); frontend hard-codes localhost vs. Render URL
+detection in three places ([js/sentenceManager.js:315](../js/sentenceManager.js#L315),
+[js/app.js:523](../js/app.js#L523), [js/ui.js:549](../js/ui.js#L549)).
 
-**Data**: [data/levels/](data/levels/) = plain sentence lists per level+category (A1, A2, B1).
-[data/library/](data/library/) = the same sentences pre-analyzed (full word metadata), built
-offline by [scripts/build_library_data.py](scripts/build_library_data.py) from manually
-corrected exports in [data/saved/](data/saved/). At runtime the app prefers library data and
+**Data**: [data/levels/](../data/levels/) = plain sentence lists per level+category (A1, A2, B1).
+[data/library/](../data/library/) = the same sentences pre-analyzed (full word metadata), built
+offline by [scripts/build_library_data.py](../scripts/build_library_data.py) from manually
+corrected exports in [data/saved/](../data/saved/). At runtime the app prefers library data and
 falls back to `/analyze` for unknown sentences.
 
 **Persistence**: everything in `localStorage` (words, sentences, settings, scores).
@@ -52,7 +52,7 @@ frontend has **zero tests**.
 - Render free tier cold-starts (~50s) make `/analyze` fail for first-time custom sentences.
 - No schema validation for the JSON data files; ids are raw timestamps.
 - Global script-tag loading means implicit load-order coupling (see the `<script>` order
-  at the bottom of [index.html](index.html) — it matters).
+  at the bottom of [index.html](../index.html) — it matters).
 
 ---
 
@@ -80,8 +80,8 @@ score survives.
   separable verb, etc. — the data is already there in `data/library/*.json`).
 
 **Files**: new `js/learnerModel.js`, new `js/scheduler.js`; hook into
-`GameMode.validatePlacement()` and `startNewSentence()` in [js/gamemode.js](js/gamemode.js);
-extend [scripts/build_library_data.py](scripts/build_library_data.py) for skill tags.
+`GameMode.validatePlacement()` and `startNewSentence()` in [js/gamemode.js](../js/gamemode.js);
+extend [scripts/build_library_data.py](../scripts/build_library_data.py) for skill tags.
 
 **Effort**: Large (3–5 sessions). **Dependencies**: none, but #8 (decompose gamemode.js)
 makes it much easier. Do the attempt-logging part first — it's small, and data collection
@@ -96,7 +96,7 @@ controller accuracy, per-category mastery bars, streaks, and response-time trend
 
 This is the visible payoff of #1 and the emotional hook that makes people return.
 
-**Files**: new `js/dashboard.js` + a fourth view state in [js/app.js](js/app.js)
+**Files**: new `js/dashboard.js` + a fourth view state in [js/app.js](../js/app.js)
 (`currentView` already supports multiple views); reads from `LearnerModel`.
 
 **Effort**: Medium (1–2 sessions). **Dependencies**: #1 (attempt logging).
@@ -114,7 +114,7 @@ it into an infinite, personalized stream:
 - **Error explanations**: when a placement is wrong, a one-line contextual explanation
   ("*der Frau* is dative — *geben* takes a dative recipient") beats a red flash.
   Cache aggressively; most errors repeat.
-- **Story mode generation**: story mode exists ([data/library/A1_story_neue_nachbarn.json](data/library/A1_story_neue_nachbarn.json));
+- **Story mode generation**: story chapters exist ([data/stories/](../data/stories/));
   LLM can generate endless graded stories with controlled vocabulary.
 
 **Architecture note**: put the LLM behind a new backend endpoint (`/generate-sentences`,
@@ -122,8 +122,8 @@ it into an infinite, personalized stream:
 cost — these are short, structured tasks. Add strict JSON schema validation on responses
 and always re-verify generated sentences via spaCy before inserting into the queue.
 
-**Files**: [backend/app.py](backend/app.py) (new endpoints), new `backend/llm_content.py`,
-frontend queue integration in [js/gamemode.js](js/gamemode.js).
+**Files**: [backend/app.py](../backend/app.py) (new endpoints), new `backend/llm_content.py`,
+frontend queue integration in [js/gamemode.js](../js/gamemode.js).
 
 **Effort**: Medium-Large (2–3 sessions). **Dependencies**: #1 for personalization
 (but generic generation works standalone).
@@ -147,8 +147,8 @@ animations, sentence queue) can be shared with the existing mode.
 the inversion reflex that no textbook drill achieves.
 
 **Files**: new `js/feldGame.js`; extract shared game-shell utilities from
-[js/gamemode.js](js/gamemode.js); mode selection UI in [index.html](index.html) /
-[js/app.js](js/app.js).
+[js/gamemode.js](../js/gamemode.js); mode selection UI in [index.html](../index.html) /
+[js/app.js](../js/app.js).
 
 **Effort**: Large (3–4 sessions). **Dependencies**: strongly benefits from #8 first.
 
@@ -165,7 +165,7 @@ Grammar drilled silently doesn't transfer to speech. The Web Speech API
 - Later: `SpeechRecognition` for a speaking mode (Chrome-only; treat as enhancement).
 
 **Files**: new `js/speech.js` (thin wrapper: voice selection, rate control, queueing);
-hooks in [js/gamemode.js](js/gamemode.js), [js/levelSelector.js](js/levelSelector.js), [js/ui.js](js/ui.js).
+hooks in [js/gamemode.js](../js/gamemode.js), [js/levelSelector.js](../js/levelSelector.js), [js/ui.js](../js/ui.js).
 
 **Effort**: Small-Medium (1 session for TTS). **Dependencies**: none. **High
 value-to-effort ratio — a good first pick.**
@@ -176,13 +176,13 @@ The app is static files + JSON + localStorage; the backend is only needed for *n
 sentences. It should be an installable, offline-first PWA:
 
 - `manifest.json` + service worker precaching the app shell and all of
-  [data/library/](data/library/) (~small; it's text).
+  [data/library/](../data/library/) (~small; it's text).
 - Result: install to phone home screen, full game/library works in airplane mode —
   which is exactly where a mobile drill game gets used.
 - Bonus: this mostly *solves the Render cold-start problem* for the common path,
   since library sentences never touch the backend.
 
-**Files**: new `manifest.json`, `sw.js`, registration in [index.html](index.html);
+**Files**: new `manifest.json`, `sw.js`, registration in [index.html](../index.html);
 cache-busting strategy for library data (a version stamp already exists in library JSON).
 
 **Effort**: Small-Medium (1 session). **Dependencies**: none.
@@ -197,7 +197,7 @@ The Render free-tier cold start makes the "type any sentence" feature unreliable
 Options, in order of pragmatism:
 
 1. **Expand the precomputed path** (cheap): batch-analyze large public corpora
-   (Tatoeba has a German corpus; [backend/tatoeba_api.py](backend/tatoeba_api.py) already
+   (Tatoeba has a German corpus; [backend/tatoeba_api.py](../backend/tatoeba_api.py) already
    exists) offline into indexed static JSON — tens of thousands of sentences searchable
    client-side. Most users never leave curated content.
 2. **Warm-up ping**: fire a `/health` request on page load so Render wakes before the
@@ -216,11 +216,11 @@ Prerequisite hygiene for #1/#3/#4. Current structure blocks parallel work:
 
 - Convert `<script>` tags to ES modules (`type="module"`, explicit imports). No bundler
   needed — native ESM is fine for this size, keeps the zero-build-step property.
-- Split [js/gamemode.js](js/gamemode.js) (~1830 lines) into: `gameShell.js` (queue,
+- Split [js/gamemode.js](../js/gamemode.js) (~1830 lines) into: `gameShell.js` (queue,
   scoring, lifecycle, settings), `gridGame.js` (current 3×3 mechanic), `gameRenderer.js`
   (drawing), `controllers.js` (touch/gesture input). The per-frame `draw()` pipeline
-  documented in [docs/gamemode_architecture.md](docs/gamemode_architecture.md) gives the natural seams.
-- Split [js/app.js](js/app.js): extract `viewManager.js` (zoom/pan/view switching) and
+  documented in [docs/gamemode_architecture.md](gamemode_architecture.md) gives the natural seams.
+- Split [js/app.js](../js/app.js): extract `viewManager.js` (zoom/pan/view switching) and
   `backendClient.js` — **single home for the backend URL logic currently duplicated in
   3 files**.
 - Add JSDoc `@typedef` for the core `Word` shape (it's implicitly defined in 6+ files).
@@ -249,7 +249,7 @@ account infrastructure:
   URL fragment (`lz-string`) — makes the visualizer shareable with teachers/forums.
   Also listed in the README's future-enhancements; it's a genuine growth mechanic.
 - **Progress export/import**: extend the existing sentence export
-  ([js/app.js](js/app.js) already has export/import) to include learner-model data.
+  ([js/app.js](../js/app.js) already has export/import) to include learner-model data.
 - Later: real sync via the backend + magic-link auth, enabling leaderboards and
   teacher dashboards (a teacher watching a class's grid heatmaps is a compelling
   classroom product).
@@ -284,9 +284,9 @@ it is the #1 conversion blocker for any public launch.
 ### 14. Housekeeping (quick wins, do opportunistically)
 - Remove stray root files: `output.md`, `check_localstorage.html`, `test_grouping.html`,
   `test_grammar.py` (move test HTML into a `dev/` folder if still useful).
-- CORS: [backend/app.py:15](backend/app.py#L15) allows `*` — restrict to the real
+- CORS: [backend/app.py:15](../backend/app.py#L15) allows `*` — restrict to the real
   frontend origin in production.
-- The spaCy auto-download at import time ([backend/app.py:22-28](backend/app.py#L22-L28))
+- The spaCy auto-download at import time ([backend/app.py:22-28](../backend/app.py#L22-L28))
   should move into the Docker build (it may already be in the Dockerfile — verify and
   remove the runtime fallback).
 - Word ids are `Date.now()` timestamps — collision-prone when created in a loop;
