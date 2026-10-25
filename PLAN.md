@@ -332,7 +332,7 @@ challenge). Test the weighting deterministically (inject a random fn).
 > (exclusive with Story). 5 tests. Verified in headless Chrome with seeded progress: 40 picks hit only the 2 weak
 > sentences. Gotcha for drivers: starting game mode with no sentence loaded calls `alert()`, which hangs headless Chrome.
 
-### [ ] I3 Explain mistakes in feedback
+### [x] I3 Explain mistakes in feedback
 **Why**: currently a wrong placement only shows ✗. Learning happens when the learner sees *why*.
 
 **Steps**
@@ -346,6 +346,14 @@ challenge). Test the weighting deterministically (inject a random fn).
 
 **Done when**: wrong placements show a correct, specific hint; screenshot check on mobile width.
 **Depends on**: R2.
+
+> 2026-10-25 done. Pure `explainMistake({word, result, phrase, preposition})` → 0–2 lines (cell, then case) and
+> `explainPrepositionCase()` in gameRules.js, with fixed-case / two-way / contraction tables (grammaticalConfig.js has
+> none). Shown as a DOM toast `#gm-mistake-hint` (under the header on mobile, bottom on desktop so the word bar stays
+> visible); cleared on the next placement, sentence, pause/stop or after 6s — kept through auto-place. 9 tests.
+> Surprise: separable-verb particles ("rufe **an,**", "teilte **mit,**") are tagged `preposition` in the library, and
+> a few prep/case pairs disagree (`um` + dat in "um drei Uhr aus der Schule"), so a preposition is cited only when it
+> directly precedes the phrase, has no trailing punctuation and its case matches. Screenshots checked at 400×850 and 1280×800.
 
 ### [ ] I4 Mastery per category in the level selector
 **Steps**: show a small progress indicator (e.g. "12/20 mastered") per category in

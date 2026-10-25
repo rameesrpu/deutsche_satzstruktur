@@ -78,3 +78,104 @@ export function getAutoPlacement(word, expectedCell) {
     if (!expectedCell) return null;
     return { row: expectedCell.row, col: expectedCell.col, caseType: word.case || 'nom' };
 }
+
+/* ------------------------------------------------------------------
+ * Mistake explanations (I3): short hints built from a PlacementResult
+ * ------------------------------------------------------------------ */
+
+const CASE_NAMES = { nom: 'Nominativ', akk: 'Akkusativ', dat: 'Dativ', gen: 'Genitiv' };
+
+// Prepositions with one fixed case; contractions name their full form.
+// Not grammaticalConfig.js — that file only holds gender/number/pronoun colors.
+const FIXED_CASE_PREPOSITIONS = {
+    aus: 'dat', bei: 'dat', mit: 'dat', nach: 'dat', seit: 'dat', von: 'dat', zu: 'dat',
+    gegenüber: 'dat', ab: 'dat',
+    durch: 'akk', für: 'akk', gegen: 'akk', ohne: 'akk', um: 'akk', bis: 'akk', pro: 'akk',
+    trotz: 'gen', wegen: 'gen', während: 'gen', statt: 'gen', innerhalb: 'gen', außerhalb: 'gen',
+};
+// Wechselpräpositionen: Dativ = wo?/wann?, Akkusativ = wohin?
+const TWO_WAY_PREPOSITIONS = new Set(['an', 'auf', 'hinter', 'in', 'neben', 'über', 'unter', 'vor', 'zwischen']);
+const CONTRACTIONS = {
+    am: ['an dem', 'dat'], im: ['in dem', 'dat'], beim: ['bei dem', 'dat'], vom: ['von dem', 'dat'],
+    zum: ['zu dem', 'dat'], zur: ['zu der', 'dat'],
+    ans: ['an das', 'akk'], ins: ['in das', 'akk'], aufs: ['auf das', 'akk'], fürs: ['für das', 'akk'],
+    ums: ['um das', 'akk'],
+};
+
+const OBJECT_PRONOUN_BASE = { mich: 'ich', mir: 'ich', dich: 'du', dir: 'du', uns: 'wir', euch: 'ihr' };
+const GENDER_INFO = { m: ['masculine', 'der'], f: ['feminine', 'die'], n: ['neuter', 'das'] };
+
+const bare = text => (text || '').replace(/[.,!?;:–-]+$/, '').trim();
+
+/**
+ * The case rule of `preposition`, if it explains `expectedCase`, else null.
+ * Only a preposition directly before the phrase and without trailing
+ * punctuation counts: separable-verb particles ("rufe an,") are tagged
+ * 'preposition' in the library too.
+ * @param {?Word} preposition
+ * @param {Case} expectedCase
+ * @returns {?string}
+ */
+export function explainPrepositionCase(preposition, expectedCase) {
+    if (!preposition || preposition.type !== 'preposition') return null;
+    if (/[.,!?;:–-]$/.test(preposition.text.trim())) return null;
+    const p = preposition.text.trim().toLowerCase();
+    const name = CASE_NAMES[expectedCase];
+    if (CONTRACTIONS[p]) {
+        const [full, c] = CONTRACTIONS[p];
+        return c === expectedCase ? `“${p}” = ${full} → ${name}` : null;
+    }
+    if (FIXED_CASE_PREPOSITIONS[p]) {
+        return FIXED_CASE_PREPOSITIONS[p] === expectedCase ? `“${p}” → always ${name}` : null;
+    }
+    if (TWO_WAY_PREPOSITIONS.has(p)) {
+        if (expectedCase === 'dat') return `“${p}” + Dativ: wo? / wann?`;
+        if (expectedCase === 'akk') return `“${p}” + Akkusativ: wohin?`;
+    }
+    return null;
+}
+
+/**
+ * Why a placement was wrong, as 0–2 short lines (cell first, then case).
+ * @param {Object} p
+ * @param {Word} p.word            the word that decides the cell (a box's mainWord)
+ * @param {PlacementResult} p.result
+ * @param {string} [p.phrase]      whole phrase text, used in case hints (default: word text)
+ * @param {?Word} [p.preposition]  connector word directly before the phrase, if any
+ * @returns {string[]}
+ */
+export function explainMistake({ word, result, phrase, preposition = null }) {
+    const lines = [];
+    const w = bare(word.text);
+    const cell = result.expectedCell;
+
+    if (!result.cellOk && cell) {
+        const label = cell.label;
+        const pronoun = word.conjugation && word.conjugation.pronoun;
+        const objBase = OBJECT_PRONOUN_BASE[w.toLowerCase()];
+        if (word.type === 'verb' || word.type === 'modal') {
+            lines.push(pronoun === 'none' || !pronoun
+                ? `“${w}” has no subject (imperative) → ${label}`
+                : `“${w}” goes with ${pronoun === 'sie_pl' ? 'sie (plural)' : pronoun} → ${label}`);
+        } else if (word.type === 'subject' && ['ich', 'du', 'wir', 'ihr'].includes(pronoun)) {
+            lines.push(`“${w}” → ${label} cell`);
+        } else if (word.type !== 'subject' && objBase && label === objBase.toUpperCase()) {
+            lines.push(`“${w}” is the ${objBase} form → ${label}`);
+        } else if (word.number === 'pl' || pronoun === 'sie_pl') {
+            lines.push(`“${w}” is plural → ${label}`);
+        } else if (GENDER_INFO[word.gender]) {
+            const [g, article] = GENDER_INFO[word.gender];
+            lines.push(`“${w}” is ${g} (${article}) → ${label}`);
+        } else {
+            lines.push(`“${w}” → ${label} cell`);
+        }
+    }
+
+    if (!result.caseOk && result.expectedCase) {
+        const name = CASE_NAMES[result.expectedCase];
+        const p = bare(phrase || word.text);
+        lines.push(explainPrepositionCase(preposition, result.expectedCase)
+            || (word.type === 'subject' ? `“${p}” is the subject → ${name}` : `“${p}” is ${name} here`));
+    }
+    return lines;
+}

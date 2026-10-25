@@ -1,6 +1,6 @@
 import { gameSounds } from './sound.js';
 import { pickNextSentence } from './sentencePicker.js';
-import { evaluatePlacement, getAutoPlacement, MAX_WRONG_ATTEMPTS } from './gameRules.js';
+import { evaluatePlacement, getAutoPlacement, explainMistake, MAX_WRONG_ATTEMPTS } from './gameRules.js';
 import { progressStore, sentenceKey, emptyMistakes, addMistake } from './progressStore.js';
 
 /**
@@ -262,6 +262,7 @@ export class GameMode {
         this.currentWordDisplay = null;
         this.currentWordAttempts = 0;
         this.sentenceMistakes = emptyMistakes();
+        this.hideMistakeHint();
         this.waitingForContinue = false;
         this.pendingFelderReview = false;
 
@@ -289,6 +290,7 @@ export class GameMode {
     pause() {
         if (!this.isActive || this.isPaused) return;
         this.isPaused = true;
+        this.hideMistakeHint();
         this.stopTimerAnimation();
         if (this.keyboardHandler) {
             document.removeEventListener('keydown', this.keyboardHandler);
@@ -318,6 +320,7 @@ export class GameMode {
         this.isActive = false;
         this.isPaused = false;
         this.pendingFelderReview = false;
+        this.hideMistakeHint();
         // Drop any paused/in-flight fill-in-the-blank audio
         if (typeof gameSounds !== 'undefined') gameSounds.cancelPrompt();
         this.totalScore = 0; // Reset score so the next start() is fresh
@@ -1456,7 +1459,8 @@ export class GameMode {
             return;
         }
 
-        // Place the word at this cell
+        // Place the word at this cell (a new attempt replaces the previous hint)
+        this.hideMistakeHint();
         this.placeWord(row, col, caseType);
 
         // Reset selected case after placement
@@ -1591,6 +1595,11 @@ export class GameMode {
 
             // Show cross feedback (no score penalty, but don't advance)
             this.showFeedback('✗', feedbackX, feedbackY, false);
+            const before = this.words[this.getItemWordRange(currentItem)[0] - 1];
+            this.showMistakeHint(explainMistake({
+                word: itemToValidate, result: outcome.result,
+                phrase: this.getItemText(currentItem), preposition: before || null,
+            }));
 
             // After MAX_WRONG_ATTEMPTS failed attempts, auto-place correctly
             if (outcome.autoPlace) {
@@ -1600,6 +1609,32 @@ export class GameMode {
                 }, 800);
             }
         }
+    }
+
+    /**
+     * Show why a placement was wrong (lines from explainMistake) in a toast
+     * above the grid. Stays until the next placement, sentence or ~6s.
+     * @param {string[]} lines
+     */
+    showMistakeHint(lines) {
+        this.hideMistakeHint();
+        if (!lines.length) return;
+        const el = document.createElement('div');
+        el.id = 'gm-mistake-hint';
+        el.setAttribute('role', 'status');
+        lines.forEach(line => {
+            const row = document.createElement('div');
+            row.textContent = line;
+            el.appendChild(row);
+        });
+        document.body.appendChild(el);
+        this.mistakeHintTimer = setTimeout(() => this.hideMistakeHint(), 6000);
+    }
+
+    hideMistakeHint() {
+        clearTimeout(this.mistakeHintTimer);
+        const el = document.getElementById('gm-mistake-hint');
+        if (el) el.remove();
     }
 
     /**
