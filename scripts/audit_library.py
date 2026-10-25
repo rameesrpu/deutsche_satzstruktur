@@ -8,8 +8,9 @@ Usage:
     python3 scripts/audit_library.py FILE...    # audit specific files
 
 Mirrors getWordPosition() in js/gridview.js. Reports:
-  - objects/adjectives with no grid cell (not plural, gender not m/f/n, not an object pronoun)
   - subjects that fall back to the masculine cell (no pronoun cell, no gender/number)
+  - objects/adjectives that fall back to the masculine cell (not plural, gender not
+    m/f/n, not an object pronoun)
   - subjects/objects with missing case
   - duplicate word ids within a sentence (ids repeat across sentences in the
     library files; harmless, because bulkLoadLibraryCategory reassigns all ids)
@@ -52,7 +53,7 @@ def audit_word(word):
     if is_object or wtype == 'adjective':
         text = TRAILING_PUNCT.sub('', word.get('text', '').lower())
         if text not in OBJECT_PRONOUNS and not has_gender_cell(word):
-            problems.append(f'{wtype} has no grid cell (no gender/number)')
+            problems.append(f'{wtype} defaults to masculine (no gender/number)')
 
     if (wtype == 'subject' or is_object) and word.get('case') not in CASES:
         problems.append(f'{wtype} has missing case ({word.get("case")!r})')

@@ -18,8 +18,8 @@
 used — do not spend effort there unless an item says so.
 
 **Environment notes**
-- There is **no `node`** on the dev machine. `gjs` is available. Syntax-check a JS file with:
-  `gjs -c "new Function(imports.gi.GLib.file_get_contents('js/FILE.js')[1] + ''); print('OK')"`
+- There is **no `node`** on the dev machine. `gjs` is available. Tests (incl. a syntax check of every
+  `js/*.js`): `gjs -m tests/run.js` — see [tests/README.md](tests/README.md).
 - Visual checks: `python3 -m http.server` + `google-chrome --headless=new --screenshot=out.png --virtual-time-budget=8000 <url>`.
 - No build step, no framework. Scripts load via `<script>` tags at the bottom of [index.html](index.html);
   **order matters** until R4 is done.
@@ -33,8 +33,8 @@ used — do not spend effort there unless an item says so.
 silently puts words in the wrong grid cell or drops them.
 
 **Context**: grid placement is decided by `getWordPosition()` in [js/gridview.js:386](js/gridview.js#L386).
-Subjects with no gender/number fall back to the MASCULINE cell; objects/adjectives with no
-gender/number (and not an object pronoun like mich/dir) get **no position** (returns `null`).
+Subjects and objects/adjectives with no gender/number (and not an object pronoun like mich/dir)
+silently fall back to the MASCULINE cell.
 
 **Steps**
 1. Add `scripts/audit_library.py` that loads every `data/library/*.json` and reports, per file + sentence:
@@ -75,7 +75,7 @@ gender/number (and not an object pronoun like mich/dir) get **no position** (ret
 `ein Kilo Tomaten` as an akk object. Decide per word (predicative nominative → `subject`/`other`,
 measure phrase → `akk`), add to `scripts/library_corrections.py`, optionally add an audit rule.
 
-### [ ] P0.2 JS logic test harness
+### [x] P0.2 JS logic test harness
 **Why**: there are zero frontend tests, so agents cannot verify changes. This is the most important
 enabler for every refactor below.
 
@@ -103,6 +103,12 @@ touch the DOM/SVG.
 4. Add a `tests/README.md` (5 lines: how to run, how to update snapshot).
 
 **Done when**: one command runs all tests and the library snapshot, passing on current `main`.
+
+> 2026-10-25 done. `gjs -m tests/run.js` (ES modules, gjs 1.88) — 828 tests incl. syntax check of every
+> `js/*.js` and 782-sentence snapshot; verified a corrupted snapshot fails with exit 1. Surprise: P0.1's
+> context was wrong — objects/adjectives with no gender/number **also fall back to masculine**, not
+> `null` (gridview.js ~line 474); only non-subject/object/verb types get `null`. Also: the PLAN's gjs
+> syntax-check one-liner relies on deprecated `Uint8Array.toString()`; the harness uses TextDecoder.
 
 ### [ ] P0.3 Add `CLAUDE.md`
 **Why**: fresh agents need a short, always-loaded orientation instead of rediscovering structure.
