@@ -17,6 +17,7 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 - `sentenceManager.js` — all sentences, localStorage persistence, library bulk-load
 - `feldermodell.js` — Feldermodell (field model) renderer
 - `gridview.js` — GridViewModel: `parseSentenceFlow()` (phrase boxes) and `getWordPosition()` (grid cell)
+- `sentencePicker.js` — `pickNextSentence()`: pure next-sentence selection (random / story / multi-category / custom)
 - `gamemode.js` — GameMode: placement game, scoring, HUD, sentence selection (largest file)
 - `renderer.js` — SVG drawing of words/connections in edit view
 - `ui.js` — UIController: editor panels and interactions

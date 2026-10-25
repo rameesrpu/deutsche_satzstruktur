@@ -2262,7 +2262,7 @@ class GameMode {
     }
 
     /**
-     * Load a random sentence and continue the game
+     * Load the next sentence (picked per the active mode) and continue the game
      */
     loadRandomSentenceAndContinue() {
         if (!window.app || !window.app.sentenceManager) {
@@ -2270,206 +2270,44 @@ class GameMode {
             return;
         }
 
-        if (this.storyMode) {
-            this.loadNextSentenceInOrder();
-            return;
-        }
-
-        if (this.multiCategoryMode && this.selectedLevels.length > 0) {
-            const hasMultiSentences = window.app.sentenceManager.getAllSentences().some(s =>
-                s.source === 'library' && this.selectedLevels.includes(s.level)
-            );
-            if (hasMultiSentences) {
-                this.loadRandomSentenceMultiCategory();
-                return;
-            }
-        }
-
         const sentenceManager = window.app.sentenceManager;
         const levelSelector = window.app.levelSelector;
+        let mode = 'random-in-category';
+        if (this.storyMode) mode = 'story';
+        else if (this.multiCategoryMode && this.selectedLevels.length > 0) mode = 'multi-category';
+        else if (levelSelector && levelSelector.currentLevel === 'custom') mode = 'custom';
 
-        // Get sentences from the currently active list only
-        let availableSentences;
+        const picked = pickNextSentence({
+            mode,
+            sentences: sentenceManager.getAllSentences(),
+            currentId: sentenceManager.currentSentenceId,
+            usedIds: this.usedSentenceIds,
+            level: levelSelector ? levelSelector.currentLevel : null,
+            category: levelSelector ? levelSelector.currentCategory : null,
+            selectedLevels: this.selectedLevels,
+            batchState: { played: this.batchSentencesPlayed, category: this.batchCurrentCategory },
+        });
 
-        if (levelSelector && levelSelector.currentLevel) {
-            if (levelSelector.currentLevel === 'custom') {
-                // Custom sentences: filter to user-created sentences (no source)
-                availableSentences = sentenceManager.getAllSentences().filter(s => !s.source);
-            } else if (levelSelector.currentCategory) {
-                // Library sentences: filter by current level and category
-                availableSentences = sentenceManager.getAllSentences().filter(s =>
-                    s.source === 'library' &&
-                    s.level === levelSelector.currentLevel &&
-                    s.category === levelSelector.currentCategory
-                );
-            } else {
-                // Level selected but no category - use all sentences as fallback
-                availableSentences = sentenceManager.getAllSentences();
-            }
-        } else {
-            // No active list - use all sentences as fallback
-            availableSentences = sentenceManager.getAllSentences();
-        }
+        // Story mode without a category context fell back to random
+        if (mode === 'story' && picked.mode !== 'story') this.storyMode = false;
 
-        if (availableSentences.length === 0) {
+        if (!picked.sentence) {
             console.error('No sentences available in current list');
             return;
         }
 
-        // Mark current sentence as used before picking the next
-        this.usedSentenceIds.add(sentenceManager.currentSentenceId);
+        this.usedSentenceIds = picked.usedIds;
+        this.batchSentencesPlayed = picked.batchState.played;
+        this.batchCurrentCategory = picked.batchState.category;
 
-        // Pick a random sentence not yet played this session
-        let unseenSentences = availableSentences.filter(s => !this.usedSentenceIds.has(s.id));
-
-        // If all sentences have been seen, reset and allow repeats (but still avoid the just-played one)
-        if (unseenSentences.length === 0) {
-            this.usedSentenceIds.clear();
-            this.usedSentenceIds.add(sentenceManager.currentSentenceId);
-            unseenSentences = availableSentences.filter(s => !this.usedSentenceIds.has(s.id));
-        }
-
-        const pool = unseenSentences.length > 0 ? unseenSentences : availableSentences;
-        const randomSentence = pool[Math.floor(Math.random() * pool.length)];
-
-        // Load the random sentence
-        sentenceManager.loadSentence(randomSentence.id);
-
-        // Start new sentence in game mode
+        sentenceManager.loadSentence(picked.sentence.id);
         this.startNewSentence();
 
-        // Update sentence panel selection and redraw
-        if (window.app) {
-            window.app.updateSentenceList();
-            window.app.redrawAll();
+        window.app.updateSentenceList();
+        window.app.redrawAll();
+        const activeItem = document.querySelector('.sentence-item.active');
+        if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 
-            // Scroll active sentence into view in the panel
-            const activeItem = document.querySelector('.sentence-item.active');
-            if (activeItem) {
-                activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-            }
-        }
-
-        console.log('Loaded new sentence from active list:', randomSentence.text);
-    }
-
-    /**
-     * Story mode: advance to the next sentence in order within the current category.
-     * Wraps back to the first sentence after the last one.
-     */
-    loadNextSentenceInOrder() {
-        const sentenceManager = window.app.sentenceManager;
-        const levelSelector = window.app.levelSelector;
-
-        if (!levelSelector || !levelSelector.currentLevel || !levelSelector.currentCategory) {
-            // No category context — fall back to random within whatever is loaded
-            this.storyMode = false;
-            this.loadRandomSentenceAndContinue();
-            return;
-        }
-
-        const { currentLevel, currentCategory } = levelSelector;
-        const categorySentences = sentenceManager.getAllSentences().filter(s =>
-            s.source === 'library' &&
-            s.level === currentLevel &&
-            s.category === currentCategory
-        );
-
-        if (categorySentences.length === 0) return;
-
-        const currentIdx = categorySentences.findIndex(s => s.id === sentenceManager.currentSentenceId);
-        const nextIdx = (currentIdx + 1) % categorySentences.length;
-        const nextSentence = categorySentences[nextIdx];
-
-        sentenceManager.loadSentence(nextSentence.id);
-        this.startNewSentence();
-
-        if (window.app) {
-            window.app.updateSentenceList();
-            window.app.redrawAll();
-            const activeItem = document.querySelector('.sentence-item.active');
-            if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-        }
-
-        console.log(`Story mode: ${currentLevel}/${currentCategory} [${nextIdx + 1}/${categorySentences.length}]`);
-    }
-
-    /**
-     * Load a random sentence in multi-category mode.
-     * Plays 5 sentences from one category, then switches to a random new category.
-     */
-    loadRandomSentenceMultiCategory() {
-        const sentenceManager = window.app.sentenceManager;
-
-        this.batchSentencesPlayed++;
-
-        const needNewCategory = !this.batchCurrentCategory || this.batchSentencesPlayed > 5;
-
-        if (needNewCategory) {
-            const allSentences = sentenceManager.getAllSentences().filter(s =>
-                s.source === 'library' && this.selectedLevels.includes(s.level)
-            );
-
-            // Collect unique {level, category} pairs
-            const seen = new Set();
-            const categories = [];
-            allSentences.forEach(s => {
-                const key = `${s.level}/${s.category}`;
-                if (!seen.has(key)) {
-                    seen.add(key);
-                    categories.push({ level: s.level, category: s.category });
-                }
-            });
-
-            if (categories.length === 0) return;
-
-            const currentKey = this.batchCurrentCategory
-                ? `${this.batchCurrentCategory.level}/${this.batchCurrentCategory.category}`
-                : null;
-            const others = categories.filter(c => `${c.level}/${c.category}` !== currentKey);
-            const pool = others.length > 0 ? others : categories;
-
-            this.batchCurrentCategory = pool[Math.floor(Math.random() * pool.length)];
-            this.batchSentencesPlayed = 1;
-        }
-
-        const { level, category } = this.batchCurrentCategory;
-        const availableSentences = sentenceManager.getAllSentences().filter(s =>
-            s.source === 'library' && s.level === level && s.category === category
-        );
-
-        if (availableSentences.length === 0) {
-            // Category emptied, reset and retry with normal path
-            this.batchCurrentCategory = null;
-            this.batchSentencesPlayed = 0;
-            this.loadRandomSentenceAndContinue();
-            return;
-        }
-
-        this.usedSentenceIds.add(sentenceManager.currentSentenceId);
-
-        let unseen = availableSentences.filter(s => !this.usedSentenceIds.has(s.id));
-        if (unseen.length === 0) {
-            // All sentences in this category used — clear just this category's history
-            availableSentences.forEach(s => this.usedSentenceIds.delete(s.id));
-            this.usedSentenceIds.add(sentenceManager.currentSentenceId);
-            unseen = availableSentences.filter(s => !this.usedSentenceIds.has(s.id));
-        }
-
-        const randomSentence = (unseen.length > 0 ? unseen : availableSentences)[
-            Math.floor(Math.random() * (unseen.length > 0 ? unseen.length : availableSentences.length))
-        ];
-
-        sentenceManager.loadSentence(randomSentence.id);
-        this.startNewSentence();
-
-        if (window.app) {
-            window.app.updateSentenceList();
-            window.app.redrawAll();
-            const activeItem = document.querySelector('.sentence-item.active');
-            if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-        }
-
-        console.log(`Multi-category: ${level}/${category} (${this.batchSentencesPlayed}/5)`);
+        console.log(`Loaded next sentence (${picked.mode}):`, picked.sentence.text);
     }
 }

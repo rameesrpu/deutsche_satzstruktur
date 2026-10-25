@@ -176,7 +176,7 @@ Guiding rules: incremental, behavior-preserving, verified by the P0.2 snapshot a
 **No framework, no bundler, no TypeScript migration.** Don't refactor for looks — every step should
 make a concrete upcoming item (I1–I3) easier.
 
-### [ ] R1 Extract sentence selection into `js/sentencePicker.js`
+### [x] R1 Extract sentence selection into `js/sentencePicker.js`
 **Why**: three near-duplicate loaders at the end of [js/gamemode.js](js/gamemode.js)
 (`loadRandomSentenceAndContinue`, `loadNextSentenceInOrder`, `loadRandomSentenceMultiCategory`,
 ~200 lines) mix selection logic with UI refresh. I1/I2 need a clean place to add weighting.
@@ -194,6 +194,12 @@ make a concrete upcoming item (I1–I3) easier.
 **Done when**: tests pass, game mode behavior unchanged in manual/screenshot check, gamemode.js
 shrinks by ~150+ lines.
 **Depends on**: P0.2.
+
+> 2026-10-25 done. Pure global `pickNextSentence()` (injectable `random`, returns new `usedIds`/`batchState`
+> + the mode actually used); gamemode keeps one orchestrating `loadRandomSentenceAndContinue()`
+> (2475 → 2313 lines). 12 picker tests. Verified in headless Chrome by driving random/story/multi modes
+> through the real app. Fallbacks kept: story without category → random (and turns `storyMode` off);
+> multi with no library sentences in the selected levels → random.
 
 ### [ ] R2 Extract game rules into `js/gameRules.js`
 **Why**: placement validation, scoring, time points and attempt/auto-place rules are interleaved
