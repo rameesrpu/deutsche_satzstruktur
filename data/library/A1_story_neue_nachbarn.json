@@ -1,7 +1,7 @@
 {
   "level": "A1",
   "category": "Story: Neue Nachbarn",
-  "version": "2026-06-12",
+  "version": "2026-10-25b",
   "sentences": [
     {
       "text": "Lena wohnt seit drei Wochen in der Mozartgasse 7, in Wien.",
@@ -5816,7 +5816,7 @@
         },
         {
           "id": 1781001882720,
-          "type": "object",
+          "type": "subject",
           "text": "7c,",
           "x": 400,
           "y": 160,
@@ -11205,7 +11205,7 @@
         },
         {
           "id": 1781001882765,
-          "type": "object",
+          "type": "subject",
           "text": "die",
           "x": 720,
           "y": 160,
@@ -11221,7 +11221,7 @@
         },
         {
           "id": 1781001882766,
-          "type": "object",
+          "type": "subject",
           "text": "Facharztausbildung.",
           "x": 800,
           "y": 160,

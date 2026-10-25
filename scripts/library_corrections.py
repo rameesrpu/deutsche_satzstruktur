@@ -43,6 +43,43 @@ CORRECTIONS = [
     ('A1_story_der_herbstmarkt.json',
      'Wie viel kostet ein Kilo Tomaten?, fragt Thomas.', 'viel', OTHER),
 
+    # Objects tagged nom. Measure phrases → akk object; real nominatives → subject.
+    *[('A1_story_der_herbstmarkt.json',
+       'Der Naschmarkt ist zehn Minuten zu Fuß vom Café.', w,
+       {'type': 'object', 'gender': 'f', 'case': 'akk', 'number': 'pl'})
+      for w in ('zehn', 'Minuten')],
+    *[('A1_story_der_herbstmarkt.json', 'Ich nehme zwei Kilo, sagt Thomas.', w,
+       {'gender': 'n', 'case': 'akk', 'number': 'pl'})
+      for w in ('zwei', 'Kilo,')],
+    # Elliptic "(Ich möchte) drei rote Paprika"
+    *[('A1_story_der_herbstmarkt.json', 'Drei rote Paprika, bitte, sagt Lena.', w,
+       {'type': t, 'gender': 'f', 'case': 'akk', 'number': 'pl'})
+      for w, t in (('Drei', 'object'), ('rote', 'adjective'), ('Paprika,', 'object'))],
+    # The list continues the subjects "Auberginen, Käse"
+    *[('A1_story_der_herbstmarkt.json',
+       'Marco schaut in seine Tasche: Auberginen, Käse und zwei Äpfel – vielleicht ein bisschen viel.',
+       w, {'type': 'subject', 'gender': 'm', 'case': 'nom', 'number': 'pl'})
+      for w in ('zwei', 'Äpfel')],
+    ('A1_story_der_herbstmarkt.json',
+     'Marco schaut in seine Tasche: Auberginen, Käse und zwei Äpfel – vielleicht ein bisschen viel.',
+     'viel.', OTHER),
+    # "ein Kilo Tomaten" is the subject of "kostet"
+    *[('A1_story_der_herbstmarkt.json', 'Wie viel kostet ein Kilo Tomaten?, fragt Thomas.', w,
+       {'type': 'subject', 'gender': 'n', 'case': 'nom', 'number': 'sg'})
+      for w in ('ein', 'Kilo', 'Tomaten?,')],
+    # Predicative nominative
+    ('A1_story_neue_nachbarn.json',
+     'Das ist Wohnung 7c, sagt Thomas, aber Frau Hoffmann ist nicht zu Hause.', '7c,',
+     {'type': 'subject', 'gender': 'f', 'case': 'nom', 'number': 'sg'}),
+    # Elliptic "danach (kommt) noch die Facharztausbildung"
+    *[('A1_story_neue_nachbarn.json',
+       'Sechs Jahre, sagt Lena, und danach noch die Facharztausbildung.', w,
+       {'type': 'subject', 'gender': 'f', 'case': 'nom', 'number': 'sg'})
+      for w in ('die', 'Facharztausbildung.')],
+    # "zwei Wochen" is the subject of "sind"
+    ('A1_zahlen_zeit.json', 'Es sind noch zwei Wochen bis zum Urlaub.', 'zwei',
+     {'type': 'subject', 'gender': 'f', 'case': 'nom', 'number': 'pl'}),
+
     # Quantifiers / adverbs → other
     ('A2_futur1.json', 'Ich werde mehr Sport treiben.', 'mehr', OTHER),
     ('A2_imperativ.json', 'Trink mehr Wasser!', 'mehr', OTHER),

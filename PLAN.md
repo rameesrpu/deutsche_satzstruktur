@@ -69,11 +69,17 @@ silently fall back to the MASCULINE cell.
 > the loader reassigns ids, so the audit only checks duplicates *within* a sentence. Also found 1
 > extra (`Äpfel.` in A1_hauptsatz). Follow-up: P0.1b.
 
-### [ ] P0.1b Objects tagged with case `nom`
+### [x] P0.1b Objects tagged with case `nom`
 9 object words have `case: "nom"` (e.g. `zehn Minuten`, `zwei Kilo,` in the Herbstmarkt story,
 `Wohnung 7c,` in neue_nachbarn), and "Wie viel kostet ein Kilo Tomaten?" tags the subject
 `ein Kilo Tomaten` as an akk object. Decide per word (predicative nominative → `subject`/`other`,
 measure phrase → `akk`), add to `scripts/library_corrections.py`, optionally add an audit rule.
+
+> 2026-10-25 done. Measure phrases (`zehn Minuten`, `zwei Kilo`, elliptic `Drei rote Paprika`) → akk
+> plural object; real nominatives (`zwei Äpfel` in a subject list, `7c`, `die Facharztausbildung`,
+> `zwei Wochen`, `ein Kilo Tomaten`) → subject. Whole phrases retagged so they merge into one box
+> (6 snapshot diffs, all phrase merges/case fixes). Also `viel.` tagged `verb` → `other`. New audit
+> rule: object with case nom. 3 files → version `2026-10-25b`; verified a rebuild reproduces them.
 
 ### [x] P0.2 JS logic test harness
 **Why**: there are zero frontend tests, so agents cannot verify changes. This is the most important

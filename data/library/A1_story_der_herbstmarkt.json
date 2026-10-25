@@ -1,7 +1,7 @@
 {
   "level": "A1",
   "category": "Story: Der Herbstmarkt",
-  "version": "2026-10-25",
+  "version": "2026-10-25b",
   "sentences": [
     {
       "text": "Es ist Samstag, der neunte Oktober.",
@@ -7052,8 +7052,8 @@
           "text": "zehn",
           "x": 400,
           "y": 160,
-          "gender": "none",
-          "case": "nom",
+          "gender": "f",
+          "case": "akk",
           "number": "pl",
           "flowDirection": "right",
           "conjugation": {
@@ -7064,12 +7064,12 @@
         },
         {
           "id": 1781215536891,
-          "type": "subject",
+          "type": "object",
           "text": "Minuten",
           "x": 480,
           "y": 160,
           "gender": "f",
-          "case": "nom",
+          "case": "akk",
           "number": "pl",
           "flowDirection": "right",
           "conjugation": {
@@ -11331,12 +11331,12 @@
         },
         {
           "id": 1781216036379,
-          "type": "object",
+          "type": "subject",
           "text": "ein",
           "x": 400,
           "y": 160,
           "gender": "n",
-          "case": "akk",
+          "case": "nom",
           "number": "sg",
           "flowDirection": "right",
           "conjugation": {
@@ -11347,12 +11347,12 @@
         },
         {
           "id": 1781216036380,
-          "type": "object",
+          "type": "subject",
           "text": "Kilo",
           "x": 480,
           "y": 160,
           "gender": "n",
-          "case": "akk",
+          "case": "nom",
           "number": "sg",
           "flowDirection": "right",
           "conjugation": {
@@ -11363,12 +11363,12 @@
         },
         {
           "id": 1781216036381,
-          "type": "object",
+          "type": "subject",
           "text": "Tomaten?,",
           "x": 560,
           "y": 160,
           "gender": "n",
-          "case": "akk",
+          "case": "nom",
           "number": "sg",
           "flowDirection": "right",
           "conjugation": {
@@ -11554,8 +11554,8 @@
           "x": 320,
           "y": 160,
           "gender": "n",
-          "case": "nom",
-          "number": "sg",
+          "case": "akk",
+          "number": "pl",
           "flowDirection": "right",
           "conjugation": {
             "pronoun": "none"
@@ -11570,8 +11570,8 @@
           "x": 400,
           "y": 160,
           "gender": "n",
-          "case": "nom",
-          "number": "sg",
+          "case": "akk",
+          "number": "pl",
           "flowDirection": "right",
           "conjugation": {
             "pronoun": "none"
@@ -11936,8 +11936,8 @@
           "text": "Drei",
           "x": 160,
           "y": 160,
-          "gender": "none",
-          "case": "nom",
+          "gender": "f",
+          "case": "akk",
           "number": "pl",
           "flowDirection": "right",
           "conjugation": {
@@ -11952,8 +11952,8 @@
           "text": "rote",
           "x": 240,
           "y": 160,
-          "gender": "n",
-          "case": "nom",
+          "gender": "f",
+          "case": "akk",
           "number": "pl",
           "flowDirection": "right",
           "conjugation": {
@@ -11964,12 +11964,12 @@
         },
         {
           "id": 1781216194511,
-          "type": "subject",
+          "type": "object",
           "text": "Paprika,",
           "x": 320,
           "y": 160,
-          "gender": "n",
-          "case": "nom",
+          "gender": "f",
+          "case": "akk",
           "number": "pl",
           "flowDirection": "right",
           "conjugation": {
@@ -13459,11 +13459,11 @@
         },
         {
           "id": 1781216349258,
-          "type": "object",
+          "type": "subject",
           "text": "zwei",
           "x": 800,
           "y": 160,
-          "gender": "none",
+          "gender": "m",
           "case": "nom",
           "number": "pl",
           "flowDirection": "right",
@@ -13475,7 +13475,7 @@
         },
         {
           "id": 1781216349259,
-          "type": "object",
+          "type": "subject",
           "text": "Äpfel",
           "x": 880,
           "y": 160,
@@ -13555,7 +13555,7 @@
         },
         {
           "id": 1781216349264,
-          "type": "verb",
+          "type": "other",
           "text": "viel.",
           "x": 1280,
           "y": 160,

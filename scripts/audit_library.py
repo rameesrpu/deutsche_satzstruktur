@@ -11,7 +11,7 @@ Mirrors getWordPosition() in js/gridview.js. Reports:
   - subjects that fall back to the masculine cell (no pronoun cell, no gender/number)
   - objects/adjectives that fall back to the masculine cell (not plural, gender not
     m/f/n, not an object pronoun)
-  - subjects/objects with missing case
+  - subjects/objects with missing case, and objects with case nom
   - duplicate word ids within a sentence (ids repeat across sentences in the
     library files; harmless, because bulkLoadLibraryCategory reassigns all ids)
   - sentences without words
@@ -57,6 +57,8 @@ def audit_word(word):
 
     if (wtype == 'subject' or is_object) and word.get('case') not in CASES:
         problems.append(f'{wtype} has missing case ({word.get("case")!r})')
+    elif is_object and word.get('case') == 'nom':
+        problems.append(f'{wtype} has case nom (subject or akk measure phrase?)')
 
     return problems
 

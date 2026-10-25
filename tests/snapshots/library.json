@@ -2781,8 +2781,7 @@
   "leading": [],
   "boxes": [
    "Der Naschmarkt → Naschmarkt@1,1/nom",
-   "zehn → zehn@2,3/nom",
-   "Minuten → Minuten@2,3/nom",
+   "zehn Minuten → Minuten@2,3/akk",
    "Fuß → Fuß@1,1/dat",
    "Café. → Café.@2,1/dat"
   ],
@@ -2790,7 +2789,6 @@
    [
     "ist@1,1"
    ],
-   [],
    [
     "zu"
    ],
@@ -3370,7 +3368,7 @@
    "kostet@2,1"
   ],
   "boxes": [
-   "ein Kilo Tomaten?, → Tomaten?,@2,1/akk",
+   "ein Kilo Tomaten?, → Tomaten?,@2,1/nom",
    "Thomas. → Thomas.@1,1/nom"
   ],
   "connections": [
@@ -3395,7 +3393,7 @@
   "leading": [],
   "boxes": [
    "Ich → Ich@2,2/nom",
-   "zwei Kilo, → Kilo,@2,1/nom",
+   "zwei Kilo, → Kilo,@2,3/akk",
    "Thomas. → Thomas.@1,1/nom"
   ],
   "connections": [
@@ -3453,12 +3451,10 @@
  "A1_story_der_herbstmarkt.json #84 Drei rote Paprika, bitte, sagt Lena.": {
   "leading": [],
   "boxes": [
-   "Drei → Drei@2,3/nom",
-   "rote Paprika, → Paprika,@2,3/nom",
+   "Drei rote Paprika, → Paprika,@2,3/akk",
    "Lena. → Lena.@1,3/nom"
   ],
   "connections": [
-   [],
    [
     "bitte,",
     "sagt@1,3"
@@ -3650,8 +3646,7 @@
    "seine Tasche: → Tasche:@1,3/akk",
    "Auberginen, → Auberginen,@2,3/nom",
    "Käse → Käse@1,1/nom",
-   "zwei → zwei@2,3/nom",
-   "Äpfel → Äpfel@2,3/nom"
+   "zwei Äpfel → Äpfel@2,3/nom"
   ],
   "connections": [
    [
@@ -3663,13 +3658,12 @@
    [
     "und"
    ],
-   [],
    [
     "–",
     "vielleicht",
     "ein",
     "bisschen",
-    "viel.@3,3"
+    "viel."
    ]
   ]
  },
@@ -6122,8 +6116,7 @@
   "leading": [],
   "boxes": [
    "Es → Es@2,1/nom",
-   "zwei → zwei@2,3/nom",
-   "Wochen → Wochen@2,3/nom",
+   "zwei Wochen → Wochen@2,3/nom",
    "Urlaub. → Urlaub.@1,1/dat"
   ],
   "connections": [
@@ -6131,7 +6124,6 @@
     "sind@2,3",
     "noch"
    ],
-   [],
    [
     "bis",
     "zum"
