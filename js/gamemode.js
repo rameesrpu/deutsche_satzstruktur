@@ -67,6 +67,9 @@ export class GameMode {
         // Story mode: advance sequentially through the current category
         this.storyMode = false;
 
+        // Review mode: prefer sentences with past mistakes (progressStore)
+        this.reviewMode = false;
+
         // Pre-calculated gridview state
         this.preCalculatedBoxes = [];
         this.preCalculatedConnections = [];
@@ -2233,8 +2236,10 @@ export class GameMode {
     loadRandomSentenceAndContinue() {
         const { sentenceManager, levelSelector } = this.host;
         let mode = 'random-in-category';
+        const multi = this.multiCategoryMode && this.selectedLevels.length > 0;
         if (this.storyMode) mode = 'story';
-        else if (this.multiCategoryMode && this.selectedLevels.length > 0) mode = 'multi-category';
+        else if (this.reviewMode) mode = 'review';
+        else if (multi) mode = 'multi-category';
         else if (levelSelector && levelSelector.currentLevel === 'custom') mode = 'custom';
 
         const picked = pickNextSentence({
@@ -2244,8 +2249,10 @@ export class GameMode {
             usedIds: this.usedSentenceIds,
             level: levelSelector ? levelSelector.currentLevel : null,
             category: levelSelector ? levelSelector.currentCategory : null,
-            selectedLevels: this.selectedLevels,
+            // Review covers the selected levels only while multi-category is on
+            selectedLevels: mode !== 'review' || multi ? this.selectedLevels : [],
             batchState: { played: this.batchSentencesPlayed, category: this.batchCurrentCategory },
+            getProgress: s => progressStore.getSentence(sentenceKey(s)),
         });
 
         // Story mode without a category context fell back to random

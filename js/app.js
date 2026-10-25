@@ -276,6 +276,7 @@ class DeutschApp {
         const multiCategoryA2 = document.getElementById('multi-category-a2');
         const multiCategoryB1 = document.getElementById('multi-category-b1');
         const storyModeToggle = document.getElementById('story-mode-toggle');
+        const reviewModeToggle = document.getElementById('review-mode-toggle');
 
         if (multiCategoryToggle) {
             const updateSelectedLevels = () => {
@@ -319,6 +320,20 @@ class DeutschApp {
                     multiCategoryToggle.checked = false;
                     this.gameMode.multiCategoryMode = false;
                     if (multiCategoryLevels) multiCategoryLevels.style.display = 'none';
+                }
+                // Mutually exclusive with review mode
+                if (storyModeToggle.checked && reviewModeToggle) reviewModeToggle.checked = false;
+                if (storyModeToggle.checked) this.gameMode.reviewMode = false;
+            });
+        }
+
+        if (reviewModeToggle) {
+            reviewModeToggle.addEventListener('change', () => {
+                this.gameMode.reviewMode = reviewModeToggle.checked;
+                // Mutually exclusive with story mode; combines with multi-category (reviews its levels)
+                if (reviewModeToggle.checked && storyModeToggle && storyModeToggle.checked) {
+                    storyModeToggle.checked = false;
+                    this.gameMode.storyMode = false;
                 }
             });
         }

@@ -318,12 +318,19 @@ gets wrong. Foundation for I2 and I4.
 > recorded. Export adds a `progress` field; import merges (newest entry per sentence, max bests) or replaces
 > with the sentence mode. 7 tests; verified in headless Chrome: one wrong + correct play stored, survives reload.
 
-### [ ] I2 "Review weak spots" mode
+### [x] I2 "Review weak spots" mode
 **Steps**: add a picker mode in `sentencePicker.js` that weights sentences by recent mistakes and
 time since last played (simple spaced repetition: e.g. weight = mistakes × age factor; perfect plays
 decay weight). Add a toggle next to the existing game settings (story / multi-category / time
 challenge). Test the weighting deterministically (inject a random fn).
 **Depends on**: R1, I1.
+
+> 2026-10-25 done. Picker mode `'review'` + exported `reviewWeight(entry, now)` = (total mistakes + 2×last-play
+> mistakes) × (1 + days since played, capped 30) ÷ 2^perfectStreak; never-missed sentences weigh 0. Progress comes
+> in via an injected `getProgress(sentence)` (picker stays pure). Scope: current category, or the selected levels
+> when Multiple Categories is also on; with nothing to review it falls back to random. "Review Weak Spots" toggle
+> (exclusive with Story). 5 tests. Verified in headless Chrome with seeded progress: 40 picks hit only the 2 weak
+> sentences. Gotcha for drivers: starting game mode with no sentence loaded calls `alert()`, which hangs headless Chrome.
 
 ### [ ] I3 Explain mistakes in feedback
 **Why**: currently a wrong placement only shows ✗. Learning happens when the learner sees *why*.

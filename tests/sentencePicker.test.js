@@ -1,6 +1,6 @@
 import { test, assertEqual, assert } from './assert.js';
 
-import { pickNextSentence } from '../js/sentencePicker.js';
+import { pickNextSentence, reviewWeight, REVIEW_MAX_AGE_DAYS } from '../js/sentencePicker.js';
 
 const lib = (id, level, category) => ({ id, text: `s${id}`, source: 'library', level, category });
 const SENTENCES = [
@@ -11,6 +11,13 @@ const SENTENCES = [
 ];
 const first = () => 0;   // random() stub: always pick the first candidate
 const last = () => 0.999; // always pick the last candidate
+
+const DAY = 24 * 60 * 60 * 1000;
+const NOW = 100 * DAY;
+const entry = ({ cell = 0, dat = 0, last = 0, streak = 0, ago = 0 }) => ({
+    plays: 1, perfect: 0, perfectStreak: streak, lastPlayed: NOW - ago * DAY, lastMistakes: last,
+    mistakes: { case: dat ? { dat } : {}, cell },
+});
 
 export function runSentencePickerTests() {
     test('picker random-in-category: only current category, skips current and used', () => {
@@ -99,5 +106,48 @@ export function runSentencePickerTests() {
         assertEqual(r.mode, 'random-in-category');
         assertEqual(r.sentence.id, 4);
         assertEqual(r.batchState.played, 0);
+    });
+
+    test('reviewWeight: mistakes × age, halved per perfect play, 0 without mistakes', () => {
+        assertEqual(reviewWeight(null, NOW), 0, 'never played');
+        assertEqual(reviewWeight(entry({}), NOW), 0, 'never missed');
+        assertEqual(reviewWeight(entry({ cell: 1, dat: 2 }), NOW), 3, 'old mistakes, just played');
+        assertEqual(reviewWeight(entry({ cell: 1, dat: 2, last: 1 }), NOW), 5, 'last play counts double');
+        assertEqual(reviewWeight(entry({ cell: 1, ago: 2 }), NOW), 3, '2 days old → ×3');
+        assertEqual(reviewWeight(entry({ cell: 1, ago: 365 }), NOW), 1 + REVIEW_MAX_AGE_DAYS, 'age capped');
+        assertEqual(reviewWeight(entry({ cell: 4, streak: 2 }), NOW), 1, 'two perfect plays → ÷4');
+    });
+
+    // s1: weight 1, s2: weight 3, s3: never missed; key by text like progressStore
+    const PROGRESS = { s1: entry({ cell: 1 }), s2: entry({ cell: 3 }), s3: entry({}), s4: entry({ cell: 2 }) };
+    const review = opts => pickNextSentence({ mode: 'review', sentences: SENTENCES, level: 'A1', category: 'x',
+        getProgress: s => PROGRESS[s.text] || null, now: NOW, ...opts });
+
+    test('picker review: weighted pick within the category, skips unweighted', () => {
+        // candidates s1 (w1), s2 (w3), total 4: r < 1 → s1, r ≥ 1 → s2
+        assertEqual(review({ random: () => 0.2 }).sentence.id, 1);
+        assertEqual(review({ random: () => 0.3 }).sentence.id, 2);
+        assertEqual(review({ random: last }).sentence.id, 2);
+        assertEqual(review({ random: first }).mode, 'review');
+    });
+
+    test('picker review: avoids current and used, resets history when only those remain', () => {
+        const a = review({ currentId: 2, random: last });
+        assertEqual(a.sentence.id, 1);
+        assertEqual([...a.usedIds], [2]);
+        const b = review({ currentId: 1, usedIds: new Set([2]), random: first });
+        assertEqual(b.sentence.id, 2, 'all weighted seen → repeat rather than fall back');
+        assertEqual([...b.usedIds], [1], 'history reset');
+    });
+
+    test('picker review: selectedLevels widens the pool across categories', () => {
+        const r = review({ selectedLevels: ['A1'], currentId: 2, usedIds: new Set([1]), random: first });
+        assertEqual(r.sentence.id, 4);
+    });
+
+    test('picker review: nothing to review → random fallback', () => {
+        const r = review({ getProgress: () => null, currentId: 1, random: first });
+        assertEqual(r.mode, 'random-in-category');
+        assertEqual(r.sentence.id, 2);
     });
 }
