@@ -6,7 +6,7 @@ import { SentenceManager } from './sentenceManager.js';
 import { FeldermodellRenderer } from './feldermodell.js';
 import { GridViewModel } from './gridview.js';
 import { GameMode } from './gamemode.js';
-import { progressStore } from './progressStore.js';
+import { progressStore, sentenceKey, isMastered } from './progressStore.js';
 import { Renderer } from './renderer.js';
 import { UIController } from './ui.js';
 
@@ -60,7 +60,9 @@ class DeutschApp {
             onEdit:             (id, e) => this.editSentenceFromList(id, e),
             onDelete:           (id, e) => this.deleteSentenceFromList(id, e),
             getCurrentSentenceId: () => this.sentenceManager.currentSentenceId,
-            onLibraryLoad:      (level, category, data) => this.handleLibraryLoad(level, category, data)
+            onLibraryLoad:      (level, category, data) => this.handleLibraryLoad(level, category, data),
+            isMastered:         (level, category, text) =>
+                isMastered(progressStore.getSentence(sentenceKey({ level, category, text })))
         });
         this.gameMode = new GameMode(this.svg, this.wordManager, this.gridViewModel, {
             sentenceManager:    this.sentenceManager,

@@ -1,6 +1,6 @@
 import { makeLocalStorage } from './stubs.js';
 import { test, assertEqual } from './assert.js';
-import { ProgressStore, PROGRESS_KEY, sentenceKey, emptyMistakes, addMistake, countMistakes }
+import { ProgressStore, PROGRESS_KEY, sentenceKey, emptyMistakes, addMistake, countMistakes, isMastered }
     from '../js/progressStore.js';
 
 const wrongCase = { ok: false, cellOk: true, caseOk: false, expectedCase: 'dat', expectedCell: null };
@@ -12,6 +12,18 @@ export function runProgressStoreTests() {
         assertEqual(sentenceKey({ id: 1, level: 'A1', category: 'Hauptsatz', text: 'Ich lerne.' }),
             'A1/Hauptsatz/Ich lerne.');
         assertEqual(sentenceKey({ id: 2, text: 'Mein Satz.' }), 'custom//Mein Satz.');
+    });
+
+    test('progress: isMastered needs the last 2 plays perfect', () => {
+        const store = new ProgressStore(makeLocalStorage());
+        const m = emptyMistakes();
+        addMistake(m, wrongCase);
+        assertEqual(isMastered(null), false);
+        assertEqual(isMastered(store.recordSentence('k', emptyMistakes(), 1)), false);
+        assertEqual(isMastered(store.recordSentence('k', emptyMistakes(), 2)), true);
+        assertEqual(isMastered(store.recordSentence('k', m, 3)), false);
+        store.recordSentence('k', emptyMistakes(), 4);
+        assertEqual(isMastered(store.recordSentence('k', emptyMistakes(), 5)), true);
     });
 
     test('progress: addMistake counts cell and case by expected case', () => {

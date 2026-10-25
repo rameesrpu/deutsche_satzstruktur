@@ -355,10 +355,17 @@ challenge). Test the weighting deterministically (inject a random fn).
 > a few prep/case pairs disagree (`um` + dat in "um drei Uhr aus der Schule"), so a preposition is cited only when it
 > directly precedes the phrase, has no trailing punctuation and its case matches. Screenshots checked at 400×850 and 1280×800.
 
-### [ ] I4 Mastery per category in the level selector
+### [x] I4 Mastery per category in the level selector
 **Steps**: show a small progress indicator (e.g. "12/20 mastered") per category in
 [js/levelSelector.js](js/levelSelector.js), using I1 data. Mastered = last N plays perfect (pick N=2).
 **Depends on**: I1.
+
+> 2026-10-25 done. `isMastered(entry)` / `MASTERY_PLAYS = 2` in progressStore.js (perfectStreak ≥ 2). LevelSelector takes
+> an `isMastered(level, category, text)` callback: category options read "Hauptsatz (2/20)" (each level's sentence lists
+> fetched once, cached in `textsCache`, also reused when opening a category), a "N/M mastered" line tops the list, and
+> mastered sentences get a ✓. `refresh()` (called via `updateSentenceList` after each sentence) re-counts. Note: stored
+> library sentences use the LEVEL_CONTENT key as category (`hauptsatz`), not the file's `Hauptsatz`. Verified in headless
+> Chrome with seeded progress (2/20, streak-1 sentence not counted).
 
 ### [ ] I5 Handle missing German TTS voice
 **Context**: [js/sound.js](js/sound.js) picks a voice whose lang starts with `de`; many browsers

@@ -676,6 +676,21 @@ button:active {
     border-color: var(--brand-400);
 }
 
+/* Mastery (I4): last 2 plays perfect */
+.library-mastery {
+    padding: 0 2px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--success-500);
+}
+
+.sentence-mastered-badge {
+    color: var(--success-500);
+    font-weight: 700;
+    font-style: normal;
+    margin-right: 6px;
+}
+
 /* Export/Import Buttons */
 .sentence-export-import {
     margin-top: 15px;

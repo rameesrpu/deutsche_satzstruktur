@@ -17,6 +17,17 @@ export function sentenceKey(sentence) {
     return `${sentence.level || 'custom'}/${sentence.category || ''}/${sentence.text}`;
 }
 
+/** A sentence is mastered when its last MASTERY_PLAYS plays were all perfect. */
+export const MASTERY_PLAYS = 2;
+
+/**
+ * @param {?SentenceProgress} entry
+ * @returns {boolean}
+ */
+export function isMastered(entry) {
+    return !!entry && entry.perfectStreak >= MASTERY_PLAYS;
+}
+
 /** Empty per-sentence mistake tally: wrong case by expected case, wrong cell. */
 export function emptyMistakes() {
     return { case: {}, cell: 0 };

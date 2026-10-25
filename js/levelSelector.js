@@ -8,6 +8,10 @@ export class LevelSelector {
         this.onDelete = callbacks.onDelete;
         this.getCurrentSentenceId = callbacks.getCurrentSentenceId;
         this.onLibraryLoad = callbacks.onLibraryLoad || null;
+        this.isMastered = callbacks.isMastered || (() => false);
+
+        // `${level}/${category}` → Promise<string[]> of that category's sentence texts
+        this.textsCache = new Map();
 
         this.currentLevel = '';
         this.currentCategory = '';
@@ -59,6 +63,52 @@ export class LevelSelector {
         });
 
         this.categorySelect.disabled = false;
+        this.updateCategoryMastery();
+    }
+
+    /**
+     * Sentence texts of a category (from its data/levels file), fetched once.
+     * @returns {Promise<string[]>}
+     */
+    loadCategoryTexts(level, category) {
+        const key = `${level}/${category}`;
+        if (!this.textsCache.has(key)) {
+            const catData = this.levelContent[level].categories[category];
+            const promise = fetch(catData.file)
+                .then(r => {
+                    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                    return r.json();
+                })
+                .then(data => (data.sentences || []).map(t => t.trim()));
+            promise.catch(() => this.textsCache.delete(key)); // retry on next use
+            this.textsCache.set(key, promise);
+        }
+        return this.textsCache.get(key);
+    }
+
+    /** @returns {{mastered: number, total: number}} */
+    countMastered(level, category, texts) {
+        const mastered = texts.filter(t => this.isMastered(level, category, t)).length;
+        return { mastered, total: texts.length };
+    }
+
+    /** Append "mastered/total" to each category option of the current level. */
+    async updateCategoryMastery() {
+        const level = this.currentLevel;
+        const levelData = this.levelContent[level];
+        if (!levelData) return;
+        await Promise.all(Array.from(this.categorySelect.options).map(async option => {
+            const cat = levelData.categories[option.value];
+            if (!cat) return;
+            try {
+                const texts = await this.loadCategoryTexts(level, option.value);
+                if (this.currentLevel !== level) return;
+                const { mastered, total } = this.countMastered(level, option.value, texts);
+                option.textContent = `${cat.label} (${mastered}/${total})`;
+            } catch (e) {
+                option.textContent = cat.label;
+            }
+        }));
     }
 
     async handleCategoryChange() {
@@ -75,14 +125,11 @@ export class LevelSelector {
 
         try {
             const libraryFile = catData.file.replace('data/levels/', 'data/library/');
-            const [levelsResponse, libraryResponse] = await Promise.all([
-                fetch(catData.file),
+            const [texts, libraryResponse] = await Promise.all([
+                this.loadCategoryTexts(this.currentLevel, category),
                 fetch(libraryFile).catch(() => null)
             ]);
-
-            if (!levelsResponse.ok) throw new Error(`HTTP ${levelsResponse.status}`);
-            const levelsData = await levelsResponse.json();
-            this.currentSentences = levelsData.sentences || [];
+            this.currentSentences = texts;
 
             if (libraryResponse && libraryResponse.ok && this.onLibraryLoad) {
                 const libraryData = await libraryResponse.json();
@@ -107,17 +154,33 @@ export class LevelSelector {
         const currentId = this.getCurrentSentenceId();
         this.sentenceList.innerHTML = '';
 
+        const { mastered, total } = this.countMastered(this.currentLevel, this.currentCategory, this.currentSentences);
+        const summary = document.createElement('div');
+        summary.className = 'library-mastery';
+        summary.textContent = `${mastered}/${total} mastered`;
+        summary.title = 'Mastered: the last 2 plays were perfect';
+        this.sentenceList.appendChild(summary);
+
         this.currentSentences.forEach((text, i) => {
             const cached = this.getCachedSentence(this.currentLevel, this.currentCategory, text);
             const isActive = cached && cached.id === currentId;
+            const isMastered = this.isMastered(this.currentLevel, this.currentCategory, text);
 
             const item = document.createElement('div');
-            item.className = 'sentence-item' + (isActive ? ' active' : '') + (cached ? '' : ' library-uncached');
+            item.className = 'sentence-item' + (isActive ? ' active' : '') + (cached ? '' : ' library-uncached') +
+                (isMastered ? ' mastered' : '');
             item.dataset.index = i;
 
             const textDiv = document.createElement('div');
             textDiv.className = 'sentence-item-text';
             textDiv.textContent = text;
+            if (isMastered) {
+                const badge = document.createElement('span');
+                badge.className = 'sentence-mastered-badge';
+                badge.title = 'Mastered';
+                badge.textContent = '✓';
+                textDiv.prepend(badge);
+            }
             item.appendChild(textDiv);
 
             if (cached) {
@@ -198,8 +261,9 @@ export class LevelSelector {
             if (this.sentenceList) this.sentenceList.innerHTML = '';
         } else if (level === 'custom') {
             this.renderCustomSentences();
-        } else if (this.currentCategory && this.currentSentences.length > 0) {
-            this.renderLibrarySentences();
+        } else {
+            if (this.currentCategory && this.currentSentences.length > 0) this.renderLibrarySentences();
+            this.updateCategoryMastery();
         }
     }
 }
