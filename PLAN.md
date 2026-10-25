@@ -110,7 +110,7 @@ touch the DOM/SVG.
 > `null` (gridview.js ~line 474); only non-subject/object/verb types get `null`. Also: the PLAN's gjs
 > syntax-check one-liner relies on deprecated `Uint8Array.toString()`; the harness uses TextDecoder.
 
-### [ ] P0.3 Add `CLAUDE.md`
+### [x] P0.3 Add `CLAUDE.md`
 **Why**: fresh agents need a short, always-loaded orientation instead of rediscovering structure.
 
 **Steps**: write a concise (~40 lines) `CLAUDE.md` at repo root covering: what the app is; that game
@@ -122,6 +122,9 @@ section at the end of styles.css); "don't touch `backend/` unless asked"; link t
 
 **Done when**: file exists, every command in it was run once and works.
 **Depends on**: P0.1, P0.2 (so the commands exist). Update it whenever later items change structure.
+
+> 2026-10-25 done. All commands run once (tests, audit, headless screenshot at 400×850). Data shape
+> is inline until R3 adds typedefs — then replace that section with a link.
 
 ---
 
