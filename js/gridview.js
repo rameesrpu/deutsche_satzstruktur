@@ -296,6 +296,11 @@ class GridViewModel {
         console.log('=== END FLOW DIAGRAM ===\n');
     }
 
+    /**
+     * Split a sentence into phrase boxes and the connector words between them.
+     * @param {Word[]} words
+     * @returns {ParsedSentence}
+     */
     parseSentenceFlow(words) {
         // Words that connect clauses — not part of any noun cluster
         const CONNECTOR_TYPES = new Set([
@@ -383,6 +388,11 @@ class GridViewModel {
         return { boxes, connections, leadingWords, trailingWords };
     }
 
+    /**
+     * Grid cell for a word (a box's mainWord).
+     * @param {Word} word
+     * @returns {?GridCell} null for words that have no cell (connectors)
+     */
     getWordPosition(word) {
         // Subjects: Check if it's a pronoun (ich, du, wir) or a noun (use gender/number)
         if (word.type === 'subject') {

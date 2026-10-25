@@ -19,7 +19,7 @@ const MULTI_CATEGORY_BATCH_SIZE = 5;
  * (whole list, or just the current category in multi-category) but the
  * just-played sentence is still avoided.
  *
- * @returns {{ sentence: Object|null, usedIds: Set, batchState: {played: number, category: ?{level, category}}, mode: string }}
+ * @returns {{ sentence: ?Sentence, usedIds: Set, batchState: {played: number, category: ?{level, category}}, mode: string }}
  *   `mode` is the mode actually used (after fallbacks). Inputs are not mutated.
  */
 function pickNextSentence({

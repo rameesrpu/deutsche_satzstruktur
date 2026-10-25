@@ -1456,7 +1456,11 @@ class GameMode {
     }
 
     /**
-     * Place current item in selected cell
+     * Place current item (a PhraseBox or a single Word) in selected cell.
+     * Rules come from evaluatePlacement → PlacementOutcome (see js/types.js).
+     * @param {number} row
+     * @param {number} col
+     * @param {?Case} caseType
      */
     placeWord(row, col, caseType) {
         if (this.currentIndex >= this.manualItems.length) {

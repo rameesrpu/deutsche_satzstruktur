@@ -12,6 +12,7 @@ class SentenceManager {
      * Add a new sentence from text input
      * @param {string} text
      * @param {Object} meta - optional extra fields (e.g. source, level, category)
+     * @returns {?Sentence}
      */
     addSentence(text, meta = {}) {
         if (!text || text.trim() === '') return null;
@@ -195,6 +196,7 @@ class SentenceManager {
 
     /**
      * Find a library sentence by level, category, and text (for cache lookup)
+     * @returns {?Sentence}
      */
     findLibrarySentence(level, category, text) {
         return this.sentences.find(s =>
@@ -211,6 +213,9 @@ class SentenceManager {
      * - Adds sentences not yet in localStorage.
      * - Updates words on existing sentences only when the library version has changed
      *   (i.e. the developer pushed corrections), preserving user edits otherwise.
+     * @param {string} level
+     * @param {string} category
+     * @param {LibraryFile} libraryData
      */
     bulkLoadLibraryCategory(level, category, libraryData) {
         const { version, sentences } = libraryData;
@@ -250,6 +255,7 @@ class SentenceManager {
 
     /**
      * Get all sentences
+     * @returns {Sentence[]}
      */
     getAllSentences() {
         return this.sentences;
@@ -257,6 +263,7 @@ class SentenceManager {
 
     /**
      * Get current sentence
+     * @returns {?Sentence}
      */
     getCurrentSentence() {
         if (!this.currentSentenceId) return null;

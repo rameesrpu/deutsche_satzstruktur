@@ -10,14 +10,12 @@ const MAX_WRONG_ATTEMPTS = 3;    // wrong placements before the word is auto-pla
  * Verbs and modals have no case, so only the cell is checked; for other words
  * the case must match `word.case` (a word without case accepts any).
  *
- * @param {Object} word
+ * @param {Word} word
  * @param {number} row
  * @param {number} col
- * @param {?string} caseType  selected case: nom/akk/dat/gen
- * @param {?{row: number, col: number, label: string}} expectedCell  from getWordPosition(word); null = no cell
- * @returns {{ ok: boolean, cellOk: boolean, caseOk: boolean, expectedCase: ?string,
- *             expectedCell: ?{row: number, col: number} }}
- *   `expectedCase` is null when the case is not checked.
+ * @param {?Case} caseType  selected case
+ * @param {?GridCell} expectedCell  from getWordPosition(word); null = no cell
+ * @returns {PlacementResult}
  */
 function validatePlacement(word, row, col, caseType, expectedCell) {
     const cellOk = !!expectedCell && expectedCell.row === row && expectedCell.col === col;
@@ -51,10 +49,7 @@ function getTimePoints(elapsedMs) {
  * @param {Object} p.word, p.row, p.col, p.caseType, p.expectedCell  see validatePlacement
  * @param {number} p.attempts   wrong attempts so far for this word
  * @param {?number} p.elapsedMs time since the word appeared in time challenge; null otherwise
- * @returns {{ result: Object, points: number, timeColor: ?string, attempts: number, autoPlace: boolean }}
- *   `result` is the validatePlacement reason object; `attempts` is the new wrong-attempt
- *   count (reset to 0 on success); `autoPlace` is true once MAX_WRONG_ATTEMPTS is reached.
- *   `timeColor` is the time-points color on a timed correct placement, else null.
+ * @returns {PlacementOutcome}
  */
 function evaluatePlacement({ word, row, col, caseType, expectedCell, attempts = 0, elapsedMs = null }) {
     const result = validatePlacement(word, row, col, caseType, expectedCell);
@@ -75,7 +70,9 @@ function evaluatePlacement({ word, row, col, caseType, expectedCell, attempts = 
 
 /**
  * The correct placement used when auto-placing a word, or null if it has no cell.
- * @returns {?{row: number, col: number, caseType: string}}
+ * @param {Word} word
+ * @param {?GridCell} expectedCell
+ * @returns {?{row: number, col: number, caseType: Case}}
  */
 function getAutoPlacement(word, expectedCell) {
     if (!expectedCell) return null;

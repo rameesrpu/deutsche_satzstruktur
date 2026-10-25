@@ -222,7 +222,7 @@ I1 (recording results) need these as plain data.
 > don't depend on gridview. 17 rule tests; snapshot unchanged. Verified in headless Chrome: 3 wrong
 > placements → auto-place +10, then correct +10. Juice (streak, confetti, sound) stays in `placeWord`.
 
-### [ ] R3 JSDoc typedefs for core data
+### [x] R3 JSDoc typedefs for core data
 **Why**: gives agents the data shape without reading many files.
 
 **Steps**: add `js/types.js` (comments only, or loaded harmlessly) with `@typedef` for `Word`
@@ -234,6 +234,12 @@ in gridview/gamemode/sentenceManager. List allowed enum values (types, cases, ge
 
 **Done when**: typedefs exist, are linked from CLAUDE.md, and match real library data
 (spot-check with the audit script).
+
+> 2026-10-25 done. `js/types.js` (comments only, not loaded; syntax-checked by the harness): Word,
+> Sentence, LibraryFile, GridCell, PhraseBox, ParsedSentence, PlacementResult, PlacementOutcome + enums.
+> Enums checked against all 5041 library words (pronoun `'none'` is a string; `clause_type`/`clause_id`
+> missing on 4 words; library categories are capitalized, e.g. `Hauptsatz`). Referenced from
+> gridview/gameRules/sentenceManager/sentencePicker/placeWord; CLAUDE.md data section now links it.
 
 ### [ ] R4 Migrate to ES modules (incrementally)
 **Why**: removes implicit global coupling and `<script>` load-order dependence; makes each file
