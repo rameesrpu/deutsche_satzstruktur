@@ -283,12 +283,22 @@ state its dependencies. No build step needed.
 > stays in git — it's `build_library_data.py`'s input, not just a personal backup. New
 > `scripts/bump_version.sh [version]` rewrites all 17 `?v=` strings (default: timestamp).
 
-### [ ] R6 (optional) Split remaining `gamemode.js` rendering
+### [x] R6 (optional) Split remaining `gamemode.js` rendering
 Only if still painful after R1/R2. Candidates: `drawUIOverlay` (~300 lines) → `gameHud.js`;
 confetti/floating text/feedback loops → `gameJuice.js`. `draw()` clears and rebuilds the whole SVG
 on every key press (arrow keys / case keys call `redrawAll`) — only optimize if jank is observed on
 mobile.
 **Depends on**: R2.
+
+> 2026-10-25 done (gamemode.js 2315 → 1589 lines). `js/gameHud.js`: `drawHud(game)` (was `drawUIOverlay`; returns the
+> overlay group, reads GameMode state) + pure `estimateTextWidth`, `createTopBarWordShape`, `getTimerColor`, `drawTimerBar`,
+> and `GM_UI`. `js/gameJuice.js`: `ensureJuiceDefs`, `spawnConfetti`, `spawnFloatingText`, `drawFeedbackAnimation`,
+> `updateFeedbackElement` (shared `feedbackFrame` math), `showFinalCelebration` — take `svg`/parent + an `isActive()` callback
+> instead of `this`. State-owning rAF loops (feedback, score count-up, timer) stay in GameMode. Moved by script (code
+> unchanged apart from `this.` → params). Verified in headless Chrome vs a HEAD worktree with the same driver (wrong +
+> correct placements, sentence complete, final celebration, timer bar; 400×850 + 1280×800): 0 errors; the one missed call
+> (`this.spawnConfetti` in showGameComplete) was caught there. Screenshot diffs only in rAF-animated regions, which also
+> differ HEAD-vs-HEAD; the celebration screen is pixel-identical. `draw()` full rebuild not optimized (no jank observed).
 
 ---
 

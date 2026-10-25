@@ -22,7 +22,9 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 - `gameRules.js` — pure placement rules: `evaluatePlacement()` (validation reason object, points, attempts/auto-place),
   `explainMistake()` (short why-wrong hints; preposition→case table)
 - `progressStore.js` — `progressStore`: persisted game progress (localStorage `gameProgress`, per sentence keyed level/category/text; lifetime bests; `isMastered`); included in sentence export/import
-- `gamemode.js` — GameMode: placement game UI, HUD, feedback/juice (largest file)
+- `gamemode.js` — GameMode: placement game state, grid/controllers drawing, input, sentence flow (largest file)
+- `gameHud.js` — `drawHud(game)`: word bar (score pill, streak, current/auto/next words, timer bar), complete card; `GM_UI` colors
+- `gameJuice.js` — display-only effects: SVG defs, confetti, floating text, ✓/✗ feedback, final celebration overlay
 - `renderer.js` — SVG drawing of words/connections in edit view
 - `ui.js` — UIController: editor panels and interactions
 - `app.js` — DeutschApp: wires everything together, backend calls, import/export. Passes GameMode a

@@ -2,32 +2,14 @@ import { gameSounds } from './sound.js';
 import { pickNextSentence } from './sentencePicker.js';
 import { evaluatePlacement, getAutoPlacement, explainMistake, MAX_WRONG_ATTEMPTS } from './gameRules.js';
 import { progressStore, sentenceKey, emptyMistakes, addMistake } from './progressStore.js';
+import { GM_UI, drawHud, getTimerColor } from './gameHud.js';
+import { ensureJuiceDefs, spawnConfetti, spawnFloatingText, drawFeedbackAnimation, updateFeedbackElement,
+    showFinalCelebration } from './gameJuice.js';
 
 /**
  * Game Mode - Interactive German sentence placement game
  * Uses dual-controller mechanics (mobile FPS-style) for word placement
  */
-
-// Visual design tokens for SVG presentation attributes.
-// Hard-coded hex values mirror the CSS custom properties in styles.css —
-// var(--x) does NOT reliably resolve inside SVG presentation attributes.
-const GM_UI = {
-    indigo: '#4f46e5',      // brand
-    indigoSoft: '#c7d2fe',  // indigo-200
-    text: '#0f172a',        // primary text
-    secondary: '#64748b',   // secondary text
-    muted: '#94a3b8',       // muted text
-    border: '#e2e8f0',      // borders
-    surface: '#f8fafc',     // light bg
-    surfaceAlt: '#f1f5f9',  // muted pill bg
-    white: '#ffffff',
-    success: '#10b981',
-    danger: '#ef4444',
-    amber: '#f59e0b'
-};
-
-// Confetti palette (design palette + grammar-semantic accents)
-const GM_CONFETTI_COLORS = ['#4f46e5', '#10b981', '#f59e0b', '#ef4444', '#e91e63', '#3498db', '#8e44ad'];
 
 export class GameMode {
     /**
@@ -371,7 +353,7 @@ export class GameMode {
         this.svg.appendChild(this.gameGroup);
 
         // Shared visual defs (soft drop shadow) — recreated after each clear
-        this.ensureJuiceDefs();
+        ensureJuiceDefs(this.svg, this.gameGroup);
 
         // Draw empty grid
         this.drawEmptyGrid();
@@ -380,13 +362,13 @@ export class GameMode {
         this.drawPlacedItems();
 
         // Draw tick/cross feedback animation (if active)
-        this.drawFeedbackAnimation();
+        drawFeedbackAnimation(this.gameGroup, this.feedbackAnimation);
 
         // Draw controllers (now positioned below grid)
         this.drawControllers();
 
         // Draw UI overlays (score, current word, etc.)
-        this.drawUIOverlay();
+        this.overlayGroup = drawHud(this);
 
         // Draw full-screen tap overlay when waiting for continue
         if (this.waitingForContinue) {
@@ -767,399 +749,6 @@ export class GameMode {
         }
     }
 
-
-    /**
-     * Create the shaped container for the center word in the top bar.
-     * Default (no case): dashed outline, transparent fill.
-     * Selected case mirrors the gridview case-box shapes.
-     */
-    createTopBarWordShape(caseType, centerX, topY, width, height) {
-        const x = centerX - width / 2;
-        let shape;
-
-        // Restyled: prominent white pill with soft shadow. Geometry per case is
-        // unchanged (shape still encodes the selected case); border switches from
-        // subtle dashed indigo (no case) to saturated indigo (case selected).
-        if (!caseType) {
-            shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            shape.setAttribute('x', x);
-            shape.setAttribute('y', topY);
-            shape.setAttribute('width', width);
-            shape.setAttribute('height', height);
-            shape.setAttribute('rx', '14');
-            shape.setAttribute('fill', 'url(#gm-pill-grad)');
-            shape.setAttribute('stroke', GM_UI.indigoSoft);
-            shape.setAttribute('stroke-width', '2');
-            shape.setAttribute('stroke-dasharray', '8,5');
-        } else if (caseType === 'nom') {
-            shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            shape.setAttribute('x', x);
-            shape.setAttribute('y', topY);
-            shape.setAttribute('width', width);
-            shape.setAttribute('height', height);
-            shape.setAttribute('rx', '20');
-            shape.setAttribute('ry', '20');
-            shape.setAttribute('fill', 'url(#gm-pill-grad)');
-            shape.setAttribute('stroke', GM_UI.indigo);
-            shape.setAttribute('stroke-width', '3');
-        } else if (caseType === 'akk') {
-            shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            shape.setAttribute('x', x);
-            shape.setAttribute('y', topY);
-            shape.setAttribute('width', width);
-            shape.setAttribute('height', height);
-            shape.setAttribute('rx', '5');
-            shape.setAttribute('ry', '5');
-            shape.setAttribute('fill', 'url(#gm-pill-grad)');
-            shape.setAttribute('stroke', GM_UI.indigo);
-            shape.setAttribute('stroke-width', '3');
-        } else if (caseType === 'dat') {
-            shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-            const slope = 15;
-            const points = `${x + slope},${topY} ${x + width - slope},${topY} ${x + width},${topY + height} ${x},${topY + height}`;
-            shape.setAttribute('points', points);
-            shape.setAttribute('fill', 'url(#gm-pill-grad)');
-            shape.setAttribute('stroke', GM_UI.indigo);
-            shape.setAttribute('stroke-width', '3');
-        } else if (caseType === 'gen') {
-            shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-            const slant = 10;
-            const points = `${x + slant},${topY} ${x + width + slant},${topY} ${x + width - slant},${topY + height} ${x - slant},${topY + height}`;
-            shape.setAttribute('points', points);
-            shape.setAttribute('fill', 'url(#gm-pill-grad)');
-            shape.setAttribute('stroke', GM_UI.indigo);
-            shape.setAttribute('stroke-width', '3');
-        }
-
-        if (shape) shape.setAttribute('filter', 'url(#gm-shadow)');
-        return shape;
-    }
-
-    /**
-     * Estimate display width for a text string at the given font size (px).
-     * Uses ~0.62 em per character as a generous average for bold/normal Latin text.
-     */
-    estimateTextWidth(text, fontSize, padding = 40) {
-        return Math.max(text.length * (fontSize * 0.62) + padding, padding + 60);
-    }
-
-    /**
-     * Draw UI overlay (score, accumulated auto-words on left, current word in center)
-     */
-    drawUIOverlay() {
-        const overlayGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        overlayGroup.setAttribute('class', 'game-ui-overlay');
-        this.gameGroup.appendChild(overlayGroup);
-
-        // Position word bar just above the grid. Compact on desktop; much
-        // larger on mobile, where the viewBox down-scaling shrinks everything
-        const isMobile = window.innerWidth <= 768;
-        const barHeight = isMobile ? 84 : 48;
-        const gridStartY = this.getGridStartY();
-        const topY = Math.max(6, gridStartY - barHeight - 10); // 10px gap above grid
-
-        // Bar geometry: pills center on the grid's horizontal center
-        // (desktop grid: x 50–800 → center 425; mobile grid: x 50–1100 → 575)
-        const gridStartX = this.getGridStartX();
-        const cellWidth = this.gridViewModel.cellWidth;
-        const gridEndX = gridStartX + (3 * cellWidth);
-        const barCenterX = gridStartX + (3 * cellWidth) / 2;
-
-        // --- Score cluster (drawn FIRST so the word pills always render on
-        // top of it — on long sentences the words win the overlap) ---
-        // White pill right-aligned with the grid, in the word-bar band.
-        // #gm-score-text is updated in place by the score rAF loop between
-        // full redraws.
-        const scoreLabel = `${this.getDisplayedScore()}/${this.targetScore}`;
-        const scoreFont = isMobile ? 30 : 18;
-        const scoreSubFont = isMobile ? 20 : 13;
-        const scorePillW = Math.max(scoreLabel.length * scoreFont * 0.67 + 28, isMobile ? 150 : 100);
-        const scorePillH = isMobile ? 76 : 48;
-        const scorePillX = gridEndX - scorePillW;
-        const scorePillY = topY + (barHeight - scorePillH) / 2;
-
-        const scorePill = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        scorePill.setAttribute('x', scorePillX);
-        scorePill.setAttribute('y', scorePillY);
-        scorePill.setAttribute('width', scorePillW);
-        scorePill.setAttribute('height', scorePillH);
-        scorePill.setAttribute('rx', '14');
-        scorePill.setAttribute('fill', GM_UI.white);
-        scorePill.setAttribute('stroke', GM_UI.indigoSoft); // indigo-200 accent
-        scorePill.setAttribute('stroke-width', '2');
-        scorePill.setAttribute('filter', 'url(#gm-shadow)');
-        scorePill.setAttribute('pointer-events', 'none');
-        overlayGroup.appendChild(scorePill);
-
-        const scoreText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        scoreText.setAttribute('id', 'gm-score-text');
-        scoreText.setAttribute('x', gridEndX - 14);
-        scoreText.setAttribute('y', scorePillY + (isMobile ? 33 : 21));
-        scoreText.setAttribute('text-anchor', 'end');
-        scoreText.setAttribute('fill', GM_UI.indigo); // brand accent for the headline stat
-        scoreText.setAttribute('font-size', scoreFont);
-        scoreText.setAttribute('font-weight', 'bold');
-        scoreText.setAttribute('font-family', "'Inter', sans-serif");
-        scoreText.setAttribute('pointer-events', 'none');
-        scoreText.textContent = scoreLabel;
-        overlayGroup.appendChild(scoreText);
-
-        // Current sentence score (below total score)
-        const sentenceScoreText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        sentenceScoreText.setAttribute('x', gridEndX - 14);
-        sentenceScoreText.setAttribute('y', scorePillY + (isMobile ? 62 : 40));
-        sentenceScoreText.setAttribute('text-anchor', 'end');
-        sentenceScoreText.setAttribute('fill', GM_UI.secondary);
-        sentenceScoreText.setAttribute('font-size', scoreSubFont);
-        sentenceScoreText.setAttribute('font-weight', 'normal');
-        sentenceScoreText.setAttribute('font-family', "'Inter', sans-serif");
-        sentenceScoreText.setAttribute('pointer-events', 'none');
-        sentenceScoreText.textContent = `+${this.currentSentenceScore}`;
-        overlayGroup.appendChild(sentenceScoreText);
-
-        // Streak indicator (display only, never feeds back into scoring):
-        // small 🔥×N tucked inside the score pill, on the second line next
-        // to the sentence score
-        if (this.displayStreak >= 2) {
-            const streakText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            streakText.setAttribute('x', scorePillX + 14);
-            streakText.setAttribute('y', scorePillY + (isMobile ? 62 : 40));
-            streakText.setAttribute('text-anchor', 'start');
-            streakText.setAttribute('fill', '#c2410c'); // amber-700
-            streakText.setAttribute('font-size', scoreSubFont);
-            streakText.setAttribute('font-weight', 'bold');
-            streakText.setAttribute('font-family', "'Inter', sans-serif");
-            streakText.setAttribute('pointer-events', 'none');
-            streakText.textContent = `🔥×${this.displayStreak}`;
-            overlayGroup.appendChild(streakText);
-        }
-
-        // Left-aligned word flow in sentence order: [auto words] [current
-        // word] [preview], starting at the grid's left edge. Uses the full
-        // bar width and keeps pills from running off-canvas on long sentences.
-        let currentWordBoxLeft = gridStartX;
-        let currentWordBoxWidth = 0;
-
-        if (this.currentWordDisplay && this.currentIndex < this.manualItems.length) {
-            const activeItem = this.manualItems[this.currentIndex];
-
-            if (activeItem.type === 'box') {
-                const phraseText = activeItem.item.words.map(w => w.text).join(' ');
-                currentWordBoxWidth = this.estimateTextWidth(phraseText, isMobile ? 42 : 28);
-            } else {
-                currentWordBoxWidth = this.estimateTextWidth(activeItem.item.text, isMobile ? 42 : 28);
-            }
-        }
-
-        // Get visible auto-placed words in original sentence order
-        const visibleAutoWords = this.getVisibleAutoWords();
-
-        // Draw accumulated auto-placed words first (muted pills, left to right)
-        if (visibleAutoWords.length > 0) {
-            const autoWordWidths = visibleAutoWords.map(word => this.estimateTextWidth(word, isMobile ? 34 : 24));
-
-            let currentX = gridStartX;
-
-            visibleAutoWords.forEach((wordText, index) => {
-                const wordWidth = autoWordWidths[index];
-                const centerX = currentX + wordWidth / 2;
-                const centerY = topY + barHeight / 2;
-
-                // Muted gray pill for each auto-placed/past word
-                const bgRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                bgRect.setAttribute('x', currentX);
-                bgRect.setAttribute('y', topY);
-                bgRect.setAttribute('width', wordWidth);
-                bgRect.setAttribute('height', barHeight);
-                bgRect.setAttribute('fill', GM_UI.surfaceAlt);
-                bgRect.setAttribute('stroke', GM_UI.border);
-                bgRect.setAttribute('stroke-width', '1.5');
-                bgRect.setAttribute('rx', '14');
-                overlayGroup.appendChild(bgRect);
-
-                const autoText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                autoText.setAttribute('x', centerX);
-                autoText.setAttribute('y', centerY + (isMobile ? 12 : 8));
-                autoText.setAttribute('text-anchor', 'middle');
-                autoText.setAttribute('fill', GM_UI.secondary);
-                autoText.setAttribute('font-size', isMobile ? 34 : 24);
-                autoText.setAttribute('font-weight', '600');
-                autoText.setAttribute('font-family', "'Nunito', sans-serif");
-                autoText.textContent = wordText;
-                overlayGroup.appendChild(autoText);
-
-                currentX += wordWidth + 10; // Move right for next word
-            });
-
-            // Current word starts after the auto words (15px total gap)
-            currentWordBoxLeft = currentX + 5;
-        }
-
-        // Draw current word (manual placement) after the auto words
-        if (this.currentWordDisplay && this.currentIndex < this.manualItems.length) {
-            const activeItem = this.manualItems[this.currentIndex];
-            const centerX = currentWordBoxLeft + currentWordBoxWidth / 2;
-            const centerY = topY + barHeight / 2;
-
-            // Reuse the width computed before the auto-words (same font size)
-            // so the pill shape, its text, and the preview offset all agree —
-            // a second measurement here with a different size shifts the pill
-            // off its slot and overlaps the neighbors
-            const wordWidth = currentWordBoxWidth;
-            const displayText = activeItem.type === 'box'
-                ? activeItem.item.words.map(w => w.text).join(' ')
-                : activeItem.item.text;
-
-            // Wrapper group so a wrong placement can trigger a brief CSS shake
-            // (purely visual; coordinates unchanged)
-            const centerWordGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-            if (Date.now() < this.wrongShakeUntil) {
-                centerWordGroup.setAttribute('class', 'gm-shake');
-            }
-            overlayGroup.appendChild(centerWordGroup);
-
-            // Draw center word shape — shape depends on currently selected case
-            const centerShape = this.createTopBarWordShape(this.selectedCase, centerX, topY, wordWidth, barHeight);
-            centerWordGroup.appendChild(centerShape);
-
-            // Timer bar for time challenge mode
-            if (this.timeChallengeMode && this.wordStartTime !== null) {
-                this.drawTimerBar(overlayGroup, centerX, topY, barHeight, wordWidth);
-            }
-
-            // German word in Nunito 700 on the white pill
-            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            text.setAttribute('x', centerX);
-            text.setAttribute('y', centerY + (isMobile ? 15 : 9));
-            text.setAttribute('text-anchor', 'middle');
-            text.setAttribute('fill', GM_UI.text);
-            text.setAttribute('font-size', isMobile ? 42 : 28);
-            text.setAttribute('font-weight', '700');
-            text.setAttribute('font-family', "'Nunito', sans-serif");
-            text.textContent = displayText;
-            centerWordGroup.appendChild(text);
-
-            // Draw next word preview (to the right, in grey).
-            // Look at the word immediately after the current item in sentence order.
-            // If that word is the start of a box, show the full box phrase.
-            const nextWordInSentence = this.words[this.getItemWordRange(activeItem)[1] + 1];
-            let nextWordText = null;
-            if (nextWordInSentence) {
-                const nextManual = this.wordToManualItem.get(nextWordInSentence);
-                nextWordText = (nextManual && nextManual.type === 'box')
-                    ? nextManual.item.words.map(w => w.text).join(' ')
-                    : nextWordInSentence.text;
-            }
-
-            if (nextWordText) {
-                let nextWordWidth;
-                nextWordWidth = this.estimateTextWidth(nextWordText, isMobile ? 34 : 24);
-
-                const nextWordX = currentWordBoxLeft + wordWidth + 15; // 15px gap
-                const centerX = nextWordX + nextWordWidth / 2;
-                const centerY = topY + barHeight / 2;
-
-                // Faded preview pill for the upcoming word
-                const boxWidth = nextWordWidth;
-                const boxHeight = barHeight;
-                const bgRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                bgRect.setAttribute('x', centerX - boxWidth / 2);
-                bgRect.setAttribute('y', topY);
-                bgRect.setAttribute('width', boxWidth);
-                bgRect.setAttribute('height', boxHeight);
-                bgRect.setAttribute('fill', GM_UI.white);
-                bgRect.setAttribute('fill-opacity', '0.55');
-                bgRect.setAttribute('stroke', GM_UI.muted);
-                bgRect.setAttribute('stroke-width', '1.5');
-                bgRect.setAttribute('stroke-dasharray', '7,5');
-                bgRect.setAttribute('rx', '14');
-                bgRect.setAttribute('opacity', '0.75');
-                overlayGroup.appendChild(bgRect);
-
-                // Text
-                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', centerX);
-                text.setAttribute('y', centerY + (isMobile ? 12 : 8));
-                text.setAttribute('text-anchor', 'middle');
-                text.setAttribute('fill', GM_UI.muted);
-                text.setAttribute('font-size', isMobile ? 34 : 24);
-                text.setAttribute('font-weight', '600');
-                text.setAttribute('font-family', "'Nunito', sans-serif");
-                text.setAttribute('opacity', '0.85');
-                text.textContent = nextWordText;
-                overlayGroup.appendChild(text);
-            }
-        } else if (this.currentIndex >= this.manualItems.length && this.waitingForContinue) {
-            // Sentence complete — one elegant card in the word-bar slot:
-            // headline + phase-aware tap hint. Nothing else is drawn over the
-            // grid, so the player can admire the completed sentence layout.
-            // Gated on waitingForContinue so the card appears only once the
-            // tap actually works (showGameComplete fires ~600ms after the
-            // last placement; during that gap the ✓/confetti feedback plays).
-            const headline = '🎉  Complete!';
-            const hint = this.pendingFelderReview
-                ? 'Tap to review the structure'
-                : 'Tap for the next sentence';
-            const headFont = isMobile ? 40 : 26;
-            const hintFont = isMobile ? 20 : 14;
-            const cardW = Math.max(
-                this.estimateTextWidth(headline, headFont),
-                this.estimateTextWidth(hint, hintFont)
-            ) + 56;
-            const cardH = isMobile ? 100 : 56;
-            // Anchor the card just above the grid so it never covers tiles
-            const cardY = Math.max(4, gridStartY - cardH - 6);
-
-            const cardGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-            // Redraws rebuild this card from scratch, which would replay the
-            // pop animation — only apply it the first time per sentence
-            if (!this.completeCardPopped) {
-                cardGroup.setAttribute('class', 'gm-pop');
-                this.completeCardPopped = true;
-            }
-            cardGroup.setAttribute('pointer-events', 'none');
-            overlayGroup.appendChild(cardGroup);
-
-            const cardRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            cardRect.setAttribute('x', barCenterX - cardW / 2);
-            cardRect.setAttribute('y', cardY);
-            cardRect.setAttribute('width', cardW);
-            cardRect.setAttribute('height', cardH);
-            cardRect.setAttribute('fill', '#ecfdf5'); // mirrors CSS token --success-bg
-            cardRect.setAttribute('fill-opacity', '0.97');
-            cardRect.setAttribute('stroke', GM_UI.success);
-            cardRect.setAttribute('stroke-width', '2');
-            cardRect.setAttribute('rx', '16');
-            cardRect.setAttribute('filter', 'url(#gm-shadow)');
-            cardGroup.appendChild(cardRect);
-
-            const completeText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            completeText.setAttribute('x', barCenterX);
-            completeText.setAttribute('y', cardY + (isMobile ? 44 : 24));
-            completeText.setAttribute('text-anchor', 'middle');
-            completeText.setAttribute('fill', '#059669'); // mirrors CSS token --success-600
-            completeText.setAttribute('font-size', headFont);
-            completeText.setAttribute('font-weight', '700');
-            completeText.setAttribute('font-family', "'Nunito', sans-serif");
-            completeText.textContent = headline;
-            cardGroup.appendChild(completeText);
-
-            const hintText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            hintText.setAttribute('x', barCenterX);
-            hintText.setAttribute('y', cardY + (isMobile ? 82 : 45));
-            hintText.setAttribute('text-anchor', 'middle');
-            hintText.setAttribute('fill', GM_UI.secondary);
-            hintText.setAttribute('font-size', hintFont);
-            hintText.setAttribute('font-weight', '500');
-            hintText.setAttribute('font-family', "'Inter', sans-serif");
-            hintText.setAttribute('class', 'gm-hint-pulse');
-            hintText.textContent = hint;
-            cardGroup.appendChild(hintText);
-        }
-
-        this.overlayGroup = overlayGroup;
-    }
-
     /**
      * Draw full-screen overlay for "tap to continue"
      */
@@ -1196,7 +785,7 @@ export class GameMode {
         this.gameGroup.appendChild(overlay);
 
         // No banner here: the completion card (headline + tap hint) lives in
-        // the word-bar slot (drawUIOverlay), leaving the completed grid fully
+        // the word-bar slot (drawHud in gameHud.js), leaving the completed grid fully
         // visible before the tap-through to the Felder review.
     }
 
@@ -1557,10 +1146,10 @@ export class GameMode {
                 }
             }
             if (navigator.vibrate) navigator.vibrate(15); // subtle tactile confirm
-            this.spawnConfetti(feedbackX, feedbackY, 8, 90);
+            spawnConfetti(this.svg, feedbackX, feedbackY, 8, 90, () => this.isActive);
             if (!feedbackSymbol.startsWith('+')) {
                 // Timer mode already floats "+N" as the feedback symbol itself
-                this.spawnFloatingText(`+${points}`, feedbackX, feedbackY - 50, feedbackColor);
+                spawnFloatingText(this.svg, `+${points}`, feedbackX, feedbackY - 50, feedbackColor, () => this.isActive);
             }
             this.startScoreCountLoop();
 
@@ -1666,198 +1255,6 @@ export class GameMode {
     }
 
     /**
-     * Draw feedback animation (tick/cross)
-     */
-    drawFeedbackAnimation() {
-        if (!this.feedbackAnimation) return;
-
-        const { symbol, x, y, color, startTime } = this.feedbackAnimation;
-        const elapsed = Date.now() - startTime;
-        const duration = 600;
-        const progress = Math.min(elapsed / duration, 1);
-
-        const isScorePopup = symbol.startsWith('+');
-        const scale = 1 + progress * (isScorePopup ? 0.2 : 0.5);
-        const opacity = 1 - progress;
-        const floatY = isScorePopup ? -50 * progress : 0;
-
-        const feedbackGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        feedbackGroup.setAttribute('class', 'feedback-animation');
-        feedbackGroup.setAttribute('transform', `translate(${x}, ${y + floatY}) scale(${scale})`);
-        feedbackGroup.setAttribute('opacity', opacity);
-        feedbackGroup.setAttribute('pointer-events', 'none');
-
-        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttribute('x', 0);
-        text.setAttribute('y', 0);
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('dominant-baseline', 'middle');
-        text.setAttribute('font-size', isScorePopup ? '64' : '100');
-        text.setAttribute('font-weight', 'bold');
-        text.setAttribute('fill', color);
-        text.setAttribute('stroke', 'white');
-        text.setAttribute('stroke-width', '4');
-        text.setAttribute('paint-order', 'stroke');
-        text.textContent = symbol;
-        feedbackGroup.appendChild(text);
-
-        this.gameGroup.appendChild(feedbackGroup);
-    }
-
-    /* ==================================================================
-     * VISUAL JUICE HELPERS (display layer only — no game-logic effects)
-     * ================================================================== */
-
-    /**
-     * Ensure the shared soft drop-shadow filter exists (id 'gm-shadow').
-     * Called once per draw() after the SVG is cleared. Guarded against
-     * duplicates; ids are 'gm-' prefixed so we never clash with other
-     * agents' defs ('tok-'/'fm-'/'gv-').
-     */
-    ensureJuiceDefs() {
-        if (this.svg.querySelector('#gm-shadow')) return;
-
-        const svgNS = 'http://www.w3.org/2000/svg';
-        const defs = document.createElementNS(svgNS, 'defs');
-        defs.setAttribute('class', 'gm-defs');
-
-        const filter = document.createElementNS(svgNS, 'filter');
-        filter.setAttribute('id', 'gm-shadow');
-        filter.setAttribute('x', '-30%');
-        filter.setAttribute('y', '-30%');
-        filter.setAttribute('width', '160%');
-        filter.setAttribute('height', '160%');
-
-        const shadow = document.createElementNS(svgNS, 'feDropShadow');
-        shadow.setAttribute('dx', '0');
-        shadow.setAttribute('dy', '2');
-        shadow.setAttribute('stdDeviation', '3');
-        shadow.setAttribute('flood-color', '#0f172a'); // mirrors CSS text token
-        shadow.setAttribute('flood-opacity', '0.18');
-        filter.appendChild(shadow);
-
-        defs.appendChild(filter);
-
-        // Gentle vertical gradient for the current-word pill (white → indigo-50)
-        const grad = document.createElementNS(svgNS, 'linearGradient');
-        grad.setAttribute('id', 'gm-pill-grad');
-        grad.setAttribute('x1', '0');
-        grad.setAttribute('y1', '0');
-        grad.setAttribute('x2', '0');
-        grad.setAttribute('y2', '1');
-        const stop1 = document.createElementNS(svgNS, 'stop');
-        stop1.setAttribute('offset', '0%');
-        stop1.setAttribute('stop-color', '#ffffff');
-        const stop2 = document.createElementNS(svgNS, 'stop');
-        stop2.setAttribute('offset', '100%');
-        stop2.setAttribute('stop-color', '#eef2ff'); // mirrors CSS token --brand-50
-        grad.appendChild(stop1);
-        grad.appendChild(stop2);
-        defs.appendChild(grad);
-
-        this.gameGroup.appendChild(defs);
-    }
-
-    /**
-     * Burst of small confetti particles (design palette) from (x, y).
-     * Self-animating via requestAnimationFrame, self-removing after ~700ms.
-     * Survives full SVG redraws by re-attaching to the SVG root.
-     */
-    spawnConfetti(x, y, count = 8, spread = 90) {
-        const svgNS = 'http://www.w3.org/2000/svg';
-        const group = document.createElementNS(svgNS, 'g');
-        group.setAttribute('class', 'gm-confetti');
-        group.setAttribute('pointer-events', 'none');
-
-        const particles = [];
-        for (let i = 0; i < count; i++) {
-            let el;
-            if (i % 2 === 0) {
-                el = document.createElementNS(svgNS, 'rect');
-                el.setAttribute('x', '-3.5');
-                el.setAttribute('y', '-3.5');
-                el.setAttribute('width', '7');
-                el.setAttribute('height', '7');
-                el.setAttribute('rx', '1.5');
-            } else {
-                el = document.createElementNS(svgNS, 'circle');
-                el.setAttribute('r', '3.5');
-            }
-            el.setAttribute('fill', GM_CONFETTI_COLORS[i % GM_CONFETTI_COLORS.length]);
-            const angle = Math.random() * Math.PI * 2;
-            const speed = spread * (0.4 + Math.random() * 0.6);
-            particles.push({
-                el: el,
-                vx: Math.cos(angle) * speed,
-                vy: Math.sin(angle) * speed - spread * 0.5, // upward bias
-                rot: 120 + Math.random() * 360
-            });
-            group.appendChild(el);
-        }
-
-        this.svg.appendChild(group);
-
-        const start = performance.now();
-        const duration = 700;
-        const tick = (now) => {
-            const t = Math.min((now - start) / duration, 1);
-            if (t >= 1 || !this.isActive) {
-                if (group.parentNode) group.parentNode.removeChild(group);
-                return;
-            }
-            // draw() clears the SVG on redraws — re-attach so bursts survive
-            if (!group.parentNode) this.svg.appendChild(group);
-            particles.forEach(p => {
-                const px = x + p.vx * t;
-                const py = y + p.vy * t + spread * 1.6 * t * t; // gravity
-                p.el.setAttribute('transform', `translate(${px}, ${py}) rotate(${p.rot * t})`);
-            });
-            group.setAttribute('opacity', t > 0.55 ? String((1 - t) / 0.45) : '1');
-            requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-    }
-
-    /**
-     * Floating "+N" indicator that drifts upward and fades where the
-     * placement happened. Self-removing within ~700ms.
-     */
-    spawnFloatingText(str, x, y, color) {
-        const svgNS = 'http://www.w3.org/2000/svg';
-        const text = document.createElementNS(svgNS, 'text');
-        text.setAttribute('class', 'gm-float-text');
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('font-size', '26');
-        text.setAttribute('font-weight', '700');
-        text.setAttribute('font-family', "'Inter', sans-serif");
-        text.setAttribute('fill', color || GM_UI.success);
-        text.setAttribute('stroke', 'white');
-        text.setAttribute('stroke-width', '4');
-        text.setAttribute('paint-order', 'stroke');
-        text.setAttribute('pointer-events', 'none');
-        text.setAttribute('x', x);
-        text.setAttribute('y', y);
-        text.textContent = str;
-        this.svg.appendChild(text);
-
-        const start = performance.now();
-        const duration = 700;
-        const tick = (now) => {
-            const t = Math.min((now - start) / duration, 1);
-            if (t >= 1 || !this.isActive) {
-                if (text.parentNode) text.parentNode.removeChild(text);
-                return;
-            }
-            if (!text.parentNode) this.svg.appendChild(text);
-            const ease = 1 - Math.pow(1 - t, 3);
-            text.setAttribute('y', y - 44 * ease);
-            text.setAttribute('opacity', t < 0.5 ? '1' : String((1 - t) / 0.5));
-            requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-    }
-
-    /**
      * Smoothly animate the ✓/✗/+N feedback element between full redraws.
      * Runs only while feedbackAnimation exists (~600ms), then stops itself.
      */
@@ -1868,26 +1265,10 @@ export class GameMode {
                 this.feedbackLoopId = null;
                 return;
             }
-            this.updateFeedbackElement();
+            updateFeedbackElement(this.svg, this.feedbackAnimation);
             this.feedbackLoopId = requestAnimationFrame(tick);
         };
         this.feedbackLoopId = requestAnimationFrame(tick);
-    }
-
-    /**
-     * Update the floating feedback element's transform/opacity in place.
-     */
-    updateFeedbackElement() {
-        const feedbackEl = this.svg.querySelector('.feedback-animation');
-        if (!feedbackEl || !this.feedbackAnimation) return;
-        const elapsed = Date.now() - this.feedbackAnimation.startTime;
-        const progress = Math.min(elapsed / 600, 1);
-        const { x, y, symbol } = this.feedbackAnimation;
-        const isScorePopup = symbol.startsWith('+');
-        const scale = 1 + progress * (isScorePopup ? 0.2 : 0.5);
-        const floatY = isScorePopup ? -50 * progress : 0;
-        feedbackEl.setAttribute('transform', `translate(${x}, ${y + floatY}) scale(${scale})`);
-        feedbackEl.setAttribute('opacity', 1 - progress);
     }
 
     /**
@@ -1922,64 +1303,6 @@ export class GameMode {
             this.scoreLoopId = requestAnimationFrame(tick);
         };
         this.scoreLoopId = requestAnimationFrame(tick);
-    }
-
-    /**
-     * Final game-complete screen: dark scrim + white rounded card + confetti.
-     * Replaces the old alert(); pure DOM overlay, removed on dismiss.
-     */
-    showFinalCelebration(finalScore) {
-        const existing = document.getElementById('gm-complete-overlay');
-        if (existing) existing.remove();
-
-        const overlay = document.createElement('div');
-        overlay.id = 'gm-complete-overlay';
-
-        // Falling confetti pieces (CSS-animated, removed with the overlay)
-        for (let i = 0; i < 18; i++) {
-            const piece = document.createElement('span');
-            piece.className = 'gm-dom-confetti';
-            piece.style.left = `${Math.random() * 100}%`;
-            piece.style.background = GM_CONFETTI_COLORS[i % GM_CONFETTI_COLORS.length];
-            piece.style.animationDelay = `${(Math.random() * 0.5).toFixed(2)}s`;
-            overlay.appendChild(piece);
-        }
-
-        const card = document.createElement('div');
-        card.className = 'gm-complete-card';
-
-        const emoji = document.createElement('div');
-        emoji.className = 'gm-complete-emoji';
-        emoji.textContent = '🎉';
-        card.appendChild(emoji);
-
-        const title = document.createElement('h2');
-        title.className = 'gm-complete-title';
-        title.textContent = 'Geschafft!';
-        card.appendChild(title);
-
-        const score = document.createElement('div');
-        score.className = 'gm-complete-score';
-        score.textContent = String(finalScore);
-        card.appendChild(score);
-
-        const sub = document.createElement('p');
-        sub.className = 'gm-complete-sub';
-        sub.textContent = 'points — you mastered German sentence structure!';
-        card.appendChild(sub);
-
-        const btn = document.createElement('button');
-        btn.className = 'gm-complete-btn';
-        btn.textContent = 'Weiter';
-        btn.addEventListener('click', () => overlay.remove());
-        card.appendChild(btn);
-
-        overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) overlay.remove();
-        });
-
-        overlay.appendChild(card);
-        document.body.appendChild(overlay);
     }
 
     /**
@@ -2081,7 +1404,7 @@ export class GameMode {
             const remaining = Math.max(0, 1 - elapsed / 10000);
             const totalWidth = parseFloat(trackEl.getAttribute('data-width') || '0');
             fillEl.setAttribute('width', Math.max(0, totalWidth * remaining));
-            fillEl.setAttribute('fill', this.getTimerColor(1 - remaining));
+            fillEl.setAttribute('fill', getTimerColor(1 - remaining));
 
             // Gentle pulse when under 3s remain (visual only)
             const isLow = remaining < 0.3 && remaining > 0;
@@ -2094,56 +1417,7 @@ export class GameMode {
         }
 
         // Update floating feedback animation in-place
-        this.updateFeedbackElement();
-    }
-
-    getTimerColor(t) {
-        // t: 0 (fresh) → 1 (expired)
-        // Shifts indigo #4f46e5 → amber #f59e0b → red #ef4444
-        // (hard-coded hex mirrors CSS design tokens)
-        const lerp = (a, b, u) => Math.round(a + (b - a) * u);
-        if (t < 0.55) {
-            const u = t / 0.55;
-            return `rgb(${lerp(79, 245, u)},${lerp(70, 158, u)},${lerp(229, 11, u)})`;
-        }
-        const u = (t - 0.55) / 0.45;
-        return `rgb(${lerp(245, 239, u)},${lerp(158, 68, u)},${lerp(11, 68, u)})`;
-    }
-
-    drawTimerBar(group, centerX, topY, barHeight, wordWidth) {
-        const elapsed = this.wordStartTime ? Date.now() - this.wordStartTime : 0;
-        const remaining = Math.max(0, 1 - elapsed / 10000);
-        const t = 1 - remaining;
-
-        const barX = centerX - wordWidth / 2;
-        const barY = topY + barHeight + 2;
-        const trackHeight = 6;
-
-        const track = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        track.setAttribute('id', 'game-timer-bar-track');
-        track.setAttribute('data-width', wordWidth);
-        track.setAttribute('x', barX);
-        track.setAttribute('y', barY);
-        track.setAttribute('width', wordWidth);
-        track.setAttribute('height', trackHeight);
-        track.setAttribute('rx', '3');
-        track.setAttribute('fill', GM_UI.border);
-        track.setAttribute('pointer-events', 'none');
-        group.appendChild(track);
-
-        const fill = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        fill.setAttribute('id', 'game-timer-bar-fill');
-        fill.setAttribute('x', barX);
-        fill.setAttribute('y', barY);
-        fill.setAttribute('width', Math.max(0, wordWidth * remaining));
-        fill.setAttribute('height', trackHeight);
-        fill.setAttribute('rx', '3');
-        fill.setAttribute('fill', this.getTimerColor(t));
-        if (remaining < 0.3 && remaining > 0) {
-            fill.setAttribute('class', 'gm-timer-pulse');
-        }
-        fill.setAttribute('pointer-events', 'none');
-        group.appendChild(fill);
+        updateFeedbackElement(this.svg, this.feedbackAnimation);
     }
 
     /**
@@ -2234,7 +1508,7 @@ export class GameMode {
                 // Restyled celebration screen (replaces the old alert;
                 // same flow: game already stopped, grid view shown behind)
                 if (typeof gameSounds !== 'undefined') gameSounds.gameComplete();
-                this.showFinalCelebration(finalScore);
+                showFinalCelebration(finalScore);
             }, 1000);
         } else {
             this.waitingForContinue = true;
@@ -2261,7 +1535,7 @@ export class GameMode {
             const ch = this.gridViewModel.cellHeight;
             const gridCenterX = this.getGridStartX() + cw * 1.5;
             const gridCenterY = this.getGridStartY() + ch * 1.5;
-            this.spawnConfetti(gridCenterX, gridCenterY - ch * 0.8, 26, 240);
+            spawnConfetti(this.svg, gridCenterX, gridCenterY - ch * 0.8, 26, 240, () => this.isActive);
         }
     }
 
