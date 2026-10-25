@@ -18,7 +18,8 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 - `feldermodell.js` — Feldermodell (field model) renderer
 - `gridview.js` — GridViewModel: `parseSentenceFlow()` (phrase boxes) and `getWordPosition()` (grid cell)
 - `sentencePicker.js` — `pickNextSentence()`: pure next-sentence selection (random / story / multi-category / custom)
-- `gamemode.js` — GameMode: placement game, scoring, HUD, sentence selection (largest file)
+- `gameRules.js` — pure placement rules: `evaluatePlacement()` (validation reason object, points, attempts/auto-place)
+- `gamemode.js` — GameMode: placement game UI, HUD, feedback/juice (largest file)
 - `renderer.js` — SVG drawing of words/connections in edit view
 - `ui.js` — UIController: editor panels and interactions
 - `app.js` — DeutschApp: wires everything together, backend calls, import/export

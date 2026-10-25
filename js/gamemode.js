@@ -84,7 +84,7 @@ class GameMode {
         // Keyboard tile cursor: { row, col } selected via arrow keys, placed with W
         this.keyboardSelectedCell = null;
 
-        // Attempt tracking (auto-place after 3 wrong attempts)
+        // Attempt tracking (auto-place after MAX_WRONG_ATTEMPTS wrong attempts, see gameRules.js)
         this.currentWordAttempts = 0;
 
         // Waiting for user to continue to next sentence
@@ -1469,8 +1469,14 @@ class GameMode {
 
         console.log(`Placing ${currentItem.type}: ${this.getItemText(currentItem)} at row ${row}, col ${col}, case: ${caseType}`);
 
-        // Validate placement
-        const isCorrect = this.validatePlacement(itemToValidate, row, col, caseType);
+        const outcome = evaluatePlacement({
+            word: itemToValidate, row, col, caseType,
+            expectedCell: this.gridViewModel.getWordPosition(itemToValidate),
+            attempts: this.currentWordAttempts,
+            elapsedMs: this.timeChallengeMode && this.wordStartTime !== null
+                ? Date.now() - this.wordStartTime : null,
+        });
+        this.currentWordAttempts = outcome.attempts;
 
         // Get the cell position for feedback display
         const startX = this.getGridStartX();
@@ -1480,25 +1486,15 @@ class GameMode {
         const feedbackX = cellX + this.gridViewModel.cellWidth / 2;
         const feedbackY = cellY + this.gridViewModel.cellHeight / 2;
 
-        if (isCorrect) {
-            let points = 10;
-            let feedbackSymbol = '✓';
-            let feedbackColor = GM_UI.success; // mirrors CSS success token
-
-            if (this.timeChallengeMode && this.wordStartTime !== null) {
-                const elapsed = Date.now() - this.wordStartTime;
-                const timeResult = this.getTimePoints(elapsed);
-                points = timeResult.points;
-                feedbackColor = timeResult.color;
-                feedbackSymbol = `+${points}`;
-            }
+        if (outcome.result.ok) {
+            const points = outcome.points;
+            // Timed placements float "+N" in the time color; otherwise ✓ in the success token
+            const feedbackSymbol = outcome.timeColor ? `+${points}` : '✓';
+            const feedbackColor = outcome.timeColor || GM_UI.success;
 
             this.currentSentenceScore += points;
             this.totalScore += points;
             console.log('✓ Correct placement!', points, 'points');
-
-            // Reset attempts counter
-            this.currentWordAttempts = 0;
 
             // --- Visual juice (display only, no effect on scoring/validation) ---
             this.displayStreak = this.suppressStreak ? 0 : this.displayStreak + 1;
@@ -1568,10 +1564,7 @@ class GameMode {
                 }, 600);
             }
         } else {
-            console.log('✗ Incorrect placement!');
-
-            // Increment attempts
-            this.currentWordAttempts++;
+            console.log('✗ Incorrect placement!', outcome.result);
 
             // Visual only: reset streak display and shake the word pill
             this.displayStreak = 0;
@@ -1582,8 +1575,8 @@ class GameMode {
             // Show cross feedback (no score penalty, but don't advance)
             this.showFeedback('✗', feedbackX, feedbackY, false);
 
-            // After 3 failed attempts, auto-place correctly
-            if (this.currentWordAttempts >= 3) {
+            // After MAX_WRONG_ATTEMPTS failed attempts, auto-place correctly
+            if (outcome.autoPlace) {
                 console.log('Auto-placing after 3 attempts...');
                 setTimeout(() => {
                     this.autoPlaceCurrentWord();
@@ -2056,17 +2049,6 @@ class GameMode {
         this.updateFeedbackElement();
     }
 
-    getTimePoints(elapsedMs) {
-        const s = elapsedMs / 1000;
-        if (s < 1.0) return { points: 30, color: '#27ae60' };
-        if (s < 2.0) return { points: 25, color: '#52be80' };
-        if (s < 3.0) return { points: 20, color: '#a9d96c' };
-        if (s < 5.0) return { points: 15, color: '#f1c40f' };
-        if (s < 7.0) return { points: 10, color: '#e67e22' };
-        if (s < 10.0) return { points: 5,  color: '#e74c3c' };
-        return { points: 0, color: '#c0392b' };
-    }
-
     getTimerColor(t) {
         // t: 0 (fresh) → 1 (expired)
         // Shifts indigo #4f46e5 → amber #f59e0b → red #ef4444
@@ -2128,35 +2110,7 @@ class GameMode {
     }
 
     /**
-     * Validate word placement
-     */
-    validatePlacement(word, row, col, caseType) {
-        // Get expected position based on word properties
-        const expectedPosition = this.gridViewModel.getWordPosition(word);
-
-        if (!expectedPosition) return false;
-
-        // Check if row/col match
-        const positionMatch = expectedPosition.row === row && expectedPosition.col === col;
-
-        // Check if case matches
-        // - Verbs and modals: no case, so only check position
-        // - Subjects: always nominative case
-        // - Objects: check the specific case (accusative, dative, genitive)
-        let caseMatch = true;
-        if (word.type === 'verb' || word.type === 'modal') {
-            // Verbs and modals have no case - skip case check
-            caseMatch = true;
-        } else {
-            // Subjects and objects: validate case
-            caseMatch = !word.case || word.case === caseType;
-        }
-
-        return positionMatch && caseMatch;
-    }
-
-    /**
-     * Auto-place current word after 3 failed attempts
+     * Auto-place current word after MAX_WRONG_ATTEMPTS failed attempts
      */
     autoPlaceCurrentWord() {
         if (this.currentIndex >= this.manualItems.length) {
@@ -2166,20 +2120,16 @@ class GameMode {
         const currentItem = this.manualItems[this.currentIndex];
         const itemToValidate = currentItem.type === 'box' ? currentItem.item.mainWord : currentItem.item;
 
-        // Get the correct position
-        const expectedPosition = this.gridViewModel.getWordPosition(itemToValidate);
-        if (!expectedPosition) {
+        const target = getAutoPlacement(itemToValidate, this.gridViewModel.getWordPosition(itemToValidate));
+        if (!target) {
             console.error('Cannot auto-place: no expected position found');
             return;
         }
 
-        // Get the correct case
-        const correctCase = itemToValidate.case || 'nom';
-
         // Place it correctly (this will trigger the success path)
-        console.log(`Auto-placing at correct position: row ${expectedPosition.row}, col ${expectedPosition.col}, case: ${correctCase}`);
+        console.log(`Auto-placing at correct position: row ${target.row}, col ${target.col}, case: ${target.caseType}`);
         this.suppressStreak = true; // display only: auto-placed words don't count toward streak
-        this.placeWord(expectedPosition.row, expectedPosition.col, correctCase);
+        this.placeWord(target.row, target.col, target.caseType);
     }
 
     /**

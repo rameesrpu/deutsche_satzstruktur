@@ -201,7 +201,7 @@ shrinks by ~150+ lines.
 > through the real app. Fallbacks kept: story without category → random (and turns `storyMode` off);
 > multi with no library sentences in the selected levels → random.
 
-### [ ] R2 Extract game rules into `js/gameRules.js`
+### [x] R2 Extract game rules into `js/gameRules.js`
 **Why**: placement validation, scoring, time points and attempt/auto-place rules are interleaved
 with rendering in `placeWord()` ([js/gamemode.js:1461](js/gamemode.js#L1461)). I3 (explanations) and
 I1 (recording results) need these as plain data.
@@ -215,6 +215,12 @@ I1 (recording results) need these as plain data.
 
 **Done when**: tests pass, behavior unchanged, `placeWord` is mostly orchestration.
 **Depends on**: P0.2.
+
+> 2026-10-25 done. Pure globals `validatePlacement` (reason object, incl. `expectedCell.label` from
+> getWordPosition — handy for I3), `getTimePoints`, `evaluatePlacement` (points/attempts/autoPlace) and
+> `getAutoPlacement`; constants `BASE_POINTS`, `MAX_WRONG_ATTEMPTS`. Caller passes `expectedCell`, so rules
+> don't depend on gridview. 17 rule tests; snapshot unchanged. Verified in headless Chrome: 3 wrong
+> placements → auto-place +10, then correct +10. Juice (streak, confetti, sound) stays in `placeWord`.
 
 ### [ ] R3 JSDoc typedefs for core data
 **Why**: gives agents the data shape without reading many files.
