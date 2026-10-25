@@ -10,6 +10,7 @@ import { runLibrarySnapshot } from './snapshot.test.js';
 import { runIdTests } from './ids.test.js';
 import { runSentencePickerTests } from './sentencePicker.test.js';
 import { runProgressStoreTests } from './progressStore.test.js';
+import { runSoundTests } from './sound.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -25,6 +26,7 @@ runGameRuleTests();
 runIdTests();
 runSentencePickerTests();
 runProgressStoreTests();
+runSoundTests();
 runLibrarySnapshot({ update });
 
 System.exit(summary() > 0 ? 1 : 0);

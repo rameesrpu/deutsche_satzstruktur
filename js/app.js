@@ -272,6 +272,8 @@ class DeutschApp {
             });
         }
 
+        gameSounds.detectGermanVoice(status => this.applyVoiceStatus(status));
+
         const multiCategoryToggle = document.getElementById('multi-category-toggle');
         const multiCategoryLevels = document.getElementById('multi-category-levels');
         const multiCategoryA1 = document.getElementById('multi-category-a1');
@@ -356,6 +358,45 @@ class DeutschApp {
     /**
      * Setup zoom controls (pinch-to-zoom)
      */
+    /**
+     * No German TTS voice → grey out the speech toggles (the stored preference
+     * is kept, so they come back if a voice appears) and say why, once.
+     */
+    applyVoiceStatus(status) {
+        const missing = status === 'missing';
+        const toggles = [
+            [document.getElementById('speech-toggle'), gameSounds.speechEnabled],
+            [document.getElementById('listen-toggle'), gameSounds.promptEnabled],
+        ];
+        for (const [toggle, enabled] of toggles) {
+            if (!toggle) continue;
+            toggle.disabled = missing;
+            toggle.checked = !missing && enabled;
+            toggle.closest('.settings-toggle-row')?.classList.toggle('is-unavailable', missing);
+        }
+        const note = document.getElementById('tts-unavailable-note');
+        if (note) note.hidden = !missing;
+        if (missing && gameSounds.speechEnabled) this.showVoiceNoticeOnce();
+    }
+
+    showVoiceNoticeOnce() {
+        const KEY = 'ttsMissingNoticeShown';
+        try {
+            if (localStorage.getItem(KEY)) return;
+            localStorage.setItem(KEY, 'true');
+        } catch (e) { /* storage blocked: show it anyway */ }
+        const notice = document.createElement('div');
+        notice.id = 'tts-notice';
+        notice.setAttribute('role', 'status');
+        notice.innerHTML = '<span>No German voice found on this device — spoken words and ' +
+            'Audio Fill-in-the-Blank are turned off.</span>' +
+            '<button type="button" aria-label="Dismiss">✕</button>';
+        const close = () => notice.remove();
+        notice.querySelector('button').addEventListener('click', close);
+        setTimeout(close, 10000);
+        document.body.appendChild(notice);
+    }
+
     setupZoomControls() {
         // Setup pinch-to-zoom gesture support
         this.setupPinchZoom();

@@ -1114,6 +1114,17 @@ button:active {
     font-style: italic;
 }
 
+.settings-toggle-row.is-unavailable label {
+    color: var(--ink-400);
+}
+
+.settings-note {
+    margin: 6px 2px 0;
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--warn-600);
+}
+
 .settings-sub-options {
     margin-top: 6px;
     padding-left: 14px;
@@ -2748,4 +2759,38 @@ button:active {
         top: auto;
         bottom: 12px;
     }
+}
+
+/* One-time "no German TTS voice" notice (app.js showVoiceNoticeOnce) */
+#tts-notice {
+    position: fixed;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    z-index: 9000;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: max-content;
+    max-width: min(92vw, 440px);
+    padding: 10px 12px 10px 16px;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--warn-500);
+    background: var(--warn-bg);
+    color: var(--ink-900);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.4;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.18);
+    animation: gm-hint-in 0.2s ease-out both;
+}
+
+#tts-notice button {
+    flex-shrink: 0;
+    border: none;
+    background: none;
+    color: var(--ink-500);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0 2px;
 }

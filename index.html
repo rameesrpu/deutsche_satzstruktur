@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=202610251526">
+    <link rel="stylesheet" href="css/styles.css?v=202610251532">
 </head>
 <body>
     <div class="container">
@@ -121,6 +121,10 @@
                         <label for="listen-toggle">Audio Fill-in-the-Blank</label>
                         <input type="checkbox" id="listen-toggle" checked>
                     </div>
+                    <p id="tts-unavailable-note" class="settings-note" hidden>
+                        No German voice on this device, so speech is off. Install a German
+                        text-to-speech voice (or use another browser) to enable it.
+                    </p>
                     <div class="settings-toggle-row" style="margin-top: 8px;">
                         <label for="max-points-input">Max Points</label>
                         <input type="number" id="max-points-input" min="50" step="50" value="2000" style="width: 70px; text-align: right;">
@@ -255,25 +259,25 @@
     <script type="importmap">
     {
       "imports": {
-        "./js/ids.js": "./js/ids.js?v=202610251526",
-        "./js/sound.js": "./js/sound.js?v=202610251526",
-        "./js/grammaticalConfig.js": "./js/grammaticalConfig.js?v=202610251526",
-        "./js/levelContent.js": "./js/levelContent.js?v=202610251526",
-        "./js/levelSelector.js": "./js/levelSelector.js?v=202610251526",
-        "./js/wordManager.js": "./js/wordManager.js?v=202610251526",
-        "./js/sentenceManager.js": "./js/sentenceManager.js?v=202610251526",
-        "./js/feldermodell.js": "./js/feldermodell.js?v=202610251526",
-        "./js/gridview.js": "./js/gridview.js?v=202610251526",
-        "./js/sentencePicker.js": "./js/sentencePicker.js?v=202610251526",
-        "./js/gameRules.js": "./js/gameRules.js?v=202610251526",
-        "./js/progressStore.js": "./js/progressStore.js?v=202610251526",
-        "./js/gamemode.js": "./js/gamemode.js?v=202610251526",
-        "./js/renderer.js": "./js/renderer.js?v=202610251526",
-        "./js/ui.js": "./js/ui.js?v=202610251526",
-        "./js/app.js": "./js/app.js?v=202610251526"
+        "./js/ids.js": "./js/ids.js?v=202610251532",
+        "./js/sound.js": "./js/sound.js?v=202610251532",
+        "./js/grammaticalConfig.js": "./js/grammaticalConfig.js?v=202610251532",
+        "./js/levelContent.js": "./js/levelContent.js?v=202610251532",
+        "./js/levelSelector.js": "./js/levelSelector.js?v=202610251532",
+        "./js/wordManager.js": "./js/wordManager.js?v=202610251532",
+        "./js/sentenceManager.js": "./js/sentenceManager.js?v=202610251532",
+        "./js/feldermodell.js": "./js/feldermodell.js?v=202610251532",
+        "./js/gridview.js": "./js/gridview.js?v=202610251532",
+        "./js/sentencePicker.js": "./js/sentencePicker.js?v=202610251532",
+        "./js/gameRules.js": "./js/gameRules.js?v=202610251532",
+        "./js/progressStore.js": "./js/progressStore.js?v=202610251532",
+        "./js/gamemode.js": "./js/gamemode.js?v=202610251532",
+        "./js/renderer.js": "./js/renderer.js?v=202610251532",
+        "./js/ui.js": "./js/ui.js?v=202610251532",
+        "./js/app.js": "./js/app.js?v=202610251532"
       }
     }
     </script>
-    <script type="module" src="js/app.js?v=202610251526"></script>
+    <script type="module" src="js/app.js?v=202610251532"></script>
 </body>
 </html>

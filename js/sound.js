@@ -9,6 +9,12 @@
  * The AudioContext is created lazily inside a user gesture (placement
  * taps), which satisfies mobile autoplay policies.
  */
+
+/** First German voice in a speechSynthesis.getVoices() list, or null. */
+export function findGermanVoice(voices) {
+    return (voices || []).find(v => v.lang && v.lang.toLowerCase().startsWith('de')) || null;
+}
+
 export class SoundManager {
     constructor() {
         this.ctx = null;
@@ -22,6 +28,45 @@ export class SoundManager {
         this._boundaryProbed = false;
         this._promptFull = null;  // sentence text of the active prompt utterance
         this._pauseAt = null;     // char index to pause at (null = play to end)
+        // German TTS voice: 'unknown' until detectGermanVoice() settles, then
+        // 'ok' or 'missing' (speech is skipped instead of failing silently)
+        this.voiceStatus = 'unknown';
+        this.germanVoice = null;
+    }
+
+    /** False once we know no German voice exists (speech options unusable). */
+    get speechAvailable() {
+        return this.voiceStatus !== 'missing';
+    }
+
+    /**
+     * Look for a German TTS voice. getVoices() is often empty until
+     * 'voiceschanged' fires, and engines with no voices at all (e.g. Chrome
+     * on Linux without speech-dispatcher) may never fire it — so with an
+     * empty list the status settles to 'missing' after timeoutMs.
+     * onChange(status) runs on every change, also if a voice shows up later.
+     */
+    detectGermanVoice(onChange, {
+        synth = ('speechSynthesis' in window) ? window.speechSynthesis : null,
+        timeoutMs = 3000,
+        setTimer = setTimeout,
+    } = {}) {
+        const setStatus = (status) => {
+            if (status === this.voiceStatus) return;
+            this.voiceStatus = status;
+            if (onChange) onChange(status);
+        };
+        if (!synth) { setStatus('missing'); return; }
+        const check = (final) => {
+            const voices = synth.getVoices() || [];
+            this.germanVoice = findGermanVoice(voices);
+            if (this.germanVoice) setStatus('ok');
+            else if (final || voices.length > 0) setStatus('missing');
+        };
+        if (synth.addEventListener) synth.addEventListener('voiceschanged', () => check(false));
+        else synth.onvoiceschanged = () => check(false);
+        check(false);
+        if (this.voiceStatus === 'unknown') setTimer(() => check(true), timeoutMs);
     }
 
     setEnabled(on) {
@@ -70,12 +115,12 @@ export class SoundManager {
      * grammatical category and grid location.
      */
     speak(text, { queue = false } = {}) {
-        if (!this.speechEnabled || !text || !('speechSynthesis' in window)) return;
+        if (!this.speechEnabled || !this.speechAvailable || !text || !('speechSynthesis' in window)) return;
         this.lastSpoken = text; // lets callers avoid immediate repeats
         const u = new SpeechSynthesisUtterance(text);
         u.lang = 'de-DE';
         u.rate = 0.95;
-        const de = speechSynthesis.getVoices().find(v => v.lang && v.lang.startsWith('de'));
+        const de = this.germanVoice || findGermanVoice(speechSynthesis.getVoices());
         if (de) u.voice = de;
         // Word-level speech replaces whatever is playing (rapid placements
         // shouldn't back up); pass queue: true to wait for the current
@@ -131,7 +176,7 @@ export class SoundManager {
      *                                 null = play through to the end
      */
     promptSentence(words, blankIndex) {
-        if (!this.promptEnabled || !this.speechEnabled) return;
+        if (!this.promptEnabled || !this.speechEnabled || !this.speechAvailable) return;
         if (!words || words.length === 0 || !('speechSynthesis' in window)) return;
 
         const full = words.join(' ');
@@ -156,7 +201,7 @@ export class SoundManager {
             const u = new SpeechSynthesisUtterance(full);
             u.lang = 'de-DE';
             u.rate = 0.95;
-            const de = speechSynthesis.getVoices().find(v => v.lang && v.lang.startsWith('de'));
+            const de = this.germanVoice || findGermanVoice(speechSynthesis.getVoices());
             if (de) u.voice = de;
             u.onboundary = (e) => {
                 this.boundarySupported = true;

@@ -367,12 +367,19 @@ challenge). Test the weighting deterministically (inject a random fn).
 > library sentences use the LEVEL_CONTENT key as category (`hauptsatz`), not the file's `Hauptsatz`. Verified in headless
 > Chrome with seeded progress (2/20, streak-1 sentence not counted).
 
-### [ ] I5 Handle missing German TTS voice
+### [x] I5 Handle missing German TTS voice
 **Context**: [js/sound.js](js/sound.js) picks a voice whose lang starts with `de`; many browsers
 (notably Chrome on Linux) have none, so speech and audio fill-in-the-blank silently do nothing.
 **Steps**: after `voiceschanged`, if no German voice exists, show a one-time notice and
 disable/grey out the audio-dependent options instead of failing silently.
 **Depends on**: none.
+
+> 2026-10-25 done. `SoundManager.detectGermanVoice(onChange)` → `voiceStatus` 'ok'/'missing' (empty voice list settles
+> to missing after 3s, since engines with no voices may never fire `voiceschanged`; a voice appearing later flips it back).
+> `speak()`/`promptSentence()` skip while missing. `app.applyVoiceStatus` greys out + unchecks Speak Words / Audio
+> Fill-in-the-Blank (stored prefs kept), shows a note under them and a one-time toast (`ttsMissingNoticeShown`). 6 tests.
+> Surprise: headless Chrome on this Linux box *does* list Google network voices incl. de-DE, so the missing path was
+> verified with a temp page stubbing `getVoices()` → [] (screenshots at 400×850 and 1280×800).
 
 ---
 

@@ -10,7 +10,7 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 ## Files (`js/`, ES modules — entry `app.js`; each file imports what it uses)
 - `types.js` — JSDoc typedefs only (Word, Sentence, LibraryFile, ParsedSentence, PlacementResult…; not loaded)
 - `ids.js` — `nextId()`: the one source of sentence/word ids (never use `Date.now()` as an id)
-- `sound.js` — SoundManager: Web Audio effects + German text-to-speech
+- `sound.js` — SoundManager: Web Audio effects + German text-to-speech (`detectGermanVoice`: speech options greyed out when no German voice)
 - `grammaticalConfig.js` — gender/number/pronoun properties and colors
 - `levelContent.js` — `LEVEL_CONTENT`: levels → categories → sentence-list files (`data/levels/`; pre-parsed twins in `data/library/`)
 - `levelSelector.js` — level/category picker UI and sentence list
