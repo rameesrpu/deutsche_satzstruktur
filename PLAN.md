@@ -268,7 +268,7 @@ state its dependencies. No build step needed.
 > identical, 0 errors. Pre-existing oddity seen on both: `usedSentenceIds` stays at 1 after advancing via
 > Felder + "/" — not investigated. `test_grouping.html` switched to a module import.
 
-### [ ] R5 Repo & release hygiene
+### [x] R5 Repo & release hygiene
 **Steps**
 1. Remove or move to `tools/`: `output.md`, `check_localstorage.html`, `test_grouping.html`,
    `test_grammar.py`, `backend/spacy_test.py` (ask the owner before deleting).
@@ -277,6 +277,11 @@ state its dependencies. No build step needed.
    [index.html](index.html) (17 copies); make bumping one command (e.g. a tiny `scripts/bump_version.sh`).
 
 **Done when**: root contains only real project files; bumping the version is one command.
+
+> 2026-10-25 done. Owner chose: delete `output.md` (stale console log), move the other four to `tools/`
+> (`test_grouping.html` import fixed to `../js/`, checked in headless Chrome). The `data/saved/` export
+> stays in git — it's `build_library_data.py`'s input, not just a personal backup. New
+> `scripts/bump_version.sh [version]` rewrites all 17 `?v=` strings (default: timestamp).
 
 ### [ ] R6 (optional) Split remaining `gamemode.js` rendering
 Only if still painful after R1/R2. Candidates: `drawUIOverlay` (~300 lines) → `gameHud.js`;
