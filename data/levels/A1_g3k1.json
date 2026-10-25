@@ -1,0 +1,123 @@
+{
+  "level": "A1",
+  "category": "3.1 Der Termin",
+  "story": 3,
+  "storyTitle": "Papiere, Papiere",
+  "chapter": "3.1",
+  "title": "Der Termin",
+  "skill": "A1.zeit",
+  "beats": [
+    {
+      "read": "Montag. Ayisha braucht eine Anmeldung. Ohne Anmeldung: kein Bankkonto, kein Handyvertrag, nichts."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Du brauchst einen Termin."
+    },
+    {
+      "read": "Lea öffnet die Webseite vom Bürgerbüro. Sie klickt. Und klickt. Und klickt."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Der nächste Termin ist im Dezember!"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Das ist in acht Wochen!"
+    },
+    {
+      "read": "Max kommt in die Küche. Es ist elf Uhr. Für Max ist das Abend."
+    },
+    {
+      "speaker": "Max",
+      "play": "Ich kenne einen Trick."
+    },
+    {
+      "speaker": "Max",
+      "play": "Die Webseite hat um sieben Uhr neue Termine."
+    },
+    {
+      "read": "Dienstag. Sechs Uhr neunundfünfzig. Ayisha sitzt am Laptop. Ihr Finger wartet."
+    },
+    {
+      "play": "Um sieben Uhr klickt sie."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich habe einen Termin!"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Wann ist der Termin?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Der Termin ist am Freitag um halb neun."
+    },
+    {
+      "read": "Freitag. Acht Uhr. Ayisha ist schon da. Dreißig Minuten zu früh. Sehr deutsch."
+    },
+    {
+      "play": "Das Bürgerbüro öffnet um acht Uhr."
+    },
+    {
+      "read": "Im Wartezimmer sitzen zwanzig Leute. Ein Bildschirm zeigt Nummern."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich habe die Nummer zweiundvierzig."
+    },
+    {
+      "read": "Vierzig Minuten später: „Nummer zweiundvierzig, Zimmer drei!“"
+    },
+    {
+      "speaker": "Die Beamtin",
+      "read": "Guten Morgen. Ihr Pass, bitte. Und Ihr Geburtsdatum?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Mein Geburtstag ist am zwölften März."
+    },
+    {
+      "speaker": "Die Beamtin",
+      "play": "Sie wohnen in der Möhringer Straße?"
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Ja, Nummer vierzehn. Zweiter Stock."
+    },
+    {
+      "read": "Tippen. Drucken. Stempeln. Fertig!"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich bin jetzt offiziell hier!"
+    },
+    {
+      "speaker": "Die Beamtin",
+      "read": "Sie sind Ärztin? Dann brauchen Sie in Deutschland eine Approbation."
+    },
+    {
+      "read": "Approbation. Ayisha wiederholt das Wort. Es klingt lang. Es klingt schwer. Es klingt wie ein Berg."
+    },
+    {
+      "read": "Und Ayisha liebt Berge."
+    }
+  ],
+  "sentences": [
+    "Du brauchst einen Termin.",
+    "Der nächste Termin ist im Dezember!",
+    "Das ist in acht Wochen!",
+    "Ich kenne einen Trick.",
+    "Die Webseite hat um sieben Uhr neue Termine.",
+    "Um sieben Uhr klickt sie.",
+    "Ich habe einen Termin!",
+    "Wann ist der Termin?",
+    "Der Termin ist am Freitag um halb neun.",
+    "Das Bürgerbüro öffnet um acht Uhr.",
+    "Ich habe die Nummer zweiundvierzig.",
+    "Mein Geburtstag ist am zwölften März.",
+    "Sie wohnen in der Möhringer Straße?",
+    "Ich bin jetzt offiziell hier!"
+  ]
+}

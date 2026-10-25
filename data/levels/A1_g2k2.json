@@ -1,0 +1,112 @@
+{
+  "level": "A1",
+  "category": "2.2 Das Foto",
+  "story": 2,
+  "storyTitle": "Ein neues Zuhause",
+  "chapter": "2.2",
+  "title": "Das Foto",
+  "skill": "A1.negation",
+  "beats": [
+    {
+      "read": "Ayisha hebt das Foto auf. Die Frau ist jung, vielleicht zwanzig. Sie trägt eine weiße Uniform."
+    },
+    {
+      "read": "Hinter ihr: ein großes Gebäude mit vielen Fenstern. Ein Krankenhaus?"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Kennst du die Frau?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Nein, ich kenne die Frau nicht."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Sie ist eine Krankenschwester."
+    },
+    {
+      "speaker": "Max",
+      "play": "Die Frau ist nicht aus Deutschland."
+    },
+    {
+      "read": "Ayisha dreht das Foto um. Auf der Rückseite steht: Stuttgart, 1972. Und noch ein Satz. In einer anderen Schrift."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Das ist kein Deutsch!"
+    },
+    {
+      "speaker": "Max",
+      "play": "Ist das Englisch?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Nein, das ist auch kein Englisch."
+    },
+    {
+      "read": "Ayisha liest den Satz. Einmal. Zweimal. Ihre Augen werden groß."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Das ist Malayalam!"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Die Frau kommt vielleicht aus Kerala!"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Aber das Foto ist sehr alt."
+    },
+    {
+      "speaker": "Max",
+      "play": "Hat das Foto keinen Namen?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Nein, es hat keinen Namen."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Nur einen Buchstaben. Ganz unten: M."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Wir haben keine Idee."
+    },
+    {
+      "speaker": "Max",
+      "play": "Ich finde das nicht spannend."
+    },
+    {
+      "read": "Max gähnt und geht ins Bett. Natürlich."
+    },
+    {
+      "speaker": "Lea",
+      "read": "Und? Was steht da? Auf Deutsch, bitte!"
+    },
+    {
+      "read": "Ayisha schaut auf die Schrift. Ganz leise übersetzt sie: „Hier habe ich ein Zuhause.“"
+    },
+    {
+      "read": "In dieser Nacht schläft Ayisha nicht viel. Wer ist M.?"
+    }
+  ],
+  "sentences": [
+    "Kennst du die Frau?",
+    "Nein, ich kenne die Frau nicht.",
+    "Sie ist eine Krankenschwester.",
+    "Die Frau ist nicht aus Deutschland.",
+    "Das ist kein Deutsch!",
+    "Ist das Englisch?",
+    "Nein, das ist auch kein Englisch.",
+    "Das ist Malayalam!",
+    "Die Frau kommt vielleicht aus Kerala!",
+    "Aber das Foto ist sehr alt.",
+    "Hat das Foto keinen Namen?",
+    "Nein, es hat keinen Namen.",
+    "Wir haben keine Idee.",
+    "Ich finde das nicht spannend."
+  ]
+}

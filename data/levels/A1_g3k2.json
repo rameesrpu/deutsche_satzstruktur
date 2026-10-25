@@ -1,0 +1,118 @@
+{
+  "level": "A1",
+  "category": "3.2 Die Bank",
+  "story": 3,
+  "storyTitle": "Papiere, Papiere",
+  "chapter": "3.2",
+  "title": "Die Bank",
+  "skill": "A1.modal",
+  "beats": [
+    {
+      "read": "Mit der Anmeldung geht alles schneller. Fast alles."
+    },
+    {
+      "play": "Heute muss Ayisha viel erledigen."
+    },
+    {
+      "read": "Erste Station: die Bank. Ein junger Mann mit Krawatte."
+    },
+    {
+      "speaker": "Der Bankberater",
+      "play": "Was kann ich für Sie tun?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich will ein Konto eröffnen."
+    },
+    {
+      "speaker": "Der Bankberater",
+      "play": "Dann müssen Sie dieses Formular ausfüllen."
+    },
+    {
+      "read": "Das Formular hat sechs Seiten. Ayisha seufzt."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Kann ich das Formular mitnehmen?"
+    },
+    {
+      "speaker": "Der Bankberater",
+      "play": "Nein, das dürfen Sie leider nicht."
+    },
+    {
+      "read": "Eine Stunde später ist alles fertig. Die Bankkarte kommt per Post."
+    },
+    {
+      "read": "Zweite Station: das Handy. Ayisha braucht eine deutsche SIM-Karte. Sie ruft Lea an."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Du kannst die Karte online bestellen."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich will heute noch telefonieren!"
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Umma wartet. Und Umma wartet nicht gern."
+    },
+    {
+      "read": "Dritte Station: der Ticketautomat am Bahnhof. Schon wieder."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Welches Ticket muss ich nehmen?"
+    },
+    {
+      "read": "Diesmal hilft ihr kein Fremder. Sie liest. Sie denkt. Sie drückt."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich kann das allein!"
+    },
+    {
+      "play": "Der Automat druckt ein Ticket."
+    },
+    {
+      "read": "In der S-Bahn kommt ein Kontrolleur. Ayisha ist ganz ruhig. Fast."
+    },
+    {
+      "speaker": "Der Kontrolleur",
+      "play": "Darf ich Ihr Ticket sehen?"
+    },
+    {
+      "play": "Ayisha zeigt stolz ihr Ticket."
+    },
+    {
+      "speaker": "Der Kontrolleur",
+      "play": "Das Ticket ist richtig."
+    },
+    {
+      "read": "An der nächsten Haltestelle steht ein Mann am Bahnsteig. Kopfhörer. Ein bekanntes Lächeln."
+    },
+    {
+      "read": "Ayisha springt auf. Aber die Türen schließen. Die Bahn fährt. Er ist draußen. Sie ist drinnen."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Schon wieder!"
+    }
+  ],
+  "sentences": [
+    "Heute muss Ayisha viel erledigen.",
+    "Was kann ich für Sie tun?",
+    "Ich will ein Konto eröffnen.",
+    "Dann müssen Sie dieses Formular ausfüllen.",
+    "Kann ich das Formular mitnehmen?",
+    "Nein, das dürfen Sie leider nicht.",
+    "Du kannst die Karte online bestellen.",
+    "Ich will heute noch telefonieren!",
+    "Welches Ticket muss ich nehmen?",
+    "Ich kann das allein!",
+    "Der Automat druckt ein Ticket.",
+    "Darf ich Ihr Ticket sehen?",
+    "Ayisha zeigt stolz ihr Ticket.",
+    "Das Ticket ist richtig."
+  ]
+}

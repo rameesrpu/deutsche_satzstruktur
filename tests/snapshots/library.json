@@ -549,6 +549,5084 @@
    []
   ]
  },
+ "A1_g1k1.json #0 Wir sind gleich da.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom"
+  ],
+  "connections": [
+   [
+    "sind@3,2",
+    "gleich",
+    "da."
+   ]
+  ]
+ },
+ "A1_g1k1.json #1 Sie heißt Ayisha.": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@1,3/nom",
+   "Ayisha. → Ayisha.@1,3/nom"
+  ],
+  "connections": [
+   [
+    "heißt@1,3"
+   ]
+  ]
+ },
+ "A1_g1k1.json #2 Ayisha ist Ärztin.": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom",
+   "Ärztin. → Ärztin.@1,3/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,3"
+   ]
+  ]
+ },
+ "A1_g1k1.json #3 Ihre Heimat ist Kerala.": {
+  "leading": [],
+  "boxes": [
+   "Ihre Heimat → Heimat@1,3/nom",
+   "Kerala. → Kerala.@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,3"
+   ]
+  ]
+ },
+ "A1_g1k1.json #4 Das Wetter ist kalt.": {
+  "leading": [],
+  "boxes": [
+   "Das Wetter → Wetter@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "kalt."
+   ]
+  ]
+ },
+ "A1_g1k1.json #5 Ich bin endlich hier!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "bin@2,2",
+    "endlich",
+    "hier!"
+   ]
+  ]
+ },
+ "A1_g1k1.json #6 Bist du schon da?": {
+  "leading": [
+   "Bist@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom"
+  ],
+  "connections": [
+   [
+    "schon",
+    "da?"
+   ]
+  ]
+ },
+ "A1_g1k1.json #7 Die Koffer sind sehr schwer.": {
+  "leading": [],
+  "boxes": [
+   "Die Koffer → Koffer@2,3/nom"
+  ],
+  "connections": [
+   [
+    "sind@2,3",
+    "sehr",
+    "schwer."
+   ]
+  ]
+ },
+ "A1_g1k1.json #8 Der Automat ist kompliziert.": {
+  "leading": [],
+  "boxes": [
+   "Der Automat → Automat@1,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "kompliziert."
+   ]
+  ]
+ },
+ "A1_g1k1.json #9 Sind Sie neu hier?": {
+  "leading": [
+   "Sind@2,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom"
+  ],
+  "connections": [
+   [
+    "neu",
+    "hier?"
+   ]
+  ]
+ },
+ "A1_g1k1.json #10 Ja, ich bin neu.": {
+  "leading": [
+   "Ja,"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "bin@2,2",
+    "neu."
+   ]
+  ]
+ },
+ "A1_g1k1.json #11 Deutsch ist besser!": {
+  "leading": [],
+  "boxes": [
+   "Deutsch → Deutsch@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "besser!"
+   ]
+  ]
+ },
+ "A1_g1k1.json #12 Sie sind sehr nett!": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@2,3/nom"
+  ],
+  "connections": [
+   [
+    "sind@2,3",
+    "sehr",
+    "nett!"
+   ]
+  ]
+ },
+ "A1_g1k1.json #13 Wer ist der Mann?": {
+  "leading": [
+   "Wer",
+   "ist@1,1"
+  ],
+  "boxes": [
+   "der Mann? → Mann?@1,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k1_uebung.json #0 Ich bin Ärztin.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Ärztin. → Ärztin.@1,3/nom"
+  ],
+  "connections": [
+   [
+    "bin@2,2"
+   ]
+  ]
+ },
+ "A1_g1k1_uebung.json #1 Bist du müde?": {
+  "leading": [
+   "Bist@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom"
+  ],
+  "connections": [
+   [
+    "müde?"
+   ]
+  ]
+ },
+ "A1_g1k1_uebung.json #2 Er ist sehr nett.": {
+  "leading": [],
+  "boxes": [
+   "Er → Er@1,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "sehr",
+    "nett."
+   ]
+  ]
+ },
+ "A1_g1k1_uebung.json #3 Wir sind neu hier.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom"
+  ],
+  "connections": [
+   [
+    "sind@3,2",
+    "neu",
+    "hier."
+   ]
+  ]
+ },
+ "A1_g1k1_uebung.json #4 Ihr seid sehr laut!": {
+  "leading": [],
+  "boxes": [
+   "Ihr → Ihr@3,1/nom"
+  ],
+  "connections": [
+   [
+    "seid@3,1",
+    "sehr",
+    "laut!"
+   ]
+  ]
+ },
+ "A1_g1k1_uebung.json #5 Die Stadt ist schön.": {
+  "leading": [],
+  "boxes": [
+   "Die Stadt → Stadt@1,3/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,3",
+    "schön."
+   ]
+  ]
+ },
+ "A1_g1k1_uebung.json #6 Das Ticket ist teuer.": {
+  "leading": [],
+  "boxes": [
+   "Das Ticket → Ticket@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "teuer."
+   ]
+  ]
+ },
+ "A1_g1k1_uebung.json #7 Die Taschen sind schwer.": {
+  "leading": [],
+  "boxes": [
+   "Die Taschen → Taschen@2,3/nom"
+  ],
+  "connections": [
+   [
+    "sind@2,3",
+    "schwer."
+   ]
+  ]
+ },
+ "A1_g1k1_uebung.json #8 Sind Sie Frau Rahman?": {
+  "leading": [
+   "Sind@2,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "Frau Rahman? → Rahman?@1,3/nom"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g1k2.json #0 Hier wohne ich jetzt!": {
+  "leading": [
+   "Hier",
+   "wohne@2,2"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "jetzt!"
+   ]
+  ]
+ },
+ "A1_g1k2.json #1 Hallo, ich heiße Lea!": {
+  "leading": [
+   "Hallo,"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom",
+   "Lea! → Lea!@1,3/nom"
+  ],
+  "connections": [
+   [
+    "heiße@2,2"
+   ]
+  ]
+ },
+ "A1_g1k2.json #2 Ich lerne Krankenpflege.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Krankenpflege. → Krankenpflege.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "lerne@2,2"
+   ]
+  ]
+ },
+ "A1_g1k2.json #3 Ich komme aus Indien.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Indien. → Indien.@2,1/dat"
+  ],
+  "connections": [
+   [
+    "komme@2,2",
+    "aus"
+   ]
+  ]
+ },
+ "A1_g1k2.json #4 Wohnt ihr schon lange hier?": {
+  "leading": [
+   "Wohnt@3,1"
+  ],
+  "boxes": [
+   "ihr → ihr@3,1/nom"
+  ],
+  "connections": [
+   [
+    "schon",
+    "lange",
+    "hier?"
+   ]
+  ]
+ },
+ "A1_g1k2.json #5 Ja, wir wohnen gern hier.": {
+  "leading": [
+   "Ja,"
+  ],
+  "boxes": [
+   "wir → wir@3,2/nom"
+  ],
+  "connections": [
+   [
+    "wohnen@3,2",
+    "gern",
+    "hier."
+   ]
+  ]
+ },
+ "A1_g1k2.json #6 Max wohnt auch hier.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom"
+  ],
+  "connections": [
+   [
+    "wohnt@1,1",
+    "auch",
+    "hier."
+   ]
+  ]
+ },
+ "A1_g1k2.json #7 Ich backe Brezeln.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Brezeln. → Brezeln.@2,3/akk"
+  ],
+  "connections": [
+   [
+    "backe@2,2"
+   ]
+  ]
+ },
+ "A1_g1k2.json #8 Ich arbeite sehr früh.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "arbeite@2,2",
+    "sehr",
+    "früh."
+   ]
+  ]
+ },
+ "A1_g1k2.json #9 Wir kochen heute zusammen!": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom"
+  ],
+  "connections": [
+   [
+    "kochen@3,2",
+    "heute",
+    "zusammen!"
+   ]
+  ]
+ },
+ "A1_g1k2.json #10 Kochst du gern?": {
+  "leading": [
+   "Kochst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom"
+  ],
+  "connections": [
+   [
+    "gern?"
+   ]
+  ]
+ },
+ "A1_g1k2.json #11 Heute koche ich nicht.": {
+  "leading": [
+   "Heute",
+   "koche@2,2"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "nicht."
+   ]
+  ]
+ },
+ "A1_g1k2.json #12 Ich bin sehr müde.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "bin@2,2",
+    "sehr",
+    "müde."
+   ]
+  ]
+ },
+ "A1_g1k2.json #13 Lea und Max sind nett.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom",
+   "Max → Max@1,1/nom"
+  ],
+  "connections": [
+   [
+    "und"
+   ],
+   [
+    "sind@2,3",
+    "nett."
+   ]
+  ]
+ },
+ "A1_g1k2.json #14 Ayisha wohnt jetzt in Stuttgart.": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom",
+   "Stuttgart. → Stuttgart.@2,1/dat"
+  ],
+  "connections": [
+   [
+    "wohnt@1,3",
+    "jetzt",
+    "in"
+   ]
+  ]
+ },
+ "A1_g1k2_uebung.json #0 Ich wohne in Stuttgart.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Stuttgart. → Stuttgart.@2,1/dat"
+  ],
+  "connections": [
+   [
+    "wohne@2,2",
+    "in"
+   ]
+  ]
+ },
+ "A1_g1k2_uebung.json #1 Du kommst aus Indien.": {
+  "leading": [],
+  "boxes": [
+   "Du → Du@1,2/nom",
+   "Indien. → Indien.@2,1/dat"
+  ],
+  "connections": [
+   [
+    "kommst@1,2",
+    "aus"
+   ]
+  ]
+ },
+ "A1_g1k2_uebung.json #2 Lea lernt Krankenpflege.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom",
+   "Krankenpflege. → Krankenpflege.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "lernt@1,3"
+   ]
+  ]
+ },
+ "A1_g1k2_uebung.json #3 Max arbeitet sehr früh.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom"
+  ],
+  "connections": [
+   [
+    "arbeitet@1,1",
+    "sehr",
+    "früh."
+   ]
+  ]
+ },
+ "A1_g1k2_uebung.json #4 Wir kochen zusammen.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom"
+  ],
+  "connections": [
+   [
+    "kochen@3,2",
+    "zusammen."
+   ]
+  ]
+ },
+ "A1_g1k2_uebung.json #5 Ihr spielt Cricket.": {
+  "leading": [],
+  "boxes": [
+   "Ihr → Ihr@3,1/nom",
+   "Cricket. → Cricket.@2,1/akk"
+  ],
+  "connections": [
+   [
+    "spielt@3,1"
+   ]
+  ]
+ },
+ "A1_g1k2_uebung.json #6 Die Kinder spielen draußen.": {
+  "leading": [],
+  "boxes": [
+   "Die Kinder → Kinder@2,3/nom"
+  ],
+  "connections": [
+   [
+    "spielen@2,3",
+    "draußen."
+   ]
+  ]
+ },
+ "A1_g1k2_uebung.json #7 Woher kommst du?": {
+  "leading": [
+   "Woher",
+   "kommst@1,2"
+  ],
+  "boxes": [
+   "du? → du?@1,2/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k3.json #0 Das Zimmer ist klein.": {
+  "leading": [],
+  "boxes": [
+   "Das Zimmer → Zimmer@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "klein."
+   ]
+  ]
+ },
+ "A1_g1k3.json #1 Aber das Fenster ist groß.": {
+  "leading": [
+   "Aber"
+  ],
+  "boxes": [
+   "das Fenster → Fenster@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "groß."
+   ]
+  ]
+ },
+ "A1_g1k3.json #2 Hier ist ein Bett.": {
+  "leading": [
+   "Hier",
+   "ist@2,1"
+  ],
+  "boxes": [
+   "ein Bett. → Bett.@2,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k3.json #3 Und hier ist ein Tisch.": {
+  "leading": [
+   "Und",
+   "hier",
+   "ist@1,1"
+  ],
+  "boxes": [
+   "ein Tisch. → Tisch.@1,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k3.json #4 Der Schrank ist sehr alt.": {
+  "leading": [],
+  "boxes": [
+   "Der Schrank → Schrank@1,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "sehr",
+    "alt."
+   ]
+  ]
+ },
+ "A1_g1k3.json #5 Die Lampe ist kaputt.": {
+  "leading": [],
+  "boxes": [
+   "Die Lampe → Lampe@1,3/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,3",
+    "kaputt."
+   ]
+  ]
+ },
+ "A1_g1k3.json #6 Die Lampe funktioniert wieder!": {
+  "leading": [],
+  "boxes": [
+   "Die Lampe → Lampe@1,3/nom"
+  ],
+  "connections": [
+   [
+    "funktioniert@1,3",
+    "wieder!"
+   ]
+  ]
+ },
+ "A1_g1k3.json #7 Die Küche ist sehr chaotisch.": {
+  "leading": [],
+  "boxes": [
+   "Die Küche → Küche@1,3/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,3",
+    "sehr",
+    "chaotisch."
+   ]
+  ]
+ },
+ "A1_g1k3.json #8 Da sind viele Tassen.": {
+  "leading": [
+   "Da",
+   "sind@2,3"
+  ],
+  "boxes": [
+   "viele Tassen. → Tassen.@2,3/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k3.json #9 Die Teller sind schmutzig.": {
+  "leading": [],
+  "boxes": [
+   "Die Teller → Teller@2,3/nom"
+  ],
+  "connections": [
+   [
+    "sind@2,3",
+    "schmutzig."
+   ]
+  ]
+ },
+ "A1_g1k3.json #10 Die Brezeln sind ganz frisch!": {
+  "leading": [],
+  "boxes": [
+   "Die Brezeln → Brezeln@2,3/nom"
+  ],
+  "connections": [
+   [
+    "sind@2,3",
+    "ganz",
+    "frisch!"
+   ]
+  ]
+ },
+ "A1_g1k3.json #11 Was ist eine Brezel?": {
+  "leading": [
+   "Was",
+   "ist@1,3"
+  ],
+  "boxes": [
+   "eine Brezel? → Brezel?@1,3/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k3.json #12 Bist du hungrig?": {
+  "leading": [
+   "Bist@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom"
+  ],
+  "connections": [
+   [
+    "hungrig?"
+   ]
+  ]
+ },
+ "A1_g1k3.json #13 Ihr seid lustig!": {
+  "leading": [],
+  "boxes": [
+   "Ihr → Ihr@3,1/nom"
+  ],
+  "connections": [
+   [
+    "seid@3,1",
+    "lustig!"
+   ]
+  ]
+ },
+ "A1_g1k3_uebung.json #0 Der Tisch ist neu.": {
+  "leading": [],
+  "boxes": [
+   "Der Tisch → Tisch@1,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "neu."
+   ]
+  ]
+ },
+ "A1_g1k3_uebung.json #1 Die Tür ist offen.": {
+  "leading": [],
+  "boxes": [
+   "Die Tür → Tür@1,3/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,3",
+    "offen."
+   ]
+  ]
+ },
+ "A1_g1k3_uebung.json #2 Das Bett ist bequem.": {
+  "leading": [],
+  "boxes": [
+   "Das Bett → Bett@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "bequem."
+   ]
+  ]
+ },
+ "A1_g1k3_uebung.json #3 Die Fenster sind groß.": {
+  "leading": [],
+  "boxes": [
+   "Die Fenster → Fenster@2,3/nom"
+  ],
+  "connections": [
+   [
+    "sind@2,3",
+    "groß."
+   ]
+  ]
+ },
+ "A1_g1k3_uebung.json #4 Hier ist eine Lampe.": {
+  "leading": [
+   "Hier",
+   "ist@1,3"
+  ],
+  "boxes": [
+   "eine Lampe. → Lampe.@1,3/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k3_uebung.json #5 Wo ist der Schlüssel?": {
+  "leading": [
+   "Wo",
+   "ist@1,1"
+  ],
+  "boxes": [
+   "der Schlüssel? → Schlüssel?@1,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k3_uebung.json #6 Die Stühle sind alt.": {
+  "leading": [],
+  "boxes": [
+   "Die Stühle → Stühle@2,3/nom"
+  ],
+  "connections": [
+   [
+    "sind@2,3",
+    "alt."
+   ]
+  ]
+ },
+ "A1_g1k3_uebung.json #7 Ein Zimmer ist frei.": {
+  "leading": [],
+  "boxes": [
+   "Ein Zimmer → Zimmer@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "frei."
+   ]
+  ]
+ },
+ "A1_g1k4.json #0 Woher kommst du genau?": {
+  "leading": [
+   "Woher",
+   "kommst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom"
+  ],
+  "connections": [
+   [
+    "genau?"
+   ]
+  ]
+ },
+ "A1_g1k4.json #1 Ich komme aus Payyannur.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Payyannur. → Payyannur.@2,1/dat"
+  ],
+  "connections": [
+   [
+    "komme@2,2",
+    "aus"
+   ]
+  ]
+ },
+ "A1_g1k4.json #2 Wo ist das?": {
+  "leading": [
+   "Wo",
+   "ist@2,1"
+  ],
+  "boxes": [
+   "das? → das?@2,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k4.json #3 Payyannur ist in Kerala.": {
+  "leading": [],
+  "boxes": [
+   "Payyannur → Payyannur@2,1/nom",
+   "Kerala. → Kerala.@2,1/dat"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "in"
+   ]
+  ]
+ },
+ "A1_g1k4.json #4 Ist es dort warm?": {
+  "leading": [
+   "Ist@2,1"
+  ],
+  "boxes": [
+   "es → es@2,1/nom"
+  ],
+  "connections": [
+   [
+    "dort",
+    "warm?"
+   ]
+  ]
+ },
+ "A1_g1k4.json #5 Ja, es ist immer warm.": {
+  "leading": [
+   "Ja,"
+  ],
+  "boxes": [
+   "es → es@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "immer",
+    "warm."
+   ]
+  ]
+ },
+ "A1_g1k4.json #6 Lernst du schon lange Deutsch?": {
+  "leading": [
+   "Lernst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "Deutsch? → Deutsch?@2,1/akk"
+  ],
+  "connections": [
+   [
+    "schon",
+    "lange"
+   ]
+  ]
+ },
+ "A1_g1k4.json #7 Was machst du, Max?": {
+  "leading": [
+   "Was",
+   "machst@1,2"
+  ],
+  "boxes": [
+   "du, → du,@1,2/nom"
+  ],
+  "connections": [
+   [
+    "Max?"
+   ]
+  ]
+ },
+ "A1_g1k4.json #8 Ich backe Brot und Brezeln.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Brot → Brot@2,1/akk",
+   "Brezeln. → Brezeln.@2,3/akk"
+  ],
+  "connections": [
+   [
+    "backe@2,2"
+   ],
+   [
+    "und"
+   ]
+  ]
+ },
+ "A1_g1k4.json #9 Was macht ihr heute Abend?": {
+  "leading": [
+   "Was",
+   "macht@3,1"
+  ],
+  "boxes": [
+   "ihr → ihr@3,1/nom"
+  ],
+  "connections": [
+   [
+    "heute",
+    "Abend?"
+   ]
+  ]
+ },
+ "A1_g1k4.json #10 Wir spielen oft Karten.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "Karten. → Karten.@2,3/akk"
+  ],
+  "connections": [
+   [
+    "spielen@3,2",
+    "oft"
+   ]
+  ]
+ },
+ "A1_g1k4.json #11 Spielst du auch Karten?": {
+  "leading": [
+   "Spielst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "Karten? → Karten?@2,3/akk"
+  ],
+  "connections": [
+   [
+    "auch"
+   ]
+  ]
+ },
+ "A1_g1k4.json #12 Nein, ich spiele Cricket.": {
+  "leading": [
+   "Nein,"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom",
+   "Cricket. → Cricket.@2,1/akk"
+  ],
+  "connections": [
+   [
+    "spiele@2,2"
+   ]
+  ]
+ },
+ "A1_g1k4.json #13 Ist das wahr?": {
+  "leading": [
+   "Ist@2,1"
+  ],
+  "boxes": [
+   "das → das@2,1/nom"
+  ],
+  "connections": [
+   [
+    "wahr?"
+   ]
+  ]
+ },
+ "A1_g1k4_uebung.json #0 Wie heißt du?": {
+  "leading": [
+   "Wie",
+   "heißt@1,2"
+  ],
+  "boxes": [
+   "du? → du?@1,2/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k4_uebung.json #1 Wo wohnst du?": {
+  "leading": [
+   "Wo",
+   "wohnst@1,2"
+  ],
+  "boxes": [
+   "du? → du?@1,2/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k4_uebung.json #2 Kommst du aus Indien?": {
+  "leading": [
+   "Kommst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "Indien? → Indien?@2,1/dat"
+  ],
+  "connections": [
+   [
+    "aus"
+   ]
+  ]
+ },
+ "A1_g1k4_uebung.json #3 Was lernt Lea?": {
+  "leading": [
+   "Was",
+   "lernt@1,3"
+  ],
+  "boxes": [
+   "Lea? → Lea?@1,3/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k4_uebung.json #4 Wohnt Max in Stuttgart?": {
+  "leading": [
+   "Wohnt@1,1"
+  ],
+  "boxes": [
+   "Max → Max@1,1/nom",
+   "Stuttgart? → Stuttgart?@2,1/dat"
+  ],
+  "connections": [
+   [
+    "in"
+   ]
+  ]
+ },
+ "A1_g1k4_uebung.json #5 Wie ist das Wetter?": {
+  "leading": [
+   "Wie",
+   "ist@2,1"
+  ],
+  "boxes": [
+   "das Wetter? → Wetter?@2,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k4_uebung.json #6 Spielt ihr Karten?": {
+  "leading": [
+   "Spielt@3,1"
+  ],
+  "boxes": [
+   "ihr → ihr@3,1/nom",
+   "Karten? → Karten?@2,3/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g1k4_uebung.json #7 Woher kommen Sie?": {
+  "leading": [
+   "Woher",
+   "kommen@2,3"
+  ],
+  "boxes": [
+   "Sie? → Sie?@2,3/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k5.json #0 Grüß Gott, ich bin Frau Schäfer.": {
+  "leading": [
+   "Grüß",
+   "Gott,"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom",
+   "Frau Schäfer. → Schäfer.@1,3/nom"
+  ],
+  "connections": [
+   [
+    "bin@2,2"
+   ]
+  ]
+ },
+ "A1_g1k5.json #1 Haben Sie die Hausordnung?": {
+  "leading": [
+   "Haben@2,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "die Hausordnung? → Hausordnung?@1,3/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g1k5.json #2 Nein, ich habe keine Hausordnung.": {
+  "leading": [
+   "Nein,"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom",
+   "keine Hausordnung. → Hausordnung.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2"
+   ]
+  ]
+ },
+ "A1_g1k5.json #3 Hier haben wir die Kehrwoche.": {
+  "leading": [
+   "Hier",
+   "haben@3,2"
+  ],
+  "boxes": [
+   "wir → wir@3,2/nom",
+   "die Kehrwoche. → Kehrwoche.@1,3/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g1k5.json #4 Was ist das?": {
+  "leading": [
+   "Was",
+   "ist@2,1"
+  ],
+  "boxes": [
+   "das? → das?@2,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g1k5.json #5 Ich habe leider keine Zeit.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "keine Zeit. → Zeit.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2",
+    "leider"
+   ]
+  ]
+ },
+ "A1_g1k5.json #6 Sie haben nie Zeit, Herr Brenner!": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "Zeit, → Zeit,@1,3/akk"
+  ],
+  "connections": [
+   [
+    "haben@2,3",
+    "nie"
+   ],
+   [
+    "Herr",
+    "Brenner!"
+   ]
+  ]
+ },
+ "A1_g1k5.json #7 Sie haben Hühner?": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "Hühner? → Hühner?@2,3/akk"
+  ],
+  "connections": [
+   [
+    "haben@2,3"
+   ]
+  ]
+ },
+ "A1_g1k5.json #8 Ja, ich habe fünf Hühner.": {
+  "leading": [
+   "Ja,"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom",
+   "fünf Hühner. → Hühner.@2,3/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2"
+   ]
+  ]
+ },
+ "A1_g1k5.json #9 Die Hühner haben Namen.": {
+  "leading": [],
+  "boxes": [
+   "Die Hühner → Hühner@2,3/nom",
+   "Namen. → Namen.@2,3/akk"
+  ],
+  "connections": [
+   [
+    "haben@2,3"
+   ]
+  ]
+ },
+ "A1_g1k5.json #10 Ich liebe Hühner!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Hühner! → Hühner!@2,3/akk"
+  ],
+  "connections": [
+   [
+    "liebe@2,2"
+   ]
+  ]
+ },
+ "A1_g1k5.json #11 Essen Sie gern Eier?": {
+  "leading": [
+   "Essen@2,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "Eier? → Eier?@2,3/akk"
+  ],
+  "connections": [
+   [
+    "gern"
+   ]
+  ]
+ },
+ "A1_g1k5.json #12 Ayisha nimmt sechs Eier.": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom",
+   "sechs Eier. → Eier.@2,3/akk"
+  ],
+  "connections": [
+   [
+    "nimmt@1,3"
+   ]
+  ]
+ },
+ "A1_g1k5.json #13 Liest du die Hausordnung?": {
+  "leading": [
+   "Liest@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "die Hausordnung? → Hausordnung?@1,3/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g1k5.json #14 Max schläft schon wieder.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom"
+  ],
+  "connections": [
+   [
+    "schläft@1,1",
+    "schon",
+    "wieder."
+   ]
+  ]
+ },
+ "A1_g1k5_uebung.json #0 Ich habe ein Zimmer.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "ein Zimmer. → Zimmer.@2,1/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2"
+   ]
+  ]
+ },
+ "A1_g1k5_uebung.json #1 Du hast Zeit.": {
+  "leading": [],
+  "boxes": [
+   "Du → Du@1,2/nom",
+   "Zeit. → Zeit.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "hast@1,2"
+   ]
+  ]
+ },
+ "A1_g1k5_uebung.json #2 Frau Schäfer hat Hühner.": {
+  "leading": [],
+  "boxes": [
+   "Frau Schäfer → Schäfer@1,3/nom",
+   "Hühner. → Hühner.@2,3/akk"
+  ],
+  "connections": [
+   [
+    "hat@1,3"
+   ]
+  ]
+ },
+ "A1_g1k5_uebung.json #3 Wir haben eine Küche.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "eine Küche. → Küche.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "haben@3,2"
+   ]
+  ]
+ },
+ "A1_g1k5_uebung.json #4 Habt ihr Brot?": {
+  "leading": [
+   "Habt@3,1"
+  ],
+  "boxes": [
+   "ihr → ihr@3,1/nom",
+   "Brot? → Brot?@2,1/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g1k5_uebung.json #5 Max isst Brezeln.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom",
+   "Brezeln. → Brezeln.@2,3/akk"
+  ],
+  "connections": [
+   [
+    "isst@1,1"
+   ]
+  ]
+ },
+ "A1_g1k5_uebung.json #6 Sprichst du Deutsch?": {
+  "leading": [
+   "Sprichst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "Deutsch? → Deutsch?@2,1/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g1k5_uebung.json #7 Ayisha liest die Hausordnung.": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom",
+   "die Hausordnung. → Hausordnung.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "liest@1,3"
+   ]
+  ]
+ },
+ "A1_g2k1.json #0 Ich brauche einen Tisch.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "einen Tisch. → Tisch.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "brauche@2,2"
+   ]
+  ]
+ },
+ "A1_g2k1.json #1 Ich brauche auch einen Stuhl.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "einen Stuhl. → Stuhl.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "brauche@2,2",
+    "auch"
+   ]
+  ]
+ },
+ "A1_g2k1.json #2 Und ich suche einen Spiegel.": {
+  "leading": [
+   "Und"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom",
+   "einen Spiegel. → Spiegel.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "suche@2,2"
+   ]
+  ]
+ },
+ "A1_g2k1.json #3 Siehst du den Tisch da?": {
+  "leading": [
+   "Siehst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "den Tisch → Tisch@1,1/akk"
+  ],
+  "connections": [
+   [],
+   [
+    "da?"
+   ]
+  ]
+ },
+ "A1_g2k1.json #4 Der Tisch ist zu teuer.": {
+  "leading": [],
+  "boxes": [
+   "Der Tisch → Tisch@1,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "zu",
+    "teuer."
+   ]
+  ]
+ },
+ "A1_g2k1.json #5 Ich nehme den Tisch hier.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "den Tisch → Tisch@1,1/akk"
+  ],
+  "connections": [
+   [
+    "nehme@2,2"
+   ],
+   [
+    "hier."
+   ]
+  ]
+ },
+ "A1_g2k1.json #6 Max findet den Stuhl super!": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom",
+   "den Stuhl → Stuhl@1,1/akk"
+  ],
+  "connections": [
+   [
+    "findet@1,1"
+   ],
+   [
+    "super!"
+   ]
+  ]
+ },
+ "A1_g2k1.json #7 Ayisha mag den Stuhl nicht.": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom",
+   "den Stuhl → Stuhl@1,1/akk"
+  ],
+  "connections": [
+   [
+    "mag@1,3"
+   ],
+   [
+    "nicht."
+   ]
+  ]
+ },
+ "A1_g2k1.json #8 Ich kaufe eine Lampe und einen Spiegel.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "eine Lampe → Lampe@1,3/akk",
+   "einen Spiegel. → Spiegel.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "kaufe@2,2"
+   ],
+   [
+    "und"
+   ]
+  ]
+ },
+ "A1_g2k1.json #9 Wir haben keinen Platz!": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "keinen Platz! → Platz!@1,1/akk"
+  ],
+  "connections": [
+   [
+    "haben@3,2"
+   ]
+  ]
+ },
+ "A1_g2k1.json #10 Ich sehe nichts!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "sehe@2,2",
+    "nichts!"
+   ]
+  ]
+ },
+ "A1_g2k1.json #11 Wir schieben den Schrank!": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "den Schrank! → Schrank!@1,1/akk"
+  ],
+  "connections": [
+   [
+    "schieben@3,2"
+   ]
+  ]
+ },
+ "A1_g2k1.json #12 Ich sehe ein Foto!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "ein Foto! → Foto!@2,1/akk"
+  ],
+  "connections": [
+   [
+    "sehe@2,2"
+   ]
+  ]
+ },
+ "A1_g2k1_uebung.json #0 Ich brauche einen Stuhl.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "einen Stuhl. → Stuhl.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "brauche@2,2"
+   ]
+  ]
+ },
+ "A1_g2k1_uebung.json #1 Lea kauft einen Teppich.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom",
+   "einen Teppich. → Teppich.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "kauft@1,3"
+   ]
+  ]
+ },
+ "A1_g2k1_uebung.json #2 Max isst den Kuchen.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom",
+   "den Kuchen. → Kuchen.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "isst@1,1"
+   ]
+  ]
+ },
+ "A1_g2k1_uebung.json #3 Wir suchen einen Supermarkt.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "einen Supermarkt. → Supermarkt.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "suchen@3,2"
+   ]
+  ]
+ },
+ "A1_g2k1_uebung.json #4 Hast du einen Schlüssel?": {
+  "leading": [
+   "Hast@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "einen Schlüssel? → Schlüssel?@1,1/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g2k1_uebung.json #5 Ayisha trinkt einen Tee.": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom",
+   "einen Tee. → Tee.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "trinkt@1,3"
+   ]
+  ]
+ },
+ "A1_g2k1_uebung.json #6 Ich sehe den Mann.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "den Mann. → Mann.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "sehe@2,2"
+   ]
+  ]
+ },
+ "A1_g2k1_uebung.json #7 Frau Schäfer hat einen Garten.": {
+  "leading": [],
+  "boxes": [
+   "Frau Schäfer → Schäfer@1,3/nom",
+   "einen Garten. → Garten.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "hat@1,3"
+   ]
+  ]
+ },
+ "A1_g2k2.json #0 Kennst du die Frau?": {
+  "leading": [
+   "Kennst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "die Frau? → Frau?@1,3/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g2k2.json #1 Nein, ich kenne die Frau nicht.": {
+  "leading": [
+   "Nein,"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom",
+   "die Frau → Frau@1,3/akk"
+  ],
+  "connections": [
+   [
+    "kenne@2,2"
+   ],
+   [
+    "nicht."
+   ]
+  ]
+ },
+ "A1_g2k2.json #2 Sie ist eine Krankenschwester.": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@1,3/nom",
+   "eine Krankenschwester. → Krankenschwester.@1,3/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,3"
+   ]
+  ]
+ },
+ "A1_g2k2.json #3 Die Frau ist nicht aus Deutschland.": {
+  "leading": [],
+  "boxes": [
+   "Die Frau → Frau@1,3/nom",
+   "Deutschland. → Deutschland.@2,1/dat"
+  ],
+  "connections": [
+   [
+    "ist@1,3",
+    "nicht",
+    "aus"
+   ]
+  ]
+ },
+ "A1_g2k2.json #4 Das ist kein Deutsch!": {
+  "leading": [],
+  "boxes": [
+   "Das → Das@2,1/nom",
+   "kein Deutsch! → Deutsch!@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1"
+   ]
+  ]
+ },
+ "A1_g2k2.json #5 Ist das Englisch?": {
+  "leading": [
+   "Ist@2,1"
+  ],
+  "boxes": [
+   "das Englisch? → Englisch?@2,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g2k2.json #6 Nein, das ist auch kein Englisch.": {
+  "leading": [
+   "Nein,"
+  ],
+  "boxes": [
+   "das → das@2,1/nom",
+   "kein Englisch. → Englisch.@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "auch"
+   ]
+  ]
+ },
+ "A1_g2k2.json #7 Das ist Malayalam!": {
+  "leading": [],
+  "boxes": [
+   "Das → Das@2,1/nom",
+   "Malayalam! → Malayalam!@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1"
+   ]
+  ]
+ },
+ "A1_g2k2.json #8 Die Frau kommt vielleicht aus Kerala!": {
+  "leading": [],
+  "boxes": [
+   "Die Frau → Frau@1,3/nom",
+   "Kerala! → Kerala!@2,1/dat"
+  ],
+  "connections": [
+   [
+    "kommt@1,3",
+    "vielleicht",
+    "aus"
+   ]
+  ]
+ },
+ "A1_g2k2.json #9 Aber das Foto ist sehr alt.": {
+  "leading": [
+   "Aber"
+  ],
+  "boxes": [
+   "das Foto → Foto@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "sehr",
+    "alt."
+   ]
+  ]
+ },
+ "A1_g2k2.json #10 Hat das Foto keinen Namen?": {
+  "leading": [
+   "Hat@2,1"
+  ],
+  "boxes": [
+   "das Foto → Foto@2,1/nom",
+   "keinen Namen? → Namen?@1,1/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g2k2.json #11 Nein, es hat keinen Namen.": {
+  "leading": [
+   "Nein,"
+  ],
+  "boxes": [
+   "es → es@2,1/nom",
+   "keinen Namen. → Namen.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "hat@2,1"
+   ]
+  ]
+ },
+ "A1_g2k2.json #12 Wir haben keine Idee.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "keine Idee. → Idee.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "haben@3,2"
+   ]
+  ]
+ },
+ "A1_g2k2.json #13 Ich finde das nicht spannend.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "das → das@2,1/akk"
+  ],
+  "connections": [
+   [
+    "finde@2,2"
+   ],
+   [
+    "nicht",
+    "spannend."
+   ]
+  ]
+ },
+ "A1_g2k2_uebung.json #0 Ich habe keinen Tisch.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "keinen Tisch. → Tisch.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2"
+   ]
+  ]
+ },
+ "A1_g2k2_uebung.json #1 Das ist kein Problem.": {
+  "leading": [],
+  "boxes": [
+   "Das → Das@2,1/nom",
+   "kein Problem. → Problem.@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1"
+   ]
+  ]
+ },
+ "A1_g2k2_uebung.json #2 Max putzt nicht.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom"
+  ],
+  "connections": [
+   [
+    "putzt@1,1",
+    "nicht."
+   ]
+  ]
+ },
+ "A1_g2k2_uebung.json #3 Wir haben keine Zeit.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "keine Zeit. → Zeit.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "haben@3,2"
+   ]
+  ]
+ },
+ "A1_g2k2_uebung.json #4 Lea trinkt keinen Kaffee.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom",
+   "keinen Kaffee. → Kaffee.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "trinkt@1,3"
+   ]
+  ]
+ },
+ "A1_g2k2_uebung.json #5 Ich verstehe das nicht.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "das → das@2,1/akk"
+  ],
+  "connections": [
+   [
+    "verstehe@2,2"
+   ],
+   [
+    "nicht."
+   ]
+  ]
+ },
+ "A1_g2k2_uebung.json #6 Du hast keine Hühner.": {
+  "leading": [],
+  "boxes": [
+   "Du → Du@1,2/nom",
+   "keine Hühner. → Hühner.@2,3/akk"
+  ],
+  "connections": [
+   [
+    "hast@1,2"
+   ]
+  ]
+ },
+ "A1_g2k2_uebung.json #7 Das Wetter ist nicht gut.": {
+  "leading": [],
+  "boxes": [
+   "Das Wetter → Wetter@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "nicht",
+    "gut."
+   ]
+  ]
+ },
+ "A1_g2k3.json #0 Ist euer Kühlschrank immer so leer?": {
+  "leading": [
+   "Ist@1,1"
+  ],
+  "boxes": [
+   "euer Kühlschrank → Kühlschrank@1,1/nom"
+  ],
+  "connections": [
+   [
+    "immer",
+    "so",
+    "leer?"
+   ]
+  ]
+ },
+ "A1_g2k3.json #1 Das ist mein Zimmer!": {
+  "leading": [],
+  "boxes": [
+   "Das → Das@2,1/nom",
+   "mein Zimmer! → Zimmer!@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1"
+   ]
+  ]
+ },
+ "A1_g2k3.json #2 Dein Zimmer ist so klein!": {
+  "leading": [],
+  "boxes": [
+   "Dein Zimmer → Zimmer@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "so",
+    "klein!"
+   ]
+  ]
+ },
+ "A1_g2k3.json #3 Aber mein Bett ist sehr bequem.": {
+  "leading": [
+   "Aber"
+  ],
+  "boxes": [
+   "mein Bett → Bett@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "sehr",
+    "bequem."
+   ]
+  ]
+ },
+ "A1_g2k3.json #4 Wo ist dein Cricketschläger?": {
+  "leading": [
+   "Wo",
+   "ist@1,1"
+  ],
+  "boxes": [
+   "dein Cricketschläger? → Cricketschläger?@1,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g2k3.json #5 Mein Schläger ist in Kerala.": {
+  "leading": [],
+  "boxes": [
+   "Mein Schläger → Schläger@1,1/nom",
+   "Kerala. → Kerala.@2,1/dat"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "in"
+   ]
+  ]
+ },
+ "A1_g2k3.json #6 Wie ist deine Vermieterin?": {
+  "leading": [
+   "Wie",
+   "ist@1,3"
+  ],
+  "boxes": [
+   "deine Vermieterin? → Vermieterin?@1,3/nom"
+  ],
+  "connections": []
+ },
+ "A1_g2k3.json #7 Ihre Hühner sind wunderbar!": {
+  "leading": [],
+  "boxes": [
+   "Ihre Hühner → Hühner@2,3/nom"
+  ],
+  "connections": [
+   [
+    "sind@2,3",
+    "wunderbar!"
+   ]
+  ]
+ },
+ "A1_g2k3.json #8 Das ist nicht unsere Familie.": {
+  "leading": [],
+  "boxes": [
+   "Das → Das@2,1/nom",
+   "unsere Familie. → Familie.@1,3/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "nicht"
+   ]
+  ]
+ },
+ "A1_g2k3.json #9 Aber ihre Uniform kenne ich.": {
+  "leading": [
+   "Aber"
+  ],
+  "boxes": [
+   "ihre Uniform → Uniform@1,3/akk",
+   "ich. → ich.@2,2/nom"
+  ],
+  "connections": [
+   [
+    "kenne@2,2"
+   ]
+  ]
+ },
+ "A1_g2k3.json #10 Mein Haus ist sehr alt.": {
+  "leading": [],
+  "boxes": [
+   "Mein Haus → Haus@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "sehr",
+    "alt."
+   ]
+  ]
+ },
+ "A1_g2k3.json #11 Ich kenne ihr Gesicht nicht.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "ihr Gesicht → Gesicht@2,1/akk"
+  ],
+  "connections": [
+   [
+    "kenne@2,2"
+   ],
+   [
+    "nicht."
+   ]
+  ]
+ },
+ "A1_g2k3.json #12 Unser Rätsel ist spannend!": {
+  "leading": [],
+  "boxes": [
+   "Unser Rätsel → Rätsel@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "spannend!"
+   ]
+  ]
+ },
+ "A1_g2k3_uebung.json #0 Wo ist deine Tasche?": {
+  "leading": [
+   "Wo",
+   "ist@1,3"
+  ],
+  "boxes": [
+   "deine Tasche? → Tasche?@1,3/nom"
+  ],
+  "connections": []
+ },
+ "A1_g2k3_uebung.json #1 Lea sucht ihren Schlüssel.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom",
+   "ihren Schlüssel. → Schlüssel.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "sucht@1,3"
+   ]
+  ]
+ },
+ "A1_g2k3_uebung.json #2 Max liebt seine Brezeln.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom",
+   "seine Brezeln. → Brezeln.@2,3/akk"
+  ],
+  "connections": [
+   [
+    "liebt@1,1"
+   ]
+  ]
+ },
+ "A1_g2k3_uebung.json #3 Unser Haus ist alt.": {
+  "leading": [],
+  "boxes": [
+   "Unser Haus → Haus@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "alt."
+   ]
+  ]
+ },
+ "A1_g2k3_uebung.json #4 Habt ihr euer Ticket?": {
+  "leading": [
+   "Habt@3,1"
+  ],
+  "boxes": [
+   "ihr → ihr@3,1/nom",
+   "euer Ticket? → Ticket?@2,1/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g2k3_uebung.json #5 Ihr Garten ist sehr schön!": {
+  "leading": [],
+  "boxes": [
+   "Ihr Garten → Garten@1,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "sehr",
+    "schön!"
+   ]
+  ]
+ },
+ "A1_g2k3_uebung.json #6 Ich vermisse meine Familie.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "meine Familie. → Familie.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "vermisse@2,2"
+   ]
+  ]
+ },
+ "A1_g2k3_uebung.json #7 Mein Bruder spielt Cricket.": {
+  "leading": [],
+  "boxes": [
+   "Mein Bruder → Bruder@1,1/nom",
+   "Cricket. → Cricket.@2,1/akk"
+  ],
+  "connections": [
+   [
+    "spielt@1,1"
+   ]
+  ]
+ },
+ "A1_g3k1.json #0 Du brauchst einen Termin.": {
+  "leading": [],
+  "boxes": [
+   "Du → Du@1,2/nom",
+   "einen Termin. → Termin.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "brauchst@1,2"
+   ]
+  ]
+ },
+ "A1_g3k1.json #1 Der nächste Termin ist im Dezember!": {
+  "leading": [],
+  "boxes": [
+   "Der nächste Termin → Termin@1,1/nom",
+   "Dezember! → Dezember!@1,1/dat"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "im"
+   ]
+  ]
+ },
+ "A1_g3k1.json #2 Das ist in acht Wochen!": {
+  "leading": [],
+  "boxes": [
+   "Das → Das@2,1/nom",
+   "acht Wochen! → Wochen!@2,3/dat"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "in"
+   ]
+  ]
+ },
+ "A1_g3k1.json #3 Ich kenne einen Trick.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "einen Trick. → Trick.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "kenne@2,2"
+   ]
+  ]
+ },
+ "A1_g3k1.json #4 Die Webseite hat um sieben Uhr neue Termine.": {
+  "leading": [],
+  "boxes": [
+   "Die Webseite → Webseite@1,3/nom",
+   "sieben Uhr → Uhr@1,3/akk",
+   "neue Termine. → Termine.@2,3/akk"
+  ],
+  "connections": [
+   [
+    "hat@1,3",
+    "um"
+   ],
+   []
+  ]
+ },
+ "A1_g3k1.json #5 Um sieben Uhr klickt sie.": {
+  "leading": [
+   "Um"
+  ],
+  "boxes": [
+   "sieben Uhr → Uhr@1,3/akk",
+   "sie. → sie.@1,3/nom"
+  ],
+  "connections": [
+   [
+    "klickt@1,3"
+   ]
+  ]
+ },
+ "A1_g3k1.json #6 Ich habe einen Termin!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "einen Termin! → Termin!@1,1/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2"
+   ]
+  ]
+ },
+ "A1_g3k1.json #7 Wann ist der Termin?": {
+  "leading": [
+   "Wann",
+   "ist@1,1"
+  ],
+  "boxes": [
+   "der Termin? → Termin?@1,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g3k1.json #8 Der Termin ist am Freitag um halb neun.": {
+  "leading": [],
+  "boxes": [
+   "Der Termin → Termin@1,1/nom",
+   "Freitag → Freitag@1,1/dat"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "am"
+   ],
+   [
+    "um",
+    "halb",
+    "neun."
+   ]
+  ]
+ },
+ "A1_g3k1.json #9 Das Bürgerbüro öffnet um acht Uhr.": {
+  "leading": [],
+  "boxes": [
+   "Das Bürgerbüro → Bürgerbüro@2,1/nom",
+   "acht Uhr. → Uhr.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "öffnet@2,1",
+    "um"
+   ]
+  ]
+ },
+ "A1_g3k1.json #10 Ich habe die Nummer zweiundvierzig.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "die Nummer → Nummer@1,3/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2"
+   ],
+   [
+    "zweiundvierzig."
+   ]
+  ]
+ },
+ "A1_g3k1.json #11 Mein Geburtstag ist am zwölften März.": {
+  "leading": [],
+  "boxes": [
+   "Mein Geburtstag → Geburtstag@1,1/nom",
+   "zwölften März. → März.@1,1/dat"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "am"
+   ]
+  ]
+ },
+ "A1_g3k1.json #12 Sie wohnen in der Möhringer Straße?": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "der Möhringer Straße? → Straße?@1,3/dat"
+  ],
+  "connections": [
+   [
+    "wohnen@2,3",
+    "in"
+   ]
+  ]
+ },
+ "A1_g3k1.json #13 Ich bin jetzt offiziell hier!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "bin@2,2",
+    "jetzt",
+    "offiziell",
+    "hier!"
+   ]
+  ]
+ },
+ "A1_g3k1_uebung.json #0 Der Kurs beginnt um neun Uhr.": {
+  "leading": [],
+  "boxes": [
+   "Der Kurs → Kurs@1,1/nom",
+   "neun Uhr. → Uhr.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "beginnt@1,1",
+    "um"
+   ]
+  ]
+ },
+ "A1_g3k1_uebung.json #1 Am Montag arbeitet Lea.": {
+  "leading": [
+   "Am"
+  ],
+  "boxes": [
+   "Montag → Montag@1,1/dat",
+   "Lea. → Lea.@1,3/nom"
+  ],
+  "connections": [
+   [
+    "arbeitet@1,3"
+   ]
+  ]
+ },
+ "A1_g3k1_uebung.json #2 Max steht um drei Uhr auf.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom",
+   "drei Uhr → Uhr@1,3/akk"
+  ],
+  "connections": [
+   [
+    "steht@1,1",
+    "um"
+   ],
+   [
+    "auf."
+   ]
+  ]
+ },
+ "A1_g3k1_uebung.json #3 Im Oktober ist es kalt.": {
+  "leading": [
+   "Im"
+  ],
+  "boxes": [
+   "Oktober → Oktober@1,1/dat",
+   "es → es@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1"
+   ],
+   [
+    "kalt."
+   ]
+  ]
+ },
+ "A1_g3k1_uebung.json #4 Wir essen um sieben Uhr.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "sieben Uhr. → Uhr.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "essen@3,2",
+    "um"
+   ]
+  ]
+ },
+ "A1_g3k1_uebung.json #5 Der Termin ist am Mittwoch.": {
+  "leading": [],
+  "boxes": [
+   "Der Termin → Termin@1,1/nom",
+   "Mittwoch. → Mittwoch.@1,1/dat"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "am"
+   ]
+  ]
+ },
+ "A1_g3k1_uebung.json #6 Ich arbeite von Montag bis Freitag.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Montag → Montag@1,1/dat",
+   "Freitag. → Freitag.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "arbeite@2,2",
+    "von"
+   ],
+   [
+    "bis"
+   ]
+  ]
+ },
+ "A1_g3k1_uebung.json #7 Wie spät ist es?": {
+  "leading": [
+   "Wie",
+   "spät",
+   "ist@2,1"
+  ],
+  "boxes": [
+   "es? → es?@2,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g3k2.json #0 Heute muss Ayisha viel erledigen.": {
+  "leading": [
+   "Heute",
+   "muss@1,3"
+  ],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom"
+  ],
+  "connections": [
+   [
+    "viel",
+    "erledigen.@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2.json #1 Was kann ich für Sie tun?": {
+  "leading": [
+   "Was",
+   "kann@2,2"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom",
+   "Sie → Sie@2,3/akk"
+  ],
+  "connections": [
+   [
+    "für"
+   ],
+   [
+    "tun?@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2.json #2 Ich will ein Konto eröffnen.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "ein Konto → Konto@2,1/akk"
+  ],
+  "connections": [
+   [
+    "will@2,2"
+   ],
+   [
+    "eröffnen.@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2.json #3 Dann müssen Sie dieses Formular ausfüllen.": {
+  "leading": [
+   "Dann",
+   "müssen@2,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "dieses Formular → Formular@2,1/akk"
+  ],
+  "connections": [
+   [],
+   [
+    "ausfüllen.@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2.json #4 Kann ich das Formular mitnehmen?": {
+  "leading": [
+   "Kann@2,2"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom",
+   "das Formular → Formular@2,1/akk"
+  ],
+  "connections": [
+   [],
+   [
+    "mitnehmen?@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2.json #5 Nein, das dürfen Sie leider nicht.": {
+  "leading": [
+   "Nein,"
+  ],
+  "boxes": [
+   "das → das@2,1/akk",
+   "Sie → Sie@2,3/nom"
+  ],
+  "connections": [
+   [
+    "dürfen@2,3"
+   ],
+   [
+    "leider",
+    "nicht."
+   ]
+  ]
+ },
+ "A1_g3k2.json #6 Du kannst die Karte online bestellen.": {
+  "leading": [],
+  "boxes": [
+   "Du → Du@1,2/nom",
+   "die Karte → Karte@1,3/akk"
+  ],
+  "connections": [
+   [
+    "kannst@1,2"
+   ],
+   [
+    "online",
+    "bestellen.@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2.json #7 Ich will heute noch telefonieren!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "will@2,2",
+    "heute",
+    "noch",
+    "telefonieren!@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2.json #8 Welches Ticket muss ich nehmen?": {
+  "leading": [],
+  "boxes": [
+   "Welches Ticket → Ticket@2,1/akk",
+   "ich → ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "muss@2,2"
+   ],
+   [
+    "nehmen?@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2.json #9 Ich kann das allein!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "das → das@2,1/akk"
+  ],
+  "connections": [
+   [
+    "kann@2,2"
+   ],
+   [
+    "allein!"
+   ]
+  ]
+ },
+ "A1_g3k2.json #10 Der Automat druckt ein Ticket.": {
+  "leading": [],
+  "boxes": [
+   "Der Automat → Automat@1,1/nom",
+   "ein Ticket. → Ticket.@2,1/akk"
+  ],
+  "connections": [
+   [
+    "druckt@1,1"
+   ]
+  ]
+ },
+ "A1_g3k2.json #11 Darf ich Ihr Ticket sehen?": {
+  "leading": [
+   "Darf@2,2"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom",
+   "Ihr Ticket → Ticket@2,1/akk"
+  ],
+  "connections": [
+   [],
+   [
+    "sehen?@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2.json #12 Ayisha zeigt stolz ihr Ticket.": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom",
+   "ihr Ticket. → Ticket.@2,1/akk"
+  ],
+  "connections": [
+   [
+    "zeigt@1,3",
+    "stolz"
+   ]
+  ]
+ },
+ "A1_g3k2.json #13 Das Ticket ist richtig.": {
+  "leading": [],
+  "boxes": [
+   "Das Ticket → Ticket@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "richtig."
+   ]
+  ]
+ },
+ "A1_g3k2_uebung.json #0 Ich kann gut kochen.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "kann@2,2",
+    "gut",
+    "kochen.@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2_uebung.json #1 Du musst das Formular ausfüllen.": {
+  "leading": [],
+  "boxes": [
+   "Du → Du@1,2/nom",
+   "das Formular → Formular@2,1/akk"
+  ],
+  "connections": [
+   [
+    "musst@1,2"
+   ],
+   [
+    "ausfüllen.@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2_uebung.json #2 Max will nicht putzen.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom"
+  ],
+  "connections": [
+   [
+    "will@1,1",
+    "nicht",
+    "putzen.@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2_uebung.json #3 Wir dürfen hier nicht parken.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom"
+  ],
+  "connections": [
+   [
+    "dürfen@3,2",
+    "hier",
+    "nicht",
+    "parken.@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2_uebung.json #4 Könnt ihr mir helfen?": {
+  "leading": [
+   "Könnt@3,1"
+  ],
+  "boxes": [
+   "ihr → ihr@3,1/nom",
+   "mir → mir@2,2/dat"
+  ],
+  "connections": [
+   [],
+   [
+    "helfen?@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2_uebung.json #5 Lea muss heute arbeiten.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom"
+  ],
+  "connections": [
+   [
+    "muss@1,3",
+    "heute",
+    "arbeiten.@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2_uebung.json #6 Darf ich hier sitzen?": {
+  "leading": [
+   "Darf@2,2"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "hier",
+    "sitzen?@3,3"
+   ]
+  ]
+ },
+ "A1_g3k2_uebung.json #7 Sie können hier ein Ticket kaufen.": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "ein Ticket → Ticket@2,1/akk"
+  ],
+  "connections": [
+   [
+    "können@2,3",
+    "hier"
+   ],
+   [
+    "kaufen.@3,3"
+   ]
+  ]
+ },
+ "A1_g3k3.json #0 Wo ist Max?": {
+  "leading": [
+   "Wo",
+   "ist@1,1"
+  ],
+  "boxes": [
+   "Max? → Max?@1,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g3k3.json #1 Ich sehe ihn nicht.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "ihn → ihn@1,1/akk"
+  ],
+  "connections": [
+   [
+    "sehe@2,2"
+   ],
+   [
+    "nicht."
+   ]
+  ]
+ },
+ "A1_g3k3.json #2 Frau Schäfer sucht ihn schon!": {
+  "leading": [],
+  "boxes": [
+   "Frau Schäfer → Schäfer@1,3/nom",
+   "ihn → ihn@1,1/akk"
+  ],
+  "connections": [
+   [
+    "sucht@1,3"
+   ],
+   [
+    "schon!"
+   ]
+  ]
+ },
+ "A1_g3k3.json #3 Er liebt seine Oma nur samstags.": {
+  "leading": [],
+  "boxes": [
+   "Er → Er@1,1/nom",
+   "seine Oma → Oma@1,3/akk"
+  ],
+  "connections": [
+   [
+    "liebt@1,1"
+   ],
+   [
+    "nur",
+    "samstags."
+   ]
+  ]
+ },
+ "A1_g3k3.json #4 Die Treppe ist so lang!": {
+  "leading": [],
+  "boxes": [
+   "Die Treppe → Treppe@1,3/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,3",
+    "so",
+    "lang!"
+   ]
+  ]
+ },
+ "A1_g3k3.json #5 Ich sehe euch!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "euch! → euch!@3,1/akk"
+  ],
+  "connections": [
+   [
+    "sehe@2,2"
+   ]
+  ]
+ },
+ "A1_g3k3.json #6 Und wo ist Herr Brenner?": {
+  "leading": [
+   "Und",
+   "wo",
+   "ist@1,1"
+  ],
+  "boxes": [
+   "Herr Brenner? → Brenner?@1,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g3k3.json #7 Wir finden ihn nicht.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "ihn → ihn@1,1/akk"
+  ],
+  "connections": [
+   [
+    "finden@3,2"
+   ],
+   [
+    "nicht."
+   ]
+  ]
+ },
+ "A1_g3k3.json #8 Die Ecke ist nicht sauber.": {
+  "leading": [],
+  "boxes": [
+   "Die Ecke → Ecke@1,3/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,3",
+    "nicht",
+    "sauber."
+   ]
+  ]
+ },
+ "A1_g3k3.json #9 Ich putze sie sofort!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "sie → sie@1,3/akk"
+  ],
+  "connections": [
+   [
+    "putze@2,2"
+   ],
+   [
+    "sofort!"
+   ]
+  ]
+ },
+ "A1_g3k3.json #10 Sie machen das sehr gut!": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "das → das@2,1/akk"
+  ],
+  "connections": [
+   [
+    "machen@2,3"
+   ],
+   [
+    "sehr",
+    "gut!"
+   ]
+  ]
+ },
+ "A1_g3k3.json #11 Ich lade Sie ein.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Sie → Sie@2,3/akk"
+  ],
+  "connections": [
+   [
+    "lade@2,2"
+   ],
+   [
+    "ein."
+   ]
+  ]
+ },
+ "A1_g3k3.json #12 Sie lädt uns ein!": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@1,3/nom",
+   "uns → uns@3,2/akk"
+  ],
+  "connections": [
+   [
+    "lädt@1,3"
+   ],
+   [
+    "ein!"
+   ]
+  ]
+ },
+ "A1_g3k3.json #13 Ihr liebt mich, oder?": {
+  "leading": [],
+  "boxes": [
+   "Ihr → Ihr@3,1/nom",
+   "mich, → mich,@2,2/akk"
+  ],
+  "connections": [
+   [
+    "liebt@3,1"
+   ],
+   [
+    "oder?"
+   ]
+  ]
+ },
+ "A1_g3k3.json #14 Nein, wir ignorieren dich!": {
+  "leading": [
+   "Nein,"
+  ],
+  "boxes": [
+   "wir → wir@3,2/nom",
+   "dich! → dich!@1,2/akk"
+  ],
+  "connections": [
+   [
+    "ignorieren@3,2"
+   ]
+  ]
+ },
+ "A1_g3k3_uebung.json #0 Ich sehe dich.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "dich. → dich.@1,2/akk"
+  ],
+  "connections": [
+   [
+    "sehe@2,2"
+   ]
+  ]
+ },
+ "A1_g3k3_uebung.json #1 Siehst du mich?": {
+  "leading": [
+   "Siehst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "mich? → mich?@2,2/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g3k3_uebung.json #2 Lea ruft ihn an.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom",
+   "ihn → ihn@1,1/akk"
+  ],
+  "connections": [
+   [
+    "ruft@1,3"
+   ],
+   [
+    "an."
+   ]
+  ]
+ },
+ "A1_g3k3_uebung.json #3 Wir besuchen euch.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "euch. → euch.@3,1/akk"
+  ],
+  "connections": [
+   [
+    "besuchen@3,2"
+   ]
+  ]
+ },
+ "A1_g3k3_uebung.json #4 Max findet es super.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom",
+   "es → es@2,1/akk"
+  ],
+  "connections": [
+   [
+    "findet@1,1"
+   ],
+   [
+    "super."
+   ]
+  ]
+ },
+ "A1_g3k3_uebung.json #5 Frau Schäfer kennt uns.": {
+  "leading": [],
+  "boxes": [
+   "Frau Schäfer → Schäfer@1,3/nom",
+   "uns. → uns.@3,2/akk"
+  ],
+  "connections": [
+   [
+    "kennt@1,3"
+   ]
+  ]
+ },
+ "A1_g3k3_uebung.json #6 Ich frage sie.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "sie. → sie.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "frage@2,2"
+   ]
+  ]
+ },
+ "A1_g3k3_uebung.json #7 Brauchst du ihn?": {
+  "leading": [
+   "Brauchst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "ihn? → ihn?@1,1/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g4k1.json #0 Was möchten Sie trinken?": {
+  "leading": [
+   "Was",
+   "möchten@2,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom"
+  ],
+  "connections": [
+   [
+    "trinken?@3,3"
+   ]
+  ]
+ },
+ "A1_g4k1.json #1 Ich möchte einen Mango-Lassi.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "einen Mango-Lassi. → Mango-Lassi.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "möchte@2,2"
+   ]
+  ]
+ },
+ "A1_g4k1.json #2 Ich möchte eine Cola, bitte.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "eine Cola, → Cola,@1,3/akk"
+  ],
+  "connections": [
+   [
+    "möchte@2,2"
+   ],
+   [
+    "bitte."
+   ]
+  ]
+ },
+ "A1_g4k1.json #3 Ich möchte nur Wasser.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Wasser. → Wasser.@2,1/akk"
+  ],
+  "connections": [
+   [
+    "möchte@2,2",
+    "nur"
+   ]
+  ]
+ },
+ "A1_g4k1.json #4 Und was möchten Sie essen?": {
+  "leading": [
+   "Und",
+   "was",
+   "möchten@2,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom"
+  ],
+  "connections": [
+   [
+    "essen?@3,3"
+   ]
+  ]
+ },
+ "A1_g4k1.json #5 Ich möchte das Biryani.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "das Biryani. → Biryani.@2,1/akk"
+  ],
+  "connections": [
+   [
+    "möchte@2,2"
+   ]
+  ]
+ },
+ "A1_g4k1.json #6 Möchten Sie es scharf?": {
+  "leading": [
+   "Möchten@2,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "es → es@2,1/akk"
+  ],
+  "connections": [
+   [],
+   [
+    "scharf?"
+   ]
+  ]
+ },
+ "A1_g4k1.json #7 Wir möchten auch Naan.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "Naan. → Naan.@2,1/akk"
+  ],
+  "connections": [
+   [
+    "möchten@3,2",
+    "auch"
+   ]
+  ]
+ },
+ "A1_g4k1.json #8 Wie ist das Biryani?": {
+  "leading": [
+   "Wie",
+   "ist@2,1"
+  ],
+  "boxes": [
+   "das Biryani? → Biryani?@2,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g4k1.json #9 Es ist nicht scharf.": {
+  "leading": [],
+  "boxes": [
+   "Es → Es@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "nicht",
+    "scharf."
+   ]
+  ]
+ },
+ "A1_g4k1.json #10 Und der Reis ist falsch.": {
+  "leading": [
+   "Und"
+  ],
+  "boxes": [
+   "der Reis → Reis@1,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "falsch."
+   ]
+  ]
+ },
+ "A1_g4k1.json #11 Ich möchte noch einen Teller!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "einen Teller! → Teller!@1,1/akk"
+  ],
+  "connections": [
+   [
+    "möchte@2,2",
+    "noch"
+   ]
+  ]
+ },
+ "A1_g4k1.json #12 Möchtet ihr einen Nachtisch?": {
+  "leading": [
+   "Möchtet@3,1"
+  ],
+  "boxes": [
+   "ihr → ihr@3,1/nom",
+   "einen Nachtisch? → Nachtisch?@1,1/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g4k1.json #13 Ich möchte richtiges Biryani!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "richtiges Biryani! → Biryani!@2,1/akk"
+  ],
+  "connections": [
+   [
+    "möchte@2,2"
+   ]
+  ]
+ },
+ "A1_g4k1.json #14 Dann müssen Sie selbst kochen!": {
+  "leading": [
+   "Dann",
+   "müssen@2,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom"
+  ],
+  "connections": [
+   [
+    "selbst",
+    "kochen!@3,3"
+   ]
+  ]
+ },
+ "A1_g4k1_uebung.json #0 Ich möchte einen Tee.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "einen Tee. → Tee.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "möchte@2,2"
+   ]
+  ]
+ },
+ "A1_g4k1_uebung.json #1 Möchtest du Wasser?": {
+  "leading": [
+   "Möchtest@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "Wasser? → Wasser?@2,1/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g4k1_uebung.json #2 Lea möchte eine Pizza.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom",
+   "eine Pizza. → Pizza.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "möchte@1,3"
+   ]
+  ]
+ },
+ "A1_g4k1_uebung.json #3 Wir möchten zahlen.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom"
+  ],
+  "connections": [
+   [
+    "möchten@3,2",
+    "zahlen.@3,3"
+   ]
+  ]
+ },
+ "A1_g4k1_uebung.json #4 Was möchtet ihr essen?": {
+  "leading": [
+   "Was",
+   "möchtet@3,1"
+  ],
+  "boxes": [
+   "ihr → ihr@3,1/nom"
+  ],
+  "connections": [
+   [
+    "essen?@3,3"
+   ]
+  ]
+ },
+ "A1_g4k1_uebung.json #5 Max möchte zwei Brezeln.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom",
+   "zwei Brezeln. → Brezeln.@2,3/akk"
+  ],
+  "connections": [
+   [
+    "möchte@1,1"
+   ]
+  ]
+ },
+ "A1_g4k1_uebung.json #6 Möchten Sie einen Kaffee?": {
+  "leading": [
+   "Möchten@2,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "einen Kaffee? → Kaffee?@1,1/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g4k1_uebung.json #7 Ich möchte die Rechnung, bitte.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "die Rechnung, → Rechnung,@1,3/akk"
+  ],
+  "connections": [
+   [
+    "möchte@2,2"
+   ],
+   [
+    "bitte."
+   ]
+  ]
+ },
+ "A1_g4k2.json #0 Ayisha kauft heute groß ein.": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom"
+  ],
+  "connections": [
+   [
+    "kauft@1,3",
+    "heute",
+    "groß",
+    "ein."
+   ]
+  ]
+ },
+ "A1_g4k2.json #1 Hier sieht alles gut aus!": {
+  "leading": [
+   "Hier",
+   "sieht@2,1"
+  ],
+  "boxes": [
+   "alles → alles@2,1/nom"
+  ],
+  "connections": [
+   [
+    "gut",
+    "aus!"
+   ]
+  ]
+ },
+ "A1_g4k2.json #2 Sie sind der Mann vom Flughafen!": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "der Mann → Mann@1,1/nom",
+   "Flughafen! → Flughafen!@1,1/dat"
+  ],
+  "connections": [
+   [
+    "sind@2,3"
+   ],
+   [
+    "vom"
+   ]
+  ]
+ },
+ "A1_g4k2.json #3 Und Sie sind die Frau vom Automaten!": {
+  "leading": [
+   "Und"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "die Frau → Frau@1,3/nom",
+   "Automaten! → Automaten!@1,1/dat"
+  ],
+  "connections": [
+   [
+    "sind@2,3"
+   ],
+   [
+    "vom"
+   ]
+  ]
+ },
+ "A1_g4k2.json #4 Sie können den Reis mitnehmen.": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "den Reis → Reis@1,1/akk"
+  ],
+  "connections": [
+   [
+    "können@2,3"
+   ],
+   [
+    "mitnehmen.@3,3"
+   ]
+  ]
+ },
+ "A1_g4k2.json #5 Nein, das sieht nicht fair aus.": {
+  "leading": [
+   "Nein,"
+  ],
+  "boxes": [
+   "das → das@2,1/nom"
+  ],
+  "connections": [
+   [
+    "sieht@2,1",
+    "nicht",
+    "fair",
+    "aus."
+   ]
+  ]
+ },
+ "A1_g4k2.json #6 Sie sprechen Malayalam!": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "Malayalam! → Malayalam!@2,1/akk"
+  ],
+  "connections": [
+   [
+    "sprechen@2,3"
+   ]
+  ]
+ },
+ "A1_g4k2.json #7 Sie lernen so schneller.": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@2,3/nom"
+  ],
+  "connections": [
+   [
+    "lernen@2,3",
+    "so",
+    "schneller."
+   ]
+  ]
+ },
+ "A1_g4k2.json #8 Ich heiße übrigens Faris.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Faris. → Faris.@1,1/nom"
+  ],
+  "connections": [
+   [
+    "heiße@2,2",
+    "übrigens"
+   ]
+  ]
+ },
+ "A1_g4k2.json #9 Ich bin Ayisha.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Ayisha. → Ayisha.@1,3/nom"
+  ],
+  "connections": [
+   [
+    "bin@2,2"
+   ]
+  ]
+ },
+ "A1_g4k2.json #10 Kommst du auch aus Kerala?": {
+  "leading": [
+   "Kommst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "Kerala? → Kerala?@2,1/dat"
+  ],
+  "connections": [
+   [
+    "auch",
+    "aus"
+   ]
+  ]
+ },
+ "A1_g4k2.json #11 Das glaube ich nicht!": {
+  "leading": [],
+  "boxes": [
+   "Das → Das@2,1/akk",
+   "ich → ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "glaube@2,2"
+   ],
+   [
+    "nicht!"
+   ]
+  ]
+ },
+ "A1_g4k2.json #12 Der Verkäufer packt den Reis ein.": {
+  "leading": [],
+  "boxes": [
+   "Der Verkäufer → Verkäufer@1,1/nom",
+   "den Reis → Reis@1,1/akk"
+  ],
+  "connections": [
+   [
+    "packt@1,1"
+   ],
+   [
+    "ein."
+   ]
+  ]
+ },
+ "A1_g4k2.json #13 Kommst du am Sonntag mit?": {
+  "leading": [
+   "Kommst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "Sonntag → Sonntag@1,1/dat"
+  ],
+  "connections": [
+   [
+    "am"
+   ],
+   [
+    "mit?"
+   ]
+  ]
+ },
+ "A1_g4k2.json #14 Ich komme gern mit!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "komme@2,2",
+    "gern",
+    "mit!"
+   ]
+  ]
+ },
+ "A1_g4k2_uebung.json #0 Ich kaufe heute ein.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "kaufe@2,2",
+    "heute",
+    "ein."
+   ]
+  ]
+ },
+ "A1_g4k2_uebung.json #1 Lea ruft ihre Mutter an.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom",
+   "ihre Mutter → Mutter@1,3/akk"
+  ],
+  "connections": [
+   [
+    "ruft@1,3"
+   ],
+   [
+    "an."
+   ]
+  ]
+ },
+ "A1_g4k2_uebung.json #2 Max steht sehr früh auf.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom"
+  ],
+  "connections": [
+   [
+    "steht@1,1",
+    "sehr",
+    "früh",
+    "auf."
+   ]
+  ]
+ },
+ "A1_g4k2_uebung.json #3 Wann kommst du an?": {
+  "leading": [
+   "Wann",
+   "kommst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom"
+  ],
+  "connections": [
+   [
+    "an?"
+   ]
+  ]
+ },
+ "A1_g4k2_uebung.json #4 Wir kommen gern mit.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom"
+  ],
+  "connections": [
+   [
+    "kommen@3,2",
+    "gern",
+    "mit."
+   ]
+  ]
+ },
+ "A1_g4k2_uebung.json #5 Der Zug fährt um acht Uhr ab.": {
+  "leading": [],
+  "boxes": [
+   "Der Zug → Zug@1,1/nom",
+   "acht Uhr → Uhr@1,3/akk"
+  ],
+  "connections": [
+   [
+    "fährt@1,1",
+    "um"
+   ],
+   [
+    "ab."
+   ]
+  ]
+ },
+ "A1_g4k2_uebung.json #6 Ihr seht müde aus.": {
+  "leading": [],
+  "boxes": [
+   "Ihr → Ihr@3,1/nom"
+  ],
+  "connections": [
+   [
+    "seht@3,1",
+    "müde",
+    "aus."
+   ]
+  ]
+ },
+ "A1_g4k2_uebung.json #7 Ayisha räumt ihr Zimmer auf.": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom",
+   "ihr Zimmer → Zimmer@2,1/akk"
+  ],
+  "connections": [
+   [
+    "räumt@1,3"
+   ],
+   [
+    "auf."
+   ]
+  ]
+ },
+ "A1_g4k3.json #0 Der Park ist groß, und die Leute sind nett.": {
+  "leading": [],
+  "boxes": [
+   "Der Park → Park@1,1/nom",
+   "die Leute → Leute@2,3/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "groß,",
+    "und"
+   ],
+   [
+    "sind@2,3",
+    "nett."
+   ]
+  ]
+ },
+ "A1_g4k3.json #1 Spielst du Cricket, oder schaust du nur zu?": {
+  "leading": [
+   "Spielst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "Cricket, → Cricket,@2,1/akk",
+   "du → du@1,2/nom"
+  ],
+  "connections": [
+   [],
+   [
+    "oder",
+    "schaust@1,2"
+   ],
+   [
+    "nur",
+    "zu?"
+   ]
+  ]
+ },
+ "A1_g4k3.json #2 Ich spiele, denn ich bin sehr gut.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "ich → ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "spiele,@2,2",
+    "denn"
+   ],
+   [
+    "bin@2,2",
+    "sehr",
+    "gut."
+   ]
+  ]
+ },
+ "A1_g4k3.json #3 Das sagst du, aber ich glaube es nicht.": {
+  "leading": [],
+  "boxes": [
+   "Das → Das@2,1/akk",
+   "du, → du,@1,2/nom",
+   "ich → ich@2,2/nom",
+   "es → es@2,1/akk"
+  ],
+  "connections": [
+   [
+    "sagst@1,2"
+   ],
+   [
+    "aber"
+   ],
+   [
+    "glaube@2,2"
+   ],
+   [
+    "nicht."
+   ]
+  ]
+ },
+ "A1_g4k3.json #4 Ich spiele nicht, denn ich esse.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "ich → ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "spiele@2,2",
+    "nicht,",
+    "denn"
+   ],
+   [
+    "esse.@2,2"
+   ]
+  ]
+ },
+ "A1_g4k3.json #5 Lea und Max schauen zu.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom",
+   "Max → Max@1,1/nom"
+  ],
+  "connections": [
+   [
+    "und"
+   ],
+   [
+    "schauen@2,3",
+    "zu."
+   ]
+  ]
+ },
+ "A1_g4k3.json #6 Der Ball ist schnell, aber ich treffe ihn!": {
+  "leading": [],
+  "boxes": [
+   "Der Ball → Ball@1,1/nom",
+   "ich → ich@2,2/nom",
+   "ihn! → ihn!@1,1/akk"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "schnell,",
+    "aber"
+   ],
+   [
+    "treffe@2,2"
+   ]
+  ]
+ },
+ "A1_g4k3.json #7 Ayisha ist ein Profi, und Faris ist raus!": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom",
+   "ein Profi, → Profi,@1,1/nom",
+   "Faris → Faris@1,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,3"
+   ],
+   [
+    "und"
+   ],
+   [
+    "ist@1,1",
+    "raus!"
+   ]
+  ]
+ },
+ "A1_g4k3.json #8 Du hast Glück, oder?": {
+  "leading": [],
+  "boxes": [
+   "Du → Du@1,2/nom",
+   "Glück, → Glück,@2,1/akk"
+  ],
+  "connections": [
+   [
+    "hast@1,2"
+   ],
+   [
+    "oder?"
+   ]
+  ]
+ },
+ "A1_g4k3.json #9 Nein, ich habe Talent, und du hast keine Chance!": {
+  "leading": [
+   "Nein,"
+  ],
+  "boxes": [
+   "ich → ich@2,2/nom",
+   "Talent, → Talent,@2,1/akk",
+   "du → du@1,2/nom",
+   "keine Chance! → Chance!@1,3/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2"
+   ],
+   [
+    "und"
+   ],
+   [
+    "hast@1,2"
+   ]
+  ]
+ },
+ "A1_g4k3.json #10 Der Chai ist heiß, und das Pazhampori ist perfekt.": {
+  "leading": [],
+  "boxes": [
+   "Der Chai → Chai@1,1/nom",
+   "das Pazhampori → Pazhampori@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,1",
+    "heiß,",
+    "und"
+   ],
+   [
+    "ist@2,1",
+    "perfekt."
+   ]
+  ]
+ },
+ "A1_g4k3.json #11 Möchtest du Chai oder Wasser?": {
+  "leading": [
+   "Möchtest@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "Chai → Chai@1,1/akk",
+   "Wasser? → Wasser?@2,1/akk"
+  ],
+  "connections": [
+   [],
+   [
+    "oder"
+   ]
+  ]
+ },
+ "A1_g4k3.json #12 Ich nehme Chai, aber nur einen.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Chai, → Chai,@1,1/akk",
+   "einen. → einen.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "nehme@2,2"
+   ],
+   [
+    "aber",
+    "nur"
+   ]
+  ]
+ },
+ "A1_g4k3.json #13 Hier ist meine Nummer, für das nächste Spiel.": {
+  "leading": [
+   "Hier",
+   "ist@1,3"
+  ],
+  "boxes": [
+   "meine Nummer, → Nummer,@1,3/nom",
+   "das nächste Spiel. → Spiel.@2,1/akk"
+  ],
+  "connections": [
+   [
+    "für"
+   ]
+  ]
+ },
+ "A1_g4k3_uebung.json #0 Ich koche, und du spülst.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "du → du@1,2/nom"
+  ],
+  "connections": [
+   [
+    "koche,@2,2",
+    "und"
+   ],
+   [
+    "spülst.@1,2"
+   ]
+  ]
+ },
+ "A1_g4k3_uebung.json #1 Lea ist müde, aber sie arbeitet.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom",
+   "sie → sie@1,3/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,3",
+    "müde,",
+    "aber"
+   ],
+   [
+    "arbeitet.@1,3"
+   ]
+  ]
+ },
+ "A1_g4k3_uebung.json #2 Trinkst du Tee oder Kaffee?": {
+  "leading": [
+   "Trinkst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "Tee → Tee@1,1/akk",
+   "Kaffee? → Kaffee?@1,1/akk"
+  ],
+  "connections": [
+   [],
+   [
+    "oder"
+   ]
+  ]
+ },
+ "A1_g4k3_uebung.json #3 Max isst viel, denn er hat Hunger.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom",
+   "er → er@1,1/nom",
+   "Hunger. → Hunger.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "isst@1,1",
+    "viel,",
+    "denn"
+   ],
+   [
+    "hat@1,1"
+   ]
+  ]
+ },
+ "A1_g4k3_uebung.json #4 Wir spielen Cricket, und ihr schaut zu.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "Cricket, → Cricket,@2,1/akk",
+   "ihr → ihr@3,1/nom"
+  ],
+  "connections": [
+   [
+    "spielen@3,2"
+   ],
+   [
+    "und"
+   ],
+   [
+    "schaut@3,1",
+    "zu."
+   ]
+  ]
+ },
+ "A1_g4k3_uebung.json #5 Ayisha kocht gut, aber nicht heute.": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom"
+  ],
+  "connections": [
+   [
+    "kocht@1,3",
+    "gut,",
+    "aber",
+    "nicht",
+    "heute."
+   ]
+  ]
+ },
+ "A1_g4k3_uebung.json #6 Ich bleibe zu Hause, denn ich bin krank.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Hause, → Hause,@2,1/dat",
+   "ich → ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "bleibe@2,2",
+    "zu"
+   ],
+   [
+    "denn"
+   ],
+   [
+    "bin@2,2",
+    "krank."
+   ]
+  ]
+ },
+ "A1_g4k3_uebung.json #7 Kommst du heute oder morgen?": {
+  "leading": [
+   "Kommst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom"
+  ],
+  "connections": [
+   [
+    "heute",
+    "oder",
+    "morgen?"
+   ]
+  ]
+ },
+ "A1_g5k1.json #0 Bleib heute im Bett!": {
+  "leading": [
+   "Bleib@3,3",
+   "heute",
+   "im"
+  ],
+  "boxes": [
+   "Bett! → Bett!@2,1/dat"
+  ],
+  "connections": []
+ },
+ "A1_g5k1.json #1 Trink viel Tee!": {
+  "leading": [
+   "Trink@3,3"
+  ],
+  "boxes": [
+   "viel Tee! → Tee!@1,1/akk"
+  ],
+  "connections": []
+ },
+ "A1_g5k1.json #2 Dann sei eine gute Patientin!": {
+  "leading": [
+   "Dann",
+   "sei@3,3"
+  ],
+  "boxes": [
+   "eine gute Patientin! → Patientin!@1,3/nom"
+  ],
+  "connections": []
+ },
+ "A1_g5k1.json #3 Iss eine Brezel!": {
+  "leading": [
+   "Iss@3,3"
+  ],
+  "boxes": [
+   "eine Brezel! → Brezel!@1,3/akk"
+  ],
+  "connections": []
+ },
+ "A1_g5k1.json #4 Bring mir lieber Suppe.": {
+  "leading": [
+   "Bring@3,3"
+  ],
+  "boxes": [
+   "mir → mir@2,2/dat",
+   "Suppe. → Suppe.@1,3/akk"
+  ],
+  "connections": [
+   [
+    "lieber"
+   ]
+  ]
+ },
+ "A1_g5k1.json #5 Trinken Sie diesen Tee!": {
+  "leading": [
+   "Trinken@3,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "diesen Tee! → Tee!@1,1/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g5k1.json #6 Und machen Sie das Fenster zu!": {
+  "leading": [
+   "Und",
+   "machen@3,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "das Fenster → Fenster@2,1/akk"
+  ],
+  "connections": [
+   [],
+   [
+    "zu!"
+   ]
+  ]
+ },
+ "A1_g5k1.json #7 Geh bitte zum Arzt!": {
+  "leading": [
+   "Geh@3,3",
+   "bitte",
+   "zum"
+  ],
+  "boxes": [
+   "Arzt! → Arzt!@1,1/dat"
+  ],
+  "connections": []
+ },
+ "A1_g5k1.json #8 Sag mir das nicht!": {
+  "leading": [
+   "Sag@3,3"
+  ],
+  "boxes": [
+   "mir → mir@2,2/dat",
+   "das → das@2,1/akk"
+  ],
+  "connections": [
+   [],
+   [
+    "nicht!"
+   ]
+  ]
+ },
+ "A1_g5k1.json #9 Ruf Dr. Kühn an!": {
+  "leading": [
+   "Ruf@3,3"
+  ],
+  "boxes": [
+   "Dr. Kühn → Kühn@1,3/akk"
+  ],
+  "connections": [
+   [
+    "an!"
+   ]
+  ]
+ },
+ "A1_g5k1.json #10 Sie ist sehr nett.": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@1,3/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,3",
+    "sehr",
+    "nett."
+   ]
+  ]
+ },
+ "A1_g5k1.json #11 Sprechen Sie bitte langsam!": {
+  "leading": [
+   "Sprechen@3,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom"
+  ],
+  "connections": [
+   [
+    "bitte",
+    "langsam!"
+   ]
+  ]
+ },
+ "A1_g5k1.json #12 Kommen Sie morgen um neun!": {
+  "leading": [
+   "Kommen@3,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom"
+  ],
+  "connections": [
+   [
+    "morgen",
+    "um",
+    "neun!"
+   ]
+  ]
+ },
+ "A1_g5k1_uebung.json #0 Iss den Apfel!": {
+  "leading": [
+   "Iss@3,3"
+  ],
+  "boxes": [
+   "den Apfel! → Apfel!@1,1/akk"
+  ],
+  "connections": []
+ },
+ "A1_g5k1_uebung.json #1 Trink Wasser!": {
+  "leading": [
+   "Trink@3,3"
+  ],
+  "boxes": [
+   "Wasser! → Wasser!@2,1/akk"
+  ],
+  "connections": []
+ },
+ "A1_g5k1_uebung.json #2 Mach das Fenster auf!": {
+  "leading": [
+   "Mach@3,3"
+  ],
+  "boxes": [
+   "das Fenster → Fenster@2,1/akk"
+  ],
+  "connections": [
+   [
+    "auf!"
+   ]
+  ]
+ },
+ "A1_g5k1_uebung.json #3 Ruf mich an!": {
+  "leading": [
+   "Ruf@3,3"
+  ],
+  "boxes": [
+   "mich → mich@2,2/akk"
+  ],
+  "connections": [
+   [
+    "an!"
+   ]
+  ]
+ },
+ "A1_g5k1_uebung.json #4 Nehmen Sie Platz!": {
+  "leading": [
+   "Nehmen@3,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "Platz! → Platz!@1,1/akk"
+  ],
+  "connections": [
+   []
+  ]
+ },
+ "A1_g5k1_uebung.json #5 Hilf mir bitte!": {
+  "leading": [
+   "Hilf@3,3"
+  ],
+  "boxes": [
+   "mir → mir@2,2/dat"
+  ],
+  "connections": [
+   [
+    "bitte!"
+   ]
+  ]
+ },
+ "A1_g5k1_uebung.json #6 Warten Sie hier!": {
+  "leading": [
+   "Warten@3,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom"
+  ],
+  "connections": [
+   [
+    "hier!"
+   ]
+  ]
+ },
+ "A1_g5k1_uebung.json #7 Lies den Text!": {
+  "leading": [
+   "Lies@3,3"
+  ],
+  "boxes": [
+   "den Text! → Text!@1,1/akk"
+  ],
+  "connections": []
+ },
+ "A1_g5k2.json #0 Ayisha fährt mit der U-Bahn zur Praxis.": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom",
+   "der U-Bahn → U-Bahn@1,3/dat",
+   "Praxis. → Praxis.@1,3/dat"
+  ],
+  "connections": [
+   [
+    "fährt@1,3",
+    "mit"
+   ],
+   [
+    "zur"
+   ]
+  ]
+ },
+ "A1_g5k2.json #1 Sie sind bei Dr. Kühn?": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "Dr. Kühn? → Kühn?@1,3/dat"
+  ],
+  "connections": [
+   [
+    "sind@2,3",
+    "bei"
+   ]
+  ]
+ },
+ "A1_g5k2.json #2 Die Mutter spielt mit dem Baby.": {
+  "leading": [],
+  "boxes": [
+   "Die Mutter → Mutter@1,3/nom",
+   "dem Baby. → Baby.@2,1/dat"
+  ],
+  "connections": [
+   [
+    "spielt@1,3",
+    "mit"
+   ]
+  ]
+ },
+ "A1_g5k2.json #3 Was fehlt Ihnen?": {
+  "leading": [
+   "Was",
+   "fehlt@2,1"
+  ],
+  "boxes": [
+   "Ihnen? → Ihnen?@2,3/dat"
+  ],
+  "connections": []
+ },
+ "A1_g5k2.json #4 Ich habe seit Sonntag Fieber.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Sonntag → Sonntag@1,1/dat",
+   "Fieber. → Fieber.@2,1/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2",
+    "seit"
+   ],
+   []
+  ]
+ },
+ "A1_g5k2.json #5 Sie kommen aus Indien, oder?": {
+  "leading": [],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "Indien, → Indien,@2,1/dat"
+  ],
+  "connections": [
+   [
+    "kommen@2,3",
+    "aus"
+   ],
+   [
+    "oder?"
+   ]
+  ]
+ },
+ "A1_g5k2.json #6 Ich bin Ärztin aus Kerala.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Ärztin → Ärztin@1,3/nom",
+   "Kerala. → Kerala.@2,1/dat"
+  ],
+  "connections": [
+   [
+    "bin@2,2"
+   ],
+   [
+    "aus"
+   ]
+  ]
+ },
+ "A1_g5k2.json #7 Das sage ich meinen Patienten auch!": {
+  "leading": [],
+  "boxes": [
+   "Das → Das@2,1/akk",
+   "ich → ich@2,2/nom",
+   "meinen Patienten → Patienten@2,3/dat"
+  ],
+  "connections": [
+   [
+    "sage@2,2"
+   ],
+   [],
+   [
+    "auch!"
+   ]
+  ]
+ },
+ "A1_g5k2.json #8 Das Gebäude kenne ich!": {
+  "leading": [],
+  "boxes": [
+   "Das Gebäude → Gebäude@2,1/akk",
+   "ich! → ich!@2,2/nom"
+  ],
+  "connections": [
+   [
+    "kenne@2,2"
+   ]
+  ]
+ },
+ "A1_g5k2.json #9 Das ist das alte St.-Lukas-Krankenhaus.": {
+  "leading": [],
+  "boxes": [
+   "Das → Das@2,1/nom",
+   "das alte St.-Lukas-Krankenhaus. → St.-Lukas-Krankenhaus.@2,1/nom"
+  ],
+  "connections": [
+   [
+    "ist@2,1"
+   ]
+  ]
+ },
+ "A1_g5k2.json #10 Ich kenne es aus meiner Studienzeit.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "es → es@2,1/akk",
+   "meiner Studienzeit. → Studienzeit.@1,3/dat"
+  ],
+  "connections": [
+   [
+    "kenne@2,2"
+   ],
+   [
+    "aus"
+   ]
+  ]
+ },
+ "A1_g5k2.json #11 Die Frau kommt aus Kerala, wie ich.": {
+  "leading": [],
+  "boxes": [
+   "Die Frau → Frau@1,3/nom",
+   "Kerala, → Kerala,@2,1/dat",
+   "ich. → ich.@2,2/nom"
+  ],
+  "connections": [
+   [
+    "kommt@1,3",
+    "aus"
+   ],
+   [
+    "wie"
+   ]
+  ]
+ },
+ "A1_g5k2.json #12 Fragen Sie beim Stadtarchiv!": {
+  "leading": [
+   "Fragen@3,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "Stadtarchiv! → Stadtarchiv!@2,1/dat"
+  ],
+  "connections": [
+   [
+    "beim"
+   ]
+  ]
+ },
+ "A1_g5k2.json #13 Ayisha geht mit Schokolade nach Hause.": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom",
+   "Schokolade → Schokolade@1,3/dat",
+   "Hause. → Hause.@2,1/dat"
+  ],
+  "connections": [
+   [
+    "geht@1,3",
+    "mit"
+   ],
+   [
+    "nach"
+   ]
+  ]
+ },
+ "A1_g5k2_uebung.json #0 Ich fahre mit dem Bus.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "dem Bus. → Bus.@1,1/dat"
+  ],
+  "connections": [
+   [
+    "fahre@2,2",
+    "mit"
+   ]
+  ]
+ },
+ "A1_g5k2_uebung.json #1 Lea arbeitet bei einem Arzt.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom",
+   "einem Arzt. → Arzt.@1,1/dat"
+  ],
+  "connections": [
+   [
+    "arbeitet@1,3",
+    "bei"
+   ]
+  ]
+ },
+ "A1_g5k2_uebung.json #2 Max kommt aus der Bäckerei.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom",
+   "der Bäckerei. → Bäckerei.@1,3/dat"
+  ],
+  "connections": [
+   [
+    "kommt@1,1",
+    "aus"
+   ]
+  ]
+ },
+ "A1_g5k2_uebung.json #3 Wir gehen zum Supermarkt.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "Supermarkt. → Supermarkt.@1,1/dat"
+  ],
+  "connections": [
+   [
+    "gehen@3,2",
+    "zum"
+   ]
+  ]
+ },
+ "A1_g5k2_uebung.json #4 Fährst du nach Hause?": {
+  "leading": [
+   "Fährst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "Hause? → Hause?@2,1/dat"
+  ],
+  "connections": [
+   [
+    "nach"
+   ]
+  ]
+ },
+ "A1_g5k2_uebung.json #5 Das Paket ist von meiner Mutter.": {
+  "leading": [],
+  "boxes": [
+   "Das Paket → Paket@2,1/nom",
+   "meiner Mutter. → Mutter.@1,3/dat"
+  ],
+  "connections": [
+   [
+    "ist@2,1",
+    "von"
+   ]
+  ]
+ },
+ "A1_g5k2_uebung.json #6 Kannst du mir helfen?": {
+  "leading": [
+   "Kannst@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "mir → mir@2,2/dat"
+  ],
+  "connections": [
+   [],
+   [
+    "helfen?@3,3"
+   ]
+  ]
+ },
+ "A1_g5k2_uebung.json #7 Ich gebe dir den Schlüssel.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "dir → dir@1,2/dat",
+   "den Schlüssel. → Schlüssel.@1,1/akk"
+  ],
+  "connections": [
+   [
+    "gebe@2,2"
+   ],
+   []
+  ]
+ },
+ "A1_g5k3.json #0 Was hast du am Wochenende gemacht?": {
+  "leading": [
+   "Was",
+   "hast@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "Wochenende → Wochenende@2,1/dat"
+  ],
+  "connections": [
+   [
+    "am"
+   ],
+   [
+    "gemacht?@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3.json #1 Wir haben einen Ausflug gemacht.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "einen Ausflug → Ausflug@1,1/akk"
+  ],
+  "connections": [
+   [
+    "haben@3,2"
+   ],
+   [
+    "gemacht.@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3.json #2 Wir sind auf die Schwäbische Alb gefahren.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "die Schwäbische Alb → Alb@1,3/akk"
+  ],
+  "connections": [
+   [
+    "sind@3,2",
+    "auf"
+   ],
+   [
+    "gefahren.@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3.json #3 Wer ist mitgekommen?": {
+  "leading": [
+   "Wer",
+   "ist@1,1",
+   "mitgekommen?@3,3"
+  ],
+  "boxes": [],
+  "connections": []
+ },
+ "A1_g5k3.json #4 Lea und Max sind mitgekommen.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom",
+   "Max → Max@1,1/nom"
+  ],
+  "connections": [
+   [
+    "und"
+   ],
+   [
+    "sind@2,3",
+    "mitgekommen.@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3.json #5 Wer ist Faris?": {
+  "leading": [
+   "Wer",
+   "ist@1,1"
+  ],
+  "boxes": [
+   "Faris? → Faris?@1,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g5k3.json #6 Er kommt auch aus Kerala.": {
+  "leading": [],
+  "boxes": [
+   "Er → Er@1,1/nom",
+   "Kerala. → Kerala.@2,1/dat"
+  ],
+  "connections": [
+   [
+    "kommt@1,1",
+    "auch",
+    "aus"
+   ]
+  ]
+ },
+ "A1_g5k3.json #7 Wir haben eine Burg besucht.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "eine Burg → Burg@1,3/akk"
+  ],
+  "connections": [
+   [
+    "haben@3,2"
+   ],
+   [
+    "besucht.@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3.json #8 Ich habe viele Fotos gemacht.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "viele Fotos → Fotos@2,3/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2"
+   ],
+   [
+    "gemacht.@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3.json #9 Ich war so glücklich!": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "war@2,2",
+    "so",
+    "glücklich!"
+   ]
+  ]
+ },
+ "A1_g5k3.json #10 Hast du etwas gegessen?": {
+  "leading": [
+   "Hast@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "etwas → etwas@2,1/akk"
+  ],
+  "connections": [
+   [],
+   [
+    "gegessen?@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3.json #11 Max hat Brezeln mitgebracht.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom",
+   "Brezeln → Brezeln@2,3/akk"
+  ],
+  "connections": [
+   [
+    "hat@1,1"
+   ],
+   [
+    "mitgebracht.@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3.json #12 Wie war das Biryani?": {
+  "leading": [
+   "Wie",
+   "war@2,1"
+  ],
+  "boxes": [
+   "das Biryani? → Biryani?@2,1/nom"
+  ],
+  "connections": []
+ },
+ "A1_g5k3.json #13 Es war nicht schlecht.": {
+  "leading": [],
+  "boxes": [
+   "Es → Es@2,1/nom"
+  ],
+  "connections": [
+   [
+    "war@2,1",
+    "nicht",
+    "schlecht."
+   ]
+  ]
+ },
+ "A1_g5k3_uebung.json #0 Ich habe Tee getrunken.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Tee → Tee@1,1/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2"
+   ],
+   [
+    "getrunken.@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3_uebung.json #1 Du hast lange geschlafen.": {
+  "leading": [],
+  "boxes": [
+   "Du → Du@1,2/nom"
+  ],
+  "connections": [
+   [
+    "hast@1,2",
+    "lange",
+    "geschlafen.@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3_uebung.json #2 Lea hat eine Prüfung gemacht.": {
+  "leading": [],
+  "boxes": [
+   "Lea → Lea@1,3/nom",
+   "eine Prüfung → Prüfung@1,3/akk"
+  ],
+  "connections": [
+   [
+    "hat@1,3"
+   ],
+   [
+    "gemacht.@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3_uebung.json #3 Wir sind nach Ulm gefahren.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "Ulm → Ulm@2,1/dat"
+  ],
+  "connections": [
+   [
+    "sind@3,2",
+    "nach"
+   ],
+   [
+    "gefahren.@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3_uebung.json #4 Max hat Brot gebacken.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom",
+   "Brot → Brot@2,1/akk"
+  ],
+  "connections": [
+   [
+    "hat@1,1"
+   ],
+   [
+    "gebacken.@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3_uebung.json #5 Habt ihr den Berg gesehen?": {
+  "leading": [
+   "Habt@3,1"
+  ],
+  "boxes": [
+   "ihr → ihr@3,1/nom",
+   "den Berg → Berg@1,1/akk"
+  ],
+  "connections": [
+   [],
+   [
+    "gesehen?@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3_uebung.json #6 Ayisha ist zu Hause geblieben.": {
+  "leading": [],
+  "boxes": [
+   "Ayisha → Ayisha@1,3/nom",
+   "Hause → Hause@2,1/dat"
+  ],
+  "connections": [
+   [
+    "ist@1,3",
+    "zu"
+   ],
+   [
+    "geblieben.@3,3"
+   ]
+  ]
+ },
+ "A1_g5k3_uebung.json #7 Ich war gestern müde.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom"
+  ],
+  "connections": [
+   [
+    "war@2,2",
+    "gestern",
+    "müde."
+   ]
+  ]
+ },
  "A1_hauptsatz.json #0 Ich bin ein Student.": {
   "leading": [],
   "boxes": [
@@ -1851,3773 +6929,6 @@
    [
     "arbeitet@1,1",
     "bei"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #0 Es ist Samstag, der neunte Oktober.": {
-  "leading": [],
-  "boxes": [
-   "Es → Es@2,1/nom",
-   "Samstag, der neunte Oktober. → Oktober.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "ist@2,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #1 Das Wetter in Wien ist kühl und sonnig – typisch Herbst.": {
-  "leading": [],
-  "boxes": [
-   "Das Wetter → Wetter@2,1/nom",
-   "Wien → Wien@2,1/dat"
-  ],
-  "connections": [
-   [
-    "in"
-   ],
-   [
-    "ist@2,1",
-    "kühl",
-    "und",
-    "sonnig",
-    "–",
-    "typisch",
-    "Herbst."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #2 Die Bäume in der Mozartgasse haben rote und gelbe Blätter.": {
-  "leading": [],
-  "boxes": [
-   "Die Bäume → Bäume@2,3/nom",
-   "der Mozartgasse → Mozartgasse@1,3/dat",
-   "rote → rote@2,3/akk",
-   "gelbe Blätter. → Blätter.@2,3/akk"
-  ],
-  "connections": [
-   [
-    "in"
-   ],
-   [
-    "haben@2,3"
-   ],
-   [
-    "und"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #3 Thomas steht in der Küche und trinkt seinen ersten Kaffee.": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom",
-   "der Küche → Küche@1,3/dat",
-   "seinen ersten Kaffee. → Kaffee.@1,1/akk"
-  ],
-  "connections": [
-   [
-    "steht@1,1",
-    "in"
-   ],
-   [
-    "und",
-    "trinkt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #4 Er schaut aus dem Fenster: Ein perfekter Tag für den Markt.": {
-  "leading": [],
-  "boxes": [
-   "Er → Er@1,1/nom",
-   "dem Fenster: → Fenster:@2,1/dat",
-   "Ein perfekter Tag → Tag@1,1/nom",
-   "den Markt. → Markt.@1,1/akk"
-  ],
-  "connections": [
-   [
-    "schaut@1,1",
-    "aus"
-   ],
-   [],
-   [
-    "für"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #5 Er klopft an Lenas Tür.": {
-  "leading": [],
-  "boxes": [
-   "Er → Er@1,1/nom",
-   "Lenas Tür. → Tür.@1,3/akk"
-  ],
-  "connections": [
-   [
-    "klopft@1,1",
-    "an"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #6 Lena macht die Tür auf – sie trägt eine rote Jacke.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "die Tür → Tür@1,3/akk",
-   "sie → sie@1,3/nom",
-   "eine rote Jacke. → Jacke.@1,3/akk"
-  ],
-  "connections": [
-   [
-    "macht@1,3"
-   ],
-   [
-    "auf",
-    "–"
-   ],
-   [
-    "trägt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #7 Guten Morgen!, sagt Thomas.": {
-  "leading": [],
-  "boxes": [
-   "Guten Morgen!, → Morgen!,@1,1/akk",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #8 Guten Morgen – was gibt es?, fragt Lena.": {
-  "leading": [],
-  "boxes": [
-   "Guten Morgen → Morgen@1,1/akk",
-   "was → was@2,1/akk",
-   "es?, → es?,@2,1/nom",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "–"
-   ],
-   [
-    "gibt@2,1"
-   ],
-   [
-    "fragt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #9 Ich gehe heute zum Naschmarkt – möchtest du mitkommen?, fragt Thomas.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "Naschmarkt → Naschmarkt@1,1/dat",
-   "du → du@1,2/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "gehe@2,2",
-    "heute",
-    "zum"
-   ],
-   [
-    "–",
-    "möchtest@1,2"
-   ],
-   [
-    "mitkommen?,@3,3",
-    "fragt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #10 Aber zuerst gehen wir zu meinem Freund Marco – er hat ein kleines Café.": {
-  "leading": [
-   "Aber",
-   "zuerst",
-   "gehen@3,2"
-  ],
-  "boxes": [
-   "wir → wir@3,2/nom",
-   "meinem Freund → Freund@1,1/dat",
-   "Marco → Marco@1,1/nom",
-   "er → er@1,1/nom",
-   "ein kleines Café. → Café.@2,1/akk"
-  ],
-  "connections": [
-   [
-    "zu"
-   ],
-   [],
-   [
-    "–"
-   ],
-   [
-    "hat@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #11 Einen Moment, sagt Lena, ich hole meine Tasche.": {
-  "leading": [],
-  "boxes": [
-   "Einen Moment, → Moment,@1,1/akk",
-   "Lena, → Lena,@1,3/nom",
-   "ich → ich@2,2/nom",
-   "meine Tasche. → Tasche.@1,3/akk"
-  ],
-  "connections": [
-   [
-    "sagt@1,1"
-   ],
-   [],
-   [
-    "hole@2,2"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #12 Fünf Minuten später gehen sie zusammen durch die Mozartgasse.": {
-  "leading": [],
-  "boxes": [
-   "Fünf → Fünf@2,3/akk",
-   "Minuten → Minuten@2,3/akk",
-   "sie → sie@2,3/nom",
-   "die Mozartgasse. → Mozartgasse.@2,3/akk"
-  ],
-  "connections": [
-   [],
-   [
-    "später",
-    "gehen@2,3"
-   ],
-   [
-    "zusammen",
-    "durch"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #13 Das Caffè Marco ist in der Gumpendorfer Straße, nicht weit vom Naschmarkt.": {
-  "leading": [],
-  "boxes": [
-   "Das Caffè Marco → Marco@2,1/nom",
-   "der Gumpendorfer Straße, → Straße,@1,3/dat",
-   "Naschmarkt. → Naschmarkt.@1,1/dat"
-  ],
-  "connections": [
-   [
-    "ist@2,1",
-    "in"
-   ],
-   [
-    "nicht",
-    "weit",
-    "vom"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #14 Es ist ein kleines, gemütliches Café mit roten Stühlen und einer langen Theke.": {
-  "leading": [],
-  "boxes": [
-   "Es → Es@2,1/nom",
-   "ein kleines, gemütliches Café → Café@2,1/nom",
-   "roten Stühlen → Stühlen@2,3/dat",
-   "einer langen Theke. → Theke.@1,3/dat"
-  ],
-  "connections": [
-   [
-    "ist@2,1"
-   ],
-   [
-    "mit"
-   ],
-   [
-    "und"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #15 Durch das Fenster sieht man den Espressoapparat und viele Kuchen in der Vitrine.": {
-  "leading": [
-   "Durch"
-  ],
-  "boxes": [
-   "das Fenster → Fenster@2,1/akk",
-   "man → man@1,1/nom",
-   "den Espressoapparat → Espressoapparat@1,1/akk",
-   "viele Kuchen → Kuchen@2,3/akk",
-   "der Vitrine. → Vitrine.@1,3/dat"
-  ],
-  "connections": [
-   [
-    "sieht@1,1"
-   ],
-   [],
-   [
-    "und"
-   ],
-   [
-    "in"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #16 Marco steht hinter der Theke – er sieht sie sofort.": {
-  "leading": [],
-  "boxes": [
-   "Marco → Marco@1,1/nom",
-   "der Theke → Theke@1,3/dat",
-   "er → er@1,1/nom",
-   "sie → sie@2,3/akk"
-  ],
-  "connections": [
-   [
-    "steht@1,1",
-    "hinter"
-   ],
-   [
-    "–"
-   ],
-   [
-    "sieht@1,1"
-   ],
-   [
-    "sofort."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #17 Tommy! Endlich!, ruft er.": {
-  "leading": [
-   "Tommy!",
-   "Endlich!,",
-   "ruft@1,1"
-  ],
-  "boxes": [
-   "er. → er.@1,1/nom"
-  ],
-  "connections": []
- },
- "A1_story_der_herbstmarkt.json #18 Thomas seufzt. Er nennt mich immer Tommy, sagt er leise zu Lena.": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom",
-   "Er → Er@1,1/nom",
-   "mich → mich@2,2/akk",
-   "Tommy, → Tommy,@1,1/nom",
-   "er → er@1,1/nom",
-   "Lena. → Lena.@2,1/dat"
-  ],
-  "connections": [
-   [
-    "seufzt.@1,1"
-   ],
-   [
-    "nennt@1,1"
-   ],
-   [
-    "immer"
-   ],
-   [
-    "sagt@1,1"
-   ],
-   [
-    "leise",
-    "zu"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #19 Das gefällt dir nicht?, fragt Lena.": {
-  "leading": [],
-  "boxes": [
-   "Das → Das@2,1/nom",
-   "dir → dir@1,2/dat",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "gefällt@2,1"
-   ],
-   [
-    "nicht?,",
-    "fragt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #20 Nein, sagt Thomas, aber ich sage es seit zehn Jahren.": {
-  "leading": [
-   "Nein,",
-   "sagt@1,1"
-  ],
-  "boxes": [
-   "Thomas, → Thomas,@1,1/nom",
-   "ich → ich@2,2/nom",
-   "es → es@2,1/akk",
-   "zehn → zehn@2,3/dat",
-   "Jahren. → Jahren.@2,3/dat"
-  ],
-  "connections": [
-   [
-    "aber"
-   ],
-   [
-    "sage@2,2"
-   ],
-   [
-    "seit"
-   ],
-   []
-  ]
- },
- "A1_story_der_herbstmarkt.json #21 Marco kommt um die Theke herum.": {
-  "leading": [],
-  "boxes": [
-   "Marco → Marco@1,1/nom",
-   "die Theke → Theke@1,3/akk"
-  ],
-  "connections": [
-   [
-    "kommt@1,1",
-    "um"
-   ],
-   [
-    "herum."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #22 Wer ist das?, fragt er und schaut Lena an.": {
-  "leading": [
-   "Wer",
-   "ist@2,1"
-  ],
-  "boxes": [
-   "das?, → das?,@2,1/nom",
-   "er → er@1,1/nom",
-   "Lena → Lena@1,3/akk"
-  ],
-  "connections": [
-   [
-    "fragt@1,1"
-   ],
-   [
-    "und",
-    "schaut@1,1"
-   ],
-   [
-    "an."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #23 Das ist Lena – meine neue Nachbarin, sagt Thomas.": {
-  "leading": [],
-  "boxes": [
-   "Das → Das@2,1/nom",
-   "Lena → Lena@1,3/nom",
-   "meine neue Nachbarin, → Nachbarin,@1,3/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "ist@2,1"
-   ],
-   [
-    "–"
-   ],
-   [
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #24 Ich bin Marco Ricci!, sagt er laut und gibt ihr die Hand.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "Marco Ricci!, → Ricci!,@1,1/nom",
-   "er → er@1,1/nom",
-   "ihr → ihr@1,3/dat",
-   "die Hand. → Hand.@1,3/akk"
-  ],
-  "connections": [
-   [
-    "bin@2,2"
-   ],
-   [
-    "sagt@1,1"
-   ],
-   [
-    "laut",
-    "und",
-    "gibt@1,1"
-   ],
-   []
-  ]
- },
- "A1_story_der_herbstmarkt.json #25 Lena Huber – freut mich!, sagt Lena.": {
-  "leading": [],
-  "boxes": [
-   "Lena Huber → Huber@1,3/nom",
-   "mich!, → mich!,@2,2/akk",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "–",
-    "freut@2,1"
-   ],
-   [
-    "sagt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #26 Du bist neu in Wien?, fragt Marco.": {
-  "leading": [],
-  "boxes": [
-   "Du → Du@1,2/nom",
-   "Wien?, → Wien?,@2,1/dat",
-   "Marco. → Marco.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "bist@1,2",
-    "neu",
-    "in"
-   ],
-   [
-    "fragt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #27 Nein, ich wohne schon ein paar Jahre hier – jetzt in der Mozartgasse, sagt Lena.": {
-  "leading": [
-   "Nein,"
-  ],
-  "boxes": [
-   "ich → ich@2,2/nom",
-   "der Mozartgasse, → Mozartgasse,@1,3/dat",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "wohne@2,2",
-    "schon",
-    "ein",
-    "paar",
-    "Jahre",
-    "hier",
-    "–",
-    "jetzt",
-    "in"
-   ],
-   [
-    "sagt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #28 Was möchtet ihr trinken?, fragt Marco.": {
-  "leading": [
-   "Was",
-   "möchtet@3,1"
-  ],
-  "boxes": [
-   "ihr → ihr@3,1/nom",
-   "Marco. → Marco.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "trinken?,@3,3",
-    "fragt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #29 Einen Cappuccino, bitte, sagt Lena.": {
-  "leading": [],
-  "boxes": [
-   "Einen Cappuccino, → Cappuccino,@1,1/akk",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "bitte,",
-    "sagt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #30 Für mich einen Espresso, sagt Thomas.": {
-  "leading": [
-   "Für"
-  ],
-  "boxes": [
-   "mich → mich@2,2/akk",
-   "einen Espresso, → Espresso,@1,1/akk",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [],
-   [
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #31 Und Kuchen! Ich habe heute Apfelstrudel – frisch gebacken!, ruft Marco.": {
-  "leading": [
-   "Und",
-   "Kuchen!@3,3"
-  ],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "Apfelstrudel → Apfelstrudel@1,1/akk",
-   "Marco. → Marco.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "habe@2,2",
-    "heute"
-   ],
-   [
-    "–",
-    "frisch",
-    "gebacken!,@3,3",
-    "ruft@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #32 Lena schaut auf die Vitrine – der Strudel sieht wirklich gut aus.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "die Vitrine → Vitrine@1,3/akk",
-   "der Strudel → Strudel@1,1/nom"
-  ],
-  "connections": [
-   [
-    "schaut@1,3",
-    "auf"
-   ],
-   [
-    "–"
-   ],
-   [
-    "sieht@1,1",
-    "wirklich",
-    "gut",
-    "aus."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #33 Natürlich – alles selbst gemacht, sagt Marco.": {
-  "leading": [
-   "Natürlich",
-   "–"
-  ],
-  "boxes": [
-   "alles → alles@2,1/nom",
-   "Marco. → Marco.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "selbst",
-    "gemacht,@3,3",
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #34 Sie setzen sich an einen kleinen Tisch am Fenster.": {
-  "leading": [],
-  "boxes": [
-   "Sie → Sie@2,3/nom",
-   "sich → sich@2,3/akk",
-   "einen kleinen Tisch → Tisch@1,1/akk",
-   "Fenster. → Fenster.@2,1/dat"
-  ],
-  "connections": [
-   [
-    "setzen@2,3"
-   ],
-   [
-    "an"
-   ],
-   [
-    "am"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #35 Marco bringt die Getränke und zwei Stücke Apfelstrudel.": {
-  "leading": [],
-  "boxes": [
-   "Marco → Marco@1,1/nom",
-   "die Getränke → Getränke@2,3/akk",
-   "zwei → zwei@2,3/akk",
-   "Stücke → Stücke@2,3/akk",
-   "Apfelstrudel. → Apfelstrudel.@2,3/akk"
-  ],
-  "connections": [
-   [
-    "bringt@1,1"
-   ],
-   [
-    "und"
-   ],
-   [],
-   []
-  ]
- },
- "A1_story_der_herbstmarkt.json #36 Was kostet das alles?, fragt Lena.": {
-  "leading": [
-   "Was",
-   "kostet@2,1"
-  ],
-  "boxes": [
-   "das alles?, → alles?,@2,1/nom",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "fragt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #37 Für Thomas und seine Freunde – heute nichts!, sagt Marco.": {
-  "leading": [
-   "Für"
-  ],
-  "boxes": [
-   "Thomas → Thomas@1,1/akk",
-   "seine Freunde → Freunde@2,3/akk",
-   "nichts!, → nichts!,@2,1/nom",
-   "Marco. → Marco.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "und"
-   ],
-   [
-    "–",
-    "heute"
-   ],
-   [
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #38 Das ist wirklich nicht nötig!, sagt Thomas.": {
-  "leading": [],
-  "boxes": [
-   "Das → Das@2,1/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "ist@2,1",
-    "wirklich",
-    "nicht",
-    "nötig!,",
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #39 Keine Diskussion – ihr seid heute meine Gäste!, sagt Marco.": {
-  "leading": [],
-  "boxes": [
-   "Keine Diskussion → Diskussion@1,3/nom",
-   "ihr → ihr@3,1/nom",
-   "meine Gäste!, → Gäste!,@2,3/nom",
-   "Marco. → Marco.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "–"
-   ],
-   [
-    "seid@3,1",
-    "heute"
-   ],
-   [
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #40 Lena probiert den Strudel.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "den Strudel. → Strudel.@1,1/akk"
-  ],
-  "connections": [
-   [
-    "probiert@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #41 Mmm – der ist wirklich sehr gut!, sagt sie.": {
-  "leading": [
-   "Mmm",
-   "–"
-  ],
-  "boxes": [
-   "der → der@1,1/nom",
-   "sie. → sie.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "ist@1,1",
-    "wirklich",
-    "sehr",
-    "gut!,",
-    "sagt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #42 Marco lacht laut. Das sage ich doch!": {
-  "leading": [],
-  "boxes": [
-   "Marco → Marco@1,1/nom",
-   "Das → Das@2,1/akk",
-   "ich → ich@2,2/nom"
-  ],
-  "connections": [
-   [
-    "lacht@1,1",
-    "laut."
-   ],
-   [
-    "sage@2,2"
-   ],
-   [
-    "doch!"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #43 Thomas schaut auf die Uhr. Es ist halb elf.": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom",
-   "die Uhr. → Uhr.@1,3/akk",
-   "Es → Es@2,1/nom"
-  ],
-  "connections": [
-   [
-    "schaut@1,1",
-    "auf"
-   ],
-   [],
-   [
-    "ist@2,1",
-    "halb",
-    "elf."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #44 Wir müssen gehen – der Markt wartet, sagt Thomas.": {
-  "leading": [],
-  "boxes": [
-   "Wir → Wir@3,2/nom",
-   "der Markt → Markt@1,1/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "müssen@3,2",
-    "gehen@3,3",
-    "–"
-   ],
-   [
-    "wartet,@1,1",
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #45 Natürlich – aber zwei Stücke Strudel kommen mit!, sagt Marco.": {
-  "leading": [
-   "Natürlich",
-   "–",
-   "aber",
-   "zwei"
-  ],
-  "boxes": [
-   "Stücke Strudel → Strudel@2,3/akk",
-   "Marco. → Marco.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "kommen@2,3",
-    "mit!,",
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #46 Er packt zwei Stücke Strudel in eine Tüte zum Mitnehmen.": {
-  "leading": [],
-  "boxes": [
-   "Er → Er@1,1/nom",
-   "Stücke → Stücke@2,3/akk",
-   "Strudel → Strudel@2,3/akk",
-   "eine Tüte → Tüte@1,3/akk",
-   "Mitnehmen. → Mitnehmen.@2,1/dat"
-  ],
-  "connections": [
-   [
-    "packt@1,1",
-    "zwei"
-   ],
-   [],
-   [
-    "in"
-   ],
-   [
-    "zum"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #47 Danke, Marco!, sagt Lena.": {
-  "leading": [
-   "Danke,",
-   "Marco!,",
-   "sagt@1,3"
-  ],
-  "boxes": [
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": []
- },
- "A1_story_der_herbstmarkt.json #48 Der Naschmarkt ist zehn Minuten zu Fuß vom Café.": {
-  "leading": [],
-  "boxes": [
-   "Der Naschmarkt → Naschmarkt@1,1/nom",
-   "zehn Minuten → Minuten@2,3/akk",
-   "Fuß → Fuß@1,1/dat",
-   "Café. → Café.@2,1/dat"
-  ],
-  "connections": [
-   [
-    "ist@1,1"
-   ],
-   [
-    "zu"
-   ],
-   [
-    "vom"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #49 Er ist Wiens größter Markt – lang, bunt und voller Stände.": {
-  "leading": [],
-  "boxes": [
-   "Er → Er@1,1/nom",
-   "Wiens größter Markt → Markt@1,1/nom",
-   "Stände. → Stände.@1,3/dat"
-  ],
-  "connections": [
-   [
-    "ist@1,1"
-   ],
-   [
-    "–",
-    "lang,",
-    "bunt",
-    "und",
-    "voller"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #50 Es gibt Obst, Gemüse, Käse, Fleisch, Gewürze und Oliven.": {
-  "leading": [],
-  "boxes": [
-   "Es → Es@2,1/nom",
-   "Obst, Gemüse, → Gemüse,@2,1/akk",
-   "Käse, → Käse,@1,1/akk",
-   "Fleisch, Gewürze → Gewürze@2,3/akk",
-   "Oliven. → Oliven.@2,3/akk"
-  ],
-  "connections": [
-   [
-    "gibt@2,1"
-   ],
-   [],
-   [],
-   [
-    "und"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #51 Lena war noch nie hier – sie schaut sich alles an.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "sie → sie@1,3/nom",
-   "alles → alles@2,1/nom"
-  ],
-  "connections": [
-   [
-    "war@1,3",
-    "noch",
-    "nie",
-    "hier",
-    "–"
-   ],
-   [
-    "schaut@1,3",
-    "sich"
-   ],
-   [
-    "an."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #52 Thomas kennt den Markt gut – er kauft hier fast jeden Samstag ein.": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom",
-   "den Markt → Markt@1,1/akk",
-   "er → er@1,1/nom",
-   "jeden Samstag → Samstag@1,1/akk"
-  ],
-  "connections": [
-   [
-    "kennt@1,1"
-   ],
-   [
-    "gut",
-    "–"
-   ],
-   [
-    "kauft@1,1",
-    "hier",
-    "fast"
-   ],
-   [
-    "ein."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #53 Am Eingang sehen sie eine bekannte Figur.": {
-  "leading": [
-   "Am"
-  ],
-  "boxes": [
-   "Eingang → Eingang@1,1/dat",
-   "sie → sie@2,3/nom",
-   "eine bekannte Figur. → Figur.@1,3/akk"
-  ],
-  "connections": [
-   [
-    "sehen@2,3"
-   ],
-   []
-  ]
- },
- "A1_story_der_herbstmarkt.json #54 Das ist Elisabeth!, sagt Lena überrascht.": {
-  "leading": [],
-  "boxes": [
-   "Das → Das@2,1/nom",
-   "Elisabeth!, → Elisabeth!,@1,3/nom",
-   "Lena → Lena@1,3/nom"
-  ],
-  "connections": [
-   [
-    "ist@2,1"
-   ],
-   [
-    "sagt@1,3"
-   ],
-   [
-    "überrascht.@3,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #55 Elisabeth steht an einem Stand mit Äpfeln und spricht mit dem Verkäufer.": {
-  "leading": [],
-  "boxes": [
-   "Elisabeth → Elisabeth@1,3/nom",
-   "einem Stand → Stand@1,1/dat",
-   "Äpfeln → Äpfeln@2,3/dat",
-   "dem Verkäufer. → Verkäufer.@1,1/dat"
-  ],
-  "connections": [
-   [
-    "steht@1,3",
-    "an"
-   ],
-   [
-    "mit"
-   ],
-   [
-    "und",
-    "spricht@1,3",
-    "mit"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #56 Elisabeth!, ruft Thomas.": {
-  "leading": [],
-  "boxes": [
-   "Elisabeth!, → Elisabeth!,@1,3/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "ruft@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #57 Thomas! Lena! Welche Überraschung!, sagt Elisabeth und dreht sich um.": {
-  "leading": [
-   "Thomas!",
-   "Lena!"
-  ],
-  "boxes": [
-   "Welche Überraschung!, → Überraschung!,@1,3/nom",
-   "Elisabeth → Elisabeth@1,3/nom"
-  ],
-  "connections": [
-   [
-    "sagt@1,3"
-   ],
-   [
-    "und",
-    "dreht@1,3",
-    "sich",
-    "um."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #58 Das ist Marco – mein bester Freund, sagt Thomas.": {
-  "leading": [],
-  "boxes": [
-   "Das → Das@2,1/nom",
-   "Marco → Marco@1,1/nom",
-   "mein bester Freund, → Freund,@1,1/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "ist@2,1"
-   ],
-   [
-    "–"
-   ],
-   [
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #59 Marco gibt ihr die Hand. Guten Tag, Frau Hoffmann.": {
-  "leading": [],
-  "boxes": [
-   "Marco → Marco@1,1/nom",
-   "ihr → ihr@1,3/dat",
-   "die Hand. → Hand.@1,3/akk",
-   "Guten Tag, → Tag,@1,1/akk",
-   "Frau Hoffmann. → Hoffmann.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "gibt@1,1"
-   ],
-   [],
-   [],
-   []
-  ]
- },
- "A1_story_der_herbstmarkt.json #60 Freut mich, Herr Ricci!, sagt Elisabeth.": {
-  "leading": [
-   "Freut@2,1"
-  ],
-  "boxes": [
-   "mich, → mich,@2,2/akk",
-   "Herr Ricci!, → Ricci!,@1,1/nom",
-   "Elisabeth. → Elisabeth.@1,3/nom"
-  ],
-  "connections": [
-   [],
-   [
-    "sagt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #61 Jetzt sind sie zu viert – und der Markt wartet.": {
-  "leading": [
-   "Jetzt",
-   "sind@2,3"
-  ],
-  "boxes": [
-   "sie → sie@2,3/nom",
-   "der Markt → Markt@1,1/nom"
-  ],
-  "connections": [
-   [
-    "zu",
-    "viert",
-    "–",
-    "und"
-   ],
-   [
-    "wartet.@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #62 Elisabeth lacht. Dann gehen wir zusammen!": {
-  "leading": [],
-  "boxes": [
-   "Elisabeth → Elisabeth@1,3/nom",
-   "wir → wir@3,2/nom"
-  ],
-  "connections": [
-   [
-    "lacht.@1,3",
-    "Dann",
-    "gehen@3,2"
-   ],
-   [
-    "zusammen!"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #63 Sie gehen langsam durch die Reihen der Stände.": {
-  "leading": [],
-  "boxes": [
-   "Sie → Sie@2,3/nom",
-   "die Reihen → Reihen@2,3/akk",
-   "der Stände. → Stände.@1,3/gen"
-  ],
-  "connections": [
-   [
-    "gehen@2,3",
-    "langsam",
-    "durch"
-   ],
-   []
-  ]
- },
- "A1_story_der_herbstmarkt.json #64 Elisabeth geht zuerst zum Käsestand.": {
-  "leading": [],
-  "boxes": [
-   "Elisabeth → Elisabeth@1,3/nom",
-   "Käsestand. → Käsestand.@1,1/dat"
-  ],
-  "connections": [
-   [
-    "geht@1,3",
-    "zuerst",
-    "zum"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #65 Der Verkäufer heißt Josef – Elisabeth kennt ihn gut.": {
-  "leading": [],
-  "boxes": [
-   "Der Verkäufer → Verkäufer@1,1/nom",
-   "Josef → Josef@1,1/nom",
-   "Elisabeth → Elisabeth@1,3/nom",
-   "ihn → ihn@1,1/akk"
-  ],
-  "connections": [
-   [
-    "heißt@1,1"
-   ],
-   [
-    "–"
-   ],
-   [
-    "kennt@1,3"
-   ],
-   [
-    "gut."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #66 Guten Morgen, Frau Hoffmann! Den üblichen Bergkäse?, fragt Josef.": {
-  "leading": [],
-  "boxes": [
-   "Guten Morgen, → Morgen,@1,1/akk",
-   "Frau Hoffmann! → Hoffmann!@1,3/nom",
-   "Den üblichen Bergkäse?, → Bergkäse?,@1,1/akk",
-   "Josef. → Josef.@1,1/nom"
-  ],
-  "connections": [
-   [],
-   [],
-   [
-    "fragt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #67 Ja – ein halbes Kilo, bitte, sagt Elisabeth.": {
-  "leading": [
-   "Ja",
-   "–"
-  ],
-  "boxes": [
-   "ein halbes Kilo, → Kilo,@2,1/akk",
-   "Elisabeth. → Elisabeth.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "bitte,",
-    "sagt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #68 Was kostet das Kilo?, fragt Lena.": {
-  "leading": [],
-  "boxes": [
-   "Was → Was@2,1/akk",
-   "das Kilo?, → Kilo?,@2,1/akk",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "kostet@2,1"
-   ],
-   [
-    "fragt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #69 Vier Euro achtzig, sagt Josef.": {
-  "leading": [
-   "Vier",
-   "Euro",
-   "achtzig,",
-   "sagt@1,1"
-  ],
-  "boxes": [
-   "Josef. → Josef.@1,1/nom"
-  ],
-  "connections": []
- },
- "A1_story_der_herbstmarkt.json #70 Kann ich ein Stück probieren?, fragt Lena.": {
-  "leading": [
-   "Kann@2,2"
-  ],
-  "boxes": [
-   "ich → ich@2,2/nom",
-   "ein Stück → Stück@2,1/akk",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [],
-   [
-    "probieren?,@3,3",
-    "fragt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #71 Natürlich!, sagt Josef und gibt ihr ein kleines Stück.": {
-  "leading": [
-   "Natürlich!,",
-   "sagt@1,1"
-  ],
-  "boxes": [
-   "Josef → Josef@1,1/nom",
-   "ihr → ihr@1,3/dat",
-   "ein kleines Stück. → Stück.@2,1/akk"
-  ],
-  "connections": [
-   [
-    "und",
-    "gibt@1,1"
-   ],
-   []
-  ]
- },
- "A1_story_der_herbstmarkt.json #72 Der ist gut!, sagt Lena. Ich nehme auch ein halbes Kilo.": {
-  "leading": [],
-  "boxes": [
-   "Der → Der@1,1/nom",
-   "Lena. → Lena.@1,3/nom",
-   "Ich → Ich@2,2/nom",
-   "ein halbes Kilo. → Kilo.@2,1/akk"
-  ],
-  "connections": [
-   [
-    "ist@1,1",
-    "gut!,",
-    "sagt@1,3"
-   ],
-   [],
-   [
-    "nehme@2,2",
-    "auch"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #73 Marco schaut den Käse an und sagt leise: Zu weich.": {
-  "leading": [],
-  "boxes": [
-   "Marco → Marco@1,1/nom",
-   "den Käse → Käse@1,1/akk"
-  ],
-  "connections": [
-   [
-    "schaut@1,1"
-   ],
-   [
-    "an",
-    "und",
-    "sagt@1,1",
-    "leise:",
-    "Zu",
-    "weich."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #74 Für richtigen Käse muss man nach Italien fahren!, sagt Marco.": {
-  "leading": [
-   "Für"
-  ],
-  "boxes": [
-   "richtigen Käse → Käse@1,1/akk",
-   "man → man@1,1/nom",
-   "Italien → Italien@2,1/dat",
-   "Marco. → Marco.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "muss@1,1"
-   ],
-   [
-    "nach"
-   ],
-   [
-    "fahren!,@3,3",
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #75 In Wien haben wir auch sehr guten Käse, Herr Ricci, sagt Elisabeth.": {
-  "leading": [
-   "In"
-  ],
-  "boxes": [
-   "Wien → Wien@2,1/dat",
-   "wir → wir@3,2/nom",
-   "guten Käse, → Käse,@1,1/akk",
-   "Herr Ricci, → Ricci,@1,1/nom",
-   "Elisabeth. → Elisabeth.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "haben@3,2"
-   ],
-   [
-    "auch",
-    "sehr"
-   ],
-   [],
-   [
-    "sagt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #76 Ich weiß das, sagt Marco, aber ich sage es trotzdem.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "das, → das,@2,1/akk",
-   "Marco, → Marco,@1,1/nom",
-   "ich → ich@2,2/nom",
-   "es → es@2,1/nom"
-  ],
-  "connections": [
-   [
-    "weiß@2,2"
-   ],
-   [
-    "sagt@1,1"
-   ],
-   [
-    "aber"
-   ],
-   [
-    "sage@2,2"
-   ],
-   [
-    "trotzdem."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #77 Alle lachen.": {
-  "leading": [],
-  "boxes": [
-   "Alle → Alle@2,3/nom"
-  ],
-  "connections": [
-   [
-    "lachen.@2,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #78 Am nächsten Stand gibt es Gemüse.": {
-  "leading": [
-   "Am"
-  ],
-  "boxes": [
-   "nächsten Stand → Stand@1,1/dat",
-   "es → es@2,1/nom",
-   "Gemüse. → Gemüse.@2,3/akk"
-  ],
-  "connections": [
-   [
-    "gibt@2,1"
-   ],
-   []
-  ]
- },
- "A1_story_der_herbstmarkt.json #79 Wie viel kostet ein Kilo Tomaten?, fragt Thomas.": {
-  "leading": [
-   "Wie",
-   "viel",
-   "kostet@2,1"
-  ],
-  "boxes": [
-   "ein Kilo Tomaten?, → Tomaten?,@2,1/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "fragt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #80 Zwei Euro zwanzig, sagt der Verkäufer.": {
-  "leading": [
-   "Zwei",
-   "Euro",
-   "zwanzig,",
-   "sagt@1,1"
-  ],
-  "boxes": [
-   "der Verkäufer. → Verkäufer.@1,1/nom"
-  ],
-  "connections": []
- },
- "A1_story_der_herbstmarkt.json #81 Ich nehme zwei Kilo, sagt Thomas.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "zwei Kilo, → Kilo,@2,3/akk",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "nehme@2,2"
-   ],
-   [
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #82 Und die Paprika – was kosten die?, fragt Lena.": {
-  "leading": [
-   "Und"
-  ],
-  "boxes": [
-   "die → die@2,3/nom",
-   "Paprika → Paprika@2,3/nom",
-   "was → was@2,1/akk",
-   "die?, → die?,@2,3/nom",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [],
-   [
-    "–"
-   ],
-   [
-    "kosten@2,3"
-   ],
-   [
-    "fragt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #83 Die roten: drei Euro fünfzig das Kilo, sagt der Verkäufer.": {
-  "leading": [],
-  "boxes": [
-   "Die → Die@2,3/nom",
-   "das Kilo, → Kilo,@2,1/akk",
-   "der Verkäufer. → Verkäufer.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "roten:@2,3",
-    "drei",
-    "Euro",
-    "fünfzig"
-   ],
-   [
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #84 Drei rote Paprika, bitte, sagt Lena.": {
-  "leading": [],
-  "boxes": [
-   "Drei rote Paprika, → Paprika,@2,3/akk",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "bitte,",
-    "sagt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #85 Marco nimmt ein Kilo Auberginen.": {
-  "leading": [],
-  "boxes": [
-   "Marco → Marco@1,1/nom",
-   "ein Kilo Auberginen. → Auberginen.@2,1/akk"
-  ],
-  "connections": [
-   [
-    "nimmt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #86 Der Verkäufer rechnet alles zusammen. Macht neun Euro siebzig.": {
-  "leading": [],
-  "boxes": [
-   "Der Verkäufer → Verkäufer@1,1/nom",
-   "alles → alles@2,1/akk"
-  ],
-  "connections": [
-   [
-    "rechnet@1,1"
-   ],
-   [
-    "zusammen.",
-    "Macht@1,1",
-    "neun",
-    "Euro",
-    "siebzig."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #87 Thomas zahlt. Stimmt so!": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom"
-  ],
-  "connections": [
-   [
-    "zahlt.@1,1",
-    "Stimmt@1,1",
-    "so!"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #88 Weiter hinten gibt es einen Stand mit Nüssen und Trockenfrüchten.": {
-  "leading": [
-   "Weiter",
-   "hinten",
-   "gibt@2,1"
-  ],
-  "boxes": [
-   "es → es@2,1/nom",
-   "einen Stand → Stand@1,1/akk",
-   "Nüssen → Nüssen@2,3/dat",
-   "Trockenfrüchten. → Trockenfrüchten.@2,3/dat"
-  ],
-  "connections": [
-   [],
-   [
-    "mit"
-   ],
-   [
-    "und"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #89 Lena kauft eine große Tüte Walnüsse – einen Euro neunzig.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "eine große Tüte Walnüsse → Walnüsse@1,3/akk",
-   "einen Euro neunzig. → neunzig.@1,1/akk"
-  ],
-  "connections": [
-   [
-    "kauft@1,3"
-   ],
-   [
-    "–"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #90 Das ist für meinen Kuchen, sagt sie.": {
-  "leading": [],
-  "boxes": [
-   "Das → Das@2,1/nom",
-   "meinen Kuchen, → Kuchen,@1,1/akk",
-   "sie. → sie.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "ist@2,1",
-    "für"
-   ],
-   [
-    "sagt@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #91 Du bäckst auch Kuchen?, fragt Marco.": {
-  "leading": [],
-  "boxes": [
-   "Du → Du@1,2/nom",
-   "Kuchen?, → Kuchen?,@2,1/akk",
-   "Marco. → Marco.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "bäckst@1,2",
-    "auch"
-   ],
-   [
-    "fragt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #92 Thomas nickt. Sie bäckt sehr gut – das weiß ich schon.": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom",
-   "Sie → Sie@1,3/nom",
-   "das → das@2,1/akk",
-   "ich → ich@2,2/nom"
-  ],
-  "connections": [
-   [
-    "nickt.@1,1"
-   ],
-   [
-    "bäckt@1,3",
-    "sehr",
-    "gut",
-    "–"
-   ],
-   [
-    "weiß@2,2"
-   ],
-   [
-    "schon."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #93 Um halb eins sind ihre Taschen voll.": {
-  "leading": [
-   "Um",
-   "halb",
-   "eins",
-   "sind@2,3"
-  ],
-  "boxes": [
-   "ihre Taschen → Taschen@2,3/nom"
-  ],
-  "connections": [
-   [
-    "voll."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #94 Ich kann nicht mehr tragen!, sagt Lena und lacht.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "Lena → Lena@1,3/nom"
-  ],
-  "connections": [
-   [
-    "kann@2,2",
-    "nicht",
-    "mehr",
-    "tragen!,@3,3",
-    "sagt@1,3"
-   ],
-   [
-    "und",
-    "lacht.@1,3"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #95 Marco schaut in seine Tasche: Auberginen, Käse und zwei Äpfel – vielleicht ein bisschen viel.": {
-  "leading": [],
-  "boxes": [
-   "Marco → Marco@1,1/nom",
-   "seine Tasche: → Tasche:@1,3/akk",
-   "Auberginen, → Auberginen,@2,3/nom",
-   "Käse → Käse@1,1/nom",
-   "zwei Äpfel → Äpfel@2,3/nom"
-  ],
-  "connections": [
-   [
-    "schaut@1,1",
-    "in"
-   ],
-   [],
-   [],
-   [
-    "und"
-   ],
-   [
-    "–",
-    "vielleicht",
-    "ein",
-    "bisschen",
-    "viel."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #96 Ein bisschen!, sagt Thomas.": {
-  "leading": [],
-  "boxes": [
-   "Ein bisschen!, → bisschen!,@2,1/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #97 Sie gehen langsam zurück durch die Gassen.": {
-  "leading": [],
-  "boxes": [
-   "Sie → Sie@2,3/nom",
-   "die Gassen. → Gassen.@2,3/akk"
-  ],
-  "connections": [
-   [
-    "gehen@2,3",
-    "langsam",
-    "zurück",
-    "durch"
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #98 Die Sonne scheint, und der Wind ist kühl und frisch.": {
-  "leading": [],
-  "boxes": [
-   "Die Sonne → Sonne@1,3/nom",
-   "der Wind → Wind@1,1/nom"
-  ],
-  "connections": [
-   [
-    "scheint,@1,3",
-    "und"
-   ],
-   [
-    "ist@1,1",
-    "kühl",
-    "und",
-    "frisch."
-   ]
-  ]
- },
- "A1_story_der_herbstmarkt.json #99 Ein guter Tag, denkt Thomas – mit neuen Freunden und einem vollen Einkaufskorb.": {
-  "leading": [],
-  "boxes": [
-   "Ein guter Tag, → Tag,@1,1/nom",
-   "Thomas → Thomas@1,1/nom",
-   "neuen Freunden → Freunden@2,3/dat",
-   "einem vollen Einkaufskorb. → Einkaufskorb.@1,1/dat"
-  ],
-  "connections": [
-   [
-    "denkt@1,1"
-   ],
-   [
-    "–",
-    "mit"
-   ],
-   [
-    "und"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #0 Lena wohnt seit drei Wochen in der Mozartgasse 7, in Wien.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "drei → drei@2,3/dat",
-   "Wochen → Wochen@2,3/dat",
-   "der Mozartgasse → Mozartgasse@1,3/dat",
-   "Wien. → Wien.@2,1/dat"
-  ],
-  "connections": [
-   [
-    "wohnt@1,3",
-    "seit"
-   ],
-   [],
-   [
-    "in"
-   ],
-   [
-    "7,",
-    "in"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #1 Ihre Wohnung ist im zweiten Stock – klein, aber hell und schön.": {
-  "leading": [],
-  "boxes": [
-   "Ihre Wohnung → Wohnung@1,3/nom",
-   "zweiten Stock → Stock@1,1/dat"
-  ],
-  "connections": [
-   [
-    "ist@1,3",
-    "im"
-   ],
-   [
-    "–",
-    "klein,",
-    "aber",
-    "hell",
-    "und",
-    "schön."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #2 Sie mag ihre Wohnung sehr.": {
-  "leading": [],
-  "boxes": [
-   "Sie → Sie@1,3/nom",
-   "ihre Wohnung → Wohnung@1,3/akk"
-  ],
-  "connections": [
-   [
-    "mag@1,3"
-   ],
-   [
-    "sehr."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #3 Das Gebäude ist alt, mit einer breiten Holztreppe und kleinen Briefkästen im Flur.": {
-  "leading": [],
-  "boxes": [
-   "Das Gebäude → Gebäude@2,1/nom",
-   "einer breiten Holztreppe → Holztreppe@1,3/dat",
-   "kleinen Briefkästen → Briefkästen@2,3/dat",
-   "Flur. → Flur.@2,1/dat"
-  ],
-  "connections": [
-   [
-    "ist@2,1",
-    "alt,",
-    "mit"
-   ],
-   [
-    "und"
-   ],
-   [
-    "im"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #4 Die Nachbarn kennt sie noch nicht gut.": {
-  "leading": [],
-  "boxes": [
-   "Die Nachbarn → Nachbarn@2,3/akk",
-   "sie → sie@2,3/nom"
-  ],
-  "connections": [
-   [
-    "kennt@1,3"
-   ],
-   [
-    "noch",
-    "nicht",
-    "gut."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #5 Jeden Morgen sieht sie denselben Mann auf der Treppe.": {
-  "leading": [],
-  "boxes": [
-   "Jeden Morgen → Morgen@1,1/akk",
-   "sie → sie@1,3/nom",
-   "denselben Mann → Mann@1,1/akk",
-   "der Treppe. → Treppe.@1,3/dat"
-  ],
-  "connections": [
-   [
-    "sieht@1,3"
-   ],
-   [],
-   [
-    "auf"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #6 Er heißt Thomas – das steht auf seinem Briefkasten: T. Berger, 2. OG.": {
-  "leading": [],
-  "boxes": [
-   "Er → Er@1,1/nom",
-   "Thomas → Thomas@1,1/nom",
-   "das → das@2,1/nom",
-   "seinem Briefkasten: → Briefkasten:@1,1/dat"
-  ],
-  "connections": [
-   [
-    "heißt@1,1"
-   ],
-   [
-    "–"
-   ],
-   [
-    "steht@2,1",
-    "auf"
-   ],
-   [
-    "T.",
-    "Berger,",
-    "2.",
-    "OG."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #7 Thomas trägt meistens Kopfhörer und schaut auf sein Handy.": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom",
-   "Kopfhörer → Kopfhörer@1,1/akk",
-   "sein Handy. → Handy.@2,1/akk"
-  ],
-  "connections": [
-   [
-    "trägt@1,1",
-    "meistens"
-   ],
-   [
-    "und",
-    "schaut@1,1",
-    "auf"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #8 Er arbeitet vielleicht von zu Hause?": {
-  "leading": [],
-  "boxes": [
-   "Er → Er@1,1/nom",
-   "Hause? → Hause?@2,1/dat"
-  ],
-  "connections": [
-   [
-    "arbeitet@1,1",
-    "vielleicht",
-    "von",
-    "zu"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #9 Lena weiß es nicht genau.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "es → es@2,1/nom"
-  ],
-  "connections": [
-   [
-    "weiß@1,3"
-   ],
-   [
-    "nicht",
-    "genau."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #10 Sie sagen immer nur Hallo – und dann gehen sie weiter.": {
-  "leading": [],
-  "boxes": [
-   "Sie → Sie@2,3/nom",
-   "Hallo → Hallo@2,1/akk",
-   "sie → sie@2,3/nom"
-  ],
-  "connections": [
-   [
-    "sagen@2,3",
-    "immer",
-    "nur"
-   ],
-   [
-    "–",
-    "und",
-    "dann",
-    "gehen@2,3"
-   ],
-   [
-    "weiter."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #11 Lena arbeitet als Ärztin in einem Krankenhaus.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "Ärztin → Ärztin@1,3/nom",
-   "einem Krankenhaus. → Krankenhaus.@2,1/dat"
-  ],
-  "connections": [
-   [
-    "arbeitet@1,3",
-    "als"
-   ],
-   [
-    "in"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #12 Ihre Schichten sind lang – manchmal zehn oder zwölf Stunden.": {
-  "leading": [],
-  "boxes": [
-   "Ihre Schichten → Schichten@2,3/nom"
-  ],
-  "connections": [
-   [
-    "sind@2,3",
-    "lang",
-    "–",
-    "manchmal",
-    "zehn",
-    "oder",
-    "zwölf",
-    "Stunden."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #13 Heute hat sie frei.": {
-  "leading": [
-   "Heute",
-   "hat@1,3"
-  ],
-  "boxes": [
-   "sie → sie@1,3/nom"
-  ],
-  "connections": [
-   [
-    "frei."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #14 Es ist Donnerstag, halb drei nachmittags.": {
-  "leading": [],
-  "boxes": [
-   "Es → Es@2,1/nom",
-   "Donnerstag, → Donnerstag,@1,1/nom"
-  ],
-  "connections": [
-   [
-    "ist@2,1"
-   ],
-   [
-    "halb",
-    "drei",
-    "nachmittags."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #15 Lena ist zu Hause und räumt ihre Wohnung auf.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "Hause → Hause@2,1/dat",
-   "ihre Wohnung → Wohnung@1,3/akk"
-  ],
-  "connections": [
-   [
-    "ist@1,3",
-    "zu"
-   ],
-   [
-    "und",
-    "räumt@1,3"
-   ],
-   [
-    "auf."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #16 Sie hat ein neues Bücherregal – weiß, mit fünf Fächern.": {
-  "leading": [],
-  "boxes": [
-   "Sie → Sie@1,3/nom",
-   "ein neues Bücherregal → Bücherregal@2,1/akk",
-   "fünf → fünf@2,3/dat",
-   "Fächern. → Fächern.@2,3/dat"
-  ],
-  "connections": [
-   [
-    "hat@1,3"
-   ],
-   [
-    "–",
-    "weiß,",
-    "mit"
-   ],
-   []
-  ]
- },
- "A1_story_neue_nachbarn.json #17 Es ist sehr schön, aber auch sehr schwer.": {
-  "leading": [],
-  "boxes": [
-   "Es → Es@2,1/nom"
-  ],
-  "connections": [
-   [
-    "ist@2,1",
-    "sehr",
-    "schön,",
-    "aber",
-    "auch",
-    "sehr",
-    "schwer."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #18 Lena kann es nicht alleine bewegen.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "es → es@2,1/nom"
-  ],
-  "connections": [
-   [
-    "kann@1,3"
-   ],
-   [
-    "nicht",
-    "alleine",
-    "bewegen.@3,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #19 Das Regal steht mitten im Zimmer, und das ist nicht gut.": {
-  "leading": [],
-  "boxes": [
-   "Das Regal → Regal@2,1/nom",
-   "Zimmer, → Zimmer,@2,1/dat",
-   "das → das@2,1/nom"
-  ],
-  "connections": [
-   [
-    "steht@2,1",
-    "mitten",
-    "im"
-   ],
-   [
-    "und"
-   ],
-   [
-    "ist@2,1",
-    "nicht",
-    "gut."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #20 Ich brauche Hilfe, denkt Lena.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "Hilfe, → Hilfe,@1,3/akk",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "brauche@2,2"
-   ],
-   [
-    "denkt@1,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #21 In diesem Moment klopft jemand an die Tür.": {
-  "leading": [
-   "In"
-  ],
-  "boxes": [
-   "diesem Moment → Moment@1,1/dat",
-   "jemand → jemand@1,1/nom",
-   "die Tür. → Tür.@1,3/akk"
-  ],
-  "connections": [
-   [
-    "klopft@1,1"
-   ],
-   [
-    "an"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #22 Lena macht die Tür auf.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "die Tür → Tür@1,3/akk"
-  ],
-  "connections": [
-   [
-    "macht@1,3"
-   ],
-   [
-    "auf."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #23 Es ist Thomas.": {
-  "leading": [],
-  "boxes": [
-   "Es → Es@2,1/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "ist@2,1"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #24 Er hält ein Paket in der Hand.": {
-  "leading": [],
-  "boxes": [
-   "Er → Er@1,1/nom",
-   "ein Paket → Paket@2,1/akk",
-   "der Hand. → Hand.@1,3/dat"
-  ],
-  "connections": [
-   [
-    "hält@1,1"
-   ],
-   [
-    "in"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #25 Hallo, ich bin dein Nachbar – Nummer 7b, sagt Thomas.": {
-  "leading": [
-   "Hallo,"
-  ],
-  "boxes": [
-   "ich → ich@2,2/nom",
-   "dein Nachbar → Nachbar@1,1/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "bin@2,2"
-   ],
-   [
-    "–",
-    "Nummer",
-    "7b,",
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #26 Der Paketbote hat dein Paket bei mir abgegeben – ich war zu Hause, du nicht.": {
-  "leading": [],
-  "boxes": [
-   "Der Paketbote → Paketbote@1,1/nom",
-   "dein Paket → Paket@2,1/akk",
-   "mir → mir@2,2/dat",
-   "ich → ich@2,2/nom",
-   "Hause, → Hause,@2,1/dat",
-   "du → du@1,2/nom"
-  ],
-  "connections": [
-   [
-    "hat@1,1"
-   ],
-   [
-    "bei"
-   ],
-   [
-    "abgegeben@3,3",
-    "–"
-   ],
-   [
-    "war@2,2",
-    "zu"
-   ],
-   [],
-   [
-    "nicht."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #27 Lena lächelt. Oh, danke! Ich bin Lena.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "Ich → Ich@2,2/nom",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "lächelt.@1,3",
-    "Oh,",
-    "danke!"
-   ],
-   [
-    "bin@2,2"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #28 Freut mich, sagt Thomas, und er gibt ihr das Paket.": {
-  "leading": [
-   "Freut@2,1"
-  ],
-  "boxes": [
-   "mich, → mich,@2,2/akk",
-   "Thomas, → Thomas,@1,1/nom",
-   "er → er@1,1/nom",
-   "ihr → ihr@1,3/dat",
-   "das Paket. → Paket.@2,1/akk"
-  ],
-  "connections": [
-   [
-    "sagt@1,1"
-   ],
-   [
-    "und"
-   ],
-   [
-    "gibt@1,1"
-   ],
-   []
-  ]
- },
- "A1_story_neue_nachbarn.json #29 Lena schaut das Paket an – und dann schaut sie noch einmal.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "das Paket → Paket@2,1/akk",
-   "sie → sie@1,3/nom"
-  ],
-  "connections": [
-   [
-    "schaut@1,3"
-   ],
-   [
-    "an",
-    "–",
-    "und",
-    "dann",
-    "schaut@1,3"
-   ],
-   [
-    "noch",
-    "einmal."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #30 Der Name auf dem Paket ist Lena Hoffmann.": {
-  "leading": [],
-  "boxes": [
-   "Der Name → Name@1,1/nom",
-   "dem Paket → Paket@2,1/dat",
-   "Lena Hoffmann. → Hoffmann.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "auf"
-   ],
-   [
-    "ist@1,1"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #31 Aber Lena heißt Lena Huber.": {
-  "leading": [
-   "Aber"
-  ],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "Lena Huber. → Huber.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "heißt@1,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #32 Warte mal, sagt sie, das ist nicht mein Paket.": {
-  "leading": [
-   "Warte@3,3",
-   "mal,",
-   "sagt@1,3"
-  ],
-  "boxes": [
-   "sie, → sie,@1,3/nom",
-   "das → das@2,1/nom",
-   "mein Paket. → Paket.@2,1/nom"
-  ],
-  "connections": [
-   [],
-   [
-    "ist@2,1",
-    "nicht"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #33 Thomas schaut das Paket an, dann Lena, dann wieder das Paket.": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom",
-   "das Paket → Paket@2,1/akk",
-   "Lena, → Lena,@1,3/akk",
-   "das Paket. → Paket.@2,1/akk"
-  ],
-  "connections": [
-   [
-    "schaut@1,1"
-   ],
-   [
-    "an,",
-    "dann"
-   ],
-   [
-    "dann",
-    "wieder"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #34 Aber du heißt Lena, oder?": {
-  "leading": [
-   "Aber"
-  ],
-  "boxes": [
-   "du → du@1,2/nom",
-   "Lena, → Lena,@1,3/nom"
-  ],
-  "connections": [
-   [
-    "heißt@1,2"
-   ],
-   [
-    "oder?"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #35 Ja, aber ich bin Lena Huber – das hier ist für Lena Hoffmann.": {
-  "leading": [
-   "Ja,",
-   "aber"
-  ],
-  "boxes": [
-   "ich → ich@2,2/nom",
-   "Lena Huber → Huber@1,3/nom",
-   "das → das@2,1/nom",
-   "Lena Hoffmann. → Hoffmann.@1,3/akk"
-  ],
-  "connections": [
-   [
-    "bin@2,2"
-   ],
-   [
-    "–"
-   ],
-   [
-    "hier",
-    "ist@2,1",
-    "für"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #36 Jetzt sind sie beide still.": {
-  "leading": [
-   "Jetzt",
-   "sind@2,3"
-  ],
-  "boxes": [
-   "sie beide → beide@2,3/nom"
-  ],
-  "connections": [
-   [
-    "still."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #37 Dann lachen sie beide.": {
-  "leading": [
-   "Dann",
-   "lachen@2,3"
-  ],
-  "boxes": [
-   "sie beide. → beide.@2,3/nom"
-  ],
-  "connections": []
- },
- "A1_story_neue_nachbarn.json #38 Wer ist Lena Hoffmann?, fragt Thomas.": {
-  "leading": [
-   "Wer",
-   "ist@1,3"
-  ],
-  "boxes": [
-   "Lena Hoffmann?, → Hoffmann?,@1,3/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "fragt@1,1"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #39 Ich weiß es nicht!, sagt Lena.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "es → es@2,1/akk",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "weiß@2,2"
-   ],
-   [
-    "nicht!,",
-    "sagt@1,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #40 Sie gehen zusammen zum Briefkasten im Flur.": {
-  "leading": [],
-  "boxes": [
-   "Sie → Sie@2,3/nom",
-   "Briefkasten → Briefkasten@1,1/dat",
-   "Flur. → Flur.@2,1/dat"
-  ],
-  "connections": [
-   [
-    "gehen@2,3",
-    "zusammen",
-    "zum"
-   ],
-   [
-    "im"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #41 Da steht es: L. Hoffmann, 2. OG – die Wohnung genau gegenüber von Thomas.": {
-  "leading": [
-   "Da",
-   "steht@2,1"
-  ],
-  "boxes": [
-   "es: → es:@2,1/nom",
-   "die Wohnung → Wohnung@1,3/nom",
-   "Thomas. → Thomas.@1,1/dat"
-  ],
-  "connections": [
-   [
-    "L.",
-    "Hoffmann,",
-    "2.",
-    "OG",
-    "–"
-   ],
-   [
-    "genau",
-    "gegenüber",
-    "von"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #42 Das ist Wohnung 7c, sagt Thomas, aber Frau Hoffmann ist nicht zu Hause.": {
-  "leading": [],
-  "boxes": [
-   "Das → Das@2,1/nom",
-   "Wohnung 7c, → 7c,@1,3/nom",
-   "Thomas, → Thomas,@1,1/nom",
-   "Frau Hoffmann → Hoffmann@1,3/nom",
-   "Hause. → Hause.@2,1/dat"
-  ],
-  "connections": [
-   [
-    "ist@2,1"
-   ],
-   [
-    "sagt@1,1"
-   ],
-   [
-    "aber"
-   ],
-   [
-    "ist@1,3",
-    "nicht",
-    "zu"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #43 Ich glaube, sie arbeitet bis sechs Uhr.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "sie → sie@1,3/nom"
-  ],
-  "connections": [
-   [
-    "glaube,@2,2"
-   ],
-   [
-    "arbeitet@1,3",
-    "bis",
-    "sechs",
-    "Uhr."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #44 Kein Problem, sagt Lena, das Paket kann bei mir warten.": {
-  "leading": [
-   "Kein",
-   "Problem,",
-   "sagt@1,3"
-  ],
-  "boxes": [
-   "Lena, → Lena,@1,3/nom",
-   "das Paket → Paket@2,1/nom",
-   "mir → mir@2,2/dat"
-  ],
-  "connections": [
-   [],
-   [
-    "kann@2,1",
-    "bei"
-   ],
-   [
-    "warten.@3,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #45 Thomas nickt.": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom"
-  ],
-  "connections": [
-   [
-    "nickt.@1,1"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #46 Dann sieht er das Regal im Zimmer – es steht noch mitten im Zimmer.": {
-  "leading": [
-   "Dann",
-   "sieht@1,1"
-  ],
-  "boxes": [
-   "er → er@1,1/nom",
-   "das Regal → Regal@2,1/akk",
-   "Zimmer → Zimmer@2,1/dat",
-   "es → es@2,1/nom",
-   "Zimmer. → Zimmer.@2,1/dat"
-  ],
-  "connections": [
-   [],
-   [
-    "im"
-   ],
-   [
-    "–"
-   ],
-   [
-    "steht@2,1",
-    "noch",
-    "mitten",
-    "im"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #47 Ist das neu?, fragt er.": {
-  "leading": [
-   "Ist@2,1"
-  ],
-  "boxes": [
-   "das → das@2,1/nom",
-   "er. → er.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "neu?,",
-    "fragt@1,1"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #48 Ja, sagt Lena, ich kann es nicht alleine an die Wand stellen – es ist zu schwer.": {
-  "leading": [
-   "Ja,",
-   "sagt@1,3"
-  ],
-  "boxes": [
-   "Lena, → Lena,@1,3/nom",
-   "ich → ich@2,2/nom",
-   "es → es@2,1/akk",
-   "die Wand → Wand@1,3/akk",
-   "es → es@2,1/nom"
-  ],
-  "connections": [
-   [],
-   [
-    "kann@2,2"
-   ],
-   [
-    "nicht",
-    "alleine",
-    "an"
-   ],
-   [
-    "stellen@3,3",
-    "–"
-   ],
-   [
-    "ist@2,1",
-    "zu",
-    "schwer."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #49 Thomas schaut das Regal an, dann die Wand, dann Lena.": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom",
-   "das Regal → Regal@2,1/akk",
-   "die Wand, → Wand,@1,3/akk",
-   "Lena. → Lena.@1,3/akk"
-  ],
-  "connections": [
-   [
-    "schaut@1,1"
-   ],
-   [
-    "an,",
-    "dann"
-   ],
-   [
-    "dann"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #50 Ich kann dir helfen – ich habe Zeit.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "dir → dir@1,2/dat",
-   "ich → ich@2,2/nom",
-   "Zeit. → Zeit.@1,3/akk"
-  ],
-  "connections": [
-   [
-    "kann@2,2"
-   ],
-   [
-    "helfen@3,3",
-    "–"
-   ],
-   [
-    "habe@2,2"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #51 Wirklich? Das ist sehr nett von dir!": {
-  "leading": [
-   "Wirklich?"
-  ],
-  "boxes": [
-   "Das → Das@2,1/nom",
-   "dir! → dir!@1,2/dat"
-  ],
-  "connections": [
-   [
-    "ist@2,1",
-    "sehr",
-    "nett",
-    "von"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #52 Thomas kommt herein.": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom"
-  ],
-  "connections": [
-   [
-    "kommt@1,1",
-    "herein."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #53 Zusammen tragen sie das Regal an die Wand – neben dem Fenster, links vom Sofa.": {
-  "leading": [
-   "Zusammen",
-   "tragen@2,3"
-  ],
-  "boxes": [
-   "sie → sie@2,3/nom",
-   "das Regal → Regal@2,1/akk",
-   "die Wand → Wand@1,3/akk",
-   "dem Fenster, → Fenster,@2,1/dat",
-   "Sofa. → Sofa.@2,1/dat"
-  ],
-  "connections": [
-   [],
-   [
-    "an"
-   ],
-   [
-    "–",
-    "neben"
-   ],
-   [
-    "links",
-    "vom"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #54 Es passt perfekt.": {
-  "leading": [],
-  "boxes": [
-   "Es → Es@2,1/nom"
-  ],
-  "connections": [
-   [
-    "passt@2,1",
-    "perfekt."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #55 Super!, sagt Lena.": {
-  "leading": [
-   "Super!,",
-   "sagt@1,3"
-  ],
-  "boxes": [
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": []
- },
- "A1_story_neue_nachbarn.json #56 Wohin kommen die Bücher?, fragt Thomas.": {
-  "leading": [
-   "Wohin",
-   "kommen@2,3"
-  ],
-  "boxes": [
-   "die Bücher?, → Bücher?,@2,3/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "fragt@1,1"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #57 Lena zeigt auf eine große Kiste auf dem Boden.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "eine große Kiste → Kiste@1,3/akk",
-   "dem Boden. → Boden.@1,1/dat"
-  ],
-  "connections": [
-   [
-    "zeigt@1,3",
-    "auf"
-   ],
-   [
-    "auf"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #58 Da drin – aber das mache ich später.": {
-  "leading": [
-   "Da",
-   "drin",
-   "–",
-   "aber"
-  ],
-  "boxes": [
-   "das → das@2,1/akk",
-   "ich → ich@2,2/nom"
-  ],
-  "connections": [
-   [
-    "mache@2,2"
-   ],
-   [
-    "später."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #59 Thomas schaut in die Kiste: Romane, Medizinbücher, Reiseführer.": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom",
-   "die Kiste: → Kiste:@1,3/akk",
-   "Romane, Medizinbücher, Reiseführer. → Reiseführer.@2,3/nom"
-  ],
-  "connections": [
-   [
-    "schaut@1,1",
-    "in"
-   ],
-   []
-  ]
- },
- "A1_story_neue_nachbarn.json #60 Medizinbücher?, sagt er überrascht.": {
-  "leading": [],
-  "boxes": [
-   "Medizinbücher?, → Medizinbücher?,@2,3/nom",
-   "er → er@1,1/nom"
-  ],
-  "connections": [
-   [
-    "sagt@1,1"
-   ],
-   [
-    "überrascht.@3,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #61 Ja, ich bin Ärztin – ich arbeite im Allgemeinen Krankenhaus Wien.": {
-  "leading": [
-   "Ja,"
-  ],
-  "boxes": [
-   "ich → ich@2,2/nom",
-   "Ärztin → Ärztin@1,3/nom",
-   "ich → ich@2,2/nom",
-   "Allgemeinen Krankenhaus Wien. → Wien.@2,1/dat"
-  ],
-  "connections": [
-   [
-    "bin@2,2"
-   ],
-   [
-    "–"
-   ],
-   [
-    "arbeite@2,2",
-    "im"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #62 Auf welcher Station?, fragt Thomas.": {
-  "leading": [
-   "Auf"
-  ],
-  "boxes": [
-   "welcher Station?, → Station?,@1,3/dat",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "fragt@1,1"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #63 Auf der Kinderstation, sagt Lena, ich mag meine Arbeit sehr.": {
-  "leading": [
-   "Auf"
-  ],
-  "boxes": [
-   "der Kinderstation, → Kinderstation,@1,3/dat",
-   "Lena, → Lena,@1,3/nom",
-   "ich → ich@2,2/nom",
-   "meine Arbeit → Arbeit@1,3/akk"
-  ],
-  "connections": [
-   [
-    "sagt@1,3"
-   ],
-   [],
-   [
-    "mag@2,2"
-   ],
-   [
-    "sehr."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #64 Das ist toll!, sagt Thomas.": {
-  "leading": [],
-  "boxes": [
-   "Das → Das@2,1/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "ist@2,1",
-    "toll!,",
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #65 Und du – was machst du beruflich?": {
-  "leading": [
-   "Und"
-  ],
-  "boxes": [
-   "du → du@1,2/nom",
-   "was → was@2,1/akk",
-   "du → du@1,2/nom"
-  ],
-  "connections": [
-   [
-    "–"
-   ],
-   [
-    "machst@1,2"
-   ],
-   [
-    "beruflich?"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #66 Ich bin Softwareentwickler, sagt Thomas, ich arbeite von zu Hause.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "Softwareentwickler, → Softwareentwickler,@1,1/nom",
-   "Thomas, → Thomas,@1,1/nom",
-   "ich → ich@2,2/nom",
-   "Hause. → Hause.@2,1/dat"
-  ],
-  "connections": [
-   [
-    "bin@2,2"
-   ],
-   [
-    "sagt@1,1"
-   ],
-   [],
-   [
-    "arbeite@2,2",
-    "von",
-    "zu"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #67 Aha – deshalb bist du immer zu Hause und nimmst alle Pakete an!, sagt Lena.": {
-  "leading": [
-   "Aha",
-   "–",
-   "deshalb",
-   "bist@1,2"
-  ],
-  "boxes": [
-   "du → du@1,2/nom",
-   "Hause → Hause@2,1/dat",
-   "alle Pakete → Pakete@2,3/akk",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "immer",
-    "zu"
-   ],
-   [
-    "und",
-    "nimmst@1,2"
-   ],
-   [
-    "an!,",
-    "sagt@1,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #68 Sie lacht, und Thomas lacht auch.": {
-  "leading": [],
-  "boxes": [
-   "Sie → Sie@1,3/nom",
-   "Thomas → Thomas@1,1/nom"
-  ],
-  "connections": [
-   [
-    "lacht,@1,3",
-    "und"
-   ],
-   [
-    "lacht@1,1",
-    "auch."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #69 Mein Büro ist da drüben, sagt Thomas, hinter dem großen Bildschirm.": {
-  "leading": [],
-  "boxes": [
-   "Mein Büro → Büro@2,1/nom",
-   "Thomas, → Thomas,@1,1/nom",
-   "dem großen Bildschirm. → Bildschirm.@1,1/dat"
-  ],
-  "connections": [
-   [
-    "ist@2,1",
-    "da",
-    "drüben,",
-    "sagt@1,1"
-   ],
-   [
-    "hinter"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #70 Möchtest du einen Kaffee?, fragt Lena.": {
-  "leading": [
-   "Möchtest@1,2"
-  ],
-  "boxes": [
-   "du → du@1,2/nom",
-   "einen Kaffee?, → Kaffee?,@1,1/akk",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [],
-   [
-    "fragt@1,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #71 Ich habe auch Kuchen – ich habe ihn heute Morgen gebacken.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "Kuchen → Kuchen@1,1/akk",
-   "ich → ich@2,2/nom",
-   "ihn → ihn@1,1/akk"
-  ],
-  "connections": [
-   [
-    "habe@2,2",
-    "auch"
-   ],
-   [
-    "–"
-   ],
-   [
-    "habe@2,2"
-   ],
-   [
-    "heute",
-    "Morgen",
-    "gebacken.@3,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #72 Gern!, sagt Thomas.": {
-  "leading": [
-   "Gern!,",
-   "sagt@1,1"
-  ],
-  "boxes": [
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": []
- },
- "A1_story_neue_nachbarn.json #73 Sie sitzen in der kleinen Küche.": {
-  "leading": [],
-  "boxes": [
-   "Sie → Sie@2,3/nom",
-   "der kleinen Küche. → Küche.@1,3/dat"
-  ],
-  "connections": [
-   [
-    "sitzen@2,3",
-    "in"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #74 Lena macht zwei Tassen Kaffee.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom",
-   "zwei → zwei@2,3/akk",
-   "Tassen → Tassen@2,3/akk",
-   "Kaffee. → Kaffee.@2,3/akk"
-  ],
-  "connections": [
-   [
-    "macht@1,3"
-   ],
-   [],
-   []
-  ]
- },
- "A1_story_neue_nachbarn.json #75 Thomas isst ein Stück Kuchen.": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom",
-   "ein Stück Kuchen. → Kuchen.@2,1/akk"
-  ],
-  "connections": [
-   [
-    "isst@1,1"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #76 Er ist wirklich gut, sagt Thomas.": {
-  "leading": [],
-  "boxes": [
-   "Er → Er@1,1/nom",
-   "Thomas. → Thomas.@1,1/nom"
-  ],
-  "connections": [
-   [
-    "ist@1,1",
-    "wirklich",
-    "gut,",
-    "sagt@1,1"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #77 Du lügst nicht?, fragt Lena.": {
-  "leading": [],
-  "boxes": [
-   "Du → Du@1,2/nom",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "lügst@1,2",
-    "nicht?,",
-    "fragt@1,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #78 Nein, wirklich – der Kuchen ist sehr gut.": {
-  "leading": [
-   "Nein,",
-   "wirklich",
-   "–"
-  ],
-  "boxes": [
-   "der Kuchen → Kuchen@1,1/nom"
-  ],
-  "connections": [
-   [
-    "ist@1,1",
-    "sehr",
-    "gut."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #79 Lena lacht.": {
-  "leading": [],
-  "boxes": [
-   "Lena → Lena@1,3/nom"
-  ],
-  "connections": [
-   [
-    "lacht.@1,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #80 Es ist das erste Mal, dass sie richtig mit ihrem Nachbarn spricht – nach drei Wochen.": {
-  "leading": [],
-  "boxes": [
-   "Es → Es@2,1/nom",
-   "das erste Mal, → Mal,@2,1/nom",
-   "sie → sie@1,3/nom",
-   "ihrem Nachbarn → Nachbarn@1,1/dat",
-   "Wochen. → Wochen.@2,3/dat"
-  ],
-  "connections": [
-   [
-    "ist@2,1"
-   ],
-   [
-    "dass"
-   ],
-   [
-    "richtig",
-    "mit"
-   ],
-   [
-    "spricht@1,3",
-    "–",
-    "nach",
-    "drei"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #81 Thomas trinkt seinen Kaffee.": {
-  "leading": [],
-  "boxes": [
-   "Thomas → Thomas@1,1/nom",
-   "seinen Kaffee. → Kaffee.@1,1/akk"
-  ],
-  "connections": [
-   [
-    "trinkt@1,1"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #82 Darf ich fragen – wie lange dauert das Studium als Ärztin?": {
-  "leading": [
-   "Darf@2,2"
-  ],
-  "boxes": [
-   "ich → ich@2,2/nom",
-   "das Studium → Studium@2,1/nom"
-  ],
-  "connections": [
-   [
-    "fragen@3,3",
-    "–",
-    "wie",
-    "lange",
-    "dauert@2,1"
-   ],
-   [
-    "als",
-    "Ärztin?"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #83 Sechs Jahre, sagt Lena, und danach noch die Facharztausbildung.": {
-  "leading": [
-   "Sechs",
-   "Jahre,",
-   "sagt@1,3"
-  ],
-  "boxes": [
-   "Lena, → Lena,@1,3/nom",
-   "die Facharztausbildung. → Facharztausbildung.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "und",
-    "danach",
-    "noch"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #84 Das ist sehr lang!": {
-  "leading": [],
-  "boxes": [
-   "Das → Das@2,1/nom"
-  ],
-  "connections": [
-   [
-    "ist@2,1",
-    "sehr",
-    "lang!"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #85 Ja, sagt Lena, aber ich finde es interessant.": {
-  "leading": [
-   "Ja,",
-   "sagt@1,3"
-  ],
-  "boxes": [
-   "Lena, → Lena,@1,3/nom",
-   "ich → ich@2,2/nom",
-   "es → es@2,1/akk"
-  ],
-  "connections": [
-   [
-    "aber"
-   ],
-   [
-    "finde@2,2"
-   ],
-   [
-    "interessant."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #86 Und du – wie lange lernt man Programmieren?": {
-  "leading": [
-   "Und"
-  ],
-  "boxes": [
-   "du → du@1,2/nom",
-   "man → man@1,1/nom",
-   "Programmieren? → Programmieren?@2,1/akk"
-  ],
-  "connections": [
-   [
-    "–",
-    "wie",
-    "lange",
-    "lernt@1,1"
-   ],
-   []
-  ]
- },
- "A1_story_neue_nachbarn.json #87 Ich habe vier Jahre studiert, sagt Thomas, aber ich lerne jeden Tag noch etwas Neues.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "Thomas, → Thomas,@1,1/nom",
-   "ich → ich@2,2/nom",
-   "jeden Tag → Tag@1,1/akk",
-   "etwas Neues. → Neues.@2,1/akk"
-  ],
-  "connections": [
-   [
-    "habe@2,2",
-    "vier",
-    "Jahre",
-    "studiert,@3,3",
-    "sagt@1,1"
-   ],
-   [
-    "aber"
-   ],
-   [
-    "lerne@2,2"
-   ],
-   [
-    "noch"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #88 Um halb fünf klopft es an der Tür.": {
-  "leading": [
-   "Um",
-   "halb",
-   "fünf",
-   "klopft@2,1"
-  ],
-  "boxes": [
-   "es → es@2,1/nom",
-   "der Tür. → Tür.@1,3/dat"
-  ],
-  "connections": [
-   [
-    "an"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #89 Es ist eine Frau mit einem freundlichen Gesicht.": {
-  "leading": [],
-  "boxes": [
-   "Es → Es@2,1/nom",
-   "eine Frau → Frau@1,3/nom",
-   "einem freundlichen Gesicht. → Gesicht.@2,1/dat"
-  ],
-  "connections": [
-   [
-    "ist@2,1"
-   ],
-   [
-    "mit"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #90 Guten Tag – ich bin Elisabeth Hoffmann, von 7c.": {
-  "leading": [
-   "Guten",
-   "Tag",
-   "–"
-  ],
-  "boxes": [
-   "ich → ich@2,2/nom",
-   "Elisabeth Hoffmann, → Hoffmann,@1,3/nom"
-  ],
-  "connections": [
-   [
-    "bin@2,2"
-   ],
-   [
-    "von",
-    "7c."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #91 Ich glaube, ein Paket von mir ist hier?": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "ein Paket → Paket@2,1/akk",
-   "mir → mir@2,2/dat"
-  ],
-  "connections": [
-   [
-    "glaube,@2,2"
-   ],
-   [
-    "von"
-   ],
-   [
-    "ist@2,1",
-    "hier?"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #92 Ja, natürlich!, sagt Lena, und sie gibt ihr das Paket.": {
-  "leading": [
-   "Ja,",
-   "natürlich!,",
-   "sagt@1,3"
-  ],
-  "boxes": [
-   "Lena, → Lena,@1,3/nom",
-   "sie → sie@1,3/nom",
-   "ihr → ihr@1,3/dat",
-   "das Paket. → Paket.@2,1/akk"
-  ],
-  "connections": [
-   [
-    "und"
-   ],
-   [
-    "gibt@1,3"
-   ],
-   []
-  ]
- },
- "A1_story_neue_nachbarn.json #93 Elisabeth lächelt.": {
-  "leading": [],
-  "boxes": [
-   "Elisabeth → Elisabeth@1,3/nom"
-  ],
-  "connections": [
-   [
-    "lächelt.@1,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #94 Danke! Ich wohne seit zwei Jahren hier und kenne meine Nachbarn immer noch nicht.": {
-  "leading": [
-   "Danke!"
-  ],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "meine Nachbarn → Nachbarn@2,3/akk"
-  ],
-  "connections": [
-   [
-    "wohne@2,2",
-    "seit",
-    "zwei",
-    "Jahren",
-    "hier",
-    "und",
-    "kenne@2,2"
-   ],
-   [
-    "immer",
-    "noch",
-    "nicht."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #95 Ich heiße Elisabeth.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "Elisabeth. → Elisabeth.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "heiße@2,2"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #96 Ich bin Lena, und das ist Thomas, sagt Lena.": {
-  "leading": [],
-  "boxes": [
-   "Ich → Ich@2,2/nom",
-   "Lena, → Lena,@1,3/nom",
-   "das → das@2,1/nom",
-   "Thomas, → Thomas,@1,1/nom",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "bin@2,2"
-   ],
-   [
-    "und"
-   ],
-   [
-    "ist@2,1"
-   ],
-   [
-    "sagt@1,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #97 Möchten Sie auch Kaffee – und Kuchen?, fragt Lena.": {
-  "leading": [
-   "Möchten@2,3"
-  ],
-  "boxes": [
-   "Sie → Sie@2,3/nom",
-   "Kaffee → Kaffee@1,1/akk",
-   "Kuchen?, → Kuchen?,@1,1/akk",
-   "Lena. → Lena.@1,3/nom"
-  ],
-  "connections": [
-   [
-    "auch"
-   ],
-   [
-    "–",
-    "und"
-   ],
-   [
-    "fragt@1,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #98 Elisabeth schaut auf ihre Uhr: Es ist 16:47.": {
-  "leading": [],
-  "boxes": [
-   "Elisabeth → Elisabeth@1,3/nom",
-   "ihre Uhr: → Uhr:@1,3/akk",
-   "Es → Es@2,1/nom"
-  ],
-  "connections": [
-   [
-    "schaut@1,3",
-    "auf"
-   ],
-   [],
-   [
-    "ist@2,1",
-    "16:47."
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #99 Sie lacht.": {
-  "leading": [],
-  "boxes": [
-   "Sie → Sie@1,3/nom"
-  ],
-  "connections": [
-   [
-    "lacht.@1,3"
-   ]
-  ]
- },
- "A1_story_neue_nachbarn.json #100 Warum nicht?": {
-  "leading": [
-   "Warum",
-   "nicht?"
-  ],
-  "boxes": [],
-  "connections": []
- },
- "A1_story_neue_nachbarn.json #101 Und so sitzen drei Nachbarn zusammen – zum ersten Mal.": {
-  "leading": [
-   "Und",
-   "so",
-   "sitzen@2,3"
-  ],
-  "boxes": [
-   "drei → drei@2,3/nom",
-   "Nachbarn → Nachbarn@2,3/nom",
-   "ersten Mal. → Mal.@2,1/dat"
-  ],
-  "connections": [
-   [],
-   [
-    "zusammen",
-    "–",
-    "zum"
    ]
   ]
  },

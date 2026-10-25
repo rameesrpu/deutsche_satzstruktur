@@ -9,6 +9,7 @@ import { GameMode } from './gamemode.js';
 import { progressStore, sentenceKey, isMastered } from './progressStore.js';
 import { Renderer } from './renderer.js';
 import { UIController } from './ui.js';
+import { chapterStartText, hideStoryCard } from './storyNarration.js';
 
 /**
  * Main Application
@@ -62,14 +63,17 @@ class DeutschApp {
             getCurrentSentenceId: () => this.sentenceManager.currentSentenceId,
             onLibraryLoad:      (level, category, data) => this.handleLibraryLoad(level, category, data),
             isMastered:         (level, category, text) =>
-                isMastered(progressStore.getSentence(sentenceKey({ level, category, text })))
+                isMastered(progressStore.getSentence(sentenceKey({ level, category, text }))),
+            hasPlayed:          (level, category, text) =>
+                !!progressStore.getSentence(sentenceKey({ level, category, text }))
         });
         this.gameMode = new GameMode(this.svg, this.wordManager, this.gridViewModel, {
             sentenceManager:    this.sentenceManager,
             levelSelector:      this.levelSelector,
             redraw:             () => this.redrawAll(),
             setView:            (view) => { this.currentView = view; },
-            updateSentenceList: () => this.updateSentenceList()
+            updateSentenceList: () => this.updateSentenceList(),
+            startChapter:       (level, category, opts) => this.startChapter(level, category, opts)
         });
         this.renderer = new Renderer(this.svg, this.wordManager);
         this.uiController = new UIController(this.wordManager, () => this.redrawAll(), this.gridConfig);
@@ -198,7 +202,7 @@ class DeutschApp {
         const gameModeBtn = document.getElementById('game-mode-btn');
 
         if (gameModeBtn) {
-            gameModeBtn.addEventListener('click', () => {
+            gameModeBtn.addEventListener('click', async () => {
                 if (this.gameMode.isActive) {
                     // Exit game mode — stop() resets score for next fresh session
                     this.currentView = 'grid';
@@ -207,6 +211,8 @@ class DeutschApp {
                     gameModeBtn.title = 'Start Game Mode';
                     this.redrawAll();
                 } else {
+                    await this.prepareGameSentence();
+
                     // Check if there's a current sentence with words
                     if (!this.sentenceManager.currentSentenceId) {
                         alert('Please add or select a sentence first before starting the game!');
@@ -954,7 +960,72 @@ class DeutschApp {
      */
     loadSentences() {
         this.sentenceManager.load();
+        // Drop stored library sentences whose category no longer exists (e.g. removed stories)
+        this.sentenceManager.sentences = this.sentenceManager.sentences.filter(s =>
+            s.source !== 'library' || !!(LEVEL_CONTENT[s.level] && LEVEL_CONTENT[s.level].categories[s.category]));
+        if (this.sentenceManager.currentSentenceId && !this.sentenceManager.getCurrentSentence()) {
+            this.sentenceManager.newBlankSentence();
+        }
         this.updateSentenceList();
+    }
+
+    /**
+     * Before starting the game with a library category selected: in a story
+     * chapter, load where to (re)start it; elsewhere load the first sentence
+     * if none is loaded yet.
+     */
+    async prepareGameSentence() {
+        const { currentLevel: level, currentCategory: category } = this.levelSelector;
+        if (!level || !category || level === 'custom') return;
+        const data = this.levelSelector.getLoadedData(level, category);
+        if (!data || data.sentences.length === 0) return;
+        const cat = LEVEL_CONTENT[level].categories[category];
+        const current = this.sentenceManager.getCurrentSentence();
+        let text = null;
+        if (cat && cat.story && cat.story.kind === 'chapter') {
+            const inChapter = current && current.level === level && current.category === category;
+            text = chapterStartText(data.sentences, inChapter ? current.text : null,
+                t => !!progressStore.getSentence(sentenceKey({ level, category, text: t })));
+        } else if (!current) {
+            text = data.sentences[0];
+        }
+        if (text && !(current && current.level === level && current.category === category && current.text === text)) {
+            await this.loadLibrarySentence(level, category, text);
+        }
+    }
+
+    /**
+     * Switch to a story chapter (or drill) and play it; used by the chapter-end card.
+     * @param {{fromStart?: boolean}} [opts]  fromStart: replay a chapter from its first sentence
+     */
+    async startChapter(level, category, { fromStart = false } = {}) {
+        hideStoryCard();
+        await this.levelSelector.selectCategory(level, category);
+        const data = this.levelSelector.getLoadedData(level, category);
+        if (!data || data.sentences.length === 0) return;
+        const cat = LEVEL_CONTENT[level].categories[category];
+        const isChapter = cat && cat.story && cat.story.kind === 'chapter';
+        const text = fromStart || !isChapter ? data.sentences[0]
+            : chapterStartText(data.sentences, null,
+                t => !!progressStore.getSentence(sentenceKey({ level, category, text: t })));
+        await this.loadLibrarySentence(level, category, text);
+
+        const gameModeBtn = document.getElementById('game-mode-btn');
+        if (this.gameMode.isActive) {
+            if (this.gameMode.isPaused) this.gameMode.resume();
+            this.currentView = 'game';
+            this.gameMode.startNewSentence();
+            this.redrawAll();
+            this.gameMode.showStoryIntro();
+        } else {
+            this.currentView = 'game';
+            this.gameMode.start();
+            if (gameModeBtn) {
+                gameModeBtn.textContent = '✕';
+                gameModeBtn.title = 'Exit Game Mode';
+            }
+            this.redrawAll();
+        }
     }
 
     /**

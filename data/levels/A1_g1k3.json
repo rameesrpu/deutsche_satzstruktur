@@ -1,0 +1,108 @@
+{
+  "level": "A1",
+  "category": "1.3 Mein Zimmer",
+  "story": 1,
+  "storyTitle": "Ankunft",
+  "chapter": "1.3",
+  "title": "Mein Zimmer",
+  "skill": "A1.artikel",
+  "beats": [
+    {
+      "read": "Am Morgen scheint die Sonne. Ayisha schaut ihr Zimmer an."
+    },
+    {
+      "play": "Das Zimmer ist klein."
+    },
+    {
+      "play": "Aber das Fenster ist groß."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Hier ist ein Bett."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Und hier ist ein Tisch."
+    },
+    {
+      "play": "Der Schrank ist sehr alt."
+    },
+    {
+      "read": "Der Schrank ist riesig. Dunkles Holz. Und er riecht ein bisschen komisch."
+    },
+    {
+      "play": "Die Lampe ist kaputt."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Kein Problem. Ich bin Ärztin, keine Elektrikerin. Aber …"
+    },
+    {
+      "read": "Sie dreht. Sie drückt. Klick! Licht!"
+    },
+    {
+      "play": "Die Lampe funktioniert wieder!"
+    },
+    {
+      "read": "Dann geht sie in die Küche."
+    },
+    {
+      "play": "Die Küche ist sehr chaotisch."
+    },
+    {
+      "play": "Da sind viele Tassen."
+    },
+    {
+      "play": "Die Teller sind schmutzig."
+    },
+    {
+      "speaker": "Lea",
+      "read": "Das ist Max. Immer Max!"
+    },
+    {
+      "speaker": "Max",
+      "read": "Guten Morgen! Ich habe Frühstück!"
+    },
+    {
+      "speaker": "Max",
+      "play": "Die Brezeln sind ganz frisch!"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Was ist eine Brezel?"
+    },
+    {
+      "read": "Max hält eine Brezel hoch. Wie ein Pokal."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Bist du hungrig?"
+    },
+    {
+      "read": "Ayisha probiert. Salzig. Weich. Lecker! Aber Biryani ist besser. Natürlich."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ihr seid lustig!"
+    },
+    {
+      "read": "Am Abend schaut Ayisha ihre Fotos vom Flughafen an. Auf einem Foto, im Hintergrund: der Mann vom Automaten. Wer ist er?"
+    }
+  ],
+  "sentences": [
+    "Das Zimmer ist klein.",
+    "Aber das Fenster ist groß.",
+    "Hier ist ein Bett.",
+    "Und hier ist ein Tisch.",
+    "Der Schrank ist sehr alt.",
+    "Die Lampe ist kaputt.",
+    "Die Lampe funktioniert wieder!",
+    "Die Küche ist sehr chaotisch.",
+    "Da sind viele Tassen.",
+    "Die Teller sind schmutzig.",
+    "Die Brezeln sind ganz frisch!",
+    "Was ist eine Brezel?",
+    "Bist du hungrig?",
+    "Ihr seid lustig!"
+  ]
+}

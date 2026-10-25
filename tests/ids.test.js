@@ -11,11 +11,13 @@ export function runIdTests() {
     test('bulk-loading every library category back to back gives unique ids', () => {
         globalThis.localStorage = makeLocalStorage();
         const sm = new SentenceManager(null);
+        let expected = 0;
         for (const file of listDir('data/library')) {
             const data = JSON.parse(readText(`data/library/${file}`));
             sm.bulkLoadLibraryCategory(data.level, file, data);
+            expected += data.sentences.filter(s => s.words).length;
         }
-        assertEqual(sm.sentences.length, 782, 'sentence count');
+        assertEqual(sm.sentences.length, expected, 'sentence count');
         assertEqual(allUnique(sentenceIds(sm)), true, 'sentence ids unique');
         assertEqual(allUnique(wordIds(sm)), true, 'word ids unique');
     });

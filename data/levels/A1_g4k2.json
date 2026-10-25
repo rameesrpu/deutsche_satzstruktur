@@ -1,0 +1,144 @@
+{
+  "level": "A1",
+  "category": "4.2 Der Kerala Store",
+  "story": 4,
+  "storyTitle": "Biryani gesucht",
+  "chapter": "4.2",
+  "title": "Der Kerala Store",
+  "skill": "A1.trennbar",
+  "beats": [
+    {
+      "read": "Samstag. Ayisha fährt nach Bad Cannstatt. Allein. Mit einer Mission."
+    },
+    {
+      "play": "Ayisha kauft heute groß ein."
+    },
+    {
+      "read": "Der Laden ist klein. Aber er riecht wie zu Hause: Kardamom, Zimt, Kokos, Curryblätter."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Hier sieht alles gut aus!"
+    },
+    {
+      "read": "Dann sieht sie ihn: den letzten Sack Biryani-Reis. Ganz oben im Regal."
+    },
+    {
+      "read": "Sie streckt die Hand aus. Und von der anderen Seite: noch eine Hand."
+    },
+    {
+      "read": "Ein Mann. Kopfhörer um den Hals. Ein bekanntes Lächeln. Irgendwo spielt eine Geige. (Nur in Ayishas Kopf.)"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Sie sind der Mann vom Flughafen!"
+    },
+    {
+      "speaker": "Der Mann",
+      "play": "Und Sie sind die Frau vom Automaten!"
+    },
+    {
+      "read": "Beide lachen. Dann schauen beide auf den Reis. Der letzte Sack."
+    },
+    {
+      "speaker": "Der Mann",
+      "play": "Sie können den Reis mitnehmen."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Nein, das sieht nicht fair aus."
+    },
+    {
+      "read": "Da klingelt sein Handy. Er geht ran."
+    },
+    {
+      "speaker": "Der Mann",
+      "read": "Haa, Umma … njan kadayil aanu …"
+    },
+    {
+      "read": "Ayisha starrt ihn an. Diese Wörter kennt sie. Das ist ihre Sprache!"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Sie sprechen Malayalam!"
+    },
+    {
+      "speaker": "Der Mann",
+      "read": "Ja. Aber mit Ihnen spreche ich Deutsch. Nur Deutsch!"
+    },
+    {
+      "speaker": "Der Mann",
+      "play": "Sie lernen so schneller."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Unglaublich. Am Flughafen … Sie haben einfach Deutsch gesprochen!"
+    },
+    {
+      "speaker": "Der Mann",
+      "play": "Ich heiße übrigens Faris."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich bin Ayisha."
+    },
+    {
+      "speaker": "Faris",
+      "read": "Wir können „du“ sagen, oder? Hier in Deutschland ist das normal."
+    },
+    {
+      "speaker": "Faris",
+      "play": "Kommst du auch aus Kerala?"
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Ja, aus Payyannur. Und ich bin Cricket-Profi. Fast."
+    },
+    {
+      "speaker": "Faris",
+      "play": "Das glaube ich nicht!"
+    },
+    {
+      "read": "Am Ende teilen sie den Reis. Halb und halb. Ganz fair."
+    },
+    {
+      "play": "Der Verkäufer packt den Reis ein."
+    },
+    {
+      "speaker": "Faris",
+      "read": "Morgen spielen wir Cricket im Park. Zwanzig Leute aus Kerala. Alle sind willkommen!"
+    },
+    {
+      "speaker": "Faris",
+      "play": "Kommst du am Sonntag mit?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich komme gern mit!"
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Und ich bringe Lea und Max mit."
+    },
+    {
+      "read": "Erst in der Straßenbahn merkt sie es: Sie hat seine Nummer nicht. Er hat ihre auch nicht. Nur einen halben Sack Reis."
+    }
+  ],
+  "sentences": [
+    "Ayisha kauft heute groß ein.",
+    "Hier sieht alles gut aus!",
+    "Sie sind der Mann vom Flughafen!",
+    "Und Sie sind die Frau vom Automaten!",
+    "Sie können den Reis mitnehmen.",
+    "Nein, das sieht nicht fair aus.",
+    "Sie sprechen Malayalam!",
+    "Sie lernen so schneller.",
+    "Ich heiße übrigens Faris.",
+    "Ich bin Ayisha.",
+    "Kommst du auch aus Kerala?",
+    "Das glaube ich nicht!",
+    "Der Verkäufer packt den Reis ein.",
+    "Kommst du am Sonntag mit?",
+    "Ich komme gern mit!"
+  ]
+}

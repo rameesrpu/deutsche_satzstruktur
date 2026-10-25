@@ -1,3 +1,5 @@
+import { chapterOrder } from './levelContent.js';
+
 export class LevelSelector {
     constructor(levelContent, callbacks) {
         this.levelContent = levelContent;
@@ -9,9 +11,12 @@ export class LevelSelector {
         this.getCurrentSentenceId = callbacks.getCurrentSentenceId;
         this.onLibraryLoad = callbacks.onLibraryLoad || null;
         this.isMastered = callbacks.isMastered || (() => false);
+        this.hasPlayed = callbacks.hasPlayed || (() => false);
 
-        // `${level}/${category}` → Promise<string[]> of that category's sentence texts
-        this.textsCache = new Map();
+        // `${level}/${category}` → Promise of that category's data/levels file
+        this.dataCache = new Map();
+        // Same files once loaded (sync access for story chapters: beats, texts)
+        this.loadedData = new Map();
 
         this.currentLevel = '';
         this.currentCategory = '';
@@ -55,11 +60,20 @@ export class LevelSelector {
         const levelData = this.levelContent[level];
         if (!levelData) return;
 
+        // Story chapters grouped per story, then the grammar categories
+        const groups = new Map();
         Object.entries(levelData.categories).forEach(([key, cat]) => {
+            const groupLabel = cat.story ? `Geschichte ${cat.story.storyNo}: ${cat.story.storyTitle}` : 'Grammatik';
+            if (!groups.has(groupLabel)) {
+                const group = document.createElement('optgroup');
+                group.label = groupLabel;
+                this.categorySelect.appendChild(group);
+                groups.set(groupLabel, group);
+            }
             const option = document.createElement('option');
             option.value = key;
             option.textContent = cat.label;
-            this.categorySelect.appendChild(option);
+            groups.get(groupLabel).appendChild(option);
         });
 
         this.categorySelect.disabled = false;
@@ -67,23 +81,60 @@ export class LevelSelector {
     }
 
     /**
-     * Sentence texts of a category (from its data/levels file), fetched once.
-     * @returns {Promise<string[]>}
+     * A category's data/levels file (sentence texts; story chapters also carry beats), fetched once.
+     * @returns {Promise<Object>}
      */
-    loadCategoryTexts(level, category) {
+    loadCategoryData(level, category) {
         const key = `${level}/${category}`;
-        if (!this.textsCache.has(key)) {
+        if (!this.dataCache.has(key)) {
             const catData = this.levelContent[level].categories[category];
             const promise = fetch(catData.file)
                 .then(r => {
                     if (!r.ok) throw new Error(`HTTP ${r.status}`);
                     return r.json();
                 })
-                .then(data => (data.sentences || []).map(t => t.trim()));
-            promise.catch(() => this.textsCache.delete(key)); // retry on next use
-            this.textsCache.set(key, promise);
+                .then(data => {
+                    data.sentences = (data.sentences || []).map(t => t.trim());
+                    this.loadedData.set(key, data);
+                    return data;
+                });
+            promise.catch(() => this.dataCache.delete(key)); // retry on next use
+            this.dataCache.set(key, promise);
         }
-        return this.textsCache.get(key);
+        return this.dataCache.get(key);
+    }
+
+    /**
+     * Sentence texts of a category (from its data/levels file), fetched once.
+     * @returns {Promise<string[]>}
+     */
+    loadCategoryTexts(level, category) {
+        return this.loadCategoryData(level, category).then(data => data.sentences);
+    }
+
+    /** The category's data/levels file if already loaded, else null. */
+    getLoadedData(level, category) {
+        return this.loadedData.get(`${level}/${category}`) || null;
+    }
+
+    /** A story chapter is complete once every play sentence has been played. */
+    isChapterComplete(level, chapterKey) {
+        const data = this.getLoadedData(level, chapterKey);
+        return !!data && data.sentences.length > 0 &&
+            data.sentences.every(t => this.hasPlayed(level, chapterKey, t));
+    }
+
+    /**
+     * Story chapters unlock in order: the first is always open, each next one
+     * once the previous chapter is complete. Non-story categories are always open.
+     * Needs the previous chapter's file loaded (see updateCategoryMastery).
+     */
+    isUnlocked(level, category) {
+        const cat = this.levelContent[level] && this.levelContent[level].categories[category];
+        if (!cat || !cat.story) return true;
+        const order = chapterOrder(level);
+        const idx = order.indexOf(cat.story.chapterKey);
+        return idx <= 0 || this.isChapterComplete(level, order[idx - 1]);
     }
 
     /** @returns {{mastered: number, total: number}} */
@@ -92,23 +143,44 @@ export class LevelSelector {
         return { mastered, total: texts.length };
     }
 
-    /** Append "mastered/total" to each category option of the current level. */
+    /**
+     * Append "mastered/total" to each category option of the current level; lock
+     * story chapters (and their drills) whose previous chapter isn't complete.
+     */
     async updateCategoryMastery() {
         const level = this.currentLevel;
         const levelData = this.levelContent[level];
         if (!levelData) return;
-        await Promise.all(Array.from(this.categorySelect.options).map(async option => {
+        const options = Array.from(this.categorySelect.options).filter(o => levelData.categories[o.value]);
+        const texts = await Promise.all(options.map(o =>
+            this.loadCategoryTexts(level, o.value).catch(() => null)));
+        if (this.currentLevel !== level) return;
+        options.forEach((option, i) => {
             const cat = levelData.categories[option.value];
-            if (!cat) return;
-            try {
-                const texts = await this.loadCategoryTexts(level, option.value);
-                if (this.currentLevel !== level) return;
-                const { mastered, total } = this.countMastered(level, option.value, texts);
-                option.textContent = `${cat.label} (${mastered}/${total})`;
-            } catch (e) {
+            if (!texts[i]) {
                 option.textContent = cat.label;
+                return;
             }
-        }));
+            const { mastered, total } = this.countMastered(level, option.value, texts[i]);
+            const unlocked = this.isUnlocked(level, option.value);
+            const done = cat.story && cat.story.kind === 'chapter' && this.isChapterComplete(level, option.value);
+            const prefix = !unlocked ? '🔒 ' : done ? '✓ ' : '';
+            option.disabled = !unlocked;
+            option.textContent = `${prefix}${cat.label} (${mastered}/${total})`;
+        });
+    }
+
+    /**
+     * Select a category programmatically (e.g. "next chapter") and load it.
+     * @returns {Promise<void>}
+     */
+    async selectCategory(level, category) {
+        if (this.levelSelect.value !== level) {
+            this.levelSelect.value = level;
+            this.handleLevelChange();
+        }
+        this.categorySelect.value = category;
+        await this.handleCategoryChange();
     }
 
     async handleCategoryChange() {

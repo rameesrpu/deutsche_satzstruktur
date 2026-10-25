@@ -1,173 +1,156 @@
-# Story Bible — Deutsch Graphic Project
+# Story Bible — "Ein Zuhause in Stuttgart"
 
-A connected story universe across A1, A2, and B1 levels.
-Setting: Vienna, Austria. Time span: roughly one year (Autumn → following Summer).
-Tone: warm, funny, everyday life — no dark themes.
+> **Audience**: the owner and AI agents writing story content.
+> Grammar per chapter, beat format and writing rules: [CURRICULUM.md](CURRICULUM.md).
+> Replaces the Vienna story universe (Thomas/Lena), 2026-10-25.
+
+A doctor from Kerala moves to Stuttgart, learns German, works towards her Approbation,
+finds friends, a home, an old mystery, and someone special.
+**Tone:** warm everyday humour, a mystery that runs through every level, a slow and respectful
+romance, and small medical cases from A2 on.
+**Content rule:** halal throughout. No alcohol, no pork, no dating alone, no physical romance.
+Meetings happen in groups, in public, or with family involved.
 
 ---
 
 ## Characters
 
-### Core
+### Dr. Ayisha Rahman (28), protagonist
+From **Payyannur, Kerala**. Mother tongue Malayalam. MBBS from Ernakulam Medical College; worked in a
+Taluk hospital. Wants to specialise in **Allgemeinmedizin / Innere Medizin**, maybe **Dermatologie**
+(still undecided; this can be a running question).
+- Muslim, a little religious; Eid is the highlight of her year.
+- Food explorer: biryani, mandi, loaded fries, chocolate. She rates every biryani in Stuttgart
+  ("Sieben von zehn.").
+- Cooks wonderfully, **but never when somebody asks her to**. She cooks when she decides to.
+- Loves fashion and dresses, mountains, exploring new places, animals, chickens and gardening.
+- Running joke: she insists she *would have been a professional cricketer*. Nobody fully believes her.
+- Loves **Bollywood songs** and hums them all the time, but doesn't watch films.
+- Languages: Malayalam, English, **Hindi** (speaks it well), some **Arabic** (reads the Qur'an,
+  understands a little). Both become useful: Hindi for an Indian tourist at A2, Arabic for a patient at B1.
 
-**Thomas Berger** (35)
-Softwareentwickler. Works from home. Lives at Mozartgasse 7b, 2nd floor.
-Charming, energetic, and present — he pulls people toward him without trying. Funny in a natural, unforced way.
-Not much interested in screens or media outside of work; he'd rather be doing something real. Loves swimming, badminton, Kicker, cooking, and trying new things. If there's a physical challenge, he steps up.
-Occasionally second-guesses himself for a moment, but moves on quickly — it barely shows. Deeply cares about the people around him. Constantly working on himself: reading, reflecting, staying open. Takes genuine pleasure in growth.
+### Faris Ahmed (31), the love interest
+Software engineer at a (fictional) Stuttgart tech company, **Neckarsoft**. From Kerala, Muslim.
+Has lived in Stuttgart for five years. Hardworking and charming; helpful, a bit nerdy,
+terrible cook, loves her food.
+- A little less religious than Ayisha, but follows most of it (prays, fasts, eats halal).
+- Loves films and TV shows (mostly English), and some anime. Quotes them constantly; Ayisha
+  hasn't seen any of them. She answers with Bollywood song lines.
+- Mother tongue **Malayalam**, like Ayisha. They could speak Malayalam together, which is exactly
+  why "Nur Deutsch!" is funny (and Malayalam slips out when they argue or get excited).
+- Speaks only a little Hindi, so her song lines go over his head (running joke, both ways).
+- Plays racquet sports: badminton, tennis, squash. A cricket vs. badminton rivalry with Ayisha.
+- Insists on **"Nur Deutsch!"**: they speak German so she learns faster. This is why all their
+  dialogue is in German, and it's a joke between them.
+- Doubts her cricket claims, out loud.
+- Is quietly building an app that helps people learn German (a small wink).
 
-**Lena Huber** (30)
-Ärztin, Kinderstation at AKH Wien. Lives at Mozartgasse 7a, 2nd floor (right next to Thomas).
-Direct, confident, and sharp — she says exactly what she thinks, sometimes bluntly, but always with warmth underneath. Funny without meaning to be mean.
-Deeply committed to her work and her people. Strong family values. Likes to dress well and takes quiet pride in it.
-An excellent cook who seeks out authentic food and real experiences — she'd rather find a hidden local restaurant than go somewhere famous. Loves travelling, trying new things, gardening, and keeps a small amount of poultry. Smart in a grounded, practical way.
+### The WG and the house (Stuttgart-Süd, Möhringer Straße)
+- **Lea Wagner (23)**: WG flatmate, nursing trainee (*Pflege-Azubi*). Cheerful, chaotic, explains
+  the German hospital from below. Later a colleague.
+- **Max Brenner (26)**: WG flatmate, baker's apprentice. Gets up at 3 a.m., brings Brezeln, and
+  avoids the Kehrwoche at all costs.
+- **Frau Gertrud Schäfer (67)**: landlady, lives on the ground floor. Strict Swabian: Kehrwoche,
+  Mülltrennung, Sonntagsruhe. Has **chickens in the garden**, which makes Ayisha very happy.
+  Soft heart. Her mother rented rooms to nurses in the 1970s (important for the mystery).
 
-### Supporting
+### Others
+- **Dr. Petra Kühn (54)**: GP (*Hausärztin*) in Stuttgart-Süd. Ayisha's first German doctor (as a
+  patient), later her mentor for the Hospitation.
+- **Sister Mariamma Thomas (born 1950)**: the nurse in the old photo (see the mystery). From near
+  Payyannur. Christian, as most Kerala nurses in 1970s Germany were. Warm, funny, sharp.
+- **Klinikum am Neckar**: fictional hospital. Ayisha's Hospitation (A2) and first job (B1).
+- **St.-Lukas-Krankenhaus**: fictional hospital, closed in 1998. Where Mariamma worked.
+- Families in Kerala appear on **video calls**: Ayisha's Umma and Uppa, her little brother Rizwan
+  (cricket rival). Faris's mother appears later.
 
-**Elisabeth Hoffmann** (55)
-Retired school teacher. Lives at Mozartgasse 7c, 2nd floor (directly across from Thomas).
-The building's quiet center of gravity — knows everyone, misses nothing, judges no one.
-Drinks tea, not coffee. Brings cake without warning.
-
-**Marco Ricci** (33)
-Thomas's best friend since university. Half-Italian, half-Austrian.
-Runs a small café, *Caffè Marco*, a few streets away in the 6th district.
-Loud, generous, always has an opinion about food. Calls Thomas "Tommy" which Thomas hates.
-
-**Sarah Köhler** (31)
-Lena's colleague and closest friend. Works in Notaufnahme (emergency) at AKH Wien.
-Dry humor, very efficient, zero patience for nonsense. Loves hiking on weekends.
-
-**Herr Nowak** (68)
-The building's Hausmeister (caretaker). Lives on the ground floor.
-Appears grumpy. Is actually kind. Complains about everything, fixes everything.
-Has a cat named Bruno.
-
----
-
-## Story Arc Overview
-
-The stories follow a loose arc over roughly one year in Vienna.
-Each level = a season. Each story is self-contained but characters and events carry forward.
-
-```
-A1  (Herbst)    →  A2  (Winter / Frühling)  →  B1  (Sommer)
-Ankommen           Verwurzeln                    Wachsen
-```
-
----
-
-## Stories by Level
-
-### A1 — Herbst (Autumn): Ankommen
-
-| # | Title | Status | Main Characters | Focus |
-|---|-------|--------|-----------------|-------|
-| 1 | Neue Nachbarn | ✅ Written | Thomas, Lena, Elisabeth | Meeting the neighbors, the package mix-up |
-| 2 | Der Herbstmarkt | ⬜ Pending | Thomas, Lena, Marco, Elisabeth | First group outing, the Naschmarkt |
-
-**Arc note:** Lena has just moved in. Thomas and Lena go from strangers to friends. By the end of A1, they have a small group: Thomas, Lena, Elisabeth, and Marco.
+### Places (real)
+Flughafen Stuttgart, Hauptbahnhof, Schlossplatz, Königstraße, Markthalle, Wilhelma,
+Fernsehturm, Killesberg, Cannstatter Wasen (Frühlingsfest, without beer tents), Schwäbische Alb,
+VVS (S-Bahn, U-Bahn), Bürgerbüro, Stadtbibliothek, a mosque in Stuttgart (unnamed), an Indian grocery shop
+(fictional: **"Kerala Store"** in Bad Cannstatt).
 
 ---
 
-### A2 — Winter / Frühling (Winter / Spring): Verwurzeln
+## The mystery: the 1972 photo
 
-| # | Title | Status | Main Characters | Focus |
-|---|-------|--------|-----------------|-------|
-| 1 | Ein langer Samstag | ⬜ Pending | Thomas, Marco, Lena, Sarah | Recounting the week, routines, past events |
-| 2 | Der Wintermarkt | ⬜ Pending | Thomas, Lena, Elisabeth, Herr Nowak | Weihnachtsmarkt, childhood stories, comparisons |
-| 3 | Lenas Geburtstag | ⬜ Pending | Thomas, Marco, Lena, Sarah | Planning a surprise, instructions, future plans |
+In the 1960s and 70s, thousands of young nurses from Kerala came to West Germany. This is real
+history, and the thread is built on it.
 
-**Arc note:** Friendships deepen. Thomas and Lena have become a clear friend group. Herr Nowak joins the story. By the end of A2, everyone knows everyone.
-
----
-
-### B1 — Sommer (Summer): Wachsen
-
-| # | Title | Status | Main Characters | Focus |
-|---|-------|--------|-----------------|-------|
-| 1 | Was wäre wenn… | ⬜ Pending | Thomas, Marco, Lena, Sarah | Dreams and hypotheticals, Konjunktiv II |
-| 2 | Das Angebot | ⬜ Pending | Thomas, Lena, Elisabeth, Marco | Thomas gets a job offer from Berlin — what do they say? |
-| 3 | Ein Sommer in Wien | ⬜ Pending | All characters | Rooftop evening, reflections, warm closing story |
-
-**Arc note:** Characters face real decisions. Thomas's job offer creates gentle tension. The final story resolves warmly — he stays, or leaves but plans to return, or something equally satisfying. Open ending is fine.
+| Level | Clue |
+|---|---|
+| A1 (story 2) | Behind the old wardrobe in her room, Ayisha finds a **black-and-white photo**: a young Indian nurse in front of a hospital, on the back "Stuttgart, 1972" and a note in **Malayalam**: *"Here I have a home." — M.* |
+| A1 (story 5) | Dr. Kühn recognises the building: the old **St.-Lukas-Krankenhaus**, closed in 1998, and suggests the Stadtarchiv. |
+| A2 | Frau Schäfer remembers "die Schwestern aus Indien" who lived in the house when she was a girl, and one who gave her sweets. Faris searches old newspaper archives online. The Stadtarchiv has a 1973 article: *"Krankenschwestern aus Kerala im St.-Lukas-Krankenhaus"*, with a name: **Mariamma**. |
+| A2 (end) | A dead end: the address in the article no longer exists. Cliffhanger. |
+| B1 | A new patient on Ayisha's ward at the Klinikum am Neckar: **Frau Mariamma Thomas, 76**. She stayed, raised a family and worked as a nurse for 40 years. She tells her story (Präteritum!), and her words "Here I have a home" become Ayisha's own. |
 
 ---
 
-## Grammar Coverage Map
+## Romance arc (Bollywood style, halal)
 
-### A1
+Bollywood drama, written with a wink: fateful coincidences, rain, misunderstandings, friends as
+matchmakers, the family's blessing as the finale. **Halal limits:** no touching, never alone in
+private; meetings happen in public, in a group, or on a family video call. Feelings are shown
+through small gestures: an umbrella, a saved plate of biryani, a song she hums, a line he
+learns in Hindi.
 
-| Category | Story 1 | Story 2 |
-|---|---|---|
-| Hauptsatz | ✅ | ✅ |
-| Fragen | ✅ | ✅ |
-| Modalverben | ✅ | ✅ |
-| Negation | ✅ | ✅ |
-| Trennbare Verben | ✅ | ✅ |
-| Possessivartikel | ✅ | ✅ |
-| Präpositionen | ✅ | ✅ |
-| Zahlen & Zeit | ✅ | ✅ (focus: prices, quantities) |
-| Alltag | ✅ | ✅ (focus: food, market vocabulary) |
+Recurring "filmi" moments (Ayisha narrates them as if a song should start, Faris doesn't get it):
+- **The rain scene** (A1/A2): caught in the rain at a bus stop, he gives her his umbrella and walks
+  home wet.
+- **The misunderstanding** (A2): she sees him laughing with a colleague and draws conclusions.
+  Lea and Max investigate. It's his cousin.
+- **The rival** (B1): the Munich job offer stands between them.
+- **The finale** (B1): he learns one Bollywood line in Hindi (badly) and asks whether his family may
+  contact hers.
 
-### A2
+| Level | Step |
+|---|---|
+| A1 story 1 | **Chance meeting** at the airport S-Bahn ticket machine. A stranger helps her and answers only in German: "Nur Deutsch!" She never gets his name. |
+| A1 story 4 | At the **Kerala Store** they both reach for the last pack of biryani rice. He recognises her. Then his phone rings and he talks to his mother **in Malayalam**. The stranger from the airport is a Malayali! Why only German? "Nur Deutsch! Du lernst schneller." Biryani debate; cricket doubts. |
+| A1 story 4 (park) | Cricket with the Kerala group; she bowls him out. Max recognises Faris as "the man with ten Brezeln every Monday". Numbers exchanged for the WhatsApp group. |
+| A1 story 5 | Faris tells her (in the group chat) to see a doctor. Group trip to the Schwäbische Alb and Burg Hohenzollern; his aunt's biryani gets a 7/10. |
+| A2 | Faris helps with the mystery search (archives). They meet at the **Eid prayer** and the community lunch. Cricket match in the park with the group; does she bowl him out? Umma meets Faris on a video call by accident. Ayisha cooks biryani for everyone, on her own decision. |
+| B1 | Both are under pressure (her FSP and Approbation, his job offer in Munich). Mariamma gives advice. At the end, Faris asks whether **his family may contact hers**: a proposal in the Kerala way. Warm, hopeful ending. |
 
-| Category | Story 1 | Story 2 | Story 3 |
+---
+
+## Stories by level
+
+### A1 — Herbst: "Ankommen"
+| # | Title | Chapters (skills) | Plot |
 |---|---|---|---|
-| Nebensatz | ✅ primary | — | ✅ |
-| Perfekt | ✅ primary | — | — |
-| Imperativ | — | — | ✅ primary |
-| Präteritum | — | ✅ primary | — |
-| Dativ | — | ✅ primary | ✅ |
-| Reflexivverben | ✅ primary | — | — |
-| Komparativ | — | ✅ primary | — |
-| Futur I | — | — | ✅ primary |
-| Wechselpräpositionen | — | ✅ | ✅ primary |
+| 1 | **Ankunft** | 1.1 nom · 1.2 präsens · 1.3 artikel · 1.4 fragen · 1.5 haben | Flight to Stuttgart, the ticket machine and the stranger, the WG, Lea and Max, Frau Schäfer and her chickens. |
+| 2 | **Ein neues Zuhause** | 2.1 akk · 2.2 negation · 2.3 possessiv | Furniture shop, **the photo behind the wardrobe**, the Malayalam note, video call home; Frau Schäfer's hands tremble. |
+| 3 | **Papiere, Papiere** | 3.1 zeit · 3.2 modal · 3.3 akk_pronomen | Anmeldung at the Bürgerbüro, bank account, VVS ticket, the Kehrwoche plan (Max is never available). |
+| 4 | **Biryani gesucht** | 4.1 möchten · 4.2 trennbar · 4.3 konnektoren | Searching for good biryani, the Markthalle, the Kerala Store, **meeting Faris again**. She refuses to cook for the WG, then cooks anyway. |
+| 5 | **Beim Arzt** | 5.1 imperativ · 5.2 dativ_präp · 5.3 perfekt | Ayisha has a cold and visits Dr. Kühn as a patient. The Alb trip. Cricket claims. **Dr. Kühn recognises the hospital**. |
 
-### B1
-
-| Category | Story 1 | Story 2 | Story 3 |
+### A2 — Winter / Frühling: "Einleben"
+| # | Title | Main skills | Plot |
 |---|---|---|---|
-| Konjunktiv II | ✅ primary | ✅ | — |
-| Passiv | — | — | ✅ primary |
-| Relativsatz | — | ✅ primary | ✅ |
-| Infinitivkonstruktionen | — | — | ✅ primary |
-| Temporalsätze | — | — | ✅ primary |
-| Konzessivsätze | ✅ primary | ✅ | — |
-| Adjektivdeklination | — | ✅ primary | ✅ |
-| Zweiteilige Konnektoren | ✅ primary | — | ✅ |
-| Pronominaladverbien | — | — | ✅ primary |
-| Indirekte Rede | — | ✅ primary | — |
-| Kausale Konnektoren | — | ✅ primary | ✅ |
+| 1 | **Der Sprachkurs** | perfekt, reflexiv | The language course, new classmates from everywhere; telling about the weekend. |
+| 2 | **Ein Winter in Stuttgart** | dativ, dat_akk, adjektiv | Snow, winter clothes and fashion, gifts, Frau Schäfer falls ill, so Ayisha looks after her (and the chickens). |
+| 3 | **Die Anerkennung** | nebensatz, indirekte_frage, konj2_höflich | Documents for the Approbation, emails to the Regierungspräsidium, waiting. |
+| 4 | **Eid in Stuttgart** | wechselpräp, komparativ, imperativ | Ramadan and Eid with the community, cooking together, the cricket match, the Umma video call. |
+| 5 | **Das Archiv** | präteritum, futur | Hospitation begins; Stadtarchiv; Mariamma's name; the dead end. |
+
+### B1 — Sommer: "Im Krankenhaus"
+| # | Title | Main skills | Plot |
+|---|---|---|---|
+| 1 | **Die erste Woche** | passiv, relativsatz, n_deklination | First job as Assistenzärztin at the Klinikum am Neckar; the ward, the team, the first patients. |
+| 2 | **Der Nachtdienst** | temporal, kausal, genitiv | A night shift, a small emergency, Lea as a nurse at her side. |
+| 3 | **Die Patientin** | präteritum, plusquamperfekt, indirekte_rede | Mariamma on the ward; her story of 1972. |
+| 4 | **Was wäre, wenn …** | konj2, konzessiv, infinitiv | FSP stress, Faris's job offer in Munich, decisions. |
+| 5 | **Ein Zuhause** | zweiteilig, pronominaladverb, adjektiv | Approbation news, the families, the proposal, a summer evening at the Fernsehturm with everyone. |
 
 ---
 
-## Writing Notes
-
-- Stories are written in German, conversational register.
-- Each story ~100 sentences (~5 min read).
-- Sentences stored as a flat array in JSON — they play in order in the game.
-- Dialogue is written as: `"Text", sagt Person.` (full sentence per line).
-- No dark themes. No relationship tension between Thomas and Lena (keep it friendly).
-- Use European city life details: Viennese street names, Naschmarkt, Kaffeehäuser, U-Bahn, AKH.
-
-## File Naming Convention
-
-```
-data/levels/A1_story_neue_nachbarn.json
-data/levels/A1_story_der_herbstmarkt.json
-data/levels/A2_story_ein_langer_samstag.json
-data/levels/A2_story_der_wintermarkt.json
-data/levels/A2_story_lenas_geburtstag.json
-data/levels/B1_story_was_waere_wenn.json
-data/levels/B1_story_das_angebot.json
-data/levels/B1_story_ein_sommer_in_wien.json
-```
-
-## levelContent.js Keys
-
-```
-A1: story_neue_nachbarn (✅), story_der_herbstmarkt (⬜)
-A2: story_ein_langer_samstag (⬜), story_der_wintermarkt (⬜), story_lenas_geburtstag (⬜)
-B1: story_was_waere_wenn (⬜), story_das_angebot (⬜), story_ein_sommer_in_wien (⬜)
-```
+## Writing rules
+- Follow CURRICULUM.md: beat format, `play` sentence rules, chapter template.
+- Dialogue: use `speaker` + the spoken sentence. Never write "…, sagt Faris." inside a `play` beat.
+- Humour comes from situations: Kehrwoche, Mülltrennung, Sonntagsruhe, punctuality, Swabian words
+  (*Grüß Gott, ade, Brezel, schaffe*), Kerala vs. Germany comparisons. Laugh with people, not at them.
+- Medical content must be correct. Patients and cases are invented.
+- Keep characters consistent: Ayisha never cooks on request; Faris always says "Nur Deutsch!";
+  Max always avoids the Kehrwoche; Frau Schäfer always notices everything.

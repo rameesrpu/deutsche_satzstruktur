@@ -1,0 +1,119 @@
+{
+  "level": "A1",
+  "category": "1.1 Hallo, Stuttgart!",
+  "story": 1,
+  "storyTitle": "Ankunft",
+  "chapter": "1.1",
+  "title": "Hallo, Stuttgart!",
+  "skill": "A1.nom",
+  "beats": [
+    {
+      "read": "Oktober. Ein Flugzeug aus Dubai fliegt über Stuttgart."
+    },
+    {
+      "read": "Am Fenster sitzt eine junge Frau. Sie ist müde, aber sie lächelt."
+    },
+    {
+      "speaker": "Der Pilot",
+      "play": "Wir sind gleich da."
+    },
+    {
+      "play": "Sie heißt Ayisha."
+    },
+    {
+      "play": "Ayisha ist Ärztin."
+    },
+    {
+      "play": "Ihre Heimat ist Kerala."
+    },
+    {
+      "read": "Kerala: Palmen, Meer, Regen und das beste Essen der Welt. Sagt Ayisha."
+    },
+    {
+      "read": "Die Tür geht auf. Kalte Luft. Sehr kalte Luft."
+    },
+    {
+      "play": "Das Wetter ist kalt."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich bin endlich hier!"
+    },
+    {
+      "read": "Ihr Handy vibriert. Eine Nachricht aus Payyannur."
+    },
+    {
+      "speaker": "Umma",
+      "play": "Bist du schon da?"
+    },
+    {
+      "read": "Am Gepäckband wartet Ayisha. Und wartet. Und wartet. Dann kommen die Koffer. Zwei. Riesig."
+    },
+    {
+      "play": "Die Koffer sind sehr schwer."
+    },
+    {
+      "read": "Dann der Ticketautomat. Alles ist auf Deutsch. Viele Knöpfe. Viele Zahlen."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Der Automat ist kompliziert."
+    },
+    {
+      "read": "Hinter ihr steht ein Mann mit Kopfhörern. Er lächelt."
+    },
+    {
+      "speaker": "Der Mann",
+      "play": "Sind Sie neu hier?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ja, ich bin neu."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Sorry … do you speak English?"
+    },
+    {
+      "read": "Der Mann schüttelt den Kopf. Er drückt drei Knöpfe. Das Ticket kommt."
+    },
+    {
+      "speaker": "Der Mann",
+      "play": "Deutsch ist besser!"
+    },
+    {
+      "speaker": "Der Mann",
+      "read": "Nur Deutsch! Hier, Ihr Ticket. Willkommen in Stuttgart!"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Sie sind sehr nett!"
+    },
+    {
+      "read": "Dann kommt die S-Bahn. Der Mann winkt. Und weg ist er. Kein Name. Nur ein Lächeln."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Wer ist der Mann?"
+    },
+    {
+      "read": "Ayisha schaut auf das Ticket. Ihr Abenteuer beginnt."
+    }
+  ],
+  "sentences": [
+    "Wir sind gleich da.",
+    "Sie heißt Ayisha.",
+    "Ayisha ist Ärztin.",
+    "Ihre Heimat ist Kerala.",
+    "Das Wetter ist kalt.",
+    "Ich bin endlich hier!",
+    "Bist du schon da?",
+    "Die Koffer sind sehr schwer.",
+    "Der Automat ist kompliziert.",
+    "Sind Sie neu hier?",
+    "Ja, ich bin neu.",
+    "Deutsch ist besser!",
+    "Sie sind sehr nett!",
+    "Wer ist der Mann?"
+  ]
+}

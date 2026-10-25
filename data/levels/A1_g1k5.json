@@ -1,0 +1,125 @@
+{
+  "level": "A1",
+  "category": "1.5 Frau Schäfer",
+  "story": 1,
+  "storyTitle": "Ankunft",
+  "chapter": "1.5",
+  "title": "Frau Schäfer",
+  "skill": "A1.haben",
+  "beats": [
+    {
+      "read": "Vor der Tür steht eine Frau. Graue Haare, eine Brille, eine Gartenschürze."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Grüß Gott, ich bin Frau Schäfer."
+    },
+    {
+      "read": "Sie schaut Ayisha an. Von oben nach unten. Und wieder nach oben."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Haben Sie die Hausordnung?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Nein, ich habe keine Hausordnung."
+    },
+    {
+      "read": "Frau Schäfer gibt ihr ein Papier. Drei Seiten. Ganz klein geschrieben."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Hier haben wir die Kehrwoche."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Was ist das?"
+    },
+    {
+      "speaker": "Lea",
+      "read": "Jede Woche putzt eine Person die Treppe. Diese Woche: Max."
+    },
+    {
+      "read": "Alle schauen Max an. Max schaut auf sein Handy."
+    },
+    {
+      "speaker": "Max",
+      "play": "Ich habe leider keine Zeit."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Sie haben nie Zeit, Herr Brenner!"
+    },
+    {
+      "read": "Dann hört Ayisha etwas aus dem Garten. Gack. Gack, gack!"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Sie haben Hühner?"
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Ja, ich habe fünf Hühner."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Die Hühner haben Namen."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "read": "Berta, Frieda, Hilde, Greta und Lotte."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich liebe Hühner!"
+    },
+    {
+      "read": "Zum ersten Mal lächelt Frau Schäfer. Ein bisschen. Ganz kurz."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Essen Sie gern Eier?"
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Ja, sehr gern!"
+    },
+    {
+      "play": "Ayisha nimmt sechs Eier."
+    },
+    {
+      "read": "Frau Schäfer geht. Lea atmet aus. Ayisha schaut Max an."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Liest du die Hausordnung?"
+    },
+    {
+      "read": "Aber Max liegt schon auf dem Sofa. Augen zu."
+    },
+    {
+      "play": "Max schläft schon wieder."
+    },
+    {
+      "read": "In der Nacht kann Ayisha nicht schlafen. Der alte Schrank knarrt. Und hinter dem Schrank … ist da etwas?"
+    }
+  ],
+  "sentences": [
+    "Grüß Gott, ich bin Frau Schäfer.",
+    "Haben Sie die Hausordnung?",
+    "Nein, ich habe keine Hausordnung.",
+    "Hier haben wir die Kehrwoche.",
+    "Was ist das?",
+    "Ich habe leider keine Zeit.",
+    "Sie haben nie Zeit, Herr Brenner!",
+    "Sie haben Hühner?",
+    "Ja, ich habe fünf Hühner.",
+    "Die Hühner haben Namen.",
+    "Ich liebe Hühner!",
+    "Essen Sie gern Eier?",
+    "Ayisha nimmt sechs Eier.",
+    "Liest du die Hausordnung?",
+    "Max schläft schon wieder."
+  ]
+}

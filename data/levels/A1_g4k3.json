@@ -1,0 +1,127 @@
+{
+  "level": "A1",
+  "category": "4.3 Cricket im Park",
+  "story": 4,
+  "storyTitle": "Biryani gesucht",
+  "chapter": "4.3",
+  "title": "Cricket im Park",
+  "skill": "A1.konnektoren",
+  "beats": [
+    {
+      "read": "Sonntag. Der Rosensteinpark. Die Sonne scheint, aber es ist kalt. Zehn Grad."
+    },
+    {
+      "read": "Zwanzig Leute aus Kerala, drei Taschen mit Snacks, eine Thermoskanne Chai und ein Cricketschläger."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Der Park ist groß, und die Leute sind nett."
+    },
+    {
+      "read": "Lea und Max sind auch da. Max sieht Faris und bleibt stehen."
+    },
+    {
+      "speaker": "Max",
+      "read": "Moment. Du bist der Mann mit den zehn Brezeln! Jeden Montag!"
+    },
+    {
+      "speaker": "Faris",
+      "read": "Schuldig."
+    },
+    {
+      "speaker": "Faris",
+      "play": "Spielst du Cricket, oder schaust du nur zu?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich spiele, denn ich bin sehr gut."
+    },
+    {
+      "speaker": "Faris",
+      "play": "Das sagst du, aber ich glaube es nicht."
+    },
+    {
+      "speaker": "Max",
+      "play": "Ich spiele nicht, denn ich esse."
+    },
+    {
+      "play": "Lea und Max schauen zu."
+    },
+    {
+      "read": "Ayisha nimmt den Ball. Sie läuft an. Sie wirft."
+    },
+    {
+      "speaker": "Faris",
+      "play": "Der Ball ist schnell, aber ich treffe ihn!"
+    },
+    {
+      "read": "Er trifft ihn nicht. Das Wicket fällt um. Alle schreien."
+    },
+    {
+      "speaker": "Max",
+      "play": "Ayisha ist ein Profi, und Faris ist raus!"
+    },
+    {
+      "read": "Faris schaut auf das Wicket. Dann auf Ayisha. Dann wieder auf das Wicket."
+    },
+    {
+      "speaker": "Faris",
+      "play": "Du hast Glück, oder?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Nein, ich habe Talent, und du hast keine Chance!"
+    },
+    {
+      "read": "Lea flüstert zu Max: „Er schaut sie die ganze Zeit an.“ Max isst eine Brezel. „Ich weiß.“"
+    },
+    {
+      "read": "Nach dem Spiel gibt es Chai und Snacks. Eine Tante hat Pazhampori dabei: Bananen, frittiert. Wie zu Hause."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Der Chai ist heiß, und das Pazhampori ist perfekt."
+    },
+    {
+      "speaker": "Faris",
+      "play": "Möchtest du Chai oder Wasser?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich nehme Chai, aber nur einen."
+    },
+    {
+      "read": "Am Ende fragt die Tante laut: „Wer ist in der WhatsApp-Gruppe?“ Alle geben ihre Nummern. Auch Ayisha. Auch Faris."
+    },
+    {
+      "speaker": "Faris",
+      "play": "Hier ist meine Nummer, für das nächste Spiel."
+    },
+    {
+      "speaker": "Max",
+      "read": "Für das Spiel. Natürlich."
+    },
+    {
+      "read": "Zu Hause schaut Ayisha auf ihr Handy. Eine Nachricht: „Revanche nächsten Sonntag? Nur Deutsch! 😄 Faris“"
+    },
+    {
+      "read": "Ayisha lächelt. Und dann: Hatschi! Einmal. Zweimal. Dreimal."
+    }
+  ],
+  "sentences": [
+    "Der Park ist groß, und die Leute sind nett.",
+    "Spielst du Cricket, oder schaust du nur zu?",
+    "Ich spiele, denn ich bin sehr gut.",
+    "Das sagst du, aber ich glaube es nicht.",
+    "Ich spiele nicht, denn ich esse.",
+    "Lea und Max schauen zu.",
+    "Der Ball ist schnell, aber ich treffe ihn!",
+    "Ayisha ist ein Profi, und Faris ist raus!",
+    "Du hast Glück, oder?",
+    "Nein, ich habe Talent, und du hast keine Chance!",
+    "Der Chai ist heiß, und das Pazhampori ist perfekt.",
+    "Möchtest du Chai oder Wasser?",
+    "Ich nehme Chai, aber nur einen.",
+    "Hier ist meine Nummer, für das nächste Spiel."
+  ]
+}

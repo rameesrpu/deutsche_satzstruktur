@@ -1,0 +1,127 @@
+{
+  "level": "A1",
+  "category": "5.3 Ein Ausflug",
+  "story": 5,
+  "storyTitle": "Beim Arzt",
+  "chapter": "5.3",
+  "title": "Ein Ausflug",
+  "skill": "A1.perfekt",
+  "beats": [
+    {
+      "read": "Eine Woche später. Ayisha ist wieder gesund. Am Montag ruft sie Umma an."
+    },
+    {
+      "speaker": "Umma",
+      "play": "Was hast du am Wochenende gemacht?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Wir haben einen Ausflug gemacht."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Wir sind auf die Schwäbische Alb gefahren."
+    },
+    {
+      "speaker": "Umma",
+      "play": "Wer ist mitgekommen?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Lea und Max sind mitgekommen."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Und die Leute aus der Cricket-Gruppe. Und … Faris."
+    },
+    {
+      "read": "Umma sagt nichts. Aber ihre Augenbrauen sagen sehr viel."
+    },
+    {
+      "speaker": "Umma",
+      "play": "Wer ist Faris?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Er kommt auch aus Kerala."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Er ist Softwareentwickler. Er spielt Badminton. Und er spielt sehr schlecht Cricket."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Wir haben eine Burg besucht."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Die Burg Hohenzollern, Umma! Ganz oben auf einem Berg. Die Bäume waren rot und gold."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich habe viele Fotos gemacht."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich war so glücklich!"
+    },
+    {
+      "speaker": "Umma",
+      "play": "Hast du etwas gegessen?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Max hat Brezeln mitgebracht."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Und Faris hat Biryani mitgebracht. Von seiner Tante aus Esslingen."
+    },
+    {
+      "speaker": "Umma",
+      "play": "Wie war das Biryani?"
+    },
+    {
+      "read": "Ayisha denkt lange nach. Sehr lange."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Es war nicht schlecht."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Sechs von zehn. Na gut … sieben."
+    },
+    {
+      "read": "Umma lacht laut. Sieben? Von Ayisha? Das hat sie noch nie gehört."
+    },
+    {
+      "read": "Am Abend nimmt Ayisha das alte Foto. Sie liest den Satz noch einmal: „Hier habe ich ein Zuhause.“"
+    },
+    {
+      "read": "Sie schaut aus dem Fenster. Unten im Garten schlafen die Hühner. Die Lichter von Stuttgart leuchten."
+    },
+    {
+      "read": "Vielleicht, denkt sie. Vielleicht bald auch für mich."
+    },
+    {
+      "read": "Ende von A1. Fortsetzung folgt …"
+    }
+  ],
+  "sentences": [
+    "Was hast du am Wochenende gemacht?",
+    "Wir haben einen Ausflug gemacht.",
+    "Wir sind auf die Schwäbische Alb gefahren.",
+    "Wer ist mitgekommen?",
+    "Lea und Max sind mitgekommen.",
+    "Wer ist Faris?",
+    "Er kommt auch aus Kerala.",
+    "Wir haben eine Burg besucht.",
+    "Ich habe viele Fotos gemacht.",
+    "Ich war so glücklich!",
+    "Hast du etwas gegessen?",
+    "Max hat Brezeln mitgebracht.",
+    "Wie war das Biryani?",
+    "Es war nicht schlecht."
+  ]
+}

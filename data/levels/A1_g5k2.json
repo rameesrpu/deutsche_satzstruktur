@@ -1,0 +1,119 @@
+{
+  "level": "A1",
+  "category": "5.2 In der Praxis",
+  "story": 5,
+  "storyTitle": "Beim Arzt",
+  "chapter": "5.2",
+  "title": "In der Praxis",
+  "skill": "A1.dativ_praep",
+  "beats": [
+    {
+      "read": "Dienstag, neun Uhr. Die Praxis von Dr. Kühn ist hell und freundlich."
+    },
+    {
+      "play": "Ayisha fährt mit der U-Bahn zur Praxis."
+    },
+    {
+      "speaker": "Die Arzthelferin",
+      "play": "Sie sind bei Dr. Kühn?"
+    },
+    {
+      "read": "Im Wartezimmer sitzen eine Mutter mit einem Baby und ein alter Mann mit einer Zeitung."
+    },
+    {
+      "play": "Die Mutter spielt mit dem Baby."
+    },
+    {
+      "read": "Ayisha beobachtet das Baby. Rote Wangen, kein Fieber, gute Laune. Sie ist eben Ärztin. Auch im Wartezimmer."
+    },
+    {
+      "read": "„Frau Rahman, bitte!“"
+    },
+    {
+      "speaker": "Dr. Kühn",
+      "play": "Was fehlt Ihnen?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich habe seit Sonntag Fieber."
+    },
+    {
+      "speaker": "Dr. Kühn",
+      "play": "Sie kommen aus Indien, oder?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich bin Ärztin aus Kerala."
+    },
+    {
+      "read": "Dr. Kühn lächelt. Sie untersucht Ayisha. Hals, Ohren, Lunge."
+    },
+    {
+      "speaker": "Dr. Kühn",
+      "read": "Eine Erkältung. Nichts Schlimmes. Viel trinken, viel schlafen."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Das sage ich meinen Patienten auch!"
+    },
+    {
+      "read": "Beide lachen. Dann fällt etwas aus Ayishas Tasche. Das Foto!"
+    },
+    {
+      "read": "Dr. Kühn hebt es auf. Sie schaut. Dann setzt sie ihre Brille auf."
+    },
+    {
+      "speaker": "Dr. Kühn",
+      "play": "Das Gebäude kenne ich!"
+    },
+    {
+      "speaker": "Dr. Kühn",
+      "play": "Das ist das alte St.-Lukas-Krankenhaus."
+    },
+    {
+      "speaker": "Dr. Kühn",
+      "play": "Ich kenne es aus meiner Studienzeit."
+    },
+    {
+      "speaker": "Dr. Kühn",
+      "read": "Das Krankenhaus ist schon lange zu. Seit 1998. Heute sind dort Wohnungen."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Die Frau kommt aus Kerala, wie ich."
+    },
+    {
+      "speaker": "Dr. Kühn",
+      "read": "Viele Krankenschwestern aus Indien haben damals bei uns gearbeitet. Ich habe von ihnen viel gelernt."
+    },
+    {
+      "speaker": "Dr. Kühn",
+      "play": "Fragen Sie beim Stadtarchiv!"
+    },
+    {
+      "read": "Auf dem Heimweg: die Apotheke. Ayisha kauft Halsbonbons. Und Schokolade. Medizinisch notwendig."
+    },
+    {
+      "play": "Ayisha geht mit Schokolade nach Hause."
+    },
+    {
+      "read": "Zu Hause schreibt sie in die Cricket-Gruppe: „Nur eine Erkältung!“ Faris antwortet sofort: „Alhamdulillah! Am Samstag fahren wir auf die Alb. Alle kommen mit. Du auch?“"
+    }
+  ],
+  "sentences": [
+    "Ayisha fährt mit der U-Bahn zur Praxis.",
+    "Sie sind bei Dr. Kühn?",
+    "Die Mutter spielt mit dem Baby.",
+    "Was fehlt Ihnen?",
+    "Ich habe seit Sonntag Fieber.",
+    "Sie kommen aus Indien, oder?",
+    "Ich bin Ärztin aus Kerala.",
+    "Das sage ich meinen Patienten auch!",
+    "Das Gebäude kenne ich!",
+    "Das ist das alte St.-Lukas-Krankenhaus.",
+    "Ich kenne es aus meiner Studienzeit.",
+    "Die Frau kommt aus Kerala, wie ich.",
+    "Fragen Sie beim Stadtarchiv!",
+    "Ayisha geht mit Schokolade nach Hause."
+  ]
+}

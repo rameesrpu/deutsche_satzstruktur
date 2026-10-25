@@ -1,0 +1,120 @@
+{
+  "level": "A1",
+  "category": "4.1 Im Restaurant",
+  "story": 4,
+  "storyTitle": "Biryani gesucht",
+  "chapter": "4.1",
+  "title": "Im Restaurant",
+  "skill": "A1.moechten",
+  "beats": [
+    {
+      "read": "Ayisha vermisst Biryani. Sehr. Lea hat eine Idee: ein indisches Restaurant in der Stadt."
+    },
+    {
+      "read": "Das Restaurant heißt „Masala Haus“. Rote Wände, goldene Lampen, Bollywood-Musik."
+    },
+    {
+      "read": "Ayisha summt mit. Sie kennt jedes Lied. Lea und Max schauen sie an."
+    },
+    {
+      "speaker": "Der Kellner",
+      "play": "Was möchten Sie trinken?"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Ich möchte einen Mango-Lassi."
+    },
+    {
+      "speaker": "Max",
+      "play": "Ich möchte eine Cola, bitte."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich möchte nur Wasser."
+    },
+    {
+      "speaker": "Der Kellner",
+      "play": "Und was möchten Sie essen?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich möchte das Biryani."
+    },
+    {
+      "speaker": "Der Kellner",
+      "play": "Möchten Sie es scharf?"
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Ja. Sehr scharf, bitte. Indisch scharf!"
+    },
+    {
+      "speaker": "Max",
+      "play": "Wir möchten auch Naan."
+    },
+    {
+      "read": "Zwanzig Minuten später. Das Biryani kommt. Ayisha probiert. Sie sagt nichts."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Wie ist das Biryani?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Es ist nicht scharf."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Und der Reis ist falsch."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Vier von zehn. Sorry."
+    },
+    {
+      "read": "Max isst alles. Seinen Teller. Leas Teller. Und Ayishas Teller."
+    },
+    {
+      "speaker": "Max",
+      "play": "Ich möchte noch einen Teller!"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Möchtet ihr einen Nachtisch?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich möchte richtiges Biryani!"
+    },
+    {
+      "read": "Der Kellner hört das. Er lacht."
+    },
+    {
+      "speaker": "Der Kellner",
+      "play": "Dann müssen Sie selbst kochen!"
+    },
+    {
+      "read": "Ayisha lächelt höflich. Selbst kochen? Nur, wenn sie will. Und heute will sie nicht."
+    },
+    {
+      "read": "Aber beim Bezahlen gibt der Kellner ihr eine Serviette. Darauf steht: „Kerala Store, Bad Cannstatt. Der beste Reis in Stuttgart.“"
+    }
+  ],
+  "sentences": [
+    "Was möchten Sie trinken?",
+    "Ich möchte einen Mango-Lassi.",
+    "Ich möchte eine Cola, bitte.",
+    "Ich möchte nur Wasser.",
+    "Und was möchten Sie essen?",
+    "Ich möchte das Biryani.",
+    "Möchten Sie es scharf?",
+    "Wir möchten auch Naan.",
+    "Wie ist das Biryani?",
+    "Es ist nicht scharf.",
+    "Und der Reis ist falsch.",
+    "Ich möchte noch einen Teller!",
+    "Möchtet ihr einen Nachtisch?",
+    "Ich möchte richtiges Biryani!",
+    "Dann müssen Sie selbst kochen!"
+  ]
+}

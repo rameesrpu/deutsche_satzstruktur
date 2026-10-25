@@ -1,0 +1,107 @@
+{
+  "level": "A1",
+  "category": "2.1 Das Möbelhaus",
+  "story": 2,
+  "storyTitle": "Ein neues Zuhause",
+  "chapter": "2.1",
+  "title": "Das Möbelhaus",
+  "skill": "A1.akk",
+  "beats": [
+    {
+      "read": "Samstag. Das Zimmer ist noch fast leer. Ayisha hat eine Liste."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich brauche einen Tisch."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich brauche auch einen Stuhl."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Und ich suche einen Spiegel."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Ein Spiegel ist sehr wichtig. Mode ist wichtig!"
+    },
+    {
+      "read": "Lea hat ein Auto. Ein sehr kleines Auto. Max kommt auch mit. Er trägt nichts. Er isst."
+    },
+    {
+      "read": "Das Möbelhaus ist riesig. Drei Etagen. Tausend Tische."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Siehst du den Tisch da?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Der Tisch ist zu teuer."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich nehme den Tisch hier."
+    },
+    {
+      "read": "Max steht vor einem Stuhl. Der Stuhl ist pink. Mit Glitzer."
+    },
+    {
+      "play": "Max findet den Stuhl super!"
+    },
+    {
+      "play": "Ayisha mag den Stuhl nicht."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich kaufe eine Lampe und einen Spiegel."
+    },
+    {
+      "read": "An der Kasse schaut Lea in den Einkaufswagen. Tisch, Stuhl, Lampe, Spiegel, zwei Kissen, drei Pflanzen."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Wir haben keinen Platz!"
+    },
+    {
+      "read": "Das Auto ist voll. Max sitzt hinten, zwischen Tisch, Lampe und Pflanzen."
+    },
+    {
+      "speaker": "Max",
+      "play": "Ich sehe nichts!"
+    },
+    {
+      "read": "Zu Hause tragen sie alles nach oben. Der Tisch passt. Der Spiegel passt. Aber der alte Schrank steht im Weg."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Wir schieben den Schrank!"
+    },
+    {
+      "read": "Eins, zwei, drei! Der Schrank bewegt sich. Und hinter dem Schrank fällt etwas auf den Boden."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich sehe ein Foto!"
+    },
+    {
+      "read": "Ein altes Foto. Schwarz-weiß. Eine junge Frau in einer Uniform. Und sie sieht aus wie … eine Frau aus Kerala."
+    }
+  ],
+  "sentences": [
+    "Ich brauche einen Tisch.",
+    "Ich brauche auch einen Stuhl.",
+    "Und ich suche einen Spiegel.",
+    "Siehst du den Tisch da?",
+    "Der Tisch ist zu teuer.",
+    "Ich nehme den Tisch hier.",
+    "Max findet den Stuhl super!",
+    "Ayisha mag den Stuhl nicht.",
+    "Ich kaufe eine Lampe und einen Spiegel.",
+    "Wir haben keinen Platz!",
+    "Ich sehe nichts!",
+    "Wir schieben den Schrank!",
+    "Ich sehe ein Foto!"
+  ]
+}

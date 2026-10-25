@@ -1,0 +1,121 @@
+{
+  "level": "A1",
+  "category": "1.2 Die WG",
+  "story": 1,
+  "storyTitle": "Ankunft",
+  "chapter": "1.2",
+  "title": "Die WG",
+  "skill": "A1.praesens",
+  "beats": [
+    {
+      "read": "Eine Stunde später. Stuttgart-Süd, Möhringer Straße 14."
+    },
+    {
+      "read": "Ein altes Haus mit einem kleinen Garten. Und im Garten: Hühner!"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Hier wohne ich jetzt!"
+    },
+    {
+      "read": "Die Tür geht auf. Eine junge Frau mit roten Haaren lacht."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Hallo, ich heiße Lea!"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Ich lerne Krankenpflege."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich komme aus Indien."
+    },
+    {
+      "speaker": "Lea",
+      "read": "Aus Indien? Super! Komm rein!"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Wohnt ihr schon lange hier?"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Ja, wir wohnen gern hier."
+    },
+    {
+      "read": "Ein Mann kommt aus der Küche. Er hat Mehl im Gesicht."
+    },
+    {
+      "play": "Max wohnt auch hier."
+    },
+    {
+      "speaker": "Max",
+      "play": "Ich backe Brezeln."
+    },
+    {
+      "speaker": "Max",
+      "play": "Ich arbeite sehr früh."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Wie früh?"
+    },
+    {
+      "speaker": "Max",
+      "read": "Drei Uhr. In der Nacht. Jeden Tag."
+    },
+    {
+      "read": "Ayisha schaut ihn an. Drei Uhr? Das ist ja wie Nachtdienst im Krankenhaus!"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Wir kochen heute zusammen!"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Kochst du gern?"
+    },
+    {
+      "read": "Ayisha kocht sehr gut. Wirklich sehr gut. Aber nur, wenn sie will."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Heute koche ich nicht."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich bin sehr müde."
+    },
+    {
+      "read": "Lea lacht. Max lacht auch. Dann machen sie Nudeln. Nur Nudeln."
+    },
+    {
+      "play": "Lea und Max sind nett."
+    },
+    {
+      "play": "Ayisha wohnt jetzt in Stuttgart."
+    },
+    {
+      "read": "Am Abend schreibt sie an Umma: Alles gut! Dann schläft sie. Zwölf Stunden."
+    }
+  ],
+  "sentences": [
+    "Hier wohne ich jetzt!",
+    "Hallo, ich heiße Lea!",
+    "Ich lerne Krankenpflege.",
+    "Ich komme aus Indien.",
+    "Wohnt ihr schon lange hier?",
+    "Ja, wir wohnen gern hier.",
+    "Max wohnt auch hier.",
+    "Ich backe Brezeln.",
+    "Ich arbeite sehr früh.",
+    "Wir kochen heute zusammen!",
+    "Kochst du gern?",
+    "Heute koche ich nicht.",
+    "Ich bin sehr müde.",
+    "Lea und Max sind nett.",
+    "Ayisha wohnt jetzt in Stuttgart."
+  ]
+}

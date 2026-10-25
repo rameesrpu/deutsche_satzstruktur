@@ -5,6 +5,9 @@ import { progressStore, sentenceKey, emptyMistakes, addMistake } from './progres
 import { GM_UI, drawHud, getTimerColor } from './gameHud.js';
 import { ensureJuiceDefs, spawnConfetti, spawnFloatingText, drawFeedbackAnimation, updateFeedbackElement,
     showFinalCelebration } from './gameJuice.js';
+import { LEVEL_CONTENT, chapterOrder } from './levelContent.js';
+import { beatsBefore, beatsAfterLast, nextPlayText, showStoryCard, hideStoryCard,
+    isStoryCardOpen } from './storyNarration.js';
 
 /**
  * Game Mode - Interactive German sentence placement game
@@ -14,7 +17,7 @@ import { ensureJuiceDefs, spawnConfetti, spawnFloatingText, drawFeedbackAnimatio
 export class GameMode {
     /**
      * @param {Object} host  app services: { sentenceManager, levelSelector, redraw(),
-     *   setView(view), updateSentenceList() }
+     *   setView(view), updateSentenceList(), startChapter(level, category, opts) }
      */
     constructor(svg, wordManager, gridViewModel, host) {
         this.host = host;
@@ -161,7 +164,7 @@ export class GameMode {
 
         // Add keyboard event listener for case selection and tile cursor (PC only)
         this.keyboardHandler = (e) => {
-            if (!this.isActive) return;
+            if (!this.isActive || isStoryCardOpen()) return;
 
             // Don't hijack keys while the user types in a form field
             const tag = e.target.tagName;
@@ -228,6 +231,8 @@ export class GameMode {
 
         // Record the initial sentence as used
         this.usedSentenceIds.add(this.host.sentenceManager.currentSentenceId);
+
+        this.showStoryIntro();
     }
 
     /**
@@ -303,6 +308,7 @@ export class GameMode {
         this.isPaused = false;
         this.pendingFelderReview = false;
         this.hideMistakeHint();
+        hideStoryCard();
         // Drop any paused/in-flight fill-in-the-blank audio
         if (typeof gameSounds !== 'undefined') gameSounds.cancelPrompt();
         this.totalScore = 0; // Reset score so the next start() is fresh
@@ -1543,6 +1549,12 @@ export class GameMode {
      * Load the next sentence (picked per the active mode) and continue the game
      */
     loadRandomSentenceAndContinue() {
+        const chapter = this.getStoryChapter();
+        if (chapter) {
+            this.continueStoryChapter(chapter);
+            return;
+        }
+
         const { sentenceManager, levelSelector } = this.host;
         let mode = 'random-in-category';
         const multi = this.multiCategoryMode && this.selectedLevels.length > 0;
@@ -1585,5 +1597,115 @@ export class GameMode {
         if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 
         console.log(`Loaded next sentence (${picked.mode}):`, picked.sentence.text);
+    }
+
+    // --- Story chapters (data/stories/, see storyNarration.js) ---
+
+    /**
+     * The story chapter being played, or null. Chapters play in order with
+     * narration between sentences; review and multi-category mode keep their
+     * own sentence choice.
+     * @returns {?{level: string, category: string, cat: Object, data: Object}}
+     */
+    getStoryChapter() {
+        if (this.reviewMode || this.multiCategoryMode) return null;
+        const { levelSelector } = this.host;
+        if (!levelSelector) return null;
+        const level = levelSelector.currentLevel;
+        const category = levelSelector.currentCategory;
+        const cat = LEVEL_CONTENT[level] && LEVEL_CONTENT[level].categories[category];
+        if (!cat || !cat.story || cat.story.kind !== 'chapter') return null;
+        const data = levelSelector.getLoadedData(level, category);
+        if (!data || !data.beats) return null;
+        const sentence = this.host.sentenceManager.getCurrentSentence();
+        if (!sentence || sentence.level !== level || sentence.category !== category) return null;
+        return { level, category, cat, data };
+    }
+
+    /** Narration before the current sentence (if it is a story play beat). */
+    showStoryIntro() {
+        const chapter = this.getStoryChapter();
+        if (!chapter) return;
+        const sentence = this.host.sentenceManager.getCurrentSentence();
+        const segment = beatsBefore(chapter.data.beats, sentence.text);
+        if (!segment) return;
+        this.pauseForStoryCard();
+        showStoryCard({
+            heading: chapter.cat.label,
+            lines: segment.lines,
+            play: segment.play,
+            buttons: [{ label: 'Los geht\'s ▶', primary: true, onClick: () => this.closeStoryCard() }],
+            onSpeak: texts => this.speakStoryLines(texts),
+        });
+    }
+
+    /** Silence listening-mode audio and the timer while a card is open. */
+    pauseForStoryCard() {
+        if (typeof gameSounds !== 'undefined') gameSounds.cancelPrompt();
+        this.stopTimerAnimation();
+        this.wordStartTime = null;
+    }
+
+    closeStoryCard() {
+        hideStoryCard();
+        if (!this.isActive) return;
+        // Restarts the listening-mode prompt and the timer for the current word
+        this.updateCurrentWordDisplay();
+        this.host.redraw();
+    }
+
+    speakStoryLines(texts) {
+        if (typeof gameSounds === 'undefined') return;
+        texts.forEach((text, i) => gameSounds.speak(text, { queue: i > 0 }));
+    }
+
+    /** Next sentence of the chapter, or the chapter-end card after the last one. */
+    continueStoryChapter(chapter) {
+        const { sentenceManager } = this.host;
+        const current = sentenceManager.getCurrentSentence();
+        const nextText = nextPlayText(chapter.data.sentences, current.text);
+        if (!nextText) {
+            this.showChapterEnd(chapter);
+            return;
+        }
+        const next = sentenceManager.findLibrarySentence(chapter.level, chapter.category, nextText);
+        if (!next) {
+            console.error('Story sentence not loaded:', nextText);
+            return;
+        }
+        sentenceManager.loadSentence(next.id);
+        this.startNewSentence();
+        this.host.updateSentenceList();
+        this.host.redraw();
+        const activeItem = document.querySelector('.sentence-item.active');
+        if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        this.showStoryIntro();
+    }
+
+    showChapterEnd(chapter) {
+        const { level, category, cat, data } = chapter;
+        const { levelSelector } = this.host;
+        const order = chapterOrder(level);
+        const nextKey = order[order.indexOf(category) + 1] || null;
+        const complete = levelSelector.isChapterComplete(level, category);
+        const buttons = [];
+        if (nextKey && levelSelector.isUnlocked(level, nextKey)) {
+            buttons.push({ label: 'Nächstes Kapitel ▶', primary: true,
+                onClick: () => this.host.startChapter(level, nextKey) });
+        }
+        buttons.push({ label: 'Übung', primary: buttons.length === 0 && complete,
+            onClick: () => this.host.startChapter(level, `${category}_uebung`) });
+        buttons.push({ label: 'Nochmal', primary: buttons.length === 1 && !complete,
+            onClick: () => this.host.startChapter(level, category, { fromStart: true }) });
+        this.pauseForStoryCard();
+        showStoryCard({
+            heading: cat.label,
+            banner: complete ? 'Kapitel geschafft! 🎉'
+                : 'Ende des Kapitels. Spiel alle Sätze, dann öffnet sich das nächste Kapitel.',
+            lines: beatsAfterLast(data.beats),
+            buttons,
+            onSpeak: texts => this.speakStoryLines(texts),
+        });
+        levelSelector.refresh();
     }
 }

@@ -1,0 +1,122 @@
+{
+  "level": "A1",
+  "category": "3.3 Die Kehrwoche",
+  "story": 3,
+  "storyTitle": "Papiere, Papiere",
+  "chapter": "3.3",
+  "title": "Die Kehrwoche",
+  "skill": "A1.akk_pronomen",
+  "beats": [
+    {
+      "read": "Samstag. An der Wohnungstür hängt ein Schild: KEHRWOCHE. Darunter ein Name: Max."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Wo ist Max?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich sehe ihn nicht."
+    },
+    {
+      "read": "Max ist nicht in der Küche. Nicht im Bad. Nicht im Bett."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Frau Schäfer sucht ihn schon!"
+    },
+    {
+      "read": "Dann vibriert Leas Handy. Eine Nachricht von Max: „Bin bei meiner Oma. Sorry!“"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Er liebt seine Oma nur samstags."
+    },
+    {
+      "read": "Lea nimmt den Besen. Ayisha nimmt den Eimer. Sie schauen die Treppe hinunter. Drei Etagen."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Die Treppe ist so lang!"
+    },
+    {
+      "read": "Unten geht eine Tür auf."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Ich sehe euch!"
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Und wo ist Herr Brenner?"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Wir finden ihn nicht."
+    },
+    {
+      "read": "Frau Schäfer schaut die Treppe an. Dann das Geländer. Dann die Ecken."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Die Ecke ist nicht sauber."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich putze sie sofort!"
+    },
+    {
+      "read": "Ayisha putzt. Wie im Krankenhaus. Steril. Perfekt. Die Treppe glänzt."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Sie machen das sehr gut!"
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Ich lade Sie ein."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "read": "Morgen um drei. Zum Essen. Bei mir."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Sie lädt uns ein!"
+    },
+    {
+      "read": "Am Abend kommt Max nach Hause. Er sieht die Treppe. Sie glänzt."
+    },
+    {
+      "speaker": "Max",
+      "play": "Ihr liebt mich, oder?"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Nein, wir ignorieren dich!"
+    },
+    {
+      "read": "Am Sonntag kocht Frau Schäfer Linsen mit Spätzle. Ohne Würstchen. „Extra für Sie“, sagt sie zu Ayisha."
+    },
+    {
+      "read": "Ayisha probiert. Lecker! Wirklich lecker. Aber in ihrem Herzen ruft eine Stimme: Biryani. Biryani. Biryani."
+    }
+  ],
+  "sentences": [
+    "Wo ist Max?",
+    "Ich sehe ihn nicht.",
+    "Frau Schäfer sucht ihn schon!",
+    "Er liebt seine Oma nur samstags.",
+    "Die Treppe ist so lang!",
+    "Ich sehe euch!",
+    "Und wo ist Herr Brenner?",
+    "Wir finden ihn nicht.",
+    "Die Ecke ist nicht sauber.",
+    "Ich putze sie sofort!",
+    "Sie machen das sehr gut!",
+    "Ich lade Sie ein.",
+    "Sie lädt uns ein!",
+    "Ihr liebt mich, oder?",
+    "Nein, wir ignorieren dich!"
+  ]
+}

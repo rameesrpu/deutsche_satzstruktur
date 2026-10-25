@@ -1,0 +1,122 @@
+{
+  "level": "A1",
+  "category": "2.3 Meine Familie, deine Familie",
+  "story": 2,
+  "storyTitle": "Ein neues Zuhause",
+  "chapter": "2.3",
+  "title": "Meine Familie, deine Familie",
+  "skill": "A1.possessiv",
+  "beats": [
+    {
+      "read": "Sonntagmorgen. Ayisha öffnet den Kühlschrank. Drin: Brezeln. Nur Brezeln."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ist euer Kühlschrank immer so leer?"
+    },
+    {
+      "speaker": "Max",
+      "read": "Das ist nicht leer. Das ist mein Frühstück!"
+    },
+    {
+      "read": "Dann klingelt das Handy. Ein Videoanruf aus Payyannur. Die ganze Familie ist da: Umma, Uppa und Rizwan, ihr kleiner Bruder."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Das ist mein Zimmer!"
+    },
+    {
+      "speaker": "Umma",
+      "play": "Dein Zimmer ist so klein!"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Aber mein Bett ist sehr bequem."
+    },
+    {
+      "speaker": "Rizwan",
+      "play": "Wo ist dein Cricketschläger?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Mein Schläger ist in Kerala."
+    },
+    {
+      "speaker": "Rizwan",
+      "read": "Ha! Endlich keine Konkurrenz für mich!"
+    },
+    {
+      "speaker": "Uppa",
+      "play": "Wie ist deine Vermieterin?"
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Streng. Sehr streng. Aber …"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ihre Hühner sind wunderbar!"
+    },
+    {
+      "read": "Dann zeigt Ayisha das Foto in die Kamera. Umma liest den Satz auf der Rückseite. Sie wird still."
+    },
+    {
+      "speaker": "Umma",
+      "play": "Das ist nicht unsere Familie."
+    },
+    {
+      "speaker": "Umma",
+      "play": "Aber ihre Uniform kenne ich."
+    },
+    {
+      "speaker": "Umma",
+      "read": "Früher sind viele Krankenschwestern aus Kerala nach Deutschland gegangen. Sehr viele."
+    },
+    {
+      "read": "Nach dem Anruf geht Ayisha nach unten. Frau Schäfer steht im Garten, bei den Hühnern."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Mein Haus ist sehr alt."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "read": "Früher hat meine Mutter hier Zimmer vermietet. An viele junge Frauen."
+    },
+    {
+      "read": "Ayisha zeigt ihr das Foto. Frau Schäfer schaut lange. Sehr lange."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Ich kenne ihr Gesicht nicht."
+    },
+    {
+      "read": "Sie gibt Ayisha das Foto zurück. Ihre Hände zittern ein bisschen."
+    },
+    {
+      "read": "Oben wartet Lea. Ihre Augen leuchten."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Unser Rätsel ist spannend!"
+    },
+    {
+      "read": "Ayisha nickt. Frau Schäfer weiß etwas. Da ist sie ganz sicher."
+    }
+  ],
+  "sentences": [
+    "Ist euer Kühlschrank immer so leer?",
+    "Das ist mein Zimmer!",
+    "Dein Zimmer ist so klein!",
+    "Aber mein Bett ist sehr bequem.",
+    "Wo ist dein Cricketschläger?",
+    "Mein Schläger ist in Kerala.",
+    "Wie ist deine Vermieterin?",
+    "Ihre Hühner sind wunderbar!",
+    "Das ist nicht unsere Familie.",
+    "Aber ihre Uniform kenne ich.",
+    "Mein Haus ist sehr alt.",
+    "Ich kenne ihr Gesicht nicht.",
+    "Unser Rätsel ist spannend!"
+  ]
+}

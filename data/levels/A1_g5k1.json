@@ -1,0 +1,117 @@
+{
+  "level": "A1",
+  "category": "5.1 Gute Besserung",
+  "story": 5,
+  "storyTitle": "Beim Arzt",
+  "chapter": "5.1",
+  "title": "Gute Besserung",
+  "skill": "A1.imperativ",
+  "beats": [
+    {
+      "read": "Montag. Ayisha hat Fieber. Und Halsschmerzen. Und fast keine Stimme."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Bleib heute im Bett!"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Trink viel Tee!"
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Lea. Ich bin Ärztin."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Dann sei eine gute Patientin!"
+    },
+    {
+      "read": "Ayisha rollt mit den Augen. Sie mag keine Befehle. Aber sie bleibt im Bett."
+    },
+    {
+      "read": "Max kommt mit einer Tüte von der Bäckerei."
+    },
+    {
+      "speaker": "Max",
+      "play": "Iss eine Brezel!"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Bring mir lieber Suppe."
+    },
+    {
+      "read": "Dann klopft es. Frau Schäfer. Mit einer Thermoskanne."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Trinken Sie diesen Tee!"
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "read": "Kamillentee. Das Rezept ist von meiner Oma. Hundert Jahre alt."
+    },
+    {
+      "speaker": "Frau Schäfer",
+      "play": "Und machen Sie das Fenster zu!"
+    },
+    {
+      "read": "Ayishas Handy vibriert. Die Cricket-Gruppe. Die Tante schreibt: „Wo ist unsere Ayisha?“ Lea antwortet: „Krank!“"
+    },
+    {
+      "read": "Dann schreiben alle. Zwanzig Nachrichten. Ingwer! Kurkuma! Pfeffer-Rasam! Und eine Nachricht von Faris:"
+    },
+    {
+      "speaker": "Faris",
+      "play": "Geh bitte zum Arzt!"
+    },
+    {
+      "speaker": "Faris",
+      "read": "Auch Ärztinnen brauchen Ärzte. Und das Team braucht seinen Profi. 😄"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Sag mir das nicht!"
+    },
+    {
+      "read": "Aber sie lächelt. Und sie sucht eine Hausärztin in der Nähe."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Ruf Dr. Kühn an!"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Sie ist sehr nett."
+    },
+    {
+      "read": "Ayisha ruft an. Die Frau am Telefon spricht schnell. Sehr schnell. Mit viel Schwäbisch."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Sprechen Sie bitte langsam!"
+    },
+    {
+      "speaker": "Die Arzthelferin",
+      "play": "Kommen Sie morgen um neun!"
+    },
+    {
+      "read": "Morgen um neun. Beim Arzt. Zum ersten Mal ist Ayisha auf der anderen Seite."
+    }
+  ],
+  "sentences": [
+    "Bleib heute im Bett!",
+    "Trink viel Tee!",
+    "Dann sei eine gute Patientin!",
+    "Iss eine Brezel!",
+    "Bring mir lieber Suppe.",
+    "Trinken Sie diesen Tee!",
+    "Und machen Sie das Fenster zu!",
+    "Geh bitte zum Arzt!",
+    "Sag mir das nicht!",
+    "Ruf Dr. Kühn an!",
+    "Sie ist sehr nett.",
+    "Sprechen Sie bitte langsam!",
+    "Kommen Sie morgen um neun!"
+  ]
+}

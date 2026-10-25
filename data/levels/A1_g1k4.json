@@ -1,0 +1,111 @@
+{
+  "level": "A1",
+  "category": "1.4 Fragen über Fragen",
+  "story": 1,
+  "storyTitle": "Ankunft",
+  "chapter": "1.4",
+  "title": "Fragen über Fragen",
+  "skill": "A1.fragen",
+  "beats": [
+    {
+      "read": "Am Abend sitzen alle in der Küche. Lea macht Tee. Max hat Brezeln. Natürlich."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Woher kommst du genau?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich komme aus Payyannur."
+    },
+    {
+      "speaker": "Max",
+      "play": "Wo ist das?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Payyannur ist in Kerala."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Im Süden von Indien. Am Meer. Mit Palmen, Kokosnüssen und sehr gutem Essen."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Ist es dort warm?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ja, es ist immer warm."
+    },
+    {
+      "read": "Lea schaut aus dem Fenster. Draußen: Regen. Acht Grad."
+    },
+    {
+      "speaker": "Max",
+      "play": "Lernst du schon lange Deutsch?"
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Nein, erst drei Monate. Aber ich lerne schnell!"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Was machst du, Max?"
+    },
+    {
+      "speaker": "Max",
+      "play": "Ich backe Brot und Brezeln."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Was macht ihr heute Abend?"
+    },
+    {
+      "speaker": "Lea",
+      "play": "Wir spielen oft Karten."
+    },
+    {
+      "speaker": "Lea",
+      "play": "Spielst du auch Karten?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Nein, ich spiele Cricket."
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Und ich bin sehr gut. Fast ein Profi!"
+    },
+    {
+      "speaker": "Max",
+      "play": "Ist das wahr?"
+    },
+    {
+      "read": "Ayisha nickt. Sehr ernst. Lea und Max schauen sich an."
+    },
+    {
+      "read": "Dann klopft es an der Tür. Laut. Dreimal. Lea wird blass."
+    },
+    {
+      "speaker": "Lea",
+      "read": "Oh nein. Das ist Frau Schäfer. Die Vermieterin."
+    }
+  ],
+  "sentences": [
+    "Woher kommst du genau?",
+    "Ich komme aus Payyannur.",
+    "Wo ist das?",
+    "Payyannur ist in Kerala.",
+    "Ist es dort warm?",
+    "Ja, es ist immer warm.",
+    "Lernst du schon lange Deutsch?",
+    "Was machst du, Max?",
+    "Ich backe Brot und Brezeln.",
+    "Was macht ihr heute Abend?",
+    "Wir spielen oft Karten.",
+    "Spielst du auch Karten?",
+    "Nein, ich spiele Cricket.",
+    "Ist das wahr?"
+  ]
+}

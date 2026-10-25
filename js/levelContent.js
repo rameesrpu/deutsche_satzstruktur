@@ -1,3 +1,5 @@
+import { STORY_CONTENT } from './storyContent.js';
+
 export const LEVEL_CONTENT = {
     A1: {
         label: 'A1 – Beginner',
@@ -10,9 +12,7 @@ export const LEVEL_CONTENT = {
             possessivartikel: { label: 'Possessivartikel',  file: 'data/levels/A1_possessivartikel.json' },
             praepositionen:   { label: 'Präpositionen',     file: 'data/levels/A1_praepositionen.json'   },
             zahlen_zeit:      { label: 'Zahlen & Zeit',     file: 'data/levels/A1_zahlen_zeit.json'      },
-            alltag:           { label: 'Alltag',            file: 'data/levels/A1_alltag.json'           },
-            story_neue_nachbarn:    { label: 'Story: Neue Nachbarn',    file: 'data/levels/A1_story_neue_nachbarn.json'    },
-            story_der_herbstmarkt: { label: 'Story: Der Herbstmarkt', file: 'data/levels/A1_story_der_herbstmarkt.json' }
+            alltag:           { label: 'Alltag',            file: 'data/levels/A1_alltag.json'           }
         }
     },
     A2: {
@@ -46,3 +46,32 @@ export const LEVEL_CONTENT = {
         }
     }
 };
+
+/**
+ * Story chapters and their drills, generated from data/stories/ (storyContent.js).
+ * They are added to LEVEL_CONTENT ahead of the grammar categories, each with
+ * `story` metadata: { kind: 'chapter'|'drill', chapterKey, index } where `index`
+ * is the chapter's position in the level's unlock order.
+ */
+for (const [level, stories] of Object.entries(STORY_CONTENT)) {
+    if (!LEVEL_CONTENT[level]) continue;
+    const storyCategories = {};
+    let index = 0;
+    stories.forEach(story => story.chapters.forEach(ch => {
+        storyCategories[ch.key] = { label: ch.label, file: ch.file,
+            story: { kind: 'chapter', chapterKey: ch.key, index, storyNo: story.story, storyTitle: story.title } };
+        storyCategories[ch.drillKey] = { label: ch.drillLabel, file: ch.drillFile,
+            story: { kind: 'drill', chapterKey: ch.key, index, storyNo: story.story, storyTitle: story.title } };
+        index++;
+    }));
+    LEVEL_CONTENT[level].categories = { ...storyCategories, ...LEVEL_CONTENT[level].categories };
+}
+
+/**
+ * Chapter keys of a level in unlock order.
+ * @param {string} level
+ * @returns {string[]}
+ */
+export function chapterOrder(level) {
+    return (STORY_CONTENT[level] || []).flatMap(story => story.chapters.map(ch => ch.key));
+}
