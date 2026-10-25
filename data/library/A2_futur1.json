@@ -1,7 +1,7 @@
 {
   "level": "A2",
   "category": "Futur I",
-  "version": "2026-06-12",
+  "version": "2026-10-25",
   "sentences": [
     {
       "text": "Ich werde morgen früh aufstehen.",
@@ -874,7 +874,7 @@
         },
         {
           "id": 1781001882491,
-          "type": "object",
+          "type": "other",
           "text": "mehr",
           "x": 320,
           "y": 160,

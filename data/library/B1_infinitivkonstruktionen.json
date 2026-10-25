@@ -1,7 +1,7 @@
 {
   "level": "B1",
   "category": "Infinitivkonstruktionen",
-  "version": "2026-06-12",
+  "version": "2026-10-25",
   "sentences": [
     {
       "text": "Ich versuche, mehr Deutsch zu sprechen.",
@@ -40,7 +40,7 @@
         },
         {
           "id": 1781001882411,
-          "type": "object",
+          "type": "other",
           "text": "mehr",
           "x": 320,
           "y": 160,
@@ -1134,7 +1134,7 @@
           "text": "sich,",
           "x": 320,
           "y": 160,
-          "gender": "none",
+          "gender": "f",
           "case": "akk",
           "number": "sg",
           "flowDirection": "right",

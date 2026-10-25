@@ -1,7 +1,7 @@
 {
   "level": "A2",
   "category": "Reflexivverben",
-  "version": "2026-06-12",
+  "version": "2026-10-25",
   "sentences": [
     {
       "text": "Ich freue mich auf das Wochenende.",
@@ -533,7 +533,7 @@
           "text": "sich",
           "x": 320,
           "y": 160,
-          "gender": "none",
+          "gender": "m",
           "case": "akk",
           "number": "sg",
           "flowDirection": "right",
@@ -958,7 +958,7 @@
           "text": "sich",
           "x": 320,
           "y": 160,
-          "gender": "none",
+          "gender": "m",
           "case": "akk",
           "number": "sg",
           "flowDirection": "right",

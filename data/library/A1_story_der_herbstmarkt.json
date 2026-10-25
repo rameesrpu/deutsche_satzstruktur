@@ -1,7 +1,7 @@
 {
   "level": "A1",
   "category": "Story: Der Herbstmarkt",
-  "version": "2026-06-12",
+  "version": "2026-10-25",
   "sentences": [
     {
       "text": "Es ist Samstag, der neunte Oktober.",
@@ -269,7 +269,7 @@
         },
         {
           "id": 1781214527806,
-          "type": "subject",
+          "type": "other",
           "text": "Herbst.",
           "x": 960,
           "y": 160,
@@ -1731,7 +1731,7 @@
           "text": "Lena,",
           "x": 400,
           "y": 160,
-          "gender": "none",
+          "gender": "f",
           "case": "nom",
           "number": "sg",
           "flowDirection": "right",
@@ -2718,7 +2718,7 @@
           "y": 160,
           "gender": "none",
           "case": "akk",
-          "number": "sg",
+          "number": "pl",
           "flowDirection": "right",
           "conjugation": {
             "pronoun": "sie_pl"
@@ -6037,7 +6037,7 @@
       "words": [
         {
           "id": 1781215439170,
-          "type": "subject",
+          "type": "other",
           "text": "Mmm",
           "x": 160,
           "y": 160,
@@ -11299,7 +11299,7 @@
         },
         {
           "id": 1781216036377,
-          "type": "subject",
+          "type": "other",
           "text": "viel",
           "x": 240,
           "y": 160,

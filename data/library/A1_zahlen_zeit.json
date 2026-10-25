@@ -1,7 +1,7 @@
 {
   "level": "A1",
   "category": "Zahlen & Zeit",
-  "version": "2026-06-12",
+  "version": "2026-10-25",
   "sentences": [
     {
       "text": "Es ist drei Uhr.",
@@ -1560,7 +1560,7 @@
           "x": 320,
           "y": 160,
           "gender": "n",
-          "case": "nom",
+          "case": "akk",
           "number": "sg",
           "flowDirection": "right",
           "conjugation": {
@@ -1576,7 +1576,7 @@
           "x": 400,
           "y": 160,
           "gender": "n",
-          "case": "nom",
+          "case": "akk",
           "number": "sg",
           "flowDirection": "right",
           "conjugation": {
@@ -1587,13 +1587,13 @@
         },
         {
           "id": 1781278543966,
-          "type": "subject",
+          "type": "object",
           "text": "Äpfel.",
           "x": 480,
           "y": 160,
-          "gender": "none",
-          "case": "nom",
-          "number": "sg",
+          "gender": "m",
+          "case": "akk",
+          "number": "pl",
           "flowDirection": "right",
           "conjugation": {
             "pronoun": "none"

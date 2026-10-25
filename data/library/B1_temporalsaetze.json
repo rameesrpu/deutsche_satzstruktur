@@ -1,7 +1,7 @@
 {
   "level": "B1",
   "category": "Temporalsätze",
-  "version": "2026-06-12",
+  "version": "2026-10-25",
   "sentences": [
     {
       "text": "Als ich Kind war, wohnte ich in München.",
@@ -737,7 +737,7 @@
         },
         {
           "id": 1781001882536,
-          "type": "object",
+          "type": "other",
           "text": "viel",
           "x": 720,
           "y": 160,

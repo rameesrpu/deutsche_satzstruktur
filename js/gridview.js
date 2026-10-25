@@ -438,7 +438,7 @@ class GridViewModel {
         if (word.type.includes('object') || word.type === 'adjective') {
             // Check if it's an object pronoun (mich, dich, mir, dir, etc.)
             // Strip punctuation before checking
-            const text = word.text.toLowerCase().replace(/[.,!?;:]$/g, '');
+            const text = word.text.toLowerCase().replace(/[.,!?;:]+$/, '');
             const objectPronouns = {
                 // Accusative pronouns
                 'mich': 'ich',

@@ -9,7 +9,8 @@ Usage:
 Reads the saved sentences file (which includes manually corrected word data),
 matches each sentence to its level JSON by text + level + category, and writes
 the analyzed word data to data/library/<filename>.json (separate from the
-source sentence lists in data/levels/).
+source sentence lists in data/levels/). Manual fixes from
+scripts/library_corrections.py are applied on top.
 
 Sentences not found in the saved file are written as { "text": "..." } with no
 words array — the app falls back to the backend for those.
@@ -20,6 +21,8 @@ import os
 import glob
 import sys
 from datetime import date
+
+from library_corrections import apply_corrections
 
 REPO_ROOT   = os.path.join(os.path.dirname(__file__), '..')
 LEVELS_DIR  = os.path.join(REPO_ROOT, 'data', 'levels')
@@ -89,6 +92,7 @@ def process_level_file(filepath, saved_index, version):
         'version':  version,
         'sentences': sentences_out,
     }
+    apply_corrections(os.path.basename(filepath), output)
 
     out_path = os.path.join(LIBRARY_DIR, os.path.basename(filepath))
     with open(out_path, 'w', encoding='utf-8') as f:

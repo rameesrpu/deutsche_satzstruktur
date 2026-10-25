@@ -1,7 +1,7 @@
 {
   "level": "B1",
   "category": "Zweiteilige Konnektoren",
-  "version": "2026-06-12",
+  "version": "2026-10-25",
   "sentences": [
     {
       "text": "Sowohl Deutsch als auch Englisch sind wichtig.",
@@ -1317,7 +1317,7 @@
         },
         {
           "id": 1781001882596,
-          "type": "object",
+          "type": "other",
           "text": "wenig",
           "x": 400,
           "y": 160,

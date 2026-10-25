@@ -1,7 +1,7 @@
 {
   "level": "A1",
   "category": "Hauptsatz",
-  "version": "2026-06-12",
+  "version": "2026-10-25",
   "sentences": [
     {
       "text": "Ich bin ein Student.",
@@ -571,13 +571,13 @@
         },
         {
           "id": 1781001882125,
-          "type": "object-akk",
+          "type": "object",
           "text": "Äpfel.",
           "x": 400,
           "y": 160,
-          "gender": "none",
+          "gender": "m",
           "case": "akk",
-          "number": "sg",
+          "number": "pl",
           "flowDirection": "right",
           "conjugation": {
             "pronoun": "none"

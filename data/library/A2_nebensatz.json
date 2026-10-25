@@ -1,7 +1,7 @@
 {
   "level": "A2",
   "category": "Nebensatz",
-  "version": "2026-06-12",
+  "version": "2026-10-25",
   "sentences": [
     {
       "text": "Ich lerne Deutsch, weil ich in Deutschland arbeiten will.",
@@ -1758,7 +1758,7 @@
         },
         {
           "id": 1781001882171,
-          "type": "subject",
+          "type": "other",
           "text": "viel,",
           "x": 320,
           "y": 160,

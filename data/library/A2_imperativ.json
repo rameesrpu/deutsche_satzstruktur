@@ -1,7 +1,7 @@
 {
   "level": "A2",
   "category": "Imperativ",
-  "version": "2026-06-12",
+  "version": "2026-10-25",
   "sentences": [
     {
       "text": "Öffne bitte das Fenster!",
@@ -374,7 +374,7 @@
         },
         {
           "id": 1781001882202,
-          "type": "object",
+          "type": "other",
           "text": "mehr",
           "x": 240,
           "y": 160,
