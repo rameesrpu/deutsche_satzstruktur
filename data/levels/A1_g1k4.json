@@ -92,6 +92,515 @@
       "read": "Oh nein. Das ist Frau Schäfer. Die Vermieterin."
     }
   ],
+  "glossary": {
+    "am": {
+      "de": "am (= an dem)",
+      "en": "at the, on the",
+      "forms": [
+        "am"
+      ]
+    },
+    "Abend": {
+      "de": "der Abend, -e",
+      "en": "evening",
+      "forms": [
+        "Abend"
+      ]
+    },
+    "sitzen": {
+      "de": "sitzen",
+      "en": "to sit",
+      "forms": [
+        "sitzt",
+        "sitzen"
+      ]
+    },
+    "alle": {
+      "de": "alle",
+      "en": "all; everyone",
+      "forms": [
+        "alle"
+      ]
+    },
+    "Küche": {
+      "de": "die Küche, -n",
+      "en": "kitchen",
+      "forms": [
+        "Küche"
+      ]
+    },
+    "machen": {
+      "de": "machen",
+      "en": "to make, do",
+      "forms": [
+        "machen",
+        "macht",
+        "machst",
+        "gemacht"
+      ]
+    },
+    "Tee": {
+      "de": "der Tee, -s",
+      "en": "tea",
+      "forms": [
+        "Tee"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "Brezel": {
+      "de": "die Brezel, -n",
+      "en": "pretzel",
+      "forms": [
+        "Brezel",
+        "Brezeln"
+      ]
+    },
+    "natürlich": {
+      "de": "natürlich",
+      "en": "of course",
+      "forms": [
+        "natürlich"
+      ]
+    },
+    "woher": {
+      "de": "woher?",
+      "en": "where from?",
+      "forms": [
+        "woher"
+      ]
+    },
+    "kommen": {
+      "de": "kommen",
+      "en": "to come",
+      "forms": [
+        "kommen",
+        "kommt",
+        "komme",
+        "kommst"
+      ]
+    },
+    "genau": {
+      "de": "genau",
+      "en": "exactly",
+      "forms": [
+        "genau"
+      ]
+    },
+    "aus": {
+      "de": "aus + Dat.",
+      "en": "from, out of",
+      "forms": [
+        "aus"
+      ]
+    },
+    "wo": {
+      "de": "wo?",
+      "en": "where?",
+      "forms": [
+        "wo"
+      ]
+    },
+    "im": {
+      "de": "im (= in dem)",
+      "en": "in the",
+      "forms": [
+        "im"
+      ]
+    },
+    "Süden": {
+      "de": "der Süden",
+      "en": "south",
+      "forms": [
+        "Süden"
+      ]
+    },
+    "von": {
+      "de": "von + Dat.",
+      "en": "from; of",
+      "forms": [
+        "von"
+      ]
+    },
+    "Meer": {
+      "de": "das Meer, -e",
+      "en": "sea",
+      "forms": [
+        "Meer"
+      ]
+    },
+    "mit": {
+      "de": "mit + Dat.",
+      "en": "with",
+      "forms": [
+        "mit"
+      ]
+    },
+    "Palme": {
+      "de": "die Palme, -n",
+      "en": "palm tree",
+      "forms": [
+        "Palmen"
+      ]
+    },
+    "Kokosnuss": {
+      "de": "die Kokosnuss, -nüsse",
+      "en": "coconut",
+      "forms": [
+        "Kokosnüssen"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "gut": {
+      "de": "gut",
+      "en": "good; well",
+      "forms": [
+        "gut",
+        "gute",
+        "gutem",
+        "Guten"
+      ]
+    },
+    "Essen": {
+      "de": "das Essen; essen (isst)",
+      "en": "food, meal; to eat",
+      "forms": [
+        "Essen",
+        "essen",
+        "isst",
+        "esse",
+        "Iss"
+      ]
+    },
+    "dort": {
+      "de": "dort",
+      "en": "there",
+      "forms": [
+        "dort"
+      ]
+    },
+    "warm": {
+      "de": "warm",
+      "en": "warm",
+      "forms": [
+        "warm"
+      ]
+    },
+    "immer": {
+      "de": "immer",
+      "en": "always",
+      "forms": [
+        "immer"
+      ]
+    },
+    "schauen": {
+      "de": "schauen",
+      "en": "to look",
+      "forms": [
+        "schaut",
+        "schauen"
+      ]
+    },
+    "Fenster": {
+      "de": "das Fenster, -",
+      "en": "window",
+      "forms": [
+        "Fenster",
+        "Fenstern"
+      ]
+    },
+    "draußen": {
+      "de": "draußen",
+      "en": "outside",
+      "forms": [
+        "draußen"
+      ]
+    },
+    "Regen": {
+      "de": "der Regen",
+      "en": "rain",
+      "forms": [
+        "Regen"
+      ]
+    },
+    "acht": {
+      "de": "acht",
+      "en": "eight",
+      "forms": [
+        "acht"
+      ]
+    },
+    "Grad": {
+      "de": "das Grad",
+      "en": "degree(s)",
+      "forms": [
+        "Grad"
+      ]
+    },
+    "lernen": {
+      "de": "lernen",
+      "en": "to learn, study",
+      "forms": [
+        "lerne",
+        "lernst",
+        "lernen"
+      ]
+    },
+    "schon": {
+      "de": "schon",
+      "en": "already; (schon wieder) again!",
+      "forms": [
+        "schon"
+      ]
+    },
+    "lange": {
+      "de": "lange",
+      "en": "(for) a long time",
+      "forms": [
+        "lange"
+      ]
+    },
+    "Deutsch": {
+      "de": "das Deutsch",
+      "en": "German (the language)",
+      "forms": [
+        "Deutsch"
+      ]
+    },
+    "erst": {
+      "de": "erst",
+      "en": "only (so far); first",
+      "forms": [
+        "erst"
+      ]
+    },
+    "drei": {
+      "de": "drei",
+      "en": "three",
+      "forms": [
+        "drei"
+      ]
+    },
+    "Monat": {
+      "de": "der Monat, -e",
+      "en": "month",
+      "forms": [
+        "Monate"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "schnell": {
+      "de": "schnell",
+      "en": "fast, quick(ly)",
+      "forms": [
+        "schnell",
+        "schneller"
+      ]
+    },
+    "was": {
+      "de": "was?",
+      "en": "what?",
+      "forms": [
+        "was"
+      ]
+    },
+    "backen": {
+      "de": "backen",
+      "en": "to bake",
+      "forms": [
+        "backe"
+      ]
+    },
+    "Brot": {
+      "de": "das Brot, -e",
+      "en": "bread",
+      "forms": [
+        "Brot"
+      ]
+    },
+    "heute": {
+      "de": "heute",
+      "en": "today",
+      "forms": [
+        "heute"
+      ]
+    },
+    "spielen": {
+      "de": "spielen",
+      "en": "to play",
+      "forms": [
+        "spielen",
+        "spielt",
+        "spiele",
+        "Spielst"
+      ]
+    },
+    "oft": {
+      "de": "oft",
+      "en": "often",
+      "forms": [
+        "oft"
+      ]
+    },
+    "Karte": {
+      "de": "die Karte, -n",
+      "en": "card",
+      "forms": [
+        "Karte",
+        "Karten"
+      ]
+    },
+    "auch": {
+      "de": "auch",
+      "en": "also, too",
+      "forms": [
+        "auch"
+      ]
+    },
+    "fast": {
+      "de": "fast",
+      "en": "almost",
+      "forms": [
+        "fast"
+      ]
+    },
+    "Profi": {
+      "de": "der Profi, -s",
+      "en": "pro, professional",
+      "forms": [
+        "Profi"
+      ]
+    },
+    "wahr": {
+      "de": "wahr",
+      "en": "true",
+      "forms": [
+        "wahr"
+      ]
+    },
+    "nicken": {
+      "de": "nicken",
+      "en": "to nod",
+      "forms": [
+        "nickt"
+      ]
+    },
+    "ernst": {
+      "de": "ernst",
+      "en": "serious(ly)",
+      "forms": [
+        "ernst"
+      ]
+    },
+    "anschauen": {
+      "de": "an|schauen",
+      "en": "to look at",
+      "forms": [
+        "schaut … an",
+        "schauen … an"
+      ]
+    },
+    "sich": {
+      "de": "sich",
+      "en": "oneself; each other",
+      "forms": [
+        "sich"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "klopfen": {
+      "de": "klopfen",
+      "en": "to knock",
+      "forms": [
+        "klopft"
+      ]
+    },
+    "an": {
+      "de": "an",
+      "en": "at, on; to",
+      "forms": [
+        "an"
+      ]
+    },
+    "Tür": {
+      "de": "die Tür, -en",
+      "en": "door",
+      "forms": [
+        "Tür",
+        "Türen"
+      ]
+    },
+    "laut": {
+      "de": "laut",
+      "en": "loud(ly)",
+      "forms": [
+        "laut"
+      ]
+    },
+    "dreimal": {
+      "de": "dreimal",
+      "en": "three times",
+      "forms": [
+        "dreimal"
+      ]
+    },
+    "werden": {
+      "de": "werden (wird)",
+      "en": "to become",
+      "forms": [
+        "wird",
+        "werden"
+      ]
+    },
+    "blass": {
+      "de": "blass",
+      "en": "pale",
+      "forms": [
+        "blass"
+      ]
+    },
+    "Frau": {
+      "de": "die Frau, -en",
+      "en": "woman; Mrs",
+      "forms": [
+        "Frau",
+        "Frauen"
+      ]
+    },
+    "Vermieterin": {
+      "de": "die Vermieterin, -nen",
+      "en": "landlady",
+      "forms": [
+        "Vermieterin"
+      ]
+    }
+  },
   "sentences": [
     "Woher kommst du genau?",
     "Ich komme aus Payyannur.",

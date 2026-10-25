@@ -100,6 +100,532 @@
       "read": "Aber beim Bezahlen gibt der Kellner ihr eine Serviette. Darauf steht: „Kerala Store, Bad Cannstatt. Der beste Reis in Stuttgart.“"
     }
   ],
+  "glossary": {
+    "vermissen": {
+      "de": "vermissen",
+      "en": "to miss (someone, something)",
+      "forms": [
+        "vermisst"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "Idee": {
+      "de": "die Idee, -n",
+      "en": "idea",
+      "forms": [
+        "Idee"
+      ]
+    },
+    "indisch": {
+      "de": "indisch",
+      "en": "Indian",
+      "forms": [
+        "indisches",
+        "Indisch"
+      ]
+    },
+    "Restaurant": {
+      "de": "das Restaurant, -s",
+      "en": "restaurant",
+      "forms": [
+        "Restaurant"
+      ]
+    },
+    "Stadt": {
+      "de": "die Stadt, Städte",
+      "en": "city, town",
+      "forms": [
+        "Stadt"
+      ]
+    },
+    "heißen": {
+      "de": "heißen",
+      "en": "to be called",
+      "forms": [
+        "heißt",
+        "heiße"
+      ]
+    },
+    "Haus": {
+      "de": "das Haus, Häuser",
+      "en": "house",
+      "forms": [
+        "Haus"
+      ]
+    },
+    "rot": {
+      "de": "rot",
+      "en": "red",
+      "forms": [
+        "rot",
+        "rote",
+        "roten"
+      ]
+    },
+    "Wand": {
+      "de": "die Wand, Wände",
+      "en": "wall",
+      "forms": [
+        "Wände"
+      ]
+    },
+    "golden": {
+      "de": "golden",
+      "en": "golden",
+      "forms": [
+        "goldene"
+      ]
+    },
+    "Lampe": {
+      "de": "die Lampe, -n",
+      "en": "lamp",
+      "forms": [
+        "Lampe",
+        "Lampen"
+      ]
+    },
+    "Bollywood-Musik": {
+      "de": "die Bollywood-Musik",
+      "en": "Bollywood music",
+      "forms": [
+        "Bollywood-Musik"
+      ]
+    },
+    "mitsummen": {
+      "de": "mit|summen",
+      "en": "to hum along",
+      "forms": [
+        "summt … mit"
+      ]
+    },
+    "kennen": {
+      "de": "kennen",
+      "en": "to know (a person, a thing)",
+      "forms": [
+        "Kennst",
+        "kenne",
+        "kennt"
+      ]
+    },
+    "jeder": {
+      "de": "jeder, jede, jedes",
+      "en": "every, each",
+      "forms": [
+        "Jeden",
+        "Jede",
+        "jedes"
+      ]
+    },
+    "Lied": {
+      "de": "das Lied, -er",
+      "en": "song",
+      "forms": [
+        "Lied"
+      ]
+    },
+    "anschauen": {
+      "de": "an|schauen",
+      "en": "to look at",
+      "forms": [
+        "schaut … an",
+        "schauen … an"
+      ]
+    },
+    "was": {
+      "de": "was?",
+      "en": "what?",
+      "forms": [
+        "was"
+      ]
+    },
+    "möchten": {
+      "de": "möchten (ich möchte)",
+      "en": "would like",
+      "forms": [
+        "möchten",
+        "möchte",
+        "Möchtest",
+        "Möchtet"
+      ]
+    },
+    "trinken": {
+      "de": "trinken",
+      "en": "to drink",
+      "forms": [
+        "trinken",
+        "Trink",
+        "Trinken"
+      ]
+    },
+    "bitte": {
+      "de": "bitte",
+      "en": "please",
+      "forms": [
+        "bitte"
+      ]
+    },
+    "nur": {
+      "de": "nur",
+      "en": "only, just",
+      "forms": [
+        "nur"
+      ]
+    },
+    "Wasser": {
+      "de": "das Wasser",
+      "en": "water",
+      "forms": [
+        "Wasser"
+      ]
+    },
+    "Essen": {
+      "de": "das Essen; essen (isst)",
+      "en": "food, meal; to eat",
+      "forms": [
+        "Essen",
+        "essen",
+        "isst",
+        "esse",
+        "Iss"
+      ]
+    },
+    "scharf": {
+      "de": "scharf",
+      "en": "spicy, hot",
+      "forms": [
+        "scharf"
+      ]
+    },
+    "auch": {
+      "de": "auch",
+      "en": "also, too",
+      "forms": [
+        "auch"
+      ]
+    },
+    "zwanzig": {
+      "de": "zwanzig",
+      "en": "twenty",
+      "forms": [
+        "zwanzig"
+      ]
+    },
+    "Minute": {
+      "de": "die Minute, -n",
+      "en": "minute",
+      "forms": [
+        "Minuten"
+      ]
+    },
+    "später": {
+      "de": "später",
+      "en": "later",
+      "forms": [
+        "später"
+      ]
+    },
+    "kommen": {
+      "de": "kommen",
+      "en": "to come",
+      "forms": [
+        "kommen",
+        "kommt",
+        "komme",
+        "kommst"
+      ]
+    },
+    "probieren": {
+      "de": "probieren",
+      "en": "to try, taste",
+      "forms": [
+        "probiert"
+      ]
+    },
+    "sagen": {
+      "de": "sagen",
+      "en": "to say",
+      "forms": [
+        "sagt",
+        "sagen",
+        "sagst",
+        "sage",
+        "Sag"
+      ]
+    },
+    "nichts": {
+      "de": "nichts",
+      "en": "nothing",
+      "forms": [
+        "nichts"
+      ]
+    },
+    "wie": {
+      "de": "wie",
+      "en": "how; like, as",
+      "forms": [
+        "wie"
+      ]
+    },
+    "nicht": {
+      "de": "nicht",
+      "en": "not",
+      "forms": [
+        "nicht"
+      ]
+    },
+    "Reis": {
+      "de": "der Reis",
+      "en": "rice",
+      "forms": [
+        "Reis"
+      ]
+    },
+    "falsch": {
+      "de": "falsch",
+      "en": "wrong",
+      "forms": [
+        "falsch"
+      ]
+    },
+    "vier": {
+      "de": "vier",
+      "en": "four",
+      "forms": [
+        "vier"
+      ]
+    },
+    "von": {
+      "de": "von + Dat.",
+      "en": "from; of",
+      "forms": [
+        "von"
+      ]
+    },
+    "zehn": {
+      "de": "zehn",
+      "en": "ten",
+      "forms": [
+        "zehn"
+      ]
+    },
+    "alles": {
+      "de": "alles",
+      "en": "everything",
+      "forms": [
+        "alles"
+      ]
+    },
+    "sein": {
+      "de": "sein, seine",
+      "en": "his; its",
+      "forms": [
+        "sein",
+        "seine",
+        "seinen",
+        "seiner"
+      ]
+    },
+    "Teller": {
+      "de": "der Teller, -",
+      "en": "plate",
+      "forms": [
+        "Teller"
+      ]
+    },
+    "noch": {
+      "de": "noch",
+      "en": "still; yet; (noch ein) another",
+      "forms": [
+        "noch"
+      ]
+    },
+    "Nachtisch": {
+      "de": "der Nachtisch, -e",
+      "en": "dessert",
+      "forms": [
+        "Nachtisch"
+      ]
+    },
+    "richtig": {
+      "de": "richtig",
+      "en": "correct, right; proper",
+      "forms": [
+        "richtig",
+        "richtiges"
+      ]
+    },
+    "Kellner": {
+      "de": "der Kellner, -",
+      "en": "waiter",
+      "forms": [
+        "Kellner"
+      ]
+    },
+    "hören": {
+      "de": "hören",
+      "en": "to hear",
+      "forms": [
+        "hört",
+        "gehört"
+      ]
+    },
+    "lachen": {
+      "de": "lachen",
+      "en": "to laugh",
+      "forms": [
+        "lacht",
+        "lachen"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "müssen": {
+      "de": "müssen (muss)",
+      "en": "must, to have to",
+      "forms": [
+        "muss",
+        "müssen"
+      ]
+    },
+    "selbst": {
+      "de": "selbst",
+      "en": "yourself, oneself",
+      "forms": [
+        "selbst"
+      ]
+    },
+    "kochen": {
+      "de": "kochen",
+      "en": "to cook",
+      "forms": [
+        "kochen",
+        "kocht",
+        "koche",
+        "Kochst"
+      ]
+    },
+    "lächeln": {
+      "de": "lächeln",
+      "en": "to smile",
+      "forms": [
+        "lächelt"
+      ]
+    },
+    "höflich": {
+      "de": "höflich",
+      "en": "polite(ly)",
+      "forms": [
+        "höflich"
+      ]
+    },
+    "wenn": {
+      "de": "wenn",
+      "en": "if, when",
+      "forms": [
+        "wenn"
+      ]
+    },
+    "wollen": {
+      "de": "wollen (will)",
+      "en": "to want",
+      "forms": [
+        "will"
+      ]
+    },
+    "heute": {
+      "de": "heute",
+      "en": "today",
+      "forms": [
+        "heute"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "beim": {
+      "de": "beim (= bei dem)",
+      "en": "at the; while",
+      "forms": [
+        "beim"
+      ]
+    },
+    "Bezahlen": {
+      "de": "das Bezahlen",
+      "en": "paying",
+      "forms": [
+        "Bezahlen"
+      ]
+    },
+    "geben": {
+      "de": "geben (gibt)",
+      "en": "to give; (es gibt) there is",
+      "forms": [
+        "gibt",
+        "geben"
+      ]
+    },
+    "Serviette": {
+      "de": "die Serviette, -n",
+      "en": "napkin",
+      "forms": [
+        "Serviette"
+      ]
+    },
+    "darauf": {
+      "de": "darauf",
+      "en": "on it",
+      "forms": [
+        "Darauf"
+      ]
+    },
+    "stehen": {
+      "de": "stehen",
+      "en": "to stand; (steht da) it says",
+      "forms": [
+        "steht",
+        "stehen"
+      ]
+    },
+    "Bad": {
+      "de": "das Bad, Bäder",
+      "en": "bathroom",
+      "forms": [
+        "Bad"
+      ]
+    },
+    "beste": {
+      "de": "der/die/das beste",
+      "en": "the best",
+      "forms": [
+        "beste"
+      ]
+    }
+  },
   "sentences": [
     "Was möchten Sie trinken?",
     "Ich möchte einen Mango-Lassi.",

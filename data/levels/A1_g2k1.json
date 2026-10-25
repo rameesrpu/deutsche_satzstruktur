@@ -89,6 +89,637 @@
       "read": "Ein altes Foto. Schwarz-weiß. Eine junge Frau in einer Uniform. Und sie sieht aus wie … eine Frau aus Kerala."
     }
   ],
+  "glossary": {
+    "Samstag": {
+      "de": "der Samstag, -e",
+      "en": "Saturday",
+      "forms": [
+        "Samstag"
+      ]
+    },
+    "Zimmer": {
+      "de": "das Zimmer, -",
+      "en": "room",
+      "forms": [
+        "Zimmer"
+      ]
+    },
+    "noch": {
+      "de": "noch",
+      "en": "still; yet; (noch ein) another",
+      "forms": [
+        "noch"
+      ]
+    },
+    "fast": {
+      "de": "fast",
+      "en": "almost",
+      "forms": [
+        "fast"
+      ]
+    },
+    "leer": {
+      "de": "leer",
+      "en": "empty",
+      "forms": [
+        "leer"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "Liste": {
+      "de": "die Liste, -n",
+      "en": "list",
+      "forms": [
+        "Liste"
+      ]
+    },
+    "brauchen": {
+      "de": "brauchen",
+      "en": "to need",
+      "forms": [
+        "brauche",
+        "braucht",
+        "brauchst",
+        "brauchen"
+      ]
+    },
+    "Tisch": {
+      "de": "der Tisch, -e",
+      "en": "table",
+      "forms": [
+        "Tisch",
+        "Tische"
+      ]
+    },
+    "auch": {
+      "de": "auch",
+      "en": "also, too",
+      "forms": [
+        "auch"
+      ]
+    },
+    "Stuhl": {
+      "de": "der Stuhl, Stühle",
+      "en": "chair",
+      "forms": [
+        "Stuhl"
+      ]
+    },
+    "suchen": {
+      "de": "suchen",
+      "en": "to look for",
+      "forms": [
+        "suche",
+        "sucht"
+      ]
+    },
+    "Spiegel": {
+      "de": "der Spiegel, -",
+      "en": "mirror",
+      "forms": [
+        "Spiegel"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "wichtig": {
+      "de": "wichtig",
+      "en": "important",
+      "forms": [
+        "wichtig"
+      ]
+    },
+    "Mode": {
+      "de": "die Mode",
+      "en": "fashion",
+      "forms": [
+        "Mode"
+      ]
+    },
+    "Auto": {
+      "de": "das Auto, -s",
+      "en": "car",
+      "forms": [
+        "Auto"
+      ]
+    },
+    "klein": {
+      "de": "klein",
+      "en": "small, little",
+      "forms": [
+        "klein",
+        "kleinen",
+        "kleines",
+        "kleiner"
+      ]
+    },
+    "mitkommen": {
+      "de": "mit|kommen",
+      "en": "to come along",
+      "forms": [
+        "kommt … mit",
+        "komme … mit",
+        "Kommst … mit",
+        "kommen … mit",
+        "mitgekommen"
+      ]
+    },
+    "tragen": {
+      "de": "tragen (trägt)",
+      "en": "to carry; to wear",
+      "forms": [
+        "trägt",
+        "tragen"
+      ]
+    },
+    "nichts": {
+      "de": "nichts",
+      "en": "nothing",
+      "forms": [
+        "nichts"
+      ]
+    },
+    "Essen": {
+      "de": "das Essen; essen (isst)",
+      "en": "food, meal; to eat",
+      "forms": [
+        "Essen",
+        "essen",
+        "isst",
+        "esse",
+        "Iss"
+      ]
+    },
+    "Möbelhaus": {
+      "de": "das Möbelhaus, -häuser",
+      "en": "furniture store",
+      "forms": [
+        "Möbelhaus"
+      ]
+    },
+    "riesig": {
+      "de": "riesig",
+      "en": "huge",
+      "forms": [
+        "riesig"
+      ]
+    },
+    "drei": {
+      "de": "drei",
+      "en": "three",
+      "forms": [
+        "drei"
+      ]
+    },
+    "Etage": {
+      "de": "die Etage, -n",
+      "en": "floor, storey",
+      "forms": [
+        "Etagen"
+      ]
+    },
+    "tausend": {
+      "de": "tausend",
+      "en": "thousand",
+      "forms": [
+        "tausend"
+      ]
+    },
+    "sehen": {
+      "de": "sehen (sieht)",
+      "en": "to see",
+      "forms": [
+        "Siehst",
+        "sehe",
+        "sieht",
+        "sehen"
+      ]
+    },
+    "da": {
+      "de": "da",
+      "en": "there; here; then",
+      "forms": [
+        "da"
+      ]
+    },
+    "zu": {
+      "de": "zu",
+      "en": "to; too; closed",
+      "forms": [
+        "zu"
+      ]
+    },
+    "teuer": {
+      "de": "teuer",
+      "en": "expensive",
+      "forms": [
+        "teuer"
+      ]
+    },
+    "nehmen": {
+      "de": "nehmen (nimmt)",
+      "en": "to take",
+      "forms": [
+        "nimmt",
+        "nehme",
+        "nehmen"
+      ]
+    },
+    "hier": {
+      "de": "hier",
+      "en": "here",
+      "forms": [
+        "hier"
+      ]
+    },
+    "stehen": {
+      "de": "stehen",
+      "en": "to stand; (steht da) it says",
+      "forms": [
+        "steht",
+        "stehen"
+      ]
+    },
+    "vor": {
+      "de": "vor",
+      "en": "in front of; before",
+      "forms": [
+        "vor"
+      ]
+    },
+    "pink": {
+      "de": "pink",
+      "en": "pink",
+      "forms": [
+        "pink"
+      ]
+    },
+    "mit": {
+      "de": "mit + Dat.",
+      "en": "with",
+      "forms": [
+        "mit"
+      ]
+    },
+    "Glitzer": {
+      "de": "der Glitzer",
+      "en": "glitter",
+      "forms": [
+        "Glitzer"
+      ]
+    },
+    "finden": {
+      "de": "finden",
+      "en": "to find; to think (opinion)",
+      "forms": [
+        "findet",
+        "finde",
+        "finden"
+      ]
+    },
+    "super": {
+      "de": "super",
+      "en": "great",
+      "forms": [
+        "super"
+      ]
+    },
+    "mögen": {
+      "de": "mögen (mag)",
+      "en": "to like",
+      "forms": [
+        "mag"
+      ]
+    },
+    "nicht": {
+      "de": "nicht",
+      "en": "not",
+      "forms": [
+        "nicht"
+      ]
+    },
+    "kaufen": {
+      "de": "kaufen",
+      "en": "to buy",
+      "forms": [
+        "kaufe",
+        "kauft"
+      ]
+    },
+    "Lampe": {
+      "de": "die Lampe, -n",
+      "en": "lamp",
+      "forms": [
+        "Lampe",
+        "Lampen"
+      ]
+    },
+    "an": {
+      "de": "an",
+      "en": "at, on; to",
+      "forms": [
+        "an"
+      ]
+    },
+    "Kasse": {
+      "de": "die Kasse, -n",
+      "en": "checkout, till",
+      "forms": [
+        "Kasse"
+      ]
+    },
+    "schauen": {
+      "de": "schauen",
+      "en": "to look",
+      "forms": [
+        "schaut",
+        "schauen"
+      ]
+    },
+    "Einkaufswagen": {
+      "de": "der Einkaufswagen, -",
+      "en": "shopping trolley",
+      "forms": [
+        "Einkaufswagen"
+      ]
+    },
+    "zwei": {
+      "de": "zwei",
+      "en": "two",
+      "forms": [
+        "zwei"
+      ]
+    },
+    "Kissen": {
+      "de": "das Kissen, -",
+      "en": "cushion, pillow",
+      "forms": [
+        "Kissen"
+      ]
+    },
+    "Pflanze": {
+      "de": "die Pflanze, -n",
+      "en": "plant",
+      "forms": [
+        "Pflanzen"
+      ]
+    },
+    "kein": {
+      "de": "kein, keine",
+      "en": "no, not a",
+      "forms": [
+        "kein",
+        "keine",
+        "keinen"
+      ]
+    },
+    "Platz": {
+      "de": "der Platz, Plätze",
+      "en": "space, room; seat",
+      "forms": [
+        "Platz"
+      ]
+    },
+    "voll": {
+      "de": "voll",
+      "en": "full",
+      "forms": [
+        "voll"
+      ]
+    },
+    "sitzen": {
+      "de": "sitzen",
+      "en": "to sit",
+      "forms": [
+        "sitzt",
+        "sitzen"
+      ]
+    },
+    "hinten": {
+      "de": "hinten",
+      "en": "at the back",
+      "forms": [
+        "hinten"
+      ]
+    },
+    "zwischen": {
+      "de": "zwischen",
+      "en": "between",
+      "forms": [
+        "zwischen"
+      ]
+    },
+    "Hause": {
+      "de": "zu Hause / nach Hause",
+      "en": "at home / (to) home",
+      "forms": [
+        "Hause"
+      ]
+    },
+    "alles": {
+      "de": "alles",
+      "en": "everything",
+      "forms": [
+        "alles"
+      ]
+    },
+    "nach": {
+      "de": "nach",
+      "en": "to; after; (nach oben) upwards",
+      "forms": [
+        "nach"
+      ]
+    },
+    "oben": {
+      "de": "oben",
+      "en": "up; upstairs; at the top",
+      "forms": [
+        "oben"
+      ]
+    },
+    "passen": {
+      "de": "passen",
+      "en": "to fit",
+      "forms": [
+        "passt"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "alt": {
+      "de": "alt",
+      "en": "old",
+      "forms": [
+        "alt",
+        "alte",
+        "altes",
+        "alter"
+      ]
+    },
+    "Schrank": {
+      "de": "der Schrank, Schränke",
+      "en": "wardrobe, cupboard",
+      "forms": [
+        "Schrank"
+      ]
+    },
+    "im": {
+      "de": "im (= in dem)",
+      "en": "in the",
+      "forms": [
+        "im"
+      ]
+    },
+    "Weg": {
+      "de": "der Weg, -e",
+      "en": "way, path; (im Weg) in the way",
+      "forms": [
+        "Weg"
+      ]
+    },
+    "schieben": {
+      "de": "schieben",
+      "en": "to push, shove",
+      "forms": [
+        "schieben"
+      ]
+    },
+    "eins": {
+      "de": "eins",
+      "en": "one",
+      "forms": [
+        "Eins"
+      ]
+    },
+    "bewegen": {
+      "de": "sich bewegen",
+      "en": "to move",
+      "forms": [
+        "bewegt"
+      ]
+    },
+    "sich": {
+      "de": "sich",
+      "en": "oneself; each other",
+      "forms": [
+        "sich"
+      ]
+    },
+    "hinter": {
+      "de": "hinter",
+      "en": "behind",
+      "forms": [
+        "hinter"
+      ]
+    },
+    "fallen": {
+      "de": "fallen (fällt)",
+      "en": "to fall",
+      "forms": [
+        "fällt"
+      ]
+    },
+    "etwas": {
+      "de": "etwas",
+      "en": "something",
+      "forms": [
+        "etwas"
+      ]
+    },
+    "auf": {
+      "de": "auf",
+      "en": "on, onto; (auf Deutsch) in German",
+      "forms": [
+        "auf"
+      ]
+    },
+    "Boden": {
+      "de": "der Boden, Böden",
+      "en": "floor, ground",
+      "forms": [
+        "Boden"
+      ]
+    },
+    "Foto": {
+      "de": "das Foto, -s",
+      "en": "photo",
+      "forms": [
+        "Foto",
+        "Fotos"
+      ]
+    },
+    "schwarz-weiß": {
+      "de": "schwarz-weiß",
+      "en": "black and white",
+      "forms": [
+        "Schwarz-weiß"
+      ]
+    },
+    "jung": {
+      "de": "jung",
+      "en": "young",
+      "forms": [
+        "jung",
+        "junge",
+        "junger"
+      ]
+    },
+    "Frau": {
+      "de": "die Frau, -en",
+      "en": "woman; Mrs",
+      "forms": [
+        "Frau",
+        "Frauen"
+      ]
+    },
+    "Uniform": {
+      "de": "die Uniform, -en",
+      "en": "uniform",
+      "forms": [
+        "Uniform"
+      ]
+    },
+    "aussehen": {
+      "de": "aus|sehen (sieht aus)",
+      "en": "to look (like), to seem",
+      "forms": [
+        "sieht … aus"
+      ]
+    },
+    "wie": {
+      "de": "wie",
+      "en": "how; like, as",
+      "forms": [
+        "wie"
+      ]
+    },
+    "aus": {
+      "de": "aus + Dat.",
+      "en": "from, out of",
+      "forms": [
+        "aus"
+      ]
+    }
+  },
   "sentences": [
     "Ich brauche einen Tisch.",
     "Ich brauche auch einen Stuhl.",

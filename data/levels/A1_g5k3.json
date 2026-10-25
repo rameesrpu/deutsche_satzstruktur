@@ -108,6 +108,676 @@
       "read": "Ende von A1. Fortsetzung folgt …"
     }
   ],
+  "glossary": {
+    "Woche": {
+      "de": "die Woche, -n",
+      "en": "week",
+      "forms": [
+        "Woche",
+        "Wochen"
+      ]
+    },
+    "später": {
+      "de": "später",
+      "en": "later",
+      "forms": [
+        "später"
+      ]
+    },
+    "wieder": {
+      "de": "wieder",
+      "en": "again",
+      "forms": [
+        "wieder"
+      ]
+    },
+    "gesund": {
+      "de": "gesund",
+      "en": "healthy, well",
+      "forms": [
+        "gesund"
+      ]
+    },
+    "am": {
+      "de": "am (= an dem)",
+      "en": "at the, on the",
+      "forms": [
+        "am"
+      ]
+    },
+    "Montag": {
+      "de": "der Montag, -e",
+      "en": "Monday",
+      "forms": [
+        "Montag"
+      ]
+    },
+    "anrufen": {
+      "de": "an|rufen",
+      "en": "to call (on the phone)",
+      "forms": [
+        "ruft … an",
+        "Ruf"
+      ]
+    },
+    "was": {
+      "de": "was?",
+      "en": "what?",
+      "forms": [
+        "was"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "Wochenende": {
+      "de": "das Wochenende, -n",
+      "en": "weekend",
+      "forms": [
+        "Wochenende"
+      ]
+    },
+    "machen": {
+      "de": "machen",
+      "en": "to make, do",
+      "forms": [
+        "machen",
+        "macht",
+        "machst",
+        "gemacht"
+      ]
+    },
+    "Ausflug": {
+      "de": "der Ausflug, Ausflüge",
+      "en": "trip, outing",
+      "forms": [
+        "Ausflug"
+      ]
+    },
+    "auf": {
+      "de": "auf",
+      "en": "on, onto; (auf Deutsch) in German",
+      "forms": [
+        "auf"
+      ]
+    },
+    "schwäbisch": {
+      "de": "schwäbisch",
+      "en": "Swabian",
+      "forms": [
+        "Schwäbische"
+      ]
+    },
+    "Alb": {
+      "de": "die (Schwäbische) Alb",
+      "en": "Swabian Jura (hills near Stuttgart)",
+      "forms": [
+        "Alb"
+      ]
+    },
+    "fahren": {
+      "de": "fahren (fährt)",
+      "en": "to go (by vehicle), drive, ride",
+      "forms": [
+        "fährt",
+        "fahren",
+        "gefahren"
+      ]
+    },
+    "wer": {
+      "de": "wer?",
+      "en": "who?",
+      "forms": [
+        "wer"
+      ]
+    },
+    "mitkommen": {
+      "de": "mit|kommen",
+      "en": "to come along",
+      "forms": [
+        "kommt … mit",
+        "komme … mit",
+        "Kommst … mit",
+        "kommen … mit",
+        "mitgekommen"
+      ]
+    },
+    "Leute": {
+      "de": "die Leute (pl.)",
+      "en": "people",
+      "forms": [
+        "Leute"
+      ]
+    },
+    "aus": {
+      "de": "aus + Dat.",
+      "en": "from, out of",
+      "forms": [
+        "aus"
+      ]
+    },
+    "Cricket-Gruppe": {
+      "de": "die Cricket-Gruppe, -n",
+      "en": "cricket group (chat)",
+      "forms": [
+        "Cricket-Gruppe"
+      ]
+    },
+    "sagen": {
+      "de": "sagen",
+      "en": "to say",
+      "forms": [
+        "sagt",
+        "sagen",
+        "sagst",
+        "sage",
+        "Sag"
+      ]
+    },
+    "nichts": {
+      "de": "nichts",
+      "en": "nothing",
+      "forms": [
+        "nichts"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "Augenbraue": {
+      "de": "die Augenbraue, -n",
+      "en": "eyebrow",
+      "forms": [
+        "Augenbrauen"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "viel": {
+      "de": "viel, viele",
+      "en": "much, a lot; many",
+      "forms": [
+        "viel",
+        "viele",
+        "vielen"
+      ]
+    },
+    "kommen": {
+      "de": "kommen",
+      "en": "to come",
+      "forms": [
+        "kommen",
+        "kommt",
+        "komme",
+        "kommst"
+      ]
+    },
+    "auch": {
+      "de": "auch",
+      "en": "also, too",
+      "forms": [
+        "auch"
+      ]
+    },
+    "Softwareentwickler": {
+      "de": "der Softwareentwickler, -",
+      "en": "software developer",
+      "forms": [
+        "Softwareentwickler"
+      ]
+    },
+    "spielen": {
+      "de": "spielen",
+      "en": "to play",
+      "forms": [
+        "spielen",
+        "spielt",
+        "spiele",
+        "Spielst"
+      ]
+    },
+    "schlecht": {
+      "de": "schlecht",
+      "en": "bad(ly)",
+      "forms": [
+        "schlecht"
+      ]
+    },
+    "Burg": {
+      "de": "die Burg, -en",
+      "en": "castle",
+      "forms": [
+        "Burg"
+      ]
+    },
+    "besuchen": {
+      "de": "besuchen",
+      "en": "to visit",
+      "forms": [
+        "besucht"
+      ]
+    },
+    "ganz": {
+      "de": "ganz",
+      "en": "quite, very; whole",
+      "forms": [
+        "ganz",
+        "ganze"
+      ]
+    },
+    "oben": {
+      "de": "oben",
+      "en": "up; upstairs; at the top",
+      "forms": [
+        "oben"
+      ]
+    },
+    "Berg": {
+      "de": "der Berg, -e",
+      "en": "mountain",
+      "forms": [
+        "Berg",
+        "Berge"
+      ]
+    },
+    "Baum": {
+      "de": "der Baum, Bäume",
+      "en": "tree",
+      "forms": [
+        "Bäume"
+      ]
+    },
+    "war": {
+      "de": "war (sein)",
+      "en": "was",
+      "forms": [
+        "war",
+        "waren"
+      ]
+    },
+    "rot": {
+      "de": "rot",
+      "en": "red",
+      "forms": [
+        "rot",
+        "rote",
+        "roten"
+      ]
+    },
+    "gold": {
+      "de": "gold",
+      "en": "gold(en)",
+      "forms": [
+        "gold"
+      ]
+    },
+    "Foto": {
+      "de": "das Foto, -s",
+      "en": "photo",
+      "forms": [
+        "Foto",
+        "Fotos"
+      ]
+    },
+    "so": {
+      "de": "so",
+      "en": "so",
+      "forms": [
+        "so"
+      ]
+    },
+    "glücklich": {
+      "de": "glücklich",
+      "en": "happy",
+      "forms": [
+        "glücklich"
+      ]
+    },
+    "etwas": {
+      "de": "etwas",
+      "en": "something",
+      "forms": [
+        "etwas"
+      ]
+    },
+    "gegessen": {
+      "de": "gegessen (essen)",
+      "en": "eaten",
+      "forms": [
+        "gegessen"
+      ]
+    },
+    "Brezel": {
+      "de": "die Brezel, -n",
+      "en": "pretzel",
+      "forms": [
+        "Brezel",
+        "Brezeln"
+      ]
+    },
+    "mitbringen": {
+      "de": "mit|bringen",
+      "en": "to bring along",
+      "forms": [
+        "bringe … mit",
+        "mitgebracht"
+      ]
+    },
+    "von": {
+      "de": "von + Dat.",
+      "en": "from; of",
+      "forms": [
+        "von"
+      ]
+    },
+    "sein": {
+      "de": "sein, seine",
+      "en": "his; its",
+      "forms": [
+        "sein",
+        "seine",
+        "seinen",
+        "seiner"
+      ]
+    },
+    "Tante": {
+      "de": "die Tante, -n",
+      "en": "aunt; (respectfully) an older woman",
+      "forms": [
+        "Tante"
+      ]
+    },
+    "wie": {
+      "de": "wie",
+      "en": "how; like, as",
+      "forms": [
+        "wie"
+      ]
+    },
+    "nachdenken": {
+      "de": "nach|denken",
+      "en": "to think (carefully)",
+      "forms": [
+        "denkt … nach"
+      ]
+    },
+    "lange": {
+      "de": "lange",
+      "en": "(for) a long time",
+      "forms": [
+        "lange"
+      ]
+    },
+    "nicht": {
+      "de": "nicht",
+      "en": "not",
+      "forms": [
+        "nicht"
+      ]
+    },
+    "sechs": {
+      "de": "sechs",
+      "en": "six",
+      "forms": [
+        "sechs"
+      ]
+    },
+    "zehn": {
+      "de": "zehn",
+      "en": "ten",
+      "forms": [
+        "zehn"
+      ]
+    },
+    "gut": {
+      "de": "gut",
+      "en": "good; well",
+      "forms": [
+        "gut",
+        "gute",
+        "gutem",
+        "Guten"
+      ]
+    },
+    "sieben": {
+      "de": "sieben",
+      "en": "seven",
+      "forms": [
+        "sieben"
+      ]
+    },
+    "lachen": {
+      "de": "lachen",
+      "en": "to laugh",
+      "forms": [
+        "lacht",
+        "lachen"
+      ]
+    },
+    "laut": {
+      "de": "laut",
+      "en": "loud(ly)",
+      "forms": [
+        "laut"
+      ]
+    },
+    "noch": {
+      "de": "noch",
+      "en": "still; yet; (noch ein) another",
+      "forms": [
+        "noch"
+      ]
+    },
+    "nie": {
+      "de": "nie",
+      "en": "never",
+      "forms": [
+        "nie"
+      ]
+    },
+    "hören": {
+      "de": "hören",
+      "en": "to hear",
+      "forms": [
+        "hört",
+        "gehört"
+      ]
+    },
+    "Abend": {
+      "de": "der Abend, -e",
+      "en": "evening",
+      "forms": [
+        "Abend"
+      ]
+    },
+    "nehmen": {
+      "de": "nehmen (nimmt)",
+      "en": "to take",
+      "forms": [
+        "nimmt",
+        "nehme",
+        "nehmen"
+      ]
+    },
+    "alt": {
+      "de": "alt",
+      "en": "old",
+      "forms": [
+        "alt",
+        "alte",
+        "altes",
+        "alter"
+      ]
+    },
+    "lesen": {
+      "de": "lesen (liest)",
+      "en": "to read",
+      "forms": [
+        "liest"
+      ]
+    },
+    "Satz": {
+      "de": "der Satz, Sätze",
+      "en": "sentence",
+      "forms": [
+        "Satz"
+      ]
+    },
+    "einmal": {
+      "de": "einmal",
+      "en": "once",
+      "forms": [
+        "einmal"
+      ]
+    },
+    "hier": {
+      "de": "hier",
+      "en": "here",
+      "forms": [
+        "hier"
+      ]
+    },
+    "Zuhause": {
+      "de": "das Zuhause",
+      "en": "home",
+      "forms": [
+        "Zuhause"
+      ]
+    },
+    "schauen": {
+      "de": "schauen",
+      "en": "to look",
+      "forms": [
+        "schaut",
+        "schauen"
+      ]
+    },
+    "Fenster": {
+      "de": "das Fenster, -",
+      "en": "window",
+      "forms": [
+        "Fenster",
+        "Fenstern"
+      ]
+    },
+    "unten": {
+      "de": "unten",
+      "en": "down; downstairs; below",
+      "forms": [
+        "unten"
+      ]
+    },
+    "im": {
+      "de": "im (= in dem)",
+      "en": "in the",
+      "forms": [
+        "im"
+      ]
+    },
+    "Garten": {
+      "de": "der Garten, Gärten",
+      "en": "garden",
+      "forms": [
+        "Garten"
+      ]
+    },
+    "schlafen": {
+      "de": "schlafen (schläft)",
+      "en": "to sleep",
+      "forms": [
+        "schläft",
+        "schlafen"
+      ]
+    },
+    "Huhn": {
+      "de": "das Huhn, Hühner",
+      "en": "chicken, hen",
+      "forms": [
+        "Hühner",
+        "Hühnern"
+      ]
+    },
+    "Licht": {
+      "de": "das Licht, -er",
+      "en": "light",
+      "forms": [
+        "Licht",
+        "Lichter"
+      ]
+    },
+    "leuchten": {
+      "de": "leuchten",
+      "en": "to shine, glow",
+      "forms": [
+        "leuchten"
+      ]
+    },
+    "vielleicht": {
+      "de": "vielleicht",
+      "en": "maybe, perhaps",
+      "forms": [
+        "vielleicht"
+      ]
+    },
+    "denken": {
+      "de": "denken",
+      "en": "to think",
+      "forms": [
+        "denkt"
+      ]
+    },
+    "bald": {
+      "de": "bald",
+      "en": "soon",
+      "forms": [
+        "bald"
+      ]
+    },
+    "für": {
+      "de": "für + Akk.",
+      "en": "for",
+      "forms": [
+        "für"
+      ]
+    },
+    "Ende": {
+      "de": "das Ende, -n",
+      "en": "end",
+      "forms": [
+        "Ende"
+      ]
+    },
+    "Fortsetzung": {
+      "de": "die Fortsetzung, -en",
+      "en": "continuation; (Fortsetzung folgt) to be continued",
+      "forms": [
+        "Fortsetzung"
+      ]
+    },
+    "folgen": {
+      "de": "folgen",
+      "en": "to follow",
+      "forms": [
+        "folgt"
+      ]
+    }
+  },
   "sentences": [
     "Was hast du am Wochenende gemacht?",
     "Wir haben einen Ausflug gemacht.",

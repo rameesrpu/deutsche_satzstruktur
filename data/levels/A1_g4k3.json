@@ -108,6 +108,779 @@
       "read": "Ayisha lächelt. Und dann: Hatschi! Einmal. Zweimal. Dreimal."
     }
   ],
+  "glossary": {
+    "Sonntag": {
+      "de": "der Sonntag, -e",
+      "en": "Sunday",
+      "forms": [
+        "Sonntag"
+      ]
+    },
+    "Sonne": {
+      "de": "die Sonne",
+      "en": "sun",
+      "forms": [
+        "Sonne"
+      ]
+    },
+    "scheinen": {
+      "de": "scheinen",
+      "en": "to shine",
+      "forms": [
+        "scheint"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "kalt": {
+      "de": "kalt",
+      "en": "cold",
+      "forms": [
+        "kalt",
+        "kalte"
+      ]
+    },
+    "zehn": {
+      "de": "zehn",
+      "en": "ten",
+      "forms": [
+        "zehn"
+      ]
+    },
+    "Grad": {
+      "de": "das Grad",
+      "en": "degree(s)",
+      "forms": [
+        "Grad"
+      ]
+    },
+    "zwanzig": {
+      "de": "zwanzig",
+      "en": "twenty",
+      "forms": [
+        "zwanzig"
+      ]
+    },
+    "Leute": {
+      "de": "die Leute (pl.)",
+      "en": "people",
+      "forms": [
+        "Leute"
+      ]
+    },
+    "aus": {
+      "de": "aus + Dat.",
+      "en": "from, out of",
+      "forms": [
+        "aus"
+      ]
+    },
+    "drei": {
+      "de": "drei",
+      "en": "three",
+      "forms": [
+        "drei"
+      ]
+    },
+    "Tasche": {
+      "de": "die Tasche, -n",
+      "en": "bag",
+      "forms": [
+        "Tasche",
+        "Taschen"
+      ]
+    },
+    "mit": {
+      "de": "mit + Dat.",
+      "en": "with",
+      "forms": [
+        "mit"
+      ]
+    },
+    "Snack": {
+      "de": "der Snack, -s",
+      "en": "snack",
+      "forms": [
+        "Snacks"
+      ]
+    },
+    "Thermoskanne": {
+      "de": "die Thermoskanne, -n",
+      "en": "thermos flask",
+      "forms": [
+        "Thermoskanne"
+      ]
+    },
+    "Chai": {
+      "de": "der Chai",
+      "en": "spiced milk tea",
+      "forms": [
+        "Chai"
+      ]
+    },
+    "Cricketschläger": {
+      "de": "der Cricketschläger, -",
+      "en": "cricket bat",
+      "forms": [
+        "Cricketschläger"
+      ]
+    },
+    "Park": {
+      "de": "der Park, -s",
+      "en": "park",
+      "forms": [
+        "Park"
+      ]
+    },
+    "groß": {
+      "de": "groß",
+      "en": "big, tall; (groß einkaufen) to do a big shop",
+      "forms": [
+        "groß",
+        "großes"
+      ]
+    },
+    "nett": {
+      "de": "nett",
+      "en": "nice, kind",
+      "forms": [
+        "nett"
+      ]
+    },
+    "auch": {
+      "de": "auch",
+      "en": "also, too",
+      "forms": [
+        "auch"
+      ]
+    },
+    "da": {
+      "de": "da",
+      "en": "there; here; then",
+      "forms": [
+        "da"
+      ]
+    },
+    "sehen": {
+      "de": "sehen (sieht)",
+      "en": "to see",
+      "forms": [
+        "Siehst",
+        "sehe",
+        "sieht",
+        "sehen"
+      ]
+    },
+    "bleiben": {
+      "de": "bleiben",
+      "en": "to stay; (bleibt stehen) stops",
+      "forms": [
+        "bleibt",
+        "Bleib"
+      ]
+    },
+    "stehen": {
+      "de": "stehen",
+      "en": "to stand; (steht da) it says",
+      "forms": [
+        "steht",
+        "stehen"
+      ]
+    },
+    "Moment": {
+      "de": "der Moment, -e",
+      "en": "moment; (Moment!) wait a moment!",
+      "forms": [
+        "Moment"
+      ]
+    },
+    "Mann": {
+      "de": "der Mann, Männer",
+      "en": "man",
+      "forms": [
+        "Mann"
+      ]
+    },
+    "Brezel": {
+      "de": "die Brezel, -n",
+      "en": "pretzel",
+      "forms": [
+        "Brezel",
+        "Brezeln"
+      ]
+    },
+    "jeder": {
+      "de": "jeder, jede, jedes",
+      "en": "every, each",
+      "forms": [
+        "Jeden",
+        "Jede",
+        "jedes"
+      ]
+    },
+    "Montag": {
+      "de": "der Montag, -e",
+      "en": "Monday",
+      "forms": [
+        "Montag"
+      ]
+    },
+    "schuldig": {
+      "de": "schuldig",
+      "en": "guilty",
+      "forms": [
+        "Schuldig"
+      ]
+    },
+    "spielen": {
+      "de": "spielen",
+      "en": "to play",
+      "forms": [
+        "spielen",
+        "spielt",
+        "spiele",
+        "Spielst"
+      ]
+    },
+    "oder": {
+      "de": "oder",
+      "en": "or; (…, oder?) …, right?",
+      "forms": [
+        "oder"
+      ]
+    },
+    "zuschauen": {
+      "de": "zu|schauen",
+      "en": "to watch",
+      "forms": [
+        "schaust … zu",
+        "schauen … zu"
+      ]
+    },
+    "nur": {
+      "de": "nur",
+      "en": "only, just",
+      "forms": [
+        "nur"
+      ]
+    },
+    "denn": {
+      "de": "denn",
+      "en": "because",
+      "forms": [
+        "denn"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "gut": {
+      "de": "gut",
+      "en": "good; well",
+      "forms": [
+        "gut",
+        "gute",
+        "gutem",
+        "Guten"
+      ]
+    },
+    "sagen": {
+      "de": "sagen",
+      "en": "to say",
+      "forms": [
+        "sagt",
+        "sagen",
+        "sagst",
+        "sage",
+        "Sag"
+      ]
+    },
+    "glauben": {
+      "de": "glauben",
+      "en": "to believe",
+      "forms": [
+        "glaube"
+      ]
+    },
+    "nicht": {
+      "de": "nicht",
+      "en": "not",
+      "forms": [
+        "nicht"
+      ]
+    },
+    "Essen": {
+      "de": "das Essen; essen (isst)",
+      "en": "food, meal; to eat",
+      "forms": [
+        "Essen",
+        "essen",
+        "isst",
+        "esse",
+        "Iss"
+      ]
+    },
+    "nehmen": {
+      "de": "nehmen (nimmt)",
+      "en": "to take",
+      "forms": [
+        "nimmt",
+        "nehme",
+        "nehmen"
+      ]
+    },
+    "Ball": {
+      "de": "der Ball, Bälle",
+      "en": "ball",
+      "forms": [
+        "Ball"
+      ]
+    },
+    "anlaufen": {
+      "de": "an|laufen",
+      "en": "to take a run-up",
+      "forms": [
+        "läuft … an"
+      ]
+    },
+    "werfen": {
+      "de": "werfen (wirft)",
+      "en": "to throw; (cricket) to bowl",
+      "forms": [
+        "wirft"
+      ]
+    },
+    "schnell": {
+      "de": "schnell",
+      "en": "fast, quick(ly)",
+      "forms": [
+        "schnell",
+        "schneller"
+      ]
+    },
+    "treffen": {
+      "de": "treffen (trifft)",
+      "en": "to hit; to meet",
+      "forms": [
+        "treffe",
+        "trifft"
+      ]
+    },
+    "Wicket": {
+      "de": "das Wicket, -s",
+      "en": "wicket (the stumps in cricket)",
+      "forms": [
+        "Wicket"
+      ]
+    },
+    "umfallen": {
+      "de": "um|fallen",
+      "en": "to fall over",
+      "forms": [
+        "fällt … um"
+      ]
+    },
+    "alle": {
+      "de": "alle",
+      "en": "all; everyone",
+      "forms": [
+        "alle"
+      ]
+    },
+    "schreien": {
+      "de": "schreien",
+      "en": "to shout, scream",
+      "forms": [
+        "schreien"
+      ]
+    },
+    "Profi": {
+      "de": "der Profi, -s",
+      "en": "pro, professional",
+      "forms": [
+        "Profi"
+      ]
+    },
+    "raus": {
+      "de": "raus",
+      "en": "out",
+      "forms": [
+        "raus"
+      ]
+    },
+    "schauen": {
+      "de": "schauen",
+      "en": "to look",
+      "forms": [
+        "schaut",
+        "schauen"
+      ]
+    },
+    "auf": {
+      "de": "auf",
+      "en": "on, onto; (auf Deutsch) in German",
+      "forms": [
+        "auf"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "wieder": {
+      "de": "wieder",
+      "en": "again",
+      "forms": [
+        "wieder"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "Glück": {
+      "de": "das Glück",
+      "en": "luck",
+      "forms": [
+        "Glück"
+      ]
+    },
+    "Talent": {
+      "de": "das Talent, -e",
+      "en": "talent",
+      "forms": [
+        "Talent"
+      ]
+    },
+    "kein": {
+      "de": "kein, keine",
+      "en": "no, not a",
+      "forms": [
+        "kein",
+        "keine",
+        "keinen"
+      ]
+    },
+    "Chance": {
+      "de": "die Chance, -n",
+      "en": "chance",
+      "forms": [
+        "Chance"
+      ]
+    },
+    "flüstern": {
+      "de": "flüstern",
+      "en": "to whisper",
+      "forms": [
+        "flüstert"
+      ]
+    },
+    "zu": {
+      "de": "zu",
+      "en": "to; too; closed",
+      "forms": [
+        "zu"
+      ]
+    },
+    "anschauen": {
+      "de": "an|schauen",
+      "en": "to look at",
+      "forms": [
+        "schaut … an",
+        "schauen … an"
+      ]
+    },
+    "ganz": {
+      "de": "ganz",
+      "en": "quite, very; whole",
+      "forms": [
+        "ganz",
+        "ganze"
+      ]
+    },
+    "Zeit": {
+      "de": "die Zeit, -en",
+      "en": "time",
+      "forms": [
+        "Zeit"
+      ]
+    },
+    "wissen": {
+      "de": "wissen (weiß)",
+      "en": "to know (a fact)",
+      "forms": [
+        "weiß"
+      ]
+    },
+    "nach": {
+      "de": "nach",
+      "en": "to; after; (nach oben) upwards",
+      "forms": [
+        "nach"
+      ]
+    },
+    "Spiel": {
+      "de": "das Spiel, -e",
+      "en": "game, match",
+      "forms": [
+        "Spiel"
+      ]
+    },
+    "geben": {
+      "de": "geben (gibt)",
+      "en": "to give; (es gibt) there is",
+      "forms": [
+        "gibt",
+        "geben"
+      ]
+    },
+    "Tante": {
+      "de": "die Tante, -n",
+      "en": "aunt; (respectfully) an older woman",
+      "forms": [
+        "Tante"
+      ]
+    },
+    "dabei": {
+      "de": "dabei",
+      "en": "with her, there",
+      "forms": [
+        "dabei"
+      ]
+    },
+    "Banane": {
+      "de": "die Banane, -n",
+      "en": "banana",
+      "forms": [
+        "Bananen"
+      ]
+    },
+    "frittiert": {
+      "de": "frittiert",
+      "en": "deep-fried",
+      "forms": [
+        "frittiert"
+      ]
+    },
+    "wie": {
+      "de": "wie",
+      "en": "how; like, as",
+      "forms": [
+        "wie"
+      ]
+    },
+    "Hause": {
+      "de": "zu Hause / nach Hause",
+      "en": "at home / (to) home",
+      "forms": [
+        "Hause"
+      ]
+    },
+    "heiß": {
+      "de": "heiß",
+      "en": "hot",
+      "forms": [
+        "heiß"
+      ]
+    },
+    "perfekt": {
+      "de": "perfekt",
+      "en": "perfect",
+      "forms": [
+        "Perfekt",
+        "perfekt"
+      ]
+    },
+    "möchten": {
+      "de": "möchten (ich möchte)",
+      "en": "would like",
+      "forms": [
+        "möchten",
+        "möchte",
+        "Möchtest",
+        "Möchtet"
+      ]
+    },
+    "Wasser": {
+      "de": "das Wasser",
+      "en": "water",
+      "forms": [
+        "Wasser"
+      ]
+    },
+    "am": {
+      "de": "am (= an dem)",
+      "en": "at the, on the",
+      "forms": [
+        "am"
+      ]
+    },
+    "Ende": {
+      "de": "das Ende, -n",
+      "en": "end",
+      "forms": [
+        "Ende"
+      ]
+    },
+    "fragen": {
+      "de": "fragen",
+      "en": "to ask",
+      "forms": [
+        "fragt",
+        "fragen"
+      ]
+    },
+    "laut": {
+      "de": "laut",
+      "en": "loud(ly)",
+      "forms": [
+        "laut"
+      ]
+    },
+    "wer": {
+      "de": "wer?",
+      "en": "who?",
+      "forms": [
+        "wer"
+      ]
+    },
+    "WhatsApp-Gruppe": {
+      "de": "die WhatsApp-Gruppe, -n",
+      "en": "WhatsApp group",
+      "forms": [
+        "WhatsApp-Gruppe"
+      ]
+    },
+    "Nummer": {
+      "de": "die Nummer, -n",
+      "en": "number",
+      "forms": [
+        "Nummer",
+        "Nummern"
+      ]
+    },
+    "hier": {
+      "de": "hier",
+      "en": "here",
+      "forms": [
+        "hier"
+      ]
+    },
+    "mein": {
+      "de": "mein, meine",
+      "en": "my",
+      "forms": [
+        "mein",
+        "meine",
+        "meiner",
+        "meinen"
+      ]
+    },
+    "für": {
+      "de": "für + Akk.",
+      "en": "for",
+      "forms": [
+        "für"
+      ]
+    },
+    "nächste": {
+      "de": "nächste",
+      "en": "next",
+      "forms": [
+        "nächste",
+        "nächsten"
+      ]
+    },
+    "natürlich": {
+      "de": "natürlich",
+      "en": "of course",
+      "forms": [
+        "natürlich"
+      ]
+    },
+    "Handy": {
+      "de": "das Handy, -s",
+      "en": "mobile phone",
+      "forms": [
+        "Handy"
+      ]
+    },
+    "Nachricht": {
+      "de": "die Nachricht, -en",
+      "en": "message",
+      "forms": [
+        "Nachricht",
+        "Nachrichten"
+      ]
+    },
+    "Revanche": {
+      "de": "die Revanche, -n",
+      "en": "rematch",
+      "forms": [
+        "Revanche"
+      ]
+    },
+    "Deutsch": {
+      "de": "das Deutsch",
+      "en": "German (the language)",
+      "forms": [
+        "Deutsch"
+      ]
+    },
+    "lächeln": {
+      "de": "lächeln",
+      "en": "to smile",
+      "forms": [
+        "lächelt"
+      ]
+    },
+    "hatschi": {
+      "de": "hatschi!",
+      "en": "achoo! (a sneeze)",
+      "forms": [
+        "Hatschi"
+      ]
+    },
+    "einmal": {
+      "de": "einmal",
+      "en": "once",
+      "forms": [
+        "einmal"
+      ]
+    },
+    "zweimal": {
+      "de": "zweimal",
+      "en": "twice",
+      "forms": [
+        "zweimal"
+      ]
+    },
+    "dreimal": {
+      "de": "dreimal",
+      "en": "three times",
+      "forms": [
+        "dreimal"
+      ]
+    }
+  },
   "sentences": [
     "Der Park ist groß, und die Leute sind nett.",
     "Spielst du Cricket, oder schaust du nur zu?",

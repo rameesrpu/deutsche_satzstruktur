@@ -101,6 +101,556 @@
       "read": "Am Abend schreibt sie an Umma: Alles gut! Dann schläft sie. Zwölf Stunden."
     }
   ],
+  "glossary": {
+    "Stunde": {
+      "de": "die Stunde, -n",
+      "en": "hour",
+      "forms": [
+        "Stunde",
+        "Stunden"
+      ]
+    },
+    "später": {
+      "de": "später",
+      "en": "later",
+      "forms": [
+        "später"
+      ]
+    },
+    "Straße": {
+      "de": "die Straße, -n",
+      "en": "street",
+      "forms": [
+        "Straße"
+      ]
+    },
+    "alt": {
+      "de": "alt",
+      "en": "old",
+      "forms": [
+        "alt",
+        "alte",
+        "altes",
+        "alter"
+      ]
+    },
+    "Haus": {
+      "de": "das Haus, Häuser",
+      "en": "house",
+      "forms": [
+        "Haus"
+      ]
+    },
+    "mit": {
+      "de": "mit + Dat.",
+      "en": "with",
+      "forms": [
+        "mit"
+      ]
+    },
+    "klein": {
+      "de": "klein",
+      "en": "small, little",
+      "forms": [
+        "klein",
+        "kleinen",
+        "kleines",
+        "kleiner"
+      ]
+    },
+    "Garten": {
+      "de": "der Garten, Gärten",
+      "en": "garden",
+      "forms": [
+        "Garten"
+      ]
+    },
+    "im": {
+      "de": "im (= in dem)",
+      "en": "in the",
+      "forms": [
+        "im"
+      ]
+    },
+    "Huhn": {
+      "de": "das Huhn, Hühner",
+      "en": "chicken, hen",
+      "forms": [
+        "Hühner",
+        "Hühnern"
+      ]
+    },
+    "hier": {
+      "de": "hier",
+      "en": "here",
+      "forms": [
+        "hier"
+      ]
+    },
+    "wohnen": {
+      "de": "wohnen",
+      "en": "to live (somewhere)",
+      "forms": [
+        "wohne",
+        "wohnt",
+        "wohnen"
+      ]
+    },
+    "jetzt": {
+      "de": "jetzt",
+      "en": "now",
+      "forms": [
+        "jetzt"
+      ]
+    },
+    "Tür": {
+      "de": "die Tür, -en",
+      "en": "door",
+      "forms": [
+        "Tür",
+        "Türen"
+      ]
+    },
+    "aufgehen": {
+      "de": "auf|gehen",
+      "en": "to open (door)",
+      "forms": [
+        "geht … auf"
+      ]
+    },
+    "jung": {
+      "de": "jung",
+      "en": "young",
+      "forms": [
+        "jung",
+        "junge",
+        "junger"
+      ]
+    },
+    "Frau": {
+      "de": "die Frau, -en",
+      "en": "woman; Mrs",
+      "forms": [
+        "Frau",
+        "Frauen"
+      ]
+    },
+    "rot": {
+      "de": "rot",
+      "en": "red",
+      "forms": [
+        "rot",
+        "rote",
+        "roten"
+      ]
+    },
+    "Haar": {
+      "de": "das Haar, -e",
+      "en": "hair",
+      "forms": [
+        "Haare",
+        "Haaren"
+      ]
+    },
+    "lachen": {
+      "de": "lachen",
+      "en": "to laugh",
+      "forms": [
+        "lacht",
+        "lachen"
+      ]
+    },
+    "heißen": {
+      "de": "heißen",
+      "en": "to be called",
+      "forms": [
+        "heißt",
+        "heiße"
+      ]
+    },
+    "lernen": {
+      "de": "lernen",
+      "en": "to learn, study",
+      "forms": [
+        "lerne",
+        "lernst",
+        "lernen"
+      ]
+    },
+    "Krankenpflege": {
+      "de": "die Krankenpflege",
+      "en": "nursing",
+      "forms": [
+        "Krankenpflege"
+      ]
+    },
+    "kommen": {
+      "de": "kommen",
+      "en": "to come",
+      "forms": [
+        "kommen",
+        "kommt",
+        "komme",
+        "kommst"
+      ]
+    },
+    "aus": {
+      "de": "aus + Dat.",
+      "en": "from, out of",
+      "forms": [
+        "aus"
+      ]
+    },
+    "super": {
+      "de": "super",
+      "en": "great",
+      "forms": [
+        "super"
+      ]
+    },
+    "reinkommen": {
+      "de": "rein|kommen",
+      "en": "to come in",
+      "forms": [
+        "Komm … rein"
+      ]
+    },
+    "schon": {
+      "de": "schon",
+      "en": "already; (schon wieder) again!",
+      "forms": [
+        "schon"
+      ]
+    },
+    "lange": {
+      "de": "lange",
+      "en": "(for) a long time",
+      "forms": [
+        "lange"
+      ]
+    },
+    "gern": {
+      "de": "gern",
+      "en": "gladly; (ich wohne gern) I like living",
+      "forms": [
+        "gern"
+      ]
+    },
+    "Mann": {
+      "de": "der Mann, Männer",
+      "en": "man",
+      "forms": [
+        "Mann"
+      ]
+    },
+    "Küche": {
+      "de": "die Küche, -n",
+      "en": "kitchen",
+      "forms": [
+        "Küche"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "Mehl": {
+      "de": "das Mehl",
+      "en": "flour",
+      "forms": [
+        "Mehl"
+      ]
+    },
+    "Gesicht": {
+      "de": "das Gesicht, -er",
+      "en": "face",
+      "forms": [
+        "Gesicht"
+      ]
+    },
+    "auch": {
+      "de": "auch",
+      "en": "also, too",
+      "forms": [
+        "auch"
+      ]
+    },
+    "backen": {
+      "de": "backen",
+      "en": "to bake",
+      "forms": [
+        "backe"
+      ]
+    },
+    "Brezel": {
+      "de": "die Brezel, -n",
+      "en": "pretzel",
+      "forms": [
+        "Brezel",
+        "Brezeln"
+      ]
+    },
+    "arbeiten": {
+      "de": "arbeiten",
+      "en": "to work",
+      "forms": [
+        "arbeite",
+        "gearbeitet"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "früh": {
+      "de": "früh",
+      "en": "early",
+      "forms": [
+        "früh"
+      ]
+    },
+    "wie": {
+      "de": "wie",
+      "en": "how; like, as",
+      "forms": [
+        "wie"
+      ]
+    },
+    "drei": {
+      "de": "drei",
+      "en": "three",
+      "forms": [
+        "drei"
+      ]
+    },
+    "Uhr": {
+      "de": "die Uhr, -en",
+      "en": "clock; o'clock",
+      "forms": [
+        "Uhr"
+      ]
+    },
+    "Nacht": {
+      "de": "die Nacht, Nächte",
+      "en": "night",
+      "forms": [
+        "Nacht"
+      ]
+    },
+    "jeder": {
+      "de": "jeder, jede, jedes",
+      "en": "every, each",
+      "forms": [
+        "Jeden",
+        "Jede",
+        "jedes"
+      ]
+    },
+    "Tag": {
+      "de": "der Tag, -e",
+      "en": "day",
+      "forms": [
+        "Tag"
+      ]
+    },
+    "anschauen": {
+      "de": "an|schauen",
+      "en": "to look at",
+      "forms": [
+        "schaut … an",
+        "schauen … an"
+      ]
+    },
+    "Nachtdienst": {
+      "de": "der Nachtdienst, -e",
+      "en": "night shift",
+      "forms": [
+        "Nachtdienst"
+      ]
+    },
+    "Krankenhaus": {
+      "de": "das Krankenhaus, -häuser",
+      "en": "hospital",
+      "forms": [
+        "Krankenhaus"
+      ]
+    },
+    "kochen": {
+      "de": "kochen",
+      "en": "to cook",
+      "forms": [
+        "kochen",
+        "kocht",
+        "koche",
+        "Kochst"
+      ]
+    },
+    "heute": {
+      "de": "heute",
+      "en": "today",
+      "forms": [
+        "heute"
+      ]
+    },
+    "zusammen": {
+      "de": "zusammen",
+      "en": "together",
+      "forms": [
+        "zusammen"
+      ]
+    },
+    "gut": {
+      "de": "gut",
+      "en": "good; well",
+      "forms": [
+        "gut",
+        "gute",
+        "gutem",
+        "Guten"
+      ]
+    },
+    "wirklich": {
+      "de": "wirklich",
+      "en": "really",
+      "forms": [
+        "wirklich"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "nur": {
+      "de": "nur",
+      "en": "only, just",
+      "forms": [
+        "nur"
+      ]
+    },
+    "wenn": {
+      "de": "wenn",
+      "en": "if, when",
+      "forms": [
+        "wenn"
+      ]
+    },
+    "wollen": {
+      "de": "wollen (will)",
+      "en": "to want",
+      "forms": [
+        "will"
+      ]
+    },
+    "nicht": {
+      "de": "nicht",
+      "en": "not",
+      "forms": [
+        "nicht"
+      ]
+    },
+    "müde": {
+      "de": "müde",
+      "en": "tired",
+      "forms": [
+        "müde"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "machen": {
+      "de": "machen",
+      "en": "to make, do",
+      "forms": [
+        "machen",
+        "macht",
+        "machst",
+        "gemacht"
+      ]
+    },
+    "Nudel": {
+      "de": "die Nudel, -n",
+      "en": "noodle; pasta",
+      "forms": [
+        "Nudeln"
+      ]
+    },
+    "nett": {
+      "de": "nett",
+      "en": "nice, kind",
+      "forms": [
+        "nett"
+      ]
+    },
+    "am": {
+      "de": "am (= an dem)",
+      "en": "at the, on the",
+      "forms": [
+        "am"
+      ]
+    },
+    "Abend": {
+      "de": "der Abend, -e",
+      "en": "evening",
+      "forms": [
+        "Abend"
+      ]
+    },
+    "schreiben": {
+      "de": "schreiben",
+      "en": "to write",
+      "forms": [
+        "schreibt",
+        "schreiben",
+        "geschrieben"
+      ]
+    },
+    "an": {
+      "de": "an",
+      "en": "at, on; to",
+      "forms": [
+        "an"
+      ]
+    },
+    "alles": {
+      "de": "alles",
+      "en": "everything",
+      "forms": [
+        "alles"
+      ]
+    },
+    "schlafen": {
+      "de": "schlafen (schläft)",
+      "en": "to sleep",
+      "forms": [
+        "schläft",
+        "schlafen"
+      ]
+    },
+    "zwölf": {
+      "de": "zwölf",
+      "en": "twelve",
+      "forms": [
+        "zwölf"
+      ]
+    }
+  },
   "sentences": [
     "Hier wohne ich jetzt!",
     "Hallo, ich heiße Lea!",

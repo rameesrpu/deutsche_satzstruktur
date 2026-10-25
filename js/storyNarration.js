@@ -3,6 +3,8 @@
 // Beat format: data/stories/CURRICULUM.md; chapter files are built by
 // scripts/build_stories.py. The helpers at the top are pure (no DOM).
 
+import { renderGlossedText, closeGlossPopover } from './glossary.js';
+
 /**
  * @typedef {Object} StoryBeat
  * @property {string} [read]     narration/dialogue shown between rounds, never scored
@@ -72,6 +74,7 @@ export function isStoryCardOpen() {
 }
 
 export function hideStoryCard() {
+    closeGlossPopover();
     const el = document.getElementById(CARD_ID);
     if (el) {
         if (el._onKey) document.removeEventListener('keydown', el._onKey, true);
@@ -79,7 +82,15 @@ export function hideStoryCard() {
     }
 }
 
-function lineElement(beat, extraClass = '') {
+/**
+ * One beat as a card/reader line: speaker label (if any) and the text, with
+ * glossary words tappable.
+ * @param {StoryBeat} beat
+ * @param {string} [extraClass]  e.g. ' story-line-play'
+ * @param {Object<string, import('./glossary.js').GlossaryEntry>} [glossary]
+ * @returns {HTMLElement}
+ */
+export function storyLineElement(beat, extraClass = '', glossary = null) {
     const row = document.createElement('div');
     row.className = 'story-line' + (beat.speaker ? ' story-line-speech' : '') + extraClass;
     if (beat.speaker) {
@@ -90,7 +101,7 @@ function lineElement(beat, extraClass = '') {
     }
     const text = document.createElement('span');
     text.className = 'story-text';
-    text.textContent = beat.read || beat.play || '';
+    renderGlossedText(text, beat.read || beat.play || '', glossary);
     row.appendChild(text);
     return row;
 }
@@ -104,8 +115,9 @@ function lineElement(beat, extraClass = '') {
  * @param {?string} [opts.banner]          e.g. "Kapitel geschafft!"
  * @param {{label: string, onClick: Function, primary?: boolean}[]} opts.buttons
  * @param {?Function} [opts.onSpeak]       shows a 🔊 button that calls it with the card's texts
+ * @param {?Object} [opts.glossary]        chapter glossary: its words are tappable
  */
-export function showStoryCard({ heading, lines, play = null, banner = null, buttons, onSpeak = null }) {
+export function showStoryCard({ heading, lines, play = null, banner = null, buttons, onSpeak = null, glossary = null }) {
     hideStoryCard();
     const backdrop = document.createElement('div');
     backdrop.id = CARD_ID;
@@ -130,13 +142,13 @@ export function showStoryCard({ heading, lines, play = null, banner = null, butt
 
     const body = document.createElement('div');
     body.className = 'story-body';
-    lines.forEach(beat => body.appendChild(lineElement(beat)));
+    lines.forEach(beat => body.appendChild(storyLineElement(beat, '', glossary)));
     if (play) {
         const label = document.createElement('div');
         label.className = 'story-play-label';
         label.textContent = 'Jetzt du:';
         body.appendChild(label);
-        body.appendChild(lineElement(play, ' story-line-play'));
+        body.appendChild(storyLineElement(play, ' story-line-play', glossary));
     }
     card.appendChild(body);
 

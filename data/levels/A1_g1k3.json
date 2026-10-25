@@ -89,6 +89,535 @@
       "read": "Am Abend schaut Ayisha ihre Fotos vom Flughafen an. Auf einem Foto, im Hintergrund: der Mann vom Automaten. Wer ist er?"
     }
   ],
+  "glossary": {
+    "am": {
+      "de": "am (= an dem)",
+      "en": "at the, on the",
+      "forms": [
+        "am"
+      ]
+    },
+    "Morgen": {
+      "de": "der Morgen / morgen",
+      "en": "morning / tomorrow",
+      "forms": [
+        "Morgen",
+        "morgen"
+      ]
+    },
+    "scheinen": {
+      "de": "scheinen",
+      "en": "to shine",
+      "forms": [
+        "scheint"
+      ]
+    },
+    "Sonne": {
+      "de": "die Sonne",
+      "en": "sun",
+      "forms": [
+        "Sonne"
+      ]
+    },
+    "anschauen": {
+      "de": "an|schauen",
+      "en": "to look at",
+      "forms": [
+        "schaut … an",
+        "schauen … an"
+      ]
+    },
+    "Zimmer": {
+      "de": "das Zimmer, -",
+      "en": "room",
+      "forms": [
+        "Zimmer"
+      ]
+    },
+    "klein": {
+      "de": "klein",
+      "en": "small, little",
+      "forms": [
+        "klein",
+        "kleinen",
+        "kleines",
+        "kleiner"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "Fenster": {
+      "de": "das Fenster, -",
+      "en": "window",
+      "forms": [
+        "Fenster",
+        "Fenstern"
+      ]
+    },
+    "groß": {
+      "de": "groß",
+      "en": "big, tall; (groß einkaufen) to do a big shop",
+      "forms": [
+        "groß",
+        "großes"
+      ]
+    },
+    "hier": {
+      "de": "hier",
+      "en": "here",
+      "forms": [
+        "hier"
+      ]
+    },
+    "Bett": {
+      "de": "das Bett, -en",
+      "en": "bed",
+      "forms": [
+        "Bett"
+      ]
+    },
+    "Tisch": {
+      "de": "der Tisch, -e",
+      "en": "table",
+      "forms": [
+        "Tisch",
+        "Tische"
+      ]
+    },
+    "Schrank": {
+      "de": "der Schrank, Schränke",
+      "en": "wardrobe, cupboard",
+      "forms": [
+        "Schrank"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "alt": {
+      "de": "alt",
+      "en": "old",
+      "forms": [
+        "alt",
+        "alte",
+        "altes",
+        "alter"
+      ]
+    },
+    "riesig": {
+      "de": "riesig",
+      "en": "huge",
+      "forms": [
+        "riesig"
+      ]
+    },
+    "dunkel": {
+      "de": "dunkel",
+      "en": "dark",
+      "forms": [
+        "Dunkles"
+      ]
+    },
+    "Holz": {
+      "de": "das Holz",
+      "en": "wood",
+      "forms": [
+        "Holz"
+      ]
+    },
+    "riechen": {
+      "de": "riechen",
+      "en": "to smell",
+      "forms": [
+        "riecht"
+      ]
+    },
+    "bisschen": {
+      "de": "ein bisschen",
+      "en": "a little, a bit",
+      "forms": [
+        "bisschen"
+      ]
+    },
+    "komisch": {
+      "de": "komisch",
+      "en": "strange, funny",
+      "forms": [
+        "komisch"
+      ]
+    },
+    "Lampe": {
+      "de": "die Lampe, -n",
+      "en": "lamp",
+      "forms": [
+        "Lampe",
+        "Lampen"
+      ]
+    },
+    "kaputt": {
+      "de": "kaputt",
+      "en": "broken",
+      "forms": [
+        "kaputt"
+      ]
+    },
+    "kein": {
+      "de": "kein, keine",
+      "en": "no, not a",
+      "forms": [
+        "kein",
+        "keine",
+        "keinen"
+      ]
+    },
+    "Problem": {
+      "de": "das Problem, -e",
+      "en": "problem",
+      "forms": [
+        "Problem"
+      ]
+    },
+    "Ärztin": {
+      "de": "die Ärztin, -nen",
+      "en": "(female) doctor",
+      "forms": [
+        "Ärztin",
+        "Ärztinnen"
+      ]
+    },
+    "Elektrikerin": {
+      "de": "die Elektrikerin, -nen",
+      "en": "(female) electrician",
+      "forms": [
+        "Elektrikerin"
+      ]
+    },
+    "drehen": {
+      "de": "drehen",
+      "en": "to turn",
+      "forms": [
+        "dreht"
+      ]
+    },
+    "drücken": {
+      "de": "drücken",
+      "en": "to press, push",
+      "forms": [
+        "drückt"
+      ]
+    },
+    "Licht": {
+      "de": "das Licht, -er",
+      "en": "light",
+      "forms": [
+        "Licht",
+        "Lichter"
+      ]
+    },
+    "funktionieren": {
+      "de": "funktionieren",
+      "en": "to work, function",
+      "forms": [
+        "funktioniert"
+      ]
+    },
+    "wieder": {
+      "de": "wieder",
+      "en": "again",
+      "forms": [
+        "wieder"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "gehen": {
+      "de": "gehen",
+      "en": "to go",
+      "forms": [
+        "geht",
+        "Geh",
+        "gegangen"
+      ]
+    },
+    "Küche": {
+      "de": "die Küche, -n",
+      "en": "kitchen",
+      "forms": [
+        "Küche"
+      ]
+    },
+    "chaotisch": {
+      "de": "chaotisch",
+      "en": "chaotic, messy",
+      "forms": [
+        "chaotisch"
+      ]
+    },
+    "da": {
+      "de": "da",
+      "en": "there; here; then",
+      "forms": [
+        "da"
+      ]
+    },
+    "viel": {
+      "de": "viel, viele",
+      "en": "much, a lot; many",
+      "forms": [
+        "viel",
+        "viele",
+        "vielen"
+      ]
+    },
+    "Tasse": {
+      "de": "die Tasse, -n",
+      "en": "cup",
+      "forms": [
+        "Tassen"
+      ]
+    },
+    "Teller": {
+      "de": "der Teller, -",
+      "en": "plate",
+      "forms": [
+        "Teller"
+      ]
+    },
+    "schmutzig": {
+      "de": "schmutzig",
+      "en": "dirty",
+      "forms": [
+        "schmutzig"
+      ]
+    },
+    "immer": {
+      "de": "immer",
+      "en": "always",
+      "forms": [
+        "immer"
+      ]
+    },
+    "gut": {
+      "de": "gut",
+      "en": "good; well",
+      "forms": [
+        "gut",
+        "gute",
+        "gutem",
+        "Guten"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "Frühstück": {
+      "de": "das Frühstück",
+      "en": "breakfast",
+      "forms": [
+        "Frühstück"
+      ]
+    },
+    "Brezel": {
+      "de": "die Brezel, -n",
+      "en": "pretzel",
+      "forms": [
+        "Brezel",
+        "Brezeln"
+      ]
+    },
+    "ganz": {
+      "de": "ganz",
+      "en": "quite, very; whole",
+      "forms": [
+        "ganz",
+        "ganze"
+      ]
+    },
+    "frisch": {
+      "de": "frisch",
+      "en": "fresh",
+      "forms": [
+        "frisch"
+      ]
+    },
+    "was": {
+      "de": "was?",
+      "en": "what?",
+      "forms": [
+        "was"
+      ]
+    },
+    "hochhalten": {
+      "de": "hoch|halten",
+      "en": "to hold up",
+      "forms": [
+        "hält … hoch"
+      ]
+    },
+    "wie": {
+      "de": "wie",
+      "en": "how; like, as",
+      "forms": [
+        "wie"
+      ]
+    },
+    "Pokal": {
+      "de": "der Pokal, -e",
+      "en": "trophy, cup",
+      "forms": [
+        "Pokal"
+      ]
+    },
+    "hungrig": {
+      "de": "hungrig",
+      "en": "hungry",
+      "forms": [
+        "hungrig"
+      ]
+    },
+    "probieren": {
+      "de": "probieren",
+      "en": "to try, taste",
+      "forms": [
+        "probiert"
+      ]
+    },
+    "salzig": {
+      "de": "salzig",
+      "en": "salty",
+      "forms": [
+        "salzig"
+      ]
+    },
+    "weich": {
+      "de": "weich",
+      "en": "soft",
+      "forms": [
+        "weich"
+      ]
+    },
+    "lecker": {
+      "de": "lecker",
+      "en": "tasty, delicious",
+      "forms": [
+        "lecker"
+      ]
+    },
+    "besser": {
+      "de": "besser",
+      "en": "better",
+      "forms": [
+        "besser"
+      ]
+    },
+    "natürlich": {
+      "de": "natürlich",
+      "en": "of course",
+      "forms": [
+        "natürlich"
+      ]
+    },
+    "lustig": {
+      "de": "lustig",
+      "en": "funny",
+      "forms": [
+        "lustig"
+      ]
+    },
+    "Abend": {
+      "de": "der Abend, -e",
+      "en": "evening",
+      "forms": [
+        "Abend"
+      ]
+    },
+    "Foto": {
+      "de": "das Foto, -s",
+      "en": "photo",
+      "forms": [
+        "Foto",
+        "Fotos"
+      ]
+    },
+    "vom": {
+      "de": "vom (= von dem)",
+      "en": "from the; of the",
+      "forms": [
+        "vom"
+      ]
+    },
+    "Flughafen": {
+      "de": "der Flughafen, -häfen",
+      "en": "airport",
+      "forms": [
+        "Flughafen"
+      ]
+    },
+    "auf": {
+      "de": "auf",
+      "en": "on, onto; (auf Deutsch) in German",
+      "forms": [
+        "auf"
+      ]
+    },
+    "im": {
+      "de": "im (= in dem)",
+      "en": "in the",
+      "forms": [
+        "im"
+      ]
+    },
+    "Hintergrund": {
+      "de": "der Hintergrund",
+      "en": "background",
+      "forms": [
+        "Hintergrund"
+      ]
+    },
+    "Mann": {
+      "de": "der Mann, Männer",
+      "en": "man",
+      "forms": [
+        "Mann"
+      ]
+    },
+    "Automat": {
+      "de": "der Automat, -en",
+      "en": "machine (ticket/vending)",
+      "forms": [
+        "Automat",
+        "Automaten"
+      ]
+    },
+    "wer": {
+      "de": "wer?",
+      "en": "who?",
+      "forms": [
+        "wer"
+      ]
+    }
+  },
   "sentences": [
     "Das Zimmer ist klein.",
     "Aber das Fenster ist groß.",

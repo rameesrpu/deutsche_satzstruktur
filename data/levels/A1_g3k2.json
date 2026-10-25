@@ -99,6 +99,742 @@
       "read": "Schon wieder!"
     }
   ],
+  "glossary": {
+    "mit": {
+      "de": "mit + Dat.",
+      "en": "with",
+      "forms": [
+        "mit"
+      ]
+    },
+    "Anmeldung": {
+      "de": "die Anmeldung, -en",
+      "en": "(address) registration",
+      "forms": [
+        "Anmeldung"
+      ]
+    },
+    "gehen": {
+      "de": "gehen",
+      "en": "to go",
+      "forms": [
+        "geht",
+        "Geh",
+        "gegangen"
+      ]
+    },
+    "alles": {
+      "de": "alles",
+      "en": "everything",
+      "forms": [
+        "alles"
+      ]
+    },
+    "schnell": {
+      "de": "schnell",
+      "en": "fast, quick(ly)",
+      "forms": [
+        "schnell",
+        "schneller"
+      ]
+    },
+    "fast": {
+      "de": "fast",
+      "en": "almost",
+      "forms": [
+        "fast"
+      ]
+    },
+    "heute": {
+      "de": "heute",
+      "en": "today",
+      "forms": [
+        "heute"
+      ]
+    },
+    "müssen": {
+      "de": "müssen (muss)",
+      "en": "must, to have to",
+      "forms": [
+        "muss",
+        "müssen"
+      ]
+    },
+    "viel": {
+      "de": "viel, viele",
+      "en": "much, a lot; many",
+      "forms": [
+        "viel",
+        "viele",
+        "vielen"
+      ]
+    },
+    "erledigen": {
+      "de": "erledigen",
+      "en": "to get done, take care of",
+      "forms": [
+        "erledigen"
+      ]
+    },
+    "erste": {
+      "de": "erste",
+      "en": "first",
+      "forms": [
+        "ersten",
+        "Erste"
+      ]
+    },
+    "Station": {
+      "de": "die Station, -en",
+      "en": "stop, station",
+      "forms": [
+        "Station"
+      ]
+    },
+    "Bank": {
+      "de": "die Bank, -en",
+      "en": "bank",
+      "forms": [
+        "Bank"
+      ]
+    },
+    "jung": {
+      "de": "jung",
+      "en": "young",
+      "forms": [
+        "jung",
+        "junge",
+        "junger"
+      ]
+    },
+    "Mann": {
+      "de": "der Mann, Männer",
+      "en": "man",
+      "forms": [
+        "Mann"
+      ]
+    },
+    "Krawatte": {
+      "de": "die Krawatte, -n",
+      "en": "tie",
+      "forms": [
+        "Krawatte"
+      ]
+    },
+    "was": {
+      "de": "was?",
+      "en": "what?",
+      "forms": [
+        "was"
+      ]
+    },
+    "können": {
+      "de": "können (kann)",
+      "en": "can, to be able to",
+      "forms": [
+        "kann",
+        "kannst",
+        "können"
+      ]
+    },
+    "für": {
+      "de": "für + Akk.",
+      "en": "for",
+      "forms": [
+        "für"
+      ]
+    },
+    "tun": {
+      "de": "tun",
+      "en": "to do",
+      "forms": [
+        "tun"
+      ]
+    },
+    "wollen": {
+      "de": "wollen (will)",
+      "en": "to want",
+      "forms": [
+        "will"
+      ]
+    },
+    "Konto": {
+      "de": "das Konto, Konten",
+      "en": "account",
+      "forms": [
+        "Konto"
+      ]
+    },
+    "eröffnen": {
+      "de": "eröffnen",
+      "en": "to open (an account)",
+      "forms": [
+        "eröffnen"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "dieser": {
+      "de": "dieser, diese, dieses",
+      "en": "this",
+      "forms": [
+        "Diese",
+        "dieser",
+        "dieses",
+        "diesen"
+      ]
+    },
+    "Formular": {
+      "de": "das Formular, -e",
+      "en": "form (to fill in)",
+      "forms": [
+        "Formular"
+      ]
+    },
+    "ausfüllen": {
+      "de": "aus|füllen",
+      "en": "to fill in",
+      "forms": [
+        "ausfüllen"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "sechs": {
+      "de": "sechs",
+      "en": "six",
+      "forms": [
+        "sechs"
+      ]
+    },
+    "Seite": {
+      "de": "die Seite, -n",
+      "en": "page; side",
+      "forms": [
+        "Seite",
+        "Seiten"
+      ]
+    },
+    "seufzen": {
+      "de": "seufzen",
+      "en": "to sigh",
+      "forms": [
+        "seufzt"
+      ]
+    },
+    "mitnehmen": {
+      "de": "mit|nehmen",
+      "en": "to take along",
+      "forms": [
+        "mitnehmen"
+      ]
+    },
+    "dürfen": {
+      "de": "dürfen (darf)",
+      "en": "may, to be allowed to",
+      "forms": [
+        "dürfen",
+        "Darf"
+      ]
+    },
+    "leider": {
+      "de": "leider",
+      "en": "unfortunately",
+      "forms": [
+        "leider"
+      ]
+    },
+    "nicht": {
+      "de": "nicht",
+      "en": "not",
+      "forms": [
+        "nicht"
+      ]
+    },
+    "Stunde": {
+      "de": "die Stunde, -n",
+      "en": "hour",
+      "forms": [
+        "Stunde",
+        "Stunden"
+      ]
+    },
+    "später": {
+      "de": "später",
+      "en": "later",
+      "forms": [
+        "später"
+      ]
+    },
+    "fertig": {
+      "de": "fertig",
+      "en": "finished, done, ready",
+      "forms": [
+        "fertig"
+      ]
+    },
+    "Bankkarte": {
+      "de": "die Bankkarte, -n",
+      "en": "bank card",
+      "forms": [
+        "Bankkarte"
+      ]
+    },
+    "kommen": {
+      "de": "kommen",
+      "en": "to come",
+      "forms": [
+        "kommen",
+        "kommt",
+        "komme",
+        "kommst"
+      ]
+    },
+    "per": {
+      "de": "per",
+      "en": "by (per Post: by post)",
+      "forms": [
+        "per"
+      ]
+    },
+    "Post": {
+      "de": "die Post",
+      "en": "post, mail",
+      "forms": [
+        "Post"
+      ]
+    },
+    "zweite": {
+      "de": "zweite",
+      "en": "second",
+      "forms": [
+        "Zweiter",
+        "Zweite"
+      ]
+    },
+    "Handy": {
+      "de": "das Handy, -s",
+      "en": "mobile phone",
+      "forms": [
+        "Handy"
+      ]
+    },
+    "brauchen": {
+      "de": "brauchen",
+      "en": "to need",
+      "forms": [
+        "brauche",
+        "braucht",
+        "brauchst",
+        "brauchen"
+      ]
+    },
+    "deutsch": {
+      "de": "deutsch",
+      "en": "German",
+      "forms": [
+        "deutsch",
+        "deutsche"
+      ]
+    },
+    "SIM-Karte": {
+      "de": "die SIM-Karte, -n",
+      "en": "SIM card",
+      "forms": [
+        "SIM-Karte"
+      ]
+    },
+    "anrufen": {
+      "de": "an|rufen",
+      "en": "to call (on the phone)",
+      "forms": [
+        "ruft … an",
+        "Ruf"
+      ]
+    },
+    "Karte": {
+      "de": "die Karte, -n",
+      "en": "card",
+      "forms": [
+        "Karte",
+        "Karten"
+      ]
+    },
+    "online": {
+      "de": "online",
+      "en": "online",
+      "forms": [
+        "online"
+      ]
+    },
+    "bestellen": {
+      "de": "bestellen",
+      "en": "to order",
+      "forms": [
+        "bestellen"
+      ]
+    },
+    "noch": {
+      "de": "noch",
+      "en": "still; yet; (noch ein) another",
+      "forms": [
+        "noch"
+      ]
+    },
+    "telefonieren": {
+      "de": "telefonieren",
+      "en": "to make a phone call",
+      "forms": [
+        "telefonieren"
+      ]
+    },
+    "warten": {
+      "de": "warten",
+      "en": "to wait",
+      "forms": [
+        "wartet"
+      ]
+    },
+    "gern": {
+      "de": "gern",
+      "en": "gladly; (ich wohne gern) I like living",
+      "forms": [
+        "gern"
+      ]
+    },
+    "dritte": {
+      "de": "dritte",
+      "en": "third",
+      "forms": [
+        "Dritte"
+      ]
+    },
+    "Ticketautomat": {
+      "de": "der Ticketautomat, -en",
+      "en": "ticket machine",
+      "forms": [
+        "Ticketautomat"
+      ]
+    },
+    "am": {
+      "de": "am (= an dem)",
+      "en": "at the, on the",
+      "forms": [
+        "am"
+      ]
+    },
+    "Bahnhof": {
+      "de": "der Bahnhof, -höfe",
+      "en": "(train) station",
+      "forms": [
+        "Bahnhof"
+      ]
+    },
+    "schon": {
+      "de": "schon",
+      "en": "already; (schon wieder) again!",
+      "forms": [
+        "schon"
+      ]
+    },
+    "wieder": {
+      "de": "wieder",
+      "en": "again",
+      "forms": [
+        "wieder"
+      ]
+    },
+    "welcher": {
+      "de": "welcher, welche, welches",
+      "en": "which",
+      "forms": [
+        "Welches"
+      ]
+    },
+    "Ticket": {
+      "de": "das Ticket, -s",
+      "en": "ticket",
+      "forms": [
+        "Ticket"
+      ]
+    },
+    "nehmen": {
+      "de": "nehmen (nimmt)",
+      "en": "to take",
+      "forms": [
+        "nimmt",
+        "nehme",
+        "nehmen"
+      ]
+    },
+    "diesmal": {
+      "de": "diesmal",
+      "en": "this time",
+      "forms": [
+        "Diesmal"
+      ]
+    },
+    "helfen": {
+      "de": "helfen (hilft)",
+      "en": "to help",
+      "forms": [
+        "hilft"
+      ]
+    },
+    "kein": {
+      "de": "kein, keine",
+      "en": "no, not a",
+      "forms": [
+        "kein",
+        "keine",
+        "keinen"
+      ]
+    },
+    "Fremder": {
+      "de": "ein Fremder",
+      "en": "a stranger",
+      "forms": [
+        "Fremder"
+      ]
+    },
+    "lesen": {
+      "de": "lesen (liest)",
+      "en": "to read",
+      "forms": [
+        "liest"
+      ]
+    },
+    "denken": {
+      "de": "denken",
+      "en": "to think",
+      "forms": [
+        "denkt"
+      ]
+    },
+    "drücken": {
+      "de": "drücken",
+      "en": "to press, push",
+      "forms": [
+        "drückt"
+      ]
+    },
+    "allein": {
+      "de": "allein",
+      "en": "alone, by oneself",
+      "forms": [
+        "allein",
+        "Allein"
+      ]
+    },
+    "Automat": {
+      "de": "der Automat, -en",
+      "en": "machine (ticket/vending)",
+      "forms": [
+        "Automat",
+        "Automaten"
+      ]
+    },
+    "drucken": {
+      "de": "drucken",
+      "en": "to print",
+      "forms": [
+        "Drucken",
+        "druckt"
+      ]
+    },
+    "S-Bahn": {
+      "de": "die S-Bahn, -en",
+      "en": "suburban train",
+      "forms": [
+        "S-Bahn"
+      ]
+    },
+    "Kontrolleur": {
+      "de": "der Kontrolleur, -e",
+      "en": "ticket inspector",
+      "forms": [
+        "Kontrolleur"
+      ]
+    },
+    "ganz": {
+      "de": "ganz",
+      "en": "quite, very; whole",
+      "forms": [
+        "ganz",
+        "ganze"
+      ]
+    },
+    "ruhig": {
+      "de": "ruhig",
+      "en": "calm, quiet",
+      "forms": [
+        "ruhig"
+      ]
+    },
+    "sehen": {
+      "de": "sehen (sieht)",
+      "en": "to see",
+      "forms": [
+        "Siehst",
+        "sehe",
+        "sieht",
+        "sehen"
+      ]
+    },
+    "zeigen": {
+      "de": "zeigen",
+      "en": "to show",
+      "forms": [
+        "zeigt"
+      ]
+    },
+    "stolz": {
+      "de": "stolz",
+      "en": "proud(ly)",
+      "forms": [
+        "stolz"
+      ]
+    },
+    "richtig": {
+      "de": "richtig",
+      "en": "correct, right; proper",
+      "forms": [
+        "richtig",
+        "richtiges"
+      ]
+    },
+    "an": {
+      "de": "an",
+      "en": "at, on; to",
+      "forms": [
+        "an"
+      ]
+    },
+    "nächste": {
+      "de": "nächste",
+      "en": "next",
+      "forms": [
+        "nächste",
+        "nächsten"
+      ]
+    },
+    "Haltestelle": {
+      "de": "die Haltestelle, -n",
+      "en": "(bus/tram) stop",
+      "forms": [
+        "Haltestelle"
+      ]
+    },
+    "stehen": {
+      "de": "stehen",
+      "en": "to stand; (steht da) it says",
+      "forms": [
+        "steht",
+        "stehen"
+      ]
+    },
+    "Bahnsteig": {
+      "de": "der Bahnsteig, -e",
+      "en": "platform",
+      "forms": [
+        "Bahnsteig"
+      ]
+    },
+    "Kopfhörer": {
+      "de": "der Kopfhörer, -",
+      "en": "headphones",
+      "forms": [
+        "Kopfhörer",
+        "Kopfhörern"
+      ]
+    },
+    "bekannt": {
+      "de": "bekannt",
+      "en": "familiar, known",
+      "forms": [
+        "bekanntes"
+      ]
+    },
+    "Lächeln": {
+      "de": "das Lächeln",
+      "en": "smile",
+      "forms": [
+        "Lächeln"
+      ]
+    },
+    "aufspringen": {
+      "de": "auf|springen",
+      "en": "to jump up",
+      "forms": [
+        "springt … auf"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "Tür": {
+      "de": "die Tür, -en",
+      "en": "door",
+      "forms": [
+        "Tür",
+        "Türen"
+      ]
+    },
+    "schließen": {
+      "de": "schließen",
+      "en": "to close",
+      "forms": [
+        "schließen"
+      ]
+    },
+    "Bahn": {
+      "de": "die Bahn, -en",
+      "en": "train",
+      "forms": [
+        "Bahn"
+      ]
+    },
+    "fahren": {
+      "de": "fahren (fährt)",
+      "en": "to go (by vehicle), drive, ride",
+      "forms": [
+        "fährt",
+        "fahren",
+        "gefahren"
+      ]
+    },
+    "draußen": {
+      "de": "draußen",
+      "en": "outside",
+      "forms": [
+        "draußen"
+      ]
+    },
+    "drinnen": {
+      "de": "drinnen",
+      "en": "inside",
+      "forms": [
+        "drinnen"
+      ]
+    }
+  },
   "sentences": [
     "Heute muss Ayisha viel erledigen.",
     "Was kann ich für Sie tun?",

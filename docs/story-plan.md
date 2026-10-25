@@ -16,7 +16,10 @@ Content must stay halal (no alcohol, no pork, no dating alone or physical romanc
 > order (previous chapter fully played once). The narration card before each sentence and the
 > chapter-end card live in `js/storyNarration.js`. Vienna stories removed.
 
-### [ ] S2 Story reader with tap-to-translate words
+### [x] S2 Story reader with tap-to-translate words
+> 2026-10-25 done. English meanings only (owner's choice); per-word 🔊 only, no chapter read-aloud (S3).
+> 640 glossary entries in the A1 story files; `js/glossary.js` (matcher + popover), `js/storyReader.js`,
+> 📖 next to the category select, "📖 Erst lesen" on a chapter's first card; tests in `tests/glossary.test.js`.
 **Why**: the learner wants to read a chapter as a story first and then play it. Reading in context
 with meanings on demand is how she will learn the vocabulary; the game then drills the structure.
 

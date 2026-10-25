@@ -1,5 +1,5 @@
 import { gameSounds } from './sound.js';
-import { LEVEL_CONTENT } from './levelContent.js';
+import { LEVEL_CONTENT, chapterOrder } from './levelContent.js';
 import { LevelSelector } from './levelSelector.js';
 import { WordManager } from './wordManager.js';
 import { SentenceManager } from './sentenceManager.js';
@@ -9,7 +9,8 @@ import { GameMode } from './gamemode.js';
 import { progressStore, sentenceKey, isMastered } from './progressStore.js';
 import { Renderer } from './renderer.js';
 import { UIController } from './ui.js';
-import { chapterStartText, hideStoryCard } from './storyNarration.js';
+import { chapterStartText, hideStoryCard, isStoryCardOpen } from './storyNarration.js';
+import { showStoryReader, hideStoryReader } from './storyReader.js';
 
 /**
  * Main Application
@@ -65,7 +66,8 @@ class DeutschApp {
             isMastered:         (level, category, text) =>
                 isMastered(progressStore.getSentence(sentenceKey({ level, category, text }))),
             hasPlayed:          (level, category, text) =>
-                !!progressStore.getSentence(sentenceKey({ level, category, text }))
+                !!progressStore.getSentence(sentenceKey({ level, category, text })),
+            onRead:             (level, category) => this.openReader(level, category)
         });
         this.gameMode = new GameMode(this.svg, this.wordManager, this.gridViewModel, {
             sentenceManager:    this.sentenceManager,
@@ -73,7 +75,8 @@ class DeutschApp {
             redraw:             () => this.redrawAll(),
             setView:            (view) => { this.currentView = view; },
             updateSentenceList: () => this.updateSentenceList(),
-            startChapter:       (level, category, opts) => this.startChapter(level, category, opts)
+            startChapter:       (level, category, opts) => this.startChapter(level, category, opts),
+            openReader:         (level, category) => this.openReader(level, category)
         });
         this.renderer = new Renderer(this.svg, this.wordManager);
         this.uiController = new UIController(this.wordManager, () => this.redrawAll(), this.gridConfig);
@@ -999,6 +1002,7 @@ class DeutschApp {
      * @param {{fromStart?: boolean}} [opts]  fromStart: replay a chapter from its first sentence
      */
     async startChapter(level, category, { fromStart = false } = {}) {
+        hideStoryReader();
         hideStoryCard();
         await this.levelSelector.selectCategory(level, category);
         const data = this.levelSelector.getLoadedData(level, category);
@@ -1026,6 +1030,40 @@ class DeutschApp {
             }
             this.redrawAll();
         }
+    }
+
+    /**
+     * Open the story reader for a chapter (unlocked chapters only: no spoilers).
+     * The game's timer pauses while it is open, unless a narration card
+     * underneath already paused it.
+     */
+    async openReader(level, category) {
+        const cat = LEVEL_CONTENT[level] && LEVEL_CONTENT[level].categories[category];
+        if (!cat || !cat.story || cat.story.kind !== 'chapter') return;
+        const order = chapterOrder(level);
+        const idx = order.indexOf(category);
+        // isUnlocked needs the previous chapter's file; "Weiterlesen" this one's
+        const [data] = await Promise.all([
+            this.levelSelector.loadCategoryData(level, category),
+            idx > 0 ? this.levelSelector.loadCategoryData(level, order[idx - 1]).catch(() => null) : null,
+        ]).catch(() => [null]);
+        if (!data || !data.beats || !this.levelSelector.isUnlocked(level, category)) return;
+
+        const nextKey = order[idx + 1] || null;
+        const pauseGame = this.gameMode.isActive && !isStoryCardOpen();
+        if (pauseGame) this.gameMode.pauseForStoryCard();
+        showStoryReader({
+            heading: cat.label,
+            subheading: `Geschichte ${cat.story.storyNo}: ${cat.story.storyTitle}`,
+            beats: data.beats,
+            glossary: data.glossary || {},
+            onPlay: () => this.startChapter(level, category),
+            onNext: nextKey && this.levelSelector.isUnlocked(level, nextKey)
+                ? () => this.openReader(level, nextKey) : null,
+            onClose: () => {
+                if (pauseGame && this.gameMode.isActive && !isStoryCardOpen()) this.gameMode.closeStoryCard();
+            },
+        });
     }
 
     /**

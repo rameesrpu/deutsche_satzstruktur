@@ -100,6 +100,593 @@
       "read": "Ayisha schaut auf das Ticket. Ihr Abenteuer beginnt."
     }
   ],
+  "glossary": {
+    "Oktober": {
+      "de": "der Oktober",
+      "en": "October",
+      "forms": [
+        "Oktober"
+      ]
+    },
+    "Flugzeug": {
+      "de": "das Flugzeug, -e",
+      "en": "plane",
+      "forms": [
+        "Flugzeug"
+      ]
+    },
+    "aus": {
+      "de": "aus + Dat.",
+      "en": "from, out of",
+      "forms": [
+        "aus"
+      ]
+    },
+    "fliegen": {
+      "de": "fliegen",
+      "en": "to fly",
+      "forms": [
+        "fliegt"
+      ]
+    },
+    "über": {
+      "de": "über",
+      "en": "over, above",
+      "forms": [
+        "über"
+      ]
+    },
+    "am": {
+      "de": "am (= an dem)",
+      "en": "at the, on the",
+      "forms": [
+        "am"
+      ]
+    },
+    "Fenster": {
+      "de": "das Fenster, -",
+      "en": "window",
+      "forms": [
+        "Fenster",
+        "Fenstern"
+      ]
+    },
+    "sitzen": {
+      "de": "sitzen",
+      "en": "to sit",
+      "forms": [
+        "sitzt",
+        "sitzen"
+      ]
+    },
+    "jung": {
+      "de": "jung",
+      "en": "young",
+      "forms": [
+        "jung",
+        "junge",
+        "junger"
+      ]
+    },
+    "Frau": {
+      "de": "die Frau, -en",
+      "en": "woman; Mrs",
+      "forms": [
+        "Frau",
+        "Frauen"
+      ]
+    },
+    "müde": {
+      "de": "müde",
+      "en": "tired",
+      "forms": [
+        "müde"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "lächeln": {
+      "de": "lächeln",
+      "en": "to smile",
+      "forms": [
+        "lächelt"
+      ]
+    },
+    "gleich": {
+      "de": "gleich",
+      "en": "in a moment, right away",
+      "forms": [
+        "gleich"
+      ]
+    },
+    "da": {
+      "de": "da",
+      "en": "there; here; then",
+      "forms": [
+        "da"
+      ]
+    },
+    "heißen": {
+      "de": "heißen",
+      "en": "to be called",
+      "forms": [
+        "heißt",
+        "heiße"
+      ]
+    },
+    "Ärztin": {
+      "de": "die Ärztin, -nen",
+      "en": "(female) doctor",
+      "forms": [
+        "Ärztin",
+        "Ärztinnen"
+      ]
+    },
+    "Heimat": {
+      "de": "die Heimat",
+      "en": "home, homeland",
+      "forms": [
+        "Heimat"
+      ]
+    },
+    "Palme": {
+      "de": "die Palme, -n",
+      "en": "palm tree",
+      "forms": [
+        "Palmen"
+      ]
+    },
+    "Meer": {
+      "de": "das Meer, -e",
+      "en": "sea",
+      "forms": [
+        "Meer"
+      ]
+    },
+    "Regen": {
+      "de": "der Regen",
+      "en": "rain",
+      "forms": [
+        "Regen"
+      ]
+    },
+    "beste": {
+      "de": "der/die/das beste",
+      "en": "the best",
+      "forms": [
+        "beste"
+      ]
+    },
+    "Essen": {
+      "de": "das Essen; essen (isst)",
+      "en": "food, meal; to eat",
+      "forms": [
+        "Essen",
+        "essen",
+        "isst",
+        "esse",
+        "Iss"
+      ]
+    },
+    "Welt": {
+      "de": "die Welt, -en",
+      "en": "world",
+      "forms": [
+        "Welt"
+      ]
+    },
+    "sagen": {
+      "de": "sagen",
+      "en": "to say",
+      "forms": [
+        "sagt",
+        "sagen",
+        "sagst",
+        "sage",
+        "Sag"
+      ]
+    },
+    "Tür": {
+      "de": "die Tür, -en",
+      "en": "door",
+      "forms": [
+        "Tür",
+        "Türen"
+      ]
+    },
+    "aufgehen": {
+      "de": "auf|gehen",
+      "en": "to open (door)",
+      "forms": [
+        "geht … auf"
+      ]
+    },
+    "kalt": {
+      "de": "kalt",
+      "en": "cold",
+      "forms": [
+        "kalt",
+        "kalte"
+      ]
+    },
+    "Luft": {
+      "de": "die Luft",
+      "en": "air",
+      "forms": [
+        "Luft"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "Wetter": {
+      "de": "das Wetter",
+      "en": "weather",
+      "forms": [
+        "Wetter"
+      ]
+    },
+    "endlich": {
+      "de": "endlich",
+      "en": "finally, at last",
+      "forms": [
+        "endlich"
+      ]
+    },
+    "hier": {
+      "de": "hier",
+      "en": "here",
+      "forms": [
+        "hier"
+      ]
+    },
+    "Handy": {
+      "de": "das Handy, -s",
+      "en": "mobile phone",
+      "forms": [
+        "Handy"
+      ]
+    },
+    "vibrieren": {
+      "de": "vibrieren",
+      "en": "to vibrate",
+      "forms": [
+        "vibriert"
+      ]
+    },
+    "Nachricht": {
+      "de": "die Nachricht, -en",
+      "en": "message",
+      "forms": [
+        "Nachricht",
+        "Nachrichten"
+      ]
+    },
+    "schon": {
+      "de": "schon",
+      "en": "already; (schon wieder) again!",
+      "forms": [
+        "schon"
+      ]
+    },
+    "Gepäckband": {
+      "de": "das Gepäckband, -bänder",
+      "en": "baggage carousel",
+      "forms": [
+        "Gepäckband"
+      ]
+    },
+    "warten": {
+      "de": "warten",
+      "en": "to wait",
+      "forms": [
+        "wartet"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "kommen": {
+      "de": "kommen",
+      "en": "to come",
+      "forms": [
+        "kommen",
+        "kommt",
+        "komme",
+        "kommst"
+      ]
+    },
+    "Koffer": {
+      "de": "der Koffer, -",
+      "en": "suitcase",
+      "forms": [
+        "Koffer"
+      ]
+    },
+    "zwei": {
+      "de": "zwei",
+      "en": "two",
+      "forms": [
+        "zwei"
+      ]
+    },
+    "riesig": {
+      "de": "riesig",
+      "en": "huge",
+      "forms": [
+        "riesig"
+      ]
+    },
+    "schwer": {
+      "de": "schwer",
+      "en": "heavy; difficult",
+      "forms": [
+        "schwer"
+      ]
+    },
+    "Ticketautomat": {
+      "de": "der Ticketautomat, -en",
+      "en": "ticket machine",
+      "forms": [
+        "Ticketautomat"
+      ]
+    },
+    "alles": {
+      "de": "alles",
+      "en": "everything",
+      "forms": [
+        "alles"
+      ]
+    },
+    "auf": {
+      "de": "auf",
+      "en": "on, onto; (auf Deutsch) in German",
+      "forms": [
+        "auf"
+      ]
+    },
+    "Deutsch": {
+      "de": "das Deutsch",
+      "en": "German (the language)",
+      "forms": [
+        "Deutsch"
+      ]
+    },
+    "viel": {
+      "de": "viel, viele",
+      "en": "much, a lot; many",
+      "forms": [
+        "viel",
+        "viele",
+        "vielen"
+      ]
+    },
+    "Knopf": {
+      "de": "der Knopf, Knöpfe",
+      "en": "button",
+      "forms": [
+        "Knöpfe"
+      ]
+    },
+    "Zahl": {
+      "de": "die Zahl, -en",
+      "en": "number, figure",
+      "forms": [
+        "Zahlen"
+      ]
+    },
+    "Automat": {
+      "de": "der Automat, -en",
+      "en": "machine (ticket/vending)",
+      "forms": [
+        "Automat",
+        "Automaten"
+      ]
+    },
+    "kompliziert": {
+      "de": "kompliziert",
+      "en": "complicated",
+      "forms": [
+        "kompliziert"
+      ]
+    },
+    "hinter": {
+      "de": "hinter",
+      "en": "behind",
+      "forms": [
+        "hinter"
+      ]
+    },
+    "stehen": {
+      "de": "stehen",
+      "en": "to stand; (steht da) it says",
+      "forms": [
+        "steht",
+        "stehen"
+      ]
+    },
+    "Mann": {
+      "de": "der Mann, Männer",
+      "en": "man",
+      "forms": [
+        "Mann"
+      ]
+    },
+    "mit": {
+      "de": "mit + Dat.",
+      "en": "with",
+      "forms": [
+        "mit"
+      ]
+    },
+    "Kopfhörer": {
+      "de": "der Kopfhörer, -",
+      "en": "headphones",
+      "forms": [
+        "Kopfhörer",
+        "Kopfhörern"
+      ]
+    },
+    "neu": {
+      "de": "neu",
+      "en": "new",
+      "forms": [
+        "neu",
+        "neue"
+      ]
+    },
+    "schütteln": {
+      "de": "schütteln",
+      "en": "to shake",
+      "forms": [
+        "schüttelt"
+      ]
+    },
+    "Kopf": {
+      "de": "der Kopf, Köpfe",
+      "en": "head",
+      "forms": [
+        "Kopf"
+      ]
+    },
+    "drücken": {
+      "de": "drücken",
+      "en": "to press, push",
+      "forms": [
+        "drückt"
+      ]
+    },
+    "drei": {
+      "de": "drei",
+      "en": "three",
+      "forms": [
+        "drei"
+      ]
+    },
+    "Ticket": {
+      "de": "das Ticket, -s",
+      "en": "ticket",
+      "forms": [
+        "Ticket"
+      ]
+    },
+    "besser": {
+      "de": "besser",
+      "en": "better",
+      "forms": [
+        "besser"
+      ]
+    },
+    "nur": {
+      "de": "nur",
+      "en": "only, just",
+      "forms": [
+        "nur"
+      ]
+    },
+    "willkommen": {
+      "de": "willkommen",
+      "en": "welcome",
+      "forms": [
+        "Willkommen",
+        "willkommen"
+      ]
+    },
+    "nett": {
+      "de": "nett",
+      "en": "nice, kind",
+      "forms": [
+        "nett"
+      ]
+    },
+    "S-Bahn": {
+      "de": "die S-Bahn, -en",
+      "en": "suburban train",
+      "forms": [
+        "S-Bahn"
+      ]
+    },
+    "winken": {
+      "de": "winken",
+      "en": "to wave",
+      "forms": [
+        "winkt"
+      ]
+    },
+    "weg": {
+      "de": "weg",
+      "en": "gone, away",
+      "forms": [
+        "weg"
+      ]
+    },
+    "kein": {
+      "de": "kein, keine",
+      "en": "no, not a",
+      "forms": [
+        "kein",
+        "keine",
+        "keinen"
+      ]
+    },
+    "Name": {
+      "de": "der Name, -n",
+      "en": "name",
+      "forms": [
+        "Name",
+        "Namen"
+      ]
+    },
+    "Lächeln": {
+      "de": "das Lächeln",
+      "en": "smile",
+      "forms": [
+        "Lächeln"
+      ]
+    },
+    "wer": {
+      "de": "wer?",
+      "en": "who?",
+      "forms": [
+        "wer"
+      ]
+    },
+    "schauen": {
+      "de": "schauen",
+      "en": "to look",
+      "forms": [
+        "schaut",
+        "schauen"
+      ]
+    },
+    "Abenteuer": {
+      "de": "das Abenteuer, -",
+      "en": "adventure",
+      "forms": [
+        "Abenteuer"
+      ]
+    },
+    "beginnen": {
+      "de": "beginnen",
+      "en": "to begin",
+      "forms": [
+        "beginnt"
+      ]
+    }
+  },
   "sentences": [
     "Wir sind gleich da.",
     "Sie heißt Ayisha.",

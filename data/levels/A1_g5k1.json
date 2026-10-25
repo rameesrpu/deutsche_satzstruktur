@@ -99,6 +99,739 @@
       "read": "Morgen um neun. Beim Arzt. Zum ersten Mal ist Ayisha auf der anderen Seite."
     }
   ],
+  "glossary": {
+    "Montag": {
+      "de": "der Montag, -e",
+      "en": "Monday",
+      "forms": [
+        "Montag"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "Fieber": {
+      "de": "das Fieber",
+      "en": "fever",
+      "forms": [
+        "Fieber"
+      ]
+    },
+    "Halsschmerzen": {
+      "de": "die Halsschmerzen (pl.)",
+      "en": "sore throat",
+      "forms": [
+        "Halsschmerzen"
+      ]
+    },
+    "fast": {
+      "de": "fast",
+      "en": "almost",
+      "forms": [
+        "fast"
+      ]
+    },
+    "kein": {
+      "de": "kein, keine",
+      "en": "no, not a",
+      "forms": [
+        "kein",
+        "keine",
+        "keinen"
+      ]
+    },
+    "Stimme": {
+      "de": "die Stimme, -n",
+      "en": "voice",
+      "forms": [
+        "Stimme"
+      ]
+    },
+    "bleiben": {
+      "de": "bleiben",
+      "en": "to stay; (bleibt stehen) stops",
+      "forms": [
+        "bleibt",
+        "Bleib"
+      ]
+    },
+    "heute": {
+      "de": "heute",
+      "en": "today",
+      "forms": [
+        "heute"
+      ]
+    },
+    "im": {
+      "de": "im (= in dem)",
+      "en": "in the",
+      "forms": [
+        "im"
+      ]
+    },
+    "Bett": {
+      "de": "das Bett, -en",
+      "en": "bed",
+      "forms": [
+        "Bett"
+      ]
+    },
+    "trinken": {
+      "de": "trinken",
+      "en": "to drink",
+      "forms": [
+        "trinken",
+        "Trink",
+        "Trinken"
+      ]
+    },
+    "viel": {
+      "de": "viel, viele",
+      "en": "much, a lot; many",
+      "forms": [
+        "viel",
+        "viele",
+        "vielen"
+      ]
+    },
+    "Tee": {
+      "de": "der Tee, -s",
+      "en": "tea",
+      "forms": [
+        "Tee"
+      ]
+    },
+    "Ärztin": {
+      "de": "die Ärztin, -nen",
+      "en": "(female) doctor",
+      "forms": [
+        "Ärztin",
+        "Ärztinnen"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "sei": {
+      "de": "sei! (sein)",
+      "en": "be! (command)",
+      "forms": [
+        "sei"
+      ]
+    },
+    "gut": {
+      "de": "gut",
+      "en": "good; well",
+      "forms": [
+        "gut",
+        "gute",
+        "gutem",
+        "Guten"
+      ]
+    },
+    "Patientin": {
+      "de": "die Patientin, -nen",
+      "en": "(female) patient",
+      "forms": [
+        "Patientin"
+      ]
+    },
+    "rollen": {
+      "de": "rollen",
+      "en": "to roll",
+      "forms": [
+        "rollt"
+      ]
+    },
+    "mit": {
+      "de": "mit + Dat.",
+      "en": "with",
+      "forms": [
+        "mit"
+      ]
+    },
+    "Auge": {
+      "de": "das Auge, -n",
+      "en": "eye",
+      "forms": [
+        "Augen"
+      ]
+    },
+    "mögen": {
+      "de": "mögen (mag)",
+      "en": "to like",
+      "forms": [
+        "mag"
+      ]
+    },
+    "Befehl": {
+      "de": "der Befehl, -e",
+      "en": "order, command",
+      "forms": [
+        "Befehle"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "kommen": {
+      "de": "kommen",
+      "en": "to come",
+      "forms": [
+        "kommen",
+        "kommt",
+        "komme",
+        "kommst"
+      ]
+    },
+    "Tüte": {
+      "de": "die Tüte, -n",
+      "en": "(paper/plastic) bag",
+      "forms": [
+        "Tüte"
+      ]
+    },
+    "von": {
+      "de": "von + Dat.",
+      "en": "from; of",
+      "forms": [
+        "von"
+      ]
+    },
+    "Bäckerei": {
+      "de": "die Bäckerei, -en",
+      "en": "bakery",
+      "forms": [
+        "Bäckerei"
+      ]
+    },
+    "Essen": {
+      "de": "das Essen; essen (isst)",
+      "en": "food, meal; to eat",
+      "forms": [
+        "Essen",
+        "essen",
+        "isst",
+        "esse",
+        "Iss"
+      ]
+    },
+    "Brezel": {
+      "de": "die Brezel, -n",
+      "en": "pretzel",
+      "forms": [
+        "Brezel",
+        "Brezeln"
+      ]
+    },
+    "bringen": {
+      "de": "bringen",
+      "en": "to bring",
+      "forms": [
+        "Bring"
+      ]
+    },
+    "lieber": {
+      "de": "lieber",
+      "en": "rather, preferably",
+      "forms": [
+        "lieber"
+      ]
+    },
+    "Suppe": {
+      "de": "die Suppe, -n",
+      "en": "soup",
+      "forms": [
+        "Suppe"
+      ]
+    },
+    "klopfen": {
+      "de": "klopfen",
+      "en": "to knock",
+      "forms": [
+        "klopft"
+      ]
+    },
+    "Frau": {
+      "de": "die Frau, -en",
+      "en": "woman; Mrs",
+      "forms": [
+        "Frau",
+        "Frauen"
+      ]
+    },
+    "Thermoskanne": {
+      "de": "die Thermoskanne, -n",
+      "en": "thermos flask",
+      "forms": [
+        "Thermoskanne"
+      ]
+    },
+    "dieser": {
+      "de": "dieser, diese, dieses",
+      "en": "this",
+      "forms": [
+        "Diese",
+        "dieser",
+        "dieses",
+        "diesen"
+      ]
+    },
+    "Kamillentee": {
+      "de": "der Kamillentee",
+      "en": "chamomile tea",
+      "forms": [
+        "Kamillentee"
+      ]
+    },
+    "Rezept": {
+      "de": "das Rezept, -e",
+      "en": "recipe; prescription",
+      "forms": [
+        "Rezept"
+      ]
+    },
+    "mein": {
+      "de": "mein, meine",
+      "en": "my",
+      "forms": [
+        "mein",
+        "meine",
+        "meiner",
+        "meinen"
+      ]
+    },
+    "Oma": {
+      "de": "die Oma, -s",
+      "en": "grandma",
+      "forms": [
+        "Oma"
+      ]
+    },
+    "hundert": {
+      "de": "hundert",
+      "en": "hundred",
+      "forms": [
+        "Hundert"
+      ]
+    },
+    "Jahr": {
+      "de": "das Jahr, -e",
+      "en": "year",
+      "forms": [
+        "Jahre"
+      ]
+    },
+    "alt": {
+      "de": "alt",
+      "en": "old",
+      "forms": [
+        "alt",
+        "alte",
+        "altes",
+        "alter"
+      ]
+    },
+    "zumachen": {
+      "de": "zu|machen",
+      "en": "to close",
+      "forms": [
+        "machen … zu"
+      ]
+    },
+    "Fenster": {
+      "de": "das Fenster, -",
+      "en": "window",
+      "forms": [
+        "Fenster",
+        "Fenstern"
+      ]
+    },
+    "Handy": {
+      "de": "das Handy, -s",
+      "en": "mobile phone",
+      "forms": [
+        "Handy"
+      ]
+    },
+    "vibrieren": {
+      "de": "vibrieren",
+      "en": "to vibrate",
+      "forms": [
+        "vibriert"
+      ]
+    },
+    "Cricket-Gruppe": {
+      "de": "die Cricket-Gruppe, -n",
+      "en": "cricket group (chat)",
+      "forms": [
+        "Cricket-Gruppe"
+      ]
+    },
+    "Tante": {
+      "de": "die Tante, -n",
+      "en": "aunt; (respectfully) an older woman",
+      "forms": [
+        "Tante"
+      ]
+    },
+    "schreiben": {
+      "de": "schreiben",
+      "en": "to write",
+      "forms": [
+        "schreibt",
+        "schreiben",
+        "geschrieben"
+      ]
+    },
+    "wo": {
+      "de": "wo?",
+      "en": "where?",
+      "forms": [
+        "wo"
+      ]
+    },
+    "unser": {
+      "de": "unser, unsere",
+      "en": "our",
+      "forms": [
+        "unsere",
+        "Unser"
+      ]
+    },
+    "antworten": {
+      "de": "antworten",
+      "en": "to answer, reply",
+      "forms": [
+        "antwortet"
+      ]
+    },
+    "krank": {
+      "de": "krank",
+      "en": "sick, ill",
+      "forms": [
+        "krank"
+      ]
+    },
+    "alle": {
+      "de": "alle",
+      "en": "all; everyone",
+      "forms": [
+        "alle"
+      ]
+    },
+    "zwanzig": {
+      "de": "zwanzig",
+      "en": "twenty",
+      "forms": [
+        "zwanzig"
+      ]
+    },
+    "Nachricht": {
+      "de": "die Nachricht, -en",
+      "en": "message",
+      "forms": [
+        "Nachricht",
+        "Nachrichten"
+      ]
+    },
+    "Ingwer": {
+      "de": "der Ingwer",
+      "en": "ginger",
+      "forms": [
+        "Ingwer"
+      ]
+    },
+    "Kurkuma": {
+      "de": "die Kurkuma",
+      "en": "turmeric",
+      "forms": [
+        "Kurkuma"
+      ]
+    },
+    "Pfeffer-Rasam": {
+      "de": "das Pfeffer-Rasam",
+      "en": "pepper rasam (spicy South Indian soup)",
+      "forms": [
+        "Pfeffer-Rasam"
+      ]
+    },
+    "gehen": {
+      "de": "gehen",
+      "en": "to go",
+      "forms": [
+        "geht",
+        "Geh",
+        "gegangen"
+      ]
+    },
+    "bitte": {
+      "de": "bitte",
+      "en": "please",
+      "forms": [
+        "bitte"
+      ]
+    },
+    "zum": {
+      "de": "zum (= zu dem)",
+      "en": "to the",
+      "forms": [
+        "zum"
+      ]
+    },
+    "Arzt": {
+      "de": "der Arzt, Ärzte",
+      "en": "doctor",
+      "forms": [
+        "Arzt",
+        "Ärzte"
+      ]
+    },
+    "auch": {
+      "de": "auch",
+      "en": "also, too",
+      "forms": [
+        "auch"
+      ]
+    },
+    "brauchen": {
+      "de": "brauchen",
+      "en": "to need",
+      "forms": [
+        "brauche",
+        "braucht",
+        "brauchst",
+        "brauchen"
+      ]
+    },
+    "Team": {
+      "de": "das Team, -s",
+      "en": "team",
+      "forms": [
+        "Team"
+      ]
+    },
+    "sein": {
+      "de": "sein, seine",
+      "en": "his; its",
+      "forms": [
+        "sein",
+        "seine",
+        "seinen",
+        "seiner"
+      ]
+    },
+    "Profi": {
+      "de": "der Profi, -s",
+      "en": "pro, professional",
+      "forms": [
+        "Profi"
+      ]
+    },
+    "sagen": {
+      "de": "sagen",
+      "en": "to say",
+      "forms": [
+        "sagt",
+        "sagen",
+        "sagst",
+        "sage",
+        "Sag"
+      ]
+    },
+    "nicht": {
+      "de": "nicht",
+      "en": "not",
+      "forms": [
+        "nicht"
+      ]
+    },
+    "lächeln": {
+      "de": "lächeln",
+      "en": "to smile",
+      "forms": [
+        "lächelt"
+      ]
+    },
+    "suchen": {
+      "de": "suchen",
+      "en": "to look for",
+      "forms": [
+        "suche",
+        "sucht"
+      ]
+    },
+    "Hausärztin": {
+      "de": "die Hausärztin, -nen",
+      "en": "(female) family doctor, GP",
+      "forms": [
+        "Hausärztin"
+      ]
+    },
+    "Nähe": {
+      "de": "die Nähe",
+      "en": "(in der Nähe) nearby",
+      "forms": [
+        "Nähe"
+      ]
+    },
+    "anrufen": {
+      "de": "an|rufen",
+      "en": "to call (on the phone)",
+      "forms": [
+        "ruft … an",
+        "Ruf"
+      ]
+    },
+    "an": {
+      "de": "an",
+      "en": "at, on; to",
+      "forms": [
+        "an"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "nett": {
+      "de": "nett",
+      "en": "nice, kind",
+      "forms": [
+        "nett"
+      ]
+    },
+    "am": {
+      "de": "am (= an dem)",
+      "en": "at the, on the",
+      "forms": [
+        "am"
+      ]
+    },
+    "Telefon": {
+      "de": "das Telefon, -e",
+      "en": "telephone",
+      "forms": [
+        "Telefon"
+      ]
+    },
+    "sprechen": {
+      "de": "sprechen (spricht)",
+      "en": "to speak",
+      "forms": [
+        "sprechen",
+        "spreche",
+        "spricht",
+        "gesprochen"
+      ]
+    },
+    "schnell": {
+      "de": "schnell",
+      "en": "fast, quick(ly)",
+      "forms": [
+        "schnell",
+        "schneller"
+      ]
+    },
+    "Schwäbisch": {
+      "de": "das Schwäbisch",
+      "en": "Swabian (the local dialect)",
+      "forms": [
+        "Schwäbisch"
+      ]
+    },
+    "langsam": {
+      "de": "langsam",
+      "en": "slow(ly)",
+      "forms": [
+        "langsam"
+      ]
+    },
+    "Morgen": {
+      "de": "der Morgen / morgen",
+      "en": "morning / tomorrow",
+      "forms": [
+        "Morgen",
+        "morgen"
+      ]
+    },
+    "um": {
+      "de": "um",
+      "en": "at (time); around",
+      "forms": [
+        "um"
+      ]
+    },
+    "neun": {
+      "de": "neun",
+      "en": "nine",
+      "forms": [
+        "neun"
+      ]
+    },
+    "beim": {
+      "de": "beim (= bei dem)",
+      "en": "at the; while",
+      "forms": [
+        "beim"
+      ]
+    },
+    "erste": {
+      "de": "erste",
+      "en": "first",
+      "forms": [
+        "ersten",
+        "Erste"
+      ]
+    },
+    "Mal": {
+      "de": "das Mal, -e",
+      "en": "time (occasion); (zum ersten Mal) for the first time",
+      "forms": [
+        "Mal"
+      ]
+    },
+    "auf": {
+      "de": "auf",
+      "en": "on, onto; (auf Deutsch) in German",
+      "forms": [
+        "auf"
+      ]
+    },
+    "andere": {
+      "de": "andere",
+      "en": "other, different",
+      "forms": [
+        "anderen"
+      ]
+    },
+    "Seite": {
+      "de": "die Seite, -n",
+      "en": "page; side",
+      "forms": [
+        "Seite",
+        "Seiten"
+      ]
+    }
+  },
   "sentences": [
     "Bleib heute im Bett!",
     "Trink viel Tee!",

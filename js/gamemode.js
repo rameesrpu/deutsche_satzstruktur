@@ -17,7 +17,8 @@ import { beatsBefore, beatsAfterLast, nextPlayText, showStoryCard, hideStoryCard
 export class GameMode {
     /**
      * @param {Object} host  app services: { sentenceManager, levelSelector, redraw(),
-     *   setView(view), updateSentenceList(), startChapter(level, category, opts) }
+     *   setView(view), updateSentenceList(), startChapter(level, category, opts),
+     *   openReader(level, category) }
      */
     constructor(svg, wordManager, gridViewModel, host) {
         this.host = host;
@@ -1629,13 +1630,20 @@ export class GameMode {
         const sentence = this.host.sentenceManager.getCurrentSentence();
         const segment = beatsBefore(chapter.data.beats, sentence.text);
         if (!segment) return;
+        const buttons = [{ label: 'Los geht\'s ▶', primary: true, onClick: () => this.closeStoryCard() }];
+        // First card of the chapter: offer to read the whole chapter first
+        if (chapter.data.sentences[0] === sentence.text) {
+            buttons.unshift({ label: '📖 Erst lesen',
+                onClick: () => this.host.openReader(chapter.level, chapter.category) });
+        }
         this.pauseForStoryCard();
         showStoryCard({
             heading: chapter.cat.label,
             lines: segment.lines,
             play: segment.play,
-            buttons: [{ label: 'Los geht\'s ▶', primary: true, onClick: () => this.closeStoryCard() }],
+            buttons,
             onSpeak: texts => this.speakStoryLines(texts),
+            glossary: chapter.data.glossary,
         });
     }
 
@@ -1705,6 +1713,7 @@ export class GameMode {
             lines: beatsAfterLast(data.beats),
             buttons,
             onSpeak: texts => this.speakStoryLines(texts),
+            glossary: data.glossary,
         });
         levelSelector.refresh();
     }

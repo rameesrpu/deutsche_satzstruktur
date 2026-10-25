@@ -11,6 +11,11 @@ per chapter and per drill:
   - data/library/<same name>.json                          pre-tagged words for game mode
 and js/storyContent.js (the chapter index used by levelContent.js / the level selector).
 
+Glossary: each story file may have a "glossary" ({headword: {de, en, forms}}); all glossaries
+of a level form one dictionary. Each chapter file gets the entries whose forms occur in its
+beats (matching rules: glossary_matches, mirrored by js/glossary.js). Forms that occur in no
+chapter of the level are reported as warnings (typos).
+
 Library `version` is a hash of the file's words, so it changes exactly when the
 content changes (browsers then reload the words, see bulkLoadLibraryCategory).
 
@@ -26,6 +31,7 @@ import glob
 import hashlib
 import json
 import os
+import re
 import sys
 
 REPO_ROOT   = os.path.join(os.path.dirname(__file__), '..')
@@ -121,6 +127,95 @@ def check_play(level, text, words, warnings, where):
         warnings.append(f'{where}: nothing to place: {text}')
 
 
+# --- Glossary matching (keep in sync with js/glossary.js glossTokens) ---
+
+WORD_RE = re.compile(r'[^\W\d_]+(?:-[^\W\d_]+)*')
+SENTENCE_END_RE = re.compile(r'[.!?:;]')
+# A separable particle closes its clause: punctuation, end of text, or "… aus wie"
+PARTICLE_END_RE = re.compile(r'\s*(?:[.,!?;:…“”"»«)]|$|wie\b)')
+SEPARATOR = '…'
+
+
+def form_variants(token):
+    """A token matches a form exactly, or (sentence start) with its first letter lowercased."""
+    if token[:1].isupper():
+        return (token, token[0].lower() + token[1:])
+    return (token,)
+
+
+def glossary_matches(text, glossary):
+    """
+    → [(token, start, end, key, form)] for every word of `text`; key/form are None
+    without a glossary entry. Separable forms ("geht … auf") match when the particle
+    comes later in the same sentence and closes the clause; they win over single forms.
+    """
+    tokens = [(m.group(), m.start(), m.end()) for m in WORD_RE.finditer(text)]
+    found = [None] * len(tokens)
+    singles, separables = {}, []
+    for key, entry in glossary.items():
+        for form in entry['forms']:
+            if SEPARATOR in form:
+                first, particle = (p.strip() for p in form.split(SEPARATOR))
+                separables.append((first, particle, key, form))
+            else:
+                singles[form] = key
+    for i, (tok, _, end) in enumerate(tokens):
+        if found[i]:
+            continue
+        for first, particle, key, form in separables:
+            if first not in form_variants(tok):
+                continue
+            for j in range(i + 1, len(tokens)):
+                if SENTENCE_END_RE.search(text[tokens[j - 1][2]:tokens[j][1]]):
+                    break
+                if (tokens[j][0] == particle and not found[j]
+                        and PARTICLE_END_RE.match(text, tokens[j][2])):
+                    found[i] = found[j] = (key, form)
+                    break
+            if found[i]:
+                break
+    for i, (tok, _, _) in enumerate(tokens):
+        if not found[i]:
+            for variant in form_variants(tok):
+                if variant in singles:
+                    found[i] = (singles[variant], variant)
+                    break
+    return [(tok, start, end, *(found[i] or (None, None)))
+            for i, (tok, start, end) in enumerate(tokens)]
+
+
+def check_glossary(glossary, where, errors):
+    """Entry shape and one entry per form."""
+    owner = {}
+    for key, entry in glossary.items():
+        if not (isinstance(entry.get('de'), str) and entry['de'] and
+                isinstance(entry.get('en'), str) and entry['en'] and
+                isinstance(entry.get('forms'), list) and entry['forms']):
+            errors.append(f'{where}: glossary "{key}" needs de, en and forms')
+            continue
+        for form in entry['forms']:
+            if form in owner:
+                errors.append(f'{where}: glossary form "{form}" in both "{owner[form]}" and "{key}"')
+            owner[form] = key
+
+
+def unused_glossary_forms(glossary, texts):
+    """Forms that occur in none of `texts` → [(key, form)]."""
+    used = {(m[3], m[4]) for text in texts for m in glossary_matches(text, glossary) if m[3]}
+    return [(key, form) for key, entry in glossary.items()
+            for form in entry['forms'] if (key, form) not in used]
+
+
+def chapter_glossary(beats, glossary):
+    """The glossary entries used in a chapter's beats, in order of first use."""
+    keys = []
+    for beat in beats:
+        for m in glossary_matches(beat.get('read') or beat.get('play') or '', glossary):
+            if m[3] and m[3] not in keys:
+                keys.append(m[3])
+    return {key: glossary[key] for key in keys}
+
+
 def content_version(sentences):
     blob = json.dumps(sentences, ensure_ascii=False, sort_keys=True).encode('utf-8')
     return hashlib.sha1(blob).hexdigest()[:10]
@@ -165,9 +260,27 @@ def write_set(name, level, category, texts, library, extra=None):
 def build():
     warnings, errors = [], []
     index = {}
+    stories = []
     for path in sorted(glob.glob(os.path.join(STORIES_DIR, '*', '*.json'))):
         with open(path, encoding='utf-8') as f:
-            story = json.load(f)
+            stories.append(json.load(f))
+
+    # One glossary per level, from all of its story files
+    glossaries = {}
+    for story in stories:
+        level_glossary = glossaries.setdefault(story['level'], {})
+        for key, entry in story.get('glossary', {}).items():
+            if key in level_glossary:
+                errors.append(f'{story["level"]} story {story["story"]}: glossary "{key}" defined twice')
+            level_glossary[key] = entry
+    for level, glossary in glossaries.items():
+        check_glossary(glossary, level, errors)
+        texts = [b.get('read') or b.get('play') or '' for story in stories if story['level'] == level
+                 for ch in story['chapters'] for b in ch['beats']]
+        for key, form in unused_glossary_forms(glossary, texts):
+            warnings.append(f'{level}: glossary form "{form}" ("{key}") never appears in a chapter')
+
+    for story in stories:
         level = story['level']
         chapters_out = []
         for ch in story['chapters']:
@@ -182,6 +295,7 @@ def build():
             write_set(name, level, label, texts, library, {
                 'story': story['story'], 'storyTitle': story['title'],
                 'chapter': ch['id'], 'title': ch['title'], 'skill': ch['skill'], 'beats': beats,
+                'glossary': chapter_glossary(beats, glossaries.get(level, {})),
             })
 
             drill_texts, drill_library = build_sentence_set(level, ch['drill'], f'{name}_uebung', warnings, errors)

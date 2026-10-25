@@ -105,6 +105,631 @@
       "read": "In der Nacht kann Ayisha nicht schlafen. Der alte Schrank knarrt. Und hinter dem Schrank … ist da etwas?"
     }
   ],
+  "glossary": {
+    "vor": {
+      "de": "vor",
+      "en": "in front of; before",
+      "forms": [
+        "vor"
+      ]
+    },
+    "Tür": {
+      "de": "die Tür, -en",
+      "en": "door",
+      "forms": [
+        "Tür",
+        "Türen"
+      ]
+    },
+    "stehen": {
+      "de": "stehen",
+      "en": "to stand; (steht da) it says",
+      "forms": [
+        "steht",
+        "stehen"
+      ]
+    },
+    "Frau": {
+      "de": "die Frau, -en",
+      "en": "woman; Mrs",
+      "forms": [
+        "Frau",
+        "Frauen"
+      ]
+    },
+    "grau": {
+      "de": "grau",
+      "en": "grey",
+      "forms": [
+        "Graue"
+      ]
+    },
+    "Haar": {
+      "de": "das Haar, -e",
+      "en": "hair",
+      "forms": [
+        "Haare",
+        "Haaren"
+      ]
+    },
+    "Brille": {
+      "de": "die Brille, -n",
+      "en": "glasses",
+      "forms": [
+        "Brille"
+      ]
+    },
+    "Gartenschürze": {
+      "de": "die Gartenschürze, -n",
+      "en": "gardening apron",
+      "forms": [
+        "Gartenschürze"
+      ]
+    },
+    "Grüß Gott": {
+      "de": "Grüß Gott!",
+      "en": "hello (greeting in southern Germany)",
+      "forms": [
+        "Grüß"
+      ]
+    },
+    "anschauen": {
+      "de": "an|schauen",
+      "en": "to look at",
+      "forms": [
+        "schaut … an",
+        "schauen … an"
+      ]
+    },
+    "von": {
+      "de": "von + Dat.",
+      "en": "from; of",
+      "forms": [
+        "von"
+      ]
+    },
+    "oben": {
+      "de": "oben",
+      "en": "up; upstairs; at the top",
+      "forms": [
+        "oben"
+      ]
+    },
+    "nach": {
+      "de": "nach",
+      "en": "to; after; (nach oben) upwards",
+      "forms": [
+        "nach"
+      ]
+    },
+    "unten": {
+      "de": "unten",
+      "en": "down; downstairs; below",
+      "forms": [
+        "unten"
+      ]
+    },
+    "wieder": {
+      "de": "wieder",
+      "en": "again",
+      "forms": [
+        "wieder"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "Hausordnung": {
+      "de": "die Hausordnung, -en",
+      "en": "house rules",
+      "forms": [
+        "Hausordnung"
+      ]
+    },
+    "kein": {
+      "de": "kein, keine",
+      "en": "no, not a",
+      "forms": [
+        "kein",
+        "keine",
+        "keinen"
+      ]
+    },
+    "geben": {
+      "de": "geben (gibt)",
+      "en": "to give; (es gibt) there is",
+      "forms": [
+        "gibt",
+        "geben"
+      ]
+    },
+    "Papier": {
+      "de": "das Papier, -e",
+      "en": "paper; document",
+      "forms": [
+        "Papier"
+      ]
+    },
+    "drei": {
+      "de": "drei",
+      "en": "three",
+      "forms": [
+        "drei"
+      ]
+    },
+    "Seite": {
+      "de": "die Seite, -n",
+      "en": "page; side",
+      "forms": [
+        "Seite",
+        "Seiten"
+      ]
+    },
+    "ganz": {
+      "de": "ganz",
+      "en": "quite, very; whole",
+      "forms": [
+        "ganz",
+        "ganze"
+      ]
+    },
+    "klein": {
+      "de": "klein",
+      "en": "small, little",
+      "forms": [
+        "klein",
+        "kleinen",
+        "kleines",
+        "kleiner"
+      ]
+    },
+    "schreiben": {
+      "de": "schreiben",
+      "en": "to write",
+      "forms": [
+        "schreibt",
+        "schreiben",
+        "geschrieben"
+      ]
+    },
+    "hier": {
+      "de": "hier",
+      "en": "here",
+      "forms": [
+        "hier"
+      ]
+    },
+    "Kehrwoche": {
+      "de": "die Kehrwoche",
+      "en": "Swabian rota: your week to clean the stairs",
+      "forms": [
+        "Kehrwoche",
+        "KEHRWOCHE"
+      ]
+    },
+    "was": {
+      "de": "was?",
+      "en": "what?",
+      "forms": [
+        "was"
+      ]
+    },
+    "jeder": {
+      "de": "jeder, jede, jedes",
+      "en": "every, each",
+      "forms": [
+        "Jeden",
+        "Jede",
+        "jedes"
+      ]
+    },
+    "Woche": {
+      "de": "die Woche, -n",
+      "en": "week",
+      "forms": [
+        "Woche",
+        "Wochen"
+      ]
+    },
+    "putzen": {
+      "de": "putzen",
+      "en": "to clean",
+      "forms": [
+        "putzt",
+        "putze"
+      ]
+    },
+    "Person": {
+      "de": "die Person, -en",
+      "en": "person",
+      "forms": [
+        "Person"
+      ]
+    },
+    "Treppe": {
+      "de": "die Treppe, -n",
+      "en": "stairs, staircase",
+      "forms": [
+        "Treppe"
+      ]
+    },
+    "dieser": {
+      "de": "dieser, diese, dieses",
+      "en": "this",
+      "forms": [
+        "Diese",
+        "dieser",
+        "dieses",
+        "diesen"
+      ]
+    },
+    "alle": {
+      "de": "alle",
+      "en": "all; everyone",
+      "forms": [
+        "alle"
+      ]
+    },
+    "schauen": {
+      "de": "schauen",
+      "en": "to look",
+      "forms": [
+        "schaut",
+        "schauen"
+      ]
+    },
+    "auf": {
+      "de": "auf",
+      "en": "on, onto; (auf Deutsch) in German",
+      "forms": [
+        "auf"
+      ]
+    },
+    "sein": {
+      "de": "sein, seine",
+      "en": "his; its",
+      "forms": [
+        "sein",
+        "seine",
+        "seinen",
+        "seiner"
+      ]
+    },
+    "Handy": {
+      "de": "das Handy, -s",
+      "en": "mobile phone",
+      "forms": [
+        "Handy"
+      ]
+    },
+    "leider": {
+      "de": "leider",
+      "en": "unfortunately",
+      "forms": [
+        "leider"
+      ]
+    },
+    "Zeit": {
+      "de": "die Zeit, -en",
+      "en": "time",
+      "forms": [
+        "Zeit"
+      ]
+    },
+    "nie": {
+      "de": "nie",
+      "en": "never",
+      "forms": [
+        "nie"
+      ]
+    },
+    "Herr": {
+      "de": "der Herr, -en",
+      "en": "Mr; gentleman",
+      "forms": [
+        "Herr"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "hören": {
+      "de": "hören",
+      "en": "to hear",
+      "forms": [
+        "hört",
+        "gehört"
+      ]
+    },
+    "etwas": {
+      "de": "etwas",
+      "en": "something",
+      "forms": [
+        "etwas"
+      ]
+    },
+    "aus": {
+      "de": "aus + Dat.",
+      "en": "from, out of",
+      "forms": [
+        "aus"
+      ]
+    },
+    "Garten": {
+      "de": "der Garten, Gärten",
+      "en": "garden",
+      "forms": [
+        "Garten"
+      ]
+    },
+    "Huhn": {
+      "de": "das Huhn, Hühner",
+      "en": "chicken, hen",
+      "forms": [
+        "Hühner",
+        "Hühnern"
+      ]
+    },
+    "fünf": {
+      "de": "fünf",
+      "en": "five",
+      "forms": [
+        "fünf"
+      ]
+    },
+    "Name": {
+      "de": "der Name, -n",
+      "en": "name",
+      "forms": [
+        "Name",
+        "Namen"
+      ]
+    },
+    "lieben": {
+      "de": "lieben",
+      "en": "to love",
+      "forms": [
+        "liebe",
+        "liebt"
+      ]
+    },
+    "zum": {
+      "de": "zum (= zu dem)",
+      "en": "to the",
+      "forms": [
+        "zum"
+      ]
+    },
+    "erste": {
+      "de": "erste",
+      "en": "first",
+      "forms": [
+        "ersten",
+        "Erste"
+      ]
+    },
+    "Mal": {
+      "de": "das Mal, -e",
+      "en": "time (occasion); (zum ersten Mal) for the first time",
+      "forms": [
+        "Mal"
+      ]
+    },
+    "lächeln": {
+      "de": "lächeln",
+      "en": "to smile",
+      "forms": [
+        "lächelt"
+      ]
+    },
+    "bisschen": {
+      "de": "ein bisschen",
+      "en": "a little, a bit",
+      "forms": [
+        "bisschen"
+      ]
+    },
+    "kurz": {
+      "de": "kurz",
+      "en": "short; briefly",
+      "forms": [
+        "kurz"
+      ]
+    },
+    "Essen": {
+      "de": "das Essen; essen (isst)",
+      "en": "food, meal; to eat",
+      "forms": [
+        "Essen",
+        "essen",
+        "isst",
+        "esse",
+        "Iss"
+      ]
+    },
+    "gern": {
+      "de": "gern",
+      "en": "gladly; (ich wohne gern) I like living",
+      "forms": [
+        "gern"
+      ]
+    },
+    "Ei": {
+      "de": "das Ei, -er",
+      "en": "egg",
+      "forms": [
+        "Eier"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "nehmen": {
+      "de": "nehmen (nimmt)",
+      "en": "to take",
+      "forms": [
+        "nimmt",
+        "nehme",
+        "nehmen"
+      ]
+    },
+    "sechs": {
+      "de": "sechs",
+      "en": "six",
+      "forms": [
+        "sechs"
+      ]
+    },
+    "gehen": {
+      "de": "gehen",
+      "en": "to go",
+      "forms": [
+        "geht",
+        "Geh",
+        "gegangen"
+      ]
+    },
+    "ausatmen": {
+      "de": "aus|atmen",
+      "en": "to breathe out",
+      "forms": [
+        "atmet … aus"
+      ]
+    },
+    "lesen": {
+      "de": "lesen (liest)",
+      "en": "to read",
+      "forms": [
+        "liest"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "liegen": {
+      "de": "liegen",
+      "en": "to lie (be lying)",
+      "forms": [
+        "liegt"
+      ]
+    },
+    "schon": {
+      "de": "schon",
+      "en": "already; (schon wieder) again!",
+      "forms": [
+        "schon"
+      ]
+    },
+    "Sofa": {
+      "de": "das Sofa, -s",
+      "en": "sofa",
+      "forms": [
+        "Sofa"
+      ]
+    },
+    "Auge": {
+      "de": "das Auge, -n",
+      "en": "eye",
+      "forms": [
+        "Augen"
+      ]
+    },
+    "zu": {
+      "de": "zu",
+      "en": "to; too; closed",
+      "forms": [
+        "zu"
+      ]
+    },
+    "schlafen": {
+      "de": "schlafen (schläft)",
+      "en": "to sleep",
+      "forms": [
+        "schläft",
+        "schlafen"
+      ]
+    },
+    "Nacht": {
+      "de": "die Nacht, Nächte",
+      "en": "night",
+      "forms": [
+        "Nacht"
+      ]
+    },
+    "können": {
+      "de": "können (kann)",
+      "en": "can, to be able to",
+      "forms": [
+        "kann",
+        "kannst",
+        "können"
+      ]
+    },
+    "nicht": {
+      "de": "nicht",
+      "en": "not",
+      "forms": [
+        "nicht"
+      ]
+    },
+    "alt": {
+      "de": "alt",
+      "en": "old",
+      "forms": [
+        "alt",
+        "alte",
+        "altes",
+        "alter"
+      ]
+    },
+    "Schrank": {
+      "de": "der Schrank, Schränke",
+      "en": "wardrobe, cupboard",
+      "forms": [
+        "Schrank"
+      ]
+    },
+    "knarren": {
+      "de": "knarren",
+      "en": "to creak",
+      "forms": [
+        "knarrt"
+      ]
+    },
+    "hinter": {
+      "de": "hinter",
+      "en": "behind",
+      "forms": [
+        "hinter"
+      ]
+    },
+    "da": {
+      "de": "da",
+      "en": "there; here; then",
+      "forms": [
+        "da"
+      ]
+    }
+  },
   "sentences": [
     "Grüß Gott, ich bin Frau Schäfer.",
     "Haben Sie die Hausordnung?",

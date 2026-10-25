@@ -65,6 +65,26 @@ Then run `python3 scripts/audit_library.py` and the tests.
 - `read`: narration or dialogue, shown on the card between rounds, never scored.
 - `speaker`: shown as a label on the card. **Never write "sagt X" inside a play sentence.**
 
+### Glossary (tap-to-translate)
+Each story file ends with a `glossary`; all story files of a level form one dictionary, so a word
+is defined once, in the story where it first appears. Meanings are in English.
+
+```json
+"glossary": {
+  "Gepäckband": {"de": "das Gepäckband, -bänder", "en": "baggage carousel", "forms": ["Gepäckband"]},
+  "aussehen": {"de": "aus|sehen (sieht aus)", "en": "to look (like)", "forms": ["sieht … aus"]}
+}
+```
+- `de`: dictionary form: nouns with article and plural, verbs as infinitive with `|` for the separable
+  prefix and irregular forms in brackets. The 🔊 button reads it without plural, brackets and `|`.
+- `forms`: the words as they appear in chapter beats (case-sensitive; a capitalised word at the start of
+  a sentence also matches its lowercase form). `"geht … auf"` = separable verb: it matches when the particle
+  comes later in the same sentence and ends the clause.
+- Cover the words a complete beginner might not know, plus story words (*Kehrwoche*, *Approbation*).
+  Skip names, pronouns, articles and *sein* forms.
+- The build copies the entries a chapter uses into its `data/levels` file, warns about forms that appear
+  in no chapter (typos, drill-only words), and fails if a form belongs to two entries.
+
 ### Tags (one per word of a `play` sentence)
 | Tag | Meaning |
 |---|---|
@@ -163,3 +183,4 @@ skill ids above. They stay playable until drills with the new cast replace them.
 - Whether A1 Perfekt (5.3) is enough of a preview, or should move fully to A2.
 - Per-sentence `skill` tags, so "Review weak spots" can target a skill across chapters.
 - Narrated story mode (word-by-word highlighting) using the same beats.
+- Malayalam meanings in the glossary (needs a reviewer who speaks Malayalam).

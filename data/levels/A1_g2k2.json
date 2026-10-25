@@ -93,6 +93,513 @@
       "read": "In dieser Nacht schläft Ayisha nicht viel. Wer ist M.?"
     }
   ],
+  "glossary": {
+    "aufheben": {
+      "de": "auf|heben",
+      "en": "to pick up",
+      "forms": [
+        "hebt … auf"
+      ]
+    },
+    "Foto": {
+      "de": "das Foto, -s",
+      "en": "photo",
+      "forms": [
+        "Foto",
+        "Fotos"
+      ]
+    },
+    "Frau": {
+      "de": "die Frau, -en",
+      "en": "woman; Mrs",
+      "forms": [
+        "Frau",
+        "Frauen"
+      ]
+    },
+    "jung": {
+      "de": "jung",
+      "en": "young",
+      "forms": [
+        "jung",
+        "junge",
+        "junger"
+      ]
+    },
+    "vielleicht": {
+      "de": "vielleicht",
+      "en": "maybe, perhaps",
+      "forms": [
+        "vielleicht"
+      ]
+    },
+    "zwanzig": {
+      "de": "zwanzig",
+      "en": "twenty",
+      "forms": [
+        "zwanzig"
+      ]
+    },
+    "tragen": {
+      "de": "tragen (trägt)",
+      "en": "to carry; to wear",
+      "forms": [
+        "trägt",
+        "tragen"
+      ]
+    },
+    "weiß": {
+      "de": "weiß",
+      "en": "white",
+      "forms": [
+        "weiße"
+      ]
+    },
+    "Uniform": {
+      "de": "die Uniform, -en",
+      "en": "uniform",
+      "forms": [
+        "Uniform"
+      ]
+    },
+    "hinter": {
+      "de": "hinter",
+      "en": "behind",
+      "forms": [
+        "hinter"
+      ]
+    },
+    "groß": {
+      "de": "groß",
+      "en": "big, tall; (groß einkaufen) to do a big shop",
+      "forms": [
+        "groß",
+        "großes"
+      ]
+    },
+    "Gebäude": {
+      "de": "das Gebäude, -",
+      "en": "building",
+      "forms": [
+        "Gebäude"
+      ]
+    },
+    "mit": {
+      "de": "mit + Dat.",
+      "en": "with",
+      "forms": [
+        "mit"
+      ]
+    },
+    "viel": {
+      "de": "viel, viele",
+      "en": "much, a lot; many",
+      "forms": [
+        "viel",
+        "viele",
+        "vielen"
+      ]
+    },
+    "Fenster": {
+      "de": "das Fenster, -",
+      "en": "window",
+      "forms": [
+        "Fenster",
+        "Fenstern"
+      ]
+    },
+    "Krankenhaus": {
+      "de": "das Krankenhaus, -häuser",
+      "en": "hospital",
+      "forms": [
+        "Krankenhaus"
+      ]
+    },
+    "kennen": {
+      "de": "kennen",
+      "en": "to know (a person, a thing)",
+      "forms": [
+        "Kennst",
+        "kenne",
+        "kennt"
+      ]
+    },
+    "nicht": {
+      "de": "nicht",
+      "en": "not",
+      "forms": [
+        "nicht"
+      ]
+    },
+    "Krankenschwester": {
+      "de": "die Krankenschwester, -n",
+      "en": "nurse",
+      "forms": [
+        "Krankenschwester",
+        "Krankenschwestern"
+      ]
+    },
+    "aus": {
+      "de": "aus + Dat.",
+      "en": "from, out of",
+      "forms": [
+        "aus"
+      ]
+    },
+    "umdrehen": {
+      "de": "um|drehen",
+      "en": "to turn over",
+      "forms": [
+        "dreht … um"
+      ]
+    },
+    "auf": {
+      "de": "auf",
+      "en": "on, onto; (auf Deutsch) in German",
+      "forms": [
+        "auf"
+      ]
+    },
+    "Rückseite": {
+      "de": "die Rückseite, -n",
+      "en": "back (side)",
+      "forms": [
+        "Rückseite"
+      ]
+    },
+    "stehen": {
+      "de": "stehen",
+      "en": "to stand; (steht da) it says",
+      "forms": [
+        "steht",
+        "stehen"
+      ]
+    },
+    "noch": {
+      "de": "noch",
+      "en": "still; yet; (noch ein) another",
+      "forms": [
+        "noch"
+      ]
+    },
+    "Satz": {
+      "de": "der Satz, Sätze",
+      "en": "sentence",
+      "forms": [
+        "Satz"
+      ]
+    },
+    "andere": {
+      "de": "andere",
+      "en": "other, different",
+      "forms": [
+        "anderen"
+      ]
+    },
+    "Schrift": {
+      "de": "die Schrift, -en",
+      "en": "writing, script",
+      "forms": [
+        "Schrift"
+      ]
+    },
+    "kein": {
+      "de": "kein, keine",
+      "en": "no, not a",
+      "forms": [
+        "kein",
+        "keine",
+        "keinen"
+      ]
+    },
+    "Deutsch": {
+      "de": "das Deutsch",
+      "en": "German (the language)",
+      "forms": [
+        "Deutsch"
+      ]
+    },
+    "Englisch": {
+      "de": "das Englisch",
+      "en": "English (the language)",
+      "forms": [
+        "Englisch"
+      ]
+    },
+    "auch": {
+      "de": "auch",
+      "en": "also, too",
+      "forms": [
+        "auch"
+      ]
+    },
+    "lesen": {
+      "de": "lesen (liest)",
+      "en": "to read",
+      "forms": [
+        "liest"
+      ]
+    },
+    "einmal": {
+      "de": "einmal",
+      "en": "once",
+      "forms": [
+        "einmal"
+      ]
+    },
+    "zweimal": {
+      "de": "zweimal",
+      "en": "twice",
+      "forms": [
+        "zweimal"
+      ]
+    },
+    "Auge": {
+      "de": "das Auge, -n",
+      "en": "eye",
+      "forms": [
+        "Augen"
+      ]
+    },
+    "werden": {
+      "de": "werden (wird)",
+      "en": "to become",
+      "forms": [
+        "wird",
+        "werden"
+      ]
+    },
+    "kommen": {
+      "de": "kommen",
+      "en": "to come",
+      "forms": [
+        "kommen",
+        "kommt",
+        "komme",
+        "kommst"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "alt": {
+      "de": "alt",
+      "en": "old",
+      "forms": [
+        "alt",
+        "alte",
+        "altes",
+        "alter"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "Name": {
+      "de": "der Name, -n",
+      "en": "name",
+      "forms": [
+        "Name",
+        "Namen"
+      ]
+    },
+    "nur": {
+      "de": "nur",
+      "en": "only, just",
+      "forms": [
+        "nur"
+      ]
+    },
+    "Buchstabe": {
+      "de": "der Buchstabe, -n",
+      "en": "letter (of the alphabet)",
+      "forms": [
+        "Buchstaben"
+      ]
+    },
+    "ganz": {
+      "de": "ganz",
+      "en": "quite, very; whole",
+      "forms": [
+        "ganz",
+        "ganze"
+      ]
+    },
+    "unten": {
+      "de": "unten",
+      "en": "down; downstairs; below",
+      "forms": [
+        "unten"
+      ]
+    },
+    "Idee": {
+      "de": "die Idee, -n",
+      "en": "idea",
+      "forms": [
+        "Idee"
+      ]
+    },
+    "finden": {
+      "de": "finden",
+      "en": "to find; to think (opinion)",
+      "forms": [
+        "findet",
+        "finde",
+        "finden"
+      ]
+    },
+    "spannend": {
+      "de": "spannend",
+      "en": "exciting",
+      "forms": [
+        "spannend"
+      ]
+    },
+    "gähnen": {
+      "de": "gähnen",
+      "en": "to yawn",
+      "forms": [
+        "gähnt"
+      ]
+    },
+    "gehen": {
+      "de": "gehen",
+      "en": "to go",
+      "forms": [
+        "geht",
+        "Geh",
+        "gegangen"
+      ]
+    },
+    "ins": {
+      "de": "ins (= in das)",
+      "en": "into the",
+      "forms": [
+        "ins"
+      ]
+    },
+    "Bett": {
+      "de": "das Bett, -en",
+      "en": "bed",
+      "forms": [
+        "Bett"
+      ]
+    },
+    "natürlich": {
+      "de": "natürlich",
+      "en": "of course",
+      "forms": [
+        "natürlich"
+      ]
+    },
+    "was": {
+      "de": "was?",
+      "en": "what?",
+      "forms": [
+        "was"
+      ]
+    },
+    "da": {
+      "de": "da",
+      "en": "there; here; then",
+      "forms": [
+        "da"
+      ]
+    },
+    "bitte": {
+      "de": "bitte",
+      "en": "please",
+      "forms": [
+        "bitte"
+      ]
+    },
+    "schauen": {
+      "de": "schauen",
+      "en": "to look",
+      "forms": [
+        "schaut",
+        "schauen"
+      ]
+    },
+    "leise": {
+      "de": "leise",
+      "en": "quiet(ly), softly",
+      "forms": [
+        "leise"
+      ]
+    },
+    "übersetzen": {
+      "de": "übersetzen",
+      "en": "to translate",
+      "forms": [
+        "übersetzt"
+      ]
+    },
+    "hier": {
+      "de": "hier",
+      "en": "here",
+      "forms": [
+        "hier"
+      ]
+    },
+    "Zuhause": {
+      "de": "das Zuhause",
+      "en": "home",
+      "forms": [
+        "Zuhause"
+      ]
+    },
+    "dieser": {
+      "de": "dieser, diese, dieses",
+      "en": "this",
+      "forms": [
+        "Diese",
+        "dieser",
+        "dieses",
+        "diesen"
+      ]
+    },
+    "Nacht": {
+      "de": "die Nacht, Nächte",
+      "en": "night",
+      "forms": [
+        "Nacht"
+      ]
+    },
+    "schlafen": {
+      "de": "schlafen (schläft)",
+      "en": "to sleep",
+      "forms": [
+        "schläft",
+        "schlafen"
+      ]
+    },
+    "wer": {
+      "de": "wer?",
+      "en": "who?",
+      "forms": [
+        "wer"
+      ]
+    }
+  },
   "sentences": [
     "Kennst du die Frau?",
     "Nein, ich kenne die Frau nicht.",

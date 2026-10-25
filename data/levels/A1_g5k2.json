@@ -100,6 +100,798 @@
       "read": "Zu Hause schreibt sie in die Cricket-Gruppe: „Nur eine Erkältung!“ Faris antwortet sofort: „Alhamdulillah! Am Samstag fahren wir auf die Alb. Alle kommen mit. Du auch?“"
     }
   ],
+  "glossary": {
+    "Dienstag": {
+      "de": "der Dienstag, -e",
+      "en": "Tuesday",
+      "forms": [
+        "Dienstag"
+      ]
+    },
+    "neun": {
+      "de": "neun",
+      "en": "nine",
+      "forms": [
+        "neun"
+      ]
+    },
+    "Uhr": {
+      "de": "die Uhr, -en",
+      "en": "clock; o'clock",
+      "forms": [
+        "Uhr"
+      ]
+    },
+    "Praxis": {
+      "de": "die Praxis, Praxen",
+      "en": "(doctor's) practice, surgery",
+      "forms": [
+        "Praxis"
+      ]
+    },
+    "von": {
+      "de": "von + Dat.",
+      "en": "from; of",
+      "forms": [
+        "von"
+      ]
+    },
+    "hell": {
+      "de": "hell",
+      "en": "bright, light",
+      "forms": [
+        "hell"
+      ]
+    },
+    "freundlich": {
+      "de": "freundlich",
+      "en": "friendly",
+      "forms": [
+        "freundlich"
+      ]
+    },
+    "fahren": {
+      "de": "fahren (fährt)",
+      "en": "to go (by vehicle), drive, ride",
+      "forms": [
+        "fährt",
+        "fahren",
+        "gefahren"
+      ]
+    },
+    "mit": {
+      "de": "mit + Dat.",
+      "en": "with",
+      "forms": [
+        "mit"
+      ]
+    },
+    "U-Bahn": {
+      "de": "die U-Bahn, -en",
+      "en": "underground, subway",
+      "forms": [
+        "U-Bahn"
+      ]
+    },
+    "zur": {
+      "de": "zur (= zu der)",
+      "en": "to the",
+      "forms": [
+        "zur"
+      ]
+    },
+    "bei": {
+      "de": "bei + Dat.",
+      "en": "at, with, near",
+      "forms": [
+        "bei"
+      ]
+    },
+    "im": {
+      "de": "im (= in dem)",
+      "en": "in the",
+      "forms": [
+        "im"
+      ]
+    },
+    "Wartezimmer": {
+      "de": "das Wartezimmer, -",
+      "en": "waiting room",
+      "forms": [
+        "Wartezimmer"
+      ]
+    },
+    "sitzen": {
+      "de": "sitzen",
+      "en": "to sit",
+      "forms": [
+        "sitzt",
+        "sitzen"
+      ]
+    },
+    "Mutter": {
+      "de": "die Mutter, Mütter",
+      "en": "mother",
+      "forms": [
+        "Mutter"
+      ]
+    },
+    "Baby": {
+      "de": "das Baby, -s",
+      "en": "baby",
+      "forms": [
+        "Baby"
+      ]
+    },
+    "alt": {
+      "de": "alt",
+      "en": "old",
+      "forms": [
+        "alt",
+        "alte",
+        "altes",
+        "alter"
+      ]
+    },
+    "Mann": {
+      "de": "der Mann, Männer",
+      "en": "man",
+      "forms": [
+        "Mann"
+      ]
+    },
+    "Zeitung": {
+      "de": "die Zeitung, -en",
+      "en": "newspaper",
+      "forms": [
+        "Zeitung"
+      ]
+    },
+    "spielen": {
+      "de": "spielen",
+      "en": "to play",
+      "forms": [
+        "spielen",
+        "spielt",
+        "spiele",
+        "Spielst"
+      ]
+    },
+    "beobachten": {
+      "de": "beobachten",
+      "en": "to watch, observe",
+      "forms": [
+        "beobachtet"
+      ]
+    },
+    "rot": {
+      "de": "rot",
+      "en": "red",
+      "forms": [
+        "rot",
+        "rote",
+        "roten"
+      ]
+    },
+    "Wange": {
+      "de": "die Wange, -n",
+      "en": "cheek",
+      "forms": [
+        "Wangen"
+      ]
+    },
+    "kein": {
+      "de": "kein, keine",
+      "en": "no, not a",
+      "forms": [
+        "kein",
+        "keine",
+        "keinen"
+      ]
+    },
+    "Fieber": {
+      "de": "das Fieber",
+      "en": "fever",
+      "forms": [
+        "Fieber"
+      ]
+    },
+    "gut": {
+      "de": "gut",
+      "en": "good; well",
+      "forms": [
+        "gut",
+        "gute",
+        "gutem",
+        "Guten"
+      ]
+    },
+    "Laune": {
+      "de": "die Laune, -n",
+      "en": "mood",
+      "forms": [
+        "Laune"
+      ]
+    },
+    "eben": {
+      "de": "eben",
+      "en": "simply, just (that's how it is)",
+      "forms": [
+        "eben"
+      ]
+    },
+    "Ärztin": {
+      "de": "die Ärztin, -nen",
+      "en": "(female) doctor",
+      "forms": [
+        "Ärztin",
+        "Ärztinnen"
+      ]
+    },
+    "auch": {
+      "de": "auch",
+      "en": "also, too",
+      "forms": [
+        "auch"
+      ]
+    },
+    "Frau": {
+      "de": "die Frau, -en",
+      "en": "woman; Mrs",
+      "forms": [
+        "Frau",
+        "Frauen"
+      ]
+    },
+    "bitte": {
+      "de": "bitte",
+      "en": "please",
+      "forms": [
+        "bitte"
+      ]
+    },
+    "was": {
+      "de": "was?",
+      "en": "what?",
+      "forms": [
+        "was"
+      ]
+    },
+    "fehlen": {
+      "de": "fehlen",
+      "en": "to be missing; (Was fehlt Ihnen?) What's wrong?",
+      "forms": [
+        "fehlt"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "seit": {
+      "de": "seit + Dat.",
+      "en": "since; for (time)",
+      "forms": [
+        "seit"
+      ]
+    },
+    "Sonntag": {
+      "de": "der Sonntag, -e",
+      "en": "Sunday",
+      "forms": [
+        "Sonntag"
+      ]
+    },
+    "kommen": {
+      "de": "kommen",
+      "en": "to come",
+      "forms": [
+        "kommen",
+        "kommt",
+        "komme",
+        "kommst"
+      ]
+    },
+    "aus": {
+      "de": "aus + Dat.",
+      "en": "from, out of",
+      "forms": [
+        "aus"
+      ]
+    },
+    "oder": {
+      "de": "oder",
+      "en": "or; (…, oder?) …, right?",
+      "forms": [
+        "oder"
+      ]
+    },
+    "lächeln": {
+      "de": "lächeln",
+      "en": "to smile",
+      "forms": [
+        "lächelt"
+      ]
+    },
+    "untersuchen": {
+      "de": "untersuchen",
+      "en": "to examine",
+      "forms": [
+        "untersucht"
+      ]
+    },
+    "Hals": {
+      "de": "der Hals, Hälse",
+      "en": "neck; throat",
+      "forms": [
+        "Hals"
+      ]
+    },
+    "Ohr": {
+      "de": "das Ohr, -en",
+      "en": "ear",
+      "forms": [
+        "Ohren"
+      ]
+    },
+    "Lunge": {
+      "de": "die Lunge, -n",
+      "en": "lung(s)",
+      "forms": [
+        "Lunge"
+      ]
+    },
+    "Erkältung": {
+      "de": "die Erkältung, -en",
+      "en": "cold (illness)",
+      "forms": [
+        "Erkältung"
+      ]
+    },
+    "nichts": {
+      "de": "nichts",
+      "en": "nothing",
+      "forms": [
+        "nichts"
+      ]
+    },
+    "schlimm": {
+      "de": "schlimm",
+      "en": "bad; (nichts Schlimmes) nothing serious",
+      "forms": [
+        "Schlimmes"
+      ]
+    },
+    "viel": {
+      "de": "viel, viele",
+      "en": "much, a lot; many",
+      "forms": [
+        "viel",
+        "viele",
+        "vielen"
+      ]
+    },
+    "trinken": {
+      "de": "trinken",
+      "en": "to drink",
+      "forms": [
+        "trinken",
+        "Trink",
+        "Trinken"
+      ]
+    },
+    "schlafen": {
+      "de": "schlafen (schläft)",
+      "en": "to sleep",
+      "forms": [
+        "schläft",
+        "schlafen"
+      ]
+    },
+    "sagen": {
+      "de": "sagen",
+      "en": "to say",
+      "forms": [
+        "sagt",
+        "sagen",
+        "sagst",
+        "sage",
+        "Sag"
+      ]
+    },
+    "mein": {
+      "de": "mein, meine",
+      "en": "my",
+      "forms": [
+        "mein",
+        "meine",
+        "meiner",
+        "meinen"
+      ]
+    },
+    "Patient": {
+      "de": "der Patient, -en",
+      "en": "patient",
+      "forms": [
+        "Patienten"
+      ]
+    },
+    "beide": {
+      "de": "beide",
+      "en": "both",
+      "forms": [
+        "Beide",
+        "beide"
+      ]
+    },
+    "lachen": {
+      "de": "lachen",
+      "en": "to laugh",
+      "forms": [
+        "lacht",
+        "lachen"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "fallen": {
+      "de": "fallen (fällt)",
+      "en": "to fall",
+      "forms": [
+        "fällt"
+      ]
+    },
+    "etwas": {
+      "de": "etwas",
+      "en": "something",
+      "forms": [
+        "etwas"
+      ]
+    },
+    "Tasche": {
+      "de": "die Tasche, -n",
+      "en": "bag",
+      "forms": [
+        "Tasche",
+        "Taschen"
+      ]
+    },
+    "Foto": {
+      "de": "das Foto, -s",
+      "en": "photo",
+      "forms": [
+        "Foto",
+        "Fotos"
+      ]
+    },
+    "aufheben": {
+      "de": "auf|heben",
+      "en": "to pick up",
+      "forms": [
+        "hebt … auf"
+      ]
+    },
+    "schauen": {
+      "de": "schauen",
+      "en": "to look",
+      "forms": [
+        "schaut",
+        "schauen"
+      ]
+    },
+    "aufsetzen": {
+      "de": "auf|setzen",
+      "en": "to put on (glasses)",
+      "forms": [
+        "setzt … auf"
+      ]
+    },
+    "Brille": {
+      "de": "die Brille, -n",
+      "en": "glasses",
+      "forms": [
+        "Brille"
+      ]
+    },
+    "Gebäude": {
+      "de": "das Gebäude, -",
+      "en": "building",
+      "forms": [
+        "Gebäude"
+      ]
+    },
+    "kennen": {
+      "de": "kennen",
+      "en": "to know (a person, a thing)",
+      "forms": [
+        "Kennst",
+        "kenne",
+        "kennt"
+      ]
+    },
+    "Studienzeit": {
+      "de": "die Studienzeit",
+      "en": "student days",
+      "forms": [
+        "Studienzeit"
+      ]
+    },
+    "Krankenhaus": {
+      "de": "das Krankenhaus, -häuser",
+      "en": "hospital",
+      "forms": [
+        "Krankenhaus"
+      ]
+    },
+    "schon": {
+      "de": "schon",
+      "en": "already; (schon wieder) again!",
+      "forms": [
+        "schon"
+      ]
+    },
+    "lange": {
+      "de": "lange",
+      "en": "(for) a long time",
+      "forms": [
+        "lange"
+      ]
+    },
+    "zu": {
+      "de": "zu",
+      "en": "to; too; closed",
+      "forms": [
+        "zu"
+      ]
+    },
+    "heute": {
+      "de": "heute",
+      "en": "today",
+      "forms": [
+        "heute"
+      ]
+    },
+    "dort": {
+      "de": "dort",
+      "en": "there",
+      "forms": [
+        "dort"
+      ]
+    },
+    "Wohnung": {
+      "de": "die Wohnung, -en",
+      "en": "flat, apartment",
+      "forms": [
+        "Wohnungen"
+      ]
+    },
+    "wie": {
+      "de": "wie",
+      "en": "how; like, as",
+      "forms": [
+        "wie"
+      ]
+    },
+    "Krankenschwester": {
+      "de": "die Krankenschwester, -n",
+      "en": "nurse",
+      "forms": [
+        "Krankenschwester",
+        "Krankenschwestern"
+      ]
+    },
+    "damals": {
+      "de": "damals",
+      "en": "back then",
+      "forms": [
+        "damals"
+      ]
+    },
+    "arbeiten": {
+      "de": "arbeiten",
+      "en": "to work",
+      "forms": [
+        "arbeite",
+        "gearbeitet"
+      ]
+    },
+    "gelernt": {
+      "de": "gelernt (lernen)",
+      "en": "learned",
+      "forms": [
+        "gelernt"
+      ]
+    },
+    "fragen": {
+      "de": "fragen",
+      "en": "to ask",
+      "forms": [
+        "fragt",
+        "fragen"
+      ]
+    },
+    "beim": {
+      "de": "beim (= bei dem)",
+      "en": "at the; while",
+      "forms": [
+        "beim"
+      ]
+    },
+    "Stadtarchiv": {
+      "de": "das Stadtarchiv, -e",
+      "en": "city archive",
+      "forms": [
+        "Stadtarchiv"
+      ]
+    },
+    "auf": {
+      "de": "auf",
+      "en": "on, onto; (auf Deutsch) in German",
+      "forms": [
+        "auf"
+      ]
+    },
+    "Heimweg": {
+      "de": "der Heimweg",
+      "en": "way home",
+      "forms": [
+        "Heimweg"
+      ]
+    },
+    "Apotheke": {
+      "de": "die Apotheke, -n",
+      "en": "pharmacy",
+      "forms": [
+        "Apotheke"
+      ]
+    },
+    "kaufen": {
+      "de": "kaufen",
+      "en": "to buy",
+      "forms": [
+        "kaufe",
+        "kauft"
+      ]
+    },
+    "Halsbonbon": {
+      "de": "das Halsbonbon, -s",
+      "en": "throat lozenge",
+      "forms": [
+        "Halsbonbons"
+      ]
+    },
+    "Schokolade": {
+      "de": "die Schokolade",
+      "en": "chocolate",
+      "forms": [
+        "Schokolade"
+      ]
+    },
+    "medizinisch": {
+      "de": "medizinisch",
+      "en": "medical(ly)",
+      "forms": [
+        "Medizinisch"
+      ]
+    },
+    "notwendig": {
+      "de": "notwendig",
+      "en": "necessary",
+      "forms": [
+        "notwendig"
+      ]
+    },
+    "gehen": {
+      "de": "gehen",
+      "en": "to go",
+      "forms": [
+        "geht",
+        "Geh",
+        "gegangen"
+      ]
+    },
+    "nach": {
+      "de": "nach",
+      "en": "to; after; (nach oben) upwards",
+      "forms": [
+        "nach"
+      ]
+    },
+    "Hause": {
+      "de": "zu Hause / nach Hause",
+      "en": "at home / (to) home",
+      "forms": [
+        "Hause"
+      ]
+    },
+    "schreiben": {
+      "de": "schreiben",
+      "en": "to write",
+      "forms": [
+        "schreibt",
+        "schreiben",
+        "geschrieben"
+      ]
+    },
+    "Cricket-Gruppe": {
+      "de": "die Cricket-Gruppe, -n",
+      "en": "cricket group (chat)",
+      "forms": [
+        "Cricket-Gruppe"
+      ]
+    },
+    "nur": {
+      "de": "nur",
+      "en": "only, just",
+      "forms": [
+        "nur"
+      ]
+    },
+    "antworten": {
+      "de": "antworten",
+      "en": "to answer, reply",
+      "forms": [
+        "antwortet"
+      ]
+    },
+    "sofort": {
+      "de": "sofort",
+      "en": "immediately, right away",
+      "forms": [
+        "sofort"
+      ]
+    },
+    "am": {
+      "de": "am (= an dem)",
+      "en": "at the, on the",
+      "forms": [
+        "am"
+      ]
+    },
+    "Samstag": {
+      "de": "der Samstag, -e",
+      "en": "Saturday",
+      "forms": [
+        "Samstag"
+      ]
+    },
+    "Alb": {
+      "de": "die (Schwäbische) Alb",
+      "en": "Swabian Jura (hills near Stuttgart)",
+      "forms": [
+        "Alb"
+      ]
+    },
+    "alle": {
+      "de": "alle",
+      "en": "all; everyone",
+      "forms": [
+        "alle"
+      ]
+    },
+    "mitkommen": {
+      "de": "mit|kommen",
+      "en": "to come along",
+      "forms": [
+        "kommt … mit",
+        "komme … mit",
+        "Kommst … mit",
+        "kommen … mit",
+        "mitgekommen"
+      ]
+    }
+  },
   "sentences": [
     "Ayisha fährt mit der U-Bahn zur Praxis.",
     "Sie sind bei Dr. Kühn?",

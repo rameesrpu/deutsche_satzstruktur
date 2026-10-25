@@ -124,6 +124,862 @@
       "read": "Erst in der Straßenbahn merkt sie es: Sie hat seine Nummer nicht. Er hat ihre auch nicht. Nur einen halben Sack Reis."
     }
   ],
+  "glossary": {
+    "Samstag": {
+      "de": "der Samstag, -e",
+      "en": "Saturday",
+      "forms": [
+        "Samstag"
+      ]
+    },
+    "fahren": {
+      "de": "fahren (fährt)",
+      "en": "to go (by vehicle), drive, ride",
+      "forms": [
+        "fährt",
+        "fahren",
+        "gefahren"
+      ]
+    },
+    "nach": {
+      "de": "nach",
+      "en": "to; after; (nach oben) upwards",
+      "forms": [
+        "nach"
+      ]
+    },
+    "Bad": {
+      "de": "das Bad, Bäder",
+      "en": "bathroom",
+      "forms": [
+        "Bad"
+      ]
+    },
+    "allein": {
+      "de": "allein",
+      "en": "alone, by oneself",
+      "forms": [
+        "allein",
+        "Allein"
+      ]
+    },
+    "mit": {
+      "de": "mit + Dat.",
+      "en": "with",
+      "forms": [
+        "mit"
+      ]
+    },
+    "Mission": {
+      "de": "die Mission, -en",
+      "en": "mission",
+      "forms": [
+        "Mission"
+      ]
+    },
+    "einkaufen": {
+      "de": "ein|kaufen",
+      "en": "to go shopping",
+      "forms": [
+        "kauft … ein"
+      ]
+    },
+    "heute": {
+      "de": "heute",
+      "en": "today",
+      "forms": [
+        "heute"
+      ]
+    },
+    "groß": {
+      "de": "groß",
+      "en": "big, tall; (groß einkaufen) to do a big shop",
+      "forms": [
+        "groß",
+        "großes"
+      ]
+    },
+    "Laden": {
+      "de": "der Laden, Läden",
+      "en": "shop",
+      "forms": [
+        "Laden"
+      ]
+    },
+    "klein": {
+      "de": "klein",
+      "en": "small, little",
+      "forms": [
+        "klein",
+        "kleinen",
+        "kleines",
+        "kleiner"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "riechen": {
+      "de": "riechen",
+      "en": "to smell",
+      "forms": [
+        "riecht"
+      ]
+    },
+    "wie": {
+      "de": "wie",
+      "en": "how; like, as",
+      "forms": [
+        "wie"
+      ]
+    },
+    "zu": {
+      "de": "zu",
+      "en": "to; too; closed",
+      "forms": [
+        "zu"
+      ]
+    },
+    "Hause": {
+      "de": "zu Hause / nach Hause",
+      "en": "at home / (to) home",
+      "forms": [
+        "Hause"
+      ]
+    },
+    "Kardamom": {
+      "de": "der Kardamom",
+      "en": "cardamom",
+      "forms": [
+        "Kardamom"
+      ]
+    },
+    "Zimt": {
+      "de": "der Zimt",
+      "en": "cinnamon",
+      "forms": [
+        "Zimt"
+      ]
+    },
+    "Kokos": {
+      "de": "die Kokosnuss / Kokos",
+      "en": "coconut",
+      "forms": [
+        "Kokos"
+      ]
+    },
+    "Curryblatt": {
+      "de": "das Curryblatt, -blätter",
+      "en": "curry leaf",
+      "forms": [
+        "Curryblätter"
+      ]
+    },
+    "hier": {
+      "de": "hier",
+      "en": "here",
+      "forms": [
+        "hier"
+      ]
+    },
+    "aussehen": {
+      "de": "aus|sehen (sieht aus)",
+      "en": "to look (like), to seem",
+      "forms": [
+        "sieht … aus"
+      ]
+    },
+    "alles": {
+      "de": "alles",
+      "en": "everything",
+      "forms": [
+        "alles"
+      ]
+    },
+    "gut": {
+      "de": "gut",
+      "en": "good; well",
+      "forms": [
+        "gut",
+        "gute",
+        "gutem",
+        "Guten"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "sehen": {
+      "de": "sehen (sieht)",
+      "en": "to see",
+      "forms": [
+        "Siehst",
+        "sehe",
+        "sieht",
+        "sehen"
+      ]
+    },
+    "letzte": {
+      "de": "letzte",
+      "en": "last",
+      "forms": [
+        "letzte",
+        "letzten"
+      ]
+    },
+    "Sack": {
+      "de": "der Sack, Säcke",
+      "en": "sack, bag",
+      "forms": [
+        "Sack"
+      ]
+    },
+    "Biryani-Reis": {
+      "de": "der Biryani-Reis",
+      "en": "biryani rice",
+      "forms": [
+        "Biryani-Reis"
+      ]
+    },
+    "ganz": {
+      "de": "ganz",
+      "en": "quite, very; whole",
+      "forms": [
+        "ganz",
+        "ganze"
+      ]
+    },
+    "oben": {
+      "de": "oben",
+      "en": "up; upstairs; at the top",
+      "forms": [
+        "oben"
+      ]
+    },
+    "im": {
+      "de": "im (= in dem)",
+      "en": "in the",
+      "forms": [
+        "im"
+      ]
+    },
+    "Regal": {
+      "de": "das Regal, -e",
+      "en": "shelf",
+      "forms": [
+        "Regal"
+      ]
+    },
+    "ausstrecken": {
+      "de": "aus|strecken",
+      "en": "to stretch out, reach out",
+      "forms": [
+        "streckt … aus"
+      ]
+    },
+    "Hand": {
+      "de": "die Hand, Hände",
+      "en": "hand",
+      "forms": [
+        "Hand",
+        "Hände"
+      ]
+    },
+    "von": {
+      "de": "von + Dat.",
+      "en": "from; of",
+      "forms": [
+        "von"
+      ]
+    },
+    "andere": {
+      "de": "andere",
+      "en": "other, different",
+      "forms": [
+        "anderen"
+      ]
+    },
+    "Seite": {
+      "de": "die Seite, -n",
+      "en": "page; side",
+      "forms": [
+        "Seite",
+        "Seiten"
+      ]
+    },
+    "noch": {
+      "de": "noch",
+      "en": "still; yet; (noch ein) another",
+      "forms": [
+        "noch"
+      ]
+    },
+    "Mann": {
+      "de": "der Mann, Männer",
+      "en": "man",
+      "forms": [
+        "Mann"
+      ]
+    },
+    "Kopfhörer": {
+      "de": "der Kopfhörer, -",
+      "en": "headphones",
+      "forms": [
+        "Kopfhörer",
+        "Kopfhörern"
+      ]
+    },
+    "um": {
+      "de": "um",
+      "en": "at (time); around",
+      "forms": [
+        "um"
+      ]
+    },
+    "Hals": {
+      "de": "der Hals, Hälse",
+      "en": "neck; throat",
+      "forms": [
+        "Hals"
+      ]
+    },
+    "bekannt": {
+      "de": "bekannt",
+      "en": "familiar, known",
+      "forms": [
+        "bekanntes"
+      ]
+    },
+    "Lächeln": {
+      "de": "das Lächeln",
+      "en": "smile",
+      "forms": [
+        "Lächeln"
+      ]
+    },
+    "irgendwo": {
+      "de": "irgendwo",
+      "en": "somewhere",
+      "forms": [
+        "Irgendwo"
+      ]
+    },
+    "spielen": {
+      "de": "spielen",
+      "en": "to play",
+      "forms": [
+        "spielen",
+        "spielt",
+        "spiele",
+        "Spielst"
+      ]
+    },
+    "Geige": {
+      "de": "die Geige, -n",
+      "en": "violin",
+      "forms": [
+        "Geige"
+      ]
+    },
+    "nur": {
+      "de": "nur",
+      "en": "only, just",
+      "forms": [
+        "nur"
+      ]
+    },
+    "Kopf": {
+      "de": "der Kopf, Köpfe",
+      "en": "head",
+      "forms": [
+        "Kopf"
+      ]
+    },
+    "vom": {
+      "de": "vom (= von dem)",
+      "en": "from the; of the",
+      "forms": [
+        "vom"
+      ]
+    },
+    "Flughafen": {
+      "de": "der Flughafen, -häfen",
+      "en": "airport",
+      "forms": [
+        "Flughafen"
+      ]
+    },
+    "Frau": {
+      "de": "die Frau, -en",
+      "en": "woman; Mrs",
+      "forms": [
+        "Frau",
+        "Frauen"
+      ]
+    },
+    "Automat": {
+      "de": "der Automat, -en",
+      "en": "machine (ticket/vending)",
+      "forms": [
+        "Automat",
+        "Automaten"
+      ]
+    },
+    "beide": {
+      "de": "beide",
+      "en": "both",
+      "forms": [
+        "Beide",
+        "beide"
+      ]
+    },
+    "lachen": {
+      "de": "lachen",
+      "en": "to laugh",
+      "forms": [
+        "lacht",
+        "lachen"
+      ]
+    },
+    "schauen": {
+      "de": "schauen",
+      "en": "to look",
+      "forms": [
+        "schaut",
+        "schauen"
+      ]
+    },
+    "auf": {
+      "de": "auf",
+      "en": "on, onto; (auf Deutsch) in German",
+      "forms": [
+        "auf"
+      ]
+    },
+    "Reis": {
+      "de": "der Reis",
+      "en": "rice",
+      "forms": [
+        "Reis"
+      ]
+    },
+    "können": {
+      "de": "können (kann)",
+      "en": "can, to be able to",
+      "forms": [
+        "kann",
+        "kannst",
+        "können"
+      ]
+    },
+    "mitnehmen": {
+      "de": "mit|nehmen",
+      "en": "to take along",
+      "forms": [
+        "mitnehmen"
+      ]
+    },
+    "nicht": {
+      "de": "nicht",
+      "en": "not",
+      "forms": [
+        "nicht"
+      ]
+    },
+    "fair": {
+      "de": "fair",
+      "en": "fair",
+      "forms": [
+        "fair"
+      ]
+    },
+    "da": {
+      "de": "da",
+      "en": "there; here; then",
+      "forms": [
+        "da"
+      ]
+    },
+    "klingeln": {
+      "de": "klingeln",
+      "en": "to ring",
+      "forms": [
+        "klingelt"
+      ]
+    },
+    "sein": {
+      "de": "sein, seine",
+      "en": "his; its",
+      "forms": [
+        "sein",
+        "seine",
+        "seinen",
+        "seiner"
+      ]
+    },
+    "Handy": {
+      "de": "das Handy, -s",
+      "en": "mobile phone",
+      "forms": [
+        "Handy"
+      ]
+    },
+    "rangehen": {
+      "de": "ran|gehen",
+      "en": "to answer (the phone)",
+      "forms": [
+        "geht … ran"
+      ]
+    },
+    "anstarren": {
+      "de": "an|starren",
+      "en": "to stare at",
+      "forms": [
+        "starrt … an"
+      ]
+    },
+    "dieser": {
+      "de": "dieser, diese, dieses",
+      "en": "this",
+      "forms": [
+        "Diese",
+        "dieser",
+        "dieses",
+        "diesen"
+      ]
+    },
+    "Wort": {
+      "de": "das Wort, Wörter",
+      "en": "word",
+      "forms": [
+        "Wort",
+        "Wörter"
+      ]
+    },
+    "kennen": {
+      "de": "kennen",
+      "en": "to know (a person, a thing)",
+      "forms": [
+        "Kennst",
+        "kenne",
+        "kennt"
+      ]
+    },
+    "Sprache": {
+      "de": "die Sprache, -n",
+      "en": "language",
+      "forms": [
+        "Sprache"
+      ]
+    },
+    "sprechen": {
+      "de": "sprechen (spricht)",
+      "en": "to speak",
+      "forms": [
+        "sprechen",
+        "spreche",
+        "spricht",
+        "gesprochen"
+      ]
+    },
+    "Deutsch": {
+      "de": "das Deutsch",
+      "en": "German (the language)",
+      "forms": [
+        "Deutsch"
+      ]
+    },
+    "lernen": {
+      "de": "lernen",
+      "en": "to learn, study",
+      "forms": [
+        "lerne",
+        "lernst",
+        "lernen"
+      ]
+    },
+    "so": {
+      "de": "so",
+      "en": "so",
+      "forms": [
+        "so"
+      ]
+    },
+    "schnell": {
+      "de": "schnell",
+      "en": "fast, quick(ly)",
+      "forms": [
+        "schnell",
+        "schneller"
+      ]
+    },
+    "unglaublich": {
+      "de": "unglaublich",
+      "en": "unbelievable",
+      "forms": [
+        "Unglaublich"
+      ]
+    },
+    "am": {
+      "de": "am (= an dem)",
+      "en": "at the, on the",
+      "forms": [
+        "am"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "einfach": {
+      "de": "einfach",
+      "en": "simply; easy",
+      "forms": [
+        "einfach"
+      ]
+    },
+    "heißen": {
+      "de": "heißen",
+      "en": "to be called",
+      "forms": [
+        "heißt",
+        "heiße"
+      ]
+    },
+    "übrigens": {
+      "de": "übrigens",
+      "en": "by the way",
+      "forms": [
+        "übrigens"
+      ]
+    },
+    "sagen": {
+      "de": "sagen",
+      "en": "to say",
+      "forms": [
+        "sagt",
+        "sagen",
+        "sagst",
+        "sage",
+        "Sag"
+      ]
+    },
+    "oder": {
+      "de": "oder",
+      "en": "or; (…, oder?) …, right?",
+      "forms": [
+        "oder"
+      ]
+    },
+    "normal": {
+      "de": "normal",
+      "en": "normal",
+      "forms": [
+        "normal"
+      ]
+    },
+    "kommen": {
+      "de": "kommen",
+      "en": "to come",
+      "forms": [
+        "kommen",
+        "kommt",
+        "komme",
+        "kommst"
+      ]
+    },
+    "auch": {
+      "de": "auch",
+      "en": "also, too",
+      "forms": [
+        "auch"
+      ]
+    },
+    "aus": {
+      "de": "aus + Dat.",
+      "en": "from, out of",
+      "forms": [
+        "aus"
+      ]
+    },
+    "Cricket-Profi": {
+      "de": "der Cricket-Profi, -s",
+      "en": "cricket pro",
+      "forms": [
+        "Cricket-Profi"
+      ]
+    },
+    "fast": {
+      "de": "fast",
+      "en": "almost",
+      "forms": [
+        "fast"
+      ]
+    },
+    "glauben": {
+      "de": "glauben",
+      "en": "to believe",
+      "forms": [
+        "glaube"
+      ]
+    },
+    "Ende": {
+      "de": "das Ende, -n",
+      "en": "end",
+      "forms": [
+        "Ende"
+      ]
+    },
+    "teilen": {
+      "de": "teilen",
+      "en": "to share",
+      "forms": [
+        "teilen"
+      ]
+    },
+    "halb": {
+      "de": "halb",
+      "en": "half; (halb neun) half past eight",
+      "forms": [
+        "halb",
+        "halben"
+      ]
+    },
+    "Verkäufer": {
+      "de": "der Verkäufer, -",
+      "en": "shop assistant",
+      "forms": [
+        "Verkäufer"
+      ]
+    },
+    "einpacken": {
+      "de": "ein|packen",
+      "en": "to pack, wrap",
+      "forms": [
+        "packt … ein"
+      ]
+    },
+    "Morgen": {
+      "de": "der Morgen / morgen",
+      "en": "morning / tomorrow",
+      "forms": [
+        "Morgen",
+        "morgen"
+      ]
+    },
+    "Park": {
+      "de": "der Park, -s",
+      "en": "park",
+      "forms": [
+        "Park"
+      ]
+    },
+    "zwanzig": {
+      "de": "zwanzig",
+      "en": "twenty",
+      "forms": [
+        "zwanzig"
+      ]
+    },
+    "Leute": {
+      "de": "die Leute (pl.)",
+      "en": "people",
+      "forms": [
+        "Leute"
+      ]
+    },
+    "alle": {
+      "de": "alle",
+      "en": "all; everyone",
+      "forms": [
+        "alle"
+      ]
+    },
+    "willkommen": {
+      "de": "willkommen",
+      "en": "welcome",
+      "forms": [
+        "Willkommen",
+        "willkommen"
+      ]
+    },
+    "mitkommen": {
+      "de": "mit|kommen",
+      "en": "to come along",
+      "forms": [
+        "kommt … mit",
+        "komme … mit",
+        "Kommst … mit",
+        "kommen … mit",
+        "mitgekommen"
+      ]
+    },
+    "Sonntag": {
+      "de": "der Sonntag, -e",
+      "en": "Sunday",
+      "forms": [
+        "Sonntag"
+      ]
+    },
+    "gern": {
+      "de": "gern",
+      "en": "gladly; (ich wohne gern) I like living",
+      "forms": [
+        "gern"
+      ]
+    },
+    "mitbringen": {
+      "de": "mit|bringen",
+      "en": "to bring along",
+      "forms": [
+        "bringe … mit",
+        "mitgebracht"
+      ]
+    },
+    "erst": {
+      "de": "erst",
+      "en": "only (so far); first",
+      "forms": [
+        "erst"
+      ]
+    },
+    "Straßenbahn": {
+      "de": "die Straßenbahn, -en",
+      "en": "tram",
+      "forms": [
+        "Straßenbahn"
+      ]
+    },
+    "merken": {
+      "de": "merken",
+      "en": "to notice",
+      "forms": [
+        "merkt"
+      ]
+    },
+    "Nummer": {
+      "de": "die Nummer, -n",
+      "en": "number",
+      "forms": [
+        "Nummer",
+        "Nummern"
+      ]
+    }
+  },
   "sentences": [
     "Ayisha kauft heute groß ein.",
     "Hier sieht alles gut aus!",

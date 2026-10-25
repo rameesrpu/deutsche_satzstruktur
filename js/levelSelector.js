@@ -12,6 +12,7 @@ export class LevelSelector {
         this.onLibraryLoad = callbacks.onLibraryLoad || null;
         this.isMastered = callbacks.isMastered || (() => false);
         this.hasPlayed = callbacks.hasPlayed || (() => false);
+        this.onRead = callbacks.onRead || null;
 
         // `${level}/${category}` → Promise of that category's data/levels file
         this.dataCache = new Map();
@@ -25,17 +26,31 @@ export class LevelSelector {
         this.levelSelect = null;
         this.categorySelect = null;
         this.sentenceList = null;
+        this.readButton = null;
     }
 
     init() {
         this.levelSelect = document.getElementById('library-level-select');
         this.categorySelect = document.getElementById('library-category-select');
         this.sentenceList = document.getElementById('library-sentence-list');
+        this.readButton = document.getElementById('library-read-btn');
 
         if (!this.levelSelect || !this.categorySelect || !this.sentenceList) return;
 
         this.levelSelect.addEventListener('change', () => this.handleLevelChange());
         this.categorySelect.addEventListener('change', () => this.handleCategoryChange());
+        if (this.readButton && this.onRead) {
+            this.readButton.addEventListener('click', () => this.onRead(this.currentLevel, this.currentCategory));
+        }
+    }
+
+    /** 📖 next to the category select: only for an unlocked story chapter. */
+    updateReadButton() {
+        if (!this.readButton) return;
+        const levelData = this.levelContent[this.currentLevel];
+        const cat = levelData && levelData.categories[this.currentCategory];
+        this.readButton.hidden = !(this.onRead && cat && cat.story && cat.story.kind === 'chapter' &&
+            this.isUnlocked(this.currentLevel, this.currentCategory));
     }
 
     handleLevelChange() {
@@ -44,6 +59,7 @@ export class LevelSelector {
         this.currentCategory = '';
         this.currentSentences = [];
         this.sentenceList.innerHTML = '';
+        this.updateReadButton();
 
         this.categorySelect.innerHTML = '<option value="">-- Category --</option>';
         this.categorySelect.disabled = true;
@@ -168,6 +184,7 @@ export class LevelSelector {
             option.disabled = !unlocked;
             option.textContent = `${prefix}${cat.label} (${mastered}/${total})`;
         });
+        this.updateReadButton();
     }
 
     /**
@@ -187,6 +204,7 @@ export class LevelSelector {
         const category = this.categorySelect.value;
         this.currentCategory = category;
         this.sentenceList.innerHTML = '';
+        this.updateReadButton();
 
         if (!this.currentLevel || !category) return;
 
@@ -209,6 +227,7 @@ export class LevelSelector {
             }
 
             this.renderLibrarySentences();
+            this.updateReadButton();
         } catch (error) {
             console.error('Level content load error:', error);
             this.sentenceList.innerHTML = '<div class="library-status library-error">Failed to load sentences.</div>';

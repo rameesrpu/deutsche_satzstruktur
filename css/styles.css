@@ -2931,3 +2931,205 @@ button:active {
     margin-right: auto;
     padding: 10px 12px;
 }
+
+/* 📖 next to the library category select (levelSelector.updateReadButton) */
+.library-read-btn {
+    flex: none;
+    min-width: 36px;
+    min-height: 32px;
+    padding: 4px 8px;
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-sm);
+    background: var(--surface-0);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+
+.library-read-btn:hover {
+    border-color: var(--brand-400);
+}
+
+.library-read-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--ring);
+}
+
+.library-read-btn[hidden] {
+    display: none;
+}
+
+/* Tap-to-translate words (glossary.js) */
+.gloss-word {
+    text-decoration: underline dotted var(--ink-400);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.gloss-word:hover,
+.gloss-word:focus-visible,
+.gloss-word-active {
+    outline: none;
+    background: var(--brand-100);
+    text-decoration-color: var(--brand-600);
+}
+
+.gloss-popover {
+    position: fixed;
+    z-index: 10100; /* above the story card, the reader and #gm-complete-overlay */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: min(300px, calc(100vw - 16px));
+    padding: 10px 12px;
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-md);
+    background: var(--surface-0);
+    box-shadow: var(--shadow-lg);
+    font-family: var(--font-ui);
+    animation: story-fade-in var(--dur-fast) ease-out both;
+}
+
+.gloss-text {
+    min-width: 0;
+}
+
+.gloss-de {
+    font-family: var(--font-sentence);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink-900);
+    overflow-wrap: anywhere;
+}
+
+.gloss-en {
+    margin-top: 2px;
+    font-size: 14px;
+    color: var(--ink-700);
+}
+
+.gloss-speak {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-pill);
+    background: var(--surface-1);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.gloss-speak:focus-visible {
+    outline: none;
+    box-shadow: var(--ring);
+}
+
+/* Story reader (storyReader.js): full-screen chapter page */
+.story-reader {
+    position: fixed;
+    inset: 0;
+    z-index: 9600; /* above the story card it can be opened from */
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-1);
+    animation: story-fade-in var(--dur-med) ease-out both;
+}
+
+.story-reader-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    background: var(--header-bg);
+    color: var(--surface-0);
+    font-family: var(--font-ui);
+}
+
+.story-reader-titles {
+    flex: 1;
+    min-width: 0;
+}
+
+.story-reader-sub {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.story-reader-title {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.story-reader-close {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--surface-0);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.story-reader-close:focus-visible {
+    outline: none;
+    box-shadow: var(--ring);
+}
+
+.story-reader-scroll {
+    flex: 1;
+    overflow-y: auto;
+    outline: none;
+}
+
+.story-reader-page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 16px 16px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: var(--font-sentence);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.story-reader-hint {
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    background: var(--info-bg);
+    color: var(--ink-700);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.story-reader-page .story-line-speech {
+    background: var(--surface-0);
+    box-shadow: var(--shadow-xs);
+}
+
+/* Play sentences: subtly marked (the ones placed in game mode) */
+.story-reader-page .story-reader-play {
+    border-left: 3px solid var(--brand-400);
+    padding-left: 12px;
+}
+
+.story-reader-page .story-line-speech.story-reader-play {
+    padding-left: 12px;
+}
+
+.story-reader-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--surface-3);
+}

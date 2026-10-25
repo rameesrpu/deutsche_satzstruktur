@@ -104,6 +104,702 @@
       "read": "Und Ayisha liebt Berge."
     }
   ],
+  "glossary": {
+    "Montag": {
+      "de": "der Montag, -e",
+      "en": "Monday",
+      "forms": [
+        "Montag"
+      ]
+    },
+    "brauchen": {
+      "de": "brauchen",
+      "en": "to need",
+      "forms": [
+        "brauche",
+        "braucht",
+        "brauchst",
+        "brauchen"
+      ]
+    },
+    "Anmeldung": {
+      "de": "die Anmeldung, -en",
+      "en": "(address) registration",
+      "forms": [
+        "Anmeldung"
+      ]
+    },
+    "ohne": {
+      "de": "ohne + Akk.",
+      "en": "without",
+      "forms": [
+        "Ohne"
+      ]
+    },
+    "kein": {
+      "de": "kein, keine",
+      "en": "no, not a",
+      "forms": [
+        "kein",
+        "keine",
+        "keinen"
+      ]
+    },
+    "Bankkonto": {
+      "de": "das Bankkonto, -konten",
+      "en": "bank account",
+      "forms": [
+        "Bankkonto"
+      ]
+    },
+    "Handyvertrag": {
+      "de": "der Handyvertrag, -verträge",
+      "en": "mobile phone contract",
+      "forms": [
+        "Handyvertrag"
+      ]
+    },
+    "nichts": {
+      "de": "nichts",
+      "en": "nothing",
+      "forms": [
+        "nichts"
+      ]
+    },
+    "Termin": {
+      "de": "der Termin, -e",
+      "en": "appointment",
+      "forms": [
+        "Termin",
+        "Termine"
+      ]
+    },
+    "öffnen": {
+      "de": "öffnen",
+      "en": "to open",
+      "forms": [
+        "öffnet"
+      ]
+    },
+    "Webseite": {
+      "de": "die Webseite, -n",
+      "en": "website",
+      "forms": [
+        "Webseite"
+      ]
+    },
+    "vom": {
+      "de": "vom (= von dem)",
+      "en": "from the; of the",
+      "forms": [
+        "vom"
+      ]
+    },
+    "Bürgerbüro": {
+      "de": "das Bürgerbüro, -s",
+      "en": "citizens' office (where you register)",
+      "forms": [
+        "Bürgerbüro"
+      ]
+    },
+    "klicken": {
+      "de": "klicken",
+      "en": "to click",
+      "forms": [
+        "klickt"
+      ]
+    },
+    "nächste": {
+      "de": "nächste",
+      "en": "next",
+      "forms": [
+        "nächste",
+        "nächsten"
+      ]
+    },
+    "im": {
+      "de": "im (= in dem)",
+      "en": "in the",
+      "forms": [
+        "im"
+      ]
+    },
+    "Dezember": {
+      "de": "der Dezember",
+      "en": "December",
+      "forms": [
+        "Dezember"
+      ]
+    },
+    "acht": {
+      "de": "acht",
+      "en": "eight",
+      "forms": [
+        "acht"
+      ]
+    },
+    "Woche": {
+      "de": "die Woche, -n",
+      "en": "week",
+      "forms": [
+        "Woche",
+        "Wochen"
+      ]
+    },
+    "kommen": {
+      "de": "kommen",
+      "en": "to come",
+      "forms": [
+        "kommen",
+        "kommt",
+        "komme",
+        "kommst"
+      ]
+    },
+    "Küche": {
+      "de": "die Küche, -n",
+      "en": "kitchen",
+      "forms": [
+        "Küche"
+      ]
+    },
+    "elf": {
+      "de": "elf",
+      "en": "eleven",
+      "forms": [
+        "elf"
+      ]
+    },
+    "Uhr": {
+      "de": "die Uhr, -en",
+      "en": "clock; o'clock",
+      "forms": [
+        "Uhr"
+      ]
+    },
+    "für": {
+      "de": "für + Akk.",
+      "en": "for",
+      "forms": [
+        "für"
+      ]
+    },
+    "Abend": {
+      "de": "der Abend, -e",
+      "en": "evening",
+      "forms": [
+        "Abend"
+      ]
+    },
+    "kennen": {
+      "de": "kennen",
+      "en": "to know (a person, a thing)",
+      "forms": [
+        "Kennst",
+        "kenne",
+        "kennt"
+      ]
+    },
+    "Trick": {
+      "de": "der Trick, -s",
+      "en": "trick",
+      "forms": [
+        "Trick"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast"
+      ]
+    },
+    "um": {
+      "de": "um",
+      "en": "at (time); around",
+      "forms": [
+        "um"
+      ]
+    },
+    "sieben": {
+      "de": "sieben",
+      "en": "seven",
+      "forms": [
+        "sieben"
+      ]
+    },
+    "neu": {
+      "de": "neu",
+      "en": "new",
+      "forms": [
+        "neu",
+        "neue"
+      ]
+    },
+    "Dienstag": {
+      "de": "der Dienstag, -e",
+      "en": "Tuesday",
+      "forms": [
+        "Dienstag"
+      ]
+    },
+    "sechs": {
+      "de": "sechs",
+      "en": "six",
+      "forms": [
+        "sechs"
+      ]
+    },
+    "neunundfünfzig": {
+      "de": "neunundfünfzig",
+      "en": "fifty-nine",
+      "forms": [
+        "neunundfünfzig"
+      ]
+    },
+    "sitzen": {
+      "de": "sitzen",
+      "en": "to sit",
+      "forms": [
+        "sitzt",
+        "sitzen"
+      ]
+    },
+    "am": {
+      "de": "am (= an dem)",
+      "en": "at the, on the",
+      "forms": [
+        "am"
+      ]
+    },
+    "Laptop": {
+      "de": "der Laptop, -s",
+      "en": "laptop",
+      "forms": [
+        "Laptop"
+      ]
+    },
+    "Finger": {
+      "de": "der Finger, -",
+      "en": "finger",
+      "forms": [
+        "Finger"
+      ]
+    },
+    "warten": {
+      "de": "warten",
+      "en": "to wait",
+      "forms": [
+        "wartet"
+      ]
+    },
+    "wann": {
+      "de": "wann?",
+      "en": "when?",
+      "forms": [
+        "wann"
+      ]
+    },
+    "Freitag": {
+      "de": "der Freitag, -e",
+      "en": "Friday",
+      "forms": [
+        "Freitag"
+      ]
+    },
+    "halb": {
+      "de": "halb",
+      "en": "half; (halb neun) half past eight",
+      "forms": [
+        "halb",
+        "halben"
+      ]
+    },
+    "neun": {
+      "de": "neun",
+      "en": "nine",
+      "forms": [
+        "neun"
+      ]
+    },
+    "schon": {
+      "de": "schon",
+      "en": "already; (schon wieder) again!",
+      "forms": [
+        "schon"
+      ]
+    },
+    "da": {
+      "de": "da",
+      "en": "there; here; then",
+      "forms": [
+        "da"
+      ]
+    },
+    "dreißig": {
+      "de": "dreißig",
+      "en": "thirty",
+      "forms": [
+        "Dreißig"
+      ]
+    },
+    "Minute": {
+      "de": "die Minute, -n",
+      "en": "minute",
+      "forms": [
+        "Minuten"
+      ]
+    },
+    "zu": {
+      "de": "zu",
+      "en": "to; too; closed",
+      "forms": [
+        "zu"
+      ]
+    },
+    "früh": {
+      "de": "früh",
+      "en": "early",
+      "forms": [
+        "früh"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "deutsch": {
+      "de": "deutsch",
+      "en": "German",
+      "forms": [
+        "deutsch",
+        "deutsche"
+      ]
+    },
+    "Wartezimmer": {
+      "de": "das Wartezimmer, -",
+      "en": "waiting room",
+      "forms": [
+        "Wartezimmer"
+      ]
+    },
+    "zwanzig": {
+      "de": "zwanzig",
+      "en": "twenty",
+      "forms": [
+        "zwanzig"
+      ]
+    },
+    "Leute": {
+      "de": "die Leute (pl.)",
+      "en": "people",
+      "forms": [
+        "Leute"
+      ]
+    },
+    "Bildschirm": {
+      "de": "der Bildschirm, -e",
+      "en": "screen",
+      "forms": [
+        "Bildschirm"
+      ]
+    },
+    "zeigen": {
+      "de": "zeigen",
+      "en": "to show",
+      "forms": [
+        "zeigt"
+      ]
+    },
+    "Nummer": {
+      "de": "die Nummer, -n",
+      "en": "number",
+      "forms": [
+        "Nummer",
+        "Nummern"
+      ]
+    },
+    "zweiundvierzig": {
+      "de": "zweiundvierzig",
+      "en": "forty-two",
+      "forms": [
+        "zweiundvierzig"
+      ]
+    },
+    "vierzig": {
+      "de": "vierzig",
+      "en": "forty",
+      "forms": [
+        "Vierzig"
+      ]
+    },
+    "später": {
+      "de": "später",
+      "en": "later",
+      "forms": [
+        "später"
+      ]
+    },
+    "Zimmer": {
+      "de": "das Zimmer, -",
+      "en": "room",
+      "forms": [
+        "Zimmer"
+      ]
+    },
+    "drei": {
+      "de": "drei",
+      "en": "three",
+      "forms": [
+        "drei"
+      ]
+    },
+    "gut": {
+      "de": "gut",
+      "en": "good; well",
+      "forms": [
+        "gut",
+        "gute",
+        "gutem",
+        "Guten"
+      ]
+    },
+    "Morgen": {
+      "de": "der Morgen / morgen",
+      "en": "morning / tomorrow",
+      "forms": [
+        "Morgen",
+        "morgen"
+      ]
+    },
+    "Pass": {
+      "de": "der Pass, Pässe",
+      "en": "passport",
+      "forms": [
+        "Pass"
+      ]
+    },
+    "bitte": {
+      "de": "bitte",
+      "en": "please",
+      "forms": [
+        "bitte"
+      ]
+    },
+    "Geburtsdatum": {
+      "de": "das Geburtsdatum",
+      "en": "date of birth",
+      "forms": [
+        "Geburtsdatum"
+      ]
+    },
+    "mein": {
+      "de": "mein, meine",
+      "en": "my",
+      "forms": [
+        "mein",
+        "meine",
+        "meiner",
+        "meinen"
+      ]
+    },
+    "Geburtstag": {
+      "de": "der Geburtstag, -e",
+      "en": "birthday",
+      "forms": [
+        "Geburtstag"
+      ]
+    },
+    "zwölfte": {
+      "de": "zwölfte",
+      "en": "twelfth",
+      "forms": [
+        "zwölften"
+      ]
+    },
+    "März": {
+      "de": "der März",
+      "en": "March",
+      "forms": [
+        "März"
+      ]
+    },
+    "wohnen": {
+      "de": "wohnen",
+      "en": "to live (somewhere)",
+      "forms": [
+        "wohne",
+        "wohnt",
+        "wohnen"
+      ]
+    },
+    "Straße": {
+      "de": "die Straße, -n",
+      "en": "street",
+      "forms": [
+        "Straße"
+      ]
+    },
+    "vierzehn": {
+      "de": "vierzehn",
+      "en": "fourteen",
+      "forms": [
+        "vierzehn"
+      ]
+    },
+    "zweite": {
+      "de": "zweite",
+      "en": "second",
+      "forms": [
+        "Zweiter",
+        "Zweite"
+      ]
+    },
+    "Stock": {
+      "de": "der Stock",
+      "en": "floor, storey",
+      "forms": [
+        "Stock"
+      ]
+    },
+    "tippen": {
+      "de": "tippen",
+      "en": "to type",
+      "forms": [
+        "Tippen"
+      ]
+    },
+    "drucken": {
+      "de": "drucken",
+      "en": "to print",
+      "forms": [
+        "Drucken",
+        "druckt"
+      ]
+    },
+    "stempeln": {
+      "de": "stempeln",
+      "en": "to stamp",
+      "forms": [
+        "Stempeln"
+      ]
+    },
+    "fertig": {
+      "de": "fertig",
+      "en": "finished, done, ready",
+      "forms": [
+        "fertig"
+      ]
+    },
+    "jetzt": {
+      "de": "jetzt",
+      "en": "now",
+      "forms": [
+        "jetzt"
+      ]
+    },
+    "offiziell": {
+      "de": "offiziell",
+      "en": "official(ly)",
+      "forms": [
+        "offiziell"
+      ]
+    },
+    "hier": {
+      "de": "hier",
+      "en": "here",
+      "forms": [
+        "hier"
+      ]
+    },
+    "Ärztin": {
+      "de": "die Ärztin, -nen",
+      "en": "(female) doctor",
+      "forms": [
+        "Ärztin",
+        "Ärztinnen"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "Approbation": {
+      "de": "die Approbation",
+      "en": "licence to practise medicine (in Germany)",
+      "forms": [
+        "Approbation"
+      ]
+    },
+    "wiederholen": {
+      "de": "wiederholen",
+      "en": "to repeat",
+      "forms": [
+        "wiederholt"
+      ]
+    },
+    "Wort": {
+      "de": "das Wort, Wörter",
+      "en": "word",
+      "forms": [
+        "Wort",
+        "Wörter"
+      ]
+    },
+    "klingen": {
+      "de": "klingen",
+      "en": "to sound",
+      "forms": [
+        "klingt"
+      ]
+    },
+    "lang": {
+      "de": "lang",
+      "en": "long",
+      "forms": [
+        "lang"
+      ]
+    },
+    "schwer": {
+      "de": "schwer",
+      "en": "heavy; difficult",
+      "forms": [
+        "schwer"
+      ]
+    },
+    "wie": {
+      "de": "wie",
+      "en": "how; like, as",
+      "forms": [
+        "wie"
+      ]
+    },
+    "Berg": {
+      "de": "der Berg, -e",
+      "en": "mountain",
+      "forms": [
+        "Berg",
+        "Berge"
+      ]
+    },
+    "lieben": {
+      "de": "lieben",
+      "en": "to love",
+      "forms": [
+        "liebe",
+        "liebt"
+      ]
+    }
+  },
   "sentences": [
     "Du brauchst einen Termin.",
     "Der nächste Termin ist im Dezember!",

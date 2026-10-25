@@ -102,6 +102,678 @@
       "read": "Ayisha probiert. Lecker! Wirklich lecker. Aber in ihrem Herzen ruft eine Stimme: Biryani. Biryani. Biryani."
     }
   ],
+  "glossary": {
+    "Samstag": {
+      "de": "der Samstag, -e",
+      "en": "Saturday",
+      "forms": [
+        "Samstag"
+      ]
+    },
+    "an": {
+      "de": "an",
+      "en": "at, on; to",
+      "forms": [
+        "an"
+      ]
+    },
+    "Wohnungstür": {
+      "de": "die Wohnungstür, -en",
+      "en": "front door (of a flat)",
+      "forms": [
+        "Wohnungstür"
+      ]
+    },
+    "hängen": {
+      "de": "hängen",
+      "en": "to hang",
+      "forms": [
+        "hängt"
+      ]
+    },
+    "Schild": {
+      "de": "das Schild, -er",
+      "en": "sign",
+      "forms": [
+        "Schild"
+      ]
+    },
+    "Kehrwoche": {
+      "de": "die Kehrwoche",
+      "en": "Swabian rota: your week to clean the stairs",
+      "forms": [
+        "Kehrwoche",
+        "KEHRWOCHE"
+      ]
+    },
+    "darunter": {
+      "de": "darunter",
+      "en": "underneath",
+      "forms": [
+        "Darunter"
+      ]
+    },
+    "Name": {
+      "de": "der Name, -n",
+      "en": "name",
+      "forms": [
+        "Name",
+        "Namen"
+      ]
+    },
+    "wo": {
+      "de": "wo?",
+      "en": "where?",
+      "forms": [
+        "wo"
+      ]
+    },
+    "sehen": {
+      "de": "sehen (sieht)",
+      "en": "to see",
+      "forms": [
+        "Siehst",
+        "sehe",
+        "sieht",
+        "sehen"
+      ]
+    },
+    "nicht": {
+      "de": "nicht",
+      "en": "not",
+      "forms": [
+        "nicht"
+      ]
+    },
+    "Küche": {
+      "de": "die Küche, -n",
+      "en": "kitchen",
+      "forms": [
+        "Küche"
+      ]
+    },
+    "im": {
+      "de": "im (= in dem)",
+      "en": "in the",
+      "forms": [
+        "im"
+      ]
+    },
+    "Bad": {
+      "de": "das Bad, Bäder",
+      "en": "bathroom",
+      "forms": [
+        "Bad"
+      ]
+    },
+    "Bett": {
+      "de": "das Bett, -en",
+      "en": "bed",
+      "forms": [
+        "Bett"
+      ]
+    },
+    "Frau": {
+      "de": "die Frau, -en",
+      "en": "woman; Mrs",
+      "forms": [
+        "Frau",
+        "Frauen"
+      ]
+    },
+    "suchen": {
+      "de": "suchen",
+      "en": "to look for",
+      "forms": [
+        "suche",
+        "sucht"
+      ]
+    },
+    "schon": {
+      "de": "schon",
+      "en": "already; (schon wieder) again!",
+      "forms": [
+        "schon"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "vibrieren": {
+      "de": "vibrieren",
+      "en": "to vibrate",
+      "forms": [
+        "vibriert"
+      ]
+    },
+    "Handy": {
+      "de": "das Handy, -s",
+      "en": "mobile phone",
+      "forms": [
+        "Handy"
+      ]
+    },
+    "Nachricht": {
+      "de": "die Nachricht, -en",
+      "en": "message",
+      "forms": [
+        "Nachricht",
+        "Nachrichten"
+      ]
+    },
+    "von": {
+      "de": "von + Dat.",
+      "en": "from; of",
+      "forms": [
+        "von"
+      ]
+    },
+    "bei": {
+      "de": "bei + Dat.",
+      "en": "at, with, near",
+      "forms": [
+        "bei"
+      ]
+    },
+    "mein": {
+      "de": "mein, meine",
+      "en": "my",
+      "forms": [
+        "mein",
+        "meine",
+        "meiner",
+        "meinen"
+      ]
+    },
+    "Oma": {
+      "de": "die Oma, -s",
+      "en": "grandma",
+      "forms": [
+        "Oma"
+      ]
+    },
+    "lieben": {
+      "de": "lieben",
+      "en": "to love",
+      "forms": [
+        "liebe",
+        "liebt"
+      ]
+    },
+    "sein": {
+      "de": "sein, seine",
+      "en": "his; its",
+      "forms": [
+        "sein",
+        "seine",
+        "seinen",
+        "seiner"
+      ]
+    },
+    "nur": {
+      "de": "nur",
+      "en": "only, just",
+      "forms": [
+        "nur"
+      ]
+    },
+    "samstags": {
+      "de": "samstags",
+      "en": "on Saturdays",
+      "forms": [
+        "samstags"
+      ]
+    },
+    "nehmen": {
+      "de": "nehmen (nimmt)",
+      "en": "to take",
+      "forms": [
+        "nimmt",
+        "nehme",
+        "nehmen"
+      ]
+    },
+    "Besen": {
+      "de": "der Besen, -",
+      "en": "broom",
+      "forms": [
+        "Besen"
+      ]
+    },
+    "Eimer": {
+      "de": "der Eimer, -",
+      "en": "bucket",
+      "forms": [
+        "Eimer"
+      ]
+    },
+    "schauen": {
+      "de": "schauen",
+      "en": "to look",
+      "forms": [
+        "schaut",
+        "schauen"
+      ]
+    },
+    "Treppe": {
+      "de": "die Treppe, -n",
+      "en": "stairs, staircase",
+      "forms": [
+        "Treppe"
+      ]
+    },
+    "hinunter": {
+      "de": "hinunter",
+      "en": "down",
+      "forms": [
+        "hinunter"
+      ]
+    },
+    "drei": {
+      "de": "drei",
+      "en": "three",
+      "forms": [
+        "drei"
+      ]
+    },
+    "Etage": {
+      "de": "die Etage, -n",
+      "en": "floor, storey",
+      "forms": [
+        "Etagen"
+      ]
+    },
+    "so": {
+      "de": "so",
+      "en": "so",
+      "forms": [
+        "so"
+      ]
+    },
+    "lang": {
+      "de": "lang",
+      "en": "long",
+      "forms": [
+        "lang"
+      ]
+    },
+    "unten": {
+      "de": "unten",
+      "en": "down; downstairs; below",
+      "forms": [
+        "unten"
+      ]
+    },
+    "aufgehen": {
+      "de": "auf|gehen",
+      "en": "to open (door)",
+      "forms": [
+        "geht … auf"
+      ]
+    },
+    "Tür": {
+      "de": "die Tür, -en",
+      "en": "door",
+      "forms": [
+        "Tür",
+        "Türen"
+      ]
+    },
+    "Herr": {
+      "de": "der Herr, -en",
+      "en": "Mr; gentleman",
+      "forms": [
+        "Herr"
+      ]
+    },
+    "finden": {
+      "de": "finden",
+      "en": "to find; to think (opinion)",
+      "forms": [
+        "findet",
+        "finde",
+        "finden"
+      ]
+    },
+    "anschauen": {
+      "de": "an|schauen",
+      "en": "to look at",
+      "forms": [
+        "schaut … an",
+        "schauen … an"
+      ]
+    },
+    "Geländer": {
+      "de": "das Geländer, -",
+      "en": "banister, railing",
+      "forms": [
+        "Geländer"
+      ]
+    },
+    "Ecke": {
+      "de": "die Ecke, -n",
+      "en": "corner",
+      "forms": [
+        "Ecke",
+        "Ecken"
+      ]
+    },
+    "sauber": {
+      "de": "sauber",
+      "en": "clean",
+      "forms": [
+        "sauber"
+      ]
+    },
+    "putzen": {
+      "de": "putzen",
+      "en": "to clean",
+      "forms": [
+        "putzt",
+        "putze"
+      ]
+    },
+    "sofort": {
+      "de": "sofort",
+      "en": "immediately, right away",
+      "forms": [
+        "sofort"
+      ]
+    },
+    "wie": {
+      "de": "wie",
+      "en": "how; like, as",
+      "forms": [
+        "wie"
+      ]
+    },
+    "Krankenhaus": {
+      "de": "das Krankenhaus, -häuser",
+      "en": "hospital",
+      "forms": [
+        "Krankenhaus"
+      ]
+    },
+    "steril": {
+      "de": "steril",
+      "en": "sterile",
+      "forms": [
+        "Steril"
+      ]
+    },
+    "perfekt": {
+      "de": "perfekt",
+      "en": "perfect",
+      "forms": [
+        "Perfekt",
+        "perfekt"
+      ]
+    },
+    "glänzen": {
+      "de": "glänzen",
+      "en": "to shine, gleam",
+      "forms": [
+        "glänzt"
+      ]
+    },
+    "machen": {
+      "de": "machen",
+      "en": "to make, do",
+      "forms": [
+        "machen",
+        "macht",
+        "machst",
+        "gemacht"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "gut": {
+      "de": "gut",
+      "en": "good; well",
+      "forms": [
+        "gut",
+        "gute",
+        "gutem",
+        "Guten"
+      ]
+    },
+    "einladen": {
+      "de": "ein|laden (lädt ein)",
+      "en": "to invite",
+      "forms": [
+        "lade … ein",
+        "lädt … ein"
+      ]
+    },
+    "Morgen": {
+      "de": "der Morgen / morgen",
+      "en": "morning / tomorrow",
+      "forms": [
+        "Morgen",
+        "morgen"
+      ]
+    },
+    "um": {
+      "de": "um",
+      "en": "at (time); around",
+      "forms": [
+        "um"
+      ]
+    },
+    "zum": {
+      "de": "zum (= zu dem)",
+      "en": "to the",
+      "forms": [
+        "zum"
+      ]
+    },
+    "Essen": {
+      "de": "das Essen; essen (isst)",
+      "en": "food, meal; to eat",
+      "forms": [
+        "Essen",
+        "essen",
+        "isst",
+        "esse",
+        "Iss"
+      ]
+    },
+    "am": {
+      "de": "am (= an dem)",
+      "en": "at the, on the",
+      "forms": [
+        "am"
+      ]
+    },
+    "Abend": {
+      "de": "der Abend, -e",
+      "en": "evening",
+      "forms": [
+        "Abend"
+      ]
+    },
+    "kommen": {
+      "de": "kommen",
+      "en": "to come",
+      "forms": [
+        "kommen",
+        "kommt",
+        "komme",
+        "kommst"
+      ]
+    },
+    "nach": {
+      "de": "nach",
+      "en": "to; after; (nach oben) upwards",
+      "forms": [
+        "nach"
+      ]
+    },
+    "Hause": {
+      "de": "zu Hause / nach Hause",
+      "en": "at home / (to) home",
+      "forms": [
+        "Hause"
+      ]
+    },
+    "oder": {
+      "de": "oder",
+      "en": "or; (…, oder?) …, right?",
+      "forms": [
+        "oder"
+      ]
+    },
+    "ignorieren": {
+      "de": "ignorieren",
+      "en": "to ignore",
+      "forms": [
+        "ignorieren"
+      ]
+    },
+    "Sonntag": {
+      "de": "der Sonntag, -e",
+      "en": "Sunday",
+      "forms": [
+        "Sonntag"
+      ]
+    },
+    "kochen": {
+      "de": "kochen",
+      "en": "to cook",
+      "forms": [
+        "kochen",
+        "kocht",
+        "koche",
+        "Kochst"
+      ]
+    },
+    "Linse": {
+      "de": "die Linse, -n",
+      "en": "lentil",
+      "forms": [
+        "Linsen"
+      ]
+    },
+    "mit": {
+      "de": "mit + Dat.",
+      "en": "with",
+      "forms": [
+        "mit"
+      ]
+    },
+    "Spätzle": {
+      "de": "die Spätzle (pl.)",
+      "en": "Swabian egg noodles",
+      "forms": [
+        "Spätzle"
+      ]
+    },
+    "ohne": {
+      "de": "ohne + Akk.",
+      "en": "without",
+      "forms": [
+        "Ohne"
+      ]
+    },
+    "Würstchen": {
+      "de": "das Würstchen, -",
+      "en": "sausage",
+      "forms": [
+        "Würstchen"
+      ]
+    },
+    "extra": {
+      "de": "extra",
+      "en": "specially",
+      "forms": [
+        "Extra"
+      ]
+    },
+    "für": {
+      "de": "für + Akk.",
+      "en": "for",
+      "forms": [
+        "für"
+      ]
+    },
+    "sagen": {
+      "de": "sagen",
+      "en": "to say",
+      "forms": [
+        "sagt",
+        "sagen",
+        "sagst",
+        "sage",
+        "Sag"
+      ]
+    },
+    "zu": {
+      "de": "zu",
+      "en": "to; too; closed",
+      "forms": [
+        "zu"
+      ]
+    },
+    "probieren": {
+      "de": "probieren",
+      "en": "to try, taste",
+      "forms": [
+        "probiert"
+      ]
+    },
+    "lecker": {
+      "de": "lecker",
+      "en": "tasty, delicious",
+      "forms": [
+        "lecker"
+      ]
+    },
+    "wirklich": {
+      "de": "wirklich",
+      "en": "really",
+      "forms": [
+        "wirklich"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "Herz": {
+      "de": "das Herz, -en",
+      "en": "heart",
+      "forms": [
+        "Herzen"
+      ]
+    },
+    "rufen": {
+      "de": "rufen",
+      "en": "to call, shout",
+      "forms": [
+        "ruft"
+      ]
+    },
+    "Stimme": {
+      "de": "die Stimme, -n",
+      "en": "voice",
+      "forms": [
+        "Stimme"
+      ]
+    }
+  },
   "sentences": [
     "Wo ist Max?",
     "Ich sehe ihn nicht.",
