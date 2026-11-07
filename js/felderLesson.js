@@ -91,3 +91,25 @@ export function felderLesson(words) {
         { text: '.', em: false },
     ]);
 }
+
+/** Auto-shows of the same lesson kind per chapter (later ones: the "Satzbau" link only). */
+export const LESSON_AUTO_MAX = 3;
+
+/**
+ * Should a solved sentence's lesson open the field model on its own? Each kind opens at most
+ * `max` times per run (`runKey`: the chapter, else the game session); a new runKey starts over.
+ * Pure: returns the next state instead of changing `state`.
+ * @param {?{key: string, counts: Object<string, number>}} state
+ * @param {string} runKey
+ * @param {?{kind: string}} lesson
+ * @param {number} [max]
+ * @returns {{auto: boolean, state: {key: string, counts: Object<string, number>}}}
+ */
+export function lessonAutoShow(state, runKey, lesson, max = LESSON_AUTO_MAX) {
+    const counts = state && state.key === runKey ? { ...state.counts } : {};
+    if (!lesson) return { auto: false, state: { key: runKey, counts } };
+    const seen = counts[lesson.kind] || 0;
+    if (seen >= max) return { auto: false, state: { key: runKey, counts } };
+    counts[lesson.kind] = seen + 1;
+    return { auto: true, state: { key: runKey, counts } };
+}

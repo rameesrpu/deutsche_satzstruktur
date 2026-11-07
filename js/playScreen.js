@@ -426,9 +426,10 @@ export function renderPlayChrome(game, view) {
     document.getElementById('play-continue-row').hidden = !game.waitingForContinue;
     const cont = document.getElementById('play-continue');
     cont.innerHTML = `<span>Weiter</span>${svgIcon(ICONS.next, 20)}`;
-    // "Satzbau": sentences without a lesson (a lesson opens the review on its own)
+    // "Satzbau": unless the lesson opens the review on its own (no lesson, or a kind already
+    // shown LESSON_AUTO_MAX times this chapter; the review then still shows its hint)
     document.getElementById('play-felder-link').hidden =
-        review || !game.waitingForContinue || !!game.felderLesson;
+        review || !game.waitingForContinue || game.felderAuto;
 }
 
 /** Leave the play screen: drop the view flag used by the CSS. */

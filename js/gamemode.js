@@ -1,6 +1,6 @@
 import { gameSounds, placementSpeech } from './sound.js';
 import { pickNextSentence } from './sentencePicker.js';
-import { evaluatePlacement, getAutoPlacement, explainMistake, placementFeedback, MAX_WRONG_ATTEMPTS } from './gameRules.js';
+import { evaluatePlacement, getAutoPlacement, explainMistake, placementFeedback, predicateVerb, MAX_WRONG_ATTEMPTS } from './gameRules.js';
 import { progressStore, sentenceKey, emptyMistakes, addMistake } from './progressStore.js';
 import { GM_UI, drawHud, getTimerColor } from './gameHud.js';
 import { GRID_CELLS } from './grammaticalConfig.js';
@@ -8,7 +8,7 @@ import { ensureJuiceDefs, spawnConfetti, spawnFloatingText, drawFeedbackAnimatio
     showFinalCelebration } from './gameJuice.js';
 import { LEVEL_CONTENT, chapterOrder } from './levelContent.js';
 import { updatePlayTimer } from './playScreen.js';
-import { felderLesson } from './felderLesson.js';
+import { felderLesson, lessonAutoShow } from './felderLesson.js';
 import { beatsBefore, beatsAfterLast, nextPlayText, showStoryCard, hideStoryCard,
     isStoryCardOpen } from './storyNarration.js';
 
@@ -123,6 +123,8 @@ export class GameMode {
         // own after FELDER_AUTO_DELAY (felderTimer); other sentences go on with one tap
         this.pendingFelderReview = false;
         this.felderLesson = null; // {kind, hint, parts} of the solved sentence, or null
+        this.felderAuto = false;  // the lesson opens on its own (else: the "Satzbau" link)
+        this.lessonState = null;  // lessonAutoShow() counts per chapter: same kind ≤ LESSON_AUTO_MAX times
         this.felderTimer = null;
 
         // Track sentences played this session to avoid repeats
@@ -348,6 +350,7 @@ export class GameMode {
         this.waitingForContinue = false;
         this.pendingFelderReview = false;
         this.felderLesson = null;
+        this.felderAuto = false;
         this.cancelFelderTimer();
         this.storyLines = []; // set again by showStoryIntro()
 
@@ -406,6 +409,8 @@ export class GameMode {
         this.isPaused = false;
         this.pendingFelderReview = false;
         this.felderLesson = null;
+        this.felderAuto = false;
+        this.lessonState = null;
         this.cancelFelderTimer();
         this.hideMistakeHint();
         hideStoryCard();
@@ -1189,6 +1194,7 @@ export class GameMode {
             this.feedback = placementFeedback({
                 ok: true, word: itemToValidate, phrase: this.getItemText(currentItem), caseType,
                 cellLabel: cell ? cell.label : null, preposition: before, auto: autoPlaced,
+                predicate: predicateVerb(this.words, itemToValidate),
             });
             console.log('✓ Correct placement!', points, 'points');
 
@@ -1301,6 +1307,7 @@ export class GameMode {
             const solution = placementFeedback({
                 ok: true, auto: true, word, phrase: this.getItemText(item),
                 caseType: result.expectedCase, cellLabel: expCell ? expCell.label : null, preposition,
+                predicate: predicateVerb(this.words, word),
             });
             const [start, end] = this.getItemWordRange(item);
             miss = {
@@ -1669,9 +1676,16 @@ export class GameMode {
             if (this.isPlayScreen()) {
                 // E3: the field model only when it teaches — then it opens on its own after
                 // the sentence-complete moment (confetti + sentence audio)
+                // the same kind opens on its own at most LESSON_AUTO_MAX times per chapter;
+                // after that it waits behind the "Satzbau" link (which still shows the hint)
                 this.felderLesson = felderLesson(this.words);
+                const chapter = this.replay || this.getStoryChapter();
+                const runKey = chapter ? `${this.replay ? 'replay:' : ''}${chapter.level}/${chapter.category}` : 'session';
+                const shown = lessonAutoShow(this.lessonState, runKey, this.felderLesson);
+                this.lessonState = shown.state;
+                this.felderAuto = shown.auto;
                 this.pendingFelderReview = false;
-                if (this.felderLesson) {
+                if (this.felderAuto) {
                     this.felderTimer = setTimeout(() => {
                         this.felderTimer = null;
                         if (this.isPlayScreen() && !isStoryCardOpen()) this.openFelderReview();

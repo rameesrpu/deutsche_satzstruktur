@@ -32,14 +32,15 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 - `sentencePicker.js` — `pickNextSentence()`: pure next-sentence selection (random / story / multi-category / custom / review weak spots)
 - `gameRules.js` — pure placement rules: `evaluatePlacement()` (validation reason object, points, attempts/auto-place),
   `explainMistake()` (short why-wrong hints; preposition→case table), `articleFor()` (gender + case → der/den/dem/des…),
-  `placementFeedback()` (play screen feedback bar text)
+  `placementFeedback()` (play screen feedback bar text), `predicateVerb()` (predicate noun tagged `S`: "nach „ist“ → Nominativ")
 - `progressStore.js` — `progressStore`: persisted game progress (localStorage `gameProgress`, per sentence keyed level/category/text; lifetime bests; `isMastered`); included in sentence export/import
 - `gamemode.js` — GameMode: placement game state, grid/controllers drawing, input, sentence flow (largest file)
 - `gameHud.js` — `drawHud(game)`: word bar (score pill, streak, current/auto/next words, timer bar), complete card; `GM_UI` colors
 - `chapterRecap.js` — chapter-end recap screen (`body[data-screen="end"]`): pure helpers (stats, hard sentences,
   word chips) + `renderRecap`; GameMode records the run (`run`, `recordMiss`), app.js `showRecap`
 - `felderLesson.js` — pure `felderLesson(words)` → `{kind, hint, parts}` or null: the field model opens on its own after a
-  solved play-screen sentence only when it teaches (two-part verb, non-subject before the verb, subordinate clause)
+  solved play-screen sentence only when it teaches (two-part verb, non-subject before the verb, subordinate clause);
+  `lessonAutoShow()`: each kind at most `LESSON_AUTO_MAX` (3) times per chapter, then the "Satzbau" link
 - `gameJuice.js` — display-only effects: SVG defs, confetti, floating text, ✓/✗ feedback, final celebration overlay
 - `playScreen.js` — full-screen play screen chrome (HTML around the SVG grid on `body[data-screen="play"]`): top bar
   (close, segmented progress, score), story strip (`#play-story`: up to 2 narration lines + "mehr"), sentence with the framed
@@ -78,5 +79,5 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 - Game-mode CSS lives in the `GAME MODE VISUAL JUICE` section at the end of styles.css.
 - Cache busting: the import map in index.html adds `?v=...` to every module (plus the entry script
   and styles.css link); bump all of them with `scripts/bump_version.sh [version]` when shipping JS/CSS
-  changes. Modules need http, not `file://`.
+  changes. A new module needs its own import-map line (tests check this). Modules need http, not `file://`.
 - `tools/` holds old dev/debug helpers (localStorage inspector, grouping test page, backend checks).

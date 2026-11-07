@@ -2,7 +2,7 @@
 //   --update  rewrite tests/snapshots/library.json and felder-lessons.json from current behavior
 
 import System from 'system';
-import { listDir } from './stubs.js'; // first: installs browser stubs
+import { listDir, readText } from './stubs.js'; // first: installs browser stubs
 import { test, summary } from './assert.js';
 import { runGridTests } from './grid.test.js';
 import { runGameRuleTests } from './gameRules.test.js';
@@ -27,6 +27,15 @@ for (const name of listDir('js').filter(n => n.endsWith('.js'))) {
     let error = null;
     try { await import(`../js/${name}`); } catch (e) { error = e; }
     test(`module loads: js/${name}`, () => { if (error) throw error; });
+}
+
+// Every loaded module needs a cache-busting entry in index.html's import map, or browsers
+// keep an old copy after scripts/bump_version.sh (types.js is JSDoc only, never loaded)
+const indexHtml = readText('index.html');
+for (const name of listDir('js').filter(n => n.endsWith('.js') && n !== 'types.js')) {
+    test(`import map lists js/${name}`, () => {
+        if (!indexHtml.includes(`"./js/${name}": "./js/${name}?v=`)) throw new Error(`add "./js/${name}" to the import map`);
+    });
 }
 
 runGridTests();

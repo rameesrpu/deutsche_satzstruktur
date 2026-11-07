@@ -218,9 +218,34 @@ function genderKey(word) {
     return DEFINITE_ARTICLES[word.gender] ? word.gender : null;
 }
 
+/**
+ * The verb before a predicate noun, or null. Story tags mark a predicate nominative like the
+ * subject (`S.f` for "Ärztin" in "Ayisha ist Ärztin."), so a subject-typed word counts as
+ * predicate when, in the same clause, a finite verb comes before it and another subject before
+ * that verb ("Ich heiße Lea.", "Hallo, ich bin Lea!"). The scan stops at a conjunction or a
+ * word ending in , ; : so coordinated subjects ("Lea und Max sind nett.") stay subjects.
+ * @param {Word[]} words  the sentence
+ * @param {Word} word     a phrase's main word
+ * @returns {?Word}
+ */
+export function predicateVerb(words, word) {
+    if (!words || !word || word.type !== 'subject') return null;
+    const idx = words.indexOf(word);
+    let verb = null;
+    for (let i = idx - 1; i >= 0; i--) {
+        const w = words[i];
+        if (w.clause_id !== word.clause_id) break;
+        if (w.type === 'conjunction' || w.type === 'coord-conjunction' || /[,;:]$/.test(w.text.trim())) break;
+        if (!verb && (w.type === 'verb' || w.type === 'modal')) verb = w;
+        else if (verb && w.type === 'subject') return verb;
+    }
+    return null;
+}
+
 /** German "why this case" for a correct placement, e.g. "hier Subjekt → Nominativ". */
-function caseReason(word, caseType, preposition) {
+function caseReason(word, caseType, preposition, predicate = null) {
     const name = CASE_NAMES[caseType];
+    if (predicate && caseType === 'nom') return `nach „${bare(predicate.text)}“ → ${name}`;
     if (preposition && preposition.type === 'preposition' && !/[.,!?;:–-]$/.test(preposition.text.trim())) {
         const p = preposition.text.trim().toLowerCase();
         if (CONTRACTIONS[p] && CONTRACTIONS[p][1] === caseType) return `„${p}“ = ${CONTRACTIONS[p][0]} → ${name}`;
@@ -247,10 +272,11 @@ function caseReason(word, caseType, preposition) {
  * @param {boolean} [p.auto]         placed by the game after too many wrong attempts
  * @param {?PlacementResult} [p.result]  for a wrong placement
  * @param {number} [p.attempts]      wrong attempts so far (wrong placement)
+ * @param {?Word} [p.predicate]      predicateVerb() of the word: a predicate noun, not the subject
  * @returns {{tone: 'ok'|'solved'|'wrong', title: string, form: ?string, lines: string[]}}
  */
 export function placementFeedback({ ok, word, phrase = null, caseType = null, cellLabel = null,
-    preposition = null, auto = false, result = null, attempts = 0 }) {
+    preposition = null, auto = false, result = null, attempts = 0, predicate = null }) {
     const w = bare(word.text);
     const p = bare(phrase || word.text);
     if (!ok) {
@@ -283,7 +309,7 @@ export function placementFeedback({ ok, word, phrase = null, caseType = null, ce
         // "(die Heimat)" only for a capitalized noun with a determiner in its phrase:
         // a bare capitalized word is usually a name (Ayisha, Max, Kerala)
         const nounHint = /^\p{Lu}/u.test(w) && p !== w ? ` (${articleFor(g, 'nom')} ${w})` : '';
-        const why = name ? `, ${caseReason(word, caseType, preposition)}` : '';
+        const why = name ? `, ${caseReason(word, caseType, preposition, predicate)}` : '';
         return {
             tone,
             title: name ? `${lead} ${GENDER_TITLE[g]} + ${name}` : `${lead} ${GENDER_TITLE[g]}`,
@@ -298,7 +324,8 @@ export function placementFeedback({ ok, word, phrase = null, caseType = null, ce
         ? cellLabel.toLowerCase() : cellWord);
     const title = [lead, [titleCat, name].filter(Boolean).join(' + ')].filter(Boolean).join(' ');
     let line;
-    if (word.type === 'subject' && name) line = `„${p}“ ist das Subjekt → ${name}`;
+    if (predicate && name) line = `„${p}“ steht nach „${bare(predicate.text)}“ → ${name}`;
+    else if (word.type === 'subject' && name) line = `„${p}“ ist das Subjekt → ${name}`;
     else if (OBJECT_PRONOUN_BASE[lower] && name) line = `„${w}“ ist die ${OBJECT_PRONOUN_BASE[lower]}-Form, hier ${name}`;
     else line = `„${p}“${cellLabel ? ` → ${cellLabel}` : ''}${name ? `, ${name}` : ''}`;
     return { tone, title, form: null, lines: [line] };

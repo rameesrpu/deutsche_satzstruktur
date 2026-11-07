@@ -3,7 +3,7 @@
 
 import { listDir, readText, writeText } from './stubs.js';
 import { test, assert, assertEqual } from './assert.js';
-import { felderLesson } from '../js/felderLesson.js';
+import { felderLesson, lessonAutoShow, LESSON_AUTO_MAX } from '../js/felderLesson.js';
 
 const SNAPSHOT = 'tests/snapshots/felder-lessons.json';
 
@@ -159,4 +159,21 @@ function runChapterShare(update) {
     for (const key of keys) {
         test(`felder lessons: ${key}`, () => assertEqual(current.chapters[key], stored.chapters[key]));
     }
+    test('lessonAutoShow: each kind opens on its own LESSON_AUTO_MAX times per chapter', () => {
+        const bracket = { kind: 'bracket' }, vorfeld = { kind: 'vorfeld' };
+        let state = null;
+        const autos = [];
+        for (let i = 0; i < LESSON_AUTO_MAX + 2; i++) {
+            const r = lessonAutoShow(state, 'A1/g3k2', bracket);
+            state = r.state;
+            autos.push(r.auto);
+        }
+        assertEqual(autos, [...Array(LESSON_AUTO_MAX).fill(true), false, false]);
+        assertEqual(lessonAutoShow(state, 'A1/g3k2', vorfeld).auto, true);   // other kind: own count
+        assertEqual(lessonAutoShow(state, 'A1/g3k2', null).auto, false);     // no lesson
+        assertEqual(lessonAutoShow(state, 'A1/g3k3', bracket).auto, true);   // new chapter starts over
+        const before = JSON.stringify(state);
+        lessonAutoShow(state, 'A1/g3k2', vorfeld);
+        assertEqual(JSON.stringify(state), before);                          // pure
+    });
 }

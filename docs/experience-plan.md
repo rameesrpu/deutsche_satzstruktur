@@ -177,8 +177,11 @@ its hint and goes on with one tap; "Satzbau" link works; checked at 375×812 and
 > Strip and hint read well (2 beats, clamped line + "mehr" in 3.2 sentence 7; hint "Satzklammer: *muss … erledigen*").
 > Open (not fixed, outside E1–E3 files): `feldermodell.js` with a single verb puts everything after it in the
 > **Nachfeld** (Mittelfeld width 0: `nachfeld.start` = end of LK), e.g. *Ich kann das allein!*, *Wer ist der Mann?*
-> (a lesson sentence) — fixed 2026-11-07 (single verb: Mittelfeld runs to the clause end); 3.2 shows "Satzklammer" 9 times (see Later: throttle); feedback calls a predicate noun
-> "Subjekt" (*Ayisha ist Ärztin.* → "Ärztin … hier Subjekt"). **Left for the owner on the real phone**: hearing a
+> (a lesson sentence) — fixed 2026-11-07 (single verb: Mittelfeld runs to the clause end); 3.2 shows "Satzklammer" 9 times — fixed 2026-11-07 (`lessonAutoShow`: each kind opens on
+> its own ≤ 3× per chapter, then the "Satzbau" link with the hint); feedback calls a predicate noun
+> "Subjekt" (*Ayisha ist Ärztin.* → "Ärztin … hier Subjekt") — fixed 2026-11-07 (`predicateVerb` in gameRules.js:
+> "Ärztin ist feminin, nach „ist“ → Nominativ"). Also fixed: felderLesson.js was missing from the import map
+> (a test now checks every module). **Left for the owner on the real phone**: hearing a
 > German voice (phrase per placement, sentence once, nothing cut off when "Weiter" is tapped early, the strip's
 > read-aloud icon), and the tap feel on touch (headless pane: no voice, read-aloud only seen greyed).
 Files: none new; fix-ups in the files above.
@@ -193,6 +196,5 @@ Files: none new; fix-ups in the files above.
 target left unexplained.
 
 ## Later (not planned)
-- Throttle the field model when the same lesson kind repeats several sentences in a row.
 - Yes/no questions (verb in 1st position) as their own field-model lesson.
 - Installable PWA (from U7).

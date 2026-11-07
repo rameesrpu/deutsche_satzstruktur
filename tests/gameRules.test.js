@@ -2,7 +2,7 @@ import { test, assertEqual } from './assert.js';
 
 import { GridViewModel } from '../js/gridview.js';
 import { validatePlacement, getTimePoints, evaluatePlacement, getAutoPlacement, MAX_WRONG_ATTEMPTS,
-    explainMistake, explainPrepositionCase, articleFor, placementFeedback }
+    explainMistake, explainPrepositionCase, articleFor, placementFeedback, predicateVerb }
     from '../js/gameRules.js';
 
 export function runGameRuleTests() {
@@ -176,5 +176,35 @@ export function runGameRuleTests() {
             lines: ['“Mann” is Dativ here'] });
         assertEqual(placementFeedback({ ok: false, word: dativObject, result, attempts: MAX_WRONG_ATTEMPTS }).title,
             'Nicht ganz · hier ist die Lösung');
+    });
+    // Story tags mark a predicate noun like the subject (S.f for "Ärztin")
+    const W = (text, type, extra = {}) => ({ text, type, clause_id: 0, gender: 'f', case: 'nom', number: 'sg',
+        conjugation: { pronoun: 'sie' }, ...extra });
+    test('predicateVerb: subject … verb … subject-tagged word = predicate noun', () => {
+        const s1 = [W('Ayisha', 'subject'), W('ist', 'verb'), W('Ärztin.', 'subject')];
+        assertEqual(predicateVerb(s1, s1[2]), s1[1]);
+        assertEqual(predicateVerb(s1, s1[0]), null);
+        const s2 = [W('Hallo,', 'other'), W('ich', 'subject'), W('heiße', 'verb'), W('Lea!', 'subject')];
+        assertEqual(predicateVerb(s2, s2[3]), s2[2]);
+    });
+    test('predicateVerb: coordinated subjects, other clauses and objects are not predicates', () => {
+        const s1 = [W('Lea', 'subject'), W('und', 'coord-conjunction'), W('Max', 'subject'), W('sind', 'verb'), W('nett.', 'other')];
+        assertEqual([predicateVerb(s1, s1[0]), predicateVerb(s1, s1[2])], [null, null]);
+        const s2 = [W('Ich', 'subject'), W('bin', 'verb'), W('müde,', 'other'), W('aber', 'coord-conjunction'),
+            W('ich', 'subject'), W('lache.', 'verb')];
+        assertEqual(predicateVerb(s2, s2[4]), null);
+        const s3 = [W('Sie', 'subject'), W('kauft', 'verb'), W('Brot.', 'object', { case: 'akk' })];
+        assertEqual(predicateVerb(s3, s3[2]), null);
+        const s4 = [W('Hier', 'other'), W('wohne', 'verb'), W('ich.', 'subject')];
+        assertEqual(predicateVerb(s4, s4[2]), null);
+    });
+    test('placementFeedback: a predicate noun is not called the subject', () => {
+        const s = [W('Ayisha', 'subject'), W('ist', 'verb'), W('Ärztin.', 'subject')];
+        const r = fb({ word: s[2], phrase: 'Ärztin.', caseType: 'nom', cellLabel: 'FEMININ',
+            preposition: s[1], predicate: predicateVerb(s, s[2]) });
+        assertEqual(r.lines, ['Ärztin ist feminin, nach „ist“ → Nominativ']);
+        const lea = fb({ word: { ...s[2], text: 'Lea!', gender: 'none', conjugation: { pronoun: 'none' } },
+            phrase: 'Lea!', caseType: 'nom', predicate: W('heiße', 'verb') });
+        assertEqual(lea.lines, ['„Lea“ steht nach „heiße“ → Nominativ']);
     });
 }
