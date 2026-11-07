@@ -626,6 +626,10 @@
       ]
     }
   },
+  "image": {
+    "src": "data/stories/A1/img/restaurant.svg?v=9c42d5fe40",
+    "alt": "Ein indisches Restaurant."
+  },
   "sentences": [
     "Was möchten Sie trinken?",
     "Ich möchte einen Mango-Lassi.",

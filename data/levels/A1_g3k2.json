@@ -835,6 +835,10 @@
       ]
     }
   },
+  "image": {
+    "src": "data/stories/A1/img/bank.svg?v=936a8c98ab",
+    "alt": "Eine Bank in Stuttgart."
+  },
   "sentences": [
     "Heute muss Ayisha viel erledigen.",
     "Was kann ich für Sie tun?",

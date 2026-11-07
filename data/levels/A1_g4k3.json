@@ -881,6 +881,10 @@
       ]
     }
   },
+  "image": {
+    "src": "data/stories/A1/img/park.svg?v=57f886cea7",
+    "alt": "Ein Park in Stuttgart."
+  },
   "sentences": [
     "Der Park ist groß, und die Leute sind nett.",
     "Spielst du Cricket, oder schaust du nur zu?",

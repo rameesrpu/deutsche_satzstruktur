@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<rect x="0" y="0" width="960" height="540" rx="0" fill="#F4EFE4" />
+<rect x="0" y="0" width="960" height="370" rx="0" fill="#E7DCC6" />
+<rect x="0" y="370" width="960" height="170" rx="0" fill="#C9A97E" />
+<rect x="0" y="360" width="960" height="14" rx="0" fill="#A98260" />
+<rect x="0" y="300" width="960" height="6" rx="0" fill="#D8C9AC" />
+<rect x="0" y="374" width="2" height="166" rx="0" fill="#B58F66" opacity=".6"/>
+<rect x="120" y="374" width="2" height="166" rx="0" fill="#B58F66" opacity=".6"/>
+<rect x="240" y="374" width="2" height="166" rx="0" fill="#B58F66" opacity=".6"/>
+<rect x="360" y="374" width="2" height="166" rx="0" fill="#B58F66" opacity=".6"/>
+<rect x="480" y="374" width="2" height="166" rx="0" fill="#B58F66" opacity=".6"/>
+<rect x="600" y="374" width="2" height="166" rx="0" fill="#B58F66" opacity=".6"/>
+<rect x="720" y="374" width="2" height="166" rx="0" fill="#B58F66" opacity=".6"/>
+<rect x="840" y="374" width="2" height="166" rx="0" fill="#B58F66" opacity=".6"/>
+<rect x="90" y="70" width="230" height="190" rx="6" fill="#A98260" />
+<rect x="102" y="82" width="206" height="166" rx="0" fill="#D3DDDB" />
+<rect x="203" y="82" width="4" height="166" rx="0" fill="#F4EFE4" />
+<rect x="102" y="162" width="206" height="4" rx="0" fill="#F4EFE4" />
+<path d="M102 248 L170 82 h40 L130 248Z" fill="#fff" opacity=".25"/>
+<rect x="80" y="258" width="250" height="12" rx="3" fill="#C9B48C" />
+<rect x="640" y="100" width="160" height="270" rx="4" fill="#A98260" />
+<rect x="652" y="112" width="136" height="258" rx="3" fill="#C9A073" />
+<rect x="662" y="130" width="116" height="100" rx="3" fill="#B88B5F" />
+<circle cx="770" cy="250" r="7" fill="#E8D3A2" />
+<rect x="662" y="250" width="116" height="100" rx="3" fill="#B88B5F" opacity=".5"/>
+<rect x="600" y="60" width="240" height="26" rx="3" fill="#C9B48C" />
+<rect x="690" y="64" width="60" height="18" rx="3" fill="#8E9B6A" />
+<rect x="130" y="300" width="90" height="70" rx="10" fill="#7C8A94" />
+<rect x="124" y="360" width="102" height="26" rx="8" fill="#6B7882" />
+<rect x="136" y="386" width="8" height="50" rx="0" fill="#5A4331" />
+<rect x="206" y="386" width="8" height="50" rx="0" fill="#5A4331" />
+<rect x="132" y="330" width="86" height="6" rx="3" fill="#6B7882" opacity=".6"/>
+<rect x="250" y="300" width="90" height="70" rx="10" fill="#7C8A94" />
+<rect x="244" y="360" width="102" height="26" rx="8" fill="#6B7882" />
+<rect x="256" y="386" width="8" height="50" rx="0" fill="#5A4331" />
+<rect x="326" y="386" width="8" height="50" rx="0" fill="#5A4331" />
+<rect x="252" y="330" width="86" height="6" rx="3" fill="#6B7882" opacity=".6"/>
+<rect x="370" y="300" width="90" height="70" rx="10" fill="#7C8A94" />
+<rect x="364" y="360" width="102" height="26" rx="8" fill="#6B7882" />
+<rect x="376" y="386" width="8" height="50" rx="0" fill="#5A4331" />
+<rect x="446" y="386" width="8" height="50" rx="0" fill="#5A4331" />
+<rect x="372" y="330" width="86" height="6" rx="3" fill="#6B7882" opacity=".6"/>
+<rect x="490" y="300" width="90" height="70" rx="10" fill="#7C8A94" />
+<rect x="484" y="360" width="102" height="26" rx="8" fill="#6B7882" />
+<rect x="496" y="386" width="8" height="50" rx="0" fill="#5A4331" />
+<rect x="566" y="386" width="8" height="50" rx="0" fill="#5A4331" />
+<rect x="492" y="330" width="86" height="6" rx="3" fill="#6B7882" opacity=".6"/>
+<rect x="560" y="430" width="200" height="14" rx="4" fill="#8A6446" />
+<rect x="580" y="444" width="10" height="60" rx="0" fill="#6E4E36" />
+<rect x="730" y="444" width="10" height="60" rx="0" fill="#6E4E36" />
+<rect x="600" y="418" width="70" height="12" rx="2" fill="#C4673F" />
+<rect x="612" y="408" width="64" height="12" rx="2" fill="#E8D3A2" />
+<rect x="690" y="422" width="50" height="8" rx="2" fill="#8E9B6A" />
+<path d="M860 440 h60 l-8 70 h-44Z" fill="#C4673F" />
+<ellipse cx="890" cy="340" rx="16" ry="48" fill="#8E9B6A" transform="rotate(-30 890 440)"/>
+<ellipse cx="890" cy="320" rx="16" ry="48" fill="#8E9B6A" transform="rotate(10 890 440)"/>
+<ellipse cx="890" cy="350" rx="16" ry="48" fill="#8E9B6A" transform="rotate(40 890 440)"/>
+<ellipse cx="890" cy="370" rx="16" ry="48" fill="#8E9B6A" transform="rotate(-55 890 440)"/>
+<ellipse cx="890" cy="380" rx="16" ry="48" fill="#8E9B6A" transform="rotate(65 890 440)"/>
+</svg>

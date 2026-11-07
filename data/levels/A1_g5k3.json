@@ -778,6 +778,10 @@
       ]
     }
   },
+  "image": {
+    "src": "data/stories/A1/img/alb.svg?v=7a83984ecf",
+    "alt": "Die Schwäbische Alb."
+  },
   "sentences": [
     "Was hast du am Wochenende gemacht?",
     "Wir haben einen Ausflug gemacht.",

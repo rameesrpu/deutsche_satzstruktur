@@ -1921,8 +1921,13 @@ button:active {
 /* Mobile Styles (< 768px wide, or short landscape phones where side
    panels would crowd out the canvas — e.g. game mode in landscape) */
 @media screen and (max-width: 768px), screen and (max-height: 520px) and (orientation: landscape) {
+    html,
+    body {
+        overscroll-behavior-y: none; /* no page bounce / pull-up of the fixed layout */
+    }
     body {
         overflow: auto;
+        height: 100dvh;
     }
 
     .container {
@@ -2548,6 +2553,7 @@ body[data-screen="play"] .canvas-container {
     overflow-y: auto;
     background: var(--paper);
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain; /* at the list's end, don't drag the page (and bottom nav) along */
 }
 .screen[hidden] {
     display: none;
@@ -3730,6 +3736,20 @@ body[data-screen="end"] .app-nav {
     text-transform: uppercase;
 }
 
+/* Chapter picture (first card of a chapter): 16:9, never taller than a quarter screen */
+.story-image {
+    display: block;
+    width: calc(100% - 40px);
+    max-height: 26vh;
+    aspect-ratio: 16 / 9;
+    margin: 12px 20px 0;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    background: var(--surface-1);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
 .story-banner {
     margin: 10px 20px 0;
     padding: 10px 14px;
@@ -4052,6 +4072,16 @@ body[data-screen="end"] .app-nav {
     font-family: var(--font-sentence);
     font-size: 19px;
     line-height: 1.65;
+}
+
+.story-reader-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    background: var(--surface-1);
+    object-fit: cover;
 }
 
 .story-reader-title {

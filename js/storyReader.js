@@ -5,6 +5,7 @@
 
 import { renderGlossedText, speakableForm } from './glossary.js';
 import { gameSounds } from './sound.js';
+import { storyImageElement } from './storyNarration.js';
 
 const READER_ID = 'story-reader';
 
@@ -150,8 +151,10 @@ export function hideStoryReader() {
  * @param {Function} opts.onPlay          "Jetzt spielen": start the chapter
  * @param {?Function} [opts.onNext]       "Weiterlesen": next chapter (null = locked / last)
  * @param {?Function} [opts.onClose]      after the reader is closed with back or Esc
+ * @param {?import('./storyNarration.js').StoryImage} [opts.image]  chapter picture above the title
  */
-export function showStoryReader({ heading, subheading = null, beats, glossary = {}, onPlay, onNext = null, onClose = null }) {
+export function showStoryReader({ heading, subheading = null, beats, glossary = {}, onPlay, onNext = null, onClose = null,
+    image = null }) {
     hideStoryReader();
     const close = () => {
         hideStoryReader();
@@ -228,6 +231,9 @@ export function showStoryReader({ heading, subheading = null, beats, glossary = 
     scroll.tabIndex = -1;
     const page = document.createElement('div');
     page.className = 'story-reader-page';
+
+    const picture = storyImageElement(image, 'story-reader-image');
+    if (picture) page.appendChild(picture);
 
     const h1 = document.createElement('h1');
     h1.className = 'story-reader-title';

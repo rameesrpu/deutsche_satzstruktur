@@ -618,6 +618,10 @@
       ]
     }
   },
+  "image": {
+    "src": "data/stories/A1/img/zimmer.svg?v=da0adb9242",
+    "alt": "Ayishas Zimmer."
+  },
   "sentences": [
     "Das Zimmer ist klein.",
     "Aber das Fenster ist groß.",

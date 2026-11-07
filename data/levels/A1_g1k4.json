@@ -601,6 +601,10 @@
       ]
     }
   },
+  "image": {
+    "src": "data/stories/A1/img/wg-kueche.svg?v=c393e00ae7",
+    "alt": "Die Küche in der WG."
+  },
   "sentences": [
     "Woher kommst du genau?",
     "Ich komme aus Payyannur.",

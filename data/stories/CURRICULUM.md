@@ -85,6 +85,24 @@ is defined once, in the story where it first appears. Meanings are in English.
 - The build copies the entries a chapter uses into its `data/levels` file, warns about forms that appear
   in no chapter (typos, drill-only words), and fails if a form belongs to two entries.
 
+### Chapter pictures (optional)
+Pictures show **places, not people**: one picture per place (the airport, the WG kitchen, Ayisha's
+room, the Praxis), shared by every chapter set there. A chapter picks its place:
+
+```json
+{ "id": "1.4", "title": "…", "image": {"place": "wg-kueche", "alt": "Die Küche in der WG."}, … }
+```
+- File: `data/stories/<level>/img/<place>.webp` (also `.jpg`, `.png`, `.svg`); place names are lowercase
+  with `-` (`wg-kueche`, `indischer-laden`). Reuse an existing place before drawing a new one
+  (`ls data/stories/A1/img/`). Without `place`, the build looks for `img/<chapter id>.*`.
+- Shown on the chapter's first narration card and at the top of the 📖 reader; no picture, no box.
+- `alt`: a short simple German phrase naming the place ("Die Küche in der WG."); use the same alt
+  for every chapter at that place.
+- 16:9, at most 80 KB. Style rules: STORY_BIBLE.md → Illustrations. Keep the drawing prompt next to
+  the picture as `img/<place>.txt`.
+- The build adds a content hash to the URL (a replaced picture is never served stale) and warns about
+  missing alt text, a `place` without a file, oversized files and pictures no chapter uses.
+
 ### Tags (one per word of a `play` sentence)
 | Tag | Meaning |
 |---|---|

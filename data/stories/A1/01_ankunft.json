@@ -6,6 +6,7 @@
     {
       "id": "1.1",
       "title": "Hallo, Stuttgart!",
+      "image": {"place": "flughafen", "alt": "Der Flughafen in Stuttgart."},
       "skill": "A1.nom",
       "drillTitle": "Nominativ & sein",
       "beats": [
@@ -52,6 +53,7 @@
     {
       "id": "1.2",
       "title": "Die WG",
+      "image": {"place": "wg-haus", "alt": "Das Haus der WG mit Garten."},
       "skill": "A1.praesens",
       "drillTitle": "Verben im Präsens",
       "beats": [
@@ -96,6 +98,7 @@
     {
       "id": "1.3",
       "title": "Mein Zimmer",
+      "image": {"place": "zimmer", "alt": "Ayishas Zimmer."},
       "skill": "A1.artikel",
       "drillTitle": "der, die, das",
       "beats": [
@@ -138,6 +141,7 @@
     {
       "id": "1.4",
       "title": "Fragen über Fragen",
+      "image": {"place": "wg-kueche", "alt": "Die Küche in der WG."},
       "skill": "A1.fragen",
       "drillTitle": "Fragen",
       "beats": [
@@ -178,6 +182,7 @@
     {
       "id": "1.5",
       "title": "Frau Schäfer",
+      "image": {"place": "wg-haus", "alt": "Das Haus der WG mit Garten."},
       "skill": "A1.haben",
       "drillTitle": "haben & unregelmäßige Verben",
       "beats": [

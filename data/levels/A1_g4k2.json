@@ -980,6 +980,10 @@
       ]
     }
   },
+  "image": {
+    "src": "data/stories/A1/img/indischer-laden.svg?v=feda684a6c",
+    "alt": "Ein kleiner indischer Laden."
+  },
   "sentences": [
     "Ayisha kauft heute groß ein.",
     "Hier sieht alles gut aus!",

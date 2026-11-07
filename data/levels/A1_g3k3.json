@@ -774,6 +774,10 @@
       ]
     }
   },
+  "image": {
+    "src": "data/stories/A1/img/treppenhaus.svg?v=947c109aba",
+    "alt": "Das Treppenhaus mit Besen und Eimer."
+  },
   "sentences": [
     "Wo ist Max?",
     "Ich sehe ihn nicht.",

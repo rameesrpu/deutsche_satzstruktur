@@ -720,6 +720,10 @@
       ]
     }
   },
+  "image": {
+    "src": "data/stories/A1/img/moebelhaus.svg?v=2d7c14d04c",
+    "alt": "Ein Möbelhaus und ein Parkplatz."
+  },
   "sentences": [
     "Ich brauche einen Tisch.",
     "Ich brauche auch einen Stuhl.",

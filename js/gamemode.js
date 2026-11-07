@@ -1838,8 +1838,9 @@ export class GameMode {
             return;
         }
         const buttons = [{ label: 'Los geht\'s', icon: 'play', primary: true, onClick: () => this.closeStoryCard() }];
-        // First card of the chapter: offer to read the whole chapter first
-        if (chapter.data.sentences[0] === sentence.text) {
+        // First card of the chapter: its picture, and an offer to read the whole chapter first
+        const firstCard = chapter.data.sentences[0] === sentence.text;
+        if (firstCard) {
             buttons.unshift({ label: 'Erst lesen', icon: 'book',
                 onClick: () => this.host.openReader(chapter.level, chapter.category) });
         }
@@ -1851,6 +1852,7 @@ export class GameMode {
             buttons,
             onSpeak: texts => this.speakStoryLines(texts),
             glossary: chapter.data.glossary,
+            image: firstCard ? chapter.data.image : null,
         });
     }
 

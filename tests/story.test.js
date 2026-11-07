@@ -63,6 +63,20 @@ export function runStoryTests() {
             }
         });
 
+        test(`story data ${level}: chapter pictures exist and carry alt text and a version`, () => {
+            for (const story of stories) {
+                for (const ch of story.chapters) {
+                    const { image } = JSON.parse(readText(ch.file));
+                    if (!image) continue;
+                    const [path, query] = image.src.split('?');
+                    assertEqual(/^v=[0-9a-f]{10}$/.test(query || ''), true, `${ch.key} image version`);
+                    assertEqual(path.startsWith(`data/stories/${level}/img/`), true, `${ch.key} image path`);
+                    readText(path);
+                    assertEqual(image.alt.length > 0, true, `${ch.key} image alt`);
+                }
+            }
+        });
+
         test(`story data ${level}: chapters and drills are in LEVEL_CONTENT in unlock order`, () => {
             const keys = stories.flatMap(s => s.chapters.map(ch => ch.key));
             assertEqual(chapterOrder(level), keys);

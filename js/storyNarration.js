@@ -81,6 +81,32 @@ export function chapterStartText(texts, currentText, hasPlayed) {
 // ---------------------------------------------------------------------------
 
 const CARD_ID = 'story-card';
+
+/**
+ * Chapter picture (built from data/stories/<level>/img/<id>.*, see build_stories.py).
+ * @typedef {Object} StoryImage
+ * @property {string} src  repo-relative path with a content-hash `?v=`
+ * @property {string} alt  German description of the scene
+ */
+
+/**
+ * `<img>` for a chapter picture, or null without one. Lazy, and removes itself if the
+ * file fails to load, so a missing picture never leaves a broken box.
+ * @param {?StoryImage} image
+ * @param {string} className
+ * @returns {?HTMLImageElement}
+ */
+export function storyImageElement(image, className) {
+    if (!image || !image.src) return null;
+    const img = document.createElement('img');
+    img.className = className;
+    img.src = image.src;
+    img.alt = image.alt || '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.addEventListener('error', () => img.remove());
+    return img;
+}
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 // Inline stroke icons (24-unit viewBox, currentColor); 'play' is filled
@@ -161,8 +187,10 @@ export function storyLineElement(beat, extraClass = '', glossary = null) {
  * @param {?Function} [opts.onSpeak]       shows a read-aloud button that calls it with the card's texts
  *                                         (disabled when the device has no German voice)
  * @param {?Object} [opts.glossary]        chapter glossary: its words are tappable
+ * @param {?StoryImage} [opts.image]        chapter picture above the text (chapter's first card)
  */
-export function showStoryCard({ heading, lines, play = null, banner = null, buttons, onSpeak = null, glossary = null }) {
+export function showStoryCard({ heading, lines, play = null, banner = null, buttons, onSpeak = null, glossary = null,
+    image = null }) {
     hideStoryCard();
     const backdrop = document.createElement('div');
     backdrop.id = CARD_ID;
@@ -177,6 +205,9 @@ export function showStoryCard({ heading, lines, play = null, banner = null, butt
     head.className = 'story-heading';
     head.textContent = heading;
     card.appendChild(head);
+
+    const picture = storyImageElement(image, 'story-image');
+    if (picture) card.appendChild(picture);
 
     if (banner) {
         const b = document.createElement('div');

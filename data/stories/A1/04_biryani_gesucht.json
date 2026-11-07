@@ -6,6 +6,7 @@
     {
       "id": "4.1",
       "title": "Im Restaurant",
+      "image": {"place": "restaurant", "alt": "Ein indisches Restaurant."},
       "skill": "A1.moechten",
       "drillTitle": "möchten",
       "beats": [
@@ -49,6 +50,7 @@
     {
       "id": "4.2",
       "title": "Der Kerala Store",
+      "image": {"place": "indischer-laden", "alt": "Ein kleiner indischer Laden."},
       "skill": "A1.trennbar",
       "drillTitle": "Trennbare Verben",
       "beats": [
@@ -99,6 +101,7 @@
     {
       "id": "4.3",
       "title": "Cricket im Park",
+      "image": {"place": "park", "alt": "Ein Park in Stuttgart."},
       "skill": "A1.konnektoren",
       "drillTitle": "und, aber, oder, denn",
       "beats": [

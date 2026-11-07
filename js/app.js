@@ -1125,6 +1125,7 @@ class DeutschApp {
             subheading: `Geschichte ${cat.story.storyNo}: ${cat.story.storyTitle}`,
             beats: data.beats,
             glossary: data.glossary || {},
+            image: data.image || null,
             onPlay: () => this.startChapter(level, category),
             onNext: nextKey && this.levelSelector.isUnlocked(level, nextKey)
                 ? () => this.openReader(level, nextKey) : null,

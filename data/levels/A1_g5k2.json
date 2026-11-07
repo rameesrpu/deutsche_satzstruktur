@@ -892,6 +892,10 @@
       ]
     }
   },
+  "image": {
+    "src": "data/stories/A1/img/praxis.svg?v=b420706c7e",
+    "alt": "Das Wartezimmer in der Praxis."
+  },
   "sentences": [
     "Ayisha fährt mit der U-Bahn zur Praxis.",
     "Sie sind bei Dr. Kühn?",

@@ -16,6 +16,13 @@ of a level form one dictionary. Each chapter file gets the entries whose forms o
 beats (matching rules: glossary_matches, mirrored by js/glossary.js). Forms that occur in no
 chapter of the level are reported as warnings (typos).
 
+Images: an optional picture per chapter at data/stories/<level>/img/<name>.<ext> (webp/jpg/png/svg),
+where name is the chapter's "image": {"place": "wg-kueche"} (one picture per place, shared by every
+chapter set there) or else its chapter id; alt text from "image": {"alt": "..."}. The
+chapter file gets "image": {"src": "<path>?v=<content hash>", "alt"}. Missing alt text, a
+"image" entry without a file, files that match no chapter and files over IMAGE_MAX_KB warn
+(.txt/.md notes, e.g. the image prompt, are ignored).
+
 Library `version` is a hash of the file's words, so it changes exactly when the
 content changes (browsers then reload the words, see bulkLoadLibraryCategory).
 
@@ -39,6 +46,10 @@ STORIES_DIR = os.path.join(REPO_ROOT, 'data', 'stories')
 LEVELS_DIR  = os.path.join(REPO_ROOT, 'data', 'levels')
 LIBRARY_DIR = os.path.join(REPO_ROOT, 'data', 'library')
 INDEX_JS    = os.path.join(REPO_ROOT, 'js', 'storyContent.js')
+
+IMAGE_EXTS   = ('.webp', '.jpg', '.png', '.svg')
+IMAGE_MAX_KB = 80
+IMAGE_NOTES  = ('.txt', '.md')   # image prompts / notes next to the pictures
 
 MAX_WORDS = {'A1': 10, 'A2': 12, 'B1': 16}
 CASES     = {'nom', 'akk', 'dat', 'gen'}
@@ -221,6 +232,51 @@ def content_version(sentences):
     return hashlib.sha1(blob).hexdigest()[:10]
 
 
+def chapter_images(level):
+    """{name: file path} of the pictures in data/stories/<level>/img/ (first extension wins)."""
+    found = {}
+    for path in sorted(glob.glob(os.path.join(STORIES_DIR, level, 'img', '*'))):
+        stem, ext = os.path.splitext(os.path.basename(path))
+        if ext.lower() in IMAGE_EXTS and stem not in found:
+            found[stem] = path
+    return found
+
+
+def image_key(ch):
+    """Picture name of a chapter: its "image" place (shared by chapters set there), else its id."""
+    return (ch.get('image') or {}).get('place') or ch['id']
+
+
+def stray_images(level, keys):
+    """Files in data/stories/<level>/img/ that no chapter uses (typo, wrong extension, unused place)."""
+    images = chapter_images(level)
+    used = {images[k] for k in keys if k in images}
+    return [os.path.basename(p) for p in sorted(glob.glob(os.path.join(STORIES_DIR, level, 'img', '*')))
+            if p not in used and not p.endswith(IMAGE_NOTES)]
+
+
+def chapter_image(level, ch, images, warnings):
+    """The chapter file's image entry ({src, alt}) or None."""
+    where = f'{level} {ch["id"]}'
+    meta = ch.get('image') or {}
+    key = image_key(ch)
+    path = images.get(key)
+    if not path:
+        if meta:
+            warnings.append(f'{where}: "image" given but no img/{key}.* file')
+        return None
+    with open(path, 'rb') as f:
+        blob = f.read()
+    if len(blob) > IMAGE_MAX_KB * 1024:
+        warnings.append(f'{where}: image is {len(blob) // 1024} KB (max {IMAGE_MAX_KB} KB)')
+    alt = (meta.get('alt') or '').strip()
+    if not alt:
+        warnings.append(f'{where}: image has no "alt" text (using the chapter title)')
+        alt = ch['title']
+    rel = os.path.relpath(path, REPO_ROOT).replace(os.sep, '/')
+    return {'src': f'{rel}?v={hashlib.sha1(blob).hexdigest()[:10]}', 'alt': alt}
+
+
 def write_json(path, data):
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
@@ -280,6 +336,12 @@ def build():
         for key, form in unused_glossary_forms(glossary, texts):
             warnings.append(f'{level}: glossary form "{form}" ("{key}") never appears in a chapter')
 
+    images = {level: chapter_images(level) for level in glossaries}
+    for level in images:
+        keys = [image_key(ch) for story in stories if story['level'] == level for ch in story['chapters']]
+        for name in stray_images(level, keys):
+            warnings.append(f'{level}: img/{name} is used by no chapter (expected <place or chapter id>{"|".join(IMAGE_EXTS)})')
+
     for story in stories:
         level = story['level']
         chapters_out = []
@@ -292,11 +354,15 @@ def build():
 
             texts, library = build_sentence_set(level, ch['beats'], name, warnings, errors)
             beats = [{k: b[k] for k in ('speaker', 'read', 'play') if k in b} for b in ch['beats']]
-            write_set(name, level, label, texts, library, {
+            extra = {
                 'story': story['story'], 'storyTitle': story['title'],
                 'chapter': ch['id'], 'title': ch['title'], 'skill': ch['skill'], 'beats': beats,
                 'glossary': chapter_glossary(beats, glossaries.get(level, {})),
-            })
+            }
+            image = chapter_image(level, ch, images.get(level, {}), warnings)
+            if image:
+                extra['image'] = image
+            write_set(name, level, label, texts, library, extra)
 
             drill_texts, drill_library = build_sentence_set(level, ch['drill'], f'{name}_uebung', warnings, errors)
             write_set(f'{name}_uebung', level, drill_label, drill_texts, drill_library, {

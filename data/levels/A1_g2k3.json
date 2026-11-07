@@ -770,6 +770,10 @@
       ]
     }
   },
+  "image": {
+    "src": "data/stories/A1/img/wg-haus.svg?v=84f2d614f7",
+    "alt": "Das Haus der WG mit Garten."
+  },
   "sentences": [
     "Ist euer Kühlschrank immer so leer?",
     "Das ist mein Zimmer!",

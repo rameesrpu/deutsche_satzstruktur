@@ -6,6 +6,7 @@
     {
       "id": "3.1",
       "title": "Der Termin",
+      "image": {"place": "zimmer", "alt": "Ayishas Zimmer."},
       "skill": "A1.zeit",
       "drillTitle": "Zahlen & Zeit",
       "beats": [
@@ -51,6 +52,7 @@
     {
       "id": "3.2",
       "title": "Die Bank",
+      "image": {"place": "bank", "alt": "Eine Bank in Stuttgart."},
       "skill": "A1.modal",
       "drillTitle": "Modalverben",
       "beats": [
@@ -95,6 +97,7 @@
     {
       "id": "3.3",
       "title": "Die Kehrwoche",
+      "image": {"place": "treppenhaus", "alt": "Das Treppenhaus mit Besen und Eimer."},
       "skill": "A1.akk_pronomen",
       "drillTitle": "mich, dich, ihn …",
       "beats": [

@@ -687,6 +687,10 @@
       ]
     }
   },
+  "image": {
+    "src": "data/stories/A1/img/flughafen.svg?v=21ee2a46c9",
+    "alt": "Der Flughafen in Stuttgart."
+  },
   "sentences": [
     "Wir sind gleich da.",
     "Sie heißt Ayisha.",

@@ -6,6 +6,7 @@
     {
       "id": "2.1",
       "title": "Das Möbelhaus",
+      "image": {"place": "moebelhaus", "alt": "Ein Möbelhaus und ein Parkplatz."},
       "skill": "A1.akk",
       "drillTitle": "Akkusativ",
       "beats": [
@@ -47,6 +48,7 @@
     {
       "id": "2.2",
       "title": "Das Foto",
+      "image": {"place": "zimmer", "alt": "Ayishas Zimmer."},
       "skill": "A1.negation",
       "drillTitle": "nicht & kein",
       "beats": [
@@ -88,6 +90,7 @@
     {
       "id": "2.3",
       "title": "Meine Familie, deine Familie",
+      "image": {"place": "wg-haus", "alt": "Das Haus der WG mit Garten."},
       "skill": "A1.possessiv",
       "drillTitle": "mein, dein, sein, ihr …",
       "beats": [

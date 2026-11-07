@@ -146,6 +146,18 @@ Recurring "filmi" moments (Ayisha narrates them as if a song should start, Faris
 
 ---
 
+## Illustrations
+Chapter pictures (format: CURRICULUM.md → Chapter pictures) show the **place** where a chapter
+happens, never the characters: the text tells who is there, the picture only sets the scene. This
+keeps 100+ chapters consistent and lets one picture serve every chapter at that place.
+- No people or faces. One or two small hint objects that belong to the place are fine (suitcases
+  in the arrivals hall, broom and bucket in the stairwell for the Kehrwoche).
+- Flat, warm illustration with soft shapes; no photos, no text or letters inside the picture.
+- Palette: warm paper background, muted colors. Avoid the grammar colors (`GRAMMAR_PALETTE`) as large
+  areas, so a picture never looks like it encodes gender or case.
+- Keep the prompt used for each picture next to it as `img/<place>.txt`, so it can be redone in the
+  same style later.
+
 ## Writing rules
 - Follow CURRICULUM.md: beat format, `play` sentence rules, chapter template.
 - Dialogue: use `speaker` + the spoken sentence. Never write "…, sagt Faris." inside a `play` beat.

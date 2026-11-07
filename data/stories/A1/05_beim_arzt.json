@@ -6,6 +6,7 @@
     {
       "id": "5.1",
       "title": "Gute Besserung",
+      "image": {"place": "zimmer", "alt": "Ayishas Zimmer."},
       "skill": "A1.imperativ",
       "drillTitle": "Imperativ",
       "beats": [
@@ -49,6 +50,7 @@
     {
       "id": "5.2",
       "title": "In der Praxis",
+      "image": {"place": "praxis", "alt": "Das Wartezimmer in der Praxis."},
       "skill": "A1.dativ_praep",
       "drillTitle": "mit, bei, von, zu …",
       "beats": [
@@ -93,6 +95,7 @@
     {
       "id": "5.3",
       "title": "Ein Ausflug",
+      "image": {"place": "alb", "alt": "Die Schwäbische Alb."},
       "skill": "A1.perfekt",
       "drillTitle": "Perfekt",
       "beats": [

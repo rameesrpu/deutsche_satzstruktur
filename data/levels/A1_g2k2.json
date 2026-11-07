@@ -600,6 +600,10 @@
       ]
     }
   },
+  "image": {
+    "src": "data/stories/A1/img/zimmer.svg?v=da0adb9242",
+    "alt": "Ayishas Zimmer."
+  },
   "sentences": [
     "Kennst du die Frau?",
     "Nein, ich kenne die Frau nicht.",
