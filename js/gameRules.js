@@ -179,3 +179,127 @@ export function explainMistake({ word, result, phrase, preposition = null }) {
     }
     return lines;
 }
+
+/* ------------------------------------------------------------------
+ * Placement feedback (U5): gender + case → article form, and the text of
+ * the play screen's feedback bar. German, like the grid labels.
+ * ------------------------------------------------------------------ */
+
+const DEFINITE_ARTICLES = {
+    m:  { nom: 'der', akk: 'den', dat: 'dem', gen: 'des' },
+    f:  { nom: 'die', akk: 'die', dat: 'der', gen: 'der' },
+    n:  { nom: 'das', akk: 'das', dat: 'dem', gen: 'des' },
+    pl: { nom: 'die', akk: 'die', dat: 'den', gen: 'der' },
+};
+
+/**
+ * The definite article for a gender (or plural) in a case: articleFor('m', 'akk') → 'den'.
+ * Used only in feedback — never on a grid tile (the tile shows the category).
+ * @param {?('m'|'f'|'n'|'pl')} gender
+ * @param {?Case} caseType
+ * @returns {?string}  null when either is unknown
+ */
+export function articleFor(gender, caseType) {
+    const row = DEFINITE_ARTICLES[gender];
+    return (row && row[caseType]) || null;
+}
+
+const GENDER_TITLE = { m: 'Maskulin', f: 'Feminin', n: 'Neutrum', pl: 'Plural' };
+const GENDER_IS = { m: 'maskulin', f: 'feminin', n: 'Neutrum', pl: 'Plural' };
+// Words that carry gender/number but get no "(die Heimat)" style article hint
+const PRONOUN_FORMS = new Set(['ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr', 'man', 'mich', 'mir', 'dich',
+    'dir', 'ihn', 'ihm', 'uns', 'euch', 'ihnen', 'das', 'dies', 'der', 'die', 'wer', 'was', 'jemand',
+    'niemand', 'alle', 'alles', 'nichts', 'etwas']);
+const PRONOUN_SUBJECTS = { ich: 'ich', du: 'du', wir: 'wir', ihr: 'ihr' };
+
+/** 'm' | 'f' | 'n' | 'pl' for a word with a noun gender/number, else null. */
+function genderKey(word) {
+    if (word.number === 'pl' && !(word.conjugation && PRONOUN_SUBJECTS[word.conjugation.pronoun])) return 'pl';
+    return DEFINITE_ARTICLES[word.gender] ? word.gender : null;
+}
+
+/** German "why this case" for a correct placement, e.g. "hier Subjekt → Nominativ". */
+function caseReason(word, caseType, preposition) {
+    const name = CASE_NAMES[caseType];
+    if (preposition && preposition.type === 'preposition' && !/[.,!?;:–-]$/.test(preposition.text.trim())) {
+        const p = preposition.text.trim().toLowerCase();
+        if (CONTRACTIONS[p] && CONTRACTIONS[p][1] === caseType) return `„${p}“ = ${CONTRACTIONS[p][0]} → ${name}`;
+        if (FIXED_CASE_PREPOSITIONS[p] === caseType) return `nach „${p}“ → ${name}`;
+        if (TWO_WAY_PREPOSITIONS.has(p) && caseType === 'dat') return `„${p}“ + wo? → ${name}`;
+        if (TWO_WAY_PREPOSITIONS.has(p) && caseType === 'akk') return `„${p}“ + wohin? → ${name}`;
+    }
+    return word.type === 'subject' ? `hier Subjekt → ${name}` : `hier ${name}`;
+}
+
+/**
+ * Text of the play screen's feedback bar after one placement.
+ * Correct: "Richtig! Feminin + Nominativ" with the article form ("die") and one line
+ * naming why ("Heimat ist feminin (die Heimat), hier Subjekt → Nominativ").
+ * Wrong: the explainMistake lines. Auto-placed (after MAX_WRONG_ATTEMPTS): tone 'solved'.
+ *
+ * @param {Object} p
+ * @param {boolean} p.ok
+ * @param {Word} p.word              the word that decides the cell (a box's mainWord)
+ * @param {string} [p.phrase]        whole phrase text
+ * @param {?Case} [p.caseType]       case used for the (correct) placement
+ * @param {?string} [p.cellLabel]    German label of the cell, e.g. 'FEMININ'
+ * @param {?Word} [p.preposition]    connector word directly before the phrase
+ * @param {boolean} [p.auto]         placed by the game after too many wrong attempts
+ * @param {?PlacementResult} [p.result]  for a wrong placement
+ * @param {number} [p.attempts]      wrong attempts so far (wrong placement)
+ * @returns {{tone: 'ok'|'solved'|'wrong', title: string, form: ?string, lines: string[]}}
+ */
+export function placementFeedback({ ok, word, phrase = null, caseType = null, cellLabel = null,
+    preposition = null, auto = false, result = null, attempts = 0 }) {
+    const w = bare(word.text);
+    const p = bare(phrase || word.text);
+    if (!ok) {
+        const left = MAX_WRONG_ATTEMPTS - attempts;
+        return {
+            tone: 'wrong',
+            title: left > 0 ? `Nicht ganz · noch ${left} ${left === 1 ? 'Versuch' : 'Versuche'}` : 'Nicht ganz · hier ist die Lösung',
+            form: null,
+            lines: explainMistake({ word, result, phrase, preposition }),
+        };
+    }
+
+    const tone = auto ? 'solved' : 'ok';
+    const lead = auto ? 'Lösung:' : 'Richtig!';
+    const isVerb = word.type === 'verb' || word.type === 'modal';
+    const pronoun = word.conjugation && word.conjugation.pronoun;
+
+    if (isVerb) {
+        const line = !pronoun || pronoun === 'none'
+            ? `„${w}“ hat kein Subjekt → ${cellLabel || 'IMPERATIV'}`
+            : `„${w}“ gehört zu ${pronoun === 'sie_pl' ? 'sie (Plural)' : pronoun}${cellLabel ? ` → ${cellLabel}` : ''}`;
+        return { tone, title: `${lead} Verb`, form: null, lines: [line] };
+    }
+
+    const name = caseType ? CASE_NAMES[caseType] : null;
+    const g = genderKey(word);
+    const lower = w.toLowerCase();
+
+    if (g && !PRONOUN_FORMS.has(lower)) {
+        // "(die Heimat)" only for a capitalized noun with a determiner in its phrase:
+        // a bare capitalized word is usually a name (Ayisha, Max, Kerala)
+        const nounHint = /^\p{Lu}/u.test(w) && p !== w ? ` (${articleFor(g, 'nom')} ${w})` : '';
+        const why = name ? `, ${caseReason(word, caseType, preposition)}` : '';
+        return {
+            tone,
+            title: name ? `${lead} ${GENDER_TITLE[g]} + ${name}` : `${lead} ${GENDER_TITLE[g]}`,
+            form: name ? articleFor(g, caseType) : null,
+            lines: [`${w} ist ${GENDER_IS[g]}${nounHint}${why}`],
+        };
+    }
+
+    const cellWord = cellLabel ? cellLabel.charAt(0) + cellLabel.slice(1).toLowerCase() : null;
+    const subjectPronoun = word.type === 'subject' && PRONOUN_SUBJECTS[pronoun];
+    const titleCat = subjectPronoun || (cellLabel && ['ICH', 'DU', 'WIR', 'IHR'].includes(cellLabel)
+        ? cellLabel.toLowerCase() : cellWord);
+    const title = [lead, [titleCat, name].filter(Boolean).join(' + ')].filter(Boolean).join(' ');
+    let line;
+    if (word.type === 'subject' && name) line = `„${p}“ ist das Subjekt → ${name}`;
+    else if (OBJECT_PRONOUN_BASE[lower] && name) line = `„${w}“ ist die ${OBJECT_PRONOUN_BASE[lower]}-Form, hier ${name}`;
+    else line = `„${p}“${cellLabel ? ` → ${cellLabel}` : ''}${name ? `, ${name}` : ''}`;
+    return { tone, title, form: null, lines: [line] };
+}

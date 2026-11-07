@@ -2,7 +2,7 @@ import { test, assertEqual } from './assert.js';
 
 import { GridViewModel } from '../js/gridview.js';
 import { validatePlacement, getTimePoints, evaluatePlacement, getAutoPlacement, MAX_WRONG_ATTEMPTS,
-    explainMistake, explainPrepositionCase }
+    explainMistake, explainPrepositionCase, articleFor, placementFeedback }
     from '../js/gameRules.js';
 
 export function runGameRuleTests() {
@@ -120,4 +120,61 @@ export function runGameRuleTests() {
     test('explainMistake: wrong cell and case → two lines', () =>
         assertEqual(explain(dativObject, 2, 3, 'akk', { preposition: prep('mit') }),
             ['“Mann” is masculine (der) → MASCULINE', '“mit” → always Dativ']));
+
+    test('articleFor: full definite article table', () => {
+        const table = ['m', 'f', 'n', 'pl'].map(g => ['nom', 'akk', 'dat', 'gen'].map(c => articleFor(g, c)).join(' '));
+        assertEqual(table, ['der den dem des', 'die die der der', 'das das dem des', 'die die den der']);
+    });
+    test('articleFor: unknown gender or case → null', () => {
+        assertEqual(articleFor('none', 'nom'), null);
+        assertEqual(articleFor('m', null), null);
+        assertEqual(articleFor(undefined, 'akk'), null);
+    });
+
+    const fb = p => placementFeedback({ ok: true, ...p });
+    test('placementFeedback: noun subject names gender, case and article form', () =>
+        assertEqual(fb({ word: { type: 'subject', text: 'Heimat.', gender: 'f', case: 'nom', number: 'sg',
+            conjugation: { pronoun: 'sie' } }, phrase: 'die Heimat.', caseType: 'nom', cellLabel: 'FEMININ' }),
+        { tone: 'ok', title: 'Richtig! Feminin + Nominativ', form: 'die',
+            lines: ['Heimat ist feminin (die Heimat), hier Subjekt → Nominativ'] }));
+    test('placementFeedback: preposition explains the case', () => {
+        const r = fb({ word: dativObject, phrase: 'dem Mann', caseType: 'dat', cellLabel: 'MASKULIN',
+            preposition: prep('mit') });
+        assertEqual([r.title, r.form, r.lines], ['Richtig! Maskulin + Dativ', 'dem',
+            ['Mann ist maskulin (der Mann), nach „mit“ → Dativ']]);
+        const im = fb({ word: { type: 'object', text: 'Zimmer', gender: 'n', case: 'dat', number: 'sg' },
+            caseType: 'dat', preposition: prep('im') });
+        assertEqual(im.lines, ['Zimmer ist Neutrum, „im“ = in dem → Dativ']);
+    });
+    test('placementFeedback: a bare name gets the form but no "(der Max)"', () => {
+        const r = fb({ word: { type: 'subject', text: 'Max', gender: 'm', case: 'nom', number: 'sg',
+            conjugation: { pronoun: 'er' } }, phrase: 'Max', caseType: 'nom' });
+        assertEqual([r.form, r.lines], ['der', ['Max ist maskulin, hier Subjekt → Nominativ']]);
+    });
+    test('placementFeedback: plural noun uses the plural article', () => {
+        const r = fb({ word: { type: 'object', text: 'Kinder', gender: 'n', case: 'dat', number: 'pl' },
+            caseType: 'dat', cellLabel: 'PLURAL' });
+        assertEqual([r.title, r.form], ['Richtig! Plural + Dativ', 'den']);
+    });
+    test('placementFeedback: pronouns and verbs get no article', () => {
+        const wir = fb({ word: { type: 'subject', text: 'Wir', case: 'nom', number: 'pl', gender: 'none',
+            conjugation: { pronoun: 'wir' } }, caseType: 'nom', cellLabel: 'WIR' });
+        assertEqual(wir, { tone: 'ok', title: 'Richtig! wir + Nominativ', form: null,
+            lines: ['„Wir“ ist das Subjekt → Nominativ'] });
+        const v = fb({ word: verb, caseType: 'nom', cellLabel: 'ICH' });
+        assertEqual([v.title, v.form, v.lines], ['Richtig! Verb', null, ['„kaufe“ gehört zu ich → ICH']]);
+        const es = fb({ word: { type: 'subject', text: 'Es', gender: 'n', case: 'nom', number: 'sg' },
+            caseType: 'nom', cellLabel: 'NEUTRUM' });
+        assertEqual([es.title, es.form], ['Richtig! Neutrum + Nominativ', null]);
+    });
+    test('placementFeedback: auto-placed and wrong', () => {
+        const auto = fb({ word: dativObject, caseType: 'dat', auto: true });
+        assertEqual([auto.tone, auto.title], ['solved', 'Lösung: Maskulin + Dativ']);
+        const result = validatePlacement(dativObject, 1, 1, 'akk', cellOf(dativObject));
+        const wrong = placementFeedback({ ok: false, word: dativObject, result, attempts: 1 });
+        assertEqual(wrong, { tone: 'wrong', title: 'Nicht ganz · noch 2 Versuche', form: null,
+            lines: ['“Mann” is Dativ here'] });
+        assertEqual(placementFeedback({ ok: false, word: dativObject, result, attempts: MAX_WRONG_ATTEMPTS }).title,
+            'Nicht ganz · hier ist die Lösung');
+    });
 }

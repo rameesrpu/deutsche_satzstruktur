@@ -1,12 +1,13 @@
 import { gameSounds } from './sound.js';
 import { pickNextSentence } from './sentencePicker.js';
-import { evaluatePlacement, getAutoPlacement, explainMistake, MAX_WRONG_ATTEMPTS } from './gameRules.js';
+import { evaluatePlacement, getAutoPlacement, explainMistake, placementFeedback, MAX_WRONG_ATTEMPTS } from './gameRules.js';
 import { progressStore, sentenceKey, emptyMistakes, addMistake } from './progressStore.js';
 import { GM_UI, drawHud, getTimerColor } from './gameHud.js';
 import { GRID_CELLS } from './grammaticalConfig.js';
 import { ensureJuiceDefs, spawnConfetti, spawnFloatingText, drawFeedbackAnimation, updateFeedbackElement,
     showFinalCelebration } from './gameJuice.js';
 import { LEVEL_CONTENT, chapterOrder } from './levelContent.js';
+import { updatePlayTimer } from './playScreen.js';
 import { beatsBefore, beatsAfterLast, nextPlayText, showStoryCard, hideStoryCard,
     isStoryCardOpen } from './storyNarration.js';
 
@@ -91,6 +92,11 @@ export class GameMode {
         this.sentenceMistakes = emptyMistakes();
         this.bestSessionStreak = 0;
 
+        // Play screen (playScreen.js): feedback bar of the last placement
+        // ({tone, title, form, lines} from placementFeedback) and finished sentences this session
+        this.feedback = null;
+        this.sentencesCompleted = 0;
+
         // Waiting for user to continue to next sentence
         this.waitingForContinue = false;
 
@@ -153,6 +159,56 @@ export class GameMode {
         // Extra left margin on desktop so word pills / grid don't sit flush
         // against the canvas edge next to the sentence panel
         return isMobile ? 50 : 90;
+    }
+
+    /**
+     * True on the full-screen play screen (body[data-screen="play"]): the HUD, case tray and
+     * feedback are HTML there (playScreen.js) and the SVG shows only the grid.
+     */
+    isPlayScreen() {
+        return document.body.dataset.screen === 'play';
+    }
+
+    /**
+     * The play screen's viewBox: the grid plus the canvas margin left/right (placed
+     * phrases with their verb can reach past the outer cells) and a small one top/bottom.
+     */
+    getBoardBounds() {
+        const mx = this.getGridStartX();
+        const my = 8;
+        return {
+            x: 0,
+            y: this.getGridStartY() - my,
+            width: 3 * this.gridViewModel.cellWidth + 2 * mx,
+            height: 3 * this.gridViewModel.cellHeight + 2 * my,
+        };
+    }
+
+    /** Select a case for the next placement, or clear it if it is already selected. */
+    toggleCase(caseType) {
+        if (this.selectedCase === caseType) {
+            this.selectedCase = null;
+        } else {
+            this.selectedCase = caseType;
+            if (typeof gameSounds !== 'undefined') gameSounds.select();
+        }
+        this.host.redraw();
+    }
+
+    /**
+     * After a finished sentence: first show the Feldermodell review, then the next sentence
+     * (the tap on the grid or the play screen's continue button).
+     */
+    continueAfterSentence() {
+        if (!this.waitingForContinue) return;
+        if (this.pendingFelderReview) {
+            this.pendingFelderReview = false;
+            this.pause();
+            this.host.setView('felder');
+            this.host.redraw();
+        } else {
+            this.loadRandomSentenceAndContinue();
+        }
     }
 
     /**
@@ -252,6 +308,7 @@ export class GameMode {
         this.currentWordAttempts = 0;
         this.sentenceMistakes = emptyMistakes();
         this.hideMistakeHint();
+        this.feedback = null;
         this.waitingForContinue = false;
         this.pendingFelderReview = false;
 
@@ -315,6 +372,8 @@ export class GameMode {
         if (typeof gameSounds !== 'undefined') gameSounds.cancelPrompt();
         this.totalScore = 0; // Reset score so the next start() is fresh
         this.bestSessionStreak = 0;
+        this.sentencesCompleted = 0;
+        this.feedback = null;
         this.usedSentenceIds = new Set();
         this.stopTimerAnimation();
         this.wordStartTime = null;
@@ -373,11 +432,12 @@ export class GameMode {
         // Draw tick/cross feedback animation (if active)
         drawFeedbackAnimation(this.gameGroup, this.feedbackAnimation);
 
-        // Draw controllers (now positioned below grid)
-        this.drawControllers();
-
-        // Draw UI overlays (score, current word, etc.)
-        this.overlayGroup = drawHud(this);
+        // Werkstatt: case controllers and word bar in the SVG. The play screen has them
+        // as HTML around the grid (playScreen.js, rendered by app.redrawAll).
+        if (!this.isPlayScreen()) {
+            this.drawControllers();
+            this.overlayGroup = drawHud(this);
+        }
 
         // Draw full-screen tap overlay when waiting for continue
         if (this.waitingForContinue) {
@@ -753,10 +813,11 @@ export class GameMode {
     drawContinueOverlay() {
         // Create a full-screen transparent overlay that captures all taps
         const overlay = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        overlay.setAttribute('x', 0);
-        overlay.setAttribute('y', 0);
-        overlay.setAttribute('width', '100%');
-        overlay.setAttribute('height', '100%');
+        // Generous extent: covers the canvas whatever the viewBox (the play screen crops it to the grid)
+        overlay.setAttribute('x', -5000);
+        overlay.setAttribute('y', -5000);
+        overlay.setAttribute('width', 10000);
+        overlay.setAttribute('height', 10000);
         overlay.setAttribute('fill', 'transparent');
         overlay.setAttribute('cursor', 'pointer');
 
@@ -764,17 +825,8 @@ export class GameMode {
         const handleTap = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            if (!this.waitingForContinue) return;
-            if (this.pendingFelderReview) {
-                // First tap: show felder view so user can see the sentence structure
-                this.pendingFelderReview = false;
-                this.pause();
-                this.host.setView('felder');
-                this.host.redraw();
-            } else {
-                // Second tap (after felder review): load next sentence
-                this.loadRandomSentenceAndContinue();
-            }
+            // First tap: Feldermodell review; second tap: next sentence
+            this.continueAfterSentence();
         };
 
         overlay.addEventListener('click', handleTap);
@@ -992,19 +1044,7 @@ export class GameMode {
         const handleTap = (e) => {
             e.preventDefault();
             e.stopPropagation();
-
-            // Toggle case selection
-            if (this.selectedCase === config.caseType) {
-                // Deselect if already selected
-                this.selectedCase = null;
-            } else {
-                // Select this case
-                this.selectedCase = config.caseType;
-                if (typeof gameSounds !== 'undefined') gameSounds.select();
-            }
-
-            // Redraw to show selection state
-            this.host.redraw();
+            this.toggleCase(config.caseType);
         };
 
         // Add tap/click handlers
@@ -1072,6 +1112,9 @@ export class GameMode {
 
         const currentItem = this.manualItems[this.currentIndex];
         const itemToValidate = currentItem.type === 'box' ? currentItem.item.mainWord : currentItem.item;
+        const autoPlaced = this.suppressStreak; // set by autoPlaceCurrentWord
+        const before = this.words[this.getItemWordRange(currentItem)[0] - 1] || null;
+        const cell = GRID_CELLS.find(c => c.row === row && c.col === col);
 
         console.log(`Placing ${currentItem.type}: ${this.getItemText(currentItem)} at row ${row}, col ${col}, case: ${caseType}`);
 
@@ -1100,6 +1143,10 @@ export class GameMode {
 
             this.currentSentenceScore += points;
             this.totalScore += points;
+            this.feedback = placementFeedback({
+                ok: true, word: itemToValidate, phrase: this.getItemText(currentItem), caseType,
+                cellLabel: cell ? cell.label : null, preposition: before, auto: autoPlaced,
+            });
             console.log('✓ Correct placement!', points, 'points');
 
             // --- Visual juice (display only, no effect on scoring/validation) ---
@@ -1181,12 +1228,18 @@ export class GameMode {
             if (navigator.vibrate) navigator.vibrate([30, 40, 30]); // distinct double-buzz
 
             // Show cross feedback (no score penalty, but don't advance)
+            this.feedback = placementFeedback({
+                ok: false, word: itemToValidate, phrase: this.getItemText(currentItem),
+                preposition: before, result: outcome.result, attempts: outcome.attempts,
+            });
             this.showFeedback('✗', feedbackX, feedbackY, false);
-            const before = this.words[this.getItemWordRange(currentItem)[0] - 1];
-            this.showMistakeHint(explainMistake({
-                word: itemToValidate, result: outcome.result,
-                phrase: this.getItemText(currentItem), preposition: before || null,
-            }));
+            // Werkstatt: toast; the play screen shows this.feedback in its feedback bar
+            if (!this.isPlayScreen()) {
+                this.showMistakeHint(explainMistake({
+                    word: itemToValidate, result: outcome.result,
+                    phrase: this.getItemText(currentItem), preposition: before,
+                }));
+            }
 
             // After MAX_WRONG_ATTEMPTS failed attempts, auto-place correctly
             if (outcome.autoPlace) {
@@ -1290,14 +1343,17 @@ export class GameMode {
     startScoreCountLoop() {
         if (this.scoreLoopId) return;
         const tick = () => {
+            const el = this.svg.querySelector('#gm-score-text');
+            const playEl = document.getElementById('play-score-value'); // play screen (playScreen.js)
             if (!this.scoreAnim || !this.isActive) {
                 this.scoreLoopId = null;
-                const el = this.svg.querySelector('#gm-score-text');
                 if (el && this.isActive) el.textContent = `${this.totalScore}/${this.targetScore}`;
+                if (playEl && this.isActive) playEl.textContent = String(this.totalScore);
                 return;
             }
-            const el = this.svg.querySelector('#gm-score-text');
-            if (el) el.textContent = `${this.getDisplayedScore()}/${this.targetScore}`;
+            const shown = this.getDisplayedScore();
+            if (el) el.textContent = `${shown}/${this.targetScore}`;
+            if (playEl) playEl.textContent = String(shown);
             this.scoreLoopId = requestAnimationFrame(tick);
         };
         this.scoreLoopId = requestAnimationFrame(tick);
@@ -1414,6 +1470,11 @@ export class GameMode {
             }
         }
 
+        if (this.wordStartTime && this.isPlayScreen()) {
+            const remaining = Math.max(0, 1 - (Date.now() - this.wordStartTime) / 10000);
+            updatePlayTimer(remaining, getTimerColor(1 - remaining));
+        }
+
         // Update floating feedback animation in-place
         updateFeedbackElement(this.svg, this.feedbackAnimation);
     }
@@ -1484,6 +1545,7 @@ export class GameMode {
     showGameComplete() {
         console.log('🎉 Sentence Complete! Sentence Score:', this.currentSentenceScore, 'Total Score:', this.totalScore);
         this.recordProgress();
+        this.sentencesCompleted++; // play screen progress bar (display only)
 
         // Check if player reached target score
         if (this.totalScore >= this.targetScore) {
@@ -1621,10 +1683,10 @@ export class GameMode {
         const sentence = this.host.sentenceManager.getCurrentSentence();
         const segment = beatsBefore(chapter.data.beats, sentence.text);
         if (!segment) return;
-        const buttons = [{ label: 'Los geht\'s ▶', primary: true, onClick: () => this.closeStoryCard() }];
+        const buttons = [{ label: 'Los geht\'s', icon: 'play', primary: true, onClick: () => this.closeStoryCard() }];
         // First card of the chapter: offer to read the whole chapter first
         if (chapter.data.sentences[0] === sentence.text) {
-            buttons.unshift({ label: '📖 Erst lesen',
+            buttons.unshift({ label: 'Erst lesen', icon: 'book',
                 onClick: () => this.host.openReader(chapter.level, chapter.category) });
         }
         this.pauseForStoryCard();
@@ -1689,7 +1751,7 @@ export class GameMode {
         const complete = levelSelector.isChapterComplete(level, category);
         const buttons = [];
         if (nextKey && levelSelector.isUnlocked(level, nextKey)) {
-            buttons.push({ label: 'Nächstes Kapitel ▶', primary: true,
+            buttons.push({ label: 'Nächstes Kapitel', icon: 'next', primary: true,
                 onClick: () => this.host.startChapter(level, nextKey) });
         }
         buttons.push({ label: 'Übung', primary: buttons.length === 0 && complete,
@@ -1699,7 +1761,7 @@ export class GameMode {
         this.pauseForStoryCard();
         showStoryCard({
             heading: cat.label,
-            banner: complete ? 'Kapitel geschafft! 🎉'
+            banner: complete ? 'Kapitel geschafft!'
                 : 'Ende des Kapitels. Spiel alle Sätze, dann öffnet sich das nächste Kapitel.',
             lines: beatsAfterLast(data.beats),
             buttons,

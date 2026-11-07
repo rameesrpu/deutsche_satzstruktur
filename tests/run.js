@@ -15,6 +15,7 @@ import { runStoryTests } from './story.test.js';
 import { runGlossaryTests } from './glossary.test.js';
 import { runHomeScreenTests } from './homeScreen.test.js';
 import { runStoryReaderTests } from './storyReader.test.js';
+import { runPlayScreenTests } from './playScreen.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -35,6 +36,7 @@ runStoryTests();
 runGlossaryTests();
 runHomeScreenTests();
 runStoryReaderTests();
+runPlayScreenTests();
 runLibrarySnapshot({ update });
 
 System.exit(summary() > 0 ? 1 : 0);

@@ -83,11 +83,19 @@ editor to a "Werkstatt" tab.
 > sentences (`--read-play-dot`); sticky "Jetzt spielen". Pure helpers tested in tests/storyReader.test.js.
 > Checked at 375×812 and 1280×800 from Home, Werkstatt 📖 and in-game "Erst lesen".
 
-### [ ] U5 Play screen
-Full screen in game mode: no app header/editor chrome; top = close, segmented progress, score;
-sentence with the current phrase framed; grid; case tray (NOM/AKK/DAT/GEN shapes) at the bottom;
-feedback bar that names gender + case → form. Narration card becomes a solid bottom sheet.
-The "no German voice" toast must not cover the narration card.
+### [x] U5 Play screen
+> 2026-11-07 done. On `body[data-screen="play"]` the game chrome is HTML (`js/playScreen.js`) around
+> the SVG grid (viewBox = grid via `GameMode.getBoardBounds()`; SVG HUD/controllers only in the
+> Werkstatt): top bar ✕ (→ Home) · segmented progress (chapter sentences, else a 10-sentence session
+> window) · score + streak; sentence in Literata 26 px with the current phrase framed, earlier words
+> muted, same reveal as the old word bar; feedback bar above the case tray (`placementFeedback()` in
+> gameRules.js: "Richtig! Feminin + Nominativ → die", noun line in German; wrong = `explainMistake`
+> lines, still English; auto-placed = "Lösung:"); `articleFor(gender|'pl', case)`; tray = NOM/AKK/DAT/GEN
+> shape buttons 72 px (A/S/D/F still work), "Satzbau ansehen" / "Nächster Satz" after a sentence.
+> Narration card = solid paper bottom sheet without scrim, stroke icons, read-aloud greyed without a
+> German voice; the TTS notice sits at the top. Tests: tests/playScreen.test.js + gameRules tests.
+> Checked at 375×812 and 1280×800 (card, placing, wrong, solved sentence, Feldermodell review,
+> chapter end, timer, TTS notice, Werkstatt game unchanged).
 
 ### [ ] U6 Chapter-end recap
 After a chapter: sentences / % correct / new words, "Das war schwer" (missed sentences with the

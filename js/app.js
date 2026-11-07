@@ -6,6 +6,7 @@ import { SentenceManager } from './sentenceManager.js';
 import { FeldermodellRenderer } from './feldermodell.js';
 import { GridViewModel } from './gridview.js';
 import { GameMode } from './gamemode.js';
+import { initPlayChrome, renderPlayChrome, clearPlayChrome } from './playScreen.js';
 import { progressStore, sentenceKey, isMastered } from './progressStore.js';
 import { Renderer } from './renderer.js';
 import { UIController } from './ui.js';
@@ -109,6 +110,10 @@ class DeutschApp {
         this.setupSentencePanel();
         this.setupViewToggle();
         this.setupGameMode();
+        initPlayChrome(this.gameMode, {
+            onClose: () => this.showScreen('home'),
+            onContinue: () => this.continuePlay(),
+        });
         this.setupResizeListener();
         this.setupZoomControls();
         this.setupSidebarTabs();
@@ -1107,6 +1112,7 @@ class DeutschApp {
             (this.screen === 'play' || this.screen === 'workshop');
         this.screen = name; // set first: exitGame → handleGameStopped must not route again
         if (leavingGame) this.exitGame();
+        if (name !== 'play') clearPlayChrome();
         document.body.dataset.screen = name;
         for (const s of ['home', 'practice', 'words']) {
             const section = document.getElementById(`screen-${s}`);
@@ -1122,6 +1128,22 @@ class DeutschApp {
         else if (name === 'practice') this.renderPracticeScreen();
         else if (name === 'words') this.renderWordsScreen();
         else this.redrawAll();
+    }
+
+    /**
+     * Continue after a finished sentence: Feldermodell review first, then the next sentence
+     * (play screen button, Werkstatt "Next sentence →").
+     */
+    continuePlay() {
+        if (!this.gameMode.isActive || !this.gameMode.waitingForContinue) return;
+        if (this.gameMode.isPaused) {
+            // In the Feldermodell review: back to the game with the next sentence
+            this.gameMode.resume();
+            this.currentView = 'game';
+            this.gameMode.loadRandomSentenceAndContinue();
+        } else {
+            this.gameMode.continueAfterSentence();
+        }
     }
 
     /** Stop the running game the way the ✕ button does. */
@@ -1411,7 +1433,14 @@ class DeutschApp {
 
             this.svg.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${zoomedWidth} ${zoomedHeight}`);
             this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-            if (isMobile) {
+            if (this.currentView === 'game' && this.screen === 'play') {
+                // Play screen: the SVG holds only the grid, fitted between the HTML
+                // sentence above and the case tray below (playScreen.js); no zoom/pan
+                const b = this.gameMode.getBoardBounds();
+                this.svg.setAttribute('viewBox', `${b.x} ${b.y} ${b.width} ${b.height}`);
+                this.svg.removeAttribute('width');
+                this.svg.removeAttribute('height');
+            } else if (isMobile) {
                 // Mobile: remove width/height for responsive scaling
                 // (canvas container scrolls; taller mobile layout expects it)
                 this.svg.removeAttribute('width');
@@ -1492,9 +1521,7 @@ class DeutschApp {
                     hint.addEventListener('click', (e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        this.gameMode.resume();
-                        this.currentView = 'game';
-                        this.gameMode.loadRandomSentenceAndContinue();
+                        this.continuePlay();
                     });
                     const container = document.querySelector('.canvas-container');
                     if (container) container.appendChild(hint);
@@ -1506,6 +1533,10 @@ class DeutschApp {
         } else if (this.currentView === 'game') {
             // Draw Game view
             this.gameMode.draw();
+        }
+
+        if (this.screen === 'play' && this.gameMode.isActive) {
+            renderPlayChrome(this.gameMode, this.currentView);
         }
 
         // Auto-save current sentence after redrawing

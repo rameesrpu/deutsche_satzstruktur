@@ -4,6 +4,7 @@
 // scripts/build_stories.py. The helpers at the top are pure (no DOM).
 
 import { renderGlossedText, closeGlossPopover } from './glossary.js';
+import { gameSounds } from './sound.js';
 
 /**
  * @typedef {Object} StoryBeat
@@ -67,6 +68,35 @@ export function chapterStartText(texts, currentText, hasPlayed) {
 // ---------------------------------------------------------------------------
 
 const CARD_ID = 'story-card';
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+// Inline stroke icons (24-unit viewBox, currentColor); 'play' is filled
+const ICONS = {
+    speaker: ['M11 5L6 9H3v6h3l5 4z', 'M15.5 8.5a5 5 0 0 1 0 7', 'M18.5 5.5a9 9 0 0 1 0 13'],
+    book: ['M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z', 'M8 7h7'],
+    next: ['M9 6l6 6-6 6'],
+    play: ['M7 4l13 8-13 8z'],
+};
+
+function icon(name, size = 18) {
+    const svg = document.createElementNS(SVG_NS, 'svg');
+    svg.setAttribute('width', size);
+    svg.setAttribute('height', size);
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('aria-hidden', 'true');
+    const filled = name === 'play';
+    svg.setAttribute('fill', filled ? 'currentColor' : 'none');
+    svg.setAttribute('stroke', filled ? 'none' : 'currentColor');
+    svg.setAttribute('stroke-width', '2');
+    svg.setAttribute('stroke-linecap', 'round');
+    svg.setAttribute('stroke-linejoin', 'round');
+    for (const d of ICONS[name]) {
+        const path = document.createElementNS(SVG_NS, 'path');
+        path.setAttribute('d', d);
+        svg.appendChild(path);
+    }
+    return svg;
+}
 
 /** @returns {boolean} */
 export function isStoryCardOpen() {
@@ -107,14 +137,16 @@ export function storyLineElement(beat, extraClass = '', glossary = null) {
 }
 
 /**
- * Show the narration card. Enter/Space press the primary button.
+ * Show the narration card: a solid bottom sheet over the game (no scrim, so the grid
+ * stays visible above it). Enter/Space press the primary button.
  * @param {Object} opts
  * @param {string} opts.heading            e.g. "1.1 Hallo, Stuttgart!"
  * @param {StoryBeat[]} opts.lines         narration shown first
  * @param {?StoryBeat} [opts.play]         the sentence about to be played (highlighted)
  * @param {?string} [opts.banner]          e.g. "Kapitel geschafft!"
- * @param {{label: string, onClick: Function, primary?: boolean}[]} opts.buttons
- * @param {?Function} [opts.onSpeak]       shows a 🔊 button that calls it with the card's texts
+ * @param {{label: string, onClick: Function, primary?: boolean, icon?: 'book'|'next'|'play'}[]} opts.buttons
+ * @param {?Function} [opts.onSpeak]       shows a read-aloud button that calls it with the card's texts
+ *                                         (disabled when the device has no German voice)
  * @param {?Object} [opts.glossary]        chapter glossary: its words are tappable
  */
 export function showStoryCard({ heading, lines, play = null, banner = null, buttons, onSpeak = null, glossary = null }) {
@@ -156,9 +188,13 @@ export function showStoryCard({ heading, lines, play = null, banner = null, butt
     actions.className = 'story-actions';
     if (onSpeak) {
         const speak = document.createElement('button');
+        speak.type = 'button';
         speak.className = 'story-btn story-btn-icon';
-        speak.title = 'Vorlesen';
-        speak.textContent = '🔊';
+        const canSpeak = gameSounds.speechAvailable && 'speechSynthesis' in window;
+        speak.title = canSpeak ? 'Vorlesen' : 'Keine deutsche Stimme auf diesem Gerät';
+        speak.setAttribute('aria-label', speak.title);
+        speak.disabled = !canSpeak;
+        speak.appendChild(icon('speaker', 20));
         const texts = [...lines, ...(play ? [play] : [])].map(b => b.read || b.play);
         speak.addEventListener('click', () => onSpeak(texts));
         actions.appendChild(speak);
@@ -166,8 +202,14 @@ export function showStoryCard({ heading, lines, play = null, banner = null, butt
     let primary = null;
     buttons.forEach(btn => {
         const el = document.createElement('button');
+        el.type = 'button';
         el.className = 'story-btn' + (btn.primary ? ' story-btn-primary' : '');
-        el.textContent = btn.label;
+        // Primary: label then icon (→ / ▶); secondary: icon then label
+        const label = document.createElement('span');
+        label.textContent = btn.label;
+        if (btn.icon && btn.primary) el.append(label, icon(btn.icon, 16));
+        else if (btn.icon) el.append(icon(btn.icon, 18), label);
+        else el.append(label);
         el.addEventListener('click', () => btn.onClick());
         actions.appendChild(el);
         if (btn.primary) primary = el;
