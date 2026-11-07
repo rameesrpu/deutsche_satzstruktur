@@ -1601,6 +1601,17 @@ class DeutschApp {
                 (e, word) => this.uiController.handleDragStart(e, word)
             );
 
+            // Play screen review: fit the drawn field model to the screen (the canvas size
+            // above follows the editor's word positions and cut off the Nachfeld at 375 px)
+            if (this.screen === 'play' && this.gameMode.isActive) {
+                const b = this.svg.getBBox();
+                const pad = 12;
+                if (b.width > 0) {
+                    this.svg.setAttribute('viewBox',
+                        `${b.x - pad} ${b.y - pad} ${b.width + 2 * pad} ${b.height + 2 * pad}`);
+                }
+            }
+
             // If game paused for felder review, show a "Next sentence" button
             // at the bottom. No full-screen overlay: the canvas stays fully
             // interactive so words can be selected and corrected before

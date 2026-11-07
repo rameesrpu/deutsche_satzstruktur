@@ -162,7 +162,25 @@ vorfeld, *Ich will ein Konto eröffnen.* → bracket, *Lea und Max schauen zu.* 
 play screen a plain sentence goes on with one tap, a lesson sentence shows the field model with
 its hint and goes on with one tap; "Satzbau" link works; checked at 375×812 and 1280×800; tests pass.
 
-### [ ] E4 Phone pass over one chapter
+### [x] E4 Phone pass over one chapter
+> 2026-11-07 done. Played 1.1 and 3.2 from Home to the recap in the browser pane at 375×812 (real tile/case/button
+> click handlers; Satz aufbauen and Hörübung off = defaults). **Taps outside placements**: 1.1 = run-start card
+> "Los geht's" once, then exactly 1 "Weiter" per sentence (14/14), 0 before any sentence; chapter end = that sentence's
+> "Weiter" + the closing card's "Weiter" (U6 flow) → recap. 3.2 = the same (card once, 14 × 1 "Weiter", closing card).
+> Field model opened on its own in 1/14 sentences of 1.1 (*Wer ist der Mann?*) and 10/14 of 3.2 (9 × Satzklammer).
+> **Speech log** (`speechSynthesis.speak` wrapped in the page): every correct placement spoke only its phrase
+> (*Ayisha* · *ist* · *Ärztin*), auto-placed words (*Heute*, *Wer*, *gleich da*) are not spoken alone, the whole
+> sentence once at the end (queued), no prefix/build-up and nothing repeated from the sentence start in 28 sentences;
+> the only other utterance is the silent boundary probe at game start. **Fix**: the field model on the play screen was
+> sized from the editor's word positions (viewBox 520 wide for a 524-wide drawing), so the Nachfeld was cut off at
+> 375 px; app.js now fits the viewBox to the drawn field model on the play screen (also larger at 1280×800).
+> Strip and hint read well (2 beats, clamped line + "mehr" in 3.2 sentence 7; hint "Satzklammer: *muss … erledigen*").
+> Open (not fixed, outside E1–E3 files): `feldermodell.js` with a single verb puts everything after it in the
+> **Nachfeld** (Mittelfeld width 0: `nachfeld.start` = end of LK), e.g. *Ich kann das allein!*, *Wer ist der Mann?*
+> (a lesson sentence); 3.2 shows "Satzklammer" 9 times (see Later: throttle); feedback calls a predicate noun
+> "Subjekt" (*Ayisha ist Ärztin.* → "Ärztin … hier Subjekt"). **Left for the owner on the real phone**: hearing a
+> German voice (phrase per placement, sentence once, nothing cut off when "Weiter" is tapped early, the strip's
+> read-aloud icon), and the tap feel on touch (headless pane: no voice, read-aloud only seen greyed).
 Files: none new; fix-ups in the files above.
 
 - Play chapter 1.1 and 3.2 (modals) start to recap on a phone-sized window (375×812) and once

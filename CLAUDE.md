@@ -6,14 +6,15 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 
 **Main path**: game mode + pre-parsed library sentences (`data/library/*.json`), led by the
 **story chapters** (A1 "Ein Zuhause in Stuttgart": `data/stories/`, see its CURRICULUM.md and STORY_BIBLE.md). The spaCy backend
-(`backend/`) is rarely used — **don't touch `backend/` unless asked.** Work items: [docs/story-plan.md](docs/story-plan.md) and the UI redesign
+(`backend/`) is rarely used — **don't touch `backend/` unless asked.** Work items: [docs/story-plan.md](docs/story-plan.md), the UI redesign
 [docs/redesign-plan.md](docs/redesign-plan.md) (design decisions + mockup link; grammar colors come only from
-`GRAMMAR_PALETTE` in grammaticalConfig.js) (finished maintainability plan: [docs/archive/](docs/archive/)).
+`GRAMMAR_PALETTE` in grammaticalConfig.js) and the learning experience plan [docs/experience-plan.md](docs/experience-plan.md) (finished maintainability plan: [docs/archive/](docs/archive/)).
 
 ## Files (`js/`, ES modules — entry `app.js`; each file imports what it uses)
 - `types.js` — JSDoc typedefs only (Word, Sentence, LibraryFile, ParsedSentence, PlacementResult…; not loaded)
 - `ids.js` — `nextId()`: the one source of sentence/word ids (never use `Date.now()` as an id)
-- `sound.js` — SoundManager: Web Audio effects + German text-to-speech (`detectGermanVoice`: speech options greyed out when no German voice)
+- `sound.js` — SoundManager: Web Audio effects + German text-to-speech (`detectGermanVoice`: speech options greyed out when no German voice);
+  pure `placementSpeech()`: a correct placement speaks only its phrase ("Satz aufbauen", `gameSpeechBuildUp`, off: the growing prefix)
 - `grammaticalConfig.js` — gender/number/pronoun properties and colors
 - `levelContent.js` — `LEVEL_CONTENT`: levels → categories → sentence-list files (`data/levels/`; pre-parsed twins in `data/library/`);
   story chapters/drills are merged in first from `storyContent.js` (generated — don't edit) with `story` metadata; `chapterOrder()`
@@ -22,7 +23,7 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 - `glossary.js` — tap-to-translate: `glossTokens()` (pure; mirrors `glossary_matches` in build_stories.py) and the word popover
 - `homeScreen.js` — learner screens Home (Lernen) / Üben / Wörter: pure helpers (chapter status, today's count,
   weak spots) + `renderHome/renderPractice/renderWords`; the screen router (`showScreen`) is in app.js
-- `settings.js` — learner settings screen (Einstellungen: Ton, Aussprache, Hörübung, Zeitdruck, Tagesziel) + daily goal / time challenge persistence; pure `parseDailyGoal`, `goalProgress`, `settingsRows`
+- `settings.js` — learner settings screen (Einstellungen: Ton, Aussprache, Satz aufbauen, Hörübung, Zeitdruck, Tagesziel) + daily goal / time challenge persistence; pure `parseDailyGoal`, `goalProgress`, `settingsRows`
 - `storyReader.js` — full-screen chapter reader (📖 next to the category select, "Erst lesen" on a chapter's first card)
 - `wordManager.js` — word data model of the current sentence
 - `sentenceManager.js` — all sentences, localStorage persistence, library bulk-load
@@ -37,10 +38,12 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 - `gameHud.js` — `drawHud(game)`: word bar (score pill, streak, current/auto/next words, timer bar), complete card; `GM_UI` colors
 - `chapterRecap.js` — chapter-end recap screen (`body[data-screen="end"]`): pure helpers (stats, hard sentences,
   word chips) + `renderRecap`; GameMode records the run (`run`, `recordMiss`), app.js `showRecap`
+- `felderLesson.js` — pure `felderLesson(words)` → `{kind, hint, parts}` or null: the field model opens on its own after a
+  solved play-screen sentence only when it teaches (two-part verb, non-subject before the verb, subordinate clause)
 - `gameJuice.js` — display-only effects: SVG defs, confetti, floating text, ✓/✗ feedback, final celebration overlay
 - `playScreen.js` — full-screen play screen chrome (HTML around the SVG grid on `body[data-screen="play"]`): top bar
-  (close, segmented progress, score), sentence with the framed phrase, feedback bar (`placementFeedback` in gameRules.js),
-  case tray; pure `progressSegments()` / `sentenceParts()`. The Werkstatt game keeps the SVG HUD (gameHud.js)
+  (close, segmented progress, score), story strip (`#play-story`: up to 2 narration lines + "mehr"), sentence with the framed
+  phrase, feedback bar (`placementFeedback` in gameRules.js), case tray; solved: "Weiter" + quiet "Satzbau" link; pure `progressSegments()` / `sentenceParts()`. The Werkstatt game keeps the SVG HUD (gameHud.js)
 - `renderer.js` — SVG drawing of words/connections in edit view
 - `ui.js` — UIController: editor panels and interactions
 - `app.js` — DeutschApp: wires everything together, screen router (`showScreen`: body[data-screen], bottom nav;
