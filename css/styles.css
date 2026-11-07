@@ -47,15 +47,15 @@
     --teal-600: #0d9488;
 
     /* ---- Grammar colors (mirror grammaticalConfig.js) ---- */
-    --gram-masc:   #3498db;
-    --gram-fem:    #e91e63;
-    --gram-neut:   #8e44ad;
-    --gram-plural: #c0392b;
-    --gram-ich:    #27ae60;
-    --gram-du:     #e67e22;
-    --gram-wir:    #2c3e50;
-    --gram-ihr:    #f39c12;
-    --gram-none:   #95a5a6;
+    --gram-masc:   #3F6FB0;
+    --gram-fem:    #B9476A;
+    --gram-neut:   #4E8B5A;
+    --gram-plural: #B98A2C;
+    --gram-ich:    #7A5AA6;
+    --gram-du:     #C2603A;
+    --gram-wir:    #556070;
+    --gram-ihr:    #2E8288;
+    --gram-none:   #8B8F96;
 
     /* ---- Header ---- */
     --header-bg: linear-gradient(120deg, #1e1b4b 0%, #312e81 55%, #4338ca 100%);
@@ -1277,7 +1277,7 @@ button:active {
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 20px solid #7f8c8d;
+    border-bottom: 20px solid var(--gram-none);
     background: transparent !important;
     border-top-color: transparent;
 }

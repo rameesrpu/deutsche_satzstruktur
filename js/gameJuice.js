@@ -1,3 +1,4 @@
+import { GRAMMAR_PALETTE } from './grammaticalConfig.js';
 /**
  * Game-mode "juice": shared SVG defs, confetti bursts, floating "+N" text, the ✓/✗ feedback
  * animation and the final celebration overlay. Display only — no game-logic effects.
@@ -6,7 +7,8 @@
 import { GM_UI } from './gameHud.js';
 
 // Confetti palette (design palette + grammar-semantic accents)
-export const GM_CONFETTI_COLORS = ['#4f46e5', '#10b981', '#f59e0b', '#ef4444', '#e91e63', '#3498db', '#8e44ad'];
+// Confetti in the grammar palette's hues (docs/redesign-plan.md)
+export const GM_CONFETTI_COLORS = ['masc', 'fem', 'neut', 'pl', 'ich', 'du', 'ihr'].map(k => GRAMMAR_PALETTE[k].c);
 
 /**
  * Ensure the shared soft drop-shadow filter exists (id 'gm-shadow').

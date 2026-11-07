@@ -3,6 +3,7 @@ import { pickNextSentence } from './sentencePicker.js';
 import { evaluatePlacement, getAutoPlacement, explainMistake, MAX_WRONG_ATTEMPTS } from './gameRules.js';
 import { progressStore, sentenceKey, emptyMistakes, addMistake } from './progressStore.js';
 import { GM_UI, drawHud, getTimerColor } from './gameHud.js';
+import { GRID_CELLS } from './grammaticalConfig.js';
 import { ensureJuiceDefs, spawnConfetti, spawnFloatingText, drawFeedbackAnimation, updateFeedbackElement,
     showFinalCelebration } from './gameJuice.js';
 import { LEVEL_CONTENT, chapterOrder } from './levelContent.js';
@@ -584,57 +585,46 @@ export class GameMode {
         const startX = this.getGridStartX();
         const startY = this.getGridStartY();
 
-        const cellData = [
-            // Row 1
-            { row: 1, col: 1, label: 'MASCULINE', color: '#3498db' },
-            { row: 1, col: 2, label: 'DU', color: '#e67e22' },
-            { row: 1, col: 3, label: 'FEMININE', color: '#e91e63' },
-            // Row 2
-            { row: 2, col: 1, label: 'NEUTRAL', color: '#8e44ad' },
-            { row: 2, col: 2, label: 'ICH', color: '#27ae60' },
-            { row: 2, col: 3, label: 'PLURAL', color: '#c0392b' },
-            // Row 3
-            { row: 3, col: 1, label: 'IHR', color: '#f39c12' },
-            { row: 3, col: 2, label: 'WIR', color: '#2c3e50' },
-            // Imperative verbs (no subject) place here — matches the
-            // IMPERATIV cell in gridview.js positions
-            { row: 3, col: 3, label: 'IMPERATIV', color: '#7f8c8d' }
-        ];
+        // Shared 3×3 layout + palette (grammaticalConfig.js). Imperative verbs (no subject)
+        // go to IMPERATIV, matching the gridview.js positions.
+        const cellData = GRID_CELLS;
 
         cellData.forEach(cell => {
             const x = startX + (cell.col - 1) * cellWidth;
             const y = startY + (cell.row - 1) * cellHeight;
             const isEmpty = !cell.label;
 
-            // Draw cell background: soft grammar-color tint with a saturated 2px border
-            // (colors are grammar-semantic and must stay recognizable)
+            // "Kontur" tile (docs/redesign-plan.md): near-transparent fill, faint outline
+            // in the grammar color — the color carries the meaning, the tile stays quiet.
             const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             rect.setAttribute('x', x + 3);
             rect.setAttribute('y', y + 3);
             rect.setAttribute('width', cellWidth - 6);
             rect.setAttribute('height', cellHeight - 6);
-            rect.setAttribute('rx', '12');
-            rect.setAttribute('fill', isEmpty ? GM_UI.surface : cell.color);
-            rect.setAttribute('fill-opacity', isEmpty ? '0.7' : '0.15');
+            rect.setAttribute('rx', '14');
+            rect.setAttribute('fill', isEmpty ? GM_UI.surface : cell.tint);
+            rect.setAttribute('fill-opacity', isEmpty ? '0.7' : '0.6');
             rect.setAttribute('stroke', isEmpty ? GM_UI.border : cell.color);
-            rect.setAttribute('stroke-width', '2');
-            rect.setAttribute('stroke-opacity', isEmpty ? '1' : '0.75');
+            rect.setAttribute('stroke-width', '1.5');
+            rect.setAttribute('stroke-opacity', isEmpty ? '1' : '0.4');
             rect.setAttribute('pointer-events', 'none');
             gridGroup.appendChild(rect);
 
             // Add cell label (in the cell's saturated color)
             if (cell.label) {
                 const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                // "Versalien" label: small tracked capitals at the top of the tile,
+                // so placed phrases in the middle don't collide with it.
                 label.setAttribute('x', x + cellWidth / 2);
-                label.setAttribute('y', y + cellHeight / 2);
+                // (SVG units: the board is scaled ~0.32 on a phone, so 30 ≈ 10 px there.)
+                label.setAttribute('y', y + 46);
                 label.setAttribute('text-anchor', 'middle');
                 label.setAttribute('dominant-baseline', 'middle');
-                label.setAttribute('fill', cell.color);
-                label.setAttribute('font-size', '18');
-                label.setAttribute('font-weight', 'bold');
+                label.setAttribute('fill', cell.ink);
+                label.setAttribute('font-size', '30');
+                label.setAttribute('font-weight', '600');
                 label.setAttribute('font-family', "'Inter', sans-serif");
-                label.setAttribute('letter-spacing', '1');
-                label.setAttribute('opacity', '0.65');
+                label.setAttribute('letter-spacing', '4');
                 label.setAttribute('pointer-events', 'none');
                 label.textContent = cell.label;
                 gridGroup.appendChild(label);

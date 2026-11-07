@@ -1,3 +1,5 @@
+import { GRAMMAR_PALETTE, GRID_CELLS } from './grammaticalConfig.js';
+
 export class GridViewModel {
     constructor(svg) {
         this.svg = svg;
@@ -167,20 +169,7 @@ export class GridViewModel {
     }
 
     drawGridCells(group, startX, startY) {
-        const cellData = [
-            // Row 1 (swapped masculine and feminine positions)
-            { row: 1, col: 1, label: 'MASCULINE', color: '#3498db' },   // Blue (masculine)
-            { row: 1, col: 2, label: 'DU', color: '#e67e22' },          // Orange (du)
-            { row: 1, col: 3, label: 'FEMININE', color: '#e91e63' },    // Pink (feminine)
-            // Row 2
-            { row: 2, col: 1, label: 'NEUTRAL', color: '#8e44ad' },     // Violet (neutral)
-            { row: 2, col: 2, label: 'ICH', color: '#27ae60' },         // Green (ich)
-            { row: 2, col: 3, label: 'PLURAL', color: '#c0392b' },      // Red (plural)
-            // Row 3
-            { row: 3, col: 1, label: 'IHR', color: '#f39c12' },         // Orange/yellow (ihr)
-            { row: 3, col: 2, label: 'WIR', color: '#2c3e50' },         // Dark gray (wir)
-            { row: 3, col: 3, label: 'IMPERATIV', color: '#7f8c8d' }    // Gray (imperative)
-        ];
+        const cellData = GRID_CELLS; // shared layout + palette (grammaticalConfig.js)
 
         cellData.forEach(cell => {
             const x = startX + (cell.col - 1) * this.cellWidth;
@@ -541,10 +530,10 @@ export class GridViewModel {
         if (mainWord.conjugation && mainWord.conjugation.pronoun) {
             const pronoun = mainWord.conjugation.pronoun.toLowerCase();
             const pronounColors = {
-                'ich': '#27ae60',
-                'du': '#e67e22',
-                'wir': '#2c3e50',
-                'ihr': '#f39c12'
+                'ich': GRAMMAR_PALETTE.ich.c,
+                'du': GRAMMAR_PALETTE.du.c,
+                'wir': GRAMMAR_PALETTE.wir.c,
+                'ihr': GRAMMAR_PALETTE.ihr.c
             };
             if (pronounColors[pronoun]) {
                 boxColor = pronounColors[pronoun];
@@ -554,13 +543,13 @@ export class GridViewModel {
         // If not a personal pronoun, use gender/number colors
         if (boxColor === 'rgba(255, 255, 255, 0.9)') {
             if (mainWord.number === 'pl') {
-                boxColor = '#c0392b'; // Red for plural
+                boxColor = GRAMMAR_PALETTE.pl.c;
             } else if (mainWord.gender === 'f') {
-                boxColor = '#e91e63'; // Pink for feminine
+                boxColor = GRAMMAR_PALETTE.fem.c;
             } else if (mainWord.gender === 'm') {
-                boxColor = '#3498db'; // Blue for masculine
+                boxColor = GRAMMAR_PALETTE.masc.c;
             } else if (mainWord.gender === 'n' || mainWord.gender === 'neuter') {
-                boxColor = '#8e44ad'; // Violet for neutral
+                boxColor = GRAMMAR_PALETTE.neut.c;
             }
         }
 

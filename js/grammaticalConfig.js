@@ -6,6 +6,44 @@
  * - Gender-to-color mappings
  * - Color determination logic with clear priority rules
  */
+
+/**
+ * The one grammar palette ("Gedämpft", docs/redesign-plan.md). Every grammar color in JS comes
+ * from here; css/styles.css mirrors `c` as --gram-* tokens.
+ *   c    — main color (outlines, symbols, dots)
+ *   ink  — text color on light surfaces (≥ 4.5:1)
+ *   tint — soft fill (selected tile, chips)
+ * The four noun groups get four far-apart hues; persons take the in-between hues.
+ */
+export const GRAMMAR_PALETTE = {
+    masc: { c: '#3F6FB0', ink: '#2C5590', tint: '#E9EFF7' },  // blue
+    fem:  { c: '#B9476A', ink: '#93334F', tint: '#F6E9EE' },  // rose
+    neut: { c: '#4E8B5A', ink: '#336B40', tint: '#E8F2EA' },  // green
+    pl:   { c: '#B98A2C', ink: '#755512', tint: '#F6EFDF' },  // ochre
+    ich:  { c: '#7A5AA6', ink: '#5B3F88', tint: '#EFEAF6' },  // violet
+    du:   { c: '#C2603A', ink: '#923F20', tint: '#F7EAE4' },  // terracotta
+    ihr:  { c: '#2E8288', ink: '#1F5F64', tint: '#E4F1F2' },  // teal
+    wir:  { c: '#556070', ink: '#434C5A', tint: '#ECEDF0' },  // slate
+    imp:  { c: '#8B8F96', ink: '#5D626B', tint: '#F0F0F1' },  // grey (imperative)
+    none: { c: '#8B8F96', ink: '#5D626B', tint: '#F0F0F1' }   // grey (no gender)
+};
+
+/**
+ * The 3×3 grid (shared by grid view and game mode). Labels name the CATEGORY, never an
+ * article: the article depends on the case (der/den/dem Markt).
+ */
+export const GRID_CELLS = [
+    { row: 1, col: 1, key: 'masc', label: 'MASKULIN' },
+    { row: 1, col: 2, key: 'du',   label: 'DU' },
+    { row: 1, col: 3, key: 'fem',  label: 'FEMININ' },
+    { row: 2, col: 1, key: 'neut', label: 'NEUTRUM' },
+    { row: 2, col: 2, key: 'ich',  label: 'ICH' },
+    { row: 2, col: 3, key: 'pl',   label: 'PLURAL' },
+    { row: 3, col: 1, key: 'ihr',  label: 'IHR' },
+    { row: 3, col: 2, key: 'wir',  label: 'WIR' },
+    { row: 3, col: 3, key: 'imp',  label: 'IMPERATIV' }
+].map(cell => ({ ...cell, ...GRAMMAR_PALETTE[cell.key], color: GRAMMAR_PALETTE[cell.key].c }));
+
 export const GrammaticalConfig = {
     /**
      * Pronoun definitions with all properties
@@ -13,63 +51,63 @@ export const GrammaticalConfig = {
      */
     pronouns: {
         'none': {
-            color: '#95a5a6',
+            color: GRAMMAR_PALETTE.none.c,
             label: 'None',
             gender: null,
             number: null,
             person: null
         },
         'ich': {
-            color: '#27ae60',
+            color: GRAMMAR_PALETTE.ich.c,
             label: 'ich',
             gender: null,
             number: 'sg',
             person: 1
         },
         'du': {
-            color: '#e67e22',
+            color: GRAMMAR_PALETTE.du.c,
             label: 'du',
             gender: null,
             number: 'sg',
             person: 2
         },
         'er': {
-            color: '#3498db',
+            color: GRAMMAR_PALETTE.masc.c,
             label: 'er (♂)',
             gender: 'm',
             number: 'sg',
             person: 3
         },
         'sie': {
-            color: '#e91e63',
+            color: GRAMMAR_PALETTE.fem.c,
             label: 'sie (♀)',
             gender: 'f',
             number: 'sg',
             person: 3
         },
         'es': {
-            color: '#8e44ad',
+            color: GRAMMAR_PALETTE.neut.c,
             label: 'es (⚲)',
             gender: 'n',
             number: 'sg',
             person: 3
         },
         'wir': {
-            color: '#2c3e50',
+            color: GRAMMAR_PALETTE.wir.c,
             label: 'wir',
             gender: null,
             number: 'pl',
             person: 1
         },
         'ihr': {
-            color: '#f39c12',
+            color: GRAMMAR_PALETTE.ihr.c,
             label: 'ihr',
             gender: null,
             number: 'pl',
             person: 2
         },
         'sie_pl': {
-            color: '#c0392b',
+            color: GRAMMAR_PALETTE.pl.c,
             label: 'sie/Sie (pl.)',
             gender: null,
             number: 'pl',
@@ -82,10 +120,10 @@ export const GrammaticalConfig = {
      * These colors match the corresponding 3rd person singular pronouns
      */
     genders: {
-        'none': '#95a5a6',   // Grey - No gender
-        'm': '#3498db',      // Blue - Masculine (matches 'er')
-        'f': '#e91e63',      // Pink - Feminine (matches 'sie')
-        'n': '#8e44ad'       // Dark Violet - Neuter (matches 'es')
+        'none': GRAMMAR_PALETTE.none.c,   // grey - no gender
+        'm': GRAMMAR_PALETTE.masc.c,      // blue - masculine (matches 'er')
+        'f': GRAMMAR_PALETTE.fem.c,       // rose - feminine (matches 'sie')
+        'n': GRAMMAR_PALETTE.neut.c       // green - neuter (matches 'es')
     },
 
     /**
