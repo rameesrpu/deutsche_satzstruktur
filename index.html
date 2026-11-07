@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#1e1b4b">
+    <meta name="theme-color" content="#F6F3EC">
     <title>Deutsche Satzstruktur - Visual Tool</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=202611071336">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600;7..72,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=202611071353">
 </head>
-<body>
+<body data-screen="home">
     <div class="container">
+        <!-- Learner screens (js/homeScreen.js); the editor below is the Werkstatt screen -->
+        <main class="screen" id="screen-home" aria-label="Lernen"></main>
+        <main class="screen" id="screen-practice" aria-label="Üben" hidden></main>
+        <main class="screen" id="screen-words" aria-label="Wörter" hidden></main>
+
         <div class="header">
             <h1>Deutsche Satzstruktur Visualizer</h1>
         </div>
@@ -149,6 +154,25 @@
             </div><!-- /right-sidebar -->
         </div>
 
+        <nav class="app-nav" id="app-nav" aria-label="Hauptnavigation">
+            <button type="button" class="app-nav-btn" data-screen="home">
+                <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M8 7h7"/></svg>
+                Lernen
+            </button>
+            <button type="button" class="app-nav-btn" data-screen="practice">
+                <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+                Üben
+            </button>
+            <button type="button" class="app-nav-btn" data-screen="words">
+                <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7"/></svg>
+                Wörter
+            </button>
+            <button type="button" class="app-nav-btn" data-screen="workshop">
+                <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>
+                Werkstatt
+            </button>
+        </nav>
+
         <!-- Legend Modal (hidden by default) -->
         <div class="legend-modal-overlay" id="legend-modal" style="display: none;">
             <div class="legend-modal">
@@ -260,31 +284,32 @@
     <script type="importmap">
     {
       "imports": {
-        "./js/ids.js": "./js/ids.js?v=202611071336",
-        "./js/sound.js": "./js/sound.js?v=202611071336",
-        "./js/grammaticalConfig.js": "./js/grammaticalConfig.js?v=202611071336",
-        "./js/storyContent.js": "./js/storyContent.js?v=202611071336",
-        "./js/levelContent.js": "./js/levelContent.js?v=202611071336",
-        "./js/levelSelector.js": "./js/levelSelector.js?v=202611071336",
-        "./js/wordManager.js": "./js/wordManager.js?v=202611071336",
-        "./js/sentenceManager.js": "./js/sentenceManager.js?v=202611071336",
-        "./js/feldermodell.js": "./js/feldermodell.js?v=202611071336",
-        "./js/gridview.js": "./js/gridview.js?v=202611071336",
-        "./js/sentencePicker.js": "./js/sentencePicker.js?v=202611071336",
-        "./js/gameRules.js": "./js/gameRules.js?v=202611071336",
-        "./js/progressStore.js": "./js/progressStore.js?v=202611071336",
-        "./js/gameHud.js": "./js/gameHud.js?v=202611071336",
-        "./js/gameJuice.js": "./js/gameJuice.js?v=202611071336",
-        "./js/glossary.js": "./js/glossary.js?v=202611071336",
-        "./js/storyNarration.js": "./js/storyNarration.js?v=202611071336",
-        "./js/storyReader.js": "./js/storyReader.js?v=202611071336",
-        "./js/gamemode.js": "./js/gamemode.js?v=202611071336",
-        "./js/renderer.js": "./js/renderer.js?v=202611071336",
-        "./js/ui.js": "./js/ui.js?v=202611071336",
-        "./js/app.js": "./js/app.js?v=202611071336"
+        "./js/ids.js": "./js/ids.js?v=202611071353",
+        "./js/sound.js": "./js/sound.js?v=202611071353",
+        "./js/grammaticalConfig.js": "./js/grammaticalConfig.js?v=202611071353",
+        "./js/storyContent.js": "./js/storyContent.js?v=202611071353",
+        "./js/levelContent.js": "./js/levelContent.js?v=202611071353",
+        "./js/levelSelector.js": "./js/levelSelector.js?v=202611071353",
+        "./js/wordManager.js": "./js/wordManager.js?v=202611071353",
+        "./js/sentenceManager.js": "./js/sentenceManager.js?v=202611071353",
+        "./js/feldermodell.js": "./js/feldermodell.js?v=202611071353",
+        "./js/gridview.js": "./js/gridview.js?v=202611071353",
+        "./js/sentencePicker.js": "./js/sentencePicker.js?v=202611071353",
+        "./js/gameRules.js": "./js/gameRules.js?v=202611071353",
+        "./js/progressStore.js": "./js/progressStore.js?v=202611071353",
+        "./js/gameHud.js": "./js/gameHud.js?v=202611071353",
+        "./js/gameJuice.js": "./js/gameJuice.js?v=202611071353",
+        "./js/glossary.js": "./js/glossary.js?v=202611071353",
+        "./js/storyNarration.js": "./js/storyNarration.js?v=202611071353",
+        "./js/storyReader.js": "./js/storyReader.js?v=202611071353",
+        "./js/homeScreen.js": "./js/homeScreen.js?v=202611071353",
+        "./js/gamemode.js": "./js/gamemode.js?v=202611071353",
+        "./js/renderer.js": "./js/renderer.js?v=202611071353",
+        "./js/ui.js": "./js/ui.js?v=202611071353",
+        "./js/app.js": "./js/app.js?v=202611071353"
       }
     }
     </script>
-    <script type="module" src="js/app.js?v=202611071336"></script>
+    <script type="module" src="js/app.js?v=202611071353"></script>
 </body>
 </html>

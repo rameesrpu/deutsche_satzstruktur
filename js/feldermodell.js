@@ -12,11 +12,11 @@ export class FeldermodellRenderer {
      * Inline styles are used so the shared .feldermodell-label CSS class
      * cannot override the design-system typography.
      * Colors are hard-coded hex mirroring the CSS design tokens
-     * (#64748b = secondary text) since var(--x) is unreliable in SVG.
+     * (#6E6B66 = secondary text) since var(--x) is unreliable in SVG.
      */
     styleZoneLabel(text, fontSize = 10) {
         text.setAttribute('class', 'feldermodell-label');
-        text.setAttribute('fill', '#64748b'); // mirrors CSS design token: secondary text
+        text.setAttribute('fill', '#6E6B66'); // mirrors CSS design token: secondary text
         text.setAttribute('pointer-events', 'none');
         text.setAttribute('style',
             `font-family: 'Inter', sans-serif; font-size: ${fontSize}px; font-weight: 600; ` +
@@ -187,7 +187,7 @@ export class FeldermodellRenderer {
 
         // Define zones with calculated boundaries.
         // Fills are very-low-alpha indigo/slate tints (mirroring CSS design
-        // tokens #4f46e5 indigo and #64748b slate) so word colors still pop.
+        // tokens #1E1F24 ink and #6E6B66 slate) so word colors still pop.
         const zones = [
             { label: 'Vorfeld', x: boundaries.vorfeld.start, width: boundaries.vorfeld.end - boundaries.vorfeld.start, color: 'rgba(99, 102, 241, 0.05)' },
             { label: 'LK', x: boundaries.linkeKlammer.start, width: boundaries.linkeKlammer.end - boundaries.linkeKlammer.start, color: 'rgba(79, 70, 229, 0.06)' },
@@ -212,7 +212,7 @@ export class FeldermodellRenderer {
             rect.setAttribute('height', height);
             rect.setAttribute('rx', '10');
             rect.setAttribute('fill', zone.color);
-            rect.setAttribute('stroke', '#e2e8f0'); // mirrors CSS design token: border
+            rect.setAttribute('stroke', '#E6E1D6'); // mirrors CSS design token: border
             rect.setAttribute('stroke-width', '1');
             rect.setAttribute('pointer-events', 'none'); // Don't block clicks
             this.svg.appendChild(rect);
@@ -241,7 +241,7 @@ export class FeldermodellRenderer {
             line.setAttribute('y1', yStart);
             line.setAttribute('x2', x);
             line.setAttribute('y2', yStart + height);
-            line.setAttribute('stroke', '#cbd5e1'); // mirrors CSS design token: border (darker step)
+            line.setAttribute('stroke', '#CDC6B9'); // mirrors CSS design token: border (darker step)
             line.setAttribute('stroke-width', '1');
             line.setAttribute('stroke-dasharray', '3,6');
             line.setAttribute('stroke-linecap', 'round');
@@ -387,7 +387,7 @@ export class FeldermodellRenderer {
 
             // Define zones with calculated boundaries.
             // Low-alpha indigo/slate tints mirroring CSS design tokens
-            // (#4f46e5 indigo, #64748b slate) so word colors still pop.
+            // (#1E1F24 ink, #6E6B66 slate) so word colors still pop.
             const zones = [
                 { label: 'Konj.', y: boundaries.konj.start, height: boundaries.konj.end - boundaries.konj.start, color: 'rgba(79, 70, 229, 0.06)' },
                 { label: 'Mittelfeld', y: boundaries.mittelfeld.start, height: boundaries.mittelfeld.end - boundaries.mittelfeld.start, color: 'rgba(100, 116, 139, 0.05)' },
@@ -405,7 +405,7 @@ export class FeldermodellRenderer {
                 rect.setAttribute('height', zone.height);
                 rect.setAttribute('rx', '10');
                 rect.setAttribute('fill', zone.color);
-                rect.setAttribute('stroke', '#e2e8f0'); // mirrors CSS design token: border
+                rect.setAttribute('stroke', '#E6E1D6'); // mirrors CSS design token: border
                 rect.setAttribute('stroke-width', '1');
                 rect.setAttribute('pointer-events', 'none'); // Don't block clicks
                 this.svg.appendChild(rect);
@@ -432,7 +432,7 @@ export class FeldermodellRenderer {
                 line.setAttribute('y1', y);
                 line.setAttribute('x2', xStart + width);
                 line.setAttribute('y2', y);
-                line.setAttribute('stroke', '#cbd5e1'); // mirrors CSS design token: border (darker step)
+                line.setAttribute('stroke', '#CDC6B9'); // mirrors CSS design token: border (darker step)
                 line.setAttribute('stroke-width', '1');
                 line.setAttribute('stroke-dasharray', '3,6');
                 line.setAttribute('stroke-linecap', 'round');
@@ -450,7 +450,7 @@ export class FeldermodellRenderer {
      */
     drawNebensatzLabel(x, y, width = 150) {
         // Background: rounded pill with a soft indigo tint
-        // (colors mirror CSS design token #4f46e5 indigo accent)
+        // (colors mirror CSS design token #1E1F24 ink accent)
         const labelBg = document.createElementNS(this.svgNS, 'rect');
         labelBg.setAttribute('x', x);
         labelBg.setAttribute('y', y - 35);
@@ -468,7 +468,7 @@ export class FeldermodellRenderer {
         labelText.setAttribute('x', x + width / 2);
         labelText.setAttribute('y', y - 21);
         labelText.setAttribute('text-anchor', 'middle');
-        labelText.setAttribute('fill', '#4f46e5'); // mirrors CSS design token: indigo accent
+        labelText.setAttribute('fill', '#1E1F24'); // mirrors CSS design token: ink accent
         labelText.setAttribute('style',
             "font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.08em;");
         labelText.setAttribute('pointer-events', 'none'); // Don't block clicks

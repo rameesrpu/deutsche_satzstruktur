@@ -11,6 +11,15 @@ import { Renderer } from './renderer.js';
 import { UIController } from './ui.js';
 import { chapterStartText, hideStoryCard, isStoryCardOpen } from './storyNarration.js';
 import { showStoryReader, hideStoryReader } from './storyReader.js';
+import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday, countWeakSpots,
+    renderHome, renderPractice, renderWords } from './homeScreen.js';
+
+/**
+ * Screens (body[data-screen], see showScreen): 'home' (Lernen), 'practice' (Üben),
+ * 'words' (Wörter), 'workshop' (Werkstatt: the sentence editor, Feldermodell, settings,
+ * import/export), 'play' (a game started from the learner screens), 'read' (the story
+ * reader, an overlay on the screen it was opened from). U6 adds 'end' (chapter recap).
+ */
 
 /**
  * Main Application
@@ -76,13 +85,19 @@ class DeutschApp {
             setView:            (view) => { this.currentView = view; },
             updateSentenceList: () => this.updateSentenceList(),
             startChapter:       (level, category, opts) => this.startChapter(level, category, opts),
-            openReader:         (level, category) => this.openReader(level, category)
+            openReader:         (level, category) => this.openReader(level, category),
+            onStop:             () => this.handleGameStopped()
         });
         this.renderer = new Renderer(this.svg, this.wordManager);
         this.uiController = new UIController(this.wordManager, () => this.redrawAll(), this.gridConfig);
 
         // View state: 'felder', 'grid', or 'game'
         this.currentView = 'felder';
+
+        // Screen router state (see showScreen)
+        this.screen = 'home';
+        this.readReturn = 'home';   // screen to go back to when the reader closes
+        this.playSession = null;    // { review: bool } game modes to restore after a Home-started game
     }
 
     /**
@@ -102,6 +117,8 @@ class DeutschApp {
         this.levelSelector.init();
         this.redrawAll();
         this.uiController.updatePropertiesPanel();
+        this.setupNav();
+        this.showScreen('home');
     }
 
     /**
@@ -1002,8 +1019,10 @@ class DeutschApp {
      * @param {{fromStart?: boolean}} [opts]  fromStart: replay a chapter from its first sentence
      */
     async startChapter(level, category, { fromStart = false } = {}) {
+        const base = this.screen === 'read' ? this.readReturn : this.screen;
         hideStoryReader();
         hideStoryCard();
+        this.showScreen(base === 'workshop' ? 'workshop' : 'play');
         await this.levelSelector.selectCategory(level, category);
         const data = this.levelSelector.getLoadedData(level, category);
         if (!data || data.sentences.length === 0) return;
@@ -1052,6 +1071,8 @@ class DeutschApp {
         const nextKey = order[idx + 1] || null;
         const pauseGame = this.gameMode.isActive && !isStoryCardOpen();
         if (pauseGame) this.gameMode.pauseForStoryCard();
+        if (this.screen !== 'read') this.readReturn = this.screen;
+        this.screen = 'read';
         showStoryReader({
             heading: cat.label,
             subheading: `Geschichte ${cat.story.storyNo}: ${cat.story.storyTitle}`,
@@ -1061,9 +1082,185 @@ class DeutschApp {
             onNext: nextKey && this.levelSelector.isUnlocked(level, nextKey)
                 ? () => this.openReader(level, nextKey) : null,
             onClose: () => {
+                this.showScreen(this.readReturn);
                 if (pauseGame && this.gameMode.isActive && !isStoryCardOpen()) this.gameMode.closeStoryCard();
             },
         });
+    }
+
+    // --- Screen router ---
+
+    setupNav() {
+        document.querySelectorAll('#app-nav .app-nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => this.showScreen(btn.dataset.screen));
+        });
+    }
+
+    /**
+     * Show one screen. Learner screens are re-rendered on every visit (progress may
+     * have changed); 'workshop' and 'play' show the editor/game canvas, so it is
+     * redrawn once it has its size. Leaving 'play' or 'workshop' ends a running game.
+     * @param {'home'|'practice'|'words'|'workshop'|'play'} name
+     */
+    showScreen(name) {
+        const leavingGame = this.gameMode.isActive && name !== this.screen &&
+            (this.screen === 'play' || this.screen === 'workshop');
+        this.screen = name; // set first: exitGame → handleGameStopped must not route again
+        if (leavingGame) this.exitGame();
+        document.body.dataset.screen = name;
+        for (const s of ['home', 'practice', 'words']) {
+            const section = document.getElementById(`screen-${s}`);
+            if (section) section.hidden = s !== name;
+        }
+        document.querySelectorAll('#app-nav .app-nav-btn').forEach(btn => {
+            const active = btn.dataset.screen === name;
+            btn.classList.toggle('active', active);
+            if (active) btn.setAttribute('aria-current', 'page');
+            else btn.removeAttribute('aria-current');
+        });
+        if (name === 'home') this.renderHomeScreen();
+        else if (name === 'practice') this.renderPracticeScreen();
+        else if (name === 'words') this.renderWordsScreen();
+        else this.redrawAll();
+    }
+
+    /** Stop the running game the way the ✕ button does. */
+    exitGame() {
+        this.currentView = 'grid';
+        this.gameMode.stop();
+        const gameModeBtn = document.getElementById('game-mode-btn');
+        if (gameModeBtn) {
+            gameModeBtn.textContent = '🎮';
+            gameModeBtn.title = 'Start Game Mode';
+        }
+        this.redrawAll();
+    }
+
+    /** After GameMode.stop() (✕, target score reached): a game on the play screen returns Home. */
+    handleGameStopped() {
+        if (this.playSession) {
+            this.setReviewMode(this.playSession.review);
+            this.playSession = null;
+        }
+        if (this.screen === 'play') this.showScreen('home');
+    }
+
+    /** Review mode on/off, kept in sync with the Werkstatt toggle (exclusive with story mode). */
+    setReviewMode(on) {
+        this.gameMode.reviewMode = on;
+        const toggle = document.getElementById('review-mode-toggle');
+        if (toggle) toggle.checked = on;
+        if (on) {
+            this.gameMode.storyMode = false;
+            const storyToggle = document.getElementById('story-mode-toggle');
+            if (storyToggle) storyToggle.checked = false;
+        }
+    }
+
+    /**
+     * Story chapters with their files loaded (needed for unlock state), status and stats.
+     * @returns {Promise<Object[]>}
+     */
+    async loadChapterRows() {
+        const chapters = storyChapters();
+        const datas = await Promise.all(chapters.map(ch =>
+            this.levelSelector.loadCategoryData(ch.level, ch.key).catch(() => null)));
+        const rows = chapterStatuses(chapters, {
+            isComplete: ch => this.levelSelector.isChapterComplete(ch.level, ch.key),
+            isUnlocked: ch => this.levelSelector.isUnlocked(ch.level, ch.key),
+        });
+        return rows.map((row, i) => ({
+            ...row,
+            data: datas[i],
+            stats: sentenceStats(datas[i] ? datas[i].sentences : [], text =>
+                progressStore.getSentence(sentenceKey({ level: row.level, category: row.key, text }))),
+        }));
+    }
+
+    async renderHomeScreen() {
+        const root = document.getElementById('screen-home');
+        if (!root) return;
+        const rows = await this.loadChapterRows();
+        if (this.screen !== 'home') return;
+        const now = Date.now();
+        const progress = progressStore.load();
+        renderHome(root, {
+            chapters: rows,
+            playedToday: countPlayedToday(progress, now),
+            weakSpots: countWeakSpots(progress, now),
+            now,
+        }, {
+            read: ch => this.openReader(ch.level, ch.key),
+            play: ch => this.startChapter(ch.level, ch.key),
+            review: () => this.startReview(),
+        });
+    }
+
+    async renderPracticeScreen() {
+        const root = document.getElementById('screen-practice');
+        if (!root) return;
+        const rows = await this.loadChapterRows();
+        if (this.screen !== 'practice') return;
+        const grammar = Object.entries(LEVEL_CONTENT).map(([level, data]) => ({
+            level,
+            label: data.label,
+            categories: Object.entries(data.categories)
+                .filter(([, cat]) => !cat.story)
+                .map(([key, cat]) => ({ key, label: cat.label })),
+        }));
+        renderPractice(root, {
+            weakSpots: countWeakSpots(progressStore.load(), Date.now()),
+            drills: rows.filter(r => r.status !== 'locked')
+                .map(r => ({ level: r.level, key: r.drillKey, label: r.drillLabel })),
+            grammar,
+        }, {
+            review: () => this.startReview(),
+            play: (level, key) => this.startChapter(level, key),
+        });
+    }
+
+    async renderWordsScreen() {
+        const root = document.getElementById('screen-words');
+        if (!root) return;
+        const rows = await this.loadChapterRows();
+        if (this.screen !== 'words') return;
+        renderWords(root, {
+            chapters: rows.filter(r => r.status !== 'locked' && r.data && r.data.glossary)
+                .map(r => ({ label: r.label, entries: Object.values(r.data.glossary) }))
+                .filter(ch => ch.entries.length > 0),
+        });
+    }
+
+    /**
+     * "Schwächen üben": play the sentences with mistakes from every level (review
+     * mode over all loaded sentences, so no library category is selected).
+     */
+    async startReview() {
+        const levels = [...new Set(Object.keys(progressStore.load().sentences)
+            .map(key => key.split('/')[0]).filter(l => LEVEL_CONTENT[l]))];
+        await this.bulkLoadLibraryForLevels(levels);
+        const { levelSelect } = this.levelSelector;
+        if (levelSelect && levelSelect.value) {
+            levelSelect.value = '';
+            this.levelSelector.handleLevelChange();
+        }
+        if (this.gameMode.isActive) this.exitGame();
+        if (!this.playSession) this.playSession = { review: this.gameMode.reviewMode };
+        this.setReviewMode(true);
+        this.showScreen('play');
+        this.gameMode.loadRandomSentenceAndContinue(); // review pick (falls back to random)
+        if (!this.sentenceManager.currentSentenceId || this.wordManager.getAllWords().length === 0) {
+            this.handleGameStopped();
+            return;
+        }
+        this.currentView = 'game';
+        this.gameMode.start();
+        const gameModeBtn = document.getElementById('game-mode-btn');
+        if (gameModeBtn) {
+            gameModeBtn.textContent = '✕';
+            gameModeBtn.title = 'Exit Game Mode';
+        }
+        this.redrawAll();
     }
 
     /**

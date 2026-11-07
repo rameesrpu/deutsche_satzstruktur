@@ -142,7 +142,7 @@ export class GridViewModel {
 
         const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
         polygon.setAttribute('points', '0 0.5, 9 3.5, 0 6.5, 2 3.5'); // Narrow swallow-tail triangle
-        polygon.setAttribute('fill', '#94a3b8'); // slate-400 (mirrors CSS design tokens)
+        polygon.setAttribute('fill', '#9A958D'); // --ink-400 (mirrors CSS design tokens)
 
         marker.appendChild(polygon);
         defs.appendChild(marker);
@@ -159,7 +159,7 @@ export class GridViewModel {
         shadow.setAttribute('dx', '0');
         shadow.setAttribute('dy', '1.5');
         shadow.setAttribute('stdDeviation', '2');
-        shadow.setAttribute('flood-color', '#0f172a'); // text/ink token
+        shadow.setAttribute('flood-color', '#1E1F24'); // text/ink token
         shadow.setAttribute('flood-opacity', '0.18');
 
         filter.appendChild(shadow);
@@ -570,18 +570,18 @@ export class GridViewModel {
             group.appendChild(box);
         }
 
-        // German word text — Nunito, dark ink, subtle white halo for crispness
+        // German word text — Literata, dark ink, subtle white halo for crispness
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', centerX);
         const yOffset = this.isMobile ? 12 : 7; // Adjust y offset based on font size
         text.setAttribute('y', centerY + yOffset);
         text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('fill', '#0f172a'); // ink token
+        text.setAttribute('fill', '#1E1F24'); // ink token
         text.setAttribute('stroke', 'white');
         text.setAttribute('stroke-width', this.currentConfig.strokeWidth);
         text.setAttribute('stroke-linejoin', 'round');
         text.setAttribute('paint-order', 'stroke');
-        text.setAttribute('font-family', "'Nunito', 'Inter', sans-serif");
+        text.setAttribute('font-family', "'Literata', Georgia, serif");
         text.setAttribute('font-size', this.currentConfig.fontSize);
         text.setAttribute('font-weight', '700');
         text.setAttribute('pointer-events', 'none');
@@ -682,7 +682,7 @@ export class GridViewModel {
         // Draw arrow path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', pathD);
-        path.setAttribute('stroke', '#94a3b8'); // slate-400 (mirrors CSS design tokens)
+        path.setAttribute('stroke', '#9A958D'); // --ink-400 (mirrors CSS design tokens)
         path.setAttribute('stroke-width', this.currentConfig.arrowWidth);
         path.setAttribute('stroke-linecap', 'round');
         path.setAttribute('fill', 'none');
@@ -731,7 +731,7 @@ export class GridViewModel {
         // Draw curved arrow path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', pathD);
-        path.setAttribute('stroke', '#94a3b8'); // slate-400 (mirrors CSS design tokens)
+        path.setAttribute('stroke', '#9A958D'); // --ink-400 (mirrors CSS design tokens)
         path.setAttribute('stroke-width', this.currentConfig.arrowWidth);
         path.setAttribute('stroke-linecap', 'round');
         path.setAttribute('fill', 'none');
@@ -779,7 +779,7 @@ export class GridViewModel {
         // Draw curved arrow path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', pathD);
-        path.setAttribute('stroke', '#94a3b8'); // slate-400 (mirrors CSS design tokens)
+        path.setAttribute('stroke', '#9A958D'); // --ink-400 (mirrors CSS design tokens)
         path.setAttribute('stroke-width', this.currentConfig.arrowWidth);
         path.setAttribute('stroke-linecap', 'round');
         path.setAttribute('fill', 'none');
@@ -908,18 +908,18 @@ export class GridViewModel {
         shape.setAttribute('pointer-events', 'none');
         wordGroup.appendChild(shape);
 
-        // German word text — Nunito, dark ink, subtle white halo for crispness
+        // German word text — Literata, dark ink, subtle white halo for crispness
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', halfSize);
         const yOffset = this.isMobile ? 12 : 7; // Adjust y offset based on font size
         text.setAttribute('y', halfSize + yOffset);
         text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('fill', '#0f172a'); // ink token
+        text.setAttribute('fill', '#1E1F24'); // ink token
         text.setAttribute('stroke', 'white');
         text.setAttribute('stroke-width', this.currentConfig.strokeWidth);
         text.setAttribute('stroke-linejoin', 'round');
         text.setAttribute('paint-order', 'stroke');
-        text.setAttribute('font-family', "'Nunito', 'Inter', sans-serif");
+        text.setAttribute('font-family', "'Literata', Georgia, serif");
         text.setAttribute('font-size', this.currentConfig.fontSize);
         text.setAttribute('font-weight', '700');
         text.setAttribute('pointer-events', 'none');
@@ -982,7 +982,7 @@ export class GridViewModel {
         if (fillColor === 'rgba(255, 255, 255, 0.9)') {
             // No semantic color found — plain white box with a neutral slate border
             shape.setAttribute('fill', '#ffffff');
-            shape.setAttribute('stroke', '#94a3b8'); // slate-400 (mirrors CSS design tokens)
+            shape.setAttribute('stroke', '#9A958D'); // --ink-400 (mirrors CSS design tokens)
         } else {
             shape.setAttribute('fill', fillColor);
             shape.setAttribute('fill-opacity', '0.13');

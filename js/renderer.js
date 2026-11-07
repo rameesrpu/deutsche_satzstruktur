@@ -37,7 +37,7 @@ export class Renderer {
         shadow.setAttribute('dx', '0');
         shadow.setAttribute('dy', '1.5');
         shadow.setAttribute('stdDeviation', '2');
-        shadow.setAttribute('flood-color', '#0f172a'); // mirrors CSS design token: text color
+        shadow.setAttribute('flood-color', '#1E1F24'); // mirrors CSS design token: text color
         shadow.setAttribute('flood-opacity', '0.25');
         filter.appendChild(shadow);
 
@@ -74,7 +74,7 @@ export class Renderer {
                 line.setAttribute('d', d);
             }
 
-            line.setAttribute('stroke', '#94a3b8'); // mirrors CSS design token: slate-400
+            line.setAttribute('stroke', '#9A958D'); // mirrors CSS design token: --ink-400
             line.setAttribute('stroke-width', '2');
             line.setAttribute('stroke-linecap', 'round');
             line.setAttribute('stroke-linejoin', 'round');
@@ -157,7 +157,7 @@ export class Renderer {
             glow.setAttribute('pointer-events', 'none');
             content.appendChild(glow);
 
-            shape.setAttribute('stroke', '#4f46e5'); // mirrors CSS design token: indigo accent
+            shape.setAttribute('stroke', '#1E1F24'); // mirrors CSS design token: --ink
             const strokeWidth = GrammaticalConfig.getStrokeWidth(word, true);
             shape.setAttribute('stroke-width', strokeWidth.toString());
         }
@@ -173,7 +173,7 @@ export class Renderer {
         text.setAttribute('stroke', 'white');
         text.setAttribute('stroke-width', '3');
         text.setAttribute('paint-order', 'stroke');
-        text.setAttribute('font-family', "'Nunito', 'Inter', sans-serif");
+        text.setAttribute('font-family', "'Literata', Georgia, serif");
         text.setAttribute('font-size', '12');
         text.setAttribute('font-weight', '700');
         text.setAttribute('pointer-events', 'none');
@@ -188,7 +188,7 @@ export class Renderer {
         caseText.setAttribute('stroke', 'white');
         caseText.setAttribute('stroke-width', '2.5');
         caseText.setAttribute('paint-order', 'stroke');
-        caseText.setAttribute('font-family', "'Nunito', 'Inter', sans-serif");
+        caseText.setAttribute('font-family', "'Literata', Georgia, serif");
         caseText.setAttribute('font-size', '9');
         caseText.setAttribute('font-weight', '700');
         caseText.setAttribute('pointer-events', 'none');

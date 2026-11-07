@@ -13,6 +13,7 @@ import { runProgressStoreTests } from './progressStore.test.js';
 import { runSoundTests } from './sound.test.js';
 import { runStoryTests } from './story.test.js';
 import { runGlossaryTests } from './glossary.test.js';
+import { runHomeScreenTests } from './homeScreen.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -31,6 +32,7 @@ runProgressStoreTests();
 runSoundTests();
 runStoryTests();
 runGlossaryTests();
+runHomeScreenTests();
 runLibrarySnapshot({ update });
 
 System.exit(summary() > 0 ? 1 : 0);

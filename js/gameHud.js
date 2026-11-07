@@ -8,18 +8,20 @@
 // Hard-coded hex values mirror the CSS custom properties in styles.css —
 // var(--x) does NOT reliably resolve inside SVG presentation attributes.
 export const GM_UI = {
-    indigo: '#4f46e5',      // brand
-    indigoSoft: '#c7d2fe',  // indigo-200
-    text: '#0f172a',        // primary text
-    secondary: '#64748b',   // secondary text
-    muted: '#94a3b8',       // muted text
-    border: '#e2e8f0',      // borders
-    surface: '#f8fafc',     // light bg
-    surfaceAlt: '#f1f5f9',  // muted pill bg
-    white: '#ffffff',
-    success: '#10b981',
-    danger: '#ef4444',
-    amber: '#f59e0b'
+    accent: '#1E1F24',      // --ink (primary/selected; no brand hue)
+    accentSoft: '#D9D2C4',  // --brand-200 (dashed outlines)
+    accentTint: '#F1EDE4',  // --brand-50 (selected fill)
+    text: '#1E1F24',        // --ink
+    secondary: '#6E6B66',   // --ink-soft
+    muted: '#9A958D',       // --ink-400
+    border: '#E6E1D6',      // --line
+    surface: '#FBF9F4',     // --paper-read
+    surfaceAlt: '#F6F3EC',  // --paper (muted pill bg)
+    white: '#FFFFFF',
+    success: '#3E8A55',     // --success-500
+    successInk: '#2F6E42',  // --success-600
+    danger: '#C0463A',      // --danger-500
+    amber: '#B98A2C'        // --warn-500
 };
 
 /**
@@ -41,7 +43,7 @@ export function createTopBarWordShape(caseType, centerX, topY, width, height) {
 
     // Restyled: prominent white pill with soft shadow. Geometry per case is
     // unchanged (shape still encodes the selected case); border switches from
-    // subtle dashed indigo (no case) to saturated indigo (case selected).
+    // subtle dashed outline (no case) to solid ink (case selected).
     if (!caseType) {
         shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
         shape.setAttribute('x', x);
@@ -50,7 +52,7 @@ export function createTopBarWordShape(caseType, centerX, topY, width, height) {
         shape.setAttribute('height', height);
         shape.setAttribute('rx', '14');
         shape.setAttribute('fill', 'url(#gm-pill-grad)');
-        shape.setAttribute('stroke', GM_UI.indigoSoft);
+        shape.setAttribute('stroke', GM_UI.accentSoft);
         shape.setAttribute('stroke-width', '2');
         shape.setAttribute('stroke-dasharray', '8,5');
     } else if (caseType === 'nom') {
@@ -62,7 +64,7 @@ export function createTopBarWordShape(caseType, centerX, topY, width, height) {
         shape.setAttribute('rx', '20');
         shape.setAttribute('ry', '20');
         shape.setAttribute('fill', 'url(#gm-pill-grad)');
-        shape.setAttribute('stroke', GM_UI.indigo);
+        shape.setAttribute('stroke', GM_UI.accent);
         shape.setAttribute('stroke-width', '3');
     } else if (caseType === 'akk') {
         shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
@@ -73,7 +75,7 @@ export function createTopBarWordShape(caseType, centerX, topY, width, height) {
         shape.setAttribute('rx', '5');
         shape.setAttribute('ry', '5');
         shape.setAttribute('fill', 'url(#gm-pill-grad)');
-        shape.setAttribute('stroke', GM_UI.indigo);
+        shape.setAttribute('stroke', GM_UI.accent);
         shape.setAttribute('stroke-width', '3');
     } else if (caseType === 'dat') {
         shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
@@ -81,7 +83,7 @@ export function createTopBarWordShape(caseType, centerX, topY, width, height) {
         const points = `${x + slope},${topY} ${x + width - slope},${topY} ${x + width},${topY + height} ${x},${topY + height}`;
         shape.setAttribute('points', points);
         shape.setAttribute('fill', 'url(#gm-pill-grad)');
-        shape.setAttribute('stroke', GM_UI.indigo);
+        shape.setAttribute('stroke', GM_UI.accent);
         shape.setAttribute('stroke-width', '3');
     } else if (caseType === 'gen') {
         shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
@@ -89,7 +91,7 @@ export function createTopBarWordShape(caseType, centerX, topY, width, height) {
         const points = `${x + slant},${topY} ${x + width + slant},${topY} ${x + width - slant},${topY + height} ${x - slant},${topY + height}`;
         shape.setAttribute('points', points);
         shape.setAttribute('fill', 'url(#gm-pill-grad)');
-        shape.setAttribute('stroke', GM_UI.indigo);
+        shape.setAttribute('stroke', GM_UI.accent);
         shape.setAttribute('stroke-width', '3');
     }
 
@@ -99,15 +101,15 @@ export function createTopBarWordShape(caseType, centerX, topY, width, height) {
 
 // t: 0 (fresh) → 1 (expired)
 export function getTimerColor(t) {
-    // Shifts indigo #4f46e5 → amber #f59e0b → red #ef4444
-    // (hard-coded hex mirrors CSS design tokens)
+    // Shifts ink #1E1F24 → amber #B98A2C → red #C0463A
+    // (hard-coded rgb mirrors GM_UI.accent / amber / danger)
     const lerp = (a, b, u) => Math.round(a + (b - a) * u);
     if (t < 0.55) {
         const u = t / 0.55;
-        return `rgb(${lerp(79, 245, u)},${lerp(70, 158, u)},${lerp(229, 11, u)})`;
+        return `rgb(${lerp(30, 185, u)},${lerp(31, 138, u)},${lerp(36, 44, u)})`;
     }
     const u = (t - 0.55) / 0.45;
-    return `rgb(${lerp(245, 239, u)},${lerp(158, 68, u)},${lerp(11, 68, u)})`;
+    return `rgb(${lerp(185, 192, u)},${lerp(138, 70, u)},${lerp(44, 58, u)})`;
 }
 
 export function drawTimerBar(group, centerX, topY, barHeight, wordWidth, wordStartTime) {
@@ -190,7 +192,7 @@ export function drawHud(game) {
     scorePill.setAttribute('height', scorePillH);
     scorePill.setAttribute('rx', '14');
     scorePill.setAttribute('fill', GM_UI.white);
-    scorePill.setAttribute('stroke', GM_UI.indigoSoft); // indigo-200 accent
+    scorePill.setAttribute('stroke', GM_UI.accentSoft); // indigo-200 accent
     scorePill.setAttribute('stroke-width', '2');
     scorePill.setAttribute('filter', 'url(#gm-shadow)');
     scorePill.setAttribute('pointer-events', 'none');
@@ -201,7 +203,7 @@ export function drawHud(game) {
     scoreText.setAttribute('x', gridEndX - 14);
     scoreText.setAttribute('y', scorePillY + (isMobile ? 33 : 21));
     scoreText.setAttribute('text-anchor', 'end');
-    scoreText.setAttribute('fill', GM_UI.indigo); // brand accent for the headline stat
+    scoreText.setAttribute('fill', GM_UI.accent); // brand accent for the headline stat
     scoreText.setAttribute('font-size', scoreFont);
     scoreText.setAttribute('font-weight', 'bold');
     scoreText.setAttribute('font-family', "'Inter', sans-serif");
@@ -289,7 +291,7 @@ export function drawHud(game) {
             autoText.setAttribute('fill', GM_UI.secondary);
             autoText.setAttribute('font-size', isMobile ? 34 : 24);
             autoText.setAttribute('font-weight', '600');
-            autoText.setAttribute('font-family', "'Nunito', sans-serif");
+            autoText.setAttribute('font-family', "'Literata', Georgia, serif");
             autoText.textContent = wordText;
             overlayGroup.appendChild(autoText);
 
@@ -332,7 +334,7 @@ export function drawHud(game) {
             drawTimerBar(overlayGroup, centerX, topY, barHeight, wordWidth, game.wordStartTime);
         }
 
-        // German word in Nunito 700 on the white pill
+        // German word in Literata on the white pill
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', centerX);
         text.setAttribute('y', centerY + (isMobile ? 15 : 9));
@@ -340,7 +342,7 @@ export function drawHud(game) {
         text.setAttribute('fill', GM_UI.text);
         text.setAttribute('font-size', isMobile ? 42 : 28);
         text.setAttribute('font-weight', '700');
-        text.setAttribute('font-family', "'Nunito', sans-serif");
+        text.setAttribute('font-family', "'Literata', Georgia, serif");
         text.textContent = displayText;
         centerWordGroup.appendChild(text);
 
@@ -389,7 +391,7 @@ export function drawHud(game) {
             text.setAttribute('fill', GM_UI.muted);
             text.setAttribute('font-size', isMobile ? 34 : 24);
             text.setAttribute('font-weight', '600');
-            text.setAttribute('font-family', "'Nunito', sans-serif");
+            text.setAttribute('font-family', "'Literata', Georgia, serif");
             text.setAttribute('opacity', '0.85');
             text.textContent = nextWordText;
             overlayGroup.appendChild(text);
@@ -442,10 +444,10 @@ export function drawHud(game) {
         completeText.setAttribute('x', barCenterX);
         completeText.setAttribute('y', cardY + (isMobile ? 44 : 24));
         completeText.setAttribute('text-anchor', 'middle');
-        completeText.setAttribute('fill', '#059669'); // mirrors CSS token --success-600
+        completeText.setAttribute('fill', GM_UI.successInk);
         completeText.setAttribute('font-size', headFont);
         completeText.setAttribute('font-weight', '700');
-        completeText.setAttribute('font-family', "'Nunito', sans-serif");
+        completeText.setAttribute('font-family', "'Literata', Georgia, serif");
         completeText.textContent = headline;
         cardGroup.appendChild(completeText);
 

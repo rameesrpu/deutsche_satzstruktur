@@ -56,18 +56,25 @@ editor to a "Werkstatt" tab.
 > gameJuice, styles.css tokens and the index.html legend read from it. Game-mode grid tiles use
 > Kontur + Versalien with German labels.
 
-### [ ] U2 Base look: tokens, fonts, buttons
-Swap the neutral/brand tokens in `:root` of `css/styles.css` to the surfaces above, load Literata,
-make primary buttons ink, drop the indigo header gradient; mirror in `GM_UI` (gameHud.js).
-**Done when**: no indigo/teal/orange chrome left on the main screens (400×850 and 1280×800 screenshots).
+### [x] U2 Base look: tokens, fonts, buttons
+> 2026-11-07 done. `:root` has the surfaces (`--paper`, `--paper-read`, `--line`, `--ink`, `--ink-soft`);
+> `--brand-*` is now an ink/warm-neutral scale, semantic colors muted, violet/teal tokens removed.
+> Button tokens `--btn-primary-*` (ink) / `--btn-secondary-*` (white + line). Header is white with ink
+> text; `--header-bg` is solid ink (story card heading, reader). Literata replaces Nunito
+> (`--font-sentence` and SVG word text). `GM_UI` uses `accent`/`accentSoft`/`accentTint` (ink) instead
+> of `indigo*`; feldermodell/renderer/gridview SVG mirrors updated. Checked at 400×850 and 1280×800
+> (editor + game mode).
 
-### [ ] U3 Home screen + screen router
-A small router in `app.js` (home / read / play / end / practice / workshop). Home = "Weiter mit
-Kapitel …" card (Lesen / Spielen), today's goal, weak-spot count (from `progressStore`), chapter
-list with done / current / locked (`LevelSelector.isUnlocked`). Bottom nav: Lernen, Üben, Wörter,
-Werkstatt. The current editor (sentence input, Parse/Check, Properties, Feldermodell, import/export)
-moves under Werkstatt unchanged.
-**Done when**: the app opens on Home; every old feature is still reachable from Werkstatt.
+### [x] U3 Home screen + screen router
+> 2026-11-07 done. `showScreen()` in app.js sets `body[data-screen]` (home / practice / words /
+> workshop / play; the reader is an overlay that returns to its screen; 'end' is left for U6).
+> Screens are built by `js/homeScreen.js` (pure helpers unit-tested in tests/homeScreen.test.js).
+> Home: "Weiter mit Kapitel" card (Lesen / Spielen), today's sentences vs `DAILY_GOAL` (10, U7 makes it
+> a setting), weak spots (`reviewWeight` > 0 → "Schwächen üben" = review game over all levels), the
+> current story's chapters (done / current / locked). Üben: weak spots, drills of unlocked chapters,
+> grammar categories. Wörter: glossary of unlocked chapters, article in its gender ink. Werkstatt =
+> the old editor unchanged. Play = game canvas without header/editor panels; ✕ (or target score) goes
+> back Home. Leaving play/workshop stops a running game. Checked at 375×812 and 1280×800.
 
 ### [ ] U4 Reader restyle
 `storyReader.js` on the new look: Literata, header with back + progress + read-aloud, glossary

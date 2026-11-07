@@ -34,7 +34,7 @@ export function ensureJuiceDefs(svg, parent) {
     shadow.setAttribute('dx', '0');
     shadow.setAttribute('dy', '2');
     shadow.setAttribute('stdDeviation', '3');
-    shadow.setAttribute('flood-color', '#0f172a'); // mirrors CSS text token
+    shadow.setAttribute('flood-color', '#1E1F24'); // mirrors CSS token --ink
     shadow.setAttribute('flood-opacity', '0.18');
     filter.appendChild(shadow);
 
@@ -52,7 +52,7 @@ export function ensureJuiceDefs(svg, parent) {
     stop1.setAttribute('stop-color', '#ffffff');
     const stop2 = document.createElementNS(svgNS, 'stop');
     stop2.setAttribute('offset', '100%');
-    stop2.setAttribute('stop-color', '#eef2ff'); // mirrors CSS token --brand-50
+    stop2.setAttribute('stop-color', '#F1EDE4'); // mirrors CSS token --brand-50
     grad.appendChild(stop1);
     grad.appendChild(stop2);
     defs.appendChild(grad);

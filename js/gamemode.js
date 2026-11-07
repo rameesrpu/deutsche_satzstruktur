@@ -19,7 +19,7 @@ export class GameMode {
     /**
      * @param {Object} host  app services: { sentenceManager, levelSelector, redraw(),
      *   setView(view), updateSentenceList(), startChapter(level, category, opts),
-     *   openReader(level, category) }
+     *   openReader(level, category), onStop() (optional: after stop()) }
      */
     constructor(svg, wordManager, gridViewModel, host) {
         this.host = host;
@@ -344,6 +344,7 @@ export class GameMode {
         this.scoreAnim = null;
         this.wrongShakeUntil = 0;
         this.lastReveal = null;
+        if (this.host.onStop) this.host.onStop();
     }
 
     /**
@@ -679,7 +680,7 @@ export class GameMode {
 
         // Wrap placed boxes in one shadowed group (single shared gm-shadow filter
         // application per redraw — cheap; redraws are event-driven, not per-frame).
-        // Nunito 700 for the German text comes from the .gm-placed CSS rule.
+        // Literata for the German text comes from the .gm-placed CSS rule.
         const placedGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         placedGroup.setAttribute('class', 'gm-placed');
         placedGroup.setAttribute('filter', 'url(#gm-shadow)');
@@ -940,11 +941,11 @@ export class GameMode {
         }
 
         // Button styling in the app design language: white card with slate
-        // border; selected = indigo tint + saturated indigo border (matches
+        // border; selected = warm tint + ink border (matches
         // the selection language used across the app, replacing the old gold)
         const isSelected = this.selectedCase === config.caseType;
-        shape.setAttribute('fill', isSelected ? '#eef2ff' : GM_UI.white);   // brand-50 tint when active
-        shape.setAttribute('stroke', isSelected ? GM_UI.indigo : GM_UI.muted);
+        shape.setAttribute('fill', isSelected ? GM_UI.accentTint : GM_UI.white);
+        shape.setAttribute('stroke', isSelected ? GM_UI.accent : GM_UI.muted);
         shape.setAttribute('stroke-width', isSelected ? '5' : '3');
         shape.setAttribute('stroke-linejoin', 'round');
         shape.setAttribute('filter', 'url(#gm-shadow)');
@@ -957,7 +958,7 @@ export class GameMode {
             label.setAttribute('y', center + 1);
             label.setAttribute('text-anchor', 'middle');
             label.setAttribute('dominant-baseline', 'middle');
-            label.setAttribute('fill', isSelected ? GM_UI.indigo : GM_UI.secondary);
+            label.setAttribute('fill', isSelected ? GM_UI.accent : GM_UI.secondary);
             label.setAttribute('font-size', Math.round(config.size * 0.2));
             label.setAttribute('font-weight', '700');
             label.setAttribute('font-family', "'Inter', sans-serif");
@@ -1233,7 +1234,7 @@ export class GameMode {
             y: y,
             isCorrect: isCorrect,
             // Colors mirror CSS tokens (--success / --danger)
-            color: color || (isCorrect ? '#10b981' : '#ef4444'),
+            color: color || (isCorrect ? GM_UI.success : GM_UI.danger),
             startTime: Date.now()
         };
 

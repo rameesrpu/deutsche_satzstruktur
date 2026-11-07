@@ -20,6 +20,8 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 - `levelSelector.js` — level/category picker UI (story optgroups, chapters locked until the previous one is played) and sentence list
 - `storyNarration.js` — story chapters in game mode: pure beat helpers + the narration card (`showStoryCard`)
 - `glossary.js` — tap-to-translate: `glossTokens()` (pure; mirrors `glossary_matches` in build_stories.py) and the word popover
+- `homeScreen.js` — learner screens Home (Lernen) / Üben / Wörter: pure helpers (chapter status, today's count,
+  weak spots) + `renderHome/renderPractice/renderWords`; the screen router (`showScreen`) is in app.js
 - `storyReader.js` — full-screen chapter reader (📖 next to the category select, "Erst lesen" on a chapter's first card)
 - `wordManager.js` — word data model of the current sentence
 - `sentenceManager.js` — all sentences, localStorage persistence, library bulk-load
@@ -34,7 +36,8 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 - `gameJuice.js` — display-only effects: SVG defs, confetti, floating text, ✓/✗ feedback, final celebration overlay
 - `renderer.js` — SVG drawing of words/connections in edit view
 - `ui.js` — UIController: editor panels and interactions
-- `app.js` — DeutschApp: wires everything together, backend calls, import/export. Passes GameMode a
+- `app.js` — DeutschApp: wires everything together, screen router (`showScreen`: body[data-screen], bottom nav;
+  the editor is the Werkstatt screen), backend calls, import/export. Passes GameMode a
   `host` ({sentenceManager, levelSelector, redraw, setView, updateSentenceList}); `window.app` is a debug handle only
 
 ## Data
