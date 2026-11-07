@@ -50,7 +50,14 @@ word heard **once** while placing, plus the sentence once at the end.
 
 ## Items
 
-### [ ] E1 Audio: placed phrase once, sentence once
+### [x] E1 Audio: placed phrase once, sentence once
+> 2026-11-07 done. Pure `placementSpeech()` (+ exported `promptStartIndex`/`clauseStart`) in sound.js:
+> a correct placement speaks only the placed phrase; "Satz aufbauen" (`gameSpeechBuildUp`, off) brings
+> back the growing prefix; Hörübung now opt-in (`=== 'true'`); completion reads the sentence once unless
+> already spoken (`sentenceAlreadySpoken`: `lastSpoken` or the playing Hörübung utterance). New row on
+> Einstellungen + Werkstatt checkbox via `setLearnerSetting`, greyed without voice or with Aussprache off.
+> Checked: unit tests (phrase/prefix/clause start, defaults, stored 'true' kept), settings screen at
+> 375×812 (defaults, toggle sync, greyed states). Not heard on a real German voice (headless, no voice).
 Files: `js/sound.js`, `js/gamemode.js` (correct-placement branch, `updateCurrentWordDisplay`
 prompt calls, sentence-complete branch), `js/settings.js`, `js/app.js` (`setLearnerSetting`,
 `syncLearnerToggles`, Werkstatt checkboxes in `index.html`), `tests/sound.test.js`,

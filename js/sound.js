@@ -15,13 +15,60 @@ export function findGermanVoice(voices) {
     return (voices || []).find(v => v.lang && v.lang.toLowerCase().startsWith('de')) || null;
 }
 
+/**
+ * First word of the clause containing words[i]. Clauses split after
+ * words ending in , ; : or at standalone –/— dashes.
+ */
+export function clauseStart(words, i) {
+    const sep = /[,;:]$|^[–—-]$|[–—]$/;
+    for (let j = i - 1; j >= 0; j--) {
+        if (sep.test(words[j])) return j + 1;
+    }
+    return 0;
+}
+
+/**
+ * Where prefix speech should start when the blank is words[uptoIndex]:
+ * from the sentence start normally, but for long sentences only from the
+ * current clause — no need to re-speak clauses already heard.
+ */
+export function promptStartIndex(words, uptoIndex) {
+    const LONG = 8; // trim only when the full prefix would exceed this
+    if (uptoIndex <= LONG) return 0;
+    return clauseStart(words, uptoIndex);
+}
+
+/**
+ * What to say after a correct placement (Hörübung off).
+ * buildUp off: only the placed phrase (texts[range[0]..range[1]], trailing
+ * punctuation stripped) — every word heard once while placing.
+ * buildUp on ("Satz aufbauen"): the growing prefix through endIdx (the placed
+ * phrase plus the auto-words it reveals); on long sentences from the current
+ * clause; mid-sentence prefixes end in a comma so the last word keeps
+ * continuation intonation instead of a final fall.
+ * @param {{texts: string[], range: [number, number], endIdx: number, buildUp: boolean}} opts
+ * @returns {string}
+ */
+export function placementSpeech({ texts, range, endIdx, buildUp }) {
+    if (!buildUp) {
+        return texts.slice(range[0], range[1] + 1).join(' ').replace(/[\s.,;:!?…–—-]+$/, '');
+    }
+    const from = promptStartIndex(texts, range[0]);
+    const isSentenceEnd = endIdx >= texts.length - 1;
+    return texts.slice(from, endIdx + 1).join(' ') + (isSentenceEnd ? '' : ',');
+}
+
 export class SoundManager {
     constructor() {
         this.ctx = null;
         this.enabled = localStorage.getItem('gameSoundEnabled') !== 'false';
         this.speechEnabled = localStorage.getItem('gameSpeechEnabled') !== 'false';
         // Audio fill-in-the-blank mode: play the sentence, pause at the blank
-        this.promptEnabled = localStorage.getItem('gamePromptEnabled') !== 'false';
+        // (opt-in: off unless switched on explicitly)
+        this.promptEnabled = localStorage.getItem('gamePromptEnabled') === 'true';
+        // "Satz aufbauen": after each placement speak the sentence so far
+        // (growing prefix) instead of only the placed phrase; off by default
+        this.buildUpEnabled = localStorage.getItem('gameSpeechBuildUp') === 'true';
         // Whether this engine fires word-boundary events (detected at runtime;
         // required for pausing full-sentence audio at the blank)
         this.boundarySupported = false;
@@ -86,6 +133,19 @@ export class SoundManager {
         if (!on) this.cancelPrompt();
     }
 
+    setBuildUpEnabled(on) {
+        this.buildUpEnabled = on;
+        localStorage.setItem('gameSpeechBuildUp', on ? 'true' : 'false');
+    }
+
+    /**
+     * True when text (the whole sentence) was just spoken or is still playing
+     * as the Hörübung utterance — the completion readout then isn't repeated.
+     */
+    sentenceAlreadySpoken(text) {
+        return this.lastSpoken === text || this._promptFull === text;
+    }
+
     /** Drop any active/paused prompt audio (game exit, toggles off). */
     cancelPrompt() {
         this._promptFull = null;
@@ -137,27 +197,9 @@ export class SoundManager {
         return c;
     }
 
-    /**
-     * First word of the clause containing words[i]. Clauses split after
-     * words ending in , ; : or at standalone –/— dashes.
-     */
-    _clauseStart(words, i) {
-        const sep = /[,;:]$|^[–—-]$|[–—]$/;
-        for (let j = i - 1; j >= 0; j--) {
-            if (sep.test(words[j])) return j + 1;
-        }
-        return 0;
-    }
-
-    /**
-     * Where prefix speech should start when the blank is words[uptoIndex]:
-     * from the sentence start normally, but for long sentences only from the
-     * current clause — no need to re-speak clauses already heard.
-     */
+    /** Delegates to the exported promptStartIndex() (kept for callers). */
     promptStartIndex(words, uptoIndex) {
-        const LONG = 8; // trim only when the full prefix would exceed this
-        if (uptoIndex <= LONG) return 0;
-        return this._clauseStart(words, uptoIndex);
+        return promptStartIndex(words, uptoIndex);
     }
 
     /**

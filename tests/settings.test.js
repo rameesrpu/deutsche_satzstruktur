@@ -34,16 +34,26 @@ export function runSettingsTests() {
     });
 
     test('settings: settingsRows greys the speech rows without a German voice', () => {
-        const state = { sound: true, speech: true, prompt: false, timer: true, voice: 'ok' };
+        const state = { sound: true, speech: true, buildUp: false, prompt: false, timer: true, voice: 'ok' };
         const rows = settingsRows(state);
-        assertEqual(rows.map(r => r.key), ['sound', 'speech', 'prompt', 'timer']);
-        assertEqual(rows.map(r => r.label), ['Ton', 'Aussprache', 'Hörübung', 'Zeitdruck']);
-        assertEqual(rows.map(r => r.checked), [true, true, false, true]);
+        assertEqual(rows.map(r => r.key), ['sound', 'speech', 'buildUp', 'prompt', 'timer']);
+        assertEqual(rows.map(r => r.label), ['Ton', 'Aussprache', 'Satz aufbauen', 'Hörübung', 'Zeitdruck']);
+        assertEqual(rows.map(r => r.checked), [true, true, false, false, true]);
         assertEqual(rows.every(r => !r.disabled && r.help.length > 0), true);
-        const missing = settingsRows({ ...state, prompt: true, voice: 'missing' });
-        assertEqual(missing.map(r => r.disabled), [false, true, true, false]);
-        assertEqual(missing.map(r => r.checked), [true, false, false, true]);
+        assertEqual(rows[2].help, 'Nach jedem Teil hörst du den Satz bis hierher.');
+        const missing = settingsRows({ ...state, buildUp: true, prompt: true, voice: 'missing' });
+        assertEqual(missing.map(r => r.disabled), [false, true, true, true, false]);
+        assertEqual(missing.map(r => r.checked), [true, false, false, false, true]);
         assertEqual(settingsRows({ ...state, voice: 'unknown' })[1].disabled, false);
+    });
+
+    test('settings: "Satz aufbauen" is greyed while Aussprache is off', () => {
+        const state = { sound: true, speech: true, buildUp: true, prompt: false, timer: false, voice: 'ok' };
+        assertEqual(settingsRows(state)[2], { key: 'buildUp', label: 'Satz aufbauen',
+            help: 'Nach jedem Teil hörst du den Satz bis hierher.', checked: true, disabled: false });
+        const off = settingsRows({ ...state, speech: false })[2];
+        assertEqual([off.checked, off.disabled], [false, true]);
+        assertEqual(settingsRows({ ...state, speech: false })[3].disabled, false); // Hörübung: voice only
     });
 
     test('settings: daily goal and time challenge round-trip through storage', () => {

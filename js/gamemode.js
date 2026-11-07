@@ -1,4 +1,4 @@
-import { gameSounds } from './sound.js';
+import { gameSounds, placementSpeech } from './sound.js';
 import { pickNextSentence } from './sentencePicker.js';
 import { evaluatePlacement, getAutoPlacement, explainMistake, placementFeedback, MAX_WRONG_ATTEMPTS } from './gameRules.js';
 import { progressStore, sentenceKey, emptyMistakes, addMistake } from './progressStore.js';
@@ -1174,31 +1174,25 @@ export class GameMode {
 
             // Confetti burst + floating points + score count-up (all self-cleaning)
             // Sound: the tile's own note (pitch encodes the grid position),
-            // then the GROWING SENTENCE PREFIX spoken in German — everything
-            // from the sentence start through the placed word plus the
-            // auto-words it reveals. Speaking a real phrase (not an isolated
-            // word) lets the TTS engine apply natural sentence intonation,
-            // so each placement sounds like the sentence assembling itself.
+            // then German speech (placementSpeech in sound.js): by default
+            // only the placed phrase, so every word is heard once while
+            // placing and the whole sentence once at the end. With "Satz
+            // aufbauen" on, the GROWING SENTENCE PREFIX instead (sentence
+            // start through the placed phrase plus the auto-words it reveals).
             if (typeof gameSounds !== 'undefined') {
                 gameSounds.correct(this.displayStreak, row, col);
-                // Confirmation speech (growing prefix) only when listening
-                // mode is off — in listening mode the paused sentence audio
-                // resumes instead (see updateCurrentWordDisplay), which
-                // speaks the placed word with the sentence's own intonation
+                // Only when listening mode is off — in listening mode the
+                // paused sentence audio resumes instead (see
+                // updateCurrentWordDisplay), which speaks the placed word
+                // with the sentence's own intonation
                 if (!gameSounds.promptEnabled) {
                     const range = this.getItemWordRange(currentItem);
                     let endIdx = range[1];
                     while (endIdx + 1 < this.words.length && !this.isManualWord(this.words[endIdx + 1])) {
                         endIdx++;
                     }
-                    // On long sentences start from the current clause instead
-                    // of re-speaking everything from the beginning. Mid-
-                    // sentence prefixes get a trailing comma so the last word
-                    // keeps continuation intonation instead of a final fall.
                     const texts = this.words.map(w => w.text);
-                    const from = gameSounds.promptStartIndex(texts, range[0]);
-                    const isSentenceEnd = endIdx >= this.words.length - 1;
-                    gameSounds.speak(texts.slice(from, endIdx + 1).join(' ') + (isSentenceEnd ? '' : ','));
+                    gameSounds.speak(placementSpeech({ texts, range, endIdx, buildUp: gameSounds.buildUpEnabled }));
                 }
             }
             if (navigator.vibrate) navigator.vibrate(15); // subtle tactile confirm
@@ -1644,17 +1638,17 @@ export class GameMode {
             this.host.redraw();
 
             // Sentence-complete celebration: bigger confetti burst across the
-            // grid, then the whole sentence read aloud (the melody resolved
-            // it; the speech consolidates it)
+            // grid, then the whole sentence read aloud once (the melody
+            // resolved it; the speech consolidates it)
             if (typeof gameSounds !== 'undefined') {
                 gameSounds.sentenceComplete();
                 if (this.words && this.words.length > 0) {
                     const sentence = this.words.map(w => w.text).join(' ');
-                    // The final placement's prefix speech already covers the
-                    // full sentence — only read it out here if it wasn't just
-                    // spoken (e.g. the last word was auto-placed). queue:
-                    // waits for in-flight speech instead of cutting it off.
-                    if (gameSounds.lastSpoken !== sentence) {
+                    // Skip it only when the last placement already said the
+                    // whole sentence ("Satz aufbauen" prefix, or the Hörübung
+                    // audio playing out to the end). queue: waits for
+                    // in-flight speech (the placed phrase) instead of cutting it off.
+                    if (!gameSounds.sentenceAlreadySpoken(sentence)) {
                         setTimeout(() => gameSounds.speak(sentence, { queue: true }), 500);
                     }
                 }

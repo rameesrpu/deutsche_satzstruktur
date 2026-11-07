@@ -28,7 +28,8 @@ import { loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge, ren
 
 /** Werkstatt settings-panel checkbox of each learner setting. */
 const LEARNER_TOGGLE_IDS = {
-    sound: 'sound-toggle', speech: 'speech-toggle', prompt: 'listen-toggle', timer: 'time-challenge-toggle',
+    sound: 'sound-toggle', speech: 'speech-toggle', buildUp: 'build-up-toggle', prompt: 'listen-toggle',
+    timer: 'time-challenge-toggle',
 };
 
 /**
@@ -369,6 +370,7 @@ class DeutschApp {
         return {
             sound: gameSounds.enabled,
             speech: gameSounds.speechEnabled,
+            buildUp: gameSounds.buildUpEnabled,
             prompt: gameSounds.promptEnabled,
             timer: this.gameMode.timeChallengeMode,
             voice: gameSounds.voiceStatus,
@@ -379,7 +381,7 @@ class DeutschApp {
     /**
      * Change one learner setting (Werkstatt panel or Einstellungen screen), persist it
      * and update both surfaces.
-     * @param {'sound'|'speech'|'prompt'|'timer'|'dailyGoal'} key
+     * @param {'sound'|'speech'|'buildUp'|'prompt'|'timer'|'dailyGoal'} key
      * @param {boolean|number} value
      */
     setLearnerSetting(key, value) {
@@ -389,6 +391,8 @@ class DeutschApp {
         } else if (key === 'speech') {
             gameSounds.setSpeechEnabled(value);
             if (value) gameSounds.speak('Los geht\'s!'); // audible confirmation
+        } else if (key === 'buildUp') {
+            gameSounds.setBuildUpEnabled(value);
         } else if (key === 'prompt') {
             gameSounds.setPromptEnabled(value);
         } else if (key === 'timer') {
@@ -412,17 +416,21 @@ class DeutschApp {
         if (this.screen === 'settings') this.renderSettingsScreen();
     }
 
-    /** Werkstatt checkboxes ← current learner settings (speech ones respect the voice). */
+    /**
+     * Werkstatt checkboxes ← current learner settings (speech ones respect the voice;
+     * "Satz aufbauen" also needs Aussprache on).
+     */
     syncLearnerToggles() {
         const s = this.learnerSettings();
         const missing = s.voice === 'missing';
         for (const [key, id] of Object.entries(LEARNER_TOGGLE_IDS)) {
             const toggle = document.getElementById(id);
             if (!toggle) continue;
-            const needsVoice = key === 'speech' || key === 'prompt';
-            toggle.disabled = needsVoice && missing;
-            toggle.checked = !(needsVoice && missing) && s[key];
-            if (needsVoice) toggle.closest('.settings-toggle-row')?.classList.toggle('is-unavailable', missing);
+            const needsVoice = key === 'speech' || key === 'prompt' || key === 'buildUp';
+            const unavailable = needsVoice && (missing || (key === 'buildUp' && !s.speech));
+            toggle.disabled = unavailable;
+            toggle.checked = !unavailable && !!s[key];
+            if (needsVoice) toggle.closest('.settings-toggle-row')?.classList.toggle('is-unavailable', unavailable);
         }
     }
 

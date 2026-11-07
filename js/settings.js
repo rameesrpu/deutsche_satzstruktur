@@ -1,7 +1,7 @@
 // Learner settings ("Einstellungen", reached from Home's gear button) and the
 // persisted settings that are not owned by SoundManager: the daily goal and the
 // time challenge. Sound / speech / audio fill-in-the-blank live in SoundManager
-// (gameSoundEnabled / gameSpeechEnabled / gamePromptEnabled); the app routes
+// (gameSoundEnabled / gameSpeechEnabled / gameSpeechBuildUp / gamePromptEnabled); the app routes
 // every change from this screen and from the Werkstatt panel through one setter
 // (DeutschApp.setLearnerSetting), so both surfaces always show the same state.
 // The pure helpers at the top are unit-tested (tests/settings.test.js).
@@ -43,17 +43,22 @@ export function goalProgress(count, goal) {
 
 /**
  * Rows of the learner settings screen.
- * @param {{sound: boolean, speech: boolean, prompt: boolean, timer: boolean, voice: string}} state
- *   voice = SoundManager.voiceStatus ('unknown' | 'ok' | 'missing')
+ * @param {{sound: boolean, speech: boolean, buildUp: boolean, prompt: boolean, timer: boolean,
+ *   voice: string}} state
+ *   voice = SoundManager.voiceStatus ('unknown' | 'ok' | 'missing'); "Satz aufbauen" (buildUp)
+ *   also needs Aussprache on
  * @returns {{key: string, label: string, help: string, checked: boolean, disabled: boolean}[]}
  */
-export function settingsRows({ sound, speech, prompt, timer, voice }) {
+export function settingsRows({ sound, speech, buildUp, prompt, timer, voice }) {
     const noVoice = voice === 'missing';
+    const noBuildUp = noVoice || !speech;
     return [
         { key: 'sound', label: 'Ton', help: 'Kurze Klänge bei richtig und falsch.',
             checked: sound, disabled: false },
         { key: 'speech', label: 'Aussprache', help: 'Deutsche Wörter werden vorgelesen.',
             checked: !noVoice && speech, disabled: noVoice },
+        { key: 'buildUp', label: 'Satz aufbauen', help: 'Nach jedem Teil hörst du den Satz bis hierher.',
+            checked: !noBuildUp && !!buildUp, disabled: noBuildUp },
         { key: 'prompt', label: 'Hörübung', help: 'Du hörst den Satz – an der Lücke stoppt er.',
             checked: !noVoice && prompt, disabled: noVoice },
         { key: 'timer', label: 'Zeitdruck', help: 'Schneller platzieren gibt mehr Punkte.',
@@ -102,12 +107,12 @@ function el(tag, props = {}, ...children) {
 }
 
 /**
- * Einstellungen: Ton, Aussprache, Hörübung, Zeitdruck, Tagesziel.
+ * Einstellungen: Ton, Aussprache, Satz aufbauen, Hörübung, Zeitdruck, Tagesziel.
  * @param {HTMLElement} root
- * @param {{sound: boolean, speech: boolean, prompt: boolean, timer: boolean, voice: string,
- *   dailyGoal: number}} state
+ * @param {{sound: boolean, speech: boolean, buildUp: boolean, prompt: boolean, timer: boolean,
+ *   voice: string, dailyGoal: number}} state
  * @param {{set: function(string, (boolean|number)), back: function()}} actions
- *   set('sound'|'speech'|'prompt'|'timer', bool) or set('dailyGoal', n)
+ *   set('sound'|'speech'|'buildUp'|'prompt'|'timer', bool) or set('dailyGoal', n)
  */
 export function renderSettings(root, state, actions) {
     const rows = settingsRows(state);
