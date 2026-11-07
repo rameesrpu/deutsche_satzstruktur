@@ -4394,6 +4394,143 @@ body[data-screen="play"] #canvas {
     display: none;
 }
 
+/* Story strip (E2): the narration before the sentence, at most 2 lines each (clamped),
+   read-aloud icon + "mehr"; glossary words open the ink word bar over the feedback slot */
+.play-story {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 10px;
+    padding: 8px 4px 8px 12px;
+    border-left: 3px solid var(--line);
+    animation: play-feedback-in 0.2s var(--ease-out) both;
+}
+
+.play-story[hidden] {
+    display: none;
+}
+
+.play-story-lines {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.play-story-line {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    font-family: var(--font-sentence);
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--ink-700);
+    overflow-wrap: anywhere;
+}
+
+.play-story-speaker {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 600;
+    font-variant: all-small-caps;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+}
+
+.play-story-side {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.play-story-say {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: var(--radius-pill);
+    background: none;
+    color: var(--ink-soft);
+}
+
+.play-story-say:hover {
+    transform: none;
+    box-shadow: none;
+    background: var(--brand-100);
+    color: var(--ink);
+}
+
+.play-story-say:disabled {
+    opacity: 0.4;
+    background: none;
+    cursor: default;
+}
+
+.play-story-more {
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    background: none;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.play-story-more:hover {
+    transform: none;
+    box-shadow: none;
+    background: var(--brand-100);
+}
+
+.play-story-more[hidden] {
+    display: none;
+}
+
+.play-story-say:focus-visible,
+.play-story-more:focus-visible {
+    outline: none;
+    box-shadow: var(--ring);
+}
+
+.play-feedback-slot {
+    position: relative;
+}
+
+.play-story-word button:hover,
+.play-story-word button:active {
+    transform: none;
+    box-shadow: none;
+}
+
+.play-story-word {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 8px;
+    z-index: 2;
+}
+
+/* Short phones (e.g. 375×667): one line per beat keeps the grid and tray in view */
+@media (max-height: 700px) {
+    .play-story {
+        margin-bottom: 6px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+    .play-story-line {
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+    }
+}
+
 /* Sentence: Literata, the current phrase framed, the rest muted */
 .play-sentence {
     padding: 4px 0 12px;

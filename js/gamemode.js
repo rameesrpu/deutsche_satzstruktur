@@ -65,6 +65,12 @@ export class GameMode {
         this.run = null;
         this.replay = null;
 
+        // Play screen: the narration before the current story sentence, shown as the strip
+        // above it (playScreen.js, storyStrip()); empty when the narration card showed it
+        // (first sentence of a run), outside story chapters and in the Werkstatt
+        this.storyLines = [];
+        this.storySheetPause = null; // "mehr" sheet open: {elapsed} of the paused word timer
+
         // Pre-calculated gridview state
         this.preCalculatedBoxes = [];
         this.preCalculatedConnections = [];
@@ -320,6 +326,7 @@ export class GameMode {
         this.feedback = null;
         this.waitingForContinue = false;
         this.pendingFelderReview = false;
+        this.storyLines = []; // set again by showStoryIntro()
 
         // Reset visual-only state (streak intentionally persists across sentences)
         this.wrongShakeUntil = 0;
@@ -1759,13 +1766,24 @@ export class GameMode {
         return { level, category, cat, data };
     }
 
-    /** Narration before the current sentence (if it is a story play beat). */
-    showStoryIntro() {
+    /**
+     * Narration before the current sentence (if it is a story play beat). The card opens at
+     * the start of a run (start(), app.startChapter) and before every sentence in the
+     * Werkstatt; on the play screen later sentences show the strip above the sentence instead.
+     * @param {{runStart?: boolean}} [opts]  false: next sentence of a running chapter
+     */
+    showStoryIntro({ runStart = true } = {}) {
+        this.storyLines = [];
         const chapter = this.getStoryChapter();
         if (!chapter) return;
         const sentence = this.host.sentenceManager.getCurrentSentence();
         const segment = beatsBefore(chapter.data.beats, sentence.text);
         if (!segment) return;
+        if (!runStart && this.isPlayScreen()) {
+            this.storyLines = segment.lines;
+            this.host.redraw();
+            return;
+        }
         const buttons = [{ label: 'Los geht\'s', icon: 'play', primary: true, onClick: () => this.closeStoryCard() }];
         // First card of the chapter: offer to read the whole chapter first
         if (chapter.data.sentences[0] === sentence.text) {
@@ -1783,19 +1801,55 @@ export class GameMode {
         });
     }
 
-    /** Silence listening-mode audio and the timer while a card is open. */
-    pauseForStoryCard() {
+    /**
+     * Silence listening-mode audio and the timer while a card is open.
+     * @param {{resume?: boolean}} [opts]  resume: closeStoryCard() continues the word
+     *   (timer from where it stopped, same attempts) instead of starting it over
+     */
+    pauseForStoryCard({ resume = false } = {}) {
         if (typeof gameSounds !== 'undefined') gameSounds.cancelPrompt();
+        this.storySheetPause = resume
+            ? { elapsed: this.wordStartTime ? Date.now() - this.wordStartTime : null } : null;
         this.stopTimerAnimation();
         this.wordStartTime = null;
     }
 
     closeStoryCard() {
         hideStoryCard();
+        const pause = this.storySheetPause;
+        this.storySheetPause = null;
         if (!this.isActive) return;
+        if (pause) this.resumeCurrentWord(pause.elapsed);
         // Restarts the listening-mode prompt and the timer for the current word
-        this.updateCurrentWordDisplay();
+        else this.updateCurrentWordDisplay();
         this.host.redraw();
+    }
+
+    /** After the "mehr" sheet: the word's timer goes on from `elapsed`, the Hörübung prompt replays. */
+    resumeCurrentWord(elapsed) {
+        if (this.waitingForContinue || this.currentIndex >= this.manualItems.length) return;
+        if (typeof gameSounds !== 'undefined' && this.words && this.words.length > 0) {
+            const blankIdx = this.getItemWordRange(this.manualItems[this.currentIndex])[0];
+            gameSounds.promptSentence(this.words.map(w => w.text), blankIdx);
+        }
+        if (this.timeChallengeMode && elapsed !== null) {
+            this.wordStartTime = Date.now() - elapsed;
+            this.startTimerAnimation();
+        }
+    }
+
+    /** "mehr" on the play-screen strip: all narration lines before the sentence, one "Zurück". */
+    showStoryLinesSheet() {
+        const chapter = this.getStoryChapter();
+        if (!chapter || this.storyLines.length === 0 || isStoryCardOpen()) return;
+        this.pauseForStoryCard({ resume: true });
+        showStoryCard({
+            heading: chapter.cat.label,
+            lines: this.storyLines,
+            buttons: [{ label: 'Zurück', primary: true, onClick: () => this.closeStoryCard() }],
+            onSpeak: texts => this.speakStoryLines(texts),
+            glossary: chapter.data.glossary,
+        });
     }
 
     speakStoryLines(texts) {
@@ -1823,7 +1877,7 @@ export class GameMode {
         this.host.redraw();
         const activeItem = document.querySelector('.sentence-item.active');
         if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-        this.showStoryIntro();
+        this.showStoryIntro({ runStart: false });
     }
 
     showChapterEnd(chapter) {

@@ -4,8 +4,14 @@
  * score), the sentence with the current phrase framed, the feedback bar and the case tray.
  * The grid itself stays SVG (gamemode.js). In the Werkstatt the game keeps its SVG HUD.
  * Display only — reads GameMode state; taps call GameMode/app methods.
+ * Story chapters (E2, docs/experience-plan.md): the narration before a sentence is a strip
+ * above it (`game.storyLines`, last 2 lines via storyStrip(); "mehr" opens all of them).
  * The helpers at the top are pure (no DOM) and unit-tested in tests/playScreen.test.js.
  */
+
+import { storyStrip } from './storyNarration.js';
+import { renderGlossedText, speakableForm } from './glossary.js';
+import { gameSounds } from './sound.js';
 
 /** Sentences per progress bar outside a story chapter (review, random, drills). */
 export const SESSION_SEGMENTS = 10;
@@ -65,6 +71,7 @@ const ICONS = {
     cross: '<path d="M7 7l10 10M17 7L7 17"/>',
     bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.6.5 1.1 1.2 1.1 2V16h5v-.2c0-.8.5-1.5 1.1-2A6 6 0 0 0 12 3z"/>',
     next: '<path d="M9 6l6 6-6 6"/>',
+    speaker: '<path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/>',
 };
 
 let wired = false;
@@ -95,6 +102,7 @@ export function initPlayChrome(game, { onClose, onContinue }) {
             `</div>` +
         `</div>` +
         `<div class="play-sentence" id="play-sentence">` +
+            `<div class="play-story" id="play-story" hidden></div>` +
             `<div class="play-prompt" id="play-prompt"></div>` +
             `<p class="play-sentence-text" id="play-sentence-text" lang="de"></p>` +
             `<div class="play-timer" id="play-timer" hidden><div class="play-timer-fill" id="play-timer-fill"></div></div>` +
@@ -105,7 +113,8 @@ export function initPlayChrome(game, { onClose, onContinue }) {
     bottom.className = 'play-bottom';
     bottom.id = 'play-bottom';
     bottom.innerHTML =
-        `<div class="play-feedback-slot"><div class="play-feedback" id="play-feedback" role="status" aria-live="polite" hidden></div></div>` +
+        `<div class="play-feedback-slot"><div class="play-feedback" id="play-feedback" role="status" aria-live="polite" hidden></div>` +
+            `<div class="story-reader-word play-story-word" id="play-story-word" role="status" hidden></div></div>` +
         `<div class="play-tray" id="play-tray" role="group" aria-label="Kasus">` +
             CASES.map(c => `<button type="button" class="play-case" data-case="${c.key}" aria-pressed="false" ` +
                 `title="${c.name} (Taste ${c.hotkey})">${svgIcon(c.shape, 26, ' class="play-case-shape"')}` +
@@ -118,6 +127,133 @@ export function initPlayChrome(game, { onClose, onContinue }) {
     bottom.querySelectorAll('.play-case').forEach(btn =>
         btn.addEventListener('click', () => game.toggleCase(btn.dataset.case)));
     bottom.querySelector('#play-continue').addEventListener('click', () => onContinue());
+}
+
+// --- Story strip (E2) ---
+
+function speechUsable() {
+    return gameSounds.speechAvailable && gameSounds.speechEnabled && 'speechSynthesis' in window;
+}
+
+let activeStoryWord = null;
+
+function closeStoryWord() {
+    const bar = document.getElementById('play-story-word');
+    if (activeStoryWord) activeStoryWord.classList.remove('gloss-word-active');
+    activeStoryWord = null;
+    if (!bar) return;
+    bar.hidden = true;
+    bar.replaceChildren();
+}
+
+/** A tapped glossary word in the strip: its meaning in the ink bar (as in the reader). */
+function showStoryWord(wordEl, entry) {
+    const bar = document.getElementById('play-story-word');
+    if (!bar) return;
+    if (activeStoryWord === wordEl) { closeStoryWord(); return; }
+    closeStoryWord();
+    activeStoryWord = wordEl;
+    wordEl.classList.add('gloss-word-active');
+    const txt = document.createElement('div');
+    txt.className = 'story-reader-word-text';
+    const de = document.createElement('span');
+    de.className = 'story-reader-word-de';
+    de.lang = 'de';
+    de.textContent = entry.de;
+    const en = document.createElement('span');
+    en.className = 'story-reader-word-en';
+    en.lang = 'en';
+    en.textContent = entry.en;
+    txt.append(de, en);
+    bar.appendChild(txt);
+    const button = (cls, label, body, onClick) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = cls;
+        b.setAttribute('aria-label', label);
+        b.title = label;
+        b.innerHTML = svgIcon(body, 20);
+        b.addEventListener('click', onClick);
+        bar.appendChild(b);
+    };
+    if (speechUsable()) {
+        button('story-reader-word-say', 'Aussprechen', ICONS.speaker, () => gameSounds.speak(speakableForm(entry.de)));
+    }
+    button('story-reader-word-close', 'Schließen', ICONS.close, closeStoryWord);
+    bar.hidden = false;
+}
+
+/** Some strip line is cut off by the 2-line clamp (needs layout). */
+function stripClamped(el) {
+    return [...el.querySelectorAll('.play-story-line')].some(row => row.scrollHeight > row.clientHeight + 1);
+}
+
+/**
+ * The narration strip above the sentence; rebuilt only when the sentence's lines change
+ * (renderPlayChrome runs on every redraw), so a tapped word stays open.
+ */
+function renderStoryStrip(game) {
+    const el = document.getElementById('play-story');
+    if (!el) return;
+    const all = game.storyLines || [];
+    if (el._lines === all) return;
+    el._lines = all;
+    closeStoryWord();
+    el.replaceChildren();
+    const { lines, more } = storyStrip(all);
+    el.hidden = lines.length === 0;
+    if (el.hidden) return;
+    const chapter = game.getStoryChapter();
+    const glossary = chapter ? chapter.data.glossary : null;
+
+    const body = document.createElement('div');
+    body.className = 'play-story-lines';
+    body.lang = 'de';
+    for (const beat of lines) {
+        const row = document.createElement('div');
+        row.className = 'play-story-line';
+        if (beat.speaker) {
+            const who = document.createElement('span');
+            who.className = 'play-story-speaker';
+            who.textContent = beat.speaker;
+            row.append(who, ' ');
+        }
+        const text = document.createElement('span');
+        text.className = 'play-story-text';
+        renderGlossedText(text, beat.read, glossary, showStoryWord);
+        row.appendChild(text);
+        body.appendChild(row);
+    }
+    // Tap on the text (not a glossary word) of a cut strip = the full sheet
+    body.addEventListener('click', () => {
+        if (more || stripClamped(el)) game.showStoryLinesSheet();
+    });
+    el.appendChild(body);
+
+    const side = document.createElement('div');
+    side.className = 'play-story-side';
+    const say = document.createElement('button');
+    say.type = 'button';
+    say.className = 'play-story-say';
+    const canSpeak = speechUsable();
+    say.disabled = !canSpeak;
+    say.title = canSpeak ? 'Vorlesen'
+        : gameSounds.speechAvailable && 'speechSynthesis' in window ? 'Sprachausgabe ist in den Einstellungen aus'
+            : 'Keine deutsche Stimme auf diesem Gerät';
+    say.setAttribute('aria-label', say.title);
+    say.innerHTML = svgIcon(ICONS.speaker, 18);
+    say.addEventListener('click', () => game.speakStoryLines(lines.map(b => b.read)));
+    const mehr = document.createElement('button');
+    mehr.type = 'button';
+    mehr.className = 'play-story-more';
+    mehr.textContent = 'mehr';
+    mehr.title = 'Ganzen Text lesen';
+    mehr.hidden = !more;
+    mehr.addEventListener('click', () => game.showStoryLinesSheet());
+    side.append(say, mehr);
+    el.appendChild(side);
+    // A clamped line also gets "mehr" (once laid out)
+    if (!more) requestAnimationFrame(() => { if (el._lines === all && stripClamped(el)) mehr.hidden = false; });
 }
 
 /** Progress of the current sentence: story chapter sentences, replay list, else a session window. */
@@ -217,7 +353,8 @@ export function renderPlayChrome(game, view) {
     streak.innerHTML = game.displayStreak >= 2 ? `${svgIcon(ICONS.streak, 14)}${game.displayStreak}` : '';
     streak.title = `${game.displayStreak} richtig in Folge`;
 
-    // Sentence
+    // Story strip, sentence
+    renderStoryStrip(game);
     const complete = game.waitingForContinue || !game.manualItems.length;
     document.getElementById('play-prompt').textContent = !complete ? 'Wohin gehört der markierte Teil?'
         : game.manualItems.length ? `Satz fertig · +${game.currentSentenceScore} Punkte` : 'Satz fertig';
@@ -259,6 +396,7 @@ export function renderPlayChrome(game, view) {
 /** Leave the play screen: drop the view flag used by the CSS. */
 export function clearPlayChrome() {
     delete document.body.dataset.playView;
+    closeStoryWord();
 }
 
 /** Update the DOM timer bar in place (rAF loop in gamemode.js). */

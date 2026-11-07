@@ -84,7 +84,18 @@ on the play screen (Chrome with a German voice, 375×812) one chapter sentence s
 "Ayisha" · "ist" · "Ärztin" · then "Ayisha ist Ärztin." once; the build-up setting brings back
 the old sound; `gjs -m tests/run.js` passes.
 
-### [ ] E2 Story line on the play screen
+### [x] E2 Story line on the play screen
+> 2026-11-07 done. Pure `storyStrip()` in storyNarration.js; `showStoryIntro({runStart})`: the card opens
+> at the start of a run (`start()`, `app.startChapter`) and always in the Werkstatt; on the play screen
+> `continueStoryChapter` fills `game.storyLines` instead and playScreen.js draws the strip (`#play-story`:
+> speaker in small caps, Literata 16 px clamped to 2 lines per beat / 1 line below 700 px height, glossary
+> words → ink word bar over the feedback slot, read-aloud icon greyed without voice, "mehr" when lines were
+> cut or a line is clamped; a tap on cut text also opens the sheet). "mehr" → `showStoryLinesSheet()`:
+> card with all lines + "Zurück"; `pauseForStoryCard({resume: true})` / `closeStoryCard` continue the word
+> timer from where it stopped (no attempts reset). Checked in the browser pane: 1.1 from Home (card once,
+> then strip / no strip), resume mid-chapter (card once), "mehr" sheet in 1.2 (3 lines) open/close with the
+> timer resuming, glossary word bar, closing card + recap, Werkstatt card every sentence; 375×812, 375×667
+> (tray in view), 1280×800. Not checked with a real German voice (read-aloud only seen greyed).
 Files: `js/gamemode.js` (`showStoryIntro`, `continueStoryChapter`, `closeStoryCard`),
 `js/playScreen.js` (new strip in `#play-sentence`), `js/storyNarration.js` (helper + sheet for
 "mehr"), `css/styles.css` (play-screen section), `tests/playScreen.test.js` or

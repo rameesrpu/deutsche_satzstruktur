@@ -1,6 +1,6 @@
 import { readText } from './stubs.js';
 import { test, assertEqual } from './assert.js';
-import { beatsBefore, beatsAfterLast, nextPlayText, chapterStartText } from '../js/storyNarration.js';
+import { beatsBefore, beatsAfterLast, nextPlayText, chapterStartText, storyStrip } from '../js/storyNarration.js';
 import { STORY_CONTENT } from '../js/storyContent.js';
 import { LEVEL_CONTENT, chapterOrder } from '../js/levelContent.js';
 
@@ -72,4 +72,27 @@ export function runStoryTests() {
             }
         });
     }
+
+    // E2: story line on the play screen
+    const r = t => ({ read: t });
+    test('story: storyStrip with no narration', () => {
+        assertEqual(storyStrip([]), { lines: [], more: false });
+        assertEqual(storyStrip(null), { lines: [], more: false });
+    });
+    test('story: storyStrip with one line', () =>
+        assertEqual(storyStrip([r('Eins.')]), { lines: [r('Eins.')], more: false }));
+    test('story: storyStrip with two lines shows both', () =>
+        assertEqual(storyStrip([r('Eins.'), r('Zwei.')]), { lines: [r('Eins.'), r('Zwei.')], more: false }));
+    test('story: storyStrip with 3+ lines keeps the last two, more', () =>
+        assertEqual(storyStrip([r('Eins.'), r('Zwei.'), r('Drei.'), r('Vier.')]),
+            { lines: [r('Drei.'), r('Vier.')], more: true }));
+    test('story: storyStrip keeps speaker beats', () => {
+        const lines = [r('Intro.'), { speaker: 'Lea', read: 'Hallo!' }, { speaker: 'Ayisha', read: 'Hi!' }];
+        assertEqual(storyStrip(lines), { lines: lines.slice(1), more: true });
+    });
+    test('story: storyStrip with a custom max', () =>
+        assertEqual(storyStrip([r('Eins.'), r('Zwei.')], 1), { lines: [r('Zwei.')], more: true }));
+    test('story: storyStrip of beatsBefore (speaker + narrator)', () =>
+        assertEqual(storyStrip(beatsBefore(beats, 'Ich bin hier.').lines),
+            { lines: [{ read: 'Intro.' }, { speaker: 'A', read: 'Hallo!' }], more: false }));
 }

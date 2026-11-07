@@ -40,6 +40,19 @@ export function beatsAfterLast(beats) {
 }
 
 /**
+ * The story line above the sentence on the play screen: the last `max` read beats
+ * before it; `more` = earlier beats were cut (the "mehr" sheet shows them all).
+ * @param {StoryBeat[]} lines  e.g. `beatsBefore(...).lines`
+ * @param {number} [max]
+ * @returns {{lines: StoryBeat[], more: boolean}}
+ */
+export function storyStrip(lines, max = 2) {
+    const read = (lines || []).filter(b => b && b.read);
+    const shown = max > 0 ? read.slice(-max) : [];
+    return { lines: shown, more: read.length > shown.length };
+}
+
+/**
  * The play sentence after `text` in `texts`, or null at the end (or if unknown).
  * @param {string[]} texts
  * @param {string} text
