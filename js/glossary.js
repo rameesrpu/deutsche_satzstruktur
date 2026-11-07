@@ -112,8 +112,10 @@ const MARGIN = 8; // min distance to the screen edge (px)
  * @param {HTMLElement} el
  * @param {string} text
  * @param {Object<string, GlossaryEntry>} [glossary]
+ * @param {?function(HTMLElement, GlossaryEntry): void} [onWord]  tap handler
+ *        (default: the word popover; the story reader shows a bottom bar instead)
  */
-export function renderGlossedText(el, text, glossary) {
+export function renderGlossedText(el, text, glossary, onWord = null) {
     el.textContent = '';
     if (!glossary) {
         el.textContent = text;
@@ -131,7 +133,8 @@ export function renderGlossedText(el, text, glossary) {
         word.setAttribute('role', 'button');
         word.addEventListener('click', (e) => {
             e.stopPropagation();
-            toggleGlossPopover(word, piece.entry);
+            if (onWord) onWord(word, piece.entry);
+            else toggleGlossPopover(word, piece.entry);
         });
         el.appendChild(word);
     }

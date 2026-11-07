@@ -14,6 +14,7 @@ import { runSoundTests } from './sound.test.js';
 import { runStoryTests } from './story.test.js';
 import { runGlossaryTests } from './glossary.test.js';
 import { runHomeScreenTests } from './homeScreen.test.js';
+import { runStoryReaderTests } from './storyReader.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -33,6 +34,7 @@ runSoundTests();
 runStoryTests();
 runGlossaryTests();
 runHomeScreenTests();
+runStoryReaderTests();
 runLibrarySnapshot({ update });
 
 System.exit(summary() > 0 ? 1 : 0);

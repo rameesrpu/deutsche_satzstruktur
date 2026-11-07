@@ -76,9 +76,12 @@ editor to a "Werkstatt" tab.
 > the old editor unchanged. Play = game canvas without header/editor panels; ✕ (or target score) goes
 > back Home. Leaving play/workshop stops a running game. Checked at 375×812 and 1280×800.
 
-### [ ] U4 Reader restyle
-`storyReader.js` on the new look: Literata, header with back + progress + read-aloud, glossary
-bottom bar instead of the popover, play-sentence dot, "Jetzt spielen" button.
+### [x] U4 Reader restyle
+> 2026-11-07 done. Reader on `--paper-read` in Literata; header = back, "Story · Kapitel n" + reading
+> (scroll) progress, read-aloud (greyed when no German voice / speech off); glossary words open an ink
+> bottom bar (`renderGlossedText(…, onWord)`; the narration card keeps the popover); green dot after play
+> sentences (`--read-play-dot`); sticky "Jetzt spielen". Pure helpers tested in tests/storyReader.test.js.
+> Checked at 375×812 and 1280×800 from Home, Werkstatt 📖 and in-game "Erst lesen".
 
 ### [ ] U5 Play screen
 Full screen in game mode: no app header/editor chrome; top = close, segmented progress, score;
