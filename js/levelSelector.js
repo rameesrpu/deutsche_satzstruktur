@@ -1,4 +1,4 @@
-import { chapterOrder } from './levelContent.js';
+import { chapterOrder, categoryUrl } from './levelContent.js';
 
 export class LevelSelector {
     constructor(levelContent, callbacks) {
@@ -104,7 +104,7 @@ export class LevelSelector {
         const key = `${level}/${category}`;
         if (!this.dataCache.has(key)) {
             const catData = this.levelContent[level].categories[category];
-            const promise = fetch(catData.file)
+            const promise = fetch(categoryUrl(catData))
                 .then(r => {
                     if (!r.ok) throw new Error(`HTTP ${r.status}`);
                     return r.json();
@@ -214,10 +214,9 @@ export class LevelSelector {
         this.sentenceList.innerHTML = '<div class="library-status">Loading...</div>';
 
         try {
-            const libraryFile = catData.file.replace('data/levels/', 'data/library/');
             const [texts, libraryResponse] = await Promise.all([
                 this.loadCategoryTexts(this.currentLevel, category),
-                fetch(libraryFile).catch(() => null)
+                fetch(categoryUrl(catData, { library: true })).catch(() => null)
             ]);
             this.currentSentences = texts;
 

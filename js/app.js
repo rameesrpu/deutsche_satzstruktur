@@ -1,5 +1,5 @@
 import { gameSounds } from './sound.js';
-import { LEVEL_CONTENT, chapterOrder } from './levelContent.js';
+import { LEVEL_CONTENT, chapterOrder, categoryUrl } from './levelContent.js';
 import { LevelSelector } from './levelSelector.js';
 import { WordManager } from './wordManager.js';
 import { SentenceManager } from './sentenceManager.js';
@@ -901,9 +901,8 @@ class DeutschApp {
             const levelData = LEVEL_CONTENT[level];
             if (!levelData) continue;
             for (const [cat, catData] of Object.entries(levelData.categories)) {
-                const libraryFile = catData.file.replace('data/levels/', 'data/library/');
                 fetches.push(
-                    fetch(libraryFile)
+                    fetch(categoryUrl(catData, { library: true }))
                         .then(r => r.ok ? r.json() : null)
                         .then(data => { if (data) this.sentenceManager.bulkLoadLibraryCategory(level, cat, data); })
                         .catch(() => {})

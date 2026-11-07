@@ -11,45 +11,55 @@ export const STORY_CONTENT = {
                     "key": "g1k1",
                     "label": "1.1 Hallo, Stuttgart!",
                     "file": "data/levels/A1_g1k1.json",
+                    "version": "1780d03f55",
                     "drillKey": "g1k1_uebung",
                     "drillLabel": "1.1 Übung: Nominativ & sein",
-                    "drillFile": "data/levels/A1_g1k1_uebung.json"
+                    "drillFile": "data/levels/A1_g1k1_uebung.json",
+                    "drillVersion": "402405644a"
                 },
                 {
                     "id": "1.2",
                     "key": "g1k2",
                     "label": "1.2 Die WG",
                     "file": "data/levels/A1_g1k2.json",
+                    "version": "8145241fb1",
                     "drillKey": "g1k2_uebung",
                     "drillLabel": "1.2 Übung: Verben im Präsens",
-                    "drillFile": "data/levels/A1_g1k2_uebung.json"
+                    "drillFile": "data/levels/A1_g1k2_uebung.json",
+                    "drillVersion": "9453fbe1a1"
                 },
                 {
                     "id": "1.3",
                     "key": "g1k3",
                     "label": "1.3 Mein Zimmer",
                     "file": "data/levels/A1_g1k3.json",
+                    "version": "73229f5bf9",
                     "drillKey": "g1k3_uebung",
                     "drillLabel": "1.3 Übung: der, die, das",
-                    "drillFile": "data/levels/A1_g1k3_uebung.json"
+                    "drillFile": "data/levels/A1_g1k3_uebung.json",
+                    "drillVersion": "6f88c8541f"
                 },
                 {
                     "id": "1.4",
                     "key": "g1k4",
                     "label": "1.4 Fragen über Fragen",
                     "file": "data/levels/A1_g1k4.json",
+                    "version": "4fb9b34cd6",
                     "drillKey": "g1k4_uebung",
                     "drillLabel": "1.4 Übung: Fragen",
-                    "drillFile": "data/levels/A1_g1k4_uebung.json"
+                    "drillFile": "data/levels/A1_g1k4_uebung.json",
+                    "drillVersion": "a89c3a9240"
                 },
                 {
                     "id": "1.5",
                     "key": "g1k5",
                     "label": "1.5 Frau Schäfer",
                     "file": "data/levels/A1_g1k5.json",
+                    "version": "a6d9cbddfd",
                     "drillKey": "g1k5_uebung",
                     "drillLabel": "1.5 Übung: haben & unregelmäßige Verben",
-                    "drillFile": "data/levels/A1_g1k5_uebung.json"
+                    "drillFile": "data/levels/A1_g1k5_uebung.json",
+                    "drillVersion": "2dee0c8ff2"
                 }
             ]
         },
@@ -62,27 +72,33 @@ export const STORY_CONTENT = {
                     "key": "g2k1",
                     "label": "2.1 Das Möbelhaus",
                     "file": "data/levels/A1_g2k1.json",
+                    "version": "fee11a7e74",
                     "drillKey": "g2k1_uebung",
                     "drillLabel": "2.1 Übung: Akkusativ",
-                    "drillFile": "data/levels/A1_g2k1_uebung.json"
+                    "drillFile": "data/levels/A1_g2k1_uebung.json",
+                    "drillVersion": "8e0073920e"
                 },
                 {
                     "id": "2.2",
                     "key": "g2k2",
                     "label": "2.2 Das Foto",
                     "file": "data/levels/A1_g2k2.json",
+                    "version": "1948b805f8",
                     "drillKey": "g2k2_uebung",
                     "drillLabel": "2.2 Übung: nicht & kein",
-                    "drillFile": "data/levels/A1_g2k2_uebung.json"
+                    "drillFile": "data/levels/A1_g2k2_uebung.json",
+                    "drillVersion": "e1ec83b199"
                 },
                 {
                     "id": "2.3",
                     "key": "g2k3",
                     "label": "2.3 Meine Familie, deine Familie",
                     "file": "data/levels/A1_g2k3.json",
+                    "version": "006f370162",
                     "drillKey": "g2k3_uebung",
                     "drillLabel": "2.3 Übung: mein, dein, sein, ihr …",
-                    "drillFile": "data/levels/A1_g2k3_uebung.json"
+                    "drillFile": "data/levels/A1_g2k3_uebung.json",
+                    "drillVersion": "74b8c89b9e"
                 }
             ]
         },
@@ -95,27 +111,33 @@ export const STORY_CONTENT = {
                     "key": "g3k1",
                     "label": "3.1 Der Termin",
                     "file": "data/levels/A1_g3k1.json",
+                    "version": "ade476dad3",
                     "drillKey": "g3k1_uebung",
                     "drillLabel": "3.1 Übung: Zahlen & Zeit",
-                    "drillFile": "data/levels/A1_g3k1_uebung.json"
+                    "drillFile": "data/levels/A1_g3k1_uebung.json",
+                    "drillVersion": "1db071a563"
                 },
                 {
                     "id": "3.2",
                     "key": "g3k2",
                     "label": "3.2 Die Bank",
                     "file": "data/levels/A1_g3k2.json",
+                    "version": "cb4b24d2c6",
                     "drillKey": "g3k2_uebung",
                     "drillLabel": "3.2 Übung: Modalverben",
-                    "drillFile": "data/levels/A1_g3k2_uebung.json"
+                    "drillFile": "data/levels/A1_g3k2_uebung.json",
+                    "drillVersion": "6bbcf66dac"
                 },
                 {
                     "id": "3.3",
                     "key": "g3k3",
                     "label": "3.3 Die Kehrwoche",
                     "file": "data/levels/A1_g3k3.json",
+                    "version": "d15add29a2",
                     "drillKey": "g3k3_uebung",
                     "drillLabel": "3.3 Übung: mich, dich, ihn …",
-                    "drillFile": "data/levels/A1_g3k3_uebung.json"
+                    "drillFile": "data/levels/A1_g3k3_uebung.json",
+                    "drillVersion": "323117e159"
                 }
             ]
         },
@@ -128,27 +150,33 @@ export const STORY_CONTENT = {
                     "key": "g4k1",
                     "label": "4.1 Im Restaurant",
                     "file": "data/levels/A1_g4k1.json",
+                    "version": "0957e5427c",
                     "drillKey": "g4k1_uebung",
                     "drillLabel": "4.1 Übung: möchten",
-                    "drillFile": "data/levels/A1_g4k1_uebung.json"
+                    "drillFile": "data/levels/A1_g4k1_uebung.json",
+                    "drillVersion": "0c44bd93ad"
                 },
                 {
                     "id": "4.2",
                     "key": "g4k2",
                     "label": "4.2 Der Kerala Store",
                     "file": "data/levels/A1_g4k2.json",
+                    "version": "591ac4c15b",
                     "drillKey": "g4k2_uebung",
                     "drillLabel": "4.2 Übung: Trennbare Verben",
-                    "drillFile": "data/levels/A1_g4k2_uebung.json"
+                    "drillFile": "data/levels/A1_g4k2_uebung.json",
+                    "drillVersion": "5027a9f21f"
                 },
                 {
                     "id": "4.3",
                     "key": "g4k3",
                     "label": "4.3 Cricket im Park",
                     "file": "data/levels/A1_g4k3.json",
+                    "version": "9add6c0079",
                     "drillKey": "g4k3_uebung",
                     "drillLabel": "4.3 Übung: und, aber, oder, denn",
-                    "drillFile": "data/levels/A1_g4k3_uebung.json"
+                    "drillFile": "data/levels/A1_g4k3_uebung.json",
+                    "drillVersion": "d94912b496"
                 }
             ]
         },
@@ -161,27 +189,33 @@ export const STORY_CONTENT = {
                     "key": "g5k1",
                     "label": "5.1 Gute Besserung",
                     "file": "data/levels/A1_g5k1.json",
+                    "version": "81bdb19364",
                     "drillKey": "g5k1_uebung",
                     "drillLabel": "5.1 Übung: Imperativ",
-                    "drillFile": "data/levels/A1_g5k1_uebung.json"
+                    "drillFile": "data/levels/A1_g5k1_uebung.json",
+                    "drillVersion": "fd55a0160f"
                 },
                 {
                     "id": "5.2",
                     "key": "g5k2",
                     "label": "5.2 In der Praxis",
                     "file": "data/levels/A1_g5k2.json",
+                    "version": "ffe460a94e",
                     "drillKey": "g5k2_uebung",
                     "drillLabel": "5.2 Übung: mit, bei, von, zu …",
-                    "drillFile": "data/levels/A1_g5k2_uebung.json"
+                    "drillFile": "data/levels/A1_g5k2_uebung.json",
+                    "drillVersion": "2532d7f4ff"
                 },
                 {
                     "id": "5.3",
                     "key": "g5k3",
                     "label": "5.3 Ein Ausflug",
                     "file": "data/levels/A1_g5k3.json",
+                    "version": "1d2b7e86b5",
                     "drillKey": "g5k3_uebung",
                     "drillLabel": "5.3 Übung: Perfekt",
-                    "drillFile": "data/levels/A1_g5k3_uebung.json"
+                    "drillFile": "data/levels/A1_g5k3_uebung.json",
+                    "drillVersion": "903eed9208"
                 }
             ]
         }

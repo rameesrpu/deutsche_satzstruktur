@@ -2,7 +2,7 @@ import { readText } from './stubs.js';
 import { test, assertEqual } from './assert.js';
 import { beatsBefore, beatsAfterLast, nextPlayText, chapterStartText, storyStrip } from '../js/storyNarration.js';
 import { STORY_CONTENT } from '../js/storyContent.js';
-import { LEVEL_CONTENT, chapterOrder } from '../js/levelContent.js';
+import { LEVEL_CONTENT, chapterOrder, categoryUrl } from '../js/levelContent.js';
 
 const beats = [
     { read: 'Intro.' },
@@ -61,6 +61,19 @@ export function runStoryTests() {
                     }
                 }
             }
+        });
+
+        test(`story data ${level}: chapter and drill files are fetched with a content version`, () => {
+            for (const key of chapterOrder(level)) {
+                for (const cat of [LEVEL_CONTENT[level].categories[key], LEVEL_CONTENT[level].categories[`${key}_uebung`]]) {
+                    assertEqual(/^[0-9a-f]{10}$/.test(cat.version), true, `${key} version`);
+                    assertEqual(categoryUrl(cat), `${cat.file}?v=${cat.version}`);
+                    assertEqual(categoryUrl(cat, { library: true }),
+                        `${cat.file.replace('data/levels/', 'data/library/')}?v=${cat.version}`);
+                }
+            }
+            const grammar = LEVEL_CONTENT.A1.categories.hauptsatz;
+            assertEqual(categoryUrl(grammar), grammar.file, 'grammar files: no version');
         });
 
         test(`story data ${level}: chapter pictures exist and carry alt text and a version`, () => {

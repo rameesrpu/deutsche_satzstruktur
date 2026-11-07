@@ -58,13 +58,26 @@ for (const [level, stories] of Object.entries(STORY_CONTENT)) {
     const storyCategories = {};
     let index = 0;
     stories.forEach(story => story.chapters.forEach(ch => {
-        storyCategories[ch.key] = { label: ch.label, file: ch.file,
+        storyCategories[ch.key] = { label: ch.label, file: ch.file, version: ch.version,
             story: { kind: 'chapter', chapterKey: ch.key, index, storyNo: story.story, storyTitle: story.title } };
-        storyCategories[ch.drillKey] = { label: ch.drillLabel, file: ch.drillFile,
+        storyCategories[ch.drillKey] = { label: ch.drillLabel, file: ch.drillFile, version: ch.drillVersion,
             story: { kind: 'drill', chapterKey: ch.key, index, storyNo: story.story, storyTitle: story.title } };
         index++;
     }));
     LEVEL_CONTENT[level].categories = { ...storyCategories, ...LEVEL_CONTENT[level].categories };
+}
+
+/**
+ * URL to fetch a category's data/levels file, or with `library` its data/library twin.
+ * Story categories carry a content `version` (build_stories.py), appended as ?v= so a
+ * rebuilt file is never served from a stale browser cache.
+ * @param {{file: string, version?: string}} catData
+ * @param {{library?: boolean}} [opts]
+ * @returns {string}
+ */
+export function categoryUrl(catData, { library = false } = {}) {
+    const path = library ? catData.file.replace('data/levels/', 'data/library/') : catData.file;
+    return catData.version ? `${path}?v=${catData.version}` : path;
 }
 
 /**

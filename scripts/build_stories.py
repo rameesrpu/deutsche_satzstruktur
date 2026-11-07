@@ -24,7 +24,9 @@ chapter file gets "image": {"src": "<path>?v=<content hash>", "alt"}. Missing al
 (.txt/.md notes, e.g. the image prompt, are ignored).
 
 Library `version` is a hash of the file's words, so it changes exactly when the
-content changes (browsers then reload the words, see bulkLoadLibraryCategory).
+content changes (browsers then reload the words, see bulkLoadLibraryCategory). The index
+(js/storyContent.js) carries `version`/`drillVersion`, a hash of each levels+library pair,
+which the app appends as ?v= when fetching them, so a rebuilt file is never served stale.
 
 Tags: one per whitespace-separated word of a play sentence; "/" starts the next clause.
   S.<p>        subject      p: m f n pl ich du wir ihr Sie
@@ -305,12 +307,15 @@ def build_sentence_set(level, items, where, warnings, errors):
 
 
 def write_set(name, level, category, texts, library, extra=None):
+    """Write the data/levels + data/library pair; returns a hash of both (the fetch URL's ?v=)."""
     level_data = {'level': level, 'category': category, **(extra or {}), 'sentences': texts}
-    write_json(os.path.join(LEVELS_DIR, f'{name}.json'), level_data)
-    write_json(os.path.join(LIBRARY_DIR, f'{name}.json'), {
+    library_data = {
         'level': level, 'category': category,
         'version': content_version(library), 'sentences': library,
-    })
+    }
+    write_json(os.path.join(LEVELS_DIR, f'{name}.json'), level_data)
+    write_json(os.path.join(LIBRARY_DIR, f'{name}.json'), library_data)
+    return content_version([level_data, library_data])
 
 
 def build():
@@ -362,18 +367,18 @@ def build():
             image = chapter_image(level, ch, images.get(level, {}), warnings)
             if image:
                 extra['image'] = image
-            write_set(name, level, label, texts, library, extra)
+            version = write_set(name, level, label, texts, library, extra)
 
             drill_texts, drill_library = build_sentence_set(level, ch['drill'], f'{name}_uebung', warnings, errors)
-            write_set(f'{name}_uebung', level, drill_label, drill_texts, drill_library, {
+            drill_version = write_set(f'{name}_uebung', level, drill_label, drill_texts, drill_library, {
                 'chapter': ch['id'], 'skill': ch['skill'],
             })
 
             chapters_out.append({
                 'id': ch['id'], 'key': key, 'label': label,
-                'file': f'data/levels/{name}.json',
+                'file': f'data/levels/{name}.json', 'version': version,
                 'drillKey': f'{key}_uebung', 'drillLabel': drill_label,
-                'drillFile': f'data/levels/{name}_uebung.json',
+                'drillFile': f'data/levels/{name}_uebung.json', 'drillVersion': drill_version,
             })
             print(f'  {name}: {len(texts)} play + {len(drill_texts)} drill sentences')
         index.setdefault(level, []).append({
