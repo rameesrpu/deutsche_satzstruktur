@@ -69,8 +69,7 @@ editor to a "Werkstatt" tab.
 > 2026-11-07 done. `showScreen()` in app.js sets `body[data-screen]` (home / practice / words /
 > workshop / play; the reader is an overlay that returns to its screen; 'end' is left for U6).
 > Screens are built by `js/homeScreen.js` (pure helpers unit-tested in tests/homeScreen.test.js).
-> Home: "Weiter mit Kapitel" card (Lesen / Spielen), today's sentences vs `DAILY_GOAL` (10, U7 makes it
-> a setting), weak spots (`reviewWeight` > 0 → "Schwächen üben" = review game over all levels), the
+> Home: "Weiter mit Kapitel" card (Lesen / Spielen), today's sentences vs `DAILY_GOAL` (10; a setting since U7), weak spots (`reviewWeight` > 0 → "Schwächen üben" = review game over all levels), the
 > current story's chapters (done / current / locked). Üben: weak spots, drills of unlocked chapters,
 > grammar categories. Wörter: glossary of unlocked chapters, article in its gender ink. Werkstatt =
 > the old editor unchanged. Play = game canvas without header/editor panels; ✕ (or target score) goes
@@ -114,6 +113,19 @@ editor to a "Werkstatt" tab.
 > Checked at 375×812 and 1280×800 (mistakes, none, last chapter 5.3, chip bar, Weiter → 1.2, replay
 > and its recap, closing card).
 
-### [ ] U7 Settings and daily goal
-Keep only sound / speech / timer for the learner; move Max Points and Multiple Categories to
-Werkstatt. Daily goal (sentences per day) shown on Home. Later: installable PWA.
+### [x] U7 Settings and daily goal
+> 2026-11-07 done. Gear button in Home's header → `showScreen('settings')` ("Einstellungen",
+> `js/settings.js`; nav keeps Lernen active, back arrow → Home): Ton, Aussprache, Hörübung, Zeitdruck
+> as 56×44 switches with a short helper line each (Aussprache/Hörübung greyed + German hint when no
+> German voice, via the existing `detectGermanVoice` status), Tagesziel 5 / 10 / 20 / 30 (default 10,
+> localStorage `dailyGoal`). One source of truth: both this screen and the Werkstatt panel go through
+> `DeutschApp.setLearnerSetting()` (SoundManager keys `gameSoundEnabled` / `gameSpeechEnabled` /
+> `gamePromptEnabled`; time challenge now persisted as `gameTimeChallenge`) and `syncLearnerToggles()`
+> keeps the Werkstatt checkboxes in step. The Werkstatt panel keeps everything (Max Points, Multiple
+> Categories + levels, Story Mode, Review Weak Spots, Export/Import, and the same learner toggles).
+> Home: `DAILY_GOAL` replaced by the setting; `goalProgress()` caps the ring and, once reached, the tile
+> turns `--success-bg` with a check in the ring and "Tagesziel erreicht" (no confetti). Pure helpers
+> (`parseDailyGoal`, `goalProgress`, `settingsRows`, load/save) tested in tests/settings.test.js.
+> Checked at 375×812 and 1280×800 (goal not reached / reached, settings with and without a German
+> voice, learner ⇄ Werkstatt toggle sync, goal change reflected on Home).
+> Later: installable PWA.

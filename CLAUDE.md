@@ -22,6 +22,7 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 - `glossary.js` — tap-to-translate: `glossTokens()` (pure; mirrors `glossary_matches` in build_stories.py) and the word popover
 - `homeScreen.js` — learner screens Home (Lernen) / Üben / Wörter: pure helpers (chapter status, today's count,
   weak spots) + `renderHome/renderPractice/renderWords`; the screen router (`showScreen`) is in app.js
+- `settings.js` — learner settings screen (Einstellungen: Ton, Aussprache, Hörübung, Zeitdruck, Tagesziel) + daily goal / time challenge persistence; pure `parseDailyGoal`, `goalProgress`, `settingsRows`
 - `storyReader.js` — full-screen chapter reader (📖 next to the category select, "Erst lesen" on a chapter's first card)
 - `wordManager.js` — word data model of the current sentence
 - `sentenceManager.js` — all sentences, localStorage persistence, library bulk-load

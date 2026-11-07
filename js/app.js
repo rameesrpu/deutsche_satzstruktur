@@ -15,14 +15,21 @@ import { showStoryReader, hideStoryReader } from './storyReader.js';
 import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday, countWeakSpots,
     renderHome, renderPractice, renderWords } from './homeScreen.js';
 import { buildRecapModel, renderRecap } from './chapterRecap.js';
+import { loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge, renderSettings } from './settings.js';
 
 /**
  * Screens (body[data-screen], see showScreen): 'home' (Lernen), 'practice' (Üben),
  * 'words' (Wörter), 'workshop' (Werkstatt: the sentence editor, Feldermodell, settings,
  * import/export), 'play' (a game started from the learner screens), 'read' (the story
  * reader, an overlay on the screen it was opened from), 'end' (chapter recap after a story
- * chapter on the play screen, chapterRecap.js).
+ * chapter on the play screen, chapterRecap.js), 'settings' (Einstellungen from Home's gear,
+ * settings.js; Lernen stays the active nav tab).
  */
+
+/** Werkstatt settings-panel checkbox of each learner setting. */
+const LEARNER_TOGGLE_IDS = {
+    sound: 'sound-toggle', speech: 'speech-toggle', prompt: 'listen-toggle', timer: 'time-challenge-toggle',
+};
 
 /**
  * Main Application
@@ -102,6 +109,7 @@ class DeutschApp {
         this.screen = 'home';
         this.readReturn = 'home';   // screen to go back to when the reader closes
         this.playSession = null;    // { review: bool } game modes to restore after a Home-started game
+        this.dailyGoal = loadDailyGoal(); // sentences per day (Einstellungen → Tagesziel)
     }
 
     /**
@@ -263,48 +271,15 @@ class DeutschApp {
             });
         }
 
-        const timeChallengeToggle = document.getElementById('time-challenge-toggle');
-        if (timeChallengeToggle) {
-            timeChallengeToggle.addEventListener('change', () => {
-                this.gameMode.timeChallengeMode = timeChallengeToggle.checked;
-                if (this.gameMode.isActive) {
-                    if (timeChallengeToggle.checked) {
-                        this.gameMode.wordStartTime = Date.now();
-                        this.gameMode.startTimerAnimation();
-                    } else {
-                        this.gameMode.stopTimerAnimation();
-                        this.gameMode.wordStartTime = null;
-                        this.redrawAll();
-                    }
-                }
-            });
+        // Learner settings: the Werkstatt checkboxes and the Einstellungen screen both
+        // go through setLearnerSetting (one source of truth, same localStorage keys).
+        this.gameMode.timeChallengeMode = loadTimeChallenge();
+        for (const [key, id] of Object.entries(LEARNER_TOGGLE_IDS)) {
+            const toggle = document.getElementById(id);
+            if (!toggle) continue;
+            toggle.addEventListener('change', () => this.setLearnerSetting(key, toggle.checked));
         }
-
-        const soundToggle = document.getElementById('sound-toggle');
-        if (soundToggle && typeof gameSounds !== 'undefined') {
-            soundToggle.checked = gameSounds.enabled;
-            soundToggle.addEventListener('change', () => {
-                gameSounds.setEnabled(soundToggle.checked);
-                if (soundToggle.checked) gameSounds.select(); // audible confirmation
-            });
-        }
-
-        const speechToggle = document.getElementById('speech-toggle');
-        if (speechToggle && typeof gameSounds !== 'undefined') {
-            speechToggle.checked = gameSounds.speechEnabled;
-            speechToggle.addEventListener('change', () => {
-                gameSounds.setSpeechEnabled(speechToggle.checked);
-                if (speechToggle.checked) gameSounds.speak('Los geht\'s!'); // audible confirmation
-            });
-        }
-
-        const listenToggle = document.getElementById('listen-toggle');
-        if (listenToggle && typeof gameSounds !== 'undefined') {
-            listenToggle.checked = gameSounds.promptEnabled;
-            listenToggle.addEventListener('change', () => {
-                gameSounds.setPromptEnabled(listenToggle.checked);
-            });
-        }
+        this.syncLearnerToggles();
 
         gameSounds.detectGermanVoice(status => this.applyVoiceStatus(status));
 
@@ -389,25 +364,85 @@ class DeutschApp {
         }
     }
 
+    /** Current learner settings (see settings.js). */
+    learnerSettings() {
+        return {
+            sound: gameSounds.enabled,
+            speech: gameSounds.speechEnabled,
+            prompt: gameSounds.promptEnabled,
+            timer: this.gameMode.timeChallengeMode,
+            voice: gameSounds.voiceStatus,
+            dailyGoal: this.dailyGoal,
+        };
+    }
+
     /**
-     * Setup zoom controls (pinch-to-zoom)
+     * Change one learner setting (Werkstatt panel or Einstellungen screen), persist it
+     * and update both surfaces.
+     * @param {'sound'|'speech'|'prompt'|'timer'|'dailyGoal'} key
+     * @param {boolean|number} value
      */
+    setLearnerSetting(key, value) {
+        if (key === 'sound') {
+            gameSounds.setEnabled(value);
+            if (value) gameSounds.select(); // audible confirmation
+        } else if (key === 'speech') {
+            gameSounds.setSpeechEnabled(value);
+            if (value) gameSounds.speak('Los geht\'s!'); // audible confirmation
+        } else if (key === 'prompt') {
+            gameSounds.setPromptEnabled(value);
+        } else if (key === 'timer') {
+            this.gameMode.timeChallengeMode = value;
+            saveTimeChallenge(value);
+            if (this.gameMode.isActive) {
+                if (value) {
+                    this.gameMode.wordStartTime = Date.now();
+                    this.gameMode.startTimerAnimation();
+                } else {
+                    this.gameMode.stopTimerAnimation();
+                    this.gameMode.wordStartTime = null;
+                    this.redrawAll();
+                }
+            }
+        } else if (key === 'dailyGoal') {
+            saveDailyGoal(value);
+            this.dailyGoal = loadDailyGoal();
+        }
+        this.syncLearnerToggles();
+        if (this.screen === 'settings') this.renderSettingsScreen();
+    }
+
+    /** Werkstatt checkboxes ← current learner settings (speech ones respect the voice). */
+    syncLearnerToggles() {
+        const s = this.learnerSettings();
+        const missing = s.voice === 'missing';
+        for (const [key, id] of Object.entries(LEARNER_TOGGLE_IDS)) {
+            const toggle = document.getElementById(id);
+            if (!toggle) continue;
+            const needsVoice = key === 'speech' || key === 'prompt';
+            toggle.disabled = needsVoice && missing;
+            toggle.checked = !(needsVoice && missing) && s[key];
+            if (needsVoice) toggle.closest('.settings-toggle-row')?.classList.toggle('is-unavailable', missing);
+        }
+    }
+
+    renderSettingsScreen() {
+        const root = document.getElementById('screen-settings');
+        if (!root) return;
+        renderSettings(root, this.learnerSettings(), {
+            set: (key, value) => this.setLearnerSetting(key, value),
+            back: () => this.showScreen('home'),
+        });
+    }
+
     /**
      * No German TTS voice → grey out the speech toggles (the stored preference
      * is kept, so they come back if a voice appears) and say why, once.
      */
     applyVoiceStatus(status) {
         const missing = status === 'missing';
-        const toggles = [
-            [document.getElementById('speech-toggle'), gameSounds.speechEnabled],
-            [document.getElementById('listen-toggle'), gameSounds.promptEnabled],
-        ];
-        for (const [toggle, enabled] of toggles) {
-            if (!toggle) continue;
-            toggle.disabled = missing;
-            toggle.checked = !missing && enabled;
-            toggle.closest('.settings-toggle-row')?.classList.toggle('is-unavailable', missing);
-        }
+        this.syncLearnerToggles();
+        if (this.screen === 'settings') this.renderSettingsScreen();
         const note = document.getElementById('tts-unavailable-note');
         if (note) note.hidden = !missing;
         if (missing && gameSounds.speechEnabled) this.showVoiceNoticeOnce();
@@ -1119,12 +1154,12 @@ class DeutschApp {
         if (leavingGame) this.exitGame();
         if (name !== 'play') clearPlayChrome();
         document.body.dataset.screen = name;
-        for (const s of ['home', 'practice', 'words', 'end']) {
+        for (const s of ['home', 'practice', 'words', 'end', 'settings']) {
             const section = document.getElementById(`screen-${s}`);
             if (section) section.hidden = s !== name;
         }
         document.querySelectorAll('#app-nav .app-nav-btn').forEach(btn => {
-            const active = btn.dataset.screen === name;
+            const active = btn.dataset.screen === (name === 'settings' ? 'home' : name);
             btn.classList.toggle('active', active);
             if (active) btn.setAttribute('aria-current', 'page');
             else btn.removeAttribute('aria-current');
@@ -1132,6 +1167,7 @@ class DeutschApp {
         if (name === 'home') this.renderHomeScreen();
         else if (name === 'practice') this.renderPracticeScreen();
         else if (name === 'words') this.renderWordsScreen();
+        else if (name === 'settings') this.renderSettingsScreen();
         else if (name !== 'end') this.redrawAll();
     }
 
@@ -1214,12 +1250,14 @@ class DeutschApp {
         renderHome(root, {
             chapters: rows,
             playedToday: countPlayedToday(progress, now),
+            dailyGoal: this.dailyGoal,
             weakSpots: countWeakSpots(progress, now),
             now,
         }, {
             read: ch => this.openReader(ch.level, ch.key),
             play: ch => this.startChapter(ch.level, ch.key),
             review: () => this.startReview(),
+            settings: () => this.showScreen('settings'),
         });
     }
 

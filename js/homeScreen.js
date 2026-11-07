@@ -7,9 +7,7 @@
 import { STORY_CONTENT } from './storyContent.js';
 import { reviewWeight } from './sentencePicker.js';
 import { GRAMMAR_PALETTE } from './grammaticalConfig.js';
-
-/** Sentences per day shown as today's goal on Home (U7 makes it a setting). */
-export const DAILY_GOAL = 10;
+import { goalProgress } from './settings.js';
 
 // --- Pure helpers ---
 
@@ -117,6 +115,11 @@ const ICONS = {
     check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
     lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
     chevron: '<path d="M9 6l6 6-6 6"/>',
+    gear: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 ' +
+        '1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 ' +
+        '.3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 ' +
+        '1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 ' +
+        '1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
 };
 const PLAY_ICON = '<svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>';
 
@@ -152,16 +155,18 @@ function progressBar(fraction) {
     return el('div', { className: 'home-progress' }, fill);
 }
 
-/** Today's goal as a ring: `count` of `goal`. */
-function goalRing(count, goal) {
+/** Today's goal as a ring (goalProgress result); a check in the middle once reached. */
+function goalRing({ count, goal, fraction, reached }) {
     const r = 18, len = 2 * Math.PI * r;
-    const done = Math.min(count / goal, 1) * len;
+    const done = fraction * len;
     return el('span', {
         className: 'home-ring', role: 'img', 'aria-label': `${count} von ${goal} Sätzen`,
         html: `<svg viewBox="0 0 44 44" width="44" height="44" aria-hidden="true">` +
             `<circle cx="22" cy="22" r="${r}" fill="none" stroke="var(--line)" stroke-width="5"/>` +
             (count > 0 ? `<circle cx="22" cy="22" r="${r}" fill="none" stroke="var(--success-500)" stroke-width="5" ` +
                 `stroke-linecap="round" stroke-dasharray="${done.toFixed(1)} ${len.toFixed(1)}" transform="rotate(-90 22 22)"/>` : '') +
+            (reached ? `<path d="M15 22.5l4.5 4.5L29 17.5" fill="none" stroke="var(--success-600)" stroke-width="2.5" ` +
+                `stroke-linecap="round" stroke-linejoin="round"/>` : '') +
             `</svg>`,
     });
 }
@@ -186,18 +191,23 @@ function screenHead(title, sub = null) {
  * @param {Object[]} model.chapters   chapterStatuses() rows plus `data` (chapter file or null)
  *   and `stats` (sentenceStats)
  * @param {number} model.playedToday
+ * @param {number} model.dailyGoal  sentences per day (settings.js)
  * @param {number} model.weakSpots
  * @param {number} model.now
- * @param {{read: function(Object), play: function(Object), review: function()}} actions
+ * @param {{read: function(Object), play: function(Object), review: function(), settings: function()}} actions
  */
-export function renderHome(root, { chapters, playedToday, weakSpots, now }, actions) {
+export function renderHome(root, { chapters, playedToday, dailyGoal, weakSpots, now }, actions) {
     const date = new Date(now).toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' });
     const current = chapters.find(c => c.status === 'current') ||
         chapters.find(c => c.status === 'open') || null;
     const allDone = !current && chapters.length > 0 && chapters.every(c => c.status === 'done');
     const focus = current || (allDone ? chapters[chapters.length - 1] : chapters[0]);
 
-    const parts = [screenHead(greeting(now), date)];
+    const head = screenHead(greeting(now), date);
+    const parts = [el('div', { className: 'screen-head-row' }, head,
+        el('button', { type: 'button', className: 'screen-icon-btn', 'aria-label': 'Einstellungen',
+            title: 'Einstellungen', onclick: () => actions.settings(), html: icon('gear') }))];
+    const goal = goalProgress(playedToday, dailyGoal);
 
     if (focus) {
         const s = focus.stats;
@@ -221,11 +231,11 @@ export function renderHome(root, { chapters, playedToday, weakSpots, now }, acti
     }
 
     parts.push(el('div', { className: 'home-tiles' },
-        el('div', { className: 'home-card home-tile' },
-            goalRing(playedToday, DAILY_GOAL),
+        el('div', { className: `home-card home-tile home-goal${goal.reached ? ' is-reached' : ''}` },
+            goalRing(goal),
             el('span', { className: 'home-tile-text' },
-                el('strong', {}, `${playedToday}/${DAILY_GOAL}`),
-                el('span', { className: 'home-muted' }, 'Sätze heute'))),
+                el('strong', {}, `${goal.count}/${goal.goal}`),
+                el('span', { className: 'home-muted' }, goal.label))),
         el('button', {
             type: 'button', className: 'home-card home-tile home-tile-btn', disabled: weakSpots === 0,
             onclick: () => actions.review(),
