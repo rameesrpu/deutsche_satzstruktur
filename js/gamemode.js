@@ -20,7 +20,8 @@ export class GameMode {
     /**
      * @param {Object} host  app services: { sentenceManager, levelSelector, redraw(),
      *   setView(view), updateSentenceList(), startChapter(level, category, opts),
-     *   openReader(level, category), onStop() (optional: after stop()) }
+     *   openReader(level, category), onStop() (optional: after stop()),
+     *   showRecap(run) (optional: chapter-end recap on the play screen, chapterRecap.js) }
      */
     constructor(svg, wordManager, gridViewModel, host) {
         this.host = host;
@@ -58,6 +59,12 @@ export class GameMode {
         // Review mode: prefer sentences with past mistakes (progressStore)
         this.reviewMode = false;
 
+        // Chapter recap (chapterRecap.js): finished sentences of the current story chapter
+        // run ({level, category, results: ChapterRunSentence[]}), and "schwere Sätze
+        // nochmal" ({level, category, ids}: play only these sentences, no narration)
+        this.run = null;
+        this.replay = null;
+
         // Pre-calculated gridview state
         this.preCalculatedBoxes = [];
         this.preCalculatedConnections = [];
@@ -90,6 +97,7 @@ export class GameMode {
 
         // Wrong placements in the current sentence, recorded to progressStore on completion
         this.sentenceMistakes = emptyMistakes();
+        this.sentenceMisses = new Map(); // manual item index → RunMiss (chapterRecap.js)
         this.bestSessionStreak = 0;
 
         // Play screen (playScreen.js): feedback bar of the last placement
@@ -307,6 +315,7 @@ export class GameMode {
         this.currentWordDisplay = null;
         this.currentWordAttempts = 0;
         this.sentenceMistakes = emptyMistakes();
+        this.sentenceMisses = new Map();
         this.hideMistakeHint();
         this.feedback = null;
         this.waitingForContinue = false;
@@ -379,6 +388,8 @@ export class GameMode {
         this.wordStartTime = null;
         this.batchSentencesPlayed = 0;
         this.batchCurrentCategory = null;
+        this.run = null;
+        this.replay = null;
 
         // Remove keyboard event listener
         if (this.keyboardHandler) {
@@ -1220,6 +1231,7 @@ export class GameMode {
         } else {
             console.log('✗ Incorrect placement!', outcome.result);
             addMistake(this.sentenceMistakes, outcome.result);
+            this.recordMiss(currentItem, itemToValidate, outcome.result, cell, caseType, before);
 
             // Visual only: reset streak display and shake the word pill
             this.displayStreak = 0;
@@ -1249,6 +1261,61 @@ export class GameMode {
                 }, 800);
             }
         }
+    }
+
+    /**
+     * Remember a wrong placement of the current phrase for the chapter recap: the first
+     * wrong attempt (what was chosen) plus the right answer's German explanation.
+     */
+    recordMiss(item, word, result, cell, caseType, preposition) {
+        let miss = this.sentenceMisses.get(this.currentIndex);
+        if (!miss) {
+            const exp = result.expectedCell;
+            const expCell = exp ? GRID_CELLS.find(c => c.row === exp.row && c.col === exp.col) : null;
+            const solution = placementFeedback({
+                ok: true, auto: true, word, phrase: this.getItemText(item),
+                caseType: result.expectedCase, cellLabel: expCell ? expCell.label : null, preposition,
+            });
+            const [start, end] = this.getItemWordRange(item);
+            miss = {
+                start, end, phrase: this.getItemText(item), key: expCell ? expCell.key : 'none',
+                cellWrong: !result.cellOk, caseWrong: !result.caseOk,
+                chosenCell: cell ? cell.label : null, chosenCase: caseType || null,
+                expectedCell: expCell ? expCell.label : null, expectedCase: result.expectedCase,
+                why: solution.lines[0] || '', attempts: 0,
+            };
+            this.sentenceMisses.set(this.currentIndex, miss);
+        }
+        miss.attempts++;
+    }
+
+    /** Add the finished sentence to the chapter run (story chapter or hard-sentence replay). */
+    recordRun() {
+        const sentence = this.host.sentenceManager.getCurrentSentence();
+        if (!sentence) return;
+        const chapter = this.replay || this.getStoryChapter();
+        if (!chapter) return;
+        if (!this.run || this.run.level !== chapter.level || this.run.category !== chapter.category) {
+            this.run = { level: chapter.level, category: chapter.category, results: [] };
+        }
+        const record = {
+            text: sentence.text,
+            words: this.words.map(w => w.text),
+            items: this.manualItems.length,
+            misses: [...this.sentenceMisses.values()].sort((a, b) => a.start - b.start),
+        };
+        this.run.results = this.run.results.filter(r => r.text !== record.text).concat(record);
+    }
+
+    /**
+     * Hand the finished run to the app's recap screen (play screen only).
+     * @param {{level: string, category: string}} chapter  the chapter the run belongs to
+     */
+    finishRun(chapter) {
+        const run = this.run || { level: chapter.level, category: chapter.category, results: [] };
+        const replay = !!this.replay;
+        this.run = null;
+        this.host.showRecap({ ...run, replay });
     }
 
     /**
@@ -1545,6 +1612,7 @@ export class GameMode {
     showGameComplete() {
         console.log('🎉 Sentence Complete! Sentence Score:', this.currentSentenceScore, 'Total Score:', this.totalScore);
         this.recordProgress();
+        this.recordRun();
         this.sentencesCompleted++; // play screen progress bar (display only)
 
         // Check if player reached target score
@@ -1603,6 +1671,10 @@ export class GameMode {
      * Load the next sentence (picked per the active mode) and continue the game
      */
     loadRandomSentenceAndContinue() {
+        if (this.replay) {
+            this.continueReplay();
+            return;
+        }
         const chapter = this.getStoryChapter();
         if (chapter) {
             this.continueStoryChapter(chapter);
@@ -1653,6 +1725,23 @@ export class GameMode {
         console.log(`Loaded next sentence (${picked.mode}):`, picked.sentence.text);
     }
 
+    /** "Schwere Sätze nochmal": the next sentence of the replay list, or the recap after the last. */
+    continueReplay() {
+        const { sentenceManager } = this.host;
+        const picked = pickNextSentence({
+            mode: 'list', sentences: sentenceManager.getAllSentences(),
+            currentId: sentenceManager.currentSentenceId, list: this.replay.ids,
+        });
+        if (!picked.sentence) {
+            this.finishRun(this.replay);
+            return;
+        }
+        sentenceManager.loadSentence(picked.sentence.id);
+        this.startNewSentence();
+        this.host.updateSentenceList();
+        this.host.redraw();
+    }
+
     // --- Story chapters (data/stories/, see storyNarration.js) ---
 
     /**
@@ -1662,7 +1751,7 @@ export class GameMode {
      * @returns {?{level: string, category: string, cat: Object, data: Object}}
      */
     getStoryChapter() {
-        if (this.reviewMode || this.multiCategoryMode) return null;
+        if (this.reviewMode || this.multiCategoryMode || this.replay) return null;
         const { levelSelector } = this.host;
         if (!levelSelector) return null;
         const level = levelSelector.currentLevel;
@@ -1746,6 +1835,26 @@ export class GameMode {
     showChapterEnd(chapter) {
         const { level, category, cat, data } = chapter;
         const { levelSelector } = this.host;
+        // Play screen: the story's closing lines (if any), then the recap screen
+        if (this.isPlayScreen() && this.host.showRecap) {
+            const closing = beatsAfterLast(data.beats);
+            if (closing.length === 0) {
+                this.finishRun(chapter);
+                return;
+            }
+            this.pauseForStoryCard();
+            showStoryCard({
+                heading: cat.label,
+                lines: closing,
+                buttons: [{ label: 'Weiter', icon: 'next', primary: true, onClick: () => {
+                    hideStoryCard();
+                    this.finishRun(chapter);
+                } }],
+                onSpeak: texts => this.speakStoryLines(texts),
+                glossary: data.glossary,
+            });
+            return;
+        }
         const order = chapterOrder(level);
         const nextKey = order[order.indexOf(category) + 1] || null;
         const complete = levelSelector.isChapterComplete(level, category);

@@ -120,10 +120,14 @@ export function initPlayChrome(game, { onClose, onContinue }) {
     bottom.querySelector('#play-continue').addEventListener('click', () => onContinue());
 }
 
-/** Progress of the current sentence: story chapter sentences, else a session window. */
+/** Progress of the current sentence: story chapter sentences, replay list, else a session window. */
 function progressState(game) {
     const chapter = game.getStoryChapter();
     const done = game.waitingForContinue;
+    if (game.replay) {
+        const idx = game.replay.ids.indexOf(game.host.sentenceManager.currentSentenceId);
+        if (idx >= 0) return progressSegments(game.replay.ids.length, idx, done);
+    }
     if (chapter) {
         const sentence = game.host.sentenceManager.getCurrentSentence();
         const idx = chapter.data.sentences.indexOf(sentence && sentence.text);

@@ -35,6 +35,9 @@ export function reviewWeight(entry, now) {
  * - 'multi-category': MULTI_CATEGORY_BATCH_SIZE sentences from one library category of
  *   `selectedLevels`, then a different random category; without matching library
  *   sentences it falls back to 'random-in-category'
+ * - 'list': the sentence after `currentId` in `list` (sentence ids, in order; the first
+ *   one when the current sentence is not in it), skipping ids not in `sentences`; null
+ *   after the last ("schwere Sätze nochmal" on the chapter recap)
  * - 'review': weighted random pick by reviewWeight() of `getProgress(sentence)`, from
  *   the library sentences of `selectedLevels` if non-empty, else the same list as
  *   'random-in-category'. Skips the current sentence and `usedIds` while other weighted
@@ -59,6 +62,7 @@ export function pickNextSentence({
     random = Math.random,
     getProgress = () => null,
     now = Date.now(),
+    list = [],
 }) {
     const pickFrom = list => list[Math.floor(random() * list.length)];
     const inCategory = (lvl, cat) => s => s.source === 'library' && s.level === lvl && s.category === cat;
@@ -83,6 +87,13 @@ export function pickNextSentence({
         if (level && category) return sentences.filter(inCategory(level, category));
         return sentences;
     };
+
+    if (mode === 'list') {
+        const byId = new Map(sentences.map(s => [s.id, s]));
+        const from = list.indexOf(currentId) + 1; // 0 when the current one is not in the list
+        const nextId = list.slice(from).find(id => byId.has(id));
+        return result(nextId !== undefined ? byId.get(nextId) : null, usedIds, batchState, mode);
+    }
 
     if (mode === 'review') {
         const pool = selectedLevels.length > 0

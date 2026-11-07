@@ -14,12 +14,14 @@ import { chapterStartText, hideStoryCard, isStoryCardOpen } from './storyNarrati
 import { showStoryReader, hideStoryReader } from './storyReader.js';
 import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday, countWeakSpots,
     renderHome, renderPractice, renderWords } from './homeScreen.js';
+import { buildRecapModel, renderRecap } from './chapterRecap.js';
 
 /**
  * Screens (body[data-screen], see showScreen): 'home' (Lernen), 'practice' (Üben),
  * 'words' (Wörter), 'workshop' (Werkstatt: the sentence editor, Feldermodell, settings,
  * import/export), 'play' (a game started from the learner screens), 'read' (the story
- * reader, an overlay on the screen it was opened from). U6 adds 'end' (chapter recap).
+ * reader, an overlay on the screen it was opened from), 'end' (chapter recap after a story
+ * chapter on the play screen, chapterRecap.js).
  */
 
 /**
@@ -87,7 +89,8 @@ class DeutschApp {
             updateSentenceList: () => this.updateSentenceList(),
             startChapter:       (level, category, opts) => this.startChapter(level, category, opts),
             openReader:         (level, category) => this.openReader(level, category),
-            onStop:             () => this.handleGameStopped()
+            onStop:             () => this.handleGameStopped(),
+            showRecap:          (run) => this.showRecap(run)
         });
         this.renderer = new Renderer(this.svg, this.wordManager);
         this.uiController = new UIController(this.wordManager, () => this.redrawAll(), this.gridConfig);
@@ -1039,6 +1042,8 @@ class DeutschApp {
         await this.loadLibrarySentence(level, category, text);
 
         const gameModeBtn = document.getElementById('game-mode-btn');
+        this.gameMode.run = null; // a new chapter run for the recap
+        this.gameMode.replay = null;
         if (this.gameMode.isActive) {
             if (this.gameMode.isPaused) this.gameMode.resume();
             this.currentView = 'game';
@@ -1105,7 +1110,7 @@ class DeutschApp {
      * Show one screen. Learner screens are re-rendered on every visit (progress may
      * have changed); 'workshop' and 'play' show the editor/game canvas, so it is
      * redrawn once it has its size. Leaving 'play' or 'workshop' ends a running game.
-     * @param {'home'|'practice'|'words'|'workshop'|'play'} name
+     * @param {'home'|'practice'|'words'|'workshop'|'play'|'end'} name  ('end' is rendered by showRecap)
      */
     showScreen(name) {
         const leavingGame = this.gameMode.isActive && name !== this.screen &&
@@ -1114,7 +1119,7 @@ class DeutschApp {
         if (leavingGame) this.exitGame();
         if (name !== 'play') clearPlayChrome();
         document.body.dataset.screen = name;
-        for (const s of ['home', 'practice', 'words']) {
+        for (const s of ['home', 'practice', 'words', 'end']) {
             const section = document.getElementById(`screen-${s}`);
             if (section) section.hidden = s !== name;
         }
@@ -1127,7 +1132,7 @@ class DeutschApp {
         if (name === 'home') this.renderHomeScreen();
         else if (name === 'practice') this.renderPracticeScreen();
         else if (name === 'words') this.renderWordsScreen();
-        else this.redrawAll();
+        else if (name !== 'end') this.redrawAll();
     }
 
     /**
@@ -1251,6 +1256,56 @@ class DeutschApp {
                 .map(r => ({ label: r.label, entries: Object.values(r.data.glossary) }))
                 .filter(ch => ch.entries.length > 0),
         });
+    }
+
+    /**
+     * Chapter-end recap (from GameMode after a story chapter or a hard-sentence replay on
+     * the play screen): ends the game and shows the 'end' screen.
+     * @param {{level: string, category: string, results: Object[], replay: boolean}} run
+     */
+    async showRecap({ level, category, results, replay }) {
+        const rows = await this.loadChapterRows();
+        const idx = rows.findIndex(r => r.level === level && r.key === category);
+        if (idx < 0) { this.showScreen('home'); return; }
+        const row = rows[idx];
+        const nextRow = rows[idx + 1] && rows[idx + 1].level === level ? rows[idx + 1] : null;
+        const model = buildRecapModel({
+            chapter: { id: row.id, label: row.label, data: row.data },
+            results,
+            complete: row.status === 'done',
+            replay,
+            earlierGlossaries: rows.slice(0, idx).filter(r => r.level === level)
+                .map(r => (r.data && r.data.glossary) || {}),
+            next: nextRow ? { id: nextRow.id, label: nextRow.label, unlocked: nextRow.status !== 'locked' } : null,
+        });
+        this.showScreen('end');
+        const root = document.getElementById('screen-end');
+        if (!root) return;
+        renderRecap(root, model, {
+            next: () => this.startChapter(level, nextRow.key),
+            home: () => this.showScreen('home'),
+            words: () => this.showScreen('words'),
+            replay: texts => this.replayHardSentences(level, category, texts),
+        });
+    }
+
+    /** "Schwere Sätze nochmal": play only these sentences of a chapter (no narration), then the recap. */
+    async replayHardSentences(level, category, texts) {
+        await this.levelSelector.selectCategory(level, category);
+        const found = texts.map(t => this.sentenceManager.findLibrarySentence(level, category, t)).filter(Boolean);
+        if (found.length === 0) return;
+        if (this.gameMode.isActive) this.exitGame();
+        this.showScreen('play');
+        await this.loadLibrarySentence(level, category, found[0].text);
+        this.gameMode.replay = { level, category, ids: found.map(s => s.id) };
+        this.currentView = 'game';
+        this.gameMode.start();
+        const gameModeBtn = document.getElementById('game-mode-btn');
+        if (gameModeBtn) {
+            gameModeBtn.textContent = '✕';
+            gameModeBtn.title = 'Exit Game Mode';
+        }
+        this.redrawAll();
     }
 
     /**

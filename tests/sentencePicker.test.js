@@ -20,6 +20,16 @@ const entry = ({ cell = 0, dat = 0, last = 0, streak = 0, ago = 0 }) => ({
 });
 
 export function runSentencePickerTests() {
+    test('picker list: next id of the list after the current one, null at the end', () => {
+        const pick = (currentId, list) => pickNextSentence({ mode: 'list', sentences: SENTENCES, currentId, list });
+        assertEqual(pick(4, [4, 2, 6]).sentence.id, 2);
+        assertEqual(pick(2, [4, 2, 6]).sentence.id, 6);
+        assertEqual(pick(6, [4, 2, 6]).sentence, null);
+        assertEqual(pick(1, [4, 2]).sentence.id, 4, 'current not in the list → first');
+        assertEqual(pick(4, [4, 99, 5]).sentence.id, 5, 'unknown ids are skipped');
+        assertEqual(pick(4, [4, 2]).mode, 'list');
+    });
+
     test('picker random-in-category: only current category, skips current and used', () => {
         const used = new Set([2]);
         const r = pickNextSentence({ mode: 'random-in-category', sentences: SENTENCES, currentId: 1,

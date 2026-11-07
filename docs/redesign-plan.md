@@ -97,10 +97,22 @@ editor to a "Werkstatt" tab.
 > Checked at 375×812 and 1280×800 (card, placing, wrong, solved sentence, Feldermodell review,
 > chapter end, timer, TTS notice, Werkstatt game unchanged).
 
-### [ ] U6 Chapter-end recap
-After a chapter: sentences / % correct / new words, "Das war schwer" (missed sentences with the
-`explainMistake` reason), new words as chips colored by gender, "Weiter: next chapter" and
-"schwere Sätze nochmal".
+### [x] U6 Chapter-end recap
+> 2026-11-07 done. After a story chapter on the play screen: the closing narration (if any) as the
+> usual sheet with one "Weiter", then `showScreen('end')` (game stopped, nav hidden) built by
+> `js/chapterRecap.js`: green check, "KAPITEL n GESCHAFFT" (or "Ende von …" / "· Wiederholung"), title =
+> last short closing narration sentence, else the chapter title. Tiles: sentences of this run ·
+> % richtig = phrases right on the first try / all phrases (auto-placed = wrong) · new words = glossary
+> entries no earlier chapter of the level had. "Das war schwer": up to 3 sentences, most wrong attempts
+> first, missed phrases underlined in the right cell's palette ink/c, reason "Du hast X gewählt, richtig: Y."
+> + the German `placementFeedback` line for the right answer (GameMode.recordMiss keeps the first wrong
+> attempt per phrase; GameMode.run = this run's sentences). Chips: nouns first in gender tint/ink, others
+> grey, max 18 + "+n weitere" → Wörter; tap = ink word bar as in the reader. "Weiter: next chapter"
+> (startChapter, as Home's Spielen) or "Zur Übersicht"; "n schwere Sätze nochmal" replays only those
+> (sentencePicker mode 'list', no narration, own progress bar) and ends in a recap again. Drills, review,
+> random and the Werkstatt keep their old ending. Tests: tests/chapterRecap.test.js + picker 'list'.
+> Checked at 375×812 and 1280×800 (mistakes, none, last chapter 5.3, chip bar, Weiter → 1.2, replay
+> and its recap, closing card).
 
 ### [ ] U7 Settings and daily goal
 Keep only sound / speech / timer for the learner; move Max Points and Multiple Categories to

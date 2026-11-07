@@ -2986,6 +2986,227 @@ body[data-screen="play"] .canvas-container {
     }
 }
 
+/* ---- Chapter-end recap (U6, js/chapterRecap.js): body[data-screen="end"] ---- */
+body[data-screen="end"] .app-nav {
+    display: none;
+}
+
+.recap-inner {
+    max-width: 560px;
+    min-height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+.recap-body {
+    flex: 1;
+    padding: calc(36px + env(safe-area-inset-top, 0px)) 16px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.recap-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+.recap-badge {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-pill);
+    background: var(--success-bg);
+    color: var(--success-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.recap-badge .ui-icon {
+    width: 30px;
+    height: 30px;
+}
+.recap-kicker {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+.recap-title {
+    margin: 0;
+    font-family: var(--font-sentence);
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+}
+
+.recap-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+.recap-tile {
+    background: var(--surface-0);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+.recap-tile strong {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+}
+.recap-tile span {
+    font-size: 12px;
+    color: var(--ink-soft);
+}
+
+.recap-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.recap-h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+}
+.recap-card {
+    background: var(--surface-0);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 14px 16px;
+}
+.recap-hard {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.recap-sentence {
+    margin: 0;
+    font-family: var(--font-sentence);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--ink);
+}
+.recap-missed {
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 1px;
+}
+.recap-reason {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--ink-700);
+}
+.recap-reason b {
+    font-weight: 600;
+    color: var(--ink);
+}
+.recap-none {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--ink-700);
+}
+.recap-none-icon {
+    display: flex;
+    color: var(--success-600);
+}
+
+.recap-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.recap-chip {
+    min-height: 44px;
+    padding: 0 14px;
+    border: 1.5px solid transparent;
+    border-radius: var(--radius-pill);
+    background: var(--brand-50);
+    color: var(--ink-700);
+    font: 600 14px var(--font-ui);
+    cursor: pointer;
+}
+.recap-chip[aria-pressed="true"] {
+    border-color: currentColor;
+}
+.recap-chip-more {
+    background: transparent;
+    border-color: var(--line);
+    color: var(--ink-soft);
+}
+.recap-chip:focus-visible,
+.recap-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--ring);
+}
+
+.recap-foot {
+    position: sticky;
+    bottom: 0;
+    padding: 12px 16px calc(18px + env(safe-area-inset-bottom, 0px));
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.recap-foot .recap-word {
+    margin-bottom: 4px;
+}
+.recap-hint {
+    margin: 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.recap-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 0;
+    border-radius: 16px;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--dur-fast);
+}
+.recap-btn .ui-icon {
+    width: 18px;
+    height: 18px;
+}
+.recap-btn-primary {
+    min-height: 52px;
+    padding: 0 18px;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-fg);
+    font-size: 16px;
+}
+.recap-btn-primary:hover {
+    background: var(--btn-primary-hover);
+}
+.recap-btn-text {
+    min-height: 48px;
+    background: transparent;
+    color: var(--ink);
+    font-size: 15px;
+}
+.recap-btn-text:hover {
+    background: var(--brand-50);
+}
+
 /* === GAME MODE VISUAL JUICE (appended) === */
 /* Visual-only styles for game mode (js/gamemode.js). All class names are
    'gm-' prefixed. No existing rules above are modified. */

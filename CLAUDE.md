@@ -34,6 +34,8 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 - `progressStore.js` — `progressStore`: persisted game progress (localStorage `gameProgress`, per sentence keyed level/category/text; lifetime bests; `isMastered`); included in sentence export/import
 - `gamemode.js` — GameMode: placement game state, grid/controllers drawing, input, sentence flow (largest file)
 - `gameHud.js` — `drawHud(game)`: word bar (score pill, streak, current/auto/next words, timer bar), complete card; `GM_UI` colors
+- `chapterRecap.js` — chapter-end recap screen (`body[data-screen="end"]`): pure helpers (stats, hard sentences,
+  word chips) + `renderRecap`; GameMode records the run (`run`, `recordMiss`), app.js `showRecap`
 - `gameJuice.js` — display-only effects: SVG defs, confetti, floating text, ✓/✗ feedback, final celebration overlay
 - `playScreen.js` — full-screen play screen chrome (HTML around the SVG grid on `body[data-screen="play"]`): top bar
   (close, segmented progress, score), sentence with the framed phrase, feedback bar (`placementFeedback` in gameRules.js),
