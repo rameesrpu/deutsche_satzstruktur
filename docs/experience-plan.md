@@ -177,7 +177,7 @@ its hint and goes on with one tap; "Satzbau" link works; checked at 375×812 and
 > Strip and hint read well (2 beats, clamped line + "mehr" in 3.2 sentence 7; hint "Satzklammer: *muss … erledigen*").
 > Open (not fixed, outside E1–E3 files): `feldermodell.js` with a single verb puts everything after it in the
 > **Nachfeld** (Mittelfeld width 0: `nachfeld.start` = end of LK), e.g. *Ich kann das allein!*, *Wer ist der Mann?*
-> (a lesson sentence); 3.2 shows "Satzklammer" 9 times (see Later: throttle); feedback calls a predicate noun
+> (a lesson sentence) — fixed 2026-11-07 (single verb: Mittelfeld runs to the clause end); 3.2 shows "Satzklammer" 9 times (see Later: throttle); feedback calls a predicate noun
 > "Subjekt" (*Ayisha ist Ärztin.* → "Ärztin … hier Subjekt"). **Left for the owner on the real phone**: hearing a
 > German voice (phrase per placement, sentence once, nothing cut off when "Weiter" is tapped early, the strip's
 > read-aloud icon), and the tap feel on touch (headless pane: no voice, read-aloud only seen greyed).

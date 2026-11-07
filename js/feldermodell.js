@@ -173,16 +173,16 @@ export class FeldermodellRenderer {
 
         // If first and last verb are the same, adjust zones
         if (firstVerb.id === lastVerb.id) {
-            // Single verb: Mittelfeld extends from end of LK to before Nachfeld
+            // Single verb: no right bracket, so everything after the verb is Mittelfeld
+            // ("Ich kann | das allein!"); RK and Nachfeld collapse at the clause end.
+            // (nachfeld.start used to be the LK's right edge here, which left the
+            // Mittelfeld 0 wide and put every word after the verb in the Nachfeld.)
             boundaries.mittelfeld = {
                 start: boundaries.linkeKlammer.end,
-                end: boundaries.nachfeld.start
+                end: nachfeldEnd
             };
-            // RK is collapsed at the boundary between Mittelfeld and Nachfeld
-            boundaries.rechteKlammer = {
-                start: boundaries.nachfeld.start,
-                end: boundaries.nachfeld.start
-            };
+            boundaries.rechteKlammer = { start: nachfeldEnd, end: nachfeldEnd };
+            boundaries.nachfeld = { start: nachfeldEnd, end: nachfeldEnd };
         }
 
         // Define zones with calculated boundaries.
@@ -233,7 +233,7 @@ export class FeldermodellRenderer {
             boundaries.linkeKlammer.end,
             boundaries.mittelfeld.end,
             boundaries.rechteKlammer.end
-        ];
+        ].filter((x, i, all) => x < nachfeldEnd && all.indexOf(x) === i); // inner lines only, once
 
         boundaryPositions.forEach(x => {
             const line = document.createElementNS(this.svgNS, 'line');
