@@ -120,7 +120,18 @@ shows the card once at the start, then only the strip; resuming mid-chapter show
 once; "mehr" sheet opens/closes and the timer resumes; closing narration + recap unchanged;
 checked at 375×812, 375×667 and 1280×800; tests pass.
 
-### [ ] E3 Field model only when it teaches
+### [x] E3 Field model only when it teaches
+> 2026-11-07 done. Pure `felderLesson(words)` in the new `js/felderLesson.js` → `{kind, hint, parts}` (parts =
+> hint with the italic words); finite = verb/modal with a pronoun, bracket = nearest finite verb before a
+> non-finite verb or a clause-final `preposition` (particle; also imperative + particle), vorfeld skips a
+> leading comma interjection (≤ 3 words) and a leading *und/aber*. Play screen: `showGameComplete` sets
+> `game.felderLesson`; with a lesson `felderTimer` (`FELDER_AUTO_DELAY` 1.1 s) calls `openFelderReview()`,
+> the hint shows in the feedback bar (`.play-feedback-lesson`); else "Weiter" + "Satzbau" link. Timer cleared
+> in `startNewSentence`/`stop()` (an early "Weiter" skips the review). Werkstatt unchanged. Share: 64/240 A1
+> chapter sentences = 27 % (below the 30–45 % guess: 2.1/2.2 are all S–V–O; 3.2 71 %, 5.3 79 %), list in
+> `tests/snapshots/felder-lessons.json`. Checked in the browser pane at 375×812 and 1280×800: lesson
+> auto-switch + hint + one "Weiter", plain sentence one "Weiter", "Satzbau" link, close within the second
+> (timer cleared), chapter end card + recap, replay of hard sentences, E2 strip, Werkstatt 2-tap review.
 Files: `js/gameRules.js` (or a new small pure module, e.g. `js/felderLesson.js`), `js/gamemode.js`
 (`continueAfterSentence`, sentence-complete branch: `pendingFelderReview`), `js/playScreen.js`
 (continue button + "Satzbau" link + hint), `js/app.js` (felder review on the play screen,

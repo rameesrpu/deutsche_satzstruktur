@@ -6,6 +6,9 @@
  * Display only — reads GameMode state; taps call GameMode/app methods.
  * Story chapters (E2, docs/experience-plan.md): the narration before a sentence is a strip
  * above it (`game.storyLines`, last 2 lines via storyStrip(); "mehr" opens all of them).
+ * Solved sentence (E3): one "Weiter"; a sentence with a field-model lesson (felderLesson.js)
+ * switches to the Feldermodell on its own with the hint in the feedback bar, the others get
+ * a quiet "Satzbau" link beside "Weiter" that opens it.
  * The helpers at the top are pure (no DOM) and unit-tested in tests/playScreen.test.js.
  */
 
@@ -120,13 +123,18 @@ export function initPlayChrome(game, { onClose, onContinue }) {
                 `title="${c.name} (Taste ${c.hotkey})">${svgIcon(c.shape, 26, ' class="play-case-shape"')}` +
                 `<span class="play-case-label">${c.label}</span></button>`).join('') +
         `</div>` +
-        `<button type="button" class="play-continue" id="play-continue" hidden></button>`;
+        `<div class="play-continue-row" id="play-continue-row" hidden>` +
+            `<button type="button" class="play-continue" id="play-continue"></button>` +
+            `<button type="button" class="play-felder-link" id="play-felder-link" hidden ` +
+                `title="Den Satz im Feldermodell ansehen">Satzbau</button>` +
+        `</div>`;
     container.appendChild(bottom);
 
     top.querySelector('#play-close').addEventListener('click', () => onClose());
     bottom.querySelectorAll('.play-case').forEach(btn =>
         btn.addEventListener('click', () => game.toggleCase(btn.dataset.case)));
     bottom.querySelector('#play-continue').addEventListener('click', () => onContinue());
+    bottom.querySelector('#play-felder-link').addEventListener('click', () => game.openFelderReview());
 }
 
 // --- Story strip (E2) ---
@@ -290,6 +298,29 @@ function currentSentenceParts(game) {
     return sentenceParts(texts, range, revealEnd);
 }
 
+/** Field-model review on the play screen: the lesson hint (italic words from `parts`). */
+function renderLessonHint(el, lesson) {
+    el.hidden = false;
+    el.className = 'play-feedback play-feedback-lesson';
+    el.innerHTML = '';
+    const icon = document.createElement('span');
+    icon.className = 'play-feedback-icon';
+    icon.innerHTML = svgIcon(ICONS.bulb, 18);
+    const title = document.createElement('div');
+    title.className = 'play-feedback-text play-feedback-title';
+    title.lang = 'de';
+    for (const part of lesson.parts) {
+        if (part.em) {
+            const em = document.createElement('em');
+            em.textContent = part.text;
+            title.appendChild(em);
+        } else {
+            title.append(part.text);
+        }
+    }
+    el.append(icon, title);
+}
+
 function renderFeedback(el, game) {
     // After the last placement its explanation stays (often the noun with its article);
     // the prompt above the sentence says the sentence is done
@@ -379,8 +410,12 @@ export function renderPlayChrome(game, view) {
     const timer = document.getElementById('play-timer');
     timer.hidden = !(game.timeChallengeMode && game.wordStartTime !== null && !complete);
 
-    // Feedback, tray / continue
-    renderFeedback(document.getElementById('play-feedback'), game);
+    // Feedback (in the field-model review: the lesson hint, if any), tray / continue
+    const feedbackEl = document.getElementById('play-feedback');
+    const lesson = review && game.waitingForContinue ? game.felderLesson : null;
+    feedbackEl.parentElement.classList.toggle('is-lesson', !!lesson);
+    if (lesson) renderLessonHint(feedbackEl, lesson);
+    else renderFeedback(feedbackEl, game);
     const tray = document.getElementById('play-tray');
     tray.hidden = complete;
     tray.querySelectorAll('.play-case').forEach(btn => {
@@ -388,9 +423,12 @@ export function renderPlayChrome(game, view) {
         btn.classList.toggle('is-selected', on);
         btn.setAttribute('aria-pressed', String(on));
     });
+    document.getElementById('play-continue-row').hidden = !game.waitingForContinue;
     const cont = document.getElementById('play-continue');
-    cont.hidden = !game.waitingForContinue;
-    cont.innerHTML = `<span>${game.pendingFelderReview ? 'Satzbau ansehen' : 'Nächster Satz'}</span>${svgIcon(ICONS.next, 20)}`;
+    cont.innerHTML = `<span>Weiter</span>${svgIcon(ICONS.next, 20)}`;
+    // "Satzbau": sentences without a lesson (a lesson opens the review on its own)
+    document.getElementById('play-felder-link').hidden =
+        review || !game.waitingForContinue || !!game.felderLesson;
 }
 
 /** Leave the play screen: drop the view flag used by the CSS. */

@@ -1,0 +1,332 @@
+{
+ "total": "64/240 = 27 %",
+ "flagged": 64,
+ "count": 240,
+ "chapters": {
+  "A1_g1k1.json": {
+   "share": "1/14 = 7 %",
+   "sentences": [
+    "- | Wir sind gleich da.",
+    "- | Sie heißt Ayisha.",
+    "- | Ayisha ist Ärztin.",
+    "- | Ihre Heimat ist Kerala.",
+    "- | Das Wetter ist kalt.",
+    "- | Ich bin endlich hier!",
+    "- | Bist du schon da?",
+    "- | Die Koffer sind sehr schwer.",
+    "- | Der Automat ist kompliziert.",
+    "- | Sind Sie neu hier?",
+    "- | Ja, ich bin neu.",
+    "- | Deutsch ist besser!",
+    "- | Sie sind sehr nett!",
+    "vorfeld | Wer ist der Mann? | Verb an Position 2. Vorne steht Wer."
+   ]
+  },
+  "A1_g1k2.json": {
+   "share": "2/15 = 13 %",
+   "sentences": [
+    "vorfeld | Hier wohne ich jetzt! | Verb an Position 2. Vorne steht Hier.",
+    "- | Hallo, ich heiße Lea!",
+    "- | Ich lerne Krankenpflege.",
+    "- | Ich komme aus Indien.",
+    "- | Wohnt ihr schon lange hier?",
+    "- | Ja, wir wohnen gern hier.",
+    "- | Max wohnt auch hier.",
+    "- | Ich backe Brezeln.",
+    "- | Ich arbeite sehr früh.",
+    "- | Wir kochen heute zusammen!",
+    "- | Kochst du gern?",
+    "vorfeld | Heute koche ich nicht. | Verb an Position 2. Vorne steht Heute.",
+    "- | Ich bin sehr müde.",
+    "- | Lea und Max sind nett.",
+    "- | Ayisha wohnt jetzt in Stuttgart."
+   ]
+  },
+  "A1_g1k3.json": {
+   "share": "4/14 = 29 %",
+   "sentences": [
+    "- | Das Zimmer ist klein.",
+    "- | Aber das Fenster ist groß.",
+    "vorfeld | Hier ist ein Bett. | Verb an Position 2. Vorne steht Hier.",
+    "vorfeld | Und hier ist ein Tisch. | Verb an Position 2. Vorne steht hier.",
+    "- | Der Schrank ist sehr alt.",
+    "- | Die Lampe ist kaputt.",
+    "- | Die Lampe funktioniert wieder!",
+    "- | Die Küche ist sehr chaotisch.",
+    "vorfeld | Da sind viele Tassen. | Verb an Position 2. Vorne steht Da.",
+    "- | Die Teller sind schmutzig.",
+    "- | Die Brezeln sind ganz frisch!",
+    "vorfeld | Was ist eine Brezel? | Verb an Position 2. Vorne steht Was.",
+    "- | Bist du hungrig?",
+    "- | Ihr seid lustig!"
+   ]
+  },
+  "A1_g1k4.json": {
+   "share": "4/14 = 29 %",
+   "sentences": [
+    "vorfeld | Woher kommst du genau? | Verb an Position 2. Vorne steht Woher.",
+    "- | Ich komme aus Payyannur.",
+    "vorfeld | Wo ist das? | Verb an Position 2. Vorne steht Wo.",
+    "- | Payyannur ist in Kerala.",
+    "- | Ist es dort warm?",
+    "- | Ja, es ist immer warm.",
+    "- | Lernst du schon lange Deutsch?",
+    "vorfeld | Was machst du, Max? | Verb an Position 2. Vorne steht Was.",
+    "- | Ich backe Brot und Brezeln.",
+    "vorfeld | Was macht ihr heute Abend? | Verb an Position 2. Vorne steht Was.",
+    "- | Wir spielen oft Karten.",
+    "- | Spielst du auch Karten?",
+    "- | Nein, ich spiele Cricket.",
+    "- | Ist das wahr?"
+   ]
+  },
+  "A1_g1k5.json": {
+   "share": "2/15 = 13 %",
+   "sentences": [
+    "- | Grüß Gott, ich bin Frau Schäfer.",
+    "- | Haben Sie die Hausordnung?",
+    "- | Nein, ich habe keine Hausordnung.",
+    "vorfeld | Hier haben wir die Kehrwoche. | Verb an Position 2. Vorne steht Hier.",
+    "vorfeld | Was ist das? | Verb an Position 2. Vorne steht Was.",
+    "- | Ich habe leider keine Zeit.",
+    "- | Sie haben nie Zeit, Herr Brenner!",
+    "- | Sie haben Hühner?",
+    "- | Ja, ich habe fünf Hühner.",
+    "- | Die Hühner haben Namen.",
+    "- | Ich liebe Hühner!",
+    "- | Essen Sie gern Eier?",
+    "- | Ayisha nimmt sechs Eier.",
+    "- | Liest du die Hausordnung?",
+    "- | Max schläft schon wieder."
+   ]
+  },
+  "A1_g2k1.json": {
+   "share": "0/13 = 0 %",
+   "sentences": [
+    "- | Ich brauche einen Tisch.",
+    "- | Ich brauche auch einen Stuhl.",
+    "- | Und ich suche einen Spiegel.",
+    "- | Siehst du den Tisch da?",
+    "- | Der Tisch ist zu teuer.",
+    "- | Ich nehme den Tisch hier.",
+    "- | Max findet den Stuhl super!",
+    "- | Ayisha mag den Stuhl nicht.",
+    "- | Ich kaufe eine Lampe und einen Spiegel.",
+    "- | Wir haben keinen Platz!",
+    "- | Ich sehe nichts!",
+    "- | Wir schieben den Schrank!",
+    "- | Ich sehe ein Foto!"
+   ]
+  },
+  "A1_g2k2.json": {
+   "share": "0/14 = 0 %",
+   "sentences": [
+    "- | Kennst du die Frau?",
+    "- | Nein, ich kenne die Frau nicht.",
+    "- | Sie ist eine Krankenschwester.",
+    "- | Die Frau ist nicht aus Deutschland.",
+    "- | Das ist kein Deutsch!",
+    "- | Ist das Englisch?",
+    "- | Nein, das ist auch kein Englisch.",
+    "- | Das ist Malayalam!",
+    "- | Die Frau kommt vielleicht aus Kerala!",
+    "- | Aber das Foto ist sehr alt.",
+    "- | Hat das Foto keinen Namen?",
+    "- | Nein, es hat keinen Namen.",
+    "- | Wir haben keine Idee.",
+    "- | Ich finde das nicht spannend."
+   ]
+  },
+  "A1_g2k3.json": {
+   "share": "3/13 = 23 %",
+   "sentences": [
+    "- | Ist euer Kühlschrank immer so leer?",
+    "- | Das ist mein Zimmer!",
+    "- | Dein Zimmer ist so klein!",
+    "- | Aber mein Bett ist sehr bequem.",
+    "vorfeld | Wo ist dein Cricketschläger? | Verb an Position 2. Vorne steht Wo.",
+    "- | Mein Schläger ist in Kerala.",
+    "vorfeld | Wie ist deine Vermieterin? | Verb an Position 2. Vorne steht Wie.",
+    "- | Ihre Hühner sind wunderbar!",
+    "- | Das ist nicht unsere Familie.",
+    "vorfeld | Aber ihre Uniform kenne ich. | Verb an Position 2. Vorne steht ihre Uniform.",
+    "- | Mein Haus ist sehr alt.",
+    "- | Ich kenne ihr Gesicht nicht.",
+    "- | Unser Rätsel ist spannend!"
+   ]
+  },
+  "A1_g3k1.json": {
+   "share": "2/14 = 14 %",
+   "sentences": [
+    "- | Du brauchst einen Termin.",
+    "- | Der nächste Termin ist im Dezember!",
+    "- | Das ist in acht Wochen!",
+    "- | Ich kenne einen Trick.",
+    "- | Die Webseite hat um sieben Uhr neue Termine.",
+    "vorfeld | Um sieben Uhr klickt sie. | Verb an Position 2. Vorne steht Um sieben Uhr.",
+    "- | Ich habe einen Termin!",
+    "vorfeld | Wann ist der Termin? | Verb an Position 2. Vorne steht Wann.",
+    "- | Der Termin ist am Freitag um halb neun.",
+    "- | Das Bürgerbüro öffnet um acht Uhr.",
+    "- | Ich habe die Nummer zweiundvierzig.",
+    "- | Mein Geburtstag ist am zwölften März.",
+    "- | Sie wohnen in der Möhringer Straße?",
+    "- | Ich bin jetzt offiziell hier!"
+   ]
+  },
+  "A1_g3k2.json": {
+   "share": "10/14 = 71 %",
+   "sentences": [
+    "bracket | Heute muss Ayisha viel erledigen. | Satzklammer: muss … erledigen",
+    "bracket | Was kann ich für Sie tun? | Satzklammer: kann … tun",
+    "bracket | Ich will ein Konto eröffnen. | Satzklammer: will … eröffnen",
+    "bracket | Dann müssen Sie dieses Formular ausfüllen. | Satzklammer: müssen … ausfüllen",
+    "bracket | Kann ich das Formular mitnehmen? | Satzklammer: Kann … mitnehmen",
+    "vorfeld | Nein, das dürfen Sie leider nicht. | Verb an Position 2. Vorne steht das.",
+    "bracket | Du kannst die Karte online bestellen. | Satzklammer: kannst … bestellen",
+    "bracket | Ich will heute noch telefonieren! | Satzklammer: will … telefonieren",
+    "bracket | Welches Ticket muss ich nehmen? | Satzklammer: muss … nehmen",
+    "- | Ich kann das allein!",
+    "- | Der Automat druckt ein Ticket.",
+    "bracket | Darf ich Ihr Ticket sehen? | Satzklammer: Darf … sehen",
+    "- | Ayisha zeigt stolz ihr Ticket.",
+    "- | Das Ticket ist richtig."
+   ]
+  },
+  "A1_g3k3.json": {
+   "share": "4/15 = 27 %",
+   "sentences": [
+    "vorfeld | Wo ist Max? | Verb an Position 2. Vorne steht Wo.",
+    "- | Ich sehe ihn nicht.",
+    "- | Frau Schäfer sucht ihn schon!",
+    "- | Er liebt seine Oma nur samstags.",
+    "- | Die Treppe ist so lang!",
+    "- | Ich sehe euch!",
+    "vorfeld | Und wo ist Herr Brenner? | Verb an Position 2. Vorne steht wo.",
+    "- | Wir finden ihn nicht.",
+    "- | Die Ecke ist nicht sauber.",
+    "- | Ich putze sie sofort!",
+    "- | Sie machen das sehr gut!",
+    "bracket | Ich lade Sie ein. | Satzklammer: lade … ein",
+    "bracket | Sie lädt uns ein! | Satzklammer: lädt … ein",
+    "- | Ihr liebt mich, oder?",
+    "- | Nein, wir ignorieren dich!"
+   ]
+  },
+  "A1_g4k1.json": {
+   "share": "4/15 = 27 %",
+   "sentences": [
+    "bracket | Was möchten Sie trinken? | Satzklammer: möchten … trinken",
+    "- | Ich möchte einen Mango-Lassi.",
+    "- | Ich möchte eine Cola, bitte.",
+    "- | Ich möchte nur Wasser.",
+    "bracket | Und was möchten Sie essen? | Satzklammer: möchten … essen",
+    "- | Ich möchte das Biryani.",
+    "- | Möchten Sie es scharf?",
+    "- | Wir möchten auch Naan.",
+    "vorfeld | Wie ist das Biryani? | Verb an Position 2. Vorne steht Wie.",
+    "- | Es ist nicht scharf.",
+    "- | Und der Reis ist falsch.",
+    "- | Ich möchte noch einen Teller!",
+    "- | Möchtet ihr einen Nachtisch?",
+    "- | Ich möchte richtiges Biryani!",
+    "bracket | Dann müssen Sie selbst kochen! | Satzklammer: müssen … kochen"
+   ]
+  },
+  "A1_g4k2.json": {
+   "share": "8/15 = 53 %",
+   "sentences": [
+    "bracket | Ayisha kauft heute groß ein. | Satzklammer: kauft … ein",
+    "bracket | Hier sieht alles gut aus! | Satzklammer: sieht … aus",
+    "- | Sie sind der Mann vom Flughafen!",
+    "- | Und Sie sind die Frau vom Automaten!",
+    "bracket | Sie können den Reis mitnehmen. | Satzklammer: können … mitnehmen",
+    "bracket | Nein, das sieht nicht fair aus. | Satzklammer: sieht … aus",
+    "- | Sie sprechen Malayalam!",
+    "- | Sie lernen so schneller.",
+    "- | Ich heiße übrigens Faris.",
+    "- | Ich bin Ayisha.",
+    "- | Kommst du auch aus Kerala?",
+    "vorfeld | Das glaube ich nicht! | Verb an Position 2. Vorne steht Das.",
+    "bracket | Der Verkäufer packt den Reis ein. | Satzklammer: packt … ein",
+    "bracket | Kommst du am Sonntag mit? | Satzklammer: Kommst … mit",
+    "bracket | Ich komme gern mit! | Satzklammer: komme … mit"
+   ]
+  },
+  "A1_g4k3.json": {
+   "share": "4/14 = 29 %",
+   "sentences": [
+    "- | Der Park ist groß, und die Leute sind nett.",
+    "bracket | Spielst du Cricket, oder schaust du nur zu? | Satzklammer: schaust … zu",
+    "- | Ich spiele, denn ich bin sehr gut.",
+    "vorfeld | Das sagst du, aber ich glaube es nicht. | Verb an Position 2. Vorne steht Das.",
+    "- | Ich spiele nicht, denn ich esse.",
+    "bracket | Lea und Max schauen zu. | Satzklammer: schauen … zu",
+    "- | Der Ball ist schnell, aber ich treffe ihn!",
+    "- | Ayisha ist ein Profi, und Faris ist raus!",
+    "- | Du hast Glück, oder?",
+    "- | Nein, ich habe Talent, und du hast keine Chance!",
+    "- | Der Chai ist heiß, und das Pazhampori ist perfekt.",
+    "- | Möchtest du Chai oder Wasser?",
+    "- | Ich nehme Chai, aber nur einen.",
+    "vorfeld | Hier ist meine Nummer, für das nächste Spiel. | Verb an Position 2. Vorne steht Hier."
+   ]
+  },
+  "A1_g5k1.json": {
+   "share": "2/13 = 15 %",
+   "sentences": [
+    "- | Bleib heute im Bett!",
+    "- | Trink viel Tee!",
+    "- | Dann sei eine gute Patientin!",
+    "- | Iss eine Brezel!",
+    "- | Bring mir lieber Suppe.",
+    "- | Trinken Sie diesen Tee!",
+    "bracket | Und machen Sie das Fenster zu! | Satzklammer: machen … zu",
+    "- | Geh bitte zum Arzt!",
+    "- | Sag mir das nicht!",
+    "bracket | Ruf Dr. Kühn an! | Satzklammer: Ruf … an",
+    "- | Sie ist sehr nett.",
+    "- | Sprechen Sie bitte langsam!",
+    "- | Kommen Sie morgen um neun!"
+   ]
+  },
+  "A1_g5k2.json": {
+   "share": "3/14 = 21 %",
+   "sentences": [
+    "- | Ayisha fährt mit der U-Bahn zur Praxis.",
+    "- | Sie sind bei Dr. Kühn?",
+    "- | Die Mutter spielt mit dem Baby.",
+    "vorfeld | Was fehlt Ihnen? | Verb an Position 2. Vorne steht Was.",
+    "- | Ich habe seit Sonntag Fieber.",
+    "- | Sie kommen aus Indien, oder?",
+    "- | Ich bin Ärztin aus Kerala.",
+    "vorfeld | Das sage ich meinen Patienten auch! | Verb an Position 2. Vorne steht Das.",
+    "vorfeld | Das Gebäude kenne ich! | Verb an Position 2. Vorne steht Das Gebäude.",
+    "- | Das ist das alte St.-Lukas-Krankenhaus.",
+    "- | Ich kenne es aus meiner Studienzeit.",
+    "- | Die Frau kommt aus Kerala, wie ich.",
+    "- | Fragen Sie beim Stadtarchiv!",
+    "- | Ayisha geht mit Schokolade nach Hause."
+   ]
+  },
+  "A1_g5k3.json": {
+   "share": "11/14 = 79 %",
+   "sentences": [
+    "bracket | Was hast du am Wochenende gemacht? | Satzklammer: hast … gemacht",
+    "bracket | Wir haben einen Ausflug gemacht. | Satzklammer: haben … gemacht",
+    "bracket | Wir sind auf die Schwäbische Alb gefahren. | Satzklammer: sind … gefahren",
+    "bracket | Wer ist mitgekommen? | Satzklammer: ist … mitgekommen",
+    "bracket | Lea und Max sind mitgekommen. | Satzklammer: sind … mitgekommen",
+    "vorfeld | Wer ist Faris? | Verb an Position 2. Vorne steht Wer.",
+    "- | Er kommt auch aus Kerala.",
+    "bracket | Wir haben eine Burg besucht. | Satzklammer: haben … besucht",
+    "bracket | Ich habe viele Fotos gemacht. | Satzklammer: habe … gemacht",
+    "- | Ich war so glücklich!",
+    "bracket | Hast du etwas gegessen? | Satzklammer: Hast … gegessen",
+    "bracket | Max hat Brezeln mitgebracht. | Satzklammer: hat … mitgebracht",
+    "vorfeld | Wie war das Biryani? | Verb an Position 2. Vorne steht Wie.",
+    "- | Es war nicht schlecht."
+   ]
+  }
+ }
+}

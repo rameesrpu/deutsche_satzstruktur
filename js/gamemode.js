@@ -8,8 +8,12 @@ import { ensureJuiceDefs, spawnConfetti, spawnFloatingText, drawFeedbackAnimatio
     showFinalCelebration } from './gameJuice.js';
 import { LEVEL_CONTENT, chapterOrder } from './levelContent.js';
 import { updatePlayTimer } from './playScreen.js';
+import { felderLesson } from './felderLesson.js';
 import { beatsBefore, beatsAfterLast, nextPlayText, showStoryCard, hideStoryCard,
     isStoryCardOpen } from './storyNarration.js';
+
+/** Play screen: ms after a solved sentence before a field-model lesson opens on its own (E3). */
+export const FELDER_AUTO_DELAY = 1100;
 
 /**
  * Game Mode - Interactive German sentence placement game
@@ -114,8 +118,12 @@ export class GameMode {
         // Waiting for user to continue to next sentence
         this.waitingForContinue = false;
 
-        // First tap shows felder view; second tap loads next sentence
+        // Werkstatt: first tap shows felder view; second tap loads next sentence.
+        // Play screen (E3): only a sentence with a felderLesson() opens the field model, on its
+        // own after FELDER_AUTO_DELAY (felderTimer); other sentences go on with one tap
         this.pendingFelderReview = false;
+        this.felderLesson = null; // {kind, hint, parts} of the solved sentence, or null
+        this.felderTimer = null;
 
         // Track sentences played this session to avoid repeats
         this.usedSentenceIds = new Set();
@@ -210,19 +218,32 @@ export class GameMode {
     }
 
     /**
-     * After a finished sentence: first show the Feldermodell review, then the next sentence
-     * (the tap on the grid or the play screen's continue button).
+     * After a finished sentence (the tap on the grid or the play screen's continue button):
+     * Werkstatt: first the Feldermodell review, then the next sentence. Play screen: the next
+     * sentence (a lesson's review opens on its own, see showGameComplete).
      */
     continueAfterSentence() {
         if (!this.waitingForContinue) return;
-        if (this.pendingFelderReview) {
-            this.pendingFelderReview = false;
-            this.pause();
-            this.host.setView('felder');
-            this.host.redraw();
-        } else {
-            this.loadRandomSentenceAndContinue();
-        }
+        if (this.pendingFelderReview) this.openFelderReview();
+        else this.loadRandomSentenceAndContinue();
+    }
+
+    /**
+     * Show the solved sentence in the Feldermodell (game paused; "Weiter" / Enter goes on via
+     * app.continuePlay). Also the play screen's "Satzbau" link and the lesson auto-switch.
+     */
+    openFelderReview() {
+        this.cancelFelderTimer();
+        if (!this.isActive || this.isPaused || !this.waitingForContinue) return;
+        this.pendingFelderReview = false;
+        this.pause();
+        this.host.setView('felder');
+        this.host.redraw();
+    }
+
+    cancelFelderTimer() {
+        if (this.felderTimer !== null) clearTimeout(this.felderTimer);
+        this.felderTimer = null;
     }
 
     /**
@@ -326,6 +347,8 @@ export class GameMode {
         this.feedback = null;
         this.waitingForContinue = false;
         this.pendingFelderReview = false;
+        this.felderLesson = null;
+        this.cancelFelderTimer();
         this.storyLines = []; // set again by showStoryIntro()
 
         // Reset visual-only state (streak intentionally persists across sentences)
@@ -382,6 +405,8 @@ export class GameMode {
         this.isActive = false;
         this.isPaused = false;
         this.pendingFelderReview = false;
+        this.felderLesson = null;
+        this.cancelFelderTimer();
         this.hideMistakeHint();
         hideStoryCard();
         // Drop any paused/in-flight fill-in-the-blank audio
@@ -843,7 +868,7 @@ export class GameMode {
         const handleTap = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            // First tap: Feldermodell review; second tap: next sentence
+            // Werkstatt: first tap Feldermodell review, second tap next sentence (play screen: next)
             this.continueAfterSentence();
         };
 
@@ -1641,7 +1666,21 @@ export class GameMode {
             }, 1000);
         } else {
             this.waitingForContinue = true;
-            this.pendingFelderReview = true;
+            if (this.isPlayScreen()) {
+                // E3: the field model only when it teaches — then it opens on its own after
+                // the sentence-complete moment (confetti + sentence audio)
+                this.felderLesson = felderLesson(this.words);
+                this.pendingFelderReview = false;
+                if (this.felderLesson) {
+                    this.felderTimer = setTimeout(() => {
+                        this.felderTimer = null;
+                        if (this.isPlayScreen() && !isStoryCardOpen()) this.openFelderReview();
+                    }, FELDER_AUTO_DELAY);
+                }
+            } else {
+                this.felderLesson = null;
+                this.pendingFelderReview = true; // Werkstatt: always review
+            }
             this.host.redraw();
 
             // Sentence-complete celebration: bigger confetti burst across the

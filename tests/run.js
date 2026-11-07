@@ -1,5 +1,5 @@
 // Run all tests: gjs -m tests/run.js [--update]
-//   --update  rewrite tests/snapshots/library.json from current behavior
+//   --update  rewrite tests/snapshots/library.json and felder-lessons.json from current behavior
 
 import System from 'system';
 import { listDir } from './stubs.js'; // first: installs browser stubs
@@ -18,6 +18,7 @@ import { runStoryReaderTests } from './storyReader.test.js';
 import { runPlayScreenTests } from './playScreen.test.js';
 import { runChapterRecapTests } from './chapterRecap.test.js';
 import { runSettingsTests } from './settings.test.js';
+import { runFelderLessonTests } from './felderLesson.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -41,6 +42,7 @@ runStoryReaderTests();
 runPlayScreenTests();
 runChapterRecapTests();
 runSettingsTests();
+runFelderLessonTests({ update });
 runLibrarySnapshot({ update });
 
 System.exit(summary() > 0 ? 1 : 0);

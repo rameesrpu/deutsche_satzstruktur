@@ -4735,11 +4735,24 @@ body[data-screen="play"] #canvas {
     padding-left: 0.12em; /* balance the letter-spacing */
 }
 
+/* "Weiter" + the quiet "Satzbau" link beside it (E3) */
+.play-continue-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.play-continue-row[hidden] {
+    display: none;
+}
+
 .play-continue {
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    min-width: 0;
     width: 100%;
     height: 56px;
     border-radius: var(--radius-pill);
@@ -4754,13 +4767,51 @@ body[data-screen="play"] #canvas {
     background: var(--btn-primary-hover);
 }
 
-.play-continue[hidden] {
+.play-felder-link {
+    flex: none;
+    height: 56px;
+    padding: 0 14px;
+    border: none;
+    background: none;
+    box-shadow: none;
+    color: var(--ink-soft);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 4px;
+    touch-action: manipulation;
+}
+
+.play-felder-link:hover {
+    transform: none;
+    background: none;
+    color: var(--ink);
+    text-decoration-color: currentColor;
+}
+
+.play-felder-link[hidden] {
     display: none;
 }
 
-/* Feldermodell review after a sentence: top bar + continue button only */
+/* Field-model lesson hint in the review (felderLesson.js) */
+.play-feedback-lesson { background: var(--info-bg); color: var(--info-600); }
+
+.play-feedback-lesson .play-feedback-title {
+    align-self: center;
+    color: var(--ink);
+    font-weight: 600;
+}
+
+.play-feedback-lesson em {
+    font-family: var(--font-sentence);
+    font-style: italic;
+    font-weight: 700;
+}
+
+/* Feldermodell review after a sentence: top bar + continue button only (+ the lesson hint) */
 body[data-play-view="review"] .play-sentence,
-body[data-play-view="review"] .play-feedback-slot,
+body[data-play-view="review"] .play-feedback-slot:not(.is-lesson),
 body[data-play-view="review"] .play-tray {
     display: none;
 }

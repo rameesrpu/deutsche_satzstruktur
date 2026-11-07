@@ -168,7 +168,8 @@ class DeutschApp {
 
     /**
      * Keyboard shortcuts. Enter or "/" advances the game's continue states:
-     * - game view, sentence complete → go to the Felder review
+     * - game view, sentence complete → go to the Felder review (Werkstatt; on the play
+     *   screen the next sentence — a lesson's review opens on its own, E3)
      * - Felder review → next sentence (same as the "Next sentence" button)
      * ("/" matches the game's keyboard placement key — right hand stays on
      * the arrow cluster.) Ignored while typing in inputs. Enter is also
@@ -188,15 +189,8 @@ class DeutschApp {
 
             if (this.currentView === 'game' && this.gameMode.isActive && !this.gameMode.isPaused) {
                 e.preventDefault();
-                if (this.gameMode.pendingFelderReview) {
-                    // Mirror of the game-view tap: show the Felder review
-                    this.gameMode.pendingFelderReview = false;
-                    this.gameMode.pause();
-                    this.currentView = 'felder';
-                    this.redrawAll();
-                } else {
-                    this.gameMode.loadRandomSentenceAndContinue();
-                }
+                // Mirror of the game-view tap: Felder review (Werkstatt) or next sentence
+                this.gameMode.continueAfterSentence();
             } else if (this.currentView === 'felder' && this.gameMode.isPaused) {
                 // Mirror of the "Next sentence" button
                 e.preventDefault();
@@ -1180,8 +1174,8 @@ class DeutschApp {
     }
 
     /**
-     * Continue after a finished sentence: Feldermodell review first, then the next sentence
-     * (play screen button, Werkstatt "Next sentence →").
+     * Continue after a finished sentence: Feldermodell review first (Werkstatt), then the next
+     * sentence (play screen "Weiter", Werkstatt "Next sentence →").
      */
     continuePlay() {
         if (!this.gameMode.isActive || !this.gameMode.waitingForContinue) return;
