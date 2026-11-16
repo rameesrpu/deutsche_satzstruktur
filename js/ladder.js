@@ -2,6 +2,10 @@
 // (rung 2) and is reviewed on growing intervals; a mistake drops it one rung. Rung 3 is the top.
 // No DOM, no storage: progressStore.js keeps the entries, this file only computes them.
 
+import { normalizeLegacyType } from './felderLesson.js';
+import { orderModel } from './orderExercise.js';
+import { hasArticle } from './articleBlank.js';
+
 export const RUNG_FIRST = 2;
 export const RUNG_TOP = 3;
 /** Days until the next review after reaching a rung (by rung reached). */
@@ -10,6 +14,18 @@ export const PASS_DAYS = { 2: 1, 3: 3, 4: 7, 5: 14 };
 export const TOP_DAYS = [14, 30];
 /** Existing sentences join the ladder this many per day. */
 export const MIGRATION_PER_DAY = 10;
+
+/**
+ * Which rungs a sentence can be tested on: 2 = it has an Ordnen model, 3 = it has an article.
+ * Works on copies with the legacy word types normalised, as the game sees them, so review and
+ * game agree on the same sentence.
+ * @param {Word[]} words
+ * @returns {{2: boolean, 3: boolean}}
+ */
+export function rungEligibility(words) {
+    const normalized = words.map(w => normalizeLegacyType({ ...w }));
+    return { 2: orderModel(normalized) !== null, 3: hasArticle(normalized) };
+}
 
 /** Local midnight before `now` (ms). */
 export function startOfDay(now) {

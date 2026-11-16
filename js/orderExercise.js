@@ -7,7 +7,7 @@
  */
 
 import { fieldZones } from './fieldZones.js';
-import { bare } from './felderLesson.js';
+import { bare, isNounPhraseWord, phraseContinuation } from './felderLesson.js';
 import { MAX_WRONG_ATTEMPTS } from './gameRules.js';
 
 /** @typedef {'vorfeld'|'verb'|'mittelfeld'|'ende'} Field */
@@ -17,9 +17,6 @@ import { MAX_WRONG_ATTEMPTS } from './gameRules.js';
  *            mistakes: number, tray: number[]}} OrderState */
 
 const MIN_MOVABLE = 3;
-const isNoun = w => w.type === 'subject' || w.type === 'object';
-const sameNoun = (a, b) => isNoun(a) && isNoun(b) && a.case === b.case && a.gender === b.gender;
-
 const MAX_BETWEEN = 2; // words allowed between a preposition and its noun phrase
 
 /**
@@ -31,26 +28,22 @@ const MAX_BETWEEN = 2; // words allowed between a preposition and its noun phras
  */
 function mittelfeldGroups(words, indices) {
     const groups = [];
+    const run = indices.map(i => words[i]); // phraseContinuation works on a word list
     for (let k = 0; k < indices.length; k++) {
         const group = [indices[k]];
-        let last = words[indices[k]];
-        if (last.type === 'preposition') {
+        if (words[indices[k]].type === 'preposition') {
             let n = 0;
             while (n < MAX_BETWEEN && k + 1 + n < indices.length && words[indices[k + 1 + n]].type === 'other') n++;
             const next = k + 1 + n;
-            if (next < indices.length && isNoun(words[indices[next]])) {
+            if (next < indices.length && isNounPhraseWord(words[indices[next]])) {
                 while (k < next) { k++; group.push(indices[k]); }
-                last = words[indices[k]];
             } else if (n > 0 && words[indices[k + n]].case && words[indices[k + n]].case !== 'nom') {
                 while (n-- > 0) { k++; group.push(indices[k]); }
-                last = words[indices[k]];
             }
         }
-        if (isNoun(last)) {
-            while (k + 1 < indices.length && sameNoun(last, words[indices[k + 1]])) {
-                k++;
-                group.push(indices[k]);
-            }
+        // The noun phrase goes on: article, adjectives, noun (same case and gender)
+        for (let j = phraseContinuation(run, k); j > k; j = phraseContinuation(run, k)) {
+            while (k < j) { k++; group.push(indices[k]); }
         }
         groups.push(group);
     }

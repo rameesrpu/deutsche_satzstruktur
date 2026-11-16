@@ -3,7 +3,7 @@ import { pickNextSentence } from './sentencePicker.js';
 import { evaluatePlacement, getAutoPlacement, explainMistake, placementFeedback, predicateVerb, MAX_WRONG_ATTEMPTS } from './gameRules.js';
 import { progressStore, sentenceKey, emptyMistakes, addMistake, countMistakes } from './progressStore.js';
 import { blankArticles } from './articleBlank.js';
-import { rungEligibility } from './reviewRunner.js';
+import { rungEligibility } from './ladder.js';
 import { GM_UI, drawHud, getTimerColor } from './gameHud.js';
 import { GRID_CELLS } from './grammaticalConfig.js';
 import { ensureJuiceDefs, spawnConfetti, spawnFloatingText, drawFeedbackAnimation, updateFeedbackElement,

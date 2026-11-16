@@ -368,13 +368,14 @@ export function renderRecap(root, model, actions) {
 /**
  * Model of the review session's end screen.
  * @param {ReviewResult[]} results  one per reviewed sentence
- * @returns {{total: number, up: number, down: number, title: string, line: string}}
+ * @returns {{total: number, ok: number, up: number, down: number, title: string, line: string}}
  */
 export function reviewRecapModel(results) {
     const total = results.length;
+    const ok = results.filter(r => r.ok === true).length;
     const up = results.filter(r => r.to > r.from).length;
     const down = results.filter(r => r.to < r.from).length;
-    return { total, up, down, title: 'Geschafft!', line: `${up} von ${total} eine Stufe weiter · morgen wieder` };
+    return { total, ok, up, down, title: 'Geschafft!', line: `${ok} von ${total} richtig · morgen wieder` };
 }
 
 /**

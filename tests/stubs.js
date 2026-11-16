@@ -89,3 +89,14 @@ export function tagged(text, tags) {
     if (words.length !== tokens.length) throw new Error(`tags don't match: ${text}`);
     return words;
 }
+
+/**
+ * Words in the shape the library files have them (raw types such as "object-dat" kept):
+ * rows of [text, type, case, gender, pronoun?]; a verb's pronoun defaults to "er".
+ */
+export function libWords(rows) {
+    return rows.map(([text, type, kase, gender, pronoun]) => ({
+        text, type, case: kase, gender, clause_type: 'main', clause_id: 0,
+        conjugation: { pronoun: pronoun || (type === 'verb' || type === 'modal' ? 'er' : 'none') },
+    }));
+}

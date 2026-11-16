@@ -5,27 +5,23 @@
  * Contractions ("im", "zum") and possessives ("mein") are not articles and stay visible.
  */
 
-import { bare } from './felderLesson.js';
+import { bare, phraseContinuation } from './felderLesson.js';
 
 export const ARTICLES = new Set(['der', 'die', 'das', 'den', 'dem', 'des',
     'ein', 'eine', 'einen', 'einem', 'einer', 'eines',
     'kein', 'keine', 'keinen', 'keinem', 'keiner', 'keines']);
 
-const isNounPhraseWord = w => w.type === 'subject' || w.type === 'object';
-
 /**
- * Indices of the articles: an article form directly followed by a word of its own noun phrase
- * (same case and gender), so a lone pronoun ("Die ist neu.") is not an article.
+ * Indices of the articles: an article form (by its text) that continues into a noun of its own
+ * phrase (same case and gender, directly or after up to two adjectives; see phraseContinuation),
+ * so a lone pronoun ("Die ist neu.") is not an article.
  * @param {Word[]} words
  * @returns {number[]}
  */
 export function articleIndexes(words) {
     const result = [];
     words.forEach((w, i) => {
-        const next = words[i + 1];
-        if (!next || !isNounPhraseWord(w) || !isNounPhraseWord(next)) return;
-        if (!ARTICLES.has(bare(w.text).toLowerCase())) return;
-        if (w.case === next.case && w.gender === next.gender) result.push(i);
+        if (ARTICLES.has(bare(w.text).toLowerCase()) && phraseContinuation(words, i) >= 0) result.push(i);
     });
     return result;
 }

@@ -1,6 +1,6 @@
 // orderExercise: pure logic of rung 2 "Ordnen" (drop shuffled chips into field slots)
 
-import { tagged } from './stubs.js';
+import { tagged, libWords } from './stubs.js';
 import { test, assert, assertEqual } from './assert.js';
 import { orderModel, createOrder, dropChip, isSolved, fieldChips } from '../js/orderExercise.js';
 
@@ -111,5 +111,17 @@ export function runOrderExerciseTests() {
         assert(!isSolved(s), 'one left');
         s = dropChip(s, 4, 'ende').state;
         assert(isSolved(s), 'solved');
+    });
+    test('orderModel: legacy-typed phrase "in einem Büro" is one chip (library word shapes)', () => {
+        const m = orderModel(libWords([['Er', 'subject', 'nom', 'm'], ['arbeitet', 'verb', 'nom', 'none'],
+            ['heute', 'other', 'nom', 'none'], ['in', 'preposition', 'nom', 'none'],
+            ['einem', 'object-dat', 'dat', 'n'], ['Büro.', 'object-dat', 'dat', 'n']]));
+        assertEqual(m.chips.map(c => c.text), ['Er', 'arbeitet', 'heute', 'in einem Büro']);
+    });
+    test('orderModel: article + adjective + noun is one chip (library word shapes)', () => {
+        const m = orderModel(libWords([['Sie', 'subject', 'nom', 'none'], ['haben', 'verb', 'nom', 'none'],
+            ['heute', 'other', 'nom', 'none'], ['ein', 'object-akk', 'akk', 'n'],
+            ['großes', 'adjective', 'akk', 'n'], ['Haus.', 'object-akk', 'akk', 'n']]));
+        assertEqual(m.chips.map(c => c.text), ['Sie', 'haben', 'heute', 'ein großes Haus']);
     });
 }

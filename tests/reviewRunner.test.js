@@ -1,11 +1,11 @@
 // reviewRunner.js: the daily review session over the ladder ("Heute üben"), plus the GameMode
 // ladder hooks it drives (articleBlank, ladder) and the play screen's ladder progress bar.
 
-import { makeLocalStorage, tagged } from './stubs.js';
+import { makeLocalStorage, tagged, libWords } from './stubs.js';
 import { test, assert, assertEqual } from './assert.js';
-import { rungEligibility, buildQueue, keyCategory, ReviewRunner } from '../js/reviewRunner.js';
+import { buildQueue, keyCategory, ReviewRunner } from '../js/reviewRunner.js';
 import { ProgressStore, progressStore, emptyMistakes, addMistake, sentenceKey } from '../js/progressStore.js';
-import { dueKeys, startOfDay, addDays } from '../js/ladder.js';
+import { dueKeys, startOfDay, addDays, rungEligibility } from '../js/ladder.js';
 import { GameMode } from '../js/gamemode.js';
 import { progressState } from '../js/playScreen.js';
 import { gameSounds } from '../js/sound.js';
@@ -49,6 +49,15 @@ function setup(queueSpec) {
 }
 
 export function runReviewRunnerTests() {
+    test('review: buildQueue and rungEligibility give the same result for legacy-typed words', () => {
+        const words = libWords([['Er', 'subject', 'nom', 'm'], ['arbeitet', 'verb', 'nom', 'none'],
+            ['heute', 'other', 'nom', 'none'], ['in', 'preposition', 'nom', 'none'],
+            ['einem', 'object-dat', 'dat', 'n'], ['Büro.', 'object-dat', 'dat', 'n']]);
+        const s = sentence('Er arbeitet heute in einem Büro.', words);
+        const { queue } = buildQueue(['k'], () => s, () => 2);
+        assertEqual(queue[0].eligible, rungEligibility(words));
+        assertEqual(queue[0].eligible, { 2: true, 3: true });
+    });
     test('review: rungEligibility = Ordnen model / article', () => {
         assertEqual(rungEligibility(ayisha()), { 2: true, 3: false });
         assertEqual(rungEligibility(neu()), { 2: false, 3: false });

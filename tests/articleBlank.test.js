@@ -1,6 +1,6 @@
 // articleBlank: pure logic of rung 3 (which articles to blank until the phrase is placed)
 
-import { tagged } from './stubs.js';
+import { tagged, libWords } from './stubs.js';
 import { test, assert, assertEqual } from './assert.js';
 import { ARTICLES, articleIndexes, blankArticles, hasArticle } from '../js/articleBlank.js';
 
@@ -34,4 +34,35 @@ export function runArticleBlankTests() {
     test('blankArticles keeps punctuation around the article', () =>
         assertEqual(blankArticles(tagged('„Die Ärztin kommt.“', 'S.f S.f V.sie'), 0)[0], '„___'));
     test('hasArticle: sentence with an article', () => assert(hasArticle(give()), 'has article'));
+
+    // Word shapes copied from data/library (raw types, adjectives between article and noun)
+    const apotheke = () => libWords([['Wo', 'other', 'nom', 'none'], ['ist', 'verb', 'nom', 'none'],
+        ['die', 'subject', 'nom', 'f'], ['nächste', 'adjective', 'nom', 'f'], ['Apotheke?', 'subject', 'nom', 'f']]);
+    const haus = () => libWords([['Sie', 'subject', 'nom', 'none'], ['haben', 'verb', 'nom', 'none'],
+        ['ein', 'object-akk', 'akk', 'n'], ['großes', 'adjective', 'akk', 'n'], ['Haus.', 'object-akk', 'akk', 'n']]);
+    const buero = () => libWords([['Er', 'subject', 'nom', 'm'], ['arbeitet', 'verb', 'nom', 'none'],
+        ['in', 'preposition', 'nom', 'none'], ['einem', 'object-dat', 'dat', 'n'], ['Büro.', 'object-dat', 'dat', 'n']]);
+    const restaurant = () => libWords([['Das', 'subject', 'nom', 'n'], ['ist', 'verb', 'nom', 'none'],
+        ['das', 'subject', 'nom', 'n'], ['beste', 'adjective', 'nom', 'n'], ['Restaurant', 'subject', 'nom', 'n'],
+        ['in', 'preposition', 'nom', 'none'], ['der', 'object', 'dat', 'f'], ['Stadt.', 'object', 'dat', 'f']]);
+    test('articleIndexes: article before an adjective and its noun', () => {
+        assertEqual(articleIndexes(apotheke()), [2]);
+        assertEqual(blankArticles(apotheke(), 0), ['Wo', 'ist', '___', 'nächste', 'Apotheke?']);
+    });
+    test('articleIndexes: legacy object-akk / object-dat types count as noun phrase words', () => {
+        assertEqual(articleIndexes(haus()), [2]);
+        assertEqual(articleIndexes(buero()), [3]);
+    });
+    test('articleIndexes: both articles of "das beste Restaurant in der Stadt", the lone "Das" stays', () =>
+        assertEqual(blankArticles(restaurant(), 0),
+            ['Das', 'ist', '___', 'beste', 'Restaurant', 'in', '___', 'Stadt.']));
+    test('articleIndexes: up to two adjectives between article and noun, not three', () => {
+        const adj = n => libWords([['Das', 'subject', 'nom', 'n'], ['ist', 'verb', 'nom', 'none'], ['ein', 'subject', 'nom', 'n'],
+            ...Array.from({ length: n }, (_, i) => [`a${i}`, 'adjective', 'nom', 'n']), ['Haus.', 'subject', 'nom', 'n']]);
+        assertEqual(articleIndexes(adj(2)), [2]);
+        assertEqual(articleIndexes(adj(3)), []);
+    });
+    test('articleIndexes: an adjective run that ends in another case or gender is no phrase', () =>
+        assertEqual(articleIndexes(libWords([['Die', 'subject', 'nom', 'f'], ['ist', 'verb', 'nom', 'none'],
+            ['neu', 'adjective', 'nom', 'f'], ['Haus.', 'object', 'akk', 'n']])), []));
 }

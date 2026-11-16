@@ -7,19 +7,9 @@
  * queue; app.js (startLadderReview) feeds it and owns the screens.
  */
 
-import { exerciseRung } from './ladder.js';
+import { exerciseRung, rungEligibility } from './ladder.js';
 import { orderModel } from './orderExercise.js';
-import { hasArticle } from './articleBlank.js';
 import { renderOrderScreen } from './orderScreen.js';
-
-/**
- * Which rungs a sentence can be tested on: 2 = it has an Ordnen model, 3 = it has an article.
- * @param {Word[]} words
- * @returns {{2: boolean, 3: boolean}}
- */
-export function rungEligibility(words) {
-    return { 2: orderModel(words) !== null, 3: hasArticle(words) };
-}
 
 /**
  * @typedef {Object} ReviewItem

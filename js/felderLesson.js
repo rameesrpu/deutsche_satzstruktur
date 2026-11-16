@@ -15,6 +15,43 @@ const W_WORDS = new Set(['wer', 'wen', 'wem', 'wessen', 'was', 'wie', 'wo', 'woh
 /** Word text without surrounding punctuation ("Hier," → "Hier"). */
 export const bare = text => String(text).replace(/^[„“"»«(]+|[.,!?;:…“”"»«)]+$/g, '');
 
+/**
+ * Normalize legacy object-akk/dat/gen types to plain "object" (mutates `word`, returns it).
+ * Case is already stored separately so no information is lost. The one place for this mapping:
+ * WordManager.normalizeLegacyType delegates here.
+ */
+export function normalizeLegacyType(word) {
+    if (word.type === 'object-akk' || word.type === 'object-dat' || word.type === 'object-gen') {
+        word.type = 'object';
+    }
+    return word;
+}
+
+/** A word of a noun phrase (article, noun): subject/object, also in the legacy object-* forms. */
+export const isNounPhraseWord = w => w.type === 'subject' || w.type === 'object' || /^object-/.test(w.type);
+
+/** Adjectives allowed between an article and its noun ("das beste Restaurant"). */
+export const MAX_ADJECTIVES = 2;
+
+/**
+ * Index of the next word of the noun phrase that `words[i]` starts or continues: the following
+ * noun-phrase word with the same case and gender, directly or after up to MAX_ADJECTIVES
+ * `adjective` words. -1 when there is none (a lone pronoun, "Die ist neu.").
+ * @param {Word[]} words
+ * @param {number} i
+ * @returns {number}
+ */
+export function phraseContinuation(words, i) {
+    const w = words[i];
+    if (!w || !isNounPhraseWord(w)) return -1;
+    for (let j = i + 1; j < words.length && j <= i + 1 + MAX_ADJECTIVES; j++) {
+        const n = words[j];
+        if (isNounPhraseWord(n)) return n.case === w.case && n.gender === w.gender ? j : -1;
+        if (n.type !== 'adjective') return -1;
+    }
+    return -1;
+}
+
 const pronoun = w => (w.conjugation && w.conjugation.pronoun) || 'none';
 export const isFiniteVerb = w => (w.type === 'verb' || w.type === 'modal') && pronoun(w) !== 'none';
 export const isNonFinite = w => w.type === 'verb' && pronoun(w) === 'none';

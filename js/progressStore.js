@@ -5,6 +5,7 @@
 // progress isn't kept.
 
 import { enterLadder, afterReview, migrate, RUNG_FIRST } from './ladder.js';
+import { loadDailyGoal } from './settings.js';
 
 export const PROGRESS_KEY = 'gameProgress';
 const FORMAT_VERSION = 2;
@@ -79,7 +80,7 @@ export class ProgressStore {
         } catch (e) {
             console.warn('Could not read game progress:', e);
         }
-        this.data = normalize(data, Date.now());
+        this.data = normalize(data, Date.now(), loadDailyGoal(this._storage()));
         return this.data;
     }
 
@@ -184,7 +185,7 @@ export class ProgressStore {
     importData(imported, mode = 'merge') {
         const rawSentences = imported && typeof imported.sentences === 'object' && imported.sentences || {};
         const oldFile = !imported || imported.version !== FORMAT_VERSION;
-        const incoming = normalize(imported, Date.now());
+        const incoming = normalize(imported, Date.now(), loadDailyGoal(this._storage()));
         if (mode === 'replace') {
             this.data = incoming;
         } else {
@@ -192,9 +193,14 @@ export class ProgressStore {
             for (const [key, entry] of Object.entries(incoming.sentences)) {
                 const mine = data.sentences[key];
                 if (!mine) { data.sentences[key] = entry; continue; }
-                // A rung the incoming entry only got from migration must not overwrite one earned here.
+                if (entry.lastPlayed <= mine.lastPlayed) continue;
+                // A rung the incoming entry only got from migration must not overwrite one earned (or
+                // retired) here: the newer counters win, the local ladder fields stay.
                 const hadRung = !oldFile && isValidRung((rawSentences[key] || {}).rung);
-                if (entry.lastPlayed > mine.lastPlayed && !(mine.rung >= RUNG_FIRST && !hadRung)) {
+                if (!hadRung && Number.isFinite(mine.rung)) {
+                    const { rung, due, topPasses, lastReview } = mine;
+                    data.sentences[key] = { ...entry, rung, due, topPasses, lastReview };
+                } else {
                     data.sentences[key] = entry;
                 }
             }
@@ -208,8 +214,11 @@ export class ProgressStore {
 
 const isValidRung = r => r === 0 || (Number.isInteger(r) && r >= RUNG_FIRST && r <= 5);
 
-/** Coerce stored/imported data into a valid GameProgress (drops malformed entries). */
-function normalize(data, now) {
+/**
+ * Coerce stored/imported data into a valid GameProgress (drops malformed entries); existing
+ * sentences join the ladder `perDay` per day (the daily goal).
+ */
+function normalize(data, now, perDay) {
     const out = emptyData();
     if (!data || typeof data !== 'object') return out;
     const num = v => (Number.isFinite(v) && v >= 0 ? v : 0);
@@ -231,7 +240,7 @@ function normalize(data, now) {
                 due: num(e.due), topPasses: num(e.topPasses), lastReview: num(e.lastReview),
             };
         }
-        migrate(out.sentences, now);
+        migrate(out.sentences, now, perDay);
     }
     return out;
 }

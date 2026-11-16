@@ -1,5 +1,6 @@
 import { GrammaticalConfig } from './grammaticalConfig.js';
 import { nextId } from './ids.js';
+import { normalizeLegacyType } from './felderLesson.js';
 
 /**
  * WordManager - Manages word data and operations
@@ -211,10 +212,7 @@ export class WordManager {
      * Case is already stored separately so no information is lost.
      */
     normalizeLegacyType(word) {
-        if (word.type === 'object-akk' || word.type === 'object-dat' || word.type === 'object-gen') {
-            word.type = 'object';
-        }
-        return word;
+        return normalizeLegacyType(word);
     }
 
     /**

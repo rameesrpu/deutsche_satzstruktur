@@ -1,5 +1,5 @@
 // Run all tests: gjs -m tests/run.js [--update]
-//   --update  rewrite tests/snapshots/library.json and felder-lessons.json from current behavior
+//   --update  rewrite tests/snapshots/library.json, felder-lessons.json and field-zones.json from current behavior
 
 import System from 'system';
 import { listDir, readText } from './stubs.js'; // first: installs browser stubs

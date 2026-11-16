@@ -1,7 +1,9 @@
 // ladder.js: the pure review schedule (rungs, intervals, due list, migration of existing progress)
 
 import { test, assert, assertEqual } from './assert.js';
-import { startOfDay, addDays, enterLadder, exerciseRung, afterReview, dueKeys, migrate } from '../js/ladder.js';
+import { tagged, libWords } from './stubs.js';
+import { normalizeLegacyType } from '../js/felderLesson.js';
+import { startOfDay, addDays, enterLadder, exerciseRung, afterReview, dueKeys, migrate, rungEligibility } from '../js/ladder.js';
 
 const NOW = new Date(2026, 10, 15, 23, 50).getTime();
 const DAY0 = new Date(2026, 10, 15).getTime();
@@ -66,5 +68,24 @@ export function runLadderTests() {
             'A1/x/c': { plays: 1, lastPlayed: 3, mistakes: clean } };
         migrate(s, NOW, 1);
         assertEqual([s['A1/x/b'].due, s['A1/x/c'].due, s['A1/x/a'].due], [day(0), day(1), day(2)]);
+    });
+    test('migrate: per-day 5 spreads 12 entries over 3 days', () => {
+        const s = {};
+        for (let i = 0; i < 12; i++) s[`A1/x/${String(i).padStart(2, '0')}`] = { plays: 1, lastPlayed: i, mistakes: { cell: 0, case: {} } };
+        migrate(s, NOW, 5);
+        const days = Object.values(s).map(e => (e.due - DAY0) / 86400000 | 0);
+        assertEqual([0, 1, 2].map(d => days.filter(x => x === d).length), [5, 5, 2]);
+    });
+    test('rungEligibility: Ordnen model / article', () => {
+        assertEqual(rungEligibility(tagged('Heute muss Ayisha im Krankenhaus arbeiten.', 'X M.er S.er P O.n.dat V')), { 2: true, 3: false });
+        assertEqual(rungEligibility(tagged('Ich bin neu.', 'S.ich V.ich X')), { 2: false, 3: false });
+        assertEqual(rungEligibility(tagged('Ich gebe dem Patienten einen Tee.', 'S.ich V.ich O.m.dat O.m.dat O.m.akk O.m.akk')), { 2: true, 3: true });
+    });
+    test('rungEligibility: raw legacy-typed words and normalised words agree', () => {
+        const raw = () => libWords([['Er', 'subject', 'nom', 'm'], ['arbeitet', 'verb', 'nom', 'none'],
+            ['heute', 'other', 'nom', 'none'], ['in', 'preposition', 'nom', 'none'],
+            ['einem', 'object-dat', 'dat', 'n'], ['Büro.', 'object-dat', 'dat', 'n']]);
+        assertEqual(rungEligibility(raw()), rungEligibility(raw().map(normalizeLegacyType)));
+        assertEqual(rungEligibility(raw()), { 2: true, 3: true });
     });
 }

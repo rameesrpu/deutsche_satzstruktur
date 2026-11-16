@@ -116,6 +116,12 @@ export function runChapterRecapTests() {
         const m = reviewRecapModel([{ ok: true, from: 2, to: 3 }, { ok: false, from: 3, to: 2 }, { ok: true, from: 3, to: 3 }]);
         assertEqual([m.total, m.up, m.down], [3, 1, 1]);
         assertEqual(m.title, 'Geschafft!');
-        assertEqual(m.line, '1 von 3 eine Stufe weiter · morgen wieder');
+        assertEqual(m.ok, 2);
+        assertEqual(m.line, '2 von 3 richtig · morgen wieder');
+    });
+    test('recap: reviewRecapModel: two passes at the top rung read as 2 von 2 richtig', () => {
+        const m = reviewRecapModel([{ ok: true, from: 3, to: 3 }, { ok: true, from: 3, to: 3 }]);
+        assertEqual([m.ok, m.up, m.down], [2, 0, 0]);
+        assertEqual(m.line, '2 von 2 richtig · morgen wieder');
     });
 }

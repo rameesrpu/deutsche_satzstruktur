@@ -179,12 +179,38 @@ export function runProgressStoreTests() {
         assertEqual(dueKeys(store.load().sentences, later, 10), []);
     });
 
-    test('ladder: merge of a version 1 file keeps the local rung', () => {
+    test('ladder: merge of a newer version 1 entry takes its counters and keeps the local ladder fields', () => {
         const storage = makeLocalStorage();
-        storage.setItem(PROGRESS_KEY, JSON.stringify({ version: 2, sentences: { a: played({ rung: 3, due: 9, lastPlayed: 100 }) } }));
+        storage.setItem(PROGRESS_KEY, JSON.stringify({ version: 2, sentences: { a: played({ plays: 1, rung: 3, due: 9, topPasses: 1, lastReview: 50, lastPlayed: 100 }) } }));
         const store = new ProgressStore(storage);
-        store.importData(v1({ a: played({ plays: 7, lastPlayed: 900 }) }), 'merge');
-        assertEqual([store.getSentence('a').rung, store.getSentence('a').plays], [3, 2]);
+        store.importData(v1({ a: played({ plays: 9, lastPlayed: 900 }) }), 'merge');
+        const e = store.getSentence('a');
+        assertEqual([e.plays, e.lastPlayed], [9, 900]);
+        assertEqual([e.rung, e.due, e.topPasses, e.lastReview], [3, 9, 1, 50]);
+    });
+    test('ladder: merge of an older version 1 entry changes nothing', () => {
+        const storage = makeLocalStorage();
+        storage.setItem(PROGRESS_KEY, JSON.stringify({ version: 2, sentences: { a: played({ plays: 4, rung: 3, due: 9, lastPlayed: 500 }) } }));
+        const store = new ProgressStore(storage);
+        store.importData(v1({ a: played({ plays: 9, lastPlayed: 100 }) }), 'merge');
+        assertEqual([store.getSentence('a').plays, store.getSentence('a').rung], [4, 3]);
+    });
+    test('ladder: merge of a newer version 1 entry keeps a locally retired sentence retired', () => {
+        const storage = makeLocalStorage();
+        storage.setItem(PROGRESS_KEY, JSON.stringify({ version: 2, sentences: { a: played({ plays: 1, rung: 0, lastPlayed: 100 }) } }));
+        const store = new ProgressStore(storage);
+        store.importData(v1({ a: played({ plays: 9, lastPlayed: 900 }) }), 'merge');
+        assertEqual([store.getSentence('a').plays, store.getSentence('a').rung], [9, 0]);
+    });
+    test('ladder: migration spreads existing sentences at the daily goal', () => {
+        const storage = makeLocalStorage();
+        storage.setItem('dailyGoal', '5');
+        const sentences = {};
+        for (let i = 0; i < 12; i++) sentences[`A1/x/${i}`] = played({ lastPlayed: i + 1 });
+        storage.setItem(PROGRESS_KEY, JSON.stringify(v1(sentences)));
+        const store = new ProgressStore(storage);
+        const days = new Set(Object.values(store.load().sentences).map(e => e.due));
+        assertEqual(days.size, 3);
     });
 
     test('ladder: merge of a version 2 entry without a valid rung keeps the local rung', () => {

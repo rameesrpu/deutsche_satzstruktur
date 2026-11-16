@@ -2,7 +2,7 @@
 
 - Run everything: `gjs -m tests/run.js` (exit 0 = pass). No node, no dependencies.
 - Includes importing every `js/*.js` module (syntax + missing imports/exports), unit tests, and a golden snapshot of how every library sentence is parsed and placed (`tests/snapshots/library.json`).
-- After an *intended* behavior or library-data change: `gjs -m tests/run.js --update`, then review `git diff tests/snapshots/`.
+- After an *intended* behavior or library-data change: `gjs -m tests/run.js --update` (rewrites `library.json`, `felder-lessons.json` and `field-zones.json`), then review `git diff tests/snapshots/`.
 - `tests/felderLesson.test.js` writes `tests/snapshots/felder-lessons.json`: the field-model lesson (or `-`) of every A1 story chapter sentence and the share per chapter — review it by hand when the rules or chapters change.
 - `tests/fieldZones.test.js` writes `tests/snapshots/field-zones.json`: the field zones (Vorfeld / Verb / Mittelfeld / Ende, or `-`) of every A1 story chapter sentence — review it by hand when the rules or chapters change (regenerate with `gjs -m tests/run.js --update`).
 - Ladder tests: `ladder`, `orderExercise`, `articleBlank`, `reviewRunner` (plus `progressStore`, `homeScreen`, `chapterRecap`, `playScreen` additions) — all pure, no snapshot.
