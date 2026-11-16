@@ -77,11 +77,14 @@ export function tagged(text, tags) {
     const words = [];
     for (const tag of tags.split(' ')) {
         if (tag === '/') { clause++; continue; }
-        const [kind, p] = tag.split('.');
+        const [kind, p, c] = tag.split('.');
         const type = simple[kind] || { S: 'subject', O: 'object', V: 'verb', M: 'modal' }[kind];
         const finite = (kind === 'V' || kind === 'M') && p;
-        words.push({ type, text: tokens[words.length], clause_type: 'main', clause_id: clause,
-            conjugation: { pronoun: finite || kind === 'S' ? p : 'none' } });
+        const word = { type, text: tokens[words.length], clause_type: 'main', clause_id: clause,
+            conjugation: { pronoun: finite || kind === 'S' ? p : 'none' } };
+        // Noun phrases: S.<gender>[.<case>] / O.<gender>[.<case>] (case defaults: S nom, O akk)
+        if (kind === 'S' || kind === 'O') { word.gender = p; word.case = c || (kind === 'S' ? 'nom' : 'akk'); }
+        words.push(word);
     }
     if (words.length !== tokens.length) throw new Error(`tags don't match: ${text}`);
     return words;
