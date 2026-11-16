@@ -266,7 +266,7 @@ function renderStoryStrip(game) {
 }
 
 /** Progress of the current sentence: story chapter sentences, replay list, else a session window. */
-function progressState(game) {
+export function progressState(game) {
     // Review ladder (reviewRunner): one segment per sentence of the run
     if (game.ladder) return progressSegments(game.ladder.total, game.ladder.index, game.waitingForContinue);
     const chapter = game.getStoryChapter();

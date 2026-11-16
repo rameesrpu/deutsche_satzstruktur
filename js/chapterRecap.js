@@ -1,6 +1,7 @@
 // Chapter-end recap (U6, docs/redesign-plan.md): the full-screen 'end' screen after a story
 // chapter on the play screen — stats, "Das war schwer" (the run's missed phrases), the
-// chapter's new words as chips, "Weiter" and "schwere Sätze nochmal".
+// chapter's new words as chips, "Weiter" and "schwere Sätze nochmal". The end of a
+// "Heute üben" review session (reviewRunner.js) uses the same screen: renderReviewRecap.
 // GameMode records one ChapterRunSentence per finished sentence (see recordRun in
 // gamemode.js); the pure helpers at the top turn a run into the screen model and are
 // unit-tested in tests/chapterRecap.test.js. renderRecap() builds the DOM and calls back
@@ -359,5 +360,39 @@ export function renderRecap(root, model, actions) {
 
     root.replaceChildren(el('div', { className: 'recap-inner' },
         el('div', { className: 'recap-body' }, head, tiles, hardSection, wordsSection), foot));
+    root.scrollTop = 0;
+}
+
+// --- Review recap ("Heute üben", reviewRunner.js) ---
+
+/**
+ * Model of the review session's end screen.
+ * @param {ReviewResult[]} results  one per reviewed sentence
+ * @returns {{total: number, up: number, down: number, title: string, line: string}}
+ */
+export function reviewRecapModel(results) {
+    const total = results.length;
+    const up = results.filter(r => r.to > r.from).length;
+    const down = results.filter(r => r.to < r.from).length;
+    return { total, up, down, title: 'Geschafft!', line: `${up} von ${total} eine Stufe weiter · morgen wieder` };
+}
+
+/**
+ * Render the review recap into `root` (the 'end' screen).
+ * @param {HTMLElement} root
+ * @param {ReturnType<typeof reviewRecapModel>} model
+ * @param {{home: function()}} actions
+ */
+export function renderReviewRecap(root, model, actions) {
+    const head = el('header', { className: 'recap-head' },
+        el('span', { className: 'recap-badge', html: icon('check', 30, 2.4) }),
+        el('span', { className: 'recap-kicker' }, 'Heute üben'),
+        el('h1', { className: 'recap-title', lang: 'de' }, model.title),
+        el('p', { className: 'recap-review-line' }, model.line));
+    const home = el('button', { type: 'button', className: 'recap-btn recap-btn-primary',
+        onclick: () => actions.home() }, 'Zur Übersicht');
+    home.insertAdjacentHTML('beforeend', icon('arrow', 18, 2.2));
+    root.replaceChildren(el('div', { className: 'recap-inner' },
+        el('div', { className: 'recap-body' }, head), el('div', { className: 'recap-foot' }, home)));
     root.scrollTop = 0;
 }

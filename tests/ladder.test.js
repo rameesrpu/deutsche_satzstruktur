@@ -54,4 +54,17 @@ export function runLadderTests() {
         assertEqual(s['custom//mine'].rung, 0);
         assertEqual([s['A1/x/kept'].rung, s['A1/x/kept'].due], [3, 77]);
     });
+    test('migrate: a never-played sentence stays off the ladder', () => {
+        const s = { 'A1/x/new': { plays: 0, lastPlayed: 0, mistakes: { cell: 0, case: {} } } };
+        migrate(s, NOW);
+        assertEqual(s['A1/x/new'].rung, 0);
+        assertEqual(dueKeys(s, day(5), 10), []);
+    });
+    test('migrate: without mistakes the one played longer ago goes first, then by key', () => {
+        const clean = { cell: 0, case: {} };
+        const s = { 'A1/x/a': { plays: 1, lastPlayed: 9, mistakes: clean }, 'A1/x/b': { plays: 1, lastPlayed: 3, mistakes: clean },
+            'A1/x/c': { plays: 1, lastPlayed: 3, mistakes: clean } };
+        migrate(s, NOW, 1);
+        assertEqual([s['A1/x/b'].due, s['A1/x/c'].due, s['A1/x/a'].due], [day(0), day(1), day(2)]);
+    });
 }

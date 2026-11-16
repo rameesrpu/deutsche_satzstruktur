@@ -12,9 +12,11 @@ import { Renderer } from './renderer.js';
 import { UIController } from './ui.js';
 import { chapterStartText, hideStoryCard, isStoryCardOpen } from './storyNarration.js';
 import { showStoryReader, hideStoryReader } from './storyReader.js';
-import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday, countWeakSpots,
+import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday,
     renderHome, renderPractice, renderWords } from './homeScreen.js';
-import { buildRecapModel, renderRecap } from './chapterRecap.js';
+import { buildRecapModel, renderRecap, reviewRecapModel, renderReviewRecap } from './chapterRecap.js';
+import { dueKeys } from './ladder.js';
+import { ReviewRunner, buildQueue } from './reviewRunner.js';
 import { loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge, renderSettings } from './settings.js';
 
 /**
@@ -22,7 +24,7 @@ import { loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge, ren
  * 'words' (Wörter), 'workshop' (Werkstatt: the sentence editor, Feldermodell, settings,
  * import/export), 'play' (a game started from the learner screens), 'order' (the Ordnen exercise, orderScreen.js), 'read' (the story
  * reader, an overlay on the screen it was opened from), 'end' (chapter recap after a story
- * chapter on the play screen, chapterRecap.js), 'settings' (Einstellungen from Home's gear,
+ * chapter on the play screen, or the "Heute üben" review recap; chapterRecap.js), 'settings' (Einstellungen from Home's gear,
  * settings.js; Lernen stays the active nav tab).
  */
 
@@ -109,8 +111,9 @@ class DeutschApp {
         // Screen router state (see showScreen)
         this.screen = 'home';
         this.readReturn = 'home';   // screen to go back to when the reader closes
-        this.playSession = null;    // { review: bool } game modes to restore after a Home-started game
         this.dailyGoal = loadDailyGoal(); // sentences per day (Einstellungen → Tagesziel)
+        // "Heute üben": the daily review session over the ladder (startLadderReview)
+        this.reviewRunner = new ReviewRunner({ app: this, gameMode: this.gameMode, progressStore });
     }
 
     /**
@@ -123,7 +126,8 @@ class DeutschApp {
         this.setupViewToggle();
         this.setupGameMode();
         initPlayChrome(this.gameMode, {
-            onClose: () => this.showScreen('home'),
+            // ✕ during a review session ends the session (clears the article blank and the ladder)
+            onClose: () => (this.reviewRunner.active ? this.reviewRunner.close() : this.showScreen('home')),
             onContinue: () => this.continuePlay(),
         });
         this.setupResizeListener();
@@ -1203,11 +1207,9 @@ class DeutschApp {
 
     /** After GameMode.stop() (✕, target score reached): a game on the play screen returns Home. */
     handleGameStopped() {
-        if (this.playSession) {
-            this.setReviewMode(this.playSession.review);
-            this.playSession = null;
-        }
-        if (this.screen === 'play') this.showScreen('home');
+        if (this.screen !== 'play') return;
+        if (this.reviewRunner.active) this.reviewRunner.close();
+        else this.showScreen('home');
     }
 
     /** Review mode on/off, kept in sync with the Werkstatt toggle (exclusive with story mode). */
@@ -1253,12 +1255,12 @@ class DeutschApp {
             chapters: rows,
             playedToday: countPlayedToday(progress, now),
             dailyGoal: this.dailyGoal,
-            weakSpots: countWeakSpots(progress, now),
+            dueToday: this.dueToday(now),
             now,
         }, {
             read: ch => this.openReader(ch.level, ch.key),
             play: ch => this.startChapter(ch.level, ch.key),
-            review: () => this.startReview(),
+            review: () => this.startLadderReview(),
             settings: () => this.showScreen('settings'),
         });
     }
@@ -1276,12 +1278,12 @@ class DeutschApp {
                 .map(([key, cat]) => ({ key, label: cat.label })),
         }));
         renderPractice(root, {
-            weakSpots: countWeakSpots(progressStore.load(), Date.now()),
+            dueToday: this.dueToday(Date.now()),
             drills: rows.filter(r => r.status !== 'locked')
                 .map(r => ({ level: r.level, key: r.drillKey, label: r.drillLabel })),
             grammar,
         }, {
-            review: () => this.startReview(),
+            review: () => this.startLadderReview(),
             play: (level, key) => this.startChapter(level, key),
         });
     }
@@ -1349,35 +1351,76 @@ class DeutschApp {
     }
 
     /**
-     * "Schwächen üben": play the sentences with mistakes from every level (review
-     * mode over all loaded sentences, so no library category is selected).
+     * Keys due for review today: oldest first, capped at the daily goal (minus reviews already
+     * done today); user-made sentences are never reviewed.
+     * @param {number} now
+     * @returns {string[]}
      */
-    async startReview() {
-        const levels = [...new Set(Object.keys(progressStore.load().sentences)
+    dueReviewKeys(now) {
+        const library = Object.fromEntries(Object.entries(progressStore.load().sentences)
+            .filter(([key]) => !key.startsWith('custom/')));
+        return dueKeys(library, now, this.dailyGoal);
+    }
+
+    /** Count for the "Heute üben" tile and button. */
+    dueToday(now) {
+        return this.dueReviewKeys(now).length;
+    }
+
+    /** The library sentence a progress key belongs to, or null. */
+    findSentenceByKey(key) {
+        return this.sentenceManager.getAllSentences()
+            .find(s => s.source === 'library' && sentenceKey(s) === key) || null;
+    }
+
+    /**
+     * "Heute üben": the due sentences, each one rung harder (reviewRunner.js). Loads the library
+     * of the levels involved first; a due sentence that cannot be found or tested is retired
+     * and the next due one takes its place. Nothing to review: Home again.
+     */
+    async startLadderReview() {
+        const now = Date.now();
+        const levels = [...new Set(this.dueReviewKeys(now)
             .map(key => key.split('/')[0]).filter(l => LEVEL_CONTENT[l]))];
         await this.bulkLoadLibraryForLevels(levels);
-        const { levelSelect } = this.levelSelector;
-        if (levelSelect && levelSelect.value) {
-            levelSelect.value = '';
-            this.levelSelector.handleLevelChange();
+        let queue = [];
+        for (;;) {
+            const built = buildQueue(this.dueReviewKeys(now), key => this.findSentenceByKey(key),
+                key => progressStore.getSentence(key).rung);
+            queue = built.queue;
+            if (built.retired.length === 0) break;
+            for (const key of built.retired) progressStore.retire(key);
         }
-        if (this.gameMode.isActive) this.exitGame();
-        if (!this.playSession) this.playSession = { review: this.gameMode.reviewMode };
-        this.setReviewMode(true);
-        this.showScreen('play');
-        this.gameMode.loadRandomSentenceAndContinue(); // review pick (falls back to random)
-        if (!this.sentenceManager.currentSentenceId || this.wordManager.getAllWords().length === 0) {
-            this.handleGameStopped();
+        if (queue.length === 0) {
+            this.showScreen('home');
             return;
         }
+        if (this.gameMode.isActive) this.exitGame();
+        this.reviewRunner.start(queue);
+    }
+
+    /** Make a review sentence the game's current sentence (ReviewRunner, rung 3). */
+    loadReviewSentence(sentence) {
+        if (this.sentenceManager.currentSentenceId) {
+            this.sentenceManager.saveCurrentSentence();
+            this.saveSentences();
+        }
+        this.sentenceManager.loadSentence(sentence.id);
+        this.updateSentenceList();
         this.currentView = 'game';
-        this.gameMode.start();
         const gameModeBtn = document.getElementById('game-mode-btn');
         if (gameModeBtn) {
             gameModeBtn.textContent = '✕';
             gameModeBtn.title = 'Exit Game Mode';
         }
-        this.redrawAll();
+    }
+
+    /** End of a review session: the review recap on the 'end' screen. */
+    showReviewRecap(results) {
+        this.showScreen('end');
+        const root = document.getElementById('screen-end');
+        if (!root) return;
+        renderReviewRecap(root, reviewRecapModel(results), { home: () => this.showScreen('home') });
     }
 
     /**

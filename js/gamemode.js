@@ -3,6 +3,7 @@ import { pickNextSentence } from './sentencePicker.js';
 import { evaluatePlacement, getAutoPlacement, explainMistake, placementFeedback, predicateVerb, MAX_WRONG_ATTEMPTS } from './gameRules.js';
 import { progressStore, sentenceKey, emptyMistakes, addMistake, countMistakes } from './progressStore.js';
 import { blankArticles } from './articleBlank.js';
+import { rungEligibility } from './reviewRunner.js';
 import { GM_UI, drawHud, getTimerColor } from './gameHud.js';
 import { GRID_CELLS } from './grammaticalConfig.js';
 import { ensureJuiceDefs, spawnConfetti, spawnFloatingText, drawFeedbackAnimation, updateFeedbackElement,
@@ -1232,8 +1233,9 @@ export class GameMode {
                 // Only when listening mode is off — in listening mode the
                 // paused sentence audio resumes instead (see
                 // updateCurrentWordDisplay), which speaks the placed word
-                // with the sentence's own intonation
-                if (!gameSounds.promptEnabled) {
+                // with the sentence's own intonation. With articleBlank there is
+                // no prompt audio, so the placed phrase is spoken here as well.
+                if (!gameSounds.promptEnabled || this.articleBlank) {
                     const range = this.getItemWordRange(currentItem);
                     let endIdx = range[1];
                     while (endIdx + 1 < this.words.length && !this.isManualWord(this.words[endIdx + 1])) {
@@ -1656,7 +1658,9 @@ export class GameMode {
     recordProgress() {
         const sentence = this.host.sentenceManager.getCurrentSentence();
         if (sentence && this.ladder) this.ladder.record(sentence, countMistakes(this.sentenceMistakes));
-        else if (sentence) progressStore.recordSentence(sentenceKey(sentence), this.sentenceMistakes);
+        else if (sentence) {
+            progressStore.recordSentence(sentenceKey(sentence), this.sentenceMistakes, Date.now(), rungEligibility(this.words));
+        }
         progressStore.recordSession({ score: this.totalScore, streak: this.bestSessionStreak });
     }
 
@@ -1669,8 +1673,8 @@ export class GameMode {
         this.recordRun();
         this.sentencesCompleted++; // play screen progress bar (display only)
 
-        // Check if player reached target score
-        if (this.totalScore >= this.targetScore) {
+        // Check if player reached target score (not in a review session: the runner ends it)
+        if (!this.ladder && this.totalScore >= this.targetScore) {
             // Game fully complete!
             setTimeout(() => {
                 // Exit game mode and show the completed gridview

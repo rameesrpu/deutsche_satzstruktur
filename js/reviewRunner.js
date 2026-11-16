@@ -1,0 +1,170 @@
+/**
+ * The daily review session of the production ladder ("Heute üben", see
+ * docs/superpowers/specs/2026-11-15-production-ladder-design.md): plays the due sentences in
+ * order, each on its rung — rung 2 on the Ordnen screen (orderScreen.js), rung 3 in the placement
+ * game with its articles blanked (GameMode.articleBlank / GameMode.ladder) — records each one with
+ * progressStore.recordReview and ends on the review recap. The pure helpers at the top build the
+ * queue; app.js (startLadderReview) feeds it and owns the screens.
+ */
+
+import { exerciseRung } from './ladder.js';
+import { orderModel } from './orderExercise.js';
+import { hasArticle } from './articleBlank.js';
+import { renderOrderScreen } from './orderScreen.js';
+
+/**
+ * Which rungs a sentence can be tested on: 2 = it has an Ordnen model, 3 = it has an article.
+ * @param {Word[]} words
+ * @returns {{2: boolean, 3: boolean}}
+ */
+export function rungEligibility(words) {
+    return { 2: orderModel(words) !== null, 3: hasArticle(words) };
+}
+
+/**
+ * @typedef {Object} ReviewItem
+ * @property {string} key            sentenceKey()
+ * @property {Sentence} sentence
+ * @property {2|3} rung              the rung shown (exerciseRung)
+ * @property {{2: boolean, 3: boolean}} eligible
+ */
+
+/**
+ * The session queue for due keys, in their order. A key whose sentence is not found (library
+ * not loaded, chapter removed), a user-made (`custom/…`) key, and a sentence with no rung it
+ * can be tested on go to `retired` (the caller takes them off the ladder).
+ * @param {string[]} keys
+ * @param {function(string): ?Sentence} findSentence
+ * @param {function(string): number} getRung  the entry's stored rung
+ * @returns {{queue: ReviewItem[], retired: string[]}}
+ */
+export function buildQueue(keys, findSentence, getRung) {
+    const queue = [];
+    const retired = [];
+    for (const key of keys) {
+        const sentence = key.startsWith('custom/') ? null : findSentence(key);
+        const eligible = sentence ? rungEligibility(sentence.words || []) : null;
+        const rung = eligible ? exerciseRung(getRung(key), eligible) : null;
+        if (rung === null) retired.push(key);
+        else queue.push({ key, sentence, rung, eligible });
+    }
+    return { queue, retired };
+}
+
+/**
+ * Runs one review session. `app` provides showScreen(name), showReviewRecap(results),
+ * loadReviewSentence(sentence) (make it the game's current sentence) and redrawAll().
+ * Every way out goes through close() or the end of the queue, which clear the game's
+ * articleBlank and ladder.
+ */
+export class ReviewRunner {
+    /**
+     * @param {{app: Object, gameMode: GameMode, progressStore: ProgressStore,
+     *   renderOrder?: typeof renderOrderScreen, orderRoot?: function(): ?HTMLElement}} deps
+     *   renderOrder / orderRoot: the Ordnen screen (replaced in tests)
+     */
+    constructor({ app, gameMode, progressStore, renderOrder = renderOrderScreen,
+        orderRoot = () => document.getElementById('screen-order') }) {
+        this.app = app;
+        this.gameMode = gameMode;
+        this.progressStore = progressStore;
+        this.renderOrder = renderOrder;
+        this.orderRoot = orderRoot;
+        this.active = false;
+        this.queue = [];
+        this.index = 0;
+        /** @type {ReviewResult[]} */
+        this.results = [];
+    }
+
+    /** @param {ReviewItem[]} queue */
+    start(queue) {
+        this.queue = queue;
+        this.index = 0;
+        this.results = [];
+        this.active = queue.length > 0;
+        if (this.active) this.show();
+        else this.app.showScreen('home');
+    }
+
+    /** End the session early (✕): the sentences not finished stay due. */
+    close() {
+        if (!this.active) return;
+        this.active = false;
+        this.app.showScreen('home');
+        this.clearGame();
+    }
+
+    // --- internals ---
+
+    show() {
+        const item = this.queue[this.index];
+        if (item.rung === 2) this.showOrder(item);
+        else this.showGame(item);
+    }
+
+    /** True while `item` is the one on screen (callbacks of an earlier screen are ignored). */
+    isCurrent(item) {
+        return this.active && this.queue[this.index] === item;
+    }
+
+    showOrder(item) {
+        // Route first: leaving the play screen stops a running game (app.showScreen)
+        this.app.showScreen('order');
+        this.clearGame();
+        this.renderOrder(this.orderRoot(), {
+            model: orderModel(item.sentence.words), total: this.queue.length, index: this.index,
+        }, {
+            onDone: mistakes => {
+                if (!this.isCurrent(item)) return;
+                this.record(item, mistakes === 0);
+                this.next(item);
+            },
+            onClose: () => { if (this.isCurrent(item)) this.close(); },
+        });
+    }
+
+    showGame(item) {
+        const gm = this.gameMode;
+        this.app.showScreen('play');
+        this.app.loadReviewSentence(item.sentence);
+        // Set before start()/startNewSentence(): the first word's Hörübung prompt checks articleBlank
+        gm.articleBlank = true;
+        gm.ladder = {
+            total: this.queue.length,
+            index: this.index,
+            record: (sentence, mistakes) => { if (this.isCurrent(item)) this.record(item, mistakes === 0); },
+            next: () => { if (this.isCurrent(item)) this.next(item); },
+        };
+        if (gm.isActive) gm.startNewSentence();
+        else gm.start();
+        this.app.redrawAll();
+    }
+
+    record(item, ok) {
+        if (this.results.some(r => r.key === item.key)) return; // one result per sentence
+        const entry = this.progressStore.recordReview(item.key, ok, item.eligible);
+        this.results.push({ key: item.key, text: item.sentence.text, from: item.rung,
+            to: entry ? entry.rung : item.rung, ok });
+    }
+
+    next(item) {
+        if (!this.isCurrent(item)) return;
+        this.index++;
+        if (this.index < this.queue.length) {
+            this.show();
+            return;
+        }
+        this.active = false;
+        this.app.showReviewRecap(this.results);
+        this.clearGame();
+    }
+
+    /** Back to a normal game: articles visible, progress recorded the normal way. */
+    clearGame() {
+        const gm = this.gameMode;
+        gm.articleBlank = false;
+        gm.ladder = null;
+        if (gm.isActive) gm.stop();
+    }
+}

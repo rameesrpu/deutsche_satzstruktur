@@ -1,6 +1,6 @@
 import { test, assertEqual } from './assert.js';
 import { storyChapters, chapterStatuses, sentenceStats, startOfDay, countPlayedToday,
-    countWeakSpots, articleGender, greeting } from '../js/homeScreen.js';
+    reviewTile, practiceReviewButton, articleGender, greeting } from '../js/homeScreen.js';
 import { chapterOrder } from '../js/levelContent.js';
 
 const entry = (over = {}) => ({
@@ -46,13 +46,16 @@ export function runHomeScreenTests() {
         assertEqual(countPlayedToday(progress, now), 2);
     });
 
-    test('home: countWeakSpots counts sentences with a review weight', () => {
-        const now = Date.now();
-        const progress = { sentences: {
-            perfect: entry({ lastPlayed: now }),
-            missed: entry({ lastPlayed: now, lastMistakes: 1, perfectStreak: 0, mistakes: { case: { akk: 1 }, cell: 0 } }),
-        } };
-        assertEqual(countWeakSpots(progress, now), 1);
+    test('home: review tile shows today\'s count, "Heute fertig" at 0', () => {
+        assertEqual(reviewTile(4), { count: '4', label: 'Heute üben',
+            title: 'Sätze von früher, eine Stufe schwerer', disabled: false });
+        const done = reviewTile(0);
+        assertEqual([done.label, done.disabled, done.count], ['Heute fertig', true, null]);
+    });
+
+    test('home: Üben button "Heute üben (n)", disabled at 0', () => {
+        assertEqual(practiceReviewButton(3), { label: 'Heute üben (3)', disabled: false });
+        assertEqual(practiceReviewButton(0), { label: 'Heute üben (0)', disabled: true });
     });
 
     test('home: articleGender reads the article of a glossary headword', () => {

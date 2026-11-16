@@ -1,11 +1,10 @@
 // Learner screens outside the game and the editor: Home ("Lernen"), Üben and Wörter.
-// The pure helpers at the top (chapter status, today's count, weak spots, article
+// The pure helpers at the top (chapter status, today's count, the "Heute üben" tile, article
 // gender) are unit-tested; the render* functions build each screen's DOM into a
 // container and call back into the app for every action (they never start a
 // game or open the reader themselves).
 
 import { STORY_CONTENT } from './storyContent.js';
-import { reviewWeight } from './sentencePicker.js';
 import { GRAMMAR_PALETTE } from './grammaticalConfig.js';
 import { goalProgress } from './settings.js';
 import { startOfDay } from './ladder.js';
@@ -76,12 +75,26 @@ export function countPlayedToday(progress, now) {
 }
 
 /**
- * Sentences "Schwächen üben" would pick from (review weight > 0).
- * @param {GameProgress} progress
- * @param {number} now
+ * The Home tile of the daily review ("Heute üben", reviewRunner.js).
+ * @param {number} dueToday  sentences due today, capped at the daily goal
+ * @returns {{count: ?string, label: string, title: string, disabled: boolean}}  count null at 0
  */
-export function countWeakSpots(progress, now) {
-    return Object.values(progress.sentences).filter(e => reviewWeight(e, now) > 0).length;
+export function reviewTile(dueToday) {
+    return {
+        count: dueToday > 0 ? String(dueToday) : null,
+        label: dueToday > 0 ? 'Heute üben' : 'Heute fertig',
+        title: 'Sätze von früher, eine Stufe schwerer',
+        disabled: dueToday === 0,
+    };
+}
+
+/**
+ * The Üben screen's daily review button.
+ * @param {number} dueToday
+ * @returns {{label: string, disabled: boolean}}
+ */
+export function practiceReviewButton(dueToday) {
+    return { label: `Heute üben (${dueToday})`, disabled: dueToday === 0 };
 }
 
 /**
@@ -181,18 +194,18 @@ function screenHead(title, sub = null) {
 }
 
 /**
- * Home: "Weiter mit Kapitel …", today's goal, weak spots, the current story's chapters.
+ * Home: "Weiter mit Kapitel …", today's goal, today's review, the current story's chapters.
  * @param {HTMLElement} root
  * @param {Object} model
  * @param {Object[]} model.chapters   chapterStatuses() rows plus `data` (chapter file or null)
  *   and `stats` (sentenceStats)
  * @param {number} model.playedToday
  * @param {number} model.dailyGoal  sentences per day (settings.js)
- * @param {number} model.weakSpots
+ * @param {number} model.dueToday  sentences due for review today (capped at the daily goal)
  * @param {number} model.now
  * @param {{read: function(Object), play: function(Object), review: function(), settings: function()}} actions
  */
-export function renderHome(root, { chapters, playedToday, dailyGoal, weakSpots, now }, actions) {
+export function renderHome(root, { chapters, playedToday, dailyGoal, dueToday, now }, actions) {
     const date = new Date(now).toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' });
     const current = chapters.find(c => c.status === 'current') ||
         chapters.find(c => c.status === 'open') || null;
@@ -204,6 +217,7 @@ export function renderHome(root, { chapters, playedToday, dailyGoal, weakSpots, 
         el('button', { type: 'button', className: 'screen-icon-btn', 'aria-label': 'Einstellungen',
             title: 'Einstellungen', onclick: () => actions.settings(), html: icon('gear') }))];
     const goal = goalProgress(playedToday, dailyGoal);
+    const review = reviewTile(dueToday);
 
     if (focus) {
         const s = focus.stats;
@@ -233,14 +247,13 @@ export function renderHome(root, { chapters, playedToday, dailyGoal, weakSpots, 
                 el('strong', {}, `${goal.count}/${goal.goal}`),
                 el('span', { className: 'home-muted' }, goal.label))),
         el('button', {
-            type: 'button', className: 'home-card home-tile home-tile-btn', disabled: weakSpots === 0,
-            onclick: () => actions.review(),
-            title: weakSpots === 0 ? 'Noch keine Fehler zum Üben' : 'Sätze mit Fehlern nochmal spielen',
+            type: 'button', className: 'home-card home-tile home-tile-btn home-review', disabled: review.disabled,
+            onclick: () => actions.review(), title: review.title,
         },
-            el('span', { className: 'home-tile-icon', html: icon('review') }),
+            el('span', { className: 'home-tile-icon', html: icon(review.disabled ? 'check' : 'review') }),
             el('span', { className: 'home-tile-text' },
-                el('strong', {}, String(weakSpots)),
-                el('span', { className: 'home-muted' }, 'Schwächen üben')))));
+                review.count ? el('strong', {}, review.count) : null,
+                el('span', { className: 'home-muted' }, review.label)))));
 
     if (focus) {
         const storyRows = chapters.filter(c => c.level === focus.level && c.storyNo === focus.storyNo);
@@ -284,12 +297,12 @@ function chapterRow(ch, all, actions) {
 }
 
 /**
- * Üben: weak spots, the drills of unlocked chapters, and the grammar categories.
+ * Üben: today's review, the drills of unlocked chapters, and the grammar categories.
  * @param {HTMLElement} root
- * @param {{weakSpots: number, drills: {level, key, label}[], grammar: {level, label, categories: {key, label}[]}[]}} model
+ * @param {{dueToday: number, drills: {level, key, label}[], grammar: {level, label, categories: {key, label}[]}[]}} model
  * @param {{review: function(), play: function(string, string)}} actions  play(level, categoryKey)
  */
-export function renderPractice(root, { weakSpots, drills, grammar }, actions) {
+export function renderPractice(root, { dueToday, drills, grammar }, actions) {
     const listOf = (items, level) => el('ul', { className: 'home-card home-chapter-list' },
         items.map(it => el('li', { className: 'home-chapter' },
             el('button', { type: 'button', className: 'home-chapter-btn',
@@ -299,8 +312,11 @@ export function renderPractice(root, { weakSpots, drills, grammar }, actions) {
             el('span', { className: 'home-chapter-go', html: icon('chevron') })))));
 
     const parts = [screenHead('Üben')];
-    parts.push(button('home-card home-wide-btn', `Schwächen üben (${weakSpots})`, () => actions.review(),
-        { iconHtml: icon('review'), disabled: weakSpots === 0 }));
+    const review = practiceReviewButton(dueToday);
+    const reviewBtn = button('home-card home-wide-btn', review.label, () => actions.review(),
+        { iconHtml: icon('review'), disabled: review.disabled });
+    reviewBtn.title = reviewTile(dueToday).title;
+    parts.push(reviewBtn);
     if (drills.length > 0) {
         parts.push(el('section', { className: 'home-chapters' },
             el('div', { className: 'home-section-head' }, el('h3', {}, 'Übungen zu den Kapiteln')),

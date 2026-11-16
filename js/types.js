@@ -135,3 +135,13 @@
  * @property {Object<string, SentenceProgress>} sentences  keyed by sentenceKey(): level/category/text
  * @property {{bestScore: number, bestStreak: number, sentencesPlayed: number}} totals
  */
+
+/**
+ * One reviewed sentence of a "Heute üben" session (reviewRunner.js → reviewRecapModel).
+ * @typedef {Object} ReviewResult
+ * @property {string} key           sentenceKey()
+ * @property {string} text
+ * @property {number} from          the rung shown
+ * @property {number} to            the rung after the review
+ * @property {boolean} ok           no mistake
+ */

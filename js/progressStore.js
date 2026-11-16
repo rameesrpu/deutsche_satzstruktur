@@ -140,11 +140,12 @@ export class ProgressStore {
      * @param {boolean} ok  answered correctly
      * @param {{2: boolean, 3: boolean}} eligible
      * @param {number} [now]
-     * @returns {?SentenceProgress}  null for an unknown key
+     * @returns {?SentenceProgress}  null for an unknown key or one off the ladder (rung 0:
+     *   retired, user-made or never eligible), which stays as it is
      */
     recordReview(key, ok, eligible, now = Date.now()) {
         const entry = this.getSentence(key);
-        if (!entry) return null;
+        if (!entry || !(entry.rung >= RUNG_FIRST)) return null;
         Object.assign(entry, afterReview(entry, ok, now, eligible));
         entry.lastReview = now;
         entry.lastPlayed = now;

@@ -5012,3 +5012,11 @@ body[data-play-view="review"] .play-bottom {
     60% { transform: translateX(-4px); }
     80% { transform: translateX(4px); }
 }
+
+/* ---- "Heute üben" review recap (production ladder, chapterRecap.js renderReviewRecap) ---- */
+.recap-review-line {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+}

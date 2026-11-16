@@ -23,6 +23,7 @@ import { runFelderLessonTests } from './felderLesson.test.js';
 import { runFieldZonesTests } from './fieldZones.test.js';
 import { runOrderExerciseTests } from './orderExercise.test.js';
 import { runArticleBlankTests } from './articleBlank.test.js';
+import { runReviewRunnerTests } from './reviewRunner.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -60,6 +61,7 @@ runFelderLessonTests({ update });
 runFieldZonesTests({ update });
 runOrderExerciseTests();
 runArticleBlankTests();
+runReviewRunnerTests();
 runLibrarySnapshot({ update });
 
 System.exit(summary() > 0 ? 1 : 0);

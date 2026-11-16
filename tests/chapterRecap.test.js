@@ -1,6 +1,6 @@
 import { test, assertEqual, assert } from './assert.js';
 import { recapStats, hardSentences, underlineParts, missReason, wordChip, newGlossaryEntries,
-    chipList, recapTitle, buildRecapModel, MAX_HARD } from '../js/chapterRecap.js';
+    chipList, recapTitle, buildRecapModel, MAX_HARD, reviewRecapModel } from '../js/chapterRecap.js';
 
 const miss = (over = {}) => ({
     start: 0, end: 1, phrase: 'Ihre Heimat', key: 'fem', cellWrong: true, caseWrong: false,
@@ -110,5 +110,12 @@ export function runChapterRecapTests() {
         assertEqual(incomplete.hardTexts, []);
         assertEqual(buildRecapModel({ chapter, results, complete: true, replay: true }).kicker,
             'Kapitel 1.1 · Wiederholung');
+    });
+
+    test('recap: reviewRecapModel counts sentences moved up and down', () => {
+        const m = reviewRecapModel([{ ok: true, from: 2, to: 3 }, { ok: false, from: 3, to: 2 }, { ok: true, from: 3, to: 3 }]);
+        assertEqual([m.total, m.up, m.down], [3, 1, 1]);
+        assertEqual(m.title, 'Geschafft!');
+        assertEqual(m.line, '1 von 3 eine Stufe weiter · morgen wieder');
     });
 }
