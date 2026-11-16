@@ -64,3 +64,25 @@ export function installBrowserStubs({ innerWidth = 1024 } = {}) {
 }
 
 installBrowserStubs();
+
+/**
+ * Words from story tags (data/stories/CURRICULUM.md), like scripts/build_stories.py:
+ * S.<p> subject, O.<p>.<case> object, V.<p>/M.<p> finite verb/modal, V non-finite verb,
+ * P preposition/particle, X other, K coord. conjunction, C subordinating conjunction, "/" next clause.
+ */
+export function tagged(text, tags) {
+    const tokens = text.split(' ');
+    const simple = { P: 'preposition', X: 'other', K: 'coord-conjunction', C: 'conjunction' };
+    let clause = 0;
+    const words = [];
+    for (const tag of tags.split(' ')) {
+        if (tag === '/') { clause++; continue; }
+        const [kind, p] = tag.split('.');
+        const type = simple[kind] || { S: 'subject', O: 'object', V: 'verb', M: 'modal' }[kind];
+        const finite = (kind === 'V' || kind === 'M') && p;
+        words.push({ type, text: tokens[words.length], clause_type: 'main', clause_id: clause,
+            conjugation: { pronoun: finite || kind === 'S' ? p : 'none' } });
+    }
+    if (words.length !== tokens.length) throw new Error(`tags don't match: ${text}`);
+    return words;
+}

@@ -20,6 +20,7 @@ import { runChapterRecapTests } from './chapterRecap.test.js';
 import { runSettingsTests } from './settings.test.js';
 import { runLadderTests } from './ladder.test.js';
 import { runFelderLessonTests } from './felderLesson.test.js';
+import { runFieldZonesTests } from './fieldZones.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -54,6 +55,7 @@ runChapterRecapTests();
 runSettingsTests();
 runLadderTests();
 runFelderLessonTests({ update });
+runFieldZonesTests({ update });
 runLibrarySnapshot({ update });
 
 System.exit(summary() > 0 ? 1 : 0);

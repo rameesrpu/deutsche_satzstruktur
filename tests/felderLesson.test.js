@@ -1,33 +1,11 @@
 // felderLesson (E3): unit tests per kind + a snapshot of every A1 story chapter sentence
 // (kind or "-") with the share per chapter, to review by hand: tests/snapshots/felder-lessons.json
 
-import { listDir, readText, writeText } from './stubs.js';
+import { listDir, readText, writeText, tagged } from './stubs.js';
 import { test, assert, assertEqual } from './assert.js';
 import { felderLesson, lessonAutoShow, LESSON_AUTO_MAX } from '../js/felderLesson.js';
 
 const SNAPSHOT = 'tests/snapshots/felder-lessons.json';
-
-/**
- * Words from story tags (data/stories/CURRICULUM.md), like scripts/build_stories.py:
- * S.<p> subject, O.<p>.<case> object, V.<p>/M.<p> finite verb/modal, V non-finite verb,
- * P preposition/particle, X other, K coord. conjunction, C subordinating conjunction, "/" next clause.
- */
-function tagged(text, tags) {
-    const tokens = text.split(' ');
-    const simple = { P: 'preposition', X: 'other', K: 'coord-conjunction', C: 'conjunction' };
-    let clause = 0;
-    const words = [];
-    for (const tag of tags.split(' ')) {
-        if (tag === '/') { clause++; continue; }
-        const [kind, p] = tag.split('.');
-        const type = simple[kind] || { S: 'subject', O: 'object', V: 'verb', M: 'modal' }[kind];
-        const finite = (kind === 'V' || kind === 'M') && p;
-        words.push({ type, text: tokens[words.length], clause_type: 'main', clause_id: clause,
-            conjugation: { pronoun: finite || kind === 'S' ? p : 'none' } });
-    }
-    if (words.length !== tokens.length) throw new Error(`tags don't match: ${text}`);
-    return words;
-}
 
 const lesson = (text, tags) => felderLesson(tagged(text, tags));
 const kind = (text, tags) => { const l = lesson(text, tags); return l ? l.kind : null; };

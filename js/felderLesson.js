@@ -13,13 +13,13 @@ const W_WORDS = new Set(['wer', 'wen', 'wem', 'wessen', 'was', 'wie', 'wo', 'woh
     'wieviel', 'wie viel', 'womit', 'wofür', 'worüber', 'wozu']);
 
 /** Word text without surrounding punctuation ("Hier," → "Hier"). */
-const bare = text => String(text).replace(/^[„“"»«(]+|[.,!?;:…“”"»«)]+$/g, '');
+export const bare = text => String(text).replace(/^[„“"»«(]+|[.,!?;:…“”"»«)]+$/g, '');
 
 const pronoun = w => (w.conjugation && w.conjugation.pronoun) || 'none';
-const isFinite = w => (w.type === 'verb' || w.type === 'modal') && pronoun(w) !== 'none';
-const isNonFinite = w => w.type === 'verb' && pronoun(w) === 'none';
+export const isFiniteVerb = w => (w.type === 'verb' || w.type === 'modal') && pronoun(w) !== 'none';
+export const isNonFinite = w => w.type === 'verb' && pronoun(w) === 'none';
 /** The word closes its clause: punctuation after it, or the sentence ends. */
-const endsClause = (words, i) => i === words.length - 1 || /[.,!?;:…]$/.test(words[i].text);
+export const endsClause = (words, i) => i === words.length - 1 || /[.,!?;:…]$/.test(words[i].text);
 const sameClause = (a, b) => (a.clause_id ?? 0) === (b.clause_id ?? 0);
 
 /**
@@ -27,11 +27,11 @@ const sameClause = (a, b) => (a.clause_id ?? 0) === (b.clause_id ?? 0);
  * ("Ja,", "Hallo,", "Guten Tag,") and a leading coordinating conjunction ("Aber", "Und"):
  * neither belongs to the Vorfeld.
  */
-function clauseStart(words) {
+export function clauseStart(words) {
     let start = 0;
     const comma = words.findIndex(w => /,$/.test(w.text));
     if (comma >= 0 && comma < 3 &&
-        words.slice(0, comma + 1).every(w => !isFinite(w) && w.type !== 'verb' && w.type !== 'conjunction')) {
+        words.slice(0, comma + 1).every(w => !isFiniteVerb(w) && w.type !== 'verb' && w.type !== 'conjunction')) {
         start = comma + 1;
     }
     while (start < words.length && words[start].type === 'coord-conjunction') start++;
@@ -39,7 +39,7 @@ function clauseStart(words) {
 }
 
 /** Two-part verb: the finite verb before a later infinitive/participle or a separable particle. */
-function findBracket(words) {
+export function findBracket(words) {
     for (let i = 0; i < words.length; i++) {
         const w = words[i];
         const particle = w.type === 'preposition' && endsClause(words, i);
@@ -49,7 +49,7 @@ function findBracket(words) {
         for (let j = i - 1; j >= 0; j--) {
             const v = words[j];
             if (!sameClause(v, w)) break;
-            if (isFinite(v) || (particle && v.type === 'verb')) return [j, i];
+            if (isFiniteVerb(v) || (particle && v.type === 'verb')) return [j, i];
         }
     }
     return null;
@@ -80,7 +80,7 @@ export function felderLesson(words) {
     }
 
     const start = clauseStart(words);
-    const verb = words.findIndex((w, i) => i >= start && isFinite(w));
+    const verb = words.findIndex((w, i) => i >= start && isFiniteVerb(w));
     if (verb <= start) return null; // no finite verb, or verb first (yes/no question, imperative)
     const front = words.slice(start, verb);
     const wQuestion = W_WORDS.has(bare(front[0].text).toLowerCase());
