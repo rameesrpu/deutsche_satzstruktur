@@ -122,12 +122,16 @@
  * @property {number} lastPlayed    ms timestamp
  * @property {number} lastMistakes  mistake count of the last play
  * @property {SentenceMistakes} mistakes  summed over all plays
+ * @property {number} rung          review ladder: 0 = not on it, 2-5 (ladder.js)
+ * @property {number} due           ms timestamp (local midnight) of the next review
+ * @property {number} topPasses     passes in a row at the top rung
+ * @property {number} lastReview    ms timestamp of the last review, 0 = never
  */
 
 /**
  * localStorage `gameProgress`; also the `progress` field of a sentence export.
  * @typedef {Object} GameProgress
- * @property {number} version       format version (1)
+ * @property {number} version       format version (2)
  * @property {Object<string, SentenceProgress>} sentences  keyed by sentenceKey(): level/category/text
  * @property {{bestScore: number, bestStreak: number, sentencesPlayed: number}} totals
  */
