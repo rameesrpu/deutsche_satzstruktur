@@ -43,7 +43,7 @@ the owner's answer or review.
 
 | # | Project | Plan | Status | Needs first |
 |---|---|---|---|---|
-| 1 | Production ladder, rungs 2–3 | [plan](superpowers/plans/2026-11-15-production-ladder.md) · [design](superpowers/specs/2026-11-15-production-ladder-design.md) | in progress (5 of 8) | – |
+| 1 | Production ladder, rungs 2–3 | [plan](superpowers/plans/2026-11-15-production-ladder.md) · [design](superpowers/specs/2026-11-15-production-ladder-design.md) | in progress (6 of 8) | – |
 | 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | not started | – |
 | 3 | Ladder rungs 4–5 (Schreiben, Sprechen) | [plan](superpowers/plans/2026-11-16-ladder-write-speak.md) · [design](superpowers/specs/2026-11-16-ladder-write-speak-design.md) | not started | 1 |
 | 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | not started | 1 |
@@ -65,7 +65,7 @@ Branch `production-ladder` (not merged, not pushed).
 - [x] Task 3: Field zones (`fieldZones.js`) — commits `804eac2`, `c9a4158`
 - [x] Task 4: Ordnen logic (`orderExercise.js`) — commit `0a0ece9`
 - [x] Task 5: Article blank (rung 3) — commit `8add6e0`
-- [ ] Task 6: Ordnen screen
+- [x] Task 6: Ordnen screen — commits `c85bce4`, `d63a145`
 - [ ] Task 7: Review runner, "Heute üben", recap
 - [ ] Task 8: Docs and ship
 - [ ] Whole-branch review, then merge to `main`
