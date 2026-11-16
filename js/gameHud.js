@@ -250,12 +250,7 @@ export function drawHud(game) {
     if (game.currentWordDisplay && game.currentIndex < game.manualItems.length) {
         const activeItem = game.manualItems[game.currentIndex];
 
-        if (activeItem.type === 'box') {
-            const phraseText = activeItem.item.words.map(w => w.text).join(' ');
-            currentWordBoxWidth = estimateTextWidth(phraseText, isMobile ? 42 : 28);
-        } else {
-            currentWordBoxWidth = estimateTextWidth(activeItem.item.text, isMobile ? 42 : 28);
-        }
+        currentWordBoxWidth = estimateTextWidth(game.displayItemText(activeItem), isMobile ? 42 : 28);
     }
 
     // Get visible auto-placed words in original sentence order
@@ -313,9 +308,7 @@ export function drawHud(game) {
         // a second measurement here with a different size shifts the pill
         // off its slot and overlaps the neighbors
         const wordWidth = currentWordBoxWidth;
-        const displayText = activeItem.type === 'box'
-            ? activeItem.item.words.map(w => w.text).join(' ')
-            : activeItem.item.text;
+        const displayText = game.displayItemText(activeItem);
 
         // Wrapper group so a wrong placement can trigger a brief CSS shake
         // (purely visual; coordinates unchanged)
@@ -353,9 +346,7 @@ export function drawHud(game) {
         let nextWordText = null;
         if (nextWordInSentence) {
             const nextManual = game.wordToManualItem.get(nextWordInSentence);
-            nextWordText = (nextManual && nextManual.type === 'box')
-                ? nextManual.item.words.map(w => w.text).join(' ')
-                : nextWordInSentence.text;
+            nextWordText = nextManual ? game.displayItemText(nextManual) : nextWordInSentence.text;
         }
 
         if (nextWordText) {

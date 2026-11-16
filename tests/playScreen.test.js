@@ -1,5 +1,6 @@
 import { test, assertEqual } from './assert.js';
-import { progressSegments, sentenceParts } from '../js/playScreen.js';
+import { tagged } from './stubs.js';
+import { progressSegments, sentenceParts, playSentenceTexts } from '../js/playScreen.js';
 
 export function runPlayScreenTests() {
     test('progressSegments: done / current / todo', () =>
@@ -25,4 +26,21 @@ export function runPlayScreenTests() {
     test('sentenceParts: complete sentence', () =>
         assertEqual(sentenceParts(texts, null), {
             parts: [{ text: 'Am Fenster sitzt eine junge Frau.', kind: 'past' }], more: false }));
+
+    const give = flags => {
+        const words = tagged('Ich gebe dem Patienten einen Tee.', 'S.ich V.ich O.m.dat O.m.dat O.m.akk O.m.akk');
+        return { words, manualItems: [{}], currentIndex: 0, waitingForContinue: false,
+            getItemWordRange: () => [2, 3], articleBlank: false, ...flags };
+    };
+    test('playSentenceTexts: plain texts when articleBlank is off', () =>
+        assertEqual(playSentenceTexts(give()), ['Ich', 'gebe', 'dem', 'Patienten', 'einen', 'Tee.']));
+    test('playSentenceTexts: articleBlank blanks the phrase and later articles', () =>
+        assertEqual(playSentenceTexts(give({ articleBlank: true })),
+            ['Ich', 'gebe', '___', 'Patienten', '___', 'Tee.']));
+    test('playSentenceTexts: placed articles before the phrase stay', () =>
+        assertEqual(playSentenceTexts(give({ articleBlank: true, getItemWordRange: () => [4, 5] })),
+            ['Ich', 'gebe', 'dem', 'Patienten', '___', 'Tee.']));
+    test('playSentenceTexts: finished sentence is not blanked', () =>
+        assertEqual(playSentenceTexts(give({ articleBlank: true, waitingForContinue: true })),
+            ['Ich', 'gebe', 'dem', 'Patienten', 'einen', 'Tee.']));
 }

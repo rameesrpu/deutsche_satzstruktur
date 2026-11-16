@@ -22,6 +22,7 @@ import { runLadderTests } from './ladder.test.js';
 import { runFelderLessonTests } from './felderLesson.test.js';
 import { runFieldZonesTests } from './fieldZones.test.js';
 import { runOrderExerciseTests } from './orderExercise.test.js';
+import { runArticleBlankTests } from './articleBlank.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -58,6 +59,7 @@ runLadderTests();
 runFelderLessonTests({ update });
 runFieldZonesTests({ update });
 runOrderExerciseTests();
+runArticleBlankTests();
 runLibrarySnapshot({ update });
 
 System.exit(summary() > 0 ? 1 : 0);

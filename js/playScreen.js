@@ -15,6 +15,7 @@
 import { storyStrip } from './storyNarration.js';
 import { renderGlossedText, speakableForm } from './glossary.js';
 import { gameSounds } from './sound.js';
+import { blankArticles } from './articleBlank.js';
 
 /** Sentences per progress bar outside a story chapter (review, random, drills). */
 export const SESSION_SEGMENTS = 10;
@@ -266,6 +267,8 @@ function renderStoryStrip(game) {
 
 /** Progress of the current sentence: story chapter sentences, replay list, else a session window. */
 function progressState(game) {
+    // Review ladder (reviewRunner): one segment per sentence of the run
+    if (game.ladder) return progressSegments(game.ladder.total, game.ladder.index, game.waitingForContinue);
     const chapter = game.getStoryChapter();
     const done = game.waitingForContinue;
     if (game.replay) {
@@ -281,9 +284,20 @@ function progressState(game) {
     return progressSegments(SESSION_SEGMENTS, n % SESSION_SEGMENTS, done);
 }
 
+/**
+ * Word texts of the sentence as the play screen shows them. With `game.articleBlank` (rung 3)
+ * the articles from the current phrase on are "___" until the phrase is placed; a finished
+ * sentence is never blanked.
+ */
+export function playSentenceTexts(game) {
+    const item = game.manualItems && game.manualItems[game.currentIndex];
+    if (!game.articleBlank || !item || game.waitingForContinue) return game.words.map(w => w.text);
+    return blankArticles(game.words, game.getItemWordRange(item)[0]);
+}
+
 /** The sentence parts for the word currently being placed (same reveal as the old word bar). */
 function currentSentenceParts(game) {
-    const texts = game.words.map(w => w.text);
+    const texts = playSentenceTexts(game);
     const item = game.manualItems && game.manualItems[game.currentIndex];
     if (!item || game.waitingForContinue) return sentenceParts(texts, null);
     const range = game.getItemWordRange(item);

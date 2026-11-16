@@ -1,7 +1,8 @@
 import { gameSounds, placementSpeech } from './sound.js';
 import { pickNextSentence } from './sentencePicker.js';
 import { evaluatePlacement, getAutoPlacement, explainMistake, placementFeedback, predicateVerb, MAX_WRONG_ATTEMPTS } from './gameRules.js';
-import { progressStore, sentenceKey, emptyMistakes, addMistake } from './progressStore.js';
+import { progressStore, sentenceKey, emptyMistakes, addMistake, countMistakes } from './progressStore.js';
+import { blankArticles } from './articleBlank.js';
 import { GM_UI, drawHud, getTimerColor } from './gameHud.js';
 import { GRID_CELLS } from './grammaticalConfig.js';
 import { ensureJuiceDefs, spawnConfetti, spawnFloatingText, drawFeedbackAnimation, updateFeedbackElement,
@@ -117,6 +118,13 @@ export class GameMode {
 
         // Waiting for user to continue to next sentence
         this.waitingForContinue = false;
+
+        // Review ladder (reviewRunner.js sets these, stop() resets them). articleBlank (rung 3):
+        // the play screen shows not-yet-placed articles as "___", no Hörübung prompt.
+        // ladder: {total, index, record(sentence, mistakes), next()} replaces the progress
+        // recording, the next-sentence choice and the story chapter flow while a run is on.
+        this.articleBlank = false;
+        this.ladder = null;
 
         // Werkstatt: first tap shows felder view; second tap loads next sentence.
         // Play screen (E3): only a sentence with a felderLesson() opens the field model, on its
@@ -427,6 +435,8 @@ export class GameMode {
         this.batchCurrentCategory = null;
         this.run = null;
         this.replay = null;
+        this.articleBlank = false;
+        this.ladder = null;
 
         // Remove keyboard event listener
         if (this.keyboardHandler) {
@@ -1273,7 +1283,7 @@ export class GameMode {
 
             // Show cross feedback (no score penalty, but don't advance)
             this.feedback = placementFeedback({
-                ok: false, word: itemToValidate, phrase: this.getItemText(currentItem),
+                ok: false, word: itemToValidate, phrase: this.displayItemText(currentItem),
                 preposition: before, result: outcome.result, attempts: outcome.attempts,
             });
             this.showFeedback('✗', feedbackX, feedbackY, false);
@@ -1281,7 +1291,7 @@ export class GameMode {
             if (!this.isPlayScreen()) {
                 this.showMistakeHint(explainMistake({
                     word: itemToValidate, result: outcome.result,
-                    phrase: this.getItemText(currentItem), preposition: before,
+                    phrase: this.displayItemText(currentItem), preposition: before,
                 }));
             }
 
@@ -1504,7 +1514,7 @@ export class GameMode {
             this.stopTimerAnimation();
             this.wordStartTime = null;
             // Listening mode: sentence done — let the audio play out its tail
-            if (typeof gameSounds !== 'undefined' && this.words && this.words.length > 0) {
+            if (typeof gameSounds !== 'undefined' && !this.articleBlank && this.words && this.words.length > 0) {
                 gameSounds.promptSentence(this.words.map(w => w.text), null);
             }
             return;
@@ -1515,7 +1525,7 @@ export class GameMode {
 
         // Listening mode (audio fill-in-the-blank): play the sentence up to
         // the blank, pausing right where the current word belongs
-        if (typeof gameSounds !== 'undefined' && this.words && this.words.length > 0) {
+        if (typeof gameSounds !== 'undefined' && !this.articleBlank && this.words && this.words.length > 0) {
             const blankIdx = this.getItemWordRange(currentItem)[0];
             gameSounds.promptSentence(this.words.map(w => w.text), blankIdx);
         }
@@ -1580,6 +1590,16 @@ export class GameMode {
     }
 
     /**
+     * The phrase text of an item for display before it is placed: with articleBlank its
+     * articles are "___" (also in wrong-placement feedback, which names the phrase).
+     */
+    displayItemText(item) {
+        if (!this.articleBlank) return this.getItemText(item);
+        const [start, end] = this.getItemWordRange(item);
+        return blankArticles(this.words, start).slice(start, end + 1).join(' ');
+    }
+
+    /**
      * Get display text for a game item
      */
     getItemText(item) {
@@ -1635,7 +1655,8 @@ export class GameMode {
      */
     recordProgress() {
         const sentence = this.host.sentenceManager.getCurrentSentence();
-        if (sentence) progressStore.recordSentence(sentenceKey(sentence), this.sentenceMistakes);
+        if (sentence && this.ladder) this.ladder.record(sentence, countMistakes(this.sentenceMistakes));
+        else if (sentence) progressStore.recordSentence(sentenceKey(sentence), this.sentenceMistakes);
         progressStore.recordSession({ score: this.totalScore, streak: this.bestSessionStreak });
     }
 
@@ -1725,6 +1746,10 @@ export class GameMode {
      * Load the next sentence (picked per the active mode) and continue the game
      */
     loadRandomSentenceAndContinue() {
+        if (this.ladder) {
+            this.ladder.next();
+            return;
+        }
         if (this.replay) {
             this.continueReplay();
             return;
@@ -1805,7 +1830,7 @@ export class GameMode {
      * @returns {?{level: string, category: string, cat: Object, data: Object}}
      */
     getStoryChapter() {
-        if (this.reviewMode || this.multiCategoryMode || this.replay) return null;
+        if (this.ladder || this.reviewMode || this.multiCategoryMode || this.replay) return null;
         const { levelSelector } = this.host;
         if (!levelSelector) return null;
         const level = levelSelector.currentLevel;
@@ -1883,7 +1908,7 @@ export class GameMode {
     /** After the "mehr" sheet: the word's timer goes on from `elapsed`, the Hörübung prompt replays. */
     resumeCurrentWord(elapsed) {
         if (this.waitingForContinue || this.currentIndex >= this.manualItems.length) return;
-        if (typeof gameSounds !== 'undefined' && this.words && this.words.length > 0) {
+        if (typeof gameSounds !== 'undefined' && !this.articleBlank && this.words && this.words.length > 0) {
             const blankIdx = this.getItemWordRange(this.manualItems[this.currentIndex])[0];
             gameSounds.promptSentence(this.words.map(w => w.text), blankIdx);
         }

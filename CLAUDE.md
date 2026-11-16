@@ -39,6 +39,7 @@ project's design and plan: `docs/superpowers/specs/`, `docs/superpowers/plans/`)
 - `gameHud.js` — `drawHud(game)`: word bar (score pill, streak, current/auto/next words, timer bar), complete card; `GM_UI` colors
 - `chapterRecap.js` — chapter-end recap screen (`body[data-screen="end"]`): pure helpers (stats, hard sentences,
   word chips) + `renderRecap`; GameMode records the run (`run`, `recordMiss`), app.js `showRecap`
+- `articleBlank.js` — pure rung-3 logic of the review ladder: `articleIndexes`, `blankArticles(words, from)` (articles → "___" until their phrase is placed), `hasArticle`; GameMode flags `articleBlank` / `ladder`
 - `felderLesson.js` — pure `felderLesson(words)` → `{kind, hint, parts}` or null: the field model opens on its own after a
   solved play-screen sentence only when it teaches (two-part verb, non-subject before the verb, subordinate clause);
   `lessonAutoShow()`: each kind at most `LESSON_AUTO_MAX` (3) times per chapter, then the "Satzbau" link
