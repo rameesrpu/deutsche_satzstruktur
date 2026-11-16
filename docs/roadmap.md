@@ -44,7 +44,7 @@ the owner's answer or review.
 | # | Project | Plan | Status | Needs first |
 |---|---|---|---|---|
 | 1 | Production ladder, rungs 2–3 | [plan](superpowers/plans/2026-11-15-production-ladder.md) · [design](superpowers/specs/2026-11-15-production-ladder-design.md) | done (2026-11-17; on branch `production-ladder`, not merged) | – |
-| 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | not started | – |
+| 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | in progress (1 of 7; branch `content-pipeline`) | – |
 | 3 | Ladder rungs 4–5 (Schreiben, Sprechen) | [plan](superpowers/plans/2026-11-16-ladder-write-speak.md) · [design](superpowers/specs/2026-11-16-ladder-write-speak-design.md) | not started | 1 |
 | 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | not started | 1 |
 | 4b | Preposition scene | [plan](superpowers/plans/2026-11-16-boards-preposition-scene.md) | not started | 4a |
@@ -92,7 +92,7 @@ Parked (small, known):
 
 ### 2. Content pipeline
 
-- [ ] Task 1: Translations in the story format
+- [x] Task 1: Translations in the story format — commit `e0dad3e`
 - [ ] Task 2: Chapter checker (`scripts/check_story.py`)
 - [ ] Task 3: Review sheet (`scripts/story_review.py`)
 - [ ] Task 4: Authoring guide and `write-chapter` skill
