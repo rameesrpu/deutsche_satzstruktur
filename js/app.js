@@ -20,7 +20,7 @@ import { loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge, ren
 /**
  * Screens (body[data-screen], see showScreen): 'home' (Lernen), 'practice' (Üben),
  * 'words' (Wörter), 'workshop' (Werkstatt: the sentence editor, Feldermodell, settings,
- * import/export), 'play' (a game started from the learner screens), 'read' (the story
+ * import/export), 'play' (a game started from the learner screens), 'order' (the Ordnen exercise, orderScreen.js), 'read' (the story
  * reader, an overlay on the screen it was opened from), 'end' (chapter recap after a story
  * chapter on the play screen, chapterRecap.js), 'settings' (Einstellungen from Home's gear,
  * settings.js; Lernen stays the active nav tab).
@@ -1147,7 +1147,7 @@ class DeutschApp {
      * Show one screen. Learner screens are re-rendered on every visit (progress may
      * have changed); 'workshop' and 'play' show the editor/game canvas, so it is
      * redrawn once it has its size. Leaving 'play' or 'workshop' ends a running game.
-     * @param {'home'|'practice'|'words'|'workshop'|'play'|'end'} name  ('end' is rendered by showRecap)
+     * @param {'home'|'practice'|'words'|'workshop'|'play'|'order'|'end'} name  ('end' is rendered by showRecap, 'order' by orderScreen.js)
      */
     showScreen(name) {
         const leavingGame = this.gameMode.isActive && name !== this.screen &&
@@ -1156,7 +1156,7 @@ class DeutschApp {
         if (leavingGame) this.exitGame();
         if (name !== 'play') clearPlayChrome();
         document.body.dataset.screen = name;
-        for (const s of ['home', 'practice', 'words', 'end', 'settings']) {
+        for (const s of ['home', 'practice', 'words', 'order', 'end', 'settings']) {
             const section = document.getElementById(`screen-${s}`);
             if (section) section.hidden = s !== name;
         }
@@ -1170,7 +1170,7 @@ class DeutschApp {
         else if (name === 'practice') this.renderPracticeScreen();
         else if (name === 'words') this.renderWordsScreen();
         else if (name === 'settings') this.renderSettingsScreen();
-        else if (name !== 'end') this.redrawAll();
+        else if (name !== 'end' && name !== 'order') this.redrawAll();
     }
 
     /**
