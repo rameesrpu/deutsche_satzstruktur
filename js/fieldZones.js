@@ -22,12 +22,14 @@ export function fieldZones(words) {
     const verb = finite[0];
     const start = clauseStart(words);
     if (verb < start) return null;
+    // A comma after the verb that is not the last word's: tag question, vocative, afterthought
+    // or an elliptical add-on - no zone of its own, so no analysis
+    if (words.some((w, i) => i > verb && i < words.length - 1 && /,$/.test(w.text))) return null;
 
     // Ende: the closing part of the bracket plus directly adjacent non-finite verbs
     let endeFrom = words.length;
     const bracket = findBracket(words);
     if (bracket) {
-        if (bracket[0] !== verb) return null;
         endeFrom = bracket[1];
         while (endeFrom - 1 > verb && isNonFinite(words[endeFrom - 1])) endeFrom--;
         for (let k = bracket[1] + 1; k < words.length; k++) {

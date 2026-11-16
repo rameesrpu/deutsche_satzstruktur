@@ -31,6 +31,17 @@ export function runFieldZonesTests({ update = false } = {}) {
     test('fieldZones: words after the closing verb part → null', () =>
         assertEqual(z('Ich will gehen heute.', 'S.ich M.ich V X'), null));
 
+    test('fieldZones: leading coordinating conjunction goes to lead', () =>
+        assertEqual(z('Und hier ist ein Tisch.', 'K X V.er S.m S.m'),
+            { lead: [0], vorfeld: [1], verb: [2], mittelfeld: [3, 4], ende: [] }));
+    test('fieldZones: material after an inner comma (tag question, vocative, add-on) → null', () => {
+        assertEqual(z('Du hast Glück, oder?', 'S.du V.du O.n.akk X'), null);
+        assertEqual(z('Was machst du, Max?', 'X V.du S.du X'), null);
+        assertEqual(z('Ich möchte eine Cola, bitte.', 'S.ich V.ich O.f.akk O.f.akk X'), null);
+    });
+    test('fieldZones: non-finite verb in another clause (outside the Ende) → null', () =>
+        assertEqual(z('Ich gehe, essen wir.', 'S.ich V.ich / V S.wir'), null));
+
     runSnapshot(update);
 }
 
