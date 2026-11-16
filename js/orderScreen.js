@@ -30,11 +30,24 @@ export function renderOrderScreen(root, { model, total, index }, { onDone, onClo
     let selected = null;
     let hint = null; // { text, auto }
     const closedVorfeld = !model.chips.some(c => c.field === 'vorfeld');
+    let finished = false; // onDone/onClose fire at most once, whichever comes first
+    const finish = fn => (...args) => { if (!finished) { finished = true; fn(...args); } };
+    const done = finish(onDone);
+    const closeScreen = finish(onClose);
+    // The feedback node stays in the DOM across draws (only its text changes), so the aria-live
+    // region announces each new hint; draw() rebuilds everything around it.
+    const inner = el('div', 'order-inner');
+    const feedbackSlot = el('div', 'play-feedback-slot');
+    const feedback = el('div', 'play-feedback play-feedback-wrong');
+    feedbackSlot.appendChild(feedback);
+    inner.appendChild(feedbackSlot);
+    feedback.setAttribute('role', 'status');
+    feedback.setAttribute('aria-live', 'polite');
+    // model.chips are in sentence order, so joining them gives the spoken sentence
     const sentence = (model.lead ? model.lead + ' ' : '') + model.chips.map(c => c.text).join(' ') + model.end;
 
     function draw(shakeId = null) {
         const solved = isSolved(state);
-        const inner = el('div', 'order-inner');
 
         const bar = el('div', 'play-bar');
         const close = el('button', 'play-close');
@@ -42,7 +55,7 @@ export function renderOrderScreen(root, { model, total, index }, { onDone, onClo
         close.setAttribute('aria-label', 'Beenden');
         close.title = 'Beenden';
         close.innerHTML = CLOSE_ICON;
-        close.addEventListener('click', () => onClose());
+        close.addEventListener('click', () => closeScreen());
         const progress = el('div', 'play-progress');
         progress.setAttribute('role', 'progressbar');
         progress.setAttribute('aria-label', 'Fortschritt');
@@ -71,19 +84,15 @@ export function renderOrderScreen(root, { model, total, index }, { onDone, onClo
         }
         if (model.end) slots.appendChild(el('span', 'order-end', model.end));
 
-        const feedbackSlot = el('div', 'play-feedback-slot');
-        const feedback = el('div', 'play-feedback play-feedback-wrong', hint ? hint.text : '');
-        feedback.setAttribute('role', 'status');
-        feedback.setAttribute('aria-live', 'polite');
+        feedback.textContent = hint ? hint.text : '';
         feedback.hidden = !hint;
-        feedbackSlot.appendChild(feedback);
 
         let bottom;
         if (solved) {
             bottom = el('div', 'play-continue-row');
             const next = el('button', 'play-continue', 'Weiter ›');
             next.type = 'button';
-            next.addEventListener('click', () => onDone(state.mistakes));
+            next.addEventListener('click', () => done(state.mistakes));
             bottom.appendChild(next);
         } else {
             bottom = el('div', 'order-tray');
@@ -100,8 +109,10 @@ export function renderOrderScreen(root, { model, total, index }, { onDone, onClo
             }
         }
 
-        inner.append(bar, prompt, lead, slots, feedbackSlot, bottom);
-        root.replaceChildren(inner);
+        for (const node of [...inner.children]) if (node !== feedbackSlot) node.remove();
+        inner.prepend(bar, prompt, lead, slots);
+        inner.append(bottom);
+        if (root.firstChild !== inner) root.replaceChildren(inner);
     }
 
     function onSlot(field) {

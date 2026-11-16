@@ -17,6 +17,19 @@ export function runOrderExerciseTests() {
         assertEqual(m.end, '.');
         assertEqual(m.fields, ['vorfeld', 'verb', 'mittelfeld', 'ende']);
     });
+    test('orderModel: preposition + number + noun is one chip (library tagging)', () => {
+        const words = tagged('Ich stehe um sieben Uhr auf.', 'S.ich V.ich P X X P');
+        words[4].case = 'akk'; // the library tags "Uhr" as other, case akk
+        assertEqual(orderModel(words).chips.map(c => c.text), ['Ich', 'stehe', 'um sieben Uhr', 'auf']);
+    });
+    test('orderModel: preposition + adverb + noun phrase is one chip', () => {
+        const m = orderModel(tagged('Ich arbeite heute in sehr großen Krankenhäusern.', 'S.ich V.ich X P X X O.pl.dat'));
+        assertEqual(m.chips.map(c => c.text), ['Ich', 'arbeite', 'heute', 'in sehr großen Krankenhäusern']);
+    });
+    test('orderModel: preposition without a noun stays its own chip', () => {
+        const m = orderModel(tagged('Ich stehe heute um auf.', 'S.ich V.ich X P P'));
+        assertEqual(m.chips.map(c => c.text), ['Ich', 'stehe', 'heute', 'um', 'auf']);
+    });
     test('orderModel: fewer than 3 movable chips → null', () =>
         assertEqual(orderModel(tagged('Ich bin neu.', 'S.ich V.ich X')), null));
     test('orderModel: not a main clause → null', () =>

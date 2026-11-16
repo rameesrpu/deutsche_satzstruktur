@@ -20,16 +20,31 @@ const MIN_MOVABLE = 3;
 const isNoun = w => w.type === 'subject' || w.type === 'object';
 const sameNoun = (a, b) => isNoun(a) && isNoun(b) && a.case === b.case && a.gender === b.gender;
 
-/** Word index groups of the Mittelfeld: a preposition + its noun phrase, a noun run, or a single word. */
+const MAX_BETWEEN = 2; // words allowed between a preposition and its noun phrase
+
+/**
+ * Word index groups of the Mittelfeld: a preposition + its noun phrase, a noun run, or a single word.
+ * Up to MAX_BETWEEN `other` words (numbers, adjectives, adverbs: "um sieben Uhr") may stand between the
+ * preposition and the noun phrase. The library often tags the noun of such a phrase as `other` too
+ * ("Uhr"): then the other words still join the preposition when the last one carries a non-nominative
+ * case (the governed case), so "um sieben Uhr" is one chip but "in Ruhe heute" is not.
+ */
 function mittelfeldGroups(words, indices) {
     const groups = [];
     for (let k = 0; k < indices.length; k++) {
         const group = [indices[k]];
         let last = words[indices[k]];
-        if (last.type === 'preposition' && k + 1 < indices.length && isNoun(words[indices[k + 1]])) {
-            k++;
-            group.push(indices[k]);
-            last = words[indices[k]];
+        if (last.type === 'preposition') {
+            let n = 0;
+            while (n < MAX_BETWEEN && k + 1 + n < indices.length && words[indices[k + 1 + n]].type === 'other') n++;
+            const next = k + 1 + n;
+            if (next < indices.length && isNoun(words[indices[next]])) {
+                while (k < next) { k++; group.push(indices[k]); }
+                last = words[indices[k]];
+            } else if (n > 0 && words[indices[k + n]].case && words[indices[k + n]].case !== 'nom') {
+                while (n-- > 0) { k++; group.push(indices[k]); }
+                last = words[indices[k]];
+            }
         }
         if (isNoun(last)) {
             while (k + 1 < indices.length && sameNoun(last, words[indices[k + 1]])) {
