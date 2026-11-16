@@ -16,6 +16,10 @@ of a level form one dictionary. Each chapter file gets the entries whose forms o
 beats (matching rules: glossary_matches, mirrored by js/glossary.js). Forms that occur in no
 chapter of the level are reported as warnings (typos).
 
+Translations: a play beat or drill item may carry "en" (English); the chapter/drill file then
+gets "translations": {play text: en} (only the sentences that have one; key omitted when none).
+"en" on a read beat is an error.
+
 Images: an optional picture per chapter at data/stories/<level>/img/<name>.<ext> (webp/jpg/png/svg),
 where name is the chapter's "image": {"place": "wg-kueche"} (one picture per place, shared by every
 chapter set there) or else its chapter id; alt text from "image": {"alt": "..."}. The
@@ -290,7 +294,11 @@ def build_sentence_set(level, items, where, warnings, errors):
     texts, library = [], []
     for item in items:
         if 'play' not in item:
+            if 'en' in item:
+                errors.append(f'{where}: en is only for play beats: {item.get("read", "")}')
             continue
+        if 'en' in item and not (isinstance(item['en'], str) and item['en'].strip()):
+            errors.append(f'{where}: en must be a non-empty string: {item["play"]}')
         text = item['play'].strip()
         try:
             words = tag_sentence(text, item.get('tags', ''))
@@ -304,6 +312,12 @@ def build_sentence_set(level, items, where, warnings, errors):
         texts.append(text)
         library.append({'text': text, 'words': words})
     return texts, library
+
+
+def collect_translations(items):
+    """{play text: English} for the play items that have an "en" (one map per chapter or drill)."""
+    return {item['play'].strip(): item['en'].strip() for item in items
+            if 'play' in item and isinstance(item.get('en'), str) and item['en'].strip()}
 
 
 def write_set(name, level, category, texts, library, extra=None):
@@ -364,15 +378,20 @@ def build():
                 'chapter': ch['id'], 'title': ch['title'], 'skill': ch['skill'], 'beats': beats,
                 'glossary': chapter_glossary(beats, glossaries.get(level, {})),
             }
+            translations = collect_translations(ch['beats'])
+            if translations:
+                extra['translations'] = translations
             image = chapter_image(level, ch, images.get(level, {}), warnings)
             if image:
                 extra['image'] = image
             version = write_set(name, level, label, texts, library, extra)
 
             drill_texts, drill_library = build_sentence_set(level, ch['drill'], f'{name}_uebung', warnings, errors)
-            drill_version = write_set(f'{name}_uebung', level, drill_label, drill_texts, drill_library, {
-                'chapter': ch['id'], 'skill': ch['skill'],
-            })
+            drill_extra = {'chapter': ch['id'], 'skill': ch['skill']}
+            drill_translations = collect_translations(ch['drill'])
+            if drill_translations:
+                drill_extra['translations'] = drill_translations
+            drill_version = write_set(f'{name}_uebung', level, drill_label, drill_texts, drill_library, drill_extra)
 
             chapters_out.append({
                 'id': ch['id'], 'key': key, 'label': label,

@@ -62,6 +62,15 @@
  */
 
 /**
+ * A story chapter/drill file in data/levels/ (built by scripts/build_stories.py; more fields: see CURRICULUM.md).
+ * @typedef {Object} LevelFile
+ * @property {string} level
+ * @property {string} category
+ * @property {string[]} sentences
+ * @property {Object<string, string>} [translations]  play text -> English; only sentences that have one
+ */
+
+/**
  * A grid cell, from GridViewModel.positions / getWordPosition (1-indexed).
  * @typedef {{row: number, col: number, label: string}} GridCell
  */

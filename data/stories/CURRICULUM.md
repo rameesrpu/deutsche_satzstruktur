@@ -55,13 +55,15 @@ Then run `python3 scripts/audit_library.py` and the tests.
   { "id": "1.1", "title": "Hallo, Stuttgart!", "skill": "A1.nom", "drillTitle": "Nominativ & sein",
     "beats": [
       { "read": "Oktober. Ein Flugzeug fliegt über Stuttgart." },
-      { "play": "Sie heißt Ayisha.", "tags": "S.f V.sie S.f" },
+      { "play": "Sie heißt Ayisha.", "tags": "S.f V.sie S.f", "en": "Her name is Ayisha." },
       { "speaker": "Der Mann", "play": "Sind Sie neu hier?", "tags": "V.sie_pl S.Sie X X" },
       { "speaker": "Ayisha", "read": "Sorry … do you speak English?" }
     ],
     "drill": [ { "play": "Ich bin Ärztin.", "tags": "S.ich V.ich S.f" } ] } ] }
 ```
 - `play`: placed in game mode, scored, and tracked for mastery. Text must be unique within its chapter.
+- `en` (optional, `play` items and drill items only): English translation of the sentence. The built chapter/drill
+  file gets `"translations": {play text: en}` with only the sentences that have one. `en` on a `read` beat is a build error.
 - `read`: narration or dialogue, shown on the card between rounds, never scored.
 - `speaker`: shown as a label on the card. **Never write "sagt X" inside a play sentence.**
 

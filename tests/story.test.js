@@ -1,4 +1,5 @@
-import { readText } from './stubs.js';
+import GLib from 'gi://GLib';
+import { readText, REPO_ROOT } from './stubs.js';
 import { test, assertEqual } from './assert.js';
 import { beatsBefore, beatsAfterLast, nextPlayText, chapterStartText, storyStrip } from '../js/storyNarration.js';
 import { STORY_CONTENT } from '../js/storyContent.js';
@@ -14,6 +15,15 @@ const beats = [
     { read: 'Ende.' },
     { read: 'Wirklich Ende.' },
 ];
+
+/** Run python3 with `code` in the repo root; returns its stdout (throws on failure). */
+function runPython(code) {
+    const [, out, err, status] = GLib.spawn_sync(REPO_ROOT, ['python3', '-c', code], null,
+        GLib.SpawnFlags.SEARCH_PATH, null);
+    const decoder = new TextDecoder('utf-8');
+    if (status !== 0) throw new Error(`python3 failed: ${decoder.decode(err)}`);
+    return decoder.decode(out);
+}
 
 export function runStoryTests() {
     test('story: beatsBefore returns the reads since the previous play beat', () => {
@@ -96,6 +106,42 @@ export function runStoryTests() {
             for (const key of keys) {
                 assertEqual(LEVEL_CONTENT[level].categories[key].story.kind, 'chapter', key);
                 assertEqual(LEVEL_CONTENT[level].categories[`${key}_uebung`].story.kind, 'drill', key);
+            }
+        });
+    }
+
+    // Translations (optional `en` on play items): built into the level file's "translations" map
+    test('story: collect_translations keeps only play items with an en, per call', () => {
+        const out = runPython(`
+import json, sys
+sys.path.insert(0, 'scripts')
+from build_stories import collect_translations, build_sentence_set
+a = collect_translations([{"play": "A b.", "en": "X"}, {"read": "r"}, {"play": "C d."}])
+# the same play text in two chapters may carry different translations: one map per call
+b = collect_translations([{"play": "A b.", "en": "Y"}])
+errors = []
+build_sentence_set('A1', [{"read": "Hallo.", "en": "Hello."}], 'x', [], errors)
+print(json.dumps({'a': a, 'b': b, 'errors': errors}, ensure_ascii=False))`);
+        const { a, b, errors } = JSON.parse(out);
+        assertEqual(a, { 'A b.': 'X' });
+        assertEqual(b, { 'A b.': 'Y' });
+        assertEqual(errors, ['x: en is only for play beats: Hallo.']);
+    });
+
+    for (const [level, stories] of Object.entries(STORY_CONTENT)) {
+        test(`story data ${level}: files without translations have no translations key`, () => {
+            for (const story of stories) {
+                for (const ch of story.chapters) {
+                    for (const file of [ch.file, ch.drillFile]) {
+                        const data = JSON.parse(readText(file));
+                        const lib = JSON.parse(readText(file.replace('data/levels/', 'data/library/')));
+                        assertEqual('translations' in lib, false, `${file} library untouched`);
+                        if (level === 'A1') assertEqual('translations' in data, false, `${file} translations`);
+                        else for (const t of Object.keys(data.translations || {})) {
+                            assertEqual(data.sentences.includes(t), true, `${file} translation key ${t}`);
+                        }
+                    }
+                }
             }
         });
     }
