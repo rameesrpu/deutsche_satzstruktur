@@ -29,26 +29,41 @@ export function rungEligibility(words) {
  * @property {{2: boolean, 3: boolean}} eligible
  */
 
+/** `level/category` of a progress key `level/category/text` (category keys have no "/"). */
+export function keyCategory(key) {
+    const first = key.indexOf('/');
+    return key.slice(0, key.indexOf('/', first + 1));
+}
+
 /**
- * The session queue for due keys, in their order. A key whose sentence is not found (library
- * not loaded, chapter removed), a user-made (`custom/…`) key, and a sentence with no rung it
- * can be tested on go to `retired` (the caller takes them off the ladder).
+ * The session queue for due keys, in their order. Each key ends up in one of three lists:
+ * - `retired` (the caller takes it off the ladder): a user-made (`custom/…`) key, a sentence
+ *   missing from its loaded category (chapter changed), or one with no rung it can be tested on;
+ * - `skipped`: its sentence is not there because its category did not load (offline, a failed
+ *   fetch) — not shown, not retired, it stays due;
+ * - `queue`: everything else.
  * @param {string[]} keys
  * @param {function(string): ?Sentence} findSentence
  * @param {function(string): number} getRung  the entry's stored rung
- * @returns {{queue: ReviewItem[], retired: string[]}}
+ * @param {function(string): boolean} [isCategoryLoaded]  the key's library category is loaded
+ * @returns {{queue: ReviewItem[], retired: string[], skipped: string[]}}
  */
-export function buildQueue(keys, findSentence, getRung) {
+export function buildQueue(keys, findSentence, getRung, isCategoryLoaded = () => true) {
     const queue = [];
     const retired = [];
+    const skipped = [];
     for (const key of keys) {
         const sentence = key.startsWith('custom/') ? null : findSentence(key);
+        if (!sentence && !key.startsWith('custom/') && !isCategoryLoaded(key)) {
+            skipped.push(key);
+            continue;
+        }
         const eligible = sentence ? rungEligibility(sentence.words || []) : null;
         const rung = eligible ? exerciseRung(getRung(key), eligible) : null;
         if (rung === null) retired.push(key);
         else queue.push({ key, sentence, rung, eligible });
     }
-    return { queue, retired };
+    return { queue, retired, skipped };
 }
 
 /**
@@ -92,6 +107,13 @@ export class ReviewRunner {
         if (!this.active) return;
         this.active = false;
         this.app.showScreen('home');
+        this.clearGame();
+    }
+
+    /** End the session without routing (the app already left for another screen, e.g. the nav). */
+    abandon() {
+        if (!this.active) return;
+        this.active = false;
         this.clearGame();
     }
 

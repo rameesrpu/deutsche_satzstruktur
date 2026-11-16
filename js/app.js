@@ -16,7 +16,7 @@ import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday,
     renderHome, renderPractice, renderWords } from './homeScreen.js';
 import { buildRecapModel, renderRecap, reviewRecapModel, renderReviewRecap } from './chapterRecap.js';
 import { dueKeys } from './ladder.js';
-import { ReviewRunner, buildQueue } from './reviewRunner.js';
+import { ReviewRunner, buildQueue, keyCategory } from './reviewRunner.js';
 import { loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge, renderSettings } from './settings.js';
 
 /**
@@ -114,6 +114,7 @@ class DeutschApp {
         this.dailyGoal = loadDailyGoal(); // sentences per day (Einstellungen → Tagesziel)
         // "Heute üben": the daily review session over the ladder (startLadderReview)
         this.reviewRunner = new ReviewRunner({ app: this, gameMode: this.gameMode, progressStore });
+        this.reviewStarting = false; // startLadderReview is loading the library
     }
 
     /**
@@ -899,7 +900,12 @@ class DeutschApp {
         this.levelSelector.refresh();
     }
 
+    /**
+     * Fetch and bulk-load every library category of these levels.
+     * @returns {Promise<Set<string>>} `level/category` of the categories that loaded
+     */
     async bulkLoadLibraryForLevels(levels) {
+        const loaded = new Set();
         const fetches = [];
         for (const level of levels) {
             const levelData = LEVEL_CONTENT[level];
@@ -908,13 +914,18 @@ class DeutschApp {
                 fetches.push(
                     fetch(categoryUrl(catData, { library: true }))
                         .then(r => r.ok ? r.json() : null)
-                        .then(data => { if (data) this.sentenceManager.bulkLoadLibraryCategory(level, cat, data); })
+                        .then(data => {
+                            if (!data) return;
+                            this.sentenceManager.bulkLoadLibraryCategory(level, cat, data);
+                            loaded.add(`${level}/${cat}`);
+                        })
                         .catch(() => {})
                 );
             }
         }
         await Promise.all(fetches);
         this.saveSentences();
+        return loaded;
     }
 
     /**
@@ -1158,6 +1169,8 @@ class DeutschApp {
             (this.screen === 'play' || this.screen === 'workshop');
         this.screen = name; // set first: exitGame → handleGameStopped must not route again
         if (leavingGame) this.exitGame();
+        // Leaving a review session for anything but its own screens (e.g. the bottom nav) ends it
+        if (this.reviewRunner.active && !['play', 'order', 'end'].includes(name)) this.reviewRunner.abandon();
         if (name !== 'play') clearPlayChrome();
         document.body.dataset.screen = name;
         for (const s of ['home', 'practice', 'words', 'order', 'end', 'settings']) {
@@ -1354,11 +1367,12 @@ class DeutschApp {
      * Keys due for review today: oldest first, capped at the daily goal (minus reviews already
      * done today); user-made sentences are never reviewed.
      * @param {number} now
+     * @param {Set<string>} [exclude]  keys left out before the cap (not playable right now)
      * @returns {string[]}
      */
-    dueReviewKeys(now) {
+    dueReviewKeys(now, exclude = new Set()) {
         const library = Object.fromEntries(Object.entries(progressStore.load().sentences)
-            .filter(([key]) => !key.startsWith('custom/')));
+            .filter(([key]) => !key.startsWith('custom/') && !exclude.has(key)));
         return dueKeys(library, now, this.dailyGoal);
     }
 
@@ -1379,24 +1393,38 @@ class DeutschApp {
      * and the next due one takes its place. Nothing to review: Home again.
      */
     async startLadderReview() {
-        const now = Date.now();
-        const levels = [...new Set(this.dueReviewKeys(now)
-            .map(key => key.split('/')[0]).filter(l => LEVEL_CONTENT[l]))];
-        await this.bulkLoadLibraryForLevels(levels);
-        let queue = [];
-        for (;;) {
-            const built = buildQueue(this.dueReviewKeys(now), key => this.findSentenceByKey(key),
-                key => progressStore.getSentence(key).rung);
-            queue = built.queue;
-            if (built.retired.length === 0) break;
-            for (const key of built.retired) progressStore.retire(key);
+        if (this.reviewStarting || this.reviewRunner.active) return; // double tap while loading
+        this.reviewStarting = true;
+        try {
+            const now = Date.now();
+            const levels = [...new Set(this.dueReviewKeys(now)
+                .map(key => key.split('/')[0]).filter(l => LEVEL_CONTENT[l]))];
+            const fetched = await this.bulkLoadLibraryForLevels(levels);
+            // A category counts as loaded when it was fetched now or is already in the sentence manager
+            const present = new Set(this.sentenceManager.getAllSentences()
+                .filter(s => s.source === 'library').map(s => `${s.level}/${s.category}`));
+            const isCategoryLoaded = key => fetched.has(keyCategory(key)) || present.has(keyCategory(key));
+            // Retired keys leave the ladder and skipped ones (category not loaded) stay due but are
+            // left out, so the next due sentences take their places; each round only grows the sets.
+            const skipped = new Set();
+            let queue = [];
+            for (;;) {
+                const built = buildQueue(this.dueReviewKeys(now, skipped), key => this.findSentenceByKey(key),
+                    key => progressStore.getSentence(key).rung, isCategoryLoaded);
+                queue = built.queue;
+                if (built.retired.length === 0 && built.skipped.length === 0) break;
+                for (const key of built.retired) progressStore.retire(key);
+                for (const key of built.skipped) skipped.add(key);
+            }
+            if (queue.length === 0) {
+                this.showScreen('home');
+                return;
+            }
+            if (this.gameMode.isActive) this.exitGame();
+            this.reviewRunner.start(queue);
+        } finally {
+            this.reviewStarting = false;
         }
-        if (queue.length === 0) {
-            this.showScreen('home');
-            return;
-        }
-        if (this.gameMode.isActive) this.exitGame();
-        this.reviewRunner.start(queue);
     }
 
     /** Make a review sentence the game's current sentence (ReviewRunner, rung 3). */

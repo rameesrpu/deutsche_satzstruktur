@@ -3,7 +3,7 @@
 
 import { makeLocalStorage, tagged } from './stubs.js';
 import { test, assert, assertEqual } from './assert.js';
-import { rungEligibility, buildQueue, ReviewRunner } from '../js/reviewRunner.js';
+import { rungEligibility, buildQueue, keyCategory, ReviewRunner } from '../js/reviewRunner.js';
 import { ProgressStore, progressStore, emptyMistakes, addMistake, sentenceKey } from '../js/progressStore.js';
 import { dueKeys, startOfDay, addDays } from '../js/ladder.js';
 import { GameMode } from '../js/gamemode.js';
@@ -63,6 +63,43 @@ export function runReviewRunnerTests() {
         assertEqual(queue.map(q => q.rung), [2, 3]);
         assertEqual(queue[1].eligible, { 2: false, 3: true });
         assertEqual(queue[0].sentence.text, 'a');
+    });
+
+    test('review: buildQueue skips (does not retire) a key whose category did not load', () => {
+        const found = { 'A1/k/a': sentence('a', ayisha()) };
+        const loaded = key => key.split('/')[1] === 'k';
+        const { queue, retired, skipped } = buildQueue(['A1/k/a', 'A1/k/gone', 'A1/off/b', 'custom//c'],
+            k => found[k] || null, () => 2, loaded);
+        assertEqual(queue.map(q => q.key), ['A1/k/a']);
+        assertEqual(retired, ['A1/k/gone', 'custom//c']);
+        assertEqual(skipped, ['A1/off/b']);
+    });
+
+    test('review: keyCategory = level/category of a progress key', () => {
+        assertEqual(keyCategory('A1/g1k1/Wer ist der Mann?'), 'A1/g1k1');
+        assertEqual(keyCategory('A1/g1k1/Ja/nein?'), 'A1/g1k1');
+    });
+
+    test('review: a skipped key stays on the ladder and due', () => {
+        const store = new ProgressStore(makeLocalStorage());
+        store.recordSentence('A1/off/b', emptyMistakes(), Date.now() - 2 * 86400000);
+        const before = { ...store.getSentence('A1/off/b') };
+        const { skipped } = buildQueue(['A1/off/b'], () => null, k => store.getSentence(k).rung, () => false);
+        assertEqual(skipped, ['A1/off/b']);
+        assertEqual(store.getSentence('A1/off/b'), before);
+        assertEqual(dueKeys(store.load().sentences, Date.now(), 10), ['A1/off/b']);
+    });
+
+    test('review: abandon() ends the session without routing', () => {
+        const { calls, gameMode, queue, runner } = setup([['Der Arzt kommt.', arzt(), 3]]);
+        runner.start(queue);
+        const screens = calls.filter(c => c[0] === 'screen').length;
+        runner.abandon();
+        assertEqual([runner.active, gameMode.articleBlank, gameMode.ladder, gameMode.isActive], [false, false, null, false]);
+        assertEqual(calls.filter(c => c[0] === 'screen').length, screens);
+        gameMode.ladder = null;
+        runner.close(); // nothing left to close
+        assertEqual(calls.filter(c => c[0] === 'screen').length, screens);
     });
 
     test('review: buildQueue never reviews a custom sentence', () => {
