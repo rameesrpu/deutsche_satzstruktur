@@ -6,7 +6,8 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 
 **Main path**: game mode + pre-parsed library sentences (`data/library/*.json`), led by the
 **story chapters** (A1 "Ein Zuhause in Stuttgart": `data/stories/`, see its CURRICULUM.md and STORY_BIBLE.md). The spaCy backend
-(`backend/`) is rarely used — **don't touch `backend/` unless asked.** Work items: [docs/story-plan.md](docs/story-plan.md), the UI redesign
+(`backend/`) is rarely used — **don't touch `backend/` unless asked.** What comes next and why: [docs/roadmap.md](docs/roadmap.md) (each
+project's design and plan: `docs/superpowers/specs/`, `docs/superpowers/plans/`). Work items: [docs/story-plan.md](docs/story-plan.md), the UI redesign
 [docs/redesign-plan.md](docs/redesign-plan.md) (design decisions + mockup link; grammar colors come only from
 `GRAMMAR_PALETTE` in grammaticalConfig.js) and the learning experience plan [docs/experience-plan.md](docs/experience-plan.md) (finished maintainability plan: [docs/archive/](docs/archive/)).
 
