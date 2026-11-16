@@ -1,0 +1,42 @@
+# Names of people, places, brands and institutions in the story files.
+# One per line, exact spelling (case-sensitive). check_story.py never reports these as "ungeglosst".
+# Ordinary nouns do NOT belong here: give them a glossary entry instead.
+
+# People
+Ayisha
+Ayishas
+Faris
+Lea
+Leas
+Max
+Rizwan
+Rahman
+Umma
+Uppa
+Berta
+Frieda
+Hilde
+Greta
+Lotte
+Schäfer
+Brenner
+Kühn
+Dr
+
+# Places and institutions
+Stuttgart
+Stuttgart-Süd
+Cannstatt
+Esslingen
+Ulm
+Dubai
+Kerala
+Payyannur
+Indien
+Deutschland
+Hohenzollern
+Rosensteinpark
+Möhringer
+Lukas-Krankenhaus
+Store
+Malayalam

@@ -3,6 +3,7 @@
 Check story chapters for what build_stories.py does not: size, grammar coverage, skill ladder,
 glossary coverage, content words and the boss sentence (rules: docs/superpowers/specs/
 2026-11-16-content-pipeline-design.md, "Chapter checker").
+Names of people and places (never ungeglosst) are listed in data/stories/names.txt.
 
 Usage:
     python3 scripts/check_story.py [story.json ...]     (default: every data/stories/*/*.json)
@@ -36,6 +37,7 @@ BLOCKLIST = {'bier', 'wein', 'sekt', 'schnaps', 'whisky', 'wodka', 'cocktail', '
 BLOCK_ENDINGS = {'e', 'en', 'n', 's', 'es', 'er', 't', 'st', 'te'}
 
 CURRICULUM_PATH = os.path.join(STORIES_DIR, 'CURRICULUM.md')
+NAMES_PATH = os.path.join(STORIES_DIR, 'names.txt')
 WORDLIST_DIR = os.path.join(bs.REPO_ROOT, 'data', 'wordlists')
 
 
@@ -48,6 +50,21 @@ def load_skills(curriculum_path=CURRICULUM_PATH):
             if m and m.group(1) not in skills:
                 skills.append(m.group(1))
     return skills
+
+
+def skill_rank(skills, skill_id):
+    """Rank of a skill the rules refer to; a clear error when CURRICULUM.md no longer has it."""
+    if skill_id not in skills:
+        raise ValueError(f'skill "{skill_id}" (used by a checker rule) is missing from CURRICULUM.md')
+    return skills.index(skill_id)
+
+
+def load_names(path=NAMES_PATH):
+    """Names of people, places, brands: one per line, # comments; exact match. Missing file -> empty set."""
+    if not os.path.exists(path):
+        return set()
+    with open(path, encoding='utf-8') as f:
+        return {line.split('#')[0].strip() for line in f if line.split('#')[0].strip()}
 
 
 def texts_of(chapter):
@@ -104,13 +121,18 @@ def blocked(token):
                for stem in BLOCKLIST)
 
 
+def glossary_keys(chapter, glossary):
+    """Glossary keys matched by the beats and the drill of a chapter."""
+    return {m[3] for text in texts_of(chapter) for m in glossary_matches(text, glossary) if m[3]}
+
+
 def check_chapter(level, chapter, known_words, glossary, skills, wordlist=None,
-                  earlier_plays=None, earlier_glossary=None, level_lower=None):
+                  earlier_plays=None, earlier_glossary=None, names=frozenset()):
     """
     → (errors, warnings). known_words: words of all earlier chapters (chapter_words). glossary: the
     level's (and lower levels') entries. Context for the rules that look across chapters:
     earlier_plays (play texts of earlier chapters), earlier_glossary (keys they used),
-    level_lower (lower-case tokens anywhere in the level; names are capitalised words not in it).
+    names (people, places, brands: never reported as ungeglosst; see load_names).
     """
     errors, warnings = [], []
     beats, drill = chapter['beats'], chapter['drill']
@@ -137,16 +159,15 @@ def check_chapter(level, chapter, known_words, glossary, skills, wordlist=None,
         errors.append(f'skill "{skill}" is not in the CURRICULUM.md tables')
     else:
         rank = skills.index(skill)
-        if any(t.endswith('.gen') and t.startswith('O.') for t in tags) and rank < skills.index('B1.genitiv'):
+        if any(t.endswith('.gen') and t.startswith('O.') for t in tags) and rank < skill_rank(skills, 'B1.genitiv'):
             errors.append(f'gen object before B1.genitiv (skill {skill})')
-        if any(t.endswith('.dat') and t.startswith('O.') for t in tags) and rank < skills.index('A1.dativ_praep'):
+        if any(t.endswith('.dat') and t.startswith('O.') for t in tags) and rank < skill_rank(skills, 'A1.dativ_praep'):
             warnings.append(f'dat object before A1.dativ_praep (skill {skill}); fine only for the documented exceptions')
-        if 'C' in tags and rank < skills.index('A2.nebensatz'):
+        if 'C' in tags and rank < skill_rank(skills, 'A2.nebensatz'):
             errors.append(f'subordinate clause (C tag) before A2.nebensatz (skill {skill})')
 
     # Words: unglossed (and not on the word list)
-    own_lower = lower_words(chapter) | (level_lower if level_lower is not None
-                                        else {w for w in known_words if w[:1].islower()})
+    own_lower = lower_words(chapter) | {w for w in known_words if w[:1].islower()}
     unglossed, off_list = [], []
     seen = set()
     for text in texts_of(chapter):
@@ -159,8 +180,8 @@ def check_chapter(level, chapter, known_words, glossary, skills, wordlist=None,
             seen.add(tok)
             initial = initials[tok]
             low = tok[0].lower() + tok[1:]
-            if tok[:1].isupper() and low not in own_lower:
-                continue    # a name or place: capitalised, never seen in lower case
+            if tok in names:
+                continue
             shown = low if initial and low in own_lower else tok   # "Ein" at a sentence start = "ein"
             if tok not in known_words and not (initial and low in known_words):
                 if shown not in unglossed:
@@ -172,7 +193,7 @@ def check_chapter(level, chapter, known_words, glossary, skills, wordlist=None,
     if off_list:
         warnings.append('not on the word list: ' + ', '.join(off_list))
 
-    used = {m[3] for b in beats for m in glossary_matches(b.get('read') or b.get('play') or '', glossary) if m[3]}
+    used = glossary_keys(chapter, glossary)
     new = used - (earlier_glossary or set())
     if len(new) > MAX_NEW_GLOSSARY:
         warnings.append(f'{len(new)} new glossary words (more than {MAX_NEW_GLOSSARY})')
@@ -229,12 +250,10 @@ def check_files(paths):
     stories.sort(key=lambda ps: (level_rank(ps[1]['level']), ps[0]))
     skills = load_skills()
 
-    level_glossary, level_lowers = {}, {}
+    names = load_names()
+    level_glossary = {}
     for _, story in stories:
         level_glossary.setdefault(story['level'], {}).update(story.get('glossary', {}))
-        low = level_lowers.setdefault(story['level'], set())
-        for ch in story['chapters']:
-            low |= lower_words(ch)
 
     lines, n_err, n_warn = [], 0, 0
     known, earlier_plays, earlier_glossary = set(), set(), set()
@@ -244,12 +263,11 @@ def check_files(paths):
         for lv, entries in level_glossary.items():
             if level_rank(lv) <= level_rank(level):
                 glossary.update(entries)
-        lower = set().union(*(level_lowers[lv] for lv in level_lowers if level_rank(lv) <= level_rank(level)))
         for ch in story['chapters']:
             if not paths or path in wanted:
                 errors, warnings = check_chapter(
                     level, ch, known, glossary, skills, wordlist=load_wordlist(level),
-                    earlier_plays=earlier_plays, earlier_glossary=earlier_glossary, level_lower=lower)
+                    earlier_plays=earlier_plays, earlier_glossary=earlier_glossary, names=names)
                 rel = os.path.relpath(path, bs.REPO_ROOT)
                 lines += [f'ERROR {rel} {ch["id"]}: {e}' for e in errors]
                 lines += [f'WARN {rel} {ch["id"]}: {w}' for w in warnings]
@@ -257,8 +275,7 @@ def check_files(paths):
                 n_warn += len(warnings)
             known |= chapter_words(ch)
             earlier_plays |= {b['play'].strip() for b in ch['beats'] if 'play' in b}
-            earlier_glossary |= {m[3] for b in ch['beats']
-                                 for m in glossary_matches(b.get('read') or b.get('play') or '', glossary) if m[3]}
+            earlier_glossary |= glossary_keys(ch, glossary)
     return lines, n_err, n_warn
 
 

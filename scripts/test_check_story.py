@@ -109,15 +109,15 @@ class CheckChapterTest(unittest.TestCase):
         ch['beats'] = [{'play': 'Ayisha kauft heute einen Schrank.', 'tags': 'S.f V.sie X X O.m.akk', 'en': 'x'}]
         glossary = {'schrank': {'de': 'x', 'en': 'wardrobe', 'forms': ['Schrank']}}
         ch['drill'] = []
-        _, warnings = run(ch, known={'kauft', 'einen'}, glossary=glossary)
+        _, warnings = run(ch, known={'kauft', 'einen'}, glossary=glossary, names={'Ayisha'})
         line = [w for w in warnings if 'ungeglosst' in w][0]
         self.assertEqual(line.split(':', 1)[1].strip(), 'heute')
 
-    def _unglossed(self, text, known):
+    def _unglossed(self, text, known, names=frozenset()):
         ch = chapter()
         ch['beats'] = [{'play': text, 'tags': 'X', 'en': 'x'}]
         ch['drill'] = []
-        _, warnings = run(ch, known=set(known))
+        _, warnings = run(ch, known=set(known), names=set(names))
         lines = [w for w in warnings if 'ungeglosst' in w]
         return lines[0].split(':', 1)[1] if lines else ''
 
@@ -127,8 +127,17 @@ class CheckChapterTest(unittest.TestCase):
     def test_noun_and_verb_are_different_words(self):
         self.assertIn('Essen', self._unglossed('Das Essen ist gut.', {'essen', 'das', 'ist', 'gut'}))
 
+    def test_unknown_nouns_are_listed(self):
+        out = self._unglossed('Er kauft einen Kühlschrank heute.', {'er', 'kauft', 'einen'})
+        self.assertEqual(sorted(out.replace(',', ' ').split()), ['Kühlschrank', 'heute'])
+        self.assertIn('Kühlschrank', self._unglossed('Kühlschrank ist neu.', {'ist', 'neu'}))
+
+    def test_names_come_from_the_names_list(self):
+        self.assertEqual(self._unglossed('Faris wohnt in Stuttgart.', {'wohnt', 'in'}, names={'Faris', 'Stuttgart'}).strip(), '')
+        self.assertIn('Faris', self._unglossed('Faris wohnt in Stuttgart.', {'wohnt', 'in'}, names={'Stuttgart'}))
+
     def test_numbers_and_names_are_not_unglossed(self):
-        out = self._unglossed('Ich wohne in Stuttgart und bin 7 Jahre da.', {'ich', 'wohne', 'in', 'und', 'bin', 'Jahre', 'da'})
+        out = self._unglossed('Ich wohne in Stuttgart und bin 7 Jahre da.', {'ich', 'wohne', 'in', 'und', 'bin', 'Jahre', 'da'}, names={'Stuttgart'})
         self.assertEqual(out.strip(), '')
 
     def test_many_new_glossary_words(self):
@@ -147,7 +156,7 @@ class CheckChapterTest(unittest.TestCase):
         self.assertTrue(any('Er trinkt Bier' in w and 'Bier' in w for w in warnings))
 
     def test_missing_en(self):
-        self.assertTrue(any('en' in e.split() for e in run(chapter(en=False), level='A2')[0]))
+        self.assertTrue(any('no en translation' in e for e in run(chapter(en=False), level='A2')[0]))
         errors, warnings = run(chapter(en=False), level='A1')
         self.assertFalse(any('translation' in e for e in errors))
         self.assertTrue(any('translation' in w for w in warnings))
@@ -195,6 +204,19 @@ class CheckChapterTest(unittest.TestCase):
         for w in ('Heute', 'heute', 'Essen', 'essen', 'geht', 'Das', 'das', 'wir', 'Wir', 'essen', 'gut'):
             self.assertIn(w, words)
         self.assertIn('ist', words)
+
+
+class NamesTest(unittest.TestCase):
+    def test_load_names_skips_comments_and_blank_lines(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            path = os.path.join(d, 'names.txt')
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write('# people\nAyisha\n\n  Stuttgart  \nMax # trailing\n')
+            self.assertEqual(cs.load_names(path), {'Ayisha', 'Stuttgart', 'Max'})
+
+    def test_missing_names_file_is_empty(self):
+        self.assertEqual(cs.load_names('/nonexistent/names.txt'), set())
 
 
 class RealFilesTest(unittest.TestCase):
