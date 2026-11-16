@@ -43,7 +43,7 @@ the owner's answer or review.
 
 | # | Project | Plan | Status | Needs first |
 |---|---|---|---|---|
-| 1 | Production ladder, rungs 2–3 | [plan](superpowers/plans/2026-11-15-production-ladder.md) · [design](superpowers/specs/2026-11-15-production-ladder-design.md) | in progress (8 of 8, whole-branch review running) | – |
+| 1 | Production ladder, rungs 2–3 | [plan](superpowers/plans/2026-11-15-production-ladder.md) · [design](superpowers/specs/2026-11-15-production-ladder-design.md) | done (2026-11-17; on branch `production-ladder`, not merged) | – |
 | 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | not started | – |
 | 3 | Ladder rungs 4–5 (Schreiben, Sprechen) | [plan](superpowers/plans/2026-11-16-ladder-write-speak.md) · [design](superpowers/specs/2026-11-16-ladder-write-speak-design.md) | not started | 1 |
 | 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | not started | 1 |
@@ -68,19 +68,27 @@ Branch `production-ladder` (not merged, not pushed).
 - [x] Task 6: Ordnen screen — commits `c85bce4`, `d63a145`
 - [x] Task 7: Review runner, "Heute üben", recap — commits `a2a051a`, `f5aade2`
 - [x] Task 8: Docs and ship — commit `8d4e399`
-- [ ] Whole-branch review, then merge to `main`
+- [x] Whole-branch review (Opus) and its fix wave — commit `f023e86`
+- [ ] Merge to `main` — the owner's step, after the phone check below
 
-Notes for whoever continues:
-- This plan has no per-task model hints. Use Sonnet for tasks 3–6 and 8, Opus for task 7 and
-  the whole-branch review.
-- Carried from the Task 2 review into Task 7: `progressStore.recordReview` has no guard for an
-  entry that is off the ladder (`rung` 0). Add `if (!entry || entry.rung < 2) return null`
-  with a test, or make sure the runner never calls it for a retired sentence.
-- Small gaps the Task 1 review noted and nobody fixed: no test that `migrate` leaves
-  never-played sentences off the ladder, and none for the `lastPlayed` tie-break.
-- A local, git-ignored ledger with the task briefs is in
-  `.superpowers/sdd/2026-11-15-production-ladder/` on the owner's machine. It is a
-  convenience; this tracker and `git log` are the record.
+What the reviews changed against the plan (rulings, each can be undone):
+- The recap line reads "n von m richtig · morgen wieder", not "n von m eine Stufe weiter": at
+  the top rung a perfect session would have read "0 von 10 eine Stufe weiter".
+- Ordnen refuses (skips rung 2 for) sentences with a tail after an inner comma ("Was machst
+  du, Max?"). A preposition phrase is one chip ("um sieben Uhr", "in einem Büro").
+- Articles are found by phrase, also before adjectives ("ein großes Haus"). Of the 957
+  library sentences, 450 can be played on rung 2 and 409 on rung 3.
+- A sentence whose library file fails to load is skipped for the day, not taken off the ladder.
+- The hint after a wrong placement still names the gender ("Tisch" is masculine (der)) on rung 3.
+- The Home tile shows the number and "Heute üben" on two lines; the Üben button reads
+  "Heute üben (n)".
+
+Parked (small, known):
+- The Ordnen top bar has no score (the design lists one; Ordnen awards no points).
+- A review session fetches library files only for the levels of the first batch of due
+  sentences; a due sentence from another level waits a day.
+- After a failed library load the Home tile can show a higher number than the session plays.
+- Keyboard focus is lost when the Ordnen screen redraws (tap-only on the phone).
 
 ### 2. Content pipeline
 
@@ -140,6 +148,32 @@ Notes for whoever continues:
 - [ ] Task 4: Arztbrief
 - [ ] Task 5: FSP practice run — **owner stop** (doctor's review)
 - [ ] Task 6: Docs and ship
+
+## Needs owner review
+
+Items the agent decided alone because the owner asked not to be stopped. Each says what to
+look at. Remove an item when it is checked.
+
+### Project 1 — production ladder (branch `production-ladder`)
+
+- **Phone checklist (not done by anyone yet).** Everything on screen was checked only in
+  headless desktop Chrome at 400×850, never on a phone, never with real touch or sound.
+  On her Android phone, after serving the branch:
+  1. Home shows the "Heute üben" tile with a number no higher than the daily goal.
+  2. Tap it. An Ordnen sentence: tap a chip, tap a slot; a wrong slot shakes and shows a
+     German hint; three wrong tries place the chip; "Weiter" appears when solved and the
+     sentence is spoken once.
+  3. An Artikel sentence: the article reads "___" until the phrase is placed, and is not
+     spoken before that (also with Hörübung switched on in Einstellungen).
+  4. ✕ in the middle returns to Home and the number is lower by the finished sentences.
+  5. A full session ends on "Geschafft!"; Home then says "Heute fertig".
+  6. Start a story chapter afterwards: articles are visible, progress counts as before.
+  7. Nothing scrolls sideways on the Ordnen screen with a long sentence.
+- **Existing progress.** The first load converts her stored progress to the new format and
+  spreads the already played sentences over the coming days. Export her progress
+  (Werkstatt) before she opens the new version, as a backup.
+- **Wording.** The recap line and the other calls listed under "What the reviews changed
+  against the plan" in the tracker.
 
 ## How to run a plan from a new conversation
 
