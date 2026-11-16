@@ -8,6 +8,7 @@ import { STORY_CONTENT } from './storyContent.js';
 import { reviewWeight } from './sentencePicker.js';
 import { GRAMMAR_PALETTE } from './grammaticalConfig.js';
 import { goalProgress } from './settings.js';
+import { startOfDay } from './ladder.js';
 
 // --- Pure helpers ---
 
@@ -62,12 +63,7 @@ export function sentenceStats(texts, getEntry) {
     return { total: texts.length, played, correct };
 }
 
-/** Local midnight before `now` (ms). */
-export function startOfDay(now) {
-    const d = new Date(now);
-    d.setHours(0, 0, 0, 0);
-    return d.getTime();
-}
+export { startOfDay };
 
 /**
  * Sentences last played today (each sentence counts once).

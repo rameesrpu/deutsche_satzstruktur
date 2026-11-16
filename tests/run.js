@@ -18,6 +18,7 @@ import { runStoryReaderTests } from './storyReader.test.js';
 import { runPlayScreenTests } from './playScreen.test.js';
 import { runChapterRecapTests } from './chapterRecap.test.js';
 import { runSettingsTests } from './settings.test.js';
+import { runLadderTests } from './ladder.test.js';
 import { runFelderLessonTests } from './felderLesson.test.js';
 
 const update = System.programArgs.includes('--update');
@@ -51,6 +52,7 @@ runStoryReaderTests();
 runPlayScreenTests();
 runChapterRecapTests();
 runSettingsTests();
+runLadderTests();
 runFelderLessonTests({ update });
 runLibrarySnapshot({ update });
 
