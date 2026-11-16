@@ -43,7 +43,7 @@ the owner's answer or review.
 
 | # | Project | Plan | Status | Needs first |
 |---|---|---|---|---|
-| 1 | Production ladder, rungs 2–3 | [plan](superpowers/plans/2026-11-15-production-ladder.md) · [design](superpowers/specs/2026-11-15-production-ladder-design.md) | in progress (7 of 8) | – |
+| 1 | Production ladder, rungs 2–3 | [plan](superpowers/plans/2026-11-15-production-ladder.md) · [design](superpowers/specs/2026-11-15-production-ladder-design.md) | in progress (8 of 8, whole-branch review running) | – |
 | 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | not started | – |
 | 3 | Ladder rungs 4–5 (Schreiben, Sprechen) | [plan](superpowers/plans/2026-11-16-ladder-write-speak.md) · [design](superpowers/specs/2026-11-16-ladder-write-speak-design.md) | not started | 1 |
 | 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | not started | 1 |
@@ -67,7 +67,7 @@ Branch `production-ladder` (not merged, not pushed).
 - [x] Task 5: Article blank (rung 3) — commit `8add6e0`
 - [x] Task 6: Ordnen screen — commits `c85bce4`, `d63a145`
 - [x] Task 7: Review runner, "Heute üben", recap — commits `a2a051a`, `f5aade2`
-- [ ] Task 8: Docs and ship
+- [x] Task 8: Docs and ship — commit `8d4e399`
 - [ ] Whole-branch review, then merge to `main`
 
 Notes for whoever continues:
