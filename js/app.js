@@ -1,5 +1,5 @@
 import { gameSounds } from './sound.js';
-import { LEVEL_CONTENT, chapterOrder, categoryUrl } from './levelContent.js';
+import { LEVEL_CONTENT, chapterOrder, categoryUrl, previousChapter } from './levelContent.js';
 import { LevelSelector } from './levelSelector.js';
 import { WordManager } from './wordManager.js';
 import { SentenceManager } from './sentenceManager.js';
@@ -1122,10 +1122,11 @@ class DeutschApp {
         if (!cat || !cat.story || cat.story.kind !== 'chapter') return;
         const order = chapterOrder(level);
         const idx = order.indexOf(category);
+        const prev = previousChapter(level, category);
         // isUnlocked needs the previous chapter's file; "Weiterlesen" this one's
         const [data] = await Promise.all([
             this.levelSelector.loadCategoryData(level, category),
-            idx > 0 ? this.levelSelector.loadCategoryData(level, order[idx - 1]).catch(() => null) : null,
+            prev ? this.levelSelector.loadCategoryData(prev.level, prev.key).catch(() => null) : null,
         ]).catch(() => [null]);
         if (!data || !data.beats || !this.levelSelector.isUnlocked(level, category)) return;
 

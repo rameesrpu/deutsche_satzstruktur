@@ -88,3 +88,25 @@ export function categoryUrl(catData, { library = false } = {}) {
 export function chapterOrder(level) {
     return (STORY_CONTENT[level] || []).flatMap(story => story.chapters.map(ch => ch.key));
 }
+
+/**
+ * The chapter a story chapter unlocks after: the one before it in its level, or for the
+ * first chapter of a level the last chapter of the nearest lower level with chapters
+ * (A2 1.1 opens once A1 5.3 is complete). Null for the very first chapter.
+ * @param {string} level
+ * @param {string} key  chapter key (e.g. "g1k1")
+ * @param {Object<string, Object[]>} [content]  STORY_CONTENT (tests pass their own)
+ * @returns {?{level: string, key: string}}
+ */
+export function previousChapter(level, key, content = STORY_CONTENT) {
+    const keysOf = lv => (content[lv] || []).flatMap(story => story.chapters.map(ch => ch.key));
+    const idx = keysOf(level).indexOf(key);
+    if (idx > 0) return { level, key: keysOf(level)[idx - 1] };
+    if (idx < 0) return null;
+    const levels = Object.keys(LEVEL_CONTENT);
+    for (let i = levels.indexOf(level) - 1; i >= 0; i--) {
+        const keys = keysOf(levels[i]);
+        if (keys.length) return { level: levels[i], key: keys[keys.length - 1] };
+    }
+    return null;
+}

@@ -12,9 +12,12 @@ per chapter and per drill:
 and js/storyContent.js (the chapter index used by levelContent.js / the level selector).
 
 Glossary: each story file may have a "glossary" ({headword: {de, en, forms}}); all glossaries
-of a level form one dictionary. Each chapter file gets the entries whose forms occur in its
-beats (matching rules: glossary_matches, mirrored by js/glossary.js). Forms that occur in no
-chapter of the level are reported as warnings (typos).
+of a level form one dictionary (a key defined twice in a level is an error). Each chapter file
+gets the entries whose forms occur in its beats, from its own level and every lower level
+(LEVEL_ORDER; a key of a higher level wins over the same key of a lower one), so an A1 word
+that comes back in an A2 chapter can be tapped there (matching rules: glossary_matches,
+mirrored by js/glossary.js). Forms that occur in no chapter of the level are reported as
+warnings (typos).
 
 Translations: a play beat or drill item may carry "en" (English); the chapter/drill file then
 gets "translations": {play text: en} (only the sentences that have one; key omitted when none).
@@ -58,6 +61,7 @@ IMAGE_MAX_KB = 80
 IMAGE_NOTES  = ('.txt', '.md')   # image prompts / notes next to the pictures
 
 MAX_WORDS = {'A1': 10, 'A2': 12, 'B1': 16}
+LEVEL_ORDER = ['A1', 'A2', 'B1', 'B2', 'C1']   # lower levels first (glossary inheritance)
 CASES     = {'nom', 'akk', 'dat', 'gen'}
 VERB_PERSONS = {'ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr', 'sie_pl'}
 
@@ -233,6 +237,33 @@ def chapter_glossary(beats, glossary):
     return {key: glossary[key] for key in keys}
 
 
+def level_rank(level):
+    """Position of a level in LEVEL_ORDER (unknown levels last)."""
+    return LEVEL_ORDER.index(level) if level in LEVEL_ORDER else len(LEVEL_ORDER)
+
+
+def level_glossaries(stories, errors):
+    """{level: glossary of all its story files}; a key defined twice in one level is an error."""
+    glossaries = {}
+    for story in stories:
+        level_glossary = glossaries.setdefault(story['level'], {})
+        for key, entry in story.get('glossary', {}).items():
+            if key in level_glossary:
+                errors.append(f'{story["level"]} story {story["story"]}: glossary "{key}" defined twice')
+            level_glossary[key] = entry
+    return glossaries
+
+
+def inherited_glossary(glossaries, level):
+    """The glossary a chapter of `level` draws from: its level's and every lower level's entries,
+    a key of a higher level winning over the same key of a lower one."""
+    merged = {}
+    for lv in sorted(glossaries, key=level_rank):
+        if level_rank(lv) <= level_rank(level):
+            merged.update(glossaries[lv])
+    return merged
+
+
 def content_version(sentences):
     blob = json.dumps(sentences, ensure_ascii=False, sort_keys=True).encode('utf-8')
     return hashlib.sha1(blob).hexdigest()[:10]
@@ -341,13 +372,8 @@ def build():
             stories.append(json.load(f))
 
     # One glossary per level, from all of its story files
-    glossaries = {}
-    for story in stories:
-        level_glossary = glossaries.setdefault(story['level'], {})
-        for key, entry in story.get('glossary', {}).items():
-            if key in level_glossary:
-                errors.append(f'{story["level"]} story {story["story"]}: glossary "{key}" defined twice')
-            level_glossary[key] = entry
+    glossaries = level_glossaries(stories, errors)
+    chapter_glossaries = {level: inherited_glossary(glossaries, level) for level in glossaries}
     for level, glossary in glossaries.items():
         check_glossary(glossary, level, errors)
         texts = [b.get('read') or b.get('play') or '' for story in stories if story['level'] == level
@@ -376,7 +402,7 @@ def build():
             extra = {
                 'story': story['story'], 'storyTitle': story['title'],
                 'chapter': ch['id'], 'title': ch['title'], 'skill': ch['skill'], 'beats': beats,
-                'glossary': chapter_glossary(beats, glossaries.get(level, {})),
+                'glossary': chapter_glossary(beats, chapter_glossaries.get(level, {})),
             }
             translations = collect_translations(ch['beats'])
             if translations:

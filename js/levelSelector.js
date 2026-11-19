@@ -1,4 +1,4 @@
-import { chapterOrder, categoryUrl } from './levelContent.js';
+import { categoryUrl, previousChapter } from './levelContent.js';
 
 export class LevelSelector {
     constructor(levelContent, callbacks) {
@@ -141,16 +141,16 @@ export class LevelSelector {
     }
 
     /**
-     * Story chapters unlock in order: the first is always open, each next one
-     * once the previous chapter is complete. Non-story categories are always open.
+     * Story chapters unlock in order: the very first (A1 1.1) is always open, each next one
+     * once the previous chapter is complete; a level's first chapter follows the last
+     * chapter of the level below (previousChapter). Non-story categories are always open.
      * Needs the previous chapter's file loaded (see updateCategoryMastery).
      */
     isUnlocked(level, category) {
         const cat = this.levelContent[level] && this.levelContent[level].categories[category];
         if (!cat || !cat.story) return true;
-        const order = chapterOrder(level);
-        const idx = order.indexOf(cat.story.chapterKey);
-        return idx <= 0 || this.isChapterComplete(level, order[idx - 1]);
+        const prev = previousChapter(level, cat.story.chapterKey);
+        return !prev || this.isChapterComplete(prev.level, prev.key);
     }
 
     /** @returns {{mastered: number, total: number}} */
@@ -168,8 +168,13 @@ export class LevelSelector {
         const levelData = this.levelContent[level];
         if (!levelData) return;
         const options = Array.from(this.categorySelect.options).filter(o => levelData.categories[o.value]);
-        const texts = await Promise.all(options.map(o =>
-            this.loadCategoryTexts(level, o.value).catch(() => null)));
+        // The level's first chapter unlocks after the last chapter of the level below
+        const firstChapter = options.map(o => levelData.categories[o.value].story).find(s => s);
+        const before = firstChapter && previousChapter(level, firstChapter.chapterKey);
+        const [texts] = await Promise.all([
+            Promise.all(options.map(o => this.loadCategoryTexts(level, o.value).catch(() => null))),
+            before && before.level !== level ? this.loadCategoryData(before.level, before.key).catch(() => null) : null,
+        ]);
         if (this.currentLevel !== level) return;
         options.forEach((option, i) => {
             const cat = levelData.categories[option.value];

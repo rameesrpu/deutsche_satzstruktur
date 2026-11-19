@@ -20,14 +20,13 @@ import re
 import sys
 
 import build_stories as bs
-from build_stories import WORD_RE, SENTENCE_END_RE, STORIES_DIR, glossary_matches
+from build_stories import WORD_RE, SENTENCE_END_RE, STORIES_DIR, LEVEL_ORDER, glossary_matches, level_rank
 
 PLAY_MIN, PLAY_MAX = 12, 15
 DRILL_MIN, DRILL_MAX = 8, 10
 MIN_PERSONS = 4
 MAX_NEW_GLOSSARY = 12
 
-LEVEL_ORDER = ['A1', 'A2', 'B1', 'B2', 'C1']
 GENDERS = ('m', 'f', 'n', 'pl')
 PERSON_KEYS = {'ich', 'du', 'wir', 'ihr', 'Sie'}
 VERB_PERSON_MAP = {'er': '3sg', 'sie': '3sg', 'es': '3sg'}   # sie_pl, Sie count separately
@@ -222,10 +221,6 @@ def check_chapter(level, chapter, known_words, glossary, skills, wordlist=None,
 
 # --- Command line ---
 
-def level_rank(level):
-    return LEVEL_ORDER.index(level) if level in LEVEL_ORDER else len(LEVEL_ORDER)
-
-
 def load_wordlist(level):
     """Lower-case words of data/wordlists/<level>.txt and the lower levels; None without this level's file."""
     if not os.path.exists(os.path.join(WORDLIST_DIR, f'{level}.txt')):
@@ -264,10 +259,7 @@ def checked_chapters(paths):
     known, earlier_plays, earlier_glossary = set(), set(), set()
     for path, story in stories:
         level = story['level']
-        glossary = {}
-        for lv, entries in level_glossary.items():
-            if level_rank(lv) <= level_rank(level):
-                glossary.update(entries)
+        glossary = bs.inherited_glossary(level_glossary, level)   # the same entries the build gives
         for ch in story['chapters']:
             if not paths or path in wanted:
                 errors, warnings = check_chapter(

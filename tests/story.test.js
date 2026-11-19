@@ -3,7 +3,7 @@ import { readText, REPO_ROOT } from './stubs.js';
 import { test, assertEqual } from './assert.js';
 import { beatsBefore, beatsAfterLast, nextPlayText, chapterStartText, storyStrip } from '../js/storyNarration.js';
 import { STORY_CONTENT } from '../js/storyContent.js';
-import { LEVEL_CONTENT, chapterOrder, categoryUrl } from '../js/levelContent.js';
+import { LEVEL_CONTENT, chapterOrder, categoryUrl, previousChapter } from '../js/levelContent.js';
 
 const beats = [
     { read: 'Intro.' },
@@ -110,6 +110,23 @@ export function runStoryTests() {
         });
     }
 
+    // Unlock order across levels: a level's first chapter follows the last chapter of the level below
+    test('story: previousChapter steps back within a level, then into the level below', () => {
+        const ch = key => ({ key });
+        const content = {
+            A1: [{ chapters: [ch('g1k1'), ch('g1k2')] }, { chapters: [ch('g2k1')] }],
+            A2: [{ chapters: [ch('g1k1'), ch('g1k2')] }],
+        };
+        assertEqual(previousChapter('A1', 'g1k1', content), null, 'the very first chapter');
+        assertEqual(previousChapter('A1', 'g2k1', content), { level: 'A1', key: 'g1k2' });
+        assertEqual(previousChapter('A2', 'g1k2', content), { level: 'A2', key: 'g1k1' });
+        assertEqual(previousChapter('A2', 'g1k1', content), { level: 'A1', key: 'g2k1' }, 'A2 1.1 after A1 2.1');
+        assertEqual(previousChapter('B1', 'g1k1', { ...content, B1: [{ chapters: [ch('g1k1')] }] }),
+            { level: 'A2', key: 'g1k2' });
+        assertEqual(previousChapter('A2', 'g9k9', content), null, 'unknown chapter');
+        assertEqual(previousChapter('A2', 'g1k1', { A2: content.A2 }), null, 'no lower level with chapters');
+    });
+
     // Translations (optional `en` on play items): built into the level file's "translations" map
     test('story: collect_translations keeps only play items with an en, per call', () => {
         const out = runPython(`
@@ -126,6 +143,31 @@ print(json.dumps({'a': a, 'b': b, 'errors': errors}, ensure_ascii=False))`);
         assertEqual(a, { 'A b.': 'X' });
         assertEqual(b, { 'A b.': 'Y' });
         assertEqual(errors, ['x: en is only for play beats: Hallo.']);
+    });
+
+    // Glossary inheritance: a chapter draws on its level's and every lower level's entries
+    test('story: an A2 chapter gets the A1 entries it uses; the higher level wins a shared key', () => {
+        const out = runPython(`
+import json, sys
+sys.path.insert(0, 'scripts')
+from build_stories import level_glossaries, inherited_glossary, chapter_glossary
+e = lambda en, form: {"de": form, "en": en, "forms": [form]}
+stories = [
+    {"level": "A2", "story": 1, "glossary": {"Kurs": e("course", "Kurs"), "gut": e("good (A2)", "gut")}},
+    {"level": "A1", "story": 1, "glossary": {"Haus": e("house", "Haus"), "gut": e("good", "gut")}},
+    {"level": "A1", "story": 2, "glossary": {"Haus": e("home", "Haus")}},
+    {"level": "B1", "story": 1, "glossary": {"Klinik": e("clinic", "Klinik")}},
+]
+errors = []
+g = level_glossaries(stories, errors)
+beats = [{"play": "Das Haus ist gut."}, {"read": "Der Kurs und die Klinik."}]
+a2 = chapter_glossary(beats, inherited_glossary(g, "A2"))
+a1 = chapter_glossary(beats, inherited_glossary(g, "A1"))
+print(json.dumps({"a2": {k: v["en"] for k, v in a2.items()}, "a1": sorted(a1), "errors": errors}))`);
+        const { a2, a1, errors } = JSON.parse(out);
+        assertEqual(a2, { Haus: 'home', gut: 'good (A2)', Kurs: 'course' }, 'A1 Haus inherited, A2 gut wins, no B1');
+        assertEqual(a1, ['Haus', 'gut'], 'A1 chapters get no higher-level entries');
+        assertEqual(errors, ['A1 story 2: glossary "Haus" defined twice'], 'still one definition per level');
     });
 
     for (const [level, stories] of Object.entries(STORY_CONTENT)) {
