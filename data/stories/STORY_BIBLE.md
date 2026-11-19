@@ -59,6 +59,16 @@ terrible cook, loves her food.
   patient), later her mentor for the Hospitation.
 - **Sister Mariamma Thomas (born 1950)**: the nurse in the old photo (see the mystery). From near
   Payyannur. Christian, as most Kerala nurses in 1970s Germany were. Warm, funny, sharp.
+- **The A2 language course** (from A2 1.1, a language school in the city centre, mornings):
+  - **Herr Vogel** (about 50): the teacher. Glasses, dry humour, loves the Perfekt ("Im Perfekt,
+    bitte!"); keeps an eye on the clock. Ayisha likes him at once (a *Vogel*, like her chickens).
+  - **Omar** (Syria): civil engineer, polite and formal (says *Sie* to everyone, wears a tie in
+    class), brings cardamom coffee in a thermos; his sister and her three children live in Ulm.
+  - **Olena** (Ukraine): teacher, has a son who loves the elephants at the Wilhelma; quietly
+    corrects everyone's participles.
+  - **Lucas** (Brazil, 22): cook in a restaurant; talks about food, rates it like Ayisha does.
+  - **Linh** (Vietnam): computer science student, always sleepy, curious; the first to ask about
+    Ayisha's "friend".
 - **Klinikum am Neckar**: fictional hospital. Ayisha's Hospitation (A2) and first job (B1).
 - **St.-Lukas-Krankenhaus**: fictional hospital, closed in 1998. Where Mariamma worked.
 - Families in Kerala appear on **video calls**: Ayisha's Umma and Uppa, her little brother Rizwan

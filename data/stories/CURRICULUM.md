@@ -18,7 +18,8 @@ Engagement comes first: she has to *want* to play the next chapter.
 2. **The story is the backbone.** Level → story → chapter → beats. Grammar categories become **drills**
    attached to a chapter, using the same characters.
 3. **Unlocking in order.** A chapter unlocks once every play sentence of the previous chapter has
-   been played at least once (`LevelSelector.isUnlocked`). Mastery is shown, but doesn't gate, so a
+   been played at least once (`LevelSelector.isUnlocked`); a level's first chapter follows the last
+   chapter of the level below (`previousChapter` in levelContent.js). Mastery is shown, but doesn't gate, so a
    beginner is never stuck. Drills unlock with their chapter.
 4. **Mostly the level word list.** Use words from the level's Goethe word list (or earlier levels).
    Story-specific words are allowed when glossed: names, places, *Biryani*, *Kehrwoche*.
@@ -85,8 +86,10 @@ is defined once, in the story where it first appears. Meanings are in English.
   comes later in the same sentence and ends the clause.
 - Cover the words a complete beginner might not know, plus story words (*Kehrwoche*, *Approbation*).
   Skip names, pronouns, articles and *sein* forms.
-- The build copies the entries a chapter uses into its `data/levels` file, warns about forms that appear
-  in no chapter (typos, drill-only words), and fails if a form belongs to two entries.
+- The build copies the entries a chapter uses into its `data/levels` file, from its own level and every
+  lower level (a key of the higher level wins), warns about forms that appear in no chapter of their
+  level (typos), and fails if a form belongs to two entries of one level. Don't re-add lower-level
+  entries (AUTHORING.md step 6).
 
 ### Chapter pictures (optional)
 Pictures show **places, not people**: one picture per place (the airport, the WG kitchen, Ayisha's
