@@ -3,6 +3,16 @@
   "category": "5.3 Übung: Perfekt",
   "chapter": "5.3",
   "skill": "A1.perfekt",
+  "translations": {
+    "Ich habe Tee getrunken.": "I drank tea.",
+    "Du hast lange geschlafen.": "You slept for a long time.",
+    "Lea hat eine Prüfung gemacht.": "Lea took an exam.",
+    "Wir sind nach Ulm gefahren.": "We drove to Ulm.",
+    "Max hat Brot gebacken.": "Max baked bread.",
+    "Habt ihr den Berg gesehen?": "Did you see the mountain?",
+    "Ayisha ist zu Hause geblieben.": "Ayisha stayed at home.",
+    "Ich war gestern müde.": "I was tired yesterday."
+  },
   "sentences": [
     "Ich habe Tee getrunken.",
     "Du hast lange geschlafen.",

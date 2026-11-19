@@ -185,7 +185,9 @@
       "forms": [
         "fährt",
         "fahren",
-        "gefahren"
+        "gefahren",
+        "fahre",
+        "Fährst"
       ]
     },
     "mit": {
@@ -547,7 +549,8 @@
         "Trink",
         "Trinken",
         "trinkt",
-        "Trinkst"
+        "Trinkst",
+        "getrunken"
       ]
     },
     "schlafen": {
@@ -555,7 +558,8 @@
       "en": "to sleep",
       "forms": [
         "schläft",
-        "schlafen"
+        "schlafen",
+        "geschlafen"
       ]
     },
     "sagen": {
@@ -793,6 +797,13 @@
         "arbeiten"
       ]
     },
+    "ihnen": {
+      "de": "ihnen",
+      "en": "them, to them",
+      "forms": [
+        "ihnen"
+      ]
+    },
     "gelernt": {
       "de": "gelernt (lernen)",
       "en": "learned",
@@ -887,7 +898,8 @@
       "forms": [
         "geht",
         "Geh",
-        "gegangen"
+        "gegangen",
+        "gehen"
       ]
     },
     "nach": {
@@ -948,6 +960,13 @@
         "sofort"
       ]
     },
+    "Alhamdulillah": {
+      "de": "Alhamdulillah",
+      "en": "thank God (Arabic: praise be to God)",
+      "forms": [
+        "Alhamdulillah"
+      ]
+    },
     "am": {
       "de": "am (= an dem)",
       "en": "at the, on the",
@@ -1001,6 +1020,22 @@
         "du"
       ]
     }
+  },
+  "translations": {
+    "Ayisha fährt mit der U-Bahn zur Praxis.": "Ayisha takes the U-Bahn to the surgery.",
+    "Sie sind bei Dr. Kühn?": "You're here to see Dr. Kühn?",
+    "Die Mutter spielt mit dem Baby.": "The mother is playing with the baby.",
+    "Was fehlt Ihnen?": "What seems to be the problem?",
+    "Ich habe seit Sonntag Fieber.": "I've had a fever since Sunday.",
+    "Sie kommen aus Indien, oder?": "You're from India, aren't you?",
+    "Ich bin Ärztin aus Kerala.": "I'm a doctor from Kerala.",
+    "Das sage ich meinen Patienten auch!": "That's what I tell my patients too!",
+    "Das Gebäude kenne ich!": "I know that building!",
+    "Das ist das alte St.-Lukas-Krankenhaus.": "That's the old St. Lukas Hospital.",
+    "Ich kenne es aus meiner Studienzeit.": "I know it from my student days.",
+    "Die Frau kommt aus Kerala, wie ich.": "The woman is from Kerala, like me.",
+    "Fragen Sie beim Stadtarchiv!": "Ask at the city archive!",
+    "Ayisha geht mit Schokolade nach Hause.": "Ayisha walks home with chocolate."
   },
   "image": {
     "src": "data/stories/A1/img/praxis.svg?v=b420706c7e",

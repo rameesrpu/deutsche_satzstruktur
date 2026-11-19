@@ -138,7 +138,9 @@
       "forms": [
         "fährt",
         "fahren",
-        "gefahren"
+        "gefahren",
+        "fahre",
+        "Fährst"
       ]
     },
     "nach": {
@@ -365,7 +367,8 @@
         "sehe",
         "sieht",
         "sehen",
-        "seht"
+        "seht",
+        "gesehen"
       ]
     },
     "sie": {

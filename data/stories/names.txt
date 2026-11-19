@@ -52,3 +52,7 @@ Haa
 njan
 kadayil
 aanu
+
+# Abbreviation fragments (St., A1)
+St
+A

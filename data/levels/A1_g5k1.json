@@ -168,7 +168,8 @@
       "forms": [
         "bleibt",
         "Bleib",
-        "bleibe"
+        "bleibe",
+        "geblieben"
       ]
     },
     "heute": {
@@ -200,7 +201,8 @@
         "Trink",
         "Trinken",
         "trinkt",
-        "Trinkst"
+        "Trinkst",
+        "getrunken"
       ]
     },
     "viel": {
@@ -656,7 +658,8 @@
       "forms": [
         "geht",
         "Geh",
-        "gegangen"
+        "gegangen",
+        "gehen"
       ]
     },
     "bitte": {
@@ -919,6 +922,21 @@
         "Seiten"
       ]
     }
+  },
+  "translations": {
+    "Bleib heute im Bett!": "Stay in bed today!",
+    "Trink viel Tee!": "Drink lots of tea!",
+    "Dann sei eine gute Patientin!": "Then be a good patient!",
+    "Iss eine Brezel!": "Eat a pretzel!",
+    "Bring mir lieber Suppe.": "Bring me some soup instead.",
+    "Trinken Sie diesen Tee!": "Drink this tea!",
+    "Und machen Sie das Fenster zu!": "And close the window!",
+    "Geh bitte zum Arzt!": "Please go and see a doctor!",
+    "Sag mir das nicht!": "Don't tell me that!",
+    "Ruf Dr. Kühn an!": "Call Dr. Kühn!",
+    "Sie ist sehr nett.": "She's very nice.",
+    "Sprechen Sie bitte langsam!": "Please speak slowly!",
+    "Kommen Sie morgen um neun!": "Come tomorrow at nine!"
   },
   "image": {
     "src": "data/stories/A1/img/zimmer.svg?v=da0adb9242",

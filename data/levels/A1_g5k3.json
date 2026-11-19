@@ -283,7 +283,9 @@
       "forms": [
         "fährt",
         "fahren",
-        "gefahren"
+        "gefahren",
+        "fahre",
+        "Fährst"
       ]
     },
     "wer": {
@@ -419,6 +421,13 @@
         "spielt",
         "spiele",
         "Spielst"
+      ]
+    },
+    "Badminton": {
+      "de": "das Badminton",
+      "en": "badminton",
+      "forms": [
+        "Badminton"
       ]
     },
     "schlecht": {
@@ -643,6 +652,13 @@
         "zehn"
       ]
     },
+    "Na": {
+      "de": "Na",
+      "en": "well (Na gut = oh well, all right)",
+      "forms": [
+        "Na"
+      ]
+    },
     "gut": {
       "de": "gut",
       "en": "good; well",
@@ -734,7 +750,8 @@
       "de": "lesen (liest)",
       "en": "to read",
       "forms": [
-        "liest"
+        "liest",
+        "Lies"
       ]
     },
     "Satz": {
@@ -807,7 +824,8 @@
       "en": "to sleep",
       "forms": [
         "schläft",
-        "schlafen"
+        "schlafen",
+        "geschlafen"
       ]
     },
     "Huhn": {
@@ -889,6 +907,22 @@
         "folgt"
       ]
     }
+  },
+  "translations": {
+    "Was hast du am Wochenende gemacht?": "What did you do at the weekend?",
+    "Wir haben einen Ausflug gemacht.": "We went on a day trip.",
+    "Wir sind auf die Schwäbische Alb gefahren.": "We drove up to the Swabian Alb.",
+    "Wer ist mitgekommen?": "Who came along?",
+    "Lea und Max sind mitgekommen.": "Lea and Max came along.",
+    "Wer ist Faris?": "Who is Faris?",
+    "Er kommt auch aus Kerala.": "He's from Kerala too.",
+    "Wir haben eine Burg besucht.": "We visited a castle.",
+    "Ich habe viele Fotos gemacht.": "I took lots of photos.",
+    "Ich war so glücklich!": "I was so happy!",
+    "Hast du etwas gegessen?": "Did you eat anything?",
+    "Max hat Brezeln mitgebracht.": "Max brought pretzels.",
+    "Wie war das Biryani?": "How was the biryani?",
+    "Es war nicht schlecht.": "It wasn't bad."
   },
   "image": {
     "src": "data/stories/A1/img/alb.svg?v=7a83984ecf",

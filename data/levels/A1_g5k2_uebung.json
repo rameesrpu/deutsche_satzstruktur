@@ -3,6 +3,16 @@
   "category": "5.2 Übung: mit, bei, von, zu …",
   "chapter": "5.2",
   "skill": "A1.dativ_praep",
+  "translations": {
+    "Ich fahre mit dem Bus.": "I take the bus.",
+    "Lea arbeitet bei einem Arzt.": "Lea works for a doctor.",
+    "Max kommt aus der Bäckerei.": "Max is coming out of the bakery.",
+    "Wir gehen zum Supermarkt.": "We're going to the supermarket.",
+    "Fährst du nach Hause?": "Are you going home?",
+    "Das Paket ist von meiner Mutter.": "The parcel is from my mother.",
+    "Kannst du mir helfen?": "Can you help me?",
+    "Ich gebe dir den Schlüssel.": "I'll give you the key."
+  },
   "sentences": [
     "Ich fahre mit dem Bus.",
     "Lea arbeitet bei einem Arzt.",

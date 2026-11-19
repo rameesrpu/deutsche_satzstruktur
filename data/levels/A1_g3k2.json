@@ -131,7 +131,8 @@
       "forms": [
         "geht",
         "Geh",
-        "gegangen"
+        "gegangen",
+        "gehen"
       ]
     },
     "alles": {
@@ -569,7 +570,8 @@
       "de": "warten",
       "en": "to wait",
       "forms": [
-        "wartet"
+        "wartet",
+        "Warten"
       ]
     },
     "und": {
@@ -663,7 +665,8 @@
       "en": "to help",
       "forms": [
         "hilft",
-        "helfen"
+        "helfen",
+        "Hilf"
       ]
     },
     "ihr": {
@@ -696,7 +699,8 @@
       "de": "lesen (liest)",
       "en": "to read",
       "forms": [
-        "liest"
+        "liest",
+        "Lies"
       ]
     },
     "denken": {
@@ -781,7 +785,8 @@
         "sehe",
         "sieht",
         "sehen",
-        "seht"
+        "seht",
+        "gesehen"
       ]
     },
     "zeigen": {
@@ -907,7 +912,9 @@
       "forms": [
         "fährt",
         "fahren",
-        "gefahren"
+        "gefahren",
+        "fahre",
+        "Fährst"
       ]
     },
     "er": {

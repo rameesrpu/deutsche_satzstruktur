@@ -3,6 +3,16 @@
   "category": "5.1 Übung: Imperativ",
   "chapter": "5.1",
   "skill": "A1.imperativ",
+  "translations": {
+    "Iss den Apfel!": "Eat the apple!",
+    "Trink Wasser!": "Drink water!",
+    "Mach das Fenster auf!": "Open the window!",
+    "Ruf mich an!": "Call me!",
+    "Nehmen Sie Platz!": "Please take a seat!",
+    "Hilf mir bitte!": "Please help me!",
+    "Warten Sie hier!": "Wait here!",
+    "Lies den Text!": "Read the text!"
+  },
   "sentences": [
     "Iss den Apfel!",
     "Trink Wasser!",

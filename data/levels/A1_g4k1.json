@@ -339,7 +339,8 @@
         "Trink",
         "Trinken",
         "trinkt",
-        "Trinkst"
+        "Trinkst",
+        "getrunken"
       ]
     },
     "ich": {
@@ -733,7 +734,8 @@
       "en": "to give; (es gibt) there is",
       "forms": [
         "gibt",
-        "geben"
+        "geben",
+        "gebe"
       ]
     },
     "Serviette": {

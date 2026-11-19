@@ -310,7 +310,8 @@
       "en": "to give; (es gibt) there is",
       "forms": [
         "gibt",
-        "geben"
+        "geben",
+        "gebe"
       ]
     },
     "ihr": {
@@ -696,7 +697,8 @@
       "forms": [
         "geht",
         "Geh",
-        "gegangen"
+        "gegangen",
+        "gehen"
       ]
     },
     "ausatmen": {
@@ -710,7 +712,8 @@
       "de": "lesen (liest)",
       "en": "to read",
       "forms": [
-        "liest"
+        "liest",
+        "Lies"
       ]
     },
     "du": {
@@ -767,7 +770,8 @@
       "en": "to sleep",
       "forms": [
         "schläft",
-        "schlafen"
+        "schlafen",
+        "geschlafen"
       ]
     },
     "in": {

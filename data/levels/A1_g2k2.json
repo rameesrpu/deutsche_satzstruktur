@@ -422,7 +422,8 @@
       "de": "lesen (liest)",
       "en": "to read",
       "forms": [
-        "liest"
+        "liest",
+        "Lies"
       ]
     },
     "einmal": {
@@ -586,7 +587,8 @@
       "forms": [
         "geht",
         "Geh",
-        "gegangen"
+        "gegangen",
+        "gehen"
       ]
     },
     "ins": {
@@ -696,7 +698,8 @@
       "en": "to sleep",
       "forms": [
         "schläft",
-        "schlafen"
+        "schlafen",
+        "geschlafen"
       ]
     },
     "wer": {

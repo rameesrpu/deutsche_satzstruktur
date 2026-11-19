@@ -321,7 +321,8 @@
         "sehe",
         "sieht",
         "sehen",
-        "seht"
+        "seht",
+        "gesehen"
       ]
     },
     "bleiben": {
@@ -330,7 +331,8 @@
       "forms": [
         "bleibt",
         "Bleib",
-        "bleibe"
+        "bleibe",
+        "geblieben"
       ]
     },
     "stehen": {
@@ -755,7 +757,8 @@
       "en": "to give; (es gibt) there is",
       "forms": [
         "gibt",
-        "geben"
+        "geben",
+        "gebe"
       ]
     },
     "Tante": {
