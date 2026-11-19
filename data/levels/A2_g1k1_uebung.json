@@ -1,0 +1,30 @@
+{
+  "level": "A2",
+  "category": "1.1 Übung: Perfekt: haben oder sein",
+  "chapter": "1.1",
+  "skill": "A2.perfekt",
+  "translations": {
+    "Lucas hat Zwiebeln geschnitten.": "Lucas chopped onions.",
+    "Linh ist spät aufgestanden.": "Linh got up late.",
+    "Omar hat seine Schwester besucht.": "Omar visited his sister.",
+    "Wir sind am Sonntag zu Hause geblieben.": "We stayed at home on Sunday.",
+    "Bist du mit der U-Bahn gefahren?": "Did you take the U-Bahn?",
+    "Habt ihr die Hausaufgabe gemacht?": "Have you done the homework?",
+    "Max hat das Frühstück mitgebracht.": "Max brought breakfast.",
+    "Frau Schäfer hat im Garten gearbeitet.": "Frau Schäfer worked in the garden.",
+    "Haben Sie das Foto gesehen?": "Have you seen the photo?",
+    "Ich habe den Satz aufgeschrieben.": "I wrote the sentence down."
+  },
+  "sentences": [
+    "Lucas hat Zwiebeln geschnitten.",
+    "Linh ist spät aufgestanden.",
+    "Omar hat seine Schwester besucht.",
+    "Wir sind am Sonntag zu Hause geblieben.",
+    "Bist du mit der U-Bahn gefahren?",
+    "Habt ihr die Hausaufgabe gemacht?",
+    "Max hat das Frühstück mitgebracht.",
+    "Frau Schäfer hat im Garten gearbeitet.",
+    "Haben Sie das Foto gesehen?",
+    "Ich habe den Satz aufgeschrieben."
+  ]
+}

@@ -4,6 +4,7 @@ import { test, assertEqual } from './assert.js';
 import { beatsBefore, beatsAfterLast, nextPlayText, chapterStartText, storyStrip } from '../js/storyNarration.js';
 import { STORY_CONTENT } from '../js/storyContent.js';
 import { LEVEL_CONTENT, chapterOrder, categoryUrl, previousChapter } from '../js/levelContent.js';
+import { LevelSelector } from '../js/levelSelector.js';
 
 const beats = [
     { read: 'Intro.' },
@@ -125,6 +126,25 @@ export function runStoryTests() {
             { level: 'A2', key: 'g1k2' });
         assertEqual(previousChapter('A2', 'g9k9', content), null, 'unknown chapter');
         assertEqual(previousChapter('A2', 'g1k1', { A2: content.A2 }), null, 'no lower level with chapters');
+    });
+
+    test('story: the first A2 chapter stays locked until the last A1 chapter is complete', () => {
+        const lastA1 = chapterOrder('A1').at(-1);
+        const firstA2 = chapterOrder('A2')[0];
+        assertEqual(previousChapter('A2', firstA2), { level: 'A1', key: lastA1 });
+        const played = new Set();
+        const selector = new LevelSelector(LEVEL_CONTENT, { hasPlayed: (level, key, text) => played.has(`${level}/${key}/${text}`) });
+        assertEqual(selector.isUnlocked('A2', firstA2), false, 'A1 file not loaded yet');
+        const texts = JSON.parse(readText(LEVEL_CONTENT.A1.categories[lastA1].file)).sentences;
+        selector.loadedData.set(`A1/${lastA1}`, { sentences: texts });
+        texts.slice(1).forEach(t => played.add(`A1/${lastA1}/${t}`));
+        assertEqual(selector.isUnlocked('A2', firstA2), false, 'one A1 sentence not played');
+        assertEqual(selector.isUnlocked('A2', `${firstA2}_uebung`), false, 'its drill too');
+        played.add(`A1/${lastA1}/${texts[0]}`);
+        assertEqual(selector.isUnlocked('A2', firstA2), true, 'A1 complete');
+        assertEqual(selector.isUnlocked('A2', `${firstA2}_uebung`), true);
+        assertEqual(selector.isUnlocked('A1', chapterOrder('A1')[0]), true, 'A1 1.1 always open');
+        assertEqual(selector.isUnlocked('A2', 'nebensatz'), true, 'grammar categories always open');
     });
 
     // Translations (optional `en` on play items): built into the level file's "translations" map

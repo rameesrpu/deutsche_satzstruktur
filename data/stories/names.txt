@@ -23,6 +23,10 @@ Brenner
 Kühn
 Dr
 M
+Omar
+Lucas
+Olena
+Linh
 
 # Places and institutions
 Stuttgart
@@ -41,6 +45,12 @@ Möhringer
 Lukas-Krankenhaus
 Store
 Malayalam
+Syrien
+Ukraine
+Brasilien
+Vietnam
+Wilhelma
+Bollywood
 
 # Foreign words (not German)
 Sorry

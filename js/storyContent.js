@@ -219,5 +219,24 @@ export const STORY_CONTENT = {
                 }
             ]
         }
+    ],
+    "A2": [
+        {
+            "story": 1,
+            "title": "Der Sprachkurs",
+            "chapters": [
+                {
+                    "id": "1.1",
+                    "key": "g1k1",
+                    "label": "1.1 Der erste Kurstag",
+                    "file": "data/levels/A2_g1k1.json",
+                    "version": "ff6c39e98d",
+                    "drillKey": "g1k1_uebung",
+                    "drillLabel": "1.1 Übung: Perfekt: haben oder sein",
+                    "drillFile": "data/levels/A2_g1k1_uebung.json",
+                    "drillVersion": "1e34570102"
+                }
+            ]
+        }
     ]
 };

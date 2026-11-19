@@ -8118,6 +8118,428 @@
    ]
   ]
  },
+ "A2_g1k1.json #0 Heute beginnt Ayishas Deutschkurs.": {
+  "leading": [
+   "Heute",
+   "beginnt@1,1"
+  ],
+  "boxes": [
+   "Ayishas Deutschkurs. → Deutschkurs.@1,1/nom"
+  ],
+  "connections": []
+ },
+ "A2_g1k1.json #1 Hier sprechen wir nur Deutsch.": {
+  "leading": [
+   "Hier",
+   "sprechen@3,2"
+  ],
+  "boxes": [
+   "wir → wir@3,2/nom",
+   "Deutsch. → Deutsch.@2,1/akk"
+  ],
+  "connections": [
+   [
+    "nur"
+   ]
+  ]
+ },
+ "A2_g1k1.json #2 Ich bin Ingenieur aus Syrien.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Ingenieur → Ingenieur@1,1/nom",
+   "Syrien. → Syrien.@2,1/dat"
+  ],
+  "connections": [
+   [
+    "bin@2,2"
+   ],
+   [
+    "aus"
+   ]
+  ]
+ },
+ "A2_g1k1.json #3 Was haben Sie am Wochenende gemacht?": {
+  "leading": [
+   "Was",
+   "haben@2,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "Wochenende → Wochenende@2,1/dat"
+  ],
+  "connections": [
+   [
+    "am"
+   ],
+   [
+    "gemacht?@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1.json #4 Ich bin erst am Nachmittag aufgestanden.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Nachmittag → Nachmittag@1,1/dat"
+  ],
+  "connections": [
+   [
+    "bin@2,2",
+    "erst",
+    "am"
+   ],
+   [
+    "aufgestanden.@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1.json #5 Ich bin mit dem Zug nach Ulm gefahren.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "dem Zug → Zug@1,1/dat",
+   "Ulm → Ulm@2,1/dat"
+  ],
+  "connections": [
+   [
+    "bin@2,2",
+    "mit"
+   ],
+   [
+    "nach"
+   ],
+   [
+    "gefahren.@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1.json #6 Am Sonntag haben wir die Wilhelma besucht.": {
+  "leading": [
+   "Am"
+  ],
+  "boxes": [
+   "Sonntag → Sonntag@1,1/dat",
+   "wir → wir@3,2/nom",
+   "die Wilhelma → Wilhelma@1,3/akk"
+  ],
+  "connections": [
+   [
+    "haben@3,2"
+   ],
+   [],
+   [
+    "besucht.@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1.json #7 Ich habe am Wochenende nur Zwiebeln geschnitten.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Wochenende → Wochenende@2,1/dat",
+   "Zwiebeln → Zwiebeln@2,3/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2",
+    "am"
+   ],
+   [
+    "nur"
+   ],
+   [
+    "geschnitten.@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1.json #8 Und was haben Sie gemacht, Frau Rahman?": {
+  "leading": [
+   "Und",
+   "was",
+   "haben@2,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom"
+  ],
+  "connections": [
+   [
+    "gemacht,@3,3",
+    "Frau",
+    "Rahman?"
+   ]
+  ]
+ },
+ "A2_g1k1.json #9 Ich habe am Samstag die Treppe geputzt.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "Samstag → Samstag@1,1/dat",
+   "die Treppe → Treppe@1,3/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2",
+    "am"
+   ],
+   [],
+   [
+    "geputzt.@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1.json #10 Im Herbst sind wir zur Burg Hohenzollern gefahren.": {
+  "leading": [
+   "Im"
+  ],
+  "boxes": [
+   "Herbst → Herbst@1,1/dat",
+   "wir → wir@3,2/nom",
+   "Burg Hohenzollern → Hohenzollern@1,3/dat"
+  ],
+  "connections": [
+   [
+    "sind@3,2"
+   ],
+   [
+    "zur"
+   ],
+   [
+    "gefahren.@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1.json #11 Wer hat das Biryani gekocht?": {
+  "leading": [
+   "Wer",
+   "hat@1,1"
+  ],
+  "boxes": [
+   "das Biryani → Biryani@2,1/akk"
+  ],
+  "connections": [
+   [
+    "gekocht?@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1.json #12 Habt ihr schon einmal Kaffee mit Kardamom getrunken?": {
+  "leading": [
+   "Habt@3,1"
+  ],
+  "boxes": [
+   "ihr → ihr@3,1/nom",
+   "Kaffee → Kaffee@1,1/akk",
+   "Kardamom → Kardamom@1,1/dat"
+  ],
+  "connections": [
+   [
+    "schon",
+    "einmal"
+   ],
+   [
+    "mit"
+   ],
+   [
+    "getrunken?@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1.json #13 Wer hat früher in Ihrem Haus gewohnt?": {
+  "leading": [
+   "Wer",
+   "hat@1,1",
+   "früher",
+   "in"
+  ],
+  "boxes": [
+   "Ihrem Haus → Haus@2,1/dat"
+  ],
+  "connections": [
+   [
+    "gewohnt?@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1.json #14 In der U-Bahn hat Ayisha das Foto aus ihrer Tasche genommen.": {
+  "leading": [
+   "In"
+  ],
+  "boxes": [
+   "der U-Bahn → U-Bahn@1,3/dat",
+   "Ayisha → Ayisha@1,3/nom",
+   "das Foto → Foto@2,1/akk",
+   "ihrer Tasche → Tasche@1,3/dat"
+  ],
+  "connections": [
+   [
+    "hat@1,3"
+   ],
+   [],
+   [
+    "aus"
+   ],
+   [
+    "genommen.@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1_uebung.json #0 Lucas hat Zwiebeln geschnitten.": {
+  "leading": [],
+  "boxes": [
+   "Lucas → Lucas@1,1/nom",
+   "Zwiebeln → Zwiebeln@2,3/akk"
+  ],
+  "connections": [
+   [
+    "hat@1,1"
+   ],
+   [
+    "geschnitten.@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1_uebung.json #1 Linh ist spät aufgestanden.": {
+  "leading": [],
+  "boxes": [
+   "Linh → Linh@1,3/nom"
+  ],
+  "connections": [
+   [
+    "ist@1,3",
+    "spät",
+    "aufgestanden.@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1_uebung.json #2 Omar hat seine Schwester besucht.": {
+  "leading": [],
+  "boxes": [
+   "Omar → Omar@1,1/nom",
+   "seine Schwester → Schwester@1,3/akk"
+  ],
+  "connections": [
+   [
+    "hat@1,1"
+   ],
+   [
+    "besucht.@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1_uebung.json #3 Wir sind am Sonntag zu Hause geblieben.": {
+  "leading": [],
+  "boxes": [
+   "Wir → Wir@3,2/nom",
+   "Sonntag → Sonntag@1,1/dat",
+   "Hause → Hause@2,1/dat"
+  ],
+  "connections": [
+   [
+    "sind@3,2",
+    "am"
+   ],
+   [
+    "zu"
+   ],
+   [
+    "geblieben.@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1_uebung.json #4 Bist du mit der U-Bahn gefahren?": {
+  "leading": [
+   "Bist@1,2"
+  ],
+  "boxes": [
+   "du → du@1,2/nom",
+   "der U-Bahn → U-Bahn@1,3/dat"
+  ],
+  "connections": [
+   [
+    "mit"
+   ],
+   [
+    "gefahren?@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1_uebung.json #5 Habt ihr die Hausaufgabe gemacht?": {
+  "leading": [
+   "Habt@3,1"
+  ],
+  "boxes": [
+   "ihr → ihr@3,1/nom",
+   "die Hausaufgabe → Hausaufgabe@1,3/akk"
+  ],
+  "connections": [
+   [],
+   [
+    "gemacht?@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1_uebung.json #6 Max hat das Frühstück mitgebracht.": {
+  "leading": [],
+  "boxes": [
+   "Max → Max@1,1/nom",
+   "das Frühstück → Frühstück@2,1/akk"
+  ],
+  "connections": [
+   [
+    "hat@1,1"
+   ],
+   [
+    "mitgebracht.@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1_uebung.json #7 Frau Schäfer hat im Garten gearbeitet.": {
+  "leading": [],
+  "boxes": [
+   "Frau Schäfer → Schäfer@1,3/nom",
+   "Garten → Garten@1,1/dat"
+  ],
+  "connections": [
+   [
+    "hat@1,3",
+    "im"
+   ],
+   [
+    "gearbeitet.@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1_uebung.json #8 Haben Sie das Foto gesehen?": {
+  "leading": [
+   "Haben@2,3"
+  ],
+  "boxes": [
+   "Sie → Sie@2,3/nom",
+   "das Foto → Foto@2,1/akk"
+  ],
+  "connections": [
+   [],
+   [
+    "gesehen?@3,3"
+   ]
+  ]
+ },
+ "A2_g1k1_uebung.json #9 Ich habe den Satz aufgeschrieben.": {
+  "leading": [],
+  "boxes": [
+   "Ich → Ich@2,2/nom",
+   "den Satz → Satz@1,1/akk"
+  ],
+  "connections": [
+   [
+    "habe@2,2"
+   ],
+   [
+    "aufgeschrieben.@3,3"
+   ]
+  ]
+ },
  "A2_imperativ.json #0 Öffne bitte das Fenster!": {
   "leading": [
    "Öffne@1,1",

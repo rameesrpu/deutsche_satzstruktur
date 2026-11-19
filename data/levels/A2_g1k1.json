@@ -1,0 +1,1815 @@
+{
+  "level": "A2",
+  "category": "1.1 Der erste Kurstag",
+  "story": 1,
+  "storyTitle": "Der Sprachkurs",
+  "chapter": "1.1",
+  "title": "Der erste Kurstag",
+  "skill": "A2.perfekt",
+  "beats": [
+    {
+      "read": "Januar. Montag. Draußen ist es sehr kalt."
+    },
+    {
+      "play": "Heute beginnt Ayishas Deutschkurs."
+    },
+    {
+      "read": "Nach A1 kommt jetzt A2. Für die Approbation muss ihr Deutsch sehr gut sein. Sehr, sehr gut."
+    },
+    {
+      "read": "Auf dem Tisch in der Küche liegt eine Brezel von Max: „Viel Glück!“ Und Faris schreibt: „Viel Spaß heute! Und vergiss nicht: Nur Deutsch! 😄“"
+    },
+    {
+      "read": "Die Sprachschule ist in der Stadt. Ayisha ist zehn Minuten zu früh. Natürlich. Dann kommt der Lehrer. Er heißt Vogel. Wie ein Vogel! Ayisha liebt Vögel. Sie mag ihn sofort."
+    },
+    {
+      "speaker": "Herr Vogel",
+      "play": "Hier sprechen wir nur Deutsch."
+    },
+    {
+      "read": "Ayisha muss lachen. Diesen Satz kennt sie schon."
+    },
+    {
+      "read": "Vor ihr sitzen Olena aus der Ukraine und Linh aus Vietnam. Olena ist Lehrerin. Linh studiert Informatik. Und sie gähnt. Schon um neun Uhr."
+    },
+    {
+      "read": "Neben Ayisha sitzt ein Mann mit einer Thermoskanne. Er trägt eine Krawatte. Im Deutschkurs."
+    },
+    {
+      "speaker": "Omar",
+      "play": "Ich bin Ingenieur aus Syrien."
+    },
+    {
+      "speaker": "Omar",
+      "read": "Mein Name ist Omar. Und woher kommen Sie, junger Mann?"
+    },
+    {
+      "speaker": "Lucas",
+      "read": "Junger Mann? Ich bin Lucas, aus Brasilien. Ich bin Koch. Und bitte, sag einfach du!"
+    },
+    {
+      "read": "Omar nickt höflich. Und er sagt immer noch „Sie“. Dann schreibt Herr Vogel ein Wort: „Perfekt“."
+    },
+    {
+      "speaker": "Herr Vogel",
+      "play": "Was haben Sie am Wochenende gemacht?"
+    },
+    {
+      "read": "Alle sind still. Alle schauen nach unten. Dann hebt Linh die Hand."
+    },
+    {
+      "speaker": "Linh",
+      "play": "Ich bin erst am Nachmittag aufgestanden."
+    },
+    {
+      "speaker": "Linh",
+      "read": "Ich habe zwölf Stunden geschlafen."
+    },
+    {
+      "speaker": "Herr Vogel",
+      "read": "Sehr gut! Das ist perfekt. Und im Perfekt!"
+    },
+    {
+      "speaker": "Omar",
+      "play": "Ich bin mit dem Zug nach Ulm gefahren."
+    },
+    {
+      "speaker": "Omar",
+      "read": "Meine Schwester wohnt dort. Sie hat drei Kinder. Alle drei finden mich super."
+    },
+    {
+      "speaker": "Olena",
+      "play": "Am Sonntag haben wir die Wilhelma besucht."
+    },
+    {
+      "speaker": "Olena",
+      "read": "Mein Sohn liebt die Elefanten. Wir waren drei Stunden dort. Bei den Elefanten. Nur bei den Elefanten."
+    },
+    {
+      "speaker": "Lucas",
+      "play": "Ich habe am Wochenende nur Zwiebeln geschnitten."
+    },
+    {
+      "speaker": "Lucas",
+      "read": "Im Restaurant. Hundert Zwiebeln! Und am Abend habe ich nur Nudeln gesesst."
+    },
+    {
+      "speaker": "Olena",
+      "read": "Gegessen, Lucas. Gegessen."
+    },
+    {
+      "speaker": "Herr Vogel",
+      "play": "Und was haben Sie gemacht, Frau Rahman?"
+    },
+    {
+      "read": "Ayisha denkt nach. Samstag: Kehrwoche. Max hatte Kehrwoche. Aber Max war bei seiner Oma. Schon wieder."
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Ich habe am Samstag die Treppe geputzt."
+    },
+    {
+      "speaker": "Lucas",
+      "read": "Kehrwoche? Was ist das?"
+    },
+    {
+      "read": "Omar erklärt es. Zehn Minuten lang. Herr Vogel schaut auf die Uhr."
+    },
+    {
+      "speaker": "Herr Vogel",
+      "read": "Danke. Sehr … genau. Frau Rahman, haben Sie auch einen Ausflug gemacht?"
+    },
+    {
+      "speaker": "Ayisha",
+      "play": "Im Herbst sind wir zur Burg Hohenzollern gefahren."
+    },
+    {
+      "speaker": "Herr Vogel",
+      "read": "Im Herbst? Na gut. Perfekt ist Perfekt."
+    },
+    {
+      "read": "Ayisha erzählt. Der Berg, die Burg, die Bäume in Rot und Gold. Ihre Augen leuchten. Dann zeigt sie ihr Handy: die Burg, die Bäume. Und ein Foto mit Biryani."
+    },
+    {
+      "speaker": "Lucas",
+      "play": "Wer hat das Biryani gekocht?"
+    },
+    {
+      "speaker": "Ayisha",
+      "read": "Die Tante von einem Freund. Sieben von zehn."
+    },
+    {
+      "read": "Linh und Olena schauen Ayisha an. „Von einem Freund?“"
+    },
+    {
+      "read": "Zum Glück ist jetzt Pause. Omar öffnet seine Thermoskanne. Es riecht nach Kardamom."
+    },
+    {
+      "speaker": "Omar",
+      "play": "Habt ihr schon einmal Kaffee mit Kardamom getrunken?"
+    },
+    {
+      "speaker": "Lucas",
+      "read": "Ihr! Er hat „ihr“ gesagt!"
+    },
+    {
+      "read": "Omar lächelt stolz. Ayisha probiert. Kardamom, wie bei Umma in Kerala. „Acht von zehn.“ Von Ayisha ist das sehr viel."
+    },
+    {
+      "read": "Um zwölf Uhr kommt die Hausaufgabe."
+    },
+    {
+      "speaker": "Herr Vogel",
+      "play": "Wer hat früher in Ihrem Haus gewohnt?"
+    },
+    {
+      "speaker": "Herr Vogel",
+      "read": "Fragen Sie Ihre Nachbarn! Am Mittwoch erzählen Sie. Im Perfekt, bitte."
+    },
+    {
+      "read": "Ayisha hat den Satz aufgeschrieben. Dann denkt sie lange nach."
+    },
+    {
+      "read": "Auf dem Heimweg summt Ayisha ein Lied. Bollywood, natürlich. Aber sie denkt nicht an das Lied."
+    },
+    {
+      "play": "In der U-Bahn hat Ayisha das Foto aus ihrer Tasche genommen."
+    },
+    {
+      "read": "Das Foto: die junge Krankenschwester vor dem St.-Lukas-Krankenhaus. Stuttgart, 1972. Und auf der Rückseite, auf Malayalam: „Hier habe ich ein Zuhause.“ M."
+    },
+    {
+      "read": "Ayisha denkt an Frau Schäfer. „Früher hat meine Mutter hier Zimmer vermietet“, hat sie gesagt. „An viele junge Frauen.“"
+    },
+    {
+      "read": "Wer hat früher hier gewohnt? Vielleicht … M.?"
+    }
+  ],
+  "glossary": {
+    "Januar": {
+      "de": "der Januar",
+      "en": "January",
+      "forms": [
+        "Januar"
+      ]
+    },
+    "Montag": {
+      "de": "der Montag, -e",
+      "en": "Monday",
+      "forms": [
+        "Montag"
+      ]
+    },
+    "draußen": {
+      "de": "draußen",
+      "en": "outside",
+      "forms": [
+        "draußen"
+      ]
+    },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be: ich bin, du bist, er ist, wir/sie sind, ihr seid",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
+      ]
+    },
+    "es": {
+      "de": "es",
+      "en": "it",
+      "forms": [
+        "es"
+      ]
+    },
+    "sehr": {
+      "de": "sehr",
+      "en": "very",
+      "forms": [
+        "sehr"
+      ]
+    },
+    "kalt": {
+      "de": "kalt",
+      "en": "cold",
+      "forms": [
+        "kalt",
+        "kalte"
+      ]
+    },
+    "heute": {
+      "de": "heute",
+      "en": "today",
+      "forms": [
+        "heute"
+      ]
+    },
+    "beginnen": {
+      "de": "beginnen",
+      "en": "to begin",
+      "forms": [
+        "beginnt"
+      ]
+    },
+    "Deutschkurs": {
+      "de": "der Deutschkurs, -e",
+      "en": "German course",
+      "forms": [
+        "Deutschkurs"
+      ]
+    },
+    "nach": {
+      "de": "nach",
+      "en": "to; after; (nach oben) upwards",
+      "forms": [
+        "nach"
+      ]
+    },
+    "kommen": {
+      "de": "kommen",
+      "en": "to come",
+      "forms": [
+        "kommen",
+        "kommt",
+        "komme",
+        "kommst"
+      ]
+    },
+    "jetzt": {
+      "de": "jetzt",
+      "en": "now",
+      "forms": [
+        "jetzt"
+      ]
+    },
+    "für": {
+      "de": "für + Akk.",
+      "en": "for",
+      "forms": [
+        "für"
+      ]
+    },
+    "der": {
+      "de": "der, die, das",
+      "en": "the; das/der/die on its own: that, this (it, he, she)",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
+      ]
+    },
+    "Approbation": {
+      "de": "die Approbation",
+      "en": "licence to practise medicine (in Germany)",
+      "forms": [
+        "Approbation"
+      ]
+    },
+    "müssen": {
+      "de": "müssen (muss)",
+      "en": "must, to have to",
+      "forms": [
+        "muss",
+        "müssen",
+        "musst"
+      ]
+    },
+    "ihr": {
+      "de": "ihr, ihre",
+      "en": "you (plural); her, their; Ihr = your (formal)",
+      "forms": [
+        "ihr",
+        "Ihre",
+        "ihren",
+        "ihrem"
+      ]
+    },
+    "Deutsch": {
+      "de": "das Deutsch",
+      "en": "German (the language)",
+      "forms": [
+        "Deutsch"
+      ]
+    },
+    "gut": {
+      "de": "gut",
+      "en": "good; well",
+      "forms": [
+        "gut",
+        "gute",
+        "gutem",
+        "Guten"
+      ]
+    },
+    "sein": {
+      "de": "sein, seine",
+      "en": "his; its",
+      "forms": [
+        "sein",
+        "seine",
+        "seinen",
+        "seiner"
+      ]
+    },
+    "auf": {
+      "de": "auf",
+      "en": "on, onto; (auf Deutsch) in German",
+      "forms": [
+        "auf"
+      ]
+    },
+    "Tisch": {
+      "de": "der Tisch, -e",
+      "en": "table",
+      "forms": [
+        "Tisch",
+        "Tische"
+      ]
+    },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
+      ]
+    },
+    "Küche": {
+      "de": "die Küche, -n",
+      "en": "kitchen",
+      "forms": [
+        "Küche"
+      ]
+    },
+    "liegen": {
+      "de": "liegen",
+      "en": "to lie (be lying)",
+      "forms": [
+        "liegt"
+      ]
+    },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem",
+        "einen",
+        "einer"
+      ]
+    },
+    "Brezel": {
+      "de": "die Brezel, -n",
+      "en": "pretzel",
+      "forms": [
+        "Brezel",
+        "Brezeln"
+      ]
+    },
+    "von": {
+      "de": "von + Dat.",
+      "en": "from; of",
+      "forms": [
+        "von"
+      ]
+    },
+    "viel": {
+      "de": "viel, viele",
+      "en": "much, a lot; many",
+      "forms": [
+        "viel",
+        "viele",
+        "vielen"
+      ]
+    },
+    "Glück": {
+      "de": "das Glück",
+      "en": "luck",
+      "forms": [
+        "Glück"
+      ]
+    },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
+      ]
+    },
+    "schreiben": {
+      "de": "schreiben",
+      "en": "to write",
+      "forms": [
+        "schreibt",
+        "schreiben",
+        "geschrieben"
+      ]
+    },
+    "Spaß": {
+      "de": "der Spaß",
+      "en": "fun; (Viel Spaß!) have fun!",
+      "forms": [
+        "Spaß"
+      ]
+    },
+    "vergessen": {
+      "de": "vergessen (vergisst)",
+      "en": "to forget; (vergiss nicht!) don't forget!",
+      "forms": [
+        "vergiss"
+      ]
+    },
+    "nicht": {
+      "de": "nicht",
+      "en": "not",
+      "forms": [
+        "nicht"
+      ]
+    },
+    "nur": {
+      "de": "nur",
+      "en": "only, just",
+      "forms": [
+        "nur"
+      ]
+    },
+    "Sprachschule": {
+      "de": "die Sprachschule, -n",
+      "en": "language school",
+      "forms": [
+        "Sprachschule"
+      ]
+    },
+    "Stadt": {
+      "de": "die Stadt, Städte",
+      "en": "city, town",
+      "forms": [
+        "Stadt"
+      ]
+    },
+    "zehn": {
+      "de": "zehn",
+      "en": "ten",
+      "forms": [
+        "zehn"
+      ]
+    },
+    "Minute": {
+      "de": "die Minute, -n",
+      "en": "minute",
+      "forms": [
+        "Minuten"
+      ]
+    },
+    "zu": {
+      "de": "zu",
+      "en": "to; too; closed",
+      "forms": [
+        "zu"
+      ]
+    },
+    "früh": {
+      "de": "früh",
+      "en": "early",
+      "forms": [
+        "früh"
+      ]
+    },
+    "natürlich": {
+      "de": "natürlich",
+      "en": "of course",
+      "forms": [
+        "natürlich"
+      ]
+    },
+    "dann": {
+      "de": "dann",
+      "en": "then",
+      "forms": [
+        "dann"
+      ]
+    },
+    "Lehrer": {
+      "de": "der Lehrer, -",
+      "en": "teacher",
+      "forms": [
+        "Lehrer"
+      ]
+    },
+    "er": {
+      "de": "er",
+      "en": "he, it",
+      "forms": [
+        "er"
+      ]
+    },
+    "heißen": {
+      "de": "heißen",
+      "en": "to be called",
+      "forms": [
+        "heißt",
+        "heiße"
+      ]
+    },
+    "Vogel": {
+      "de": "der Vogel, Vögel",
+      "en": "bird (also a surname: Herr Vogel)",
+      "forms": [
+        "Vogel",
+        "Vögel"
+      ]
+    },
+    "wie": {
+      "de": "wie",
+      "en": "how; like, as",
+      "forms": [
+        "wie"
+      ]
+    },
+    "lieben": {
+      "de": "lieben",
+      "en": "to love",
+      "forms": [
+        "liebe",
+        "liebt"
+      ]
+    },
+    "Sie": {
+      "de": "Sie",
+      "en": "you (formal); at the start of a sentence also: she, they",
+      "forms": [
+        "Sie"
+      ]
+    },
+    "mögen": {
+      "de": "mögen (mag)",
+      "en": "to like",
+      "forms": [
+        "mag"
+      ]
+    },
+    "ihn": {
+      "de": "ihn",
+      "en": "him, it",
+      "forms": [
+        "ihn"
+      ]
+    },
+    "sofort": {
+      "de": "sofort",
+      "en": "immediately, right away",
+      "forms": [
+        "sofort"
+      ]
+    },
+    "hier": {
+      "de": "hier",
+      "en": "here",
+      "forms": [
+        "hier"
+      ]
+    },
+    "sprechen": {
+      "de": "sprechen (spricht)",
+      "en": "to speak",
+      "forms": [
+        "sprechen",
+        "spreche",
+        "spricht",
+        "gesprochen",
+        "sprichst"
+      ]
+    },
+    "wir": {
+      "de": "wir",
+      "en": "we",
+      "forms": [
+        "wir"
+      ]
+    },
+    "lachen": {
+      "de": "lachen",
+      "en": "to laugh",
+      "forms": [
+        "lacht",
+        "lachen"
+      ]
+    },
+    "dieser": {
+      "de": "dieser, diese, dieses",
+      "en": "this",
+      "forms": [
+        "Diese",
+        "dieser",
+        "dieses",
+        "diesen"
+      ]
+    },
+    "Satz": {
+      "de": "der Satz, Sätze",
+      "en": "sentence",
+      "forms": [
+        "Satz"
+      ]
+    },
+    "kennen": {
+      "de": "kennen",
+      "en": "to know (a person, a thing)",
+      "forms": [
+        "Kennst",
+        "kenne",
+        "kennt"
+      ]
+    },
+    "sie": {
+      "de": "sie",
+      "en": "she, her; they (a capital Sie at the start of a sentence can also be she or they)",
+      "forms": [
+        "sie"
+      ]
+    },
+    "schon": {
+      "de": "schon",
+      "en": "already; (schon wieder) again!",
+      "forms": [
+        "schon"
+      ]
+    },
+    "vor": {
+      "de": "vor",
+      "en": "in front of; before",
+      "forms": [
+        "vor"
+      ]
+    },
+    "sitzen": {
+      "de": "sitzen",
+      "en": "to sit",
+      "forms": [
+        "sitzt",
+        "sitzen"
+      ]
+    },
+    "aus": {
+      "de": "aus + Dat.",
+      "en": "from, out of",
+      "forms": [
+        "aus"
+      ]
+    },
+    "Lehrerin": {
+      "de": "die Lehrerin, -nen",
+      "en": "(female) teacher",
+      "forms": [
+        "Lehrerin"
+      ]
+    },
+    "studieren": {
+      "de": "studieren",
+      "en": "to study (at university)",
+      "forms": [
+        "studiert"
+      ]
+    },
+    "Informatik": {
+      "de": "die Informatik",
+      "en": "computer science",
+      "forms": [
+        "Informatik"
+      ]
+    },
+    "gähnen": {
+      "de": "gähnen",
+      "en": "to yawn",
+      "forms": [
+        "gähnt"
+      ]
+    },
+    "um": {
+      "de": "um",
+      "en": "at (time); around",
+      "forms": [
+        "um"
+      ]
+    },
+    "neun": {
+      "de": "neun",
+      "en": "nine",
+      "forms": [
+        "neun"
+      ]
+    },
+    "Uhr": {
+      "de": "die Uhr, -en",
+      "en": "clock; o'clock",
+      "forms": [
+        "Uhr"
+      ]
+    },
+    "neben": {
+      "de": "neben + Dat.",
+      "en": "next to",
+      "forms": [
+        "Neben"
+      ]
+    },
+    "Mann": {
+      "de": "der Mann, Männer",
+      "en": "man",
+      "forms": [
+        "Mann"
+      ]
+    },
+    "mit": {
+      "de": "mit + Dat.",
+      "en": "with",
+      "forms": [
+        "mit"
+      ]
+    },
+    "Thermoskanne": {
+      "de": "die Thermoskanne, -n",
+      "en": "thermos flask",
+      "forms": [
+        "Thermoskanne"
+      ]
+    },
+    "tragen": {
+      "de": "tragen (trägt)",
+      "en": "to carry; to wear",
+      "forms": [
+        "trägt",
+        "tragen"
+      ]
+    },
+    "Krawatte": {
+      "de": "die Krawatte, -n",
+      "en": "tie",
+      "forms": [
+        "Krawatte"
+      ]
+    },
+    "im": {
+      "de": "im (= in dem)",
+      "en": "in the",
+      "forms": [
+        "im"
+      ]
+    },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
+      ]
+    },
+    "Ingenieur": {
+      "de": "der Ingenieur, -e",
+      "en": "engineer",
+      "forms": [
+        "Ingenieur"
+      ]
+    },
+    "mein": {
+      "de": "mein, meine",
+      "en": "my",
+      "forms": [
+        "mein",
+        "meine",
+        "meiner",
+        "meinen"
+      ]
+    },
+    "Name": {
+      "de": "der Name, -n",
+      "en": "name",
+      "forms": [
+        "Name",
+        "Namen"
+      ]
+    },
+    "woher": {
+      "de": "woher?",
+      "en": "where from?",
+      "forms": [
+        "woher"
+      ]
+    },
+    "jung": {
+      "de": "jung",
+      "en": "young",
+      "forms": [
+        "jung",
+        "junge",
+        "junger"
+      ]
+    },
+    "Koch": {
+      "de": "der Koch, Köche",
+      "en": "cook, chef",
+      "forms": [
+        "Koch"
+      ]
+    },
+    "bitte": {
+      "de": "bitte",
+      "en": "please",
+      "forms": [
+        "bitte"
+      ]
+    },
+    "einfach": {
+      "de": "einfach",
+      "en": "simply; easy",
+      "forms": [
+        "einfach"
+      ]
+    },
+    "du": {
+      "de": "du",
+      "en": "you (informal, one person)",
+      "forms": [
+        "du"
+      ]
+    },
+    "nicken": {
+      "de": "nicken",
+      "en": "to nod",
+      "forms": [
+        "nickt"
+      ]
+    },
+    "höflich": {
+      "de": "höflich",
+      "en": "polite(ly)",
+      "forms": [
+        "höflich"
+      ]
+    },
+    "sagen": {
+      "de": "sagen",
+      "en": "to say",
+      "forms": [
+        "sagt",
+        "sagen",
+        "sagst",
+        "sage",
+        "Sag"
+      ]
+    },
+    "immer": {
+      "de": "immer",
+      "en": "always",
+      "forms": [
+        "immer"
+      ]
+    },
+    "noch": {
+      "de": "noch",
+      "en": "still; yet; (noch ein) another",
+      "forms": [
+        "noch"
+      ]
+    },
+    "Herr": {
+      "de": "der Herr, -en",
+      "en": "Mr; gentleman",
+      "forms": [
+        "Herr"
+      ]
+    },
+    "Wort": {
+      "de": "das Wort, Wörter",
+      "en": "word",
+      "forms": [
+        "Wort",
+        "Wörter"
+      ]
+    },
+    "perfekt": {
+      "de": "perfekt; das Perfekt",
+      "en": "perfect; (das Perfekt) the perfect tense: ich habe gemacht",
+      "forms": [
+        "Perfekt",
+        "perfekt"
+      ]
+    },
+    "was": {
+      "de": "was?",
+      "en": "what?",
+      "forms": [
+        "was"
+      ]
+    },
+    "haben": {
+      "de": "haben",
+      "en": "to have",
+      "forms": [
+        "hat",
+        "habe",
+        "haben",
+        "hast",
+        "habt"
+      ]
+    },
+    "am": {
+      "de": "am (= an dem)",
+      "en": "at the, on the",
+      "forms": [
+        "am"
+      ]
+    },
+    "Wochenende": {
+      "de": "das Wochenende, -n",
+      "en": "weekend",
+      "forms": [
+        "Wochenende"
+      ]
+    },
+    "machen": {
+      "de": "machen",
+      "en": "to make, do",
+      "forms": [
+        "machen",
+        "macht",
+        "machst",
+        "gemacht"
+      ]
+    },
+    "alle": {
+      "de": "alle",
+      "en": "all; everyone",
+      "forms": [
+        "alle"
+      ]
+    },
+    "still": {
+      "de": "still",
+      "en": "quiet, silent",
+      "forms": [
+        "still"
+      ]
+    },
+    "schauen": {
+      "de": "schauen",
+      "en": "to look",
+      "forms": [
+        "schaut",
+        "schauen"
+      ]
+    },
+    "unten": {
+      "de": "unten",
+      "en": "down; downstairs; below",
+      "forms": [
+        "unten"
+      ]
+    },
+    "Hand": {
+      "de": "die Hand, Hände",
+      "en": "hand",
+      "forms": [
+        "Hand",
+        "Hände"
+      ]
+    },
+    "erst": {
+      "de": "erst",
+      "en": "only (so far); first",
+      "forms": [
+        "erst"
+      ]
+    },
+    "Nachmittag": {
+      "de": "der Nachmittag, -e",
+      "en": "afternoon",
+      "forms": [
+        "Nachmittag"
+      ]
+    },
+    "aufgestanden": {
+      "de": "aufgestanden (auf|stehen)",
+      "en": "got up",
+      "forms": [
+        "aufgestanden"
+      ]
+    },
+    "zwölf": {
+      "de": "zwölf",
+      "en": "twelve",
+      "forms": [
+        "zwölf"
+      ]
+    },
+    "Stunde": {
+      "de": "die Stunde, -n",
+      "en": "hour",
+      "forms": [
+        "Stunde",
+        "Stunden"
+      ]
+    },
+    "schlafen": {
+      "de": "schlafen (schläft)",
+      "en": "to sleep",
+      "forms": [
+        "schläft",
+        "schlafen",
+        "geschlafen"
+      ]
+    },
+    "Zug": {
+      "de": "der Zug, Züge",
+      "en": "train",
+      "forms": [
+        "Zug"
+      ]
+    },
+    "fahren": {
+      "de": "fahren (fährt)",
+      "en": "to go (by vehicle), drive, ride",
+      "forms": [
+        "fährt",
+        "fahren",
+        "gefahren",
+        "fahre",
+        "Fährst"
+      ]
+    },
+    "Schwester": {
+      "de": "die Schwester, -n",
+      "en": "sister",
+      "forms": [
+        "Schwester"
+      ]
+    },
+    "wohnen": {
+      "de": "wohnen",
+      "en": "to live (somewhere)",
+      "forms": [
+        "wohne",
+        "wohnt",
+        "wohnen",
+        "wohnst"
+      ]
+    },
+    "dort": {
+      "de": "dort",
+      "en": "there",
+      "forms": [
+        "dort"
+      ]
+    },
+    "drei": {
+      "de": "drei",
+      "en": "three",
+      "forms": [
+        "drei"
+      ]
+    },
+    "Kind": {
+      "de": "das Kind, -er",
+      "en": "child",
+      "forms": [
+        "Kinder"
+      ]
+    },
+    "finden": {
+      "de": "finden",
+      "en": "to find; to think (opinion)",
+      "forms": [
+        "findet",
+        "finde",
+        "finden"
+      ]
+    },
+    "mich": {
+      "de": "mich",
+      "en": "me",
+      "forms": [
+        "mich"
+      ]
+    },
+    "super": {
+      "de": "super",
+      "en": "great",
+      "forms": [
+        "super"
+      ]
+    },
+    "Sonntag": {
+      "de": "der Sonntag, -e",
+      "en": "Sunday",
+      "forms": [
+        "Sonntag"
+      ]
+    },
+    "besuchen": {
+      "de": "besuchen",
+      "en": "to visit",
+      "forms": [
+        "besucht",
+        "besuchen"
+      ]
+    },
+    "Sohn": {
+      "de": "der Sohn, Söhne",
+      "en": "son",
+      "forms": [
+        "Sohn"
+      ]
+    },
+    "Elefant": {
+      "de": "der Elefant, -en",
+      "en": "elephant",
+      "forms": [
+        "Elefanten"
+      ]
+    },
+    "war": {
+      "de": "war (sein)",
+      "en": "was",
+      "forms": [
+        "war",
+        "waren"
+      ]
+    },
+    "bei": {
+      "de": "bei + Dat.",
+      "en": "at, with, near",
+      "forms": [
+        "bei"
+      ]
+    },
+    "Zwiebel": {
+      "de": "die Zwiebel, -n",
+      "en": "onion",
+      "forms": [
+        "Zwiebeln"
+      ]
+    },
+    "geschnitten": {
+      "de": "geschnitten (schneiden)",
+      "en": "cut, chopped",
+      "forms": [
+        "geschnitten"
+      ]
+    },
+    "Restaurant": {
+      "de": "das Restaurant, -s",
+      "en": "restaurant",
+      "forms": [
+        "Restaurant"
+      ]
+    },
+    "hundert": {
+      "de": "hundert",
+      "en": "hundred",
+      "forms": [
+        "Hundert"
+      ]
+    },
+    "Abend": {
+      "de": "der Abend, -e",
+      "en": "evening",
+      "forms": [
+        "Abend"
+      ]
+    },
+    "Nudel": {
+      "de": "die Nudel, -n",
+      "en": "noodle; pasta",
+      "forms": [
+        "Nudeln"
+      ]
+    },
+    "gesesst": {
+      "de": "gesesst ✗ → gegessen",
+      "en": "Lucas's mistake: the right form is gegessen (eaten)",
+      "forms": [
+        "gesesst"
+      ]
+    },
+    "gegessen": {
+      "de": "gegessen (essen)",
+      "en": "eaten",
+      "forms": [
+        "gegessen"
+      ]
+    },
+    "Frau": {
+      "de": "die Frau, -en",
+      "en": "woman; Mrs",
+      "forms": [
+        "Frau",
+        "Frauen"
+      ]
+    },
+    "nachdenken": {
+      "de": "nach|denken",
+      "en": "to think (carefully)",
+      "forms": [
+        "denkt … nach"
+      ]
+    },
+    "Samstag": {
+      "de": "der Samstag, -e",
+      "en": "Saturday",
+      "forms": [
+        "Samstag"
+      ]
+    },
+    "Kehrwoche": {
+      "de": "die Kehrwoche",
+      "en": "Swabian rota: your week to clean the stairs",
+      "forms": [
+        "Kehrwoche",
+        "KEHRWOCHE"
+      ]
+    },
+    "hatte": {
+      "de": "hatte (haben)",
+      "en": "had",
+      "forms": [
+        "hatte"
+      ]
+    },
+    "aber": {
+      "de": "aber",
+      "en": "but",
+      "forms": [
+        "aber"
+      ]
+    },
+    "Oma": {
+      "de": "die Oma, -s",
+      "en": "grandma",
+      "forms": [
+        "Oma"
+      ]
+    },
+    "wieder": {
+      "de": "wieder",
+      "en": "again",
+      "forms": [
+        "wieder"
+      ]
+    },
+    "Treppe": {
+      "de": "die Treppe, -n",
+      "en": "stairs, staircase",
+      "forms": [
+        "Treppe"
+      ]
+    },
+    "geputzt": {
+      "de": "geputzt (putzen)",
+      "en": "cleaned",
+      "forms": [
+        "geputzt"
+      ]
+    },
+    "erklären": {
+      "de": "erklären",
+      "en": "to explain",
+      "forms": [
+        "erklärt"
+      ]
+    },
+    "lang": {
+      "de": "lang",
+      "en": "long",
+      "forms": [
+        "lang"
+      ]
+    },
+    "danke": {
+      "de": "danke",
+      "en": "thank you, thanks",
+      "forms": [
+        "Danke"
+      ]
+    },
+    "genau": {
+      "de": "genau",
+      "en": "exactly",
+      "forms": [
+        "genau"
+      ]
+    },
+    "auch": {
+      "de": "auch",
+      "en": "also, too",
+      "forms": [
+        "auch"
+      ]
+    },
+    "Ausflug": {
+      "de": "der Ausflug, Ausflüge",
+      "en": "trip, outing",
+      "forms": [
+        "Ausflug"
+      ]
+    },
+    "Herbst": {
+      "de": "der Herbst, -e",
+      "en": "autumn",
+      "forms": [
+        "Herbst"
+      ]
+    },
+    "zur": {
+      "de": "zur (= zu der)",
+      "en": "to the",
+      "forms": [
+        "zur"
+      ]
+    },
+    "Burg": {
+      "de": "die Burg, -en",
+      "en": "castle",
+      "forms": [
+        "Burg"
+      ]
+    },
+    "Na": {
+      "de": "Na",
+      "en": "well (Na gut = oh well, all right)",
+      "forms": [
+        "Na"
+      ]
+    },
+    "erzählen": {
+      "de": "erzählen",
+      "en": "to tell (a story), talk about",
+      "forms": [
+        "erzählen",
+        "erzählt"
+      ]
+    },
+    "Berg": {
+      "de": "der Berg, -e",
+      "en": "mountain",
+      "forms": [
+        "Berg",
+        "Berge"
+      ]
+    },
+    "Baum": {
+      "de": "der Baum, Bäume",
+      "en": "tree",
+      "forms": [
+        "Bäume"
+      ]
+    },
+    "rot": {
+      "de": "rot",
+      "en": "red",
+      "forms": [
+        "rot",
+        "rote",
+        "roten"
+      ]
+    },
+    "gold": {
+      "de": "gold",
+      "en": "gold(en)",
+      "forms": [
+        "gold"
+      ]
+    },
+    "Auge": {
+      "de": "das Auge, -n",
+      "en": "eye",
+      "forms": [
+        "Augen"
+      ]
+    },
+    "leuchten": {
+      "de": "leuchten",
+      "en": "to shine, glow",
+      "forms": [
+        "leuchten"
+      ]
+    },
+    "zeigen": {
+      "de": "zeigen",
+      "en": "to show",
+      "forms": [
+        "zeigt"
+      ]
+    },
+    "Handy": {
+      "de": "das Handy, -s",
+      "en": "mobile phone",
+      "forms": [
+        "Handy"
+      ]
+    },
+    "Foto": {
+      "de": "das Foto, -s",
+      "en": "photo",
+      "forms": [
+        "Foto",
+        "Fotos"
+      ]
+    },
+    "Biryani": {
+      "de": "das Biryani",
+      "en": "biryani (spiced rice dish from India)",
+      "forms": [
+        "Biryani"
+      ]
+    },
+    "wer": {
+      "de": "wer?",
+      "en": "who?",
+      "forms": [
+        "wer"
+      ]
+    },
+    "gekocht": {
+      "de": "gekocht (kochen)",
+      "en": "cooked",
+      "forms": [
+        "gekocht"
+      ]
+    },
+    "Tante": {
+      "de": "die Tante, -n",
+      "en": "aunt; (respectfully) an older woman",
+      "forms": [
+        "Tante"
+      ]
+    },
+    "Freund": {
+      "de": "der Freund, -e",
+      "en": "friend",
+      "forms": [
+        "Freund"
+      ]
+    },
+    "sieben": {
+      "de": "sieben",
+      "en": "seven",
+      "forms": [
+        "sieben"
+      ]
+    },
+    "anschauen": {
+      "de": "an|schauen",
+      "en": "to look at",
+      "forms": [
+        "schaut … an",
+        "schauen … an"
+      ]
+    },
+    "zum": {
+      "de": "zum (= zu dem)",
+      "en": "to the",
+      "forms": [
+        "zum"
+      ]
+    },
+    "Pause": {
+      "de": "die Pause, -n",
+      "en": "break",
+      "forms": [
+        "Pause"
+      ]
+    },
+    "öffnen": {
+      "de": "öffnen",
+      "en": "to open",
+      "forms": [
+        "öffnet"
+      ]
+    },
+    "riechen": {
+      "de": "riechen",
+      "en": "to smell",
+      "forms": [
+        "riecht"
+      ]
+    },
+    "Kardamom": {
+      "de": "der Kardamom",
+      "en": "cardamom",
+      "forms": [
+        "Kardamom"
+      ]
+    },
+    "einmal": {
+      "de": "einmal",
+      "en": "once",
+      "forms": [
+        "einmal"
+      ]
+    },
+    "Kaffee": {
+      "de": "der Kaffee",
+      "en": "coffee",
+      "forms": [
+        "Kaffee"
+      ]
+    },
+    "trinken": {
+      "de": "trinken",
+      "en": "to drink",
+      "forms": [
+        "trinken",
+        "Trink",
+        "Trinken",
+        "trinkt",
+        "Trinkst",
+        "getrunken"
+      ]
+    },
+    "gesagt": {
+      "de": "gesagt (sagen)",
+      "en": "said",
+      "forms": [
+        "gesagt"
+      ]
+    },
+    "lächeln": {
+      "de": "lächeln",
+      "en": "to smile",
+      "forms": [
+        "lächelt"
+      ]
+    },
+    "stolz": {
+      "de": "stolz",
+      "en": "proud(ly)",
+      "forms": [
+        "stolz"
+      ]
+    },
+    "probieren": {
+      "de": "probieren",
+      "en": "to try, taste",
+      "forms": [
+        "probiert"
+      ]
+    },
+    "acht": {
+      "de": "acht",
+      "en": "eight",
+      "forms": [
+        "acht"
+      ]
+    },
+    "Hausaufgabe": {
+      "de": "die Hausaufgabe, -n",
+      "en": "homework",
+      "forms": [
+        "Hausaufgabe"
+      ]
+    },
+    "Haus": {
+      "de": "das Haus, Häuser",
+      "en": "house",
+      "forms": [
+        "Haus"
+      ]
+    },
+    "gewohnt": {
+      "de": "gewohnt (wohnen)",
+      "en": "lived",
+      "forms": [
+        "gewohnt"
+      ]
+    },
+    "fragen": {
+      "de": "fragen",
+      "en": "to ask",
+      "forms": [
+        "fragt",
+        "fragen",
+        "frage"
+      ]
+    },
+    "Nachbar": {
+      "de": "der Nachbar, -n",
+      "en": "neighbour",
+      "forms": [
+        "Nachbarn"
+      ]
+    },
+    "Mittwoch": {
+      "de": "der Mittwoch, -e",
+      "en": "Wednesday",
+      "forms": [
+        "Mittwoch"
+      ]
+    },
+    "aufgeschrieben": {
+      "de": "aufgeschrieben (auf|schreiben)",
+      "en": "written down",
+      "forms": [
+        "aufgeschrieben"
+      ]
+    },
+    "lange": {
+      "de": "lange",
+      "en": "(for) a long time",
+      "forms": [
+        "lange"
+      ]
+    },
+    "Heimweg": {
+      "de": "der Heimweg",
+      "en": "way home",
+      "forms": [
+        "Heimweg"
+      ]
+    },
+    "Lied": {
+      "de": "das Lied, -er",
+      "en": "song",
+      "forms": [
+        "Lied"
+      ]
+    },
+    "denken": {
+      "de": "denken",
+      "en": "to think",
+      "forms": [
+        "denkt"
+      ]
+    },
+    "an": {
+      "de": "an",
+      "en": "at, on; to",
+      "forms": [
+        "an"
+      ]
+    },
+    "U-Bahn": {
+      "de": "die U-Bahn, -en",
+      "en": "underground, subway",
+      "forms": [
+        "U-Bahn"
+      ]
+    },
+    "ihrer": {
+      "de": "ihrer (ihr)",
+      "en": "her, their (after a dative preposition: aus ihrer Tasche)",
+      "forms": [
+        "ihrer"
+      ]
+    },
+    "Tasche": {
+      "de": "die Tasche, -n",
+      "en": "bag",
+      "forms": [
+        "Tasche",
+        "Taschen"
+      ]
+    },
+    "genommen": {
+      "de": "genommen (nehmen)",
+      "en": "taken",
+      "forms": [
+        "genommen"
+      ]
+    },
+    "Krankenschwester": {
+      "de": "die Krankenschwester, -n",
+      "en": "nurse",
+      "forms": [
+        "Krankenschwester",
+        "Krankenschwestern"
+      ]
+    },
+    "Rückseite": {
+      "de": "die Rückseite, -n",
+      "en": "back (side)",
+      "forms": [
+        "Rückseite"
+      ]
+    },
+    "Zuhause": {
+      "de": "das Zuhause",
+      "en": "home",
+      "forms": [
+        "Zuhause"
+      ]
+    },
+    "früher": {
+      "de": "früher",
+      "en": "in the past, formerly",
+      "forms": [
+        "Früher"
+      ]
+    },
+    "Mutter": {
+      "de": "die Mutter, Mütter",
+      "en": "mother",
+      "forms": [
+        "Mutter"
+      ]
+    },
+    "Zimmer": {
+      "de": "das Zimmer, -",
+      "en": "room",
+      "forms": [
+        "Zimmer"
+      ]
+    },
+    "vermieten": {
+      "de": "vermieten",
+      "en": "to rent out",
+      "forms": [
+        "vermietet"
+      ]
+    },
+    "vielleicht": {
+      "de": "vielleicht",
+      "en": "maybe, perhaps",
+      "forms": [
+        "vielleicht"
+      ]
+    }
+  },
+  "translations": {
+    "Heute beginnt Ayishas Deutschkurs.": "Today Ayisha's German course starts.",
+    "Hier sprechen wir nur Deutsch.": "In here we only speak German.",
+    "Ich bin Ingenieur aus Syrien.": "I'm an engineer from Syria.",
+    "Was haben Sie am Wochenende gemacht?": "What did you all do at the weekend?",
+    "Ich bin erst am Nachmittag aufgestanden.": "I didn't get up until the afternoon.",
+    "Ich bin mit dem Zug nach Ulm gefahren.": "I took the train to Ulm.",
+    "Am Sonntag haben wir die Wilhelma besucht.": "On Sunday we went to the Wilhelma.",
+    "Ich habe am Wochenende nur Zwiebeln geschnitten.": "All weekend I did nothing but chop onions.",
+    "Und was haben Sie gemacht, Frau Rahman?": "And what did you do, Ms Rahman?",
+    "Ich habe am Samstag die Treppe geputzt.": "On Saturday I cleaned the stairs.",
+    "Im Herbst sind wir zur Burg Hohenzollern gefahren.": "In the autumn we went to Hohenzollern Castle.",
+    "Wer hat das Biryani gekocht?": "Who cooked the biryani?",
+    "Habt ihr schon einmal Kaffee mit Kardamom getrunken?": "Have you ever had coffee with cardamom?",
+    "Wer hat früher in Ihrem Haus gewohnt?": "Who used to live in your building?",
+    "In der U-Bahn hat Ayisha das Foto aus ihrer Tasche genommen.": "On the U-Bahn, Ayisha took the photo out of her bag."
+  },
+  "sentences": [
+    "Heute beginnt Ayishas Deutschkurs.",
+    "Hier sprechen wir nur Deutsch.",
+    "Ich bin Ingenieur aus Syrien.",
+    "Was haben Sie am Wochenende gemacht?",
+    "Ich bin erst am Nachmittag aufgestanden.",
+    "Ich bin mit dem Zug nach Ulm gefahren.",
+    "Am Sonntag haben wir die Wilhelma besucht.",
+    "Ich habe am Wochenende nur Zwiebeln geschnitten.",
+    "Und was haben Sie gemacht, Frau Rahman?",
+    "Ich habe am Samstag die Treppe geputzt.",
+    "Im Herbst sind wir zur Burg Hohenzollern gefahren.",
+    "Wer hat das Biryani gekocht?",
+    "Habt ihr schon einmal Kaffee mit Kardamom getrunken?",
+    "Wer hat früher in Ihrem Haus gewohnt?",
+    "In der U-Bahn hat Ayisha das Foto aus ihrer Tasche genommen."
+  ]
+}
