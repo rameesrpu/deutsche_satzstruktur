@@ -8,6 +8,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(__file__))
 import check_story as cs
+import story_review as sr
 import build_stories as bs
 
 CURRICULUM = os.path.join(bs.STORIES_DIR, 'CURRICULUM.md')
@@ -231,6 +232,51 @@ class RealFilesTest(unittest.TestCase):
                                 capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stdout)
         self.assertTrue(result.stdout.splitlines()[-1].startswith('0 errors'))
+
+
+class ReviewSheetTest(unittest.TestCase):
+    def sheet(self, errors=(), warnings=(), new_keys=None):
+        story = {'level': 'A2', 'glossary': {
+            'Aerztin': {'de': 'die Ärztin, -nen', 'en': 'doctor (f.)', 'forms': ['Ärztin']},
+            'Koffer': {'de': 'der Koffer, -', 'en': 'suitcase', 'forms': ['Koffer']}}}
+        ch = {'id': '1.1', 'title': 'Ankunft', 'skill': 'A1.nom', 'image': {'place': 'flughafen', 'alt': 'x'},
+              'drillTitle': 'Üben',
+              'beats': [{'read': 'Sie ist müde.', 'speaker': 'Ayisha'},
+                        {'play': 'Ich bin Ärztin.', 'tags': 'S.ich V.ich S.f', 'en': 'I am a doctor.'},
+                        {'play': 'Der Koffer ist schwer.', 'tags': 'S.m V.er X'}],
+              'drill': [{'play': 'Ich bin hier.', 'tags': 'S.ich V.ich X', 'en': 'I am here.'}]}
+        return sr.review_sheet('A2', story, ch, list(errors), list(warnings), new_keys)
+
+    def test_sheet_sections_and_lines(self):
+        s = self.sheet()
+        self.assertTrue(s.startswith('# A2 1.1 Ankunft\n'))
+        self.assertIn('Skill: A1.nom · Ort: flughafen', s)
+        self.assertIn('**Ayisha:**', s)
+        self.assertIn('**Ich bin Ärztin.** — *I am a doctor.*', s)
+        self.assertIn('**Der Koffer ist schwer.**\n', s)
+        self.assertNotIn('**Der Koffer ist schwer.** —', s)
+        self.assertIn('Keine Hinweise.', s)
+        order = [s.index(h) for h in ('## Geschichte', '## Übung', '## Neue Wörter', '## Prüfung')]
+        self.assertEqual(order, sorted(order))
+        self.assertIn('**Ich bin hier.** — *I am here.*', s.split('## Übung')[1])
+
+    def test_new_words_and_findings(self):
+        s = self.sheet(errors=['E1'], warnings=['W1'], new_keys={'Koffer'})
+        words = s.split('## Neue Wörter')[1].split('## Prüfung')[0]
+        self.assertIn('der Koffer, - — suitcase', words)
+        self.assertNotIn('Ärztin', words)
+        check = s.split('## Prüfung')[1]
+        self.assertLess(check.index('E1'), check.index('W1'))
+        self.assertNotIn('Keine Hinweise.', s)
+
+    def test_cli_writes_a_file_per_chapter(self):
+        script = os.path.join(os.path.dirname(__file__), 'story_review.py')
+        path = os.path.join(bs.STORIES_DIR, 'A1', '01_ankunft.json')
+        result = subprocess.run([sys.executable, script, path, '1.1'], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        out = result.stdout.strip()
+        self.assertTrue(out.endswith('A1_1.1.md'), out)
+        self.assertTrue(os.path.exists(out))
 
 
 if __name__ == '__main__':

@@ -239,8 +239,12 @@ def load_wordlist(level):
     return words
 
 
-def check_files(paths):
-    """Check the chapters of `paths` (in context of every story file) → (lines, error count, warning count)."""
+def checked_chapters(paths):
+    """
+    Check the chapters of `paths` (all story files when empty), in context of every story file →
+    [(path, story, chapter, errors, warnings, new_keys)]. new_keys: glossary keys first used in
+    this chapter (none of the earlier chapters in story order uses them).
+    """
     wanted = {os.path.abspath(p) for p in paths}
     files = sorted({os.path.abspath(p) for p in glob.glob(os.path.join(STORIES_DIR, '*', '*.json'))} | wanted)
     stories = []
@@ -255,7 +259,7 @@ def check_files(paths):
     for _, story in stories:
         level_glossary.setdefault(story['level'], {}).update(story.get('glossary', {}))
 
-    lines, n_err, n_warn = [], 0, 0
+    result = []
     known, earlier_plays, earlier_glossary = set(), set(), set()
     for path, story in stories:
         level = story['level']
@@ -268,14 +272,23 @@ def check_files(paths):
                 errors, warnings = check_chapter(
                     level, ch, known, glossary, skills, wordlist=load_wordlist(level),
                     earlier_plays=earlier_plays, earlier_glossary=earlier_glossary, names=names)
-                rel = os.path.relpath(path, bs.REPO_ROOT)
-                lines += [f'ERROR {rel} {ch["id"]}: {e}' for e in errors]
-                lines += [f'WARN {rel} {ch["id"]}: {w}' for w in warnings]
-                n_err += len(errors)
-                n_warn += len(warnings)
+                new_keys = glossary_keys(ch, glossary) - earlier_glossary
+                result.append((path, story, ch, errors, warnings, new_keys))
             known |= chapter_words(ch)
             earlier_plays |= {b['play'].strip() for b in ch['beats'] if 'play' in b}
             earlier_glossary |= glossary_keys(ch, glossary)
+    return result
+
+
+def check_files(paths):
+    """Check the chapters of `paths` → (lines, error count, warning count)."""
+    lines, n_err, n_warn = [], 0, 0
+    for path, _, ch, errors, warnings, _ in checked_chapters(paths):
+        rel = os.path.relpath(path, bs.REPO_ROOT)
+        lines += [f'ERROR {rel} {ch["id"]}: {e}' for e in errors]
+        lines += [f'WARN {rel} {ch["id"]}: {w}' for w in warnings]
+        n_err += len(errors)
+        n_warn += len(warnings)
     return lines, n_err, n_warn
 
 
