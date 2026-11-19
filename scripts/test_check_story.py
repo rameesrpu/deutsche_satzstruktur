@@ -157,10 +157,10 @@ class CheckChapterTest(unittest.TestCase):
         self.assertTrue(any('Er trinkt Bier' in w and 'Bier' in w for w in warnings))
 
     def test_missing_en(self):
-        self.assertTrue(any('no en translation' in e for e in run(chapter(en=False), level='A2')[0]))
-        errors, warnings = run(chapter(en=False), level='A1')
-        self.assertFalse(any('translation' in e for e in errors))
-        self.assertTrue(any('translation' in w for w in warnings))
+        for level in ('A1', 'A2'):
+            errors, warnings = run(chapter(en=False), level=level)
+            self.assertTrue(any('no en translation' in e for e in errors), level)
+            self.assertFalse(any('translation' in w for w in warnings), level)
 
     def test_boss_sentence(self):
         _, warnings = run(chapter(last='Ja'))

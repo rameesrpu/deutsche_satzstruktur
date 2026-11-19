@@ -91,8 +91,7 @@ stays on its word: `Studienzeit.` is one word). Re-read the tag table in CURRICU
 sentence type you use for the first time in this chapter (first Perfekt, first two-clause sentence,
 first dative object …).
 
-A `play` beat with tags and `en` (A1 5.2; A1 has no `en` yet, the translation was written for this
-guide):
+A `play` beat with tags and `en` (A1 5.2):
 ```json
 { "speaker": "Dr. Kühn", "play": "Ich kenne es aus meiner Studienzeit.",
   "tags": "S.ich V.ich O.n.akk P O.f.dat O.f.dat", "en": "I know it from my student days." }
@@ -118,7 +117,7 @@ German words ("Imperativ", "mit, bei, von, zu …"). Use words from this chapter
 chapters: drill files carry no glossary, so a new word in a drill cannot be tapped (and the checker
 or the build warns about it).
 
-A drill item (A1 5.2; `en` written for this guide):
+A drill item (A1 5.2):
 ```json
 { "play": "Ich gebe dir den Schlüssel.", "tags": "S.ich V.ich O.du.dat O.m.akk O.m.akk", "en": "I'll give you the key." }
 ```
@@ -156,8 +155,7 @@ Skip pronouns, articles and *sein* forms the learner has met.
 
 Give every `play` beat and every drill item an `en`: natural English, as a person would say it, not
 word for word (*Was fehlt Ihnen?* → "What seems to be the problem?", not "What is missing to you?").
-`en` on a `read` beat is a build error. A missing `en` is a checker warning in A1 and an error from
-A2 on. The build copies them into the chapter file as `"translations": {play text: en}`.
+`en` on a `read` beat is a build error. A missing `en` is a checker error at every level. The build copies them into the chapter file as `"translations": {play text: en}`.
 
 ## 8. Build and check
 

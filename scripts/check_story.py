@@ -201,7 +201,7 @@ def check_chapter(level, chapter, known_words, glossary, skills, wordlist=None,
     missing_en = [i['play'] for i in items if not (isinstance(i.get('en'), str) and i['en'].strip())]
     if missing_en:
         msg = f'{len(missing_en)} play beats/drill items have no en translation, e.g. "{missing_en[0]}"'
-        (warnings if level == 'A1' else errors).append(msg)
+        errors.append(msg)
 
     for item in beats + drill:
         text = item.get('read') or item.get('play') or ''
