@@ -44,7 +44,7 @@ the owner's answer or review.
 | # | Project | Plan | Status | Needs first |
 |---|---|---|---|---|
 | 1 | Production ladder, rungs 2–3 | [plan](superpowers/plans/2026-11-15-production-ladder.md) · [design](superpowers/specs/2026-11-15-production-ladder-design.md) | done (2026-11-17; on branch `production-ladder`, not merged) | – |
-| 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | in progress (6 of 7; branch `content-pipeline`) | – |
+| 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | in progress (7 of 7, whole-branch review running; branch `content-pipeline`) | – |
 | 3 | Ladder rungs 4–5 (Schreiben, Sprechen) | [plan](superpowers/plans/2026-11-16-ladder-write-speak.md) · [design](superpowers/specs/2026-11-16-ladder-write-speak-design.md) | not started | 1 |
 | 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | not started | 1 |
 | 4b | Preposition scene | [plan](superpowers/plans/2026-11-16-boards-preposition-scene.md) | not started | 4a |
@@ -98,7 +98,7 @@ Parked (small, known):
 - [x] Task 4: Authoring guide and `write-chapter` skill — commit `3a576f8`
 - [x] Task 5: A2 chapter list — commits `eec3a50`, `57a267e` (owner stop skipped; see "Needs owner review")
 - [x] Task 6: A1 translation backfill (five story files) — commits `008f6b4`..`05147b7`, `e1bcf15`
-- [ ] Task 7: Pilot chapter A2 1.1 — **owner stop** twice (outline, review sheet)
+- [x] Task 7: Pilot chapter A2 1.1 — commits `dfd0ac1`..`6432a52`, `5ae3e23` (owner stops skipped; see "Needs owner review")
 
 ### 3. Ladder rungs 4–5
 
