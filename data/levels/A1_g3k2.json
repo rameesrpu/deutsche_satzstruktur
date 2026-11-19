@@ -215,7 +215,9 @@
       "forms": [
         "ein",
         "eine",
-        "einem"
+        "einem",
+        "einen",
+        "einer"
       ]
     },
     "jung": {
@@ -666,7 +668,8 @@
       "en": "you (plural); her, their",
       "forms": [
         "ihr",
-        "Ihre"
+        "Ihre",
+        "ihren"
       ]
     },
     "kein": {

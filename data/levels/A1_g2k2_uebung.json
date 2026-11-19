@@ -3,6 +3,16 @@
   "category": "2.2 Übung: nicht & kein",
   "chapter": "2.2",
   "skill": "A1.negation",
+  "translations": {
+    "Ich habe keinen Tisch.": "I don't have a table.",
+    "Das ist kein Problem.": "That's not a problem.",
+    "Max putzt nicht.": "Max doesn't clean.",
+    "Wir haben keine Zeit.": "We have no time.",
+    "Lea trinkt keinen Kaffee.": "Lea doesn't drink coffee.",
+    "Ich verstehe das nicht.": "I don't understand that.",
+    "Du hast keine Hühner.": "You don't have any chickens.",
+    "Das Wetter ist nicht gut.": "The weather isn't good."
+  },
   "sentences": [
     "Ich habe keinen Tisch.",
     "Das ist kein Problem.",

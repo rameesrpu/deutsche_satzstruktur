@@ -251,7 +251,9 @@
       "forms": [
         "ein",
         "eine",
-        "einem"
+        "einem",
+        "einen",
+        "einer"
       ]
     },
     "Mutter": {
@@ -536,7 +538,8 @@
       "forms": [
         "trinken",
         "Trink",
-        "Trinken"
+        "Trinken",
+        "trinkt"
       ]
     },
     "schlafen": {

@@ -3,6 +3,16 @@
   "category": "2.1 Übung: Akkusativ",
   "chapter": "2.1",
   "skill": "A1.akk",
+  "translations": {
+    "Ich brauche einen Stuhl.": "I need a chair.",
+    "Lea kauft einen Teppich.": "Lea is buying a rug.",
+    "Max isst den Kuchen.": "Max is eating the cake.",
+    "Wir suchen einen Supermarkt.": "We're looking for a supermarket.",
+    "Hast du einen Schlüssel?": "Do you have a key?",
+    "Ayisha trinkt einen Tee.": "Ayisha is drinking a cup of tea.",
+    "Ich sehe den Mann.": "I see the man.",
+    "Frau Schäfer hat einen Garten.": "Mrs Schäfer has a garden."
+  },
   "sentences": [
     "Ich brauche einen Stuhl.",
     "Lea kauft einen Teppich.",

@@ -114,7 +114,9 @@
       "forms": [
         "ein",
         "eine",
-        "einem"
+        "einem",
+        "einen",
+        "einer"
       ]
     },
     "Flugzeug": {
@@ -273,7 +275,8 @@
       "en": "you (plural); her, their",
       "forms": [
         "ihr",
-        "Ihre"
+        "Ihre",
+        "ihren"
       ]
     },
     "Heimat": {

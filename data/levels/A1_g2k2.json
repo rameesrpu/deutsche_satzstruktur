@@ -183,7 +183,9 @@
       "forms": [
         "ein",
         "eine",
-        "einem"
+        "einem",
+        "einen",
+        "einer"
       ]
     },
     "weiß": {
@@ -212,7 +214,8 @@
       "en": "you (plural); her, their",
       "forms": [
         "ihr",
-        "Ihre"
+        "Ihre",
+        "ihren"
       ]
     },
     "groß": {
@@ -702,6 +705,22 @@
         "wer"
       ]
     }
+  },
+  "translations": {
+    "Kennst du die Frau?": "Do you know this woman?",
+    "Nein, ich kenne die Frau nicht.": "No, I don't know her.",
+    "Sie ist eine Krankenschwester.": "She's a nurse.",
+    "Die Frau ist nicht aus Deutschland.": "The woman isn't from Germany.",
+    "Das ist kein Deutsch!": "That's not German!",
+    "Ist das Englisch?": "Is that English?",
+    "Nein, das ist auch kein Englisch.": "No, that isn't English either.",
+    "Das ist Malayalam!": "That's Malayalam!",
+    "Die Frau kommt vielleicht aus Kerala!": "The woman might be from Kerala!",
+    "Aber das Foto ist sehr alt.": "But the photo is very old.",
+    "Hat das Foto keinen Namen?": "Doesn't the photo have a name?",
+    "Nein, es hat keinen Namen.": "No, it has no name.",
+    "Wir haben keine Idee.": "We have no idea.",
+    "Ich finde das nicht spannend.": "I don't find this exciting."
   },
   "image": {
     "src": "data/stories/A1/img/zimmer.svg?v=da0adb9242",

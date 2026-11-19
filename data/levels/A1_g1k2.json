@@ -108,7 +108,9 @@
       "forms": [
         "ein",
         "eine",
-        "einem"
+        "einem",
+        "einen",
+        "einer"
       ]
     },
     "Stunde": {
@@ -363,7 +365,8 @@
       "en": "you (plural); her, their",
       "forms": [
         "ihr",
-        "Ihre"
+        "Ihre",
+        "ihren"
       ]
     },
     "schon": {

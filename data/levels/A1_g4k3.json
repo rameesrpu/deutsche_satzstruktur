@@ -244,7 +244,9 @@
       "forms": [
         "ein",
         "eine",
-        "einem"
+        "einem",
+        "einen",
+        "einer"
       ]
     },
     "Thermoskanne": {
@@ -930,7 +932,8 @@
       "en": "you (plural); her, their",
       "forms": [
         "ihr",
-        "Ihre"
+        "Ihre",
+        "ihren"
       ]
     },
     "Handy": {

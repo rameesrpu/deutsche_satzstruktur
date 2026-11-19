@@ -249,7 +249,9 @@
       "forms": [
         "ein",
         "eine",
-        "einem"
+        "einem",
+        "einen",
+        "einer"
       ]
     },
     "Videoanruf": {
@@ -300,7 +302,8 @@
       "en": "you (plural); her, their",
       "forms": [
         "ihr",
-        "Ihre"
+        "Ihre",
+        "ihren"
       ]
     },
     "klein": {
@@ -391,6 +394,13 @@
         "in"
       ]
     },
+    "Ha": {
+      "de": "Ha!",
+      "en": "ha (a laugh or a cry of triumph)",
+      "forms": [
+        "Ha"
+      ]
+    },
     "endlich": {
       "de": "endlich",
       "en": "finally, at last",
@@ -419,6 +429,13 @@
       "en": "for",
       "forms": [
         "für"
+      ]
+    },
+    "mich": {
+      "de": "mich",
+      "en": "me",
+      "forms": [
+        "mich"
       ]
     },
     "wie": {
@@ -844,6 +861,21 @@
         "sicher"
       ]
     }
+  },
+  "translations": {
+    "Ist euer Kühlschrank immer so leer?": "Is your fridge always this empty?",
+    "Das ist mein Zimmer!": "This is my room!",
+    "Dein Zimmer ist so klein!": "Your room is so small!",
+    "Aber mein Bett ist sehr bequem.": "But my bed is very comfortable.",
+    "Wo ist dein Cricketschläger?": "Where is your cricket bat?",
+    "Mein Schläger ist in Kerala.": "My bat is in Kerala.",
+    "Wie ist deine Vermieterin?": "What's your landlady like?",
+    "Ihre Hühner sind wunderbar!": "Her chickens are wonderful!",
+    "Das ist nicht unsere Familie.": "That's not our family.",
+    "Aber ihre Uniform kenne ich.": "But I recognise her uniform.",
+    "Mein Haus ist sehr alt.": "My house is very old.",
+    "Ich kenne ihr Gesicht nicht.": "I don't know her face.",
+    "Unser Rätsel ist spannend!": "Our mystery is exciting!"
   },
   "image": {
     "src": "data/stories/A1/img/wg-haus.svg?v=84f2d614f7",

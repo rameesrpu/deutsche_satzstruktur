@@ -197,7 +197,8 @@
       "forms": [
         "trinken",
         "Trink",
-        "Trinken"
+        "Trinken",
+        "trinkt"
       ]
     },
     "viel": {
@@ -262,7 +263,9 @@
       "forms": [
         "ein",
         "eine",
-        "einem"
+        "einem",
+        "einen",
+        "einer"
       ]
     },
     "gut": {
@@ -740,7 +743,8 @@
       "en": "to look for",
       "forms": [
         "suche",
-        "sucht"
+        "sucht",
+        "suchen"
       ]
     },
     "Hausärztin": {

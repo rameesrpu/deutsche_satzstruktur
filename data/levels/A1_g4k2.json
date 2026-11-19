@@ -170,6 +170,17 @@
         "mit"
       ]
     },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem",
+        "einen",
+        "einer"
+      ]
+    },
     "Mission": {
       "de": "die Mission, -en",
       "en": "mission",
@@ -477,15 +488,6 @@
       "en": "still; yet; (noch ein) another",
       "forms": [
         "noch"
-      ]
-    },
-    "ein": {
-      "de": "ein, eine",
-      "en": "a, an",
-      "forms": [
-        "ein",
-        "eine",
-        "einem"
       ]
     },
     "Mann": {

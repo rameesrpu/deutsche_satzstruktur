@@ -115,7 +115,9 @@
       "forms": [
         "ein",
         "eine",
-        "einem"
+        "einem",
+        "einen",
+        "einer"
       ]
     },
     "Woche": {
@@ -856,6 +858,13 @@
       "en": "for",
       "forms": [
         "für"
+      ]
+    },
+    "mich": {
+      "de": "mich",
+      "en": "me",
+      "forms": [
+        "mich"
       ]
     },
     "Ende": {

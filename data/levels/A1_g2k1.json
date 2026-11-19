@@ -164,7 +164,9 @@
       "forms": [
         "ein",
         "eine",
-        "einem"
+        "einem",
+        "einen",
+        "einer"
       ]
     },
     "Liste": {
@@ -226,7 +228,8 @@
       "en": "to look for",
       "forms": [
         "suche",
-        "sucht"
+        "sucht",
+        "suchen"
       ]
     },
     "Spiegel": {
@@ -801,6 +804,21 @@
         "aus"
       ]
     }
+  },
+  "translations": {
+    "Ich brauche einen Tisch.": "I need a table.",
+    "Ich brauche auch einen Stuhl.": "I need a chair too.",
+    "Und ich suche einen Spiegel.": "And I'm looking for a mirror.",
+    "Siehst du den Tisch da?": "Do you see that table over there?",
+    "Der Tisch ist zu teuer.": "That table is too expensive.",
+    "Ich nehme den Tisch hier.": "I'll take this table.",
+    "Max findet den Stuhl super!": "Max thinks the chair is great!",
+    "Ayisha mag den Stuhl nicht.": "Ayisha doesn't like the chair.",
+    "Ich kaufe eine Lampe und einen Spiegel.": "I'm buying a lamp and a mirror.",
+    "Wir haben keinen Platz!": "We have no room!",
+    "Ich sehe nichts!": "I can't see anything!",
+    "Wir schieben den Schrank!": "Let's push the wardrobe!",
+    "Ich sehe ein Foto!": "I see a photo!"
   },
   "image": {
     "src": "data/stories/A1/img/moebelhaus.svg?v=2d7c14d04c",

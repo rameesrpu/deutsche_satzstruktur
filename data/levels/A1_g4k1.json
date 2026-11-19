@@ -105,7 +105,8 @@
       "de": "vermissen",
       "en": "to miss (someone, something)",
       "forms": [
-        "vermisst"
+        "vermisst",
+        "vermisse"
       ]
     },
     "Biryani": {
@@ -139,7 +140,9 @@
       "forms": [
         "ein",
         "eine",
-        "einem"
+        "einem",
+        "einen",
+        "einer"
       ]
     },
     "Idee": {
@@ -326,7 +329,8 @@
       "forms": [
         "trinken",
         "Trink",
-        "Trinken"
+        "Trinken",
+        "trinkt"
       ]
     },
     "ich": {
@@ -555,7 +559,8 @@
       "en": "you (plural); her, their",
       "forms": [
         "ihr",
-        "Ihre"
+        "Ihre",
+        "ihren"
       ]
     },
     "Nachtisch": {

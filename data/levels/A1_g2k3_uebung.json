@@ -3,6 +3,16 @@
   "category": "2.3 Übung: mein, dein, sein, ihr …",
   "chapter": "2.3",
   "skill": "A1.possessiv",
+  "translations": {
+    "Wo ist deine Tasche?": "Where is your bag?",
+    "Lea sucht ihren Schlüssel.": "Lea is looking for her key.",
+    "Max liebt seine Brezeln.": "Max loves his pretzels.",
+    "Unser Haus ist alt.": "Our house is old.",
+    "Habt ihr euer Ticket?": "Do you have your ticket?",
+    "Ihr Garten ist sehr schön!": "Her garden is very beautiful!",
+    "Ich vermisse meine Familie.": "I miss my family.",
+    "Mein Bruder spielt Cricket.": "My brother plays cricket."
+  },
   "sentences": [
     "Wo ist deine Tasche?",
     "Lea sucht ihren Schlüssel.",

@@ -148,7 +148,9 @@
       "forms": [
         "ein",
         "eine",
-        "einem"
+        "einem",
+        "einen",
+        "einer"
       ]
     },
     "Schild": {
@@ -278,7 +280,8 @@
       "en": "to look for",
       "forms": [
         "suche",
-        "sucht"
+        "sucht",
+        "suchen"
       ]
     },
     "schon": {
@@ -718,7 +721,15 @@
       "en": "you (plural); her, their",
       "forms": [
         "ihr",
-        "Ihre"
+        "Ihre",
+        "ihren"
+      ]
+    },
+    "mich": {
+      "de": "mich",
+      "en": "me",
+      "forms": [
+        "mich"
       ]
     },
     "oder": {
