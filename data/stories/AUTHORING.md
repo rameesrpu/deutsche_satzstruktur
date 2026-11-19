@@ -274,8 +274,9 @@ git commit -m "Add <level> chapter <id> <title>"
 ```
 Also add a new picture and its prompt, `data/stories/<level>/img/<place>.svg` (or `.webp`) plus
 `data/stories/<level>/img/<place>.txt` with the drawing prompt (CURRICULUM.md → Chapter pictures),
-STORY_BIBLE.md if you added characters, and this guide if you added an owner correction. A chapter whose row says `new: <place>` may ship
-without a picture (no `image` key): say so in step 10. Do not push.
+STORY_BIBLE.md if you added characters, and this guide if you added an owner correction. A chapter
+whose row says `new: <place>` may ship without a picture (no `image` key): say so in step 10.
+Do not push.
 
 ## Revising an existing chapter
 
