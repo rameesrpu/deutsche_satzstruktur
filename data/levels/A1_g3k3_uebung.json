@@ -3,6 +3,16 @@
   "category": "3.3 Übung: mich, dich, ihn …",
   "chapter": "3.3",
   "skill": "A1.akk_pronomen",
+  "translations": {
+    "Ich sehe dich.": "I see you.",
+    "Siehst du mich?": "Can you see me?",
+    "Lea ruft ihn an.": "Lea is calling him.",
+    "Wir besuchen euch.": "We're coming to visit you.",
+    "Max findet es super.": "Max thinks it's great.",
+    "Frau Schäfer kennt uns.": "Mrs Schäfer knows us.",
+    "Ich frage sie.": "I'll ask her.",
+    "Brauchst du ihn?": "Do you need him?"
+  },
   "sentences": [
     "Ich sehe dich.",
     "Siehst du mich?",

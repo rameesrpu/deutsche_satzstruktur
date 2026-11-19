@@ -168,7 +168,8 @@
       "en": "must, to have to",
       "forms": [
         "muss",
-        "müssen"
+        "müssen",
+        "musst"
       ]
     },
     "viel": {
@@ -256,7 +257,8 @@
       "forms": [
         "kann",
         "kannst",
-        "können"
+        "können",
+        "Könnt"
       ]
     },
     "ich": {
@@ -660,7 +662,8 @@
       "de": "helfen (hilft)",
       "en": "to help",
       "forms": [
-        "hilft"
+        "hilft",
+        "helfen"
       ]
     },
     "ihr": {
@@ -669,7 +672,8 @@
       "forms": [
         "ihr",
         "Ihre",
-        "ihren"
+        "ihren",
+        "ihrem"
       ]
     },
     "kein": {
@@ -926,6 +930,22 @@
         "drinnen"
       ]
     }
+  },
+  "translations": {
+    "Heute muss Ayisha viel erledigen.": "Today Ayisha has a lot to get done.",
+    "Was kann ich für Sie tun?": "How can I help you?",
+    "Ich will ein Konto eröffnen.": "I want to open an account.",
+    "Dann müssen Sie dieses Formular ausfüllen.": "Then you'll have to fill in this form.",
+    "Kann ich das Formular mitnehmen?": "Can I take the form with me?",
+    "Nein, das dürfen Sie leider nicht.": "No, I'm afraid you're not allowed to.",
+    "Du kannst die Karte online bestellen.": "You can order the card online.",
+    "Ich will heute noch telefonieren!": "I want to make a call today!",
+    "Welches Ticket muss ich nehmen?": "Which ticket do I have to take?",
+    "Ich kann das allein!": "I can do this on my own!",
+    "Der Automat druckt ein Ticket.": "The machine prints a ticket.",
+    "Darf ich Ihr Ticket sehen?": "May I see your ticket?",
+    "Ayisha zeigt stolz ihr Ticket.": "Ayisha proudly shows her ticket.",
+    "Das Ticket ist richtig.": "The ticket is fine."
   },
   "image": {
     "src": "data/stories/A1/img/bank.svg?v=936a8c98ab",

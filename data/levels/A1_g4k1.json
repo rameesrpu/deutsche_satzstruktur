@@ -560,7 +560,8 @@
       "forms": [
         "ihr",
         "Ihre",
-        "ihren"
+        "ihren",
+        "ihrem"
       ]
     },
     "Nachtisch": {
@@ -620,7 +621,8 @@
       "en": "must, to have to",
       "forms": [
         "muss",
-        "müssen"
+        "müssen",
+        "musst"
       ]
     },
     "selbst": {

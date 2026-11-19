@@ -171,7 +171,7 @@
     "ins": {"de": "ins (= in das)", "en": "into the", "forms": ["ins"]},
     "Kamera": {"de": "die Kamera, -s", "en": "camera", "forms": ["Kamera"]},
     "Kasse": {"de": "die Kasse, -n", "en": "checkout, till", "forms": ["Kasse"]},
-    "kaufen": {"de": "kaufen", "en": "to buy", "forms": ["kaufe", "kauft"]},
+    "kaufen": {"de": "kaufen", "en": "to buy", "forms": ["kaufe", "kauft", "kaufen"]},
     "kennen": {"de": "kennen", "en": "to know (a person, a thing)", "forms": ["Kennst", "kenne", "kennt"]},
     "Kissen": {"de": "das Kissen, -", "en": "cushion, pillow", "forms": ["Kissen"]},
     "klingeln": {"de": "klingeln", "en": "to ring", "forms": ["klingelt"]},

@@ -492,6 +492,13 @@
         "Türen"
       ]
     },
+    "euch": {
+      "de": "euch",
+      "en": "you, to you (plural)",
+      "forms": [
+        "euch"
+      ]
+    },
     "und": {
       "de": "und",
       "en": "and",
@@ -557,7 +564,8 @@
       "en": "to clean",
       "forms": [
         "putzt",
-        "putze"
+        "putze",
+        "putzen"
       ]
     },
     "sie": {
@@ -678,6 +686,20 @@
         "Iss"
       ]
     },
+    "mir": {
+      "de": "mir",
+      "en": "me, to me",
+      "forms": [
+        "mir"
+      ]
+    },
+    "uns": {
+      "de": "uns",
+      "en": "us, to us",
+      "forms": [
+        "uns"
+      ]
+    },
     "am": {
       "de": "am (= an dem)",
       "en": "at the, on the",
@@ -722,7 +744,8 @@
       "forms": [
         "ihr",
         "Ihre",
-        "ihren"
+        "ihren",
+        "ihrem"
       ]
     },
     "mich": {
@@ -751,6 +774,13 @@
       "en": "to ignore",
       "forms": [
         "ignorieren"
+      ]
+    },
+    "dich": {
+      "de": "dich",
+      "en": "you (informal)",
+      "forms": [
+        "dich"
       ]
     },
     "Sonntag": {
@@ -893,6 +923,23 @@
         "Biryani"
       ]
     }
+  },
+  "translations": {
+    "Wo ist Max?": "Where's Max?",
+    "Ich sehe ihn nicht.": "I can't see him.",
+    "Frau Schäfer sucht ihn schon!": "Mrs Schäfer is already looking for him!",
+    "Er liebt seine Oma nur samstags.": "He only loves his grandma on Saturdays.",
+    "Die Treppe ist so lang!": "The stairs are so long!",
+    "Ich sehe euch!": "I see you!",
+    "Und wo ist Herr Brenner?": "And where is Mr Brenner?",
+    "Wir finden ihn nicht.": "We can't find him.",
+    "Die Ecke ist nicht sauber.": "The corner isn't clean.",
+    "Ich putze sie sofort!": "I'll clean it right away!",
+    "Sie machen das sehr gut!": "You're doing that very well!",
+    "Ich lade Sie ein.": "I'd like to invite you.",
+    "Sie lädt uns ein!": "She's inviting us!",
+    "Ihr liebt mich, oder?": "You love me, right?",
+    "Nein, wir ignorieren dich!": "No, we're ignoring you!"
   },
   "image": {
     "src": "data/stories/A1/img/treppenhaus.svg?v=947c109aba",

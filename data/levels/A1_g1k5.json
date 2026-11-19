@@ -319,7 +319,8 @@
       "forms": [
         "ihr",
         "Ihre",
-        "ihren"
+        "ihren",
+        "ihrem"
       ]
     },
     "Papier": {
@@ -422,7 +423,8 @@
       "en": "to clean",
       "forms": [
         "putzt",
-        "putze"
+        "putze",
+        "putzen"
       ]
     },
     "Person": {
@@ -788,7 +790,8 @@
       "forms": [
         "kann",
         "kannst",
-        "können"
+        "können",
+        "Könnt"
       ]
     },
     "nicht": {

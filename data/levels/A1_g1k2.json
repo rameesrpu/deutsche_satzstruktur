@@ -366,7 +366,8 @@
       "forms": [
         "ihr",
         "Ihre",
-        "ihren"
+        "ihren",
+        "ihrem"
       ]
     },
     "schon": {
@@ -478,7 +479,8 @@
       "forms": [
         "arbeite",
         "gearbeitet",
-        "arbeitet"
+        "arbeitet",
+        "arbeiten"
       ]
     },
     "sehr": {

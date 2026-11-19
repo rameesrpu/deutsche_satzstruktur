@@ -3,6 +3,16 @@
   "category": "3.1 Übung: Zahlen & Zeit",
   "chapter": "3.1",
   "skill": "A1.zeit",
+  "translations": {
+    "Der Kurs beginnt um neun Uhr.": "The course starts at nine o'clock.",
+    "Am Montag arbeitet Lea.": "Lea works on Monday.",
+    "Max steht um drei Uhr auf.": "Max gets up at three o'clock.",
+    "Im Oktober ist es kalt.": "It's cold in October.",
+    "Wir essen um sieben Uhr.": "We eat at seven o'clock.",
+    "Der Termin ist am Mittwoch.": "The appointment is on Wednesday.",
+    "Ich arbeite von Montag bis Freitag.": "I work from Monday to Friday.",
+    "Wie spät ist es?": "What time is it?"
+  },
   "sentences": [
     "Der Kurs beginnt um neun Uhr.",
     "Am Montag arbeitet Lea.",

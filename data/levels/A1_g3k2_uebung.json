@@ -3,6 +3,16 @@
   "category": "3.2 Übung: Modalverben",
   "chapter": "3.2",
   "skill": "A1.modal",
+  "translations": {
+    "Ich kann gut kochen.": "I can cook well.",
+    "Du musst das Formular ausfüllen.": "You have to fill in the form.",
+    "Max will nicht putzen.": "Max doesn't want to clean.",
+    "Wir dürfen hier nicht parken.": "We're not allowed to park here.",
+    "Könnt ihr mir helfen?": "Can you help me?",
+    "Lea muss heute arbeiten.": "Lea has to work today.",
+    "Darf ich hier sitzen?": "May I sit here?",
+    "Sie können hier ein Ticket kaufen.": "You can buy a ticket here."
+  },
   "sentences": [
     "Ich kann gut kochen.",
     "Du musst das Formular ausfüllen.",

@@ -768,13 +768,21 @@
         "damals"
       ]
     },
+    "uns": {
+      "de": "uns",
+      "en": "us, to us",
+      "forms": [
+        "uns"
+      ]
+    },
     "arbeiten": {
       "de": "arbeiten",
       "en": "to work",
       "forms": [
         "arbeite",
         "gearbeitet",
-        "arbeitet"
+        "arbeitet",
+        "arbeiten"
       ]
     },
     "gelernt": {
@@ -789,7 +797,8 @@
       "en": "to ask",
       "forms": [
         "fragt",
-        "fragen"
+        "fragen",
+        "frage"
       ]
     },
     "beim": {
@@ -832,7 +841,8 @@
       "en": "to buy",
       "forms": [
         "kaufe",
-        "kauft"
+        "kauft",
+        "kaufen"
       ]
     },
     "Halsbonbon": {
