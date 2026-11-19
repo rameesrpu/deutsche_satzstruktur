@@ -2,6 +2,7 @@
 
 > **Audience**: the owner and AI agents writing or reviewing story content.
 > Characters, plot and mystery clues live in [STORY_BIBLE.md](STORY_BIBLE.md).
+> Writing a chapter step by step (commands, checks, owner stops): [AUTHORING.md](AUTHORING.md).
 > Decided 2026-10-25.
 
 ## Learner and goal
