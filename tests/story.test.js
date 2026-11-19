@@ -94,7 +94,10 @@ export function runStoryTests() {
                     if (!image) continue;
                     const [path, query] = image.src.split('?');
                     assertEqual(/^v=[0-9a-f]{10}$/.test(query || ''), true, `${ch.key} image version`);
-                    assertEqual(path.startsWith(`data/stories/${level}/img/`), true, `${ch.key} image path`);
+                    // own level's picture, or a lower level's (the build looks there next)
+                    const imgLevel = (path.match(/^data\/stories\/([^/]+)\/img\//) || [])[1];
+                    assertEqual(Boolean(imgLevel) && imgLevel <= level, true,
+                        `${ch.key} image path ${path}`);
                     readText(path);
                     assertEqual(image.alt.length > 0, true, `${ch.key} image alt`);
                 }

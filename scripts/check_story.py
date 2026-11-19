@@ -10,7 +10,9 @@ Usage:
 
 Prints "ERROR <file> <chapter id>: <message>" / "WARN ..." lines, then "N errors, M warnings".
 Exit 1 if there is any error. The chapters before the checked one (story order, lower levels
-first) give the context: known words, repeated play texts, new glossary words.
+first) give the context: repeated play texts, new glossary words. A word is "ungeglosst" when no
+glossary form of its level or a lower level matches it (glossary_matches, the app's matcher), so it
+cannot be tapped; names (names.txt) and numbers are never listed.
 """
 
 import glob
@@ -30,10 +32,14 @@ MAX_NEW_GLOSSARY = 12
 GENDERS = ('m', 'f', 'n', 'pl')
 PERSON_KEYS = {'ich', 'du', 'wir', 'ihr', 'Sie'}
 VERB_PERSON_MAP = {'er': '3sg', 'sie': '3sg', 'es': '3sg'}   # sie_pl, Sie count separately
-# Alcohol, pork, physical romance (lower-case stems; also matched with a plain inflection ending)
-BLOCKLIST = {'bier', 'wein', 'sekt', 'schnaps', 'whisky', 'wodka', 'cocktail', 'betrunken',
-             'schwein', 'schinken', 'speck', 'salami', 'kuss', 'küssen', 'küsst', 'umarmen', 'umarmt'}
-BLOCK_ENDINGS = {'e', 'en', 'n', 's', 'es', 'er', 't', 'st', 'te'}
+# Alcohol, pork, physical romance: lower-case stems, matched anywhere in the lower-cased word, so
+# compounds count too (Rotwein, Schweinefleisch, Bierchen, geküsst, alkoholfrei)
+BLOCKLIST = {'bier', 'wein', 'sekt', 'schnaps', 'whisky', 'wodka', 'cocktail', 'betrunken', 'alkohol',
+             'schwein', 'schinken', 'speck', 'salami', 'kuss', 'küss', 'umarm'}
+# Known false alarms: word parts that contain a stem but mean something else (probieren, Diskussion,
+# Insekt, Sektor) and the forms of weinen (to cry); removed from the word before the stems are matched
+BLOCK_ALLOWED_PARTS = ('probier', 'diskuss', 'insekt', 'sektor', 'geweint', 'weinend')
+BLOCK_ALLOWED_WORDS = {'weinen', 'weine', 'weinst', 'weint', 'weinte', 'weintest', 'weinten', 'weintet'}
 
 CURRICULUM_PATH = os.path.join(STORIES_DIR, 'CURRICULUM.md')
 NAMES_PATH = os.path.join(STORIES_DIR, 'names.txt')
@@ -81,17 +87,6 @@ def tokens_of(text):
     return out
 
 
-def chapter_words(chapter):
-    """Word tokens of all beats and the drill; a capitalised sentence start is also added in lower case."""
-    words = set()
-    for text in texts_of(chapter):
-        for tok, initial in tokens_of(text):
-            words.add(tok)
-            if initial:
-                words.add(tok[0].lower() + tok[1:])
-    return words
-
-
 def lower_words(chapter):
     """Tokens that occur in lower case in the chapter (a capital sentence start does not count)."""
     return {tok for text in texts_of(chapter) for tok, _ in tokens_of(text) if tok[:1].islower()}
@@ -115,9 +110,13 @@ def tag_kinds(items):
 
 
 def blocked(token):
+    """True when a blocklist stem occurs in the word (outside the known false alarms)."""
     low = token.lower()
-    return any(low == stem or (low.startswith(stem) and low[len(stem):] in BLOCK_ENDINGS)
-               for stem in BLOCKLIST)
+    if low in BLOCK_ALLOWED_WORDS:
+        return False
+    for part in BLOCK_ALLOWED_PARTS:
+        low = low.replace(part, ' ')
+    return any(stem in low for stem in BLOCKLIST)
 
 
 def glossary_keys(chapter, glossary):
@@ -125,11 +124,11 @@ def glossary_keys(chapter, glossary):
     return {m[3] for text in texts_of(chapter) for m in glossary_matches(text, glossary) if m[3]}
 
 
-def check_chapter(level, chapter, known_words, glossary, skills, wordlist=None,
+def check_chapter(level, chapter, glossary, skills, wordlist=None,
                   earlier_plays=None, earlier_glossary=None, names=frozenset()):
     """
-    → (errors, warnings). known_words: words of all earlier chapters (chapter_words). glossary: the
-    level's (and lower levels') entries. Context for the rules that look across chapters:
+    → (errors, warnings). glossary: the level's (and lower levels') entries, as the build merges
+    them; a word no form of it matches is ungeglosst. Context for the rules that look across chapters:
     earlier_plays (play texts of earlier chapters), earlier_glossary (keys they used),
     names (people, places, brands: never reported as ungeglosst; see load_names).
     """
@@ -165,26 +164,18 @@ def check_chapter(level, chapter, known_words, glossary, skills, wordlist=None,
         if 'C' in tags and rank < skill_rank(skills, 'A2.nebensatz'):
             errors.append(f'subordinate clause (C tag) before A2.nebensatz (skill {skill})')
 
-    # Words: unglossed (and not on the word list)
-    own_lower = lower_words(chapter) | {w for w in known_words if w[:1].islower()}
+    # Words: unglossed = no glossary match (glossary_matches, the app's matcher: the word cannot be
+    # tapped), whether or not an earlier chapter had the word. Also: not on the word list.
+    own_lower = lower_words(chapter)
     unglossed, off_list = [], []
-    seen = set()
     for text in texts_of(chapter):
-        initials = {}
-        for tok, initial in tokens_of(text):
-            initials.setdefault(tok, initial)
-        for tok, _, _, key, _ in glossary_matches(text, glossary):
-            if key or tok in seen:
+        for (tok, initial), (_, _, _, key, _) in zip(tokens_of(text), glossary_matches(text, glossary)):
+            if key or tok in names:
                 continue
-            seen.add(tok)
-            initial = initials[tok]
             low = tok[0].lower() + tok[1:]
-            if tok in names:
-                continue
             shown = low if initial and low in own_lower else tok   # "Ein" at a sentence start = "ein"
-            if tok not in known_words and not (initial and low in known_words):
-                if shown not in unglossed:
-                    unglossed.append(shown)
+            if shown not in unglossed:
+                unglossed.append(shown)
             if wordlist is not None and low.lower() not in wordlist and shown not in off_list:
                 off_list.append(shown)
     if unglossed:
@@ -256,28 +247,35 @@ def checked_chapters(paths):
         level_glossary.setdefault(story['level'], {}).update(story.get('glossary', {}))
 
     result = []
-    known, earlier_plays, earlier_glossary = set(), set(), set()
+    earlier_plays, earlier_glossary = set(), set()
     for path, story in stories:
         level = story['level']
         glossary = bs.inherited_glossary(level_glossary, level)   # the same entries the build gives
         for ch in story['chapters']:
             if not paths or path in wanted:
                 errors, warnings = check_chapter(
-                    level, ch, known, glossary, skills, wordlist=load_wordlist(level),
+                    level, ch, glossary, skills, wordlist=load_wordlist(level),
                     earlier_plays=earlier_plays, earlier_glossary=earlier_glossary, names=names)
                 new_words = {k: glossary[k] for k in glossary_keys(ch, glossary) - earlier_glossary}
                 result.append((path, story, ch, errors, warnings, new_words))
-            known |= chapter_words(ch)
             earlier_plays |= {b['play'].strip() for b in ch['beats'] if 'play' in b}
             earlier_glossary |= glossary_keys(ch, glossary)
     return result
+
+
+def display_path(path):
+    """A path as printed: relative to the repo when inside it, else absolute."""
+    path = os.path.abspath(path)
+    if os.path.commonpath([path, bs.REPO_ROOT]) == bs.REPO_ROOT:
+        return os.path.relpath(path, bs.REPO_ROOT).replace(os.sep, '/')
+    return path
 
 
 def check_files(paths):
     """Check the chapters of `paths` → (lines, error count, warning count)."""
     lines, n_err, n_warn = [], 0, 0
     for path, _, ch, errors, warnings, _ in checked_chapters(paths):
-        rel = os.path.relpath(path, bs.REPO_ROOT)
+        rel = display_path(path)
         lines += [f'ERROR {rel} {ch["id"]}: {e}' for e in errors]
         lines += [f'WARN {rel} {ch["id"]}: {w}' for w in warnings]
         n_err += len(errors)

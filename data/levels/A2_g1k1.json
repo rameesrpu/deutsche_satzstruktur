@@ -324,6 +324,7 @@
       "en": "you (plural); her, their; Ihr = your (formal)",
       "forms": [
         "ihr",
+        "ihre",
         "Ihre",
         "ihren",
         "ihrem"
@@ -863,6 +864,17 @@
         "bitte"
       ]
     },
+    "sagen": {
+      "de": "sagen",
+      "en": "to say",
+      "forms": [
+        "sagt",
+        "sagen",
+        "sagst",
+        "sage",
+        "sag"
+      ]
+    },
     "einfach": {
       "de": "einfach",
       "en": "simply; easy",
@@ -889,17 +901,6 @@
       "en": "polite(ly)",
       "forms": [
         "höflich"
-      ]
-    },
-    "sagen": {
-      "de": "sagen",
-      "en": "to say",
-      "forms": [
-        "sagt",
-        "sagen",
-        "sagst",
-        "sage",
-        "Sag"
       ]
     },
     "immer": {
@@ -1008,6 +1009,13 @@
       "en": "down; downstairs; below",
       "forms": [
         "unten"
+      ]
+    },
+    "heben": {
+      "de": "heben",
+      "en": "to raise, to lift (die Hand heben: to put up your hand)",
+      "forms": [
+        "hebt"
       ]
     },
     "Hand": {
@@ -1612,6 +1620,13 @@
         "Hausaufgabe"
       ]
     },
+    "früher": {
+      "de": "früher",
+      "en": "in the past, formerly",
+      "forms": [
+        "früher"
+      ]
+    },
     "Haus": {
       "de": "das Haus, Häuser",
       "en": "house",
@@ -1668,6 +1683,13 @@
       "en": "way home",
       "forms": [
         "Heimweg"
+      ]
+    },
+    "summen": {
+      "de": "summen",
+      "en": "to hum",
+      "forms": [
+        "summt"
       ]
     },
     "Lied": {
@@ -1742,13 +1764,6 @@
         "Zuhause"
       ]
     },
-    "früher": {
-      "de": "früher",
-      "en": "in the past, formerly",
-      "forms": [
-        "Früher"
-      ]
-    },
     "Mutter": {
       "de": "die Mutter, Mütter",
       "en": "mother",
@@ -1780,7 +1795,7 @@
   },
   "translations": {
     "Heute beginnt Ayishas Deutschkurs.": "Today Ayisha's German course starts.",
-    "Hier sprechen wir nur Deutsch.": "In here we only speak German.",
+    "Hier sprechen wir nur Deutsch.": "Here we only speak German.",
     "Ich bin Ingenieur aus Syrien.": "I'm an engineer from Syria.",
     "Was haben Sie am Wochenende gemacht?": "What did you do at the weekend?",
     "Ich bin erst am Nachmittag aufgestanden.": "I didn't get up until the afternoon.",

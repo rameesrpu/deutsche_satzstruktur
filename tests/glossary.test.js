@@ -1,5 +1,5 @@
 import GLib from 'gi://GLib';
-import { readText, REPO_ROOT } from './stubs.js';
+import { listDir, readText, REPO_ROOT } from './stubs.js';
 import { test, assert, assertEqual } from './assert.js';
 import { glossTokens, speakableForm } from '../js/glossary.js';
 import { STORY_CONTENT } from '../js/storyContent.js';
@@ -97,6 +97,35 @@ print(json.dumps({
                     }
                 }
             }
+        });
+    }
+
+    // Every word of a built chapter can be tapped (names excepted; numbers are no words): beats with
+    // the chapter file's own glossary (what the app shows). Drill files carry no glossary, so their
+    // words are checked against the glossary the build draws from: the story files of this level and
+    // every lower one (a lower key replaced by the same key of a higher level), as in build_stories.py.
+    const names = new Set(readText('data/stories/names.txt').split('\n')
+        .map(line => line.split('#')[0].trim()).filter(Boolean));
+    const untapped = (text, g) => glossTokens(text, g)
+        .filter(p => /\p{L}/u.test(p.text) && !p.key && !names.has(p.text)).map(p => p.text);
+    const inherited = {};
+    for (const level of Object.keys(STORY_CONTENT).sort()) {
+        for (const name of listDir(`data/stories/${level}`).filter(n => n.endsWith('.json'))) {
+            Object.assign(inherited, JSON.parse(readText(`data/stories/${level}/${name}`)).glossary || {});
+        }
+        const glossary = { ...inherited };
+        test(`glossary data ${level}: every beat and drill word is tappable`, () => {
+            const missing = [];
+            for (const ch of STORY_CONTENT[level].flatMap(s => s.chapters)) {
+                const data = JSON.parse(readText(ch.file));
+                for (const b of data.beats) {
+                    for (const w of untapped(b.read || b.play, data.glossary || {})) missing.push(`${ch.key} ${w}`);
+                }
+                for (const text of JSON.parse(readText(ch.drillFile)).sentences) {
+                    for (const w of untapped(text, glossary)) missing.push(`${ch.key}_uebung ${w}`);
+                }
+            }
+            assertEqual(missing, [], `${level} untappable words`);
         });
     }
 }

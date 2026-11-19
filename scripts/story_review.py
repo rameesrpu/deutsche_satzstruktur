@@ -56,7 +56,7 @@ def review_sheet(level, story, chapter, errors, warnings, new_words=None):
     lines += ['- ' + item_line(d) for d in chapter['drill']]
     lines += ['', '## Neue Wörter', '']
     entries = [new_words[k] for k in sorted(new_words, key=str.lower)]   # by word, not article
-    lines += [f'- {e["de"]} — {e["en"]}' for e in entries] or ['Keine.']
+    lines += [f'- {esc(e["de"])} — {esc(e["en"])}' for e in entries] or ['Keine.']
     lines += ['', '## Prüfung', '']
     findings = [f'- Fehler: {e}' for e in errors] + [f'- Hinweis: {w}' for w in warnings]
     lines += findings or ['Keine Hinweise.']

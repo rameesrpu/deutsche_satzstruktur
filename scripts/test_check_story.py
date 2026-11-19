@@ -40,11 +40,13 @@ def chapter(n_play=12, n_drill=8, skill='A1.nom', play_tags='S.m V.er', last=Non
     return {'id': '1.1', 'title': 'T', 'skill': skill, 'drillTitle': 'D', 'beats': beats, 'drill': drill}
 
 
-ALL_KNOWN = {w.lower() for t in TEXTS for w in t.split()} | {'ein', 'morgen', 'satz', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
+def gloss(forms):
+    """A glossary with one entry per form (key = form)."""
+    return {f: {'de': f, 'en': 'x', 'forms': [f]} for f in forms}
 
 
-def run(ch, level='A1', known=None, glossary=None, **kw):
-    return cs.check_chapter(level, ch, ALL_KNOWN if known is None else known, glossary or {}, SKILLS, **kw)
+def run(ch, level='A1', glossary=None, **kw):
+    return cs.check_chapter(level, ch, glossary or {}, SKILLS, **kw)
 
 
 class CheckChapterTest(unittest.TestCase):
@@ -108,25 +110,28 @@ class CheckChapterTest(unittest.TestCase):
     def test_unglossed_exact_list(self):
         ch = chapter(n_play=12)
         ch['beats'] = [{'play': 'Ayisha kauft heute einen Schrank.', 'tags': 'S.f V.sie X X O.m.akk', 'en': 'x'}]
-        glossary = {'schrank': {'de': 'x', 'en': 'wardrobe', 'forms': ['Schrank']}}
+        glossary = {'schrank': {'de': 'x', 'en': 'wardrobe', 'forms': ['Schrank']}, **gloss(['kauft', 'einen'])}
         ch['drill'] = []
-        _, warnings = run(ch, known={'kauft', 'einen'}, glossary=glossary, names={'Ayisha'})
+        _, warnings = run(ch, glossary=glossary, names={'Ayisha'})
         line = [w for w in warnings if 'ungeglosst' in w][0]
         self.assertEqual(line.split(':', 1)[1].strip(), 'heute')
 
-    def _unglossed(self, text, known, names=frozenset()):
+    def _unglossed(self, text, glossed, names=frozenset()):
         ch = chapter()
         ch['beats'] = [{'play': text, 'tags': 'X', 'en': 'x'}]
         ch['drill'] = []
-        _, warnings = run(ch, known=set(known), names=set(names))
+        _, warnings = run(ch, glossary=gloss(glossed), names=set(names))
         lines = [w for w in warnings if 'ungeglosst' in w]
         return lines[0].split(':', 1)[1] if lines else ''
 
     def test_sentence_initial_capital_is_the_same_word(self):
         self.assertNotIn('Heute', self._unglossed('Heute kommt Faris.', {'heute', 'kommt'}))
 
-    def test_noun_and_verb_are_different_words(self):
-        self.assertIn('Essen', self._unglossed('Das Essen ist gut.', {'essen', 'das', 'ist', 'gut'}))
+    def test_a_capital_inside_a_sentence_follows_the_matcher(self):
+        # The matcher also tries a capitalised word in lower case (formal "Ihr" = the "ihr" entry):
+        # the word can be tapped, so it is not unglossed; a noun with no form at all is
+        self.assertEqual(self._unglossed('Hier, Ihr Ticket.', {'hier', 'ihr', 'Ticket'}).strip(), '')
+        self.assertIn('Essen', self._unglossed('Das Essen ist gut.', {'das', 'ist', 'gut'}))
 
     def test_unknown_nouns_are_listed(self):
         out = self._unglossed('Er kauft einen Kühlschrank heute.', {'er', 'kauft', 'einen'})
@@ -149,6 +154,39 @@ class CheckChapterTest(unittest.TestCase):
         self.assertTrue(any('new glossary words' in w for w in run(ch, glossary=glossary)[1]))
         self.assertFalse(any('new glossary words' in w for w in run(ch, glossary={f: glossary[f] for f in forms[:12]})[1]))
         self.assertFalse(any('new glossary words' in w for w in run(ch, glossary=glossary, earlier_glossary=set(forms))[1]))
+
+    def test_capitalised_form_does_not_cover_a_lower_case_token(self):
+        # Stored "Früher" never matches "früher" inside a sentence: the word is not tappable
+        ch = chapter()
+        ch['beats'] = [{'read': 'Wer hat früher hier gewohnt?'}]
+        ch['drill'] = []
+        _, warnings = run(ch, glossary=gloss(['Früher', 'wer', 'hat', 'hier', 'gewohnt']))
+        lines = [w for w in warnings if 'ungeglosst' in w]
+        self.assertEqual(lines, ['ungeglosst: früher'])
+
+    def test_word_of_an_earlier_chapter_without_entry_is_unglossed(self):
+        # "summt" in A1 only as part of "summt … mit": a plain "summt" later has no entry
+        ch = chapter()
+        ch['beats'] = [{'read': 'Er summt.'}]
+        ch['drill'] = []
+        glossary = {**gloss(['er']), 'mitsummen': {'de': 'mit|summen', 'en': 'x', 'forms': ['summt … mit']}}
+        self.assertIn('ungeglosst: summt', run(ch, glossary=glossary)[1])
+        ch['beats'] = [{'read': 'Er summt mit.'}]
+        self.assertFalse(any('ungeglosst' in w for w in run(ch, glossary=glossary)[1]))
+
+    def test_blocklist_compounds(self):
+        for word in ('Rotwein', 'Weißwein', 'Glühwein', 'Schweinefleisch', 'Schweinebraten', 'Bierchen',
+                     'Küsschen', 'geküsst', 'Alkohol', 'alkoholfrei', 'umarmt', 'Kuss'):
+            self.assertTrue(cs.blocked(word), word)
+        for word in ('weinen', 'weint', 'geweint', 'Schweiz', 'Schweizer', 'probiert', 'Probier',
+                     'Diskussion', 'Insekten', 'Wetter', 'Bild'):
+            self.assertFalse(cs.blocked(word), word)
+
+    def test_blocklist_warning_survives_a_glossary_entry(self):
+        ch = chapter(extra={'read': 'Es gibt keinen Rotwein.'})
+        glossary = {'Rotwein': {'de': 'der Rotwein', 'en': 'red wine', 'forms': ['Rotwein']}}
+        _, warnings = run(ch, glossary=glossary)
+        self.assertTrue(any(w.startswith('content word Rotwein') for w in warnings), warnings)
 
     def test_blocklist_is_a_warning_with_the_beat(self):
         ch = chapter(extra={'play': 'Er trinkt Bier', 'tags': 'S.m V.er O.n.akk', 'en': 'x'})
@@ -193,18 +231,14 @@ class CheckChapterTest(unittest.TestCase):
         ch = chapter()
         ch['beats'] = [{'play': 'Er geht heim', 'tags': 'S.m V.er X', 'en': 'x'}]
         ch['drill'] = []
-        _, warnings = run(ch, known=set(), wordlist={'er', 'geht'})
+        _, warnings = run(ch, wordlist={'er', 'geht'})
         self.assertTrue(any('word list' in w and 'heim' in w and 'geht' not in w for w in warnings))
-        _, warnings = run(ch, known=set(), wordlist=None)
+        _, warnings = run(ch, wordlist=None)
         self.assertFalse(any('word list' in w for w in warnings))
 
-    def test_chapter_words(self):
-        ch = {'beats': [{'read': 'Heute ist Essen. Gut'}, {'play': 'Das geht', 'tags': 'X X'}],
-              'drill': [{'play': 'Wir essen', 'tags': 'X X'}]}
-        words = cs.chapter_words(ch)
-        for w in ('Heute', 'heute', 'Essen', 'essen', 'geht', 'Das', 'das', 'wir', 'Wir', 'essen', 'gut'):
-            self.assertIn(w, words)
-        self.assertIn('ist', words)
+    def test_sentence_start_is_shown_in_lower_case_when_the_chapter_has_it(self):
+        out = self._unglossed('Ein Tag. Es ist ein Tag.', {'Tag', 'es', 'ist'})
+        self.assertEqual(out.strip(), 'ein')
 
 
 class NamesTest(unittest.TestCase):
@@ -225,13 +259,58 @@ class RealFilesTest(unittest.TestCase):
         self.assertEqual(SKILLS[0], 'A1.nom')
         self.assertGreater(SKILLS.index('B1.genitiv'), SKILLS.index('A2.nebensatz'))
 
-    def test_five_real_a1_files_have_no_errors(self):
-        files = sorted(glob.glob(os.path.join(bs.STORIES_DIR, 'A1', '*.json')))
-        self.assertEqual(len(files), 5)
+    def test_every_story_file_has_no_errors_and_no_unglossed_word(self):
+        files = sorted(glob.glob(os.path.join(bs.STORIES_DIR, '*', '*.json')))
+        self.assertGreaterEqual(len(files), 6)
         result = subprocess.run([sys.executable, os.path.join(os.path.dirname(__file__), 'check_story.py'), *files],
                                 capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stdout)
         self.assertTrue(result.stdout.splitlines()[-1].startswith('0 errors'))
+        self.assertNotIn('ungeglosst', result.stdout)
+
+    def test_paths_are_relative_to_the_repo(self):
+        self.assertNotIn('..', os.path.relpath(bs.REPO_ROOT, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+        self.assertEqual(bs.REPO_ROOT, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        self.assertEqual(cs.display_path(os.path.join(bs.STORIES_DIR, 'A1', 'x.json')), 'data/stories/A1/x.json')
+        self.assertEqual(cs.display_path('/elsewhere/x.json'), '/elsewhere/x.json')
+
+
+class BuildTest(unittest.TestCase):
+    """Pictures and glossaries across levels (build_stories.py)."""
+
+    def test_a_chapter_uses_a_picture_of_a_lower_level(self):
+        images = {lv: bs.chapter_images(lv) for lv in ('A1', 'A2')}
+        self.assertIn('wg-kueche', images['A1'])
+        ch = {'id': '1.2', 'title': 'T', 'image': {'place': 'wg-kueche', 'alt': 'Die Küche.'}}
+        warnings = []
+        image = bs.chapter_image('A2', ch, bs.inherited_images(images, 'A2'), warnings)
+        self.assertEqual(warnings, [])
+        self.assertTrue(image['src'].startswith('data/stories/A1/img/wg-kueche.svg?v='), image)
+
+    def test_own_level_picture_wins(self):
+        images = {'A1': {'park': '/r/A1/img/park.svg'}, 'A2': {'park': '/r/A2/img/park.webp'}}
+        self.assertEqual(bs.inherited_images(images, 'A2')['park'], '/r/A2/img/park.webp')
+        self.assertEqual(bs.inherited_images(images, 'A1')['park'], '/r/A1/img/park.svg')
+
+    def test_a_picture_used_only_by_a_higher_level_is_not_stray(self):
+        images = {'A1': {'park': '/r/A1/img/park.svg'}, 'A2': {}}
+        files = {'A1': ['/r/A1/img/park.svg', '/r/A1/img/park.txt', '/r/A1/img/alt.svg'], 'A2': []}
+        chapters = {'A1': [], 'A2': [{'id': '4.4', 'image': {'place': 'park'}}]}
+        self.assertEqual(bs.stray_images(images, files, chapters), [('A1', 'alt.svg')])
+
+    def test_cross_level_form_conflict_warns(self):
+        glossaries = {
+            'A1': {'gehen': {'de': 'gehen', 'en': 'to go', 'forms': ['geht']}},
+            'A2': {'losgehen': {'de': 'los|gehen', 'en': 'to set off', 'forms': ['geht', 'los']}},
+        }
+        warnings = bs.cross_level_form_conflicts(glossaries)
+        self.assertEqual(len(warnings), 1, warnings)
+        self.assertIn('"geht"', warnings[0])
+        self.assertIn('losgehen', warnings[0])
+        # the same key redefined in the higher level replaces the lower entry and its forms: no conflict
+        glossaries['A2']['gehen'] = {'de': 'gehen', 'en': 'x', 'forms': ['gehe']}
+        self.assertEqual(bs.cross_level_form_conflicts(glossaries), [])
+        self.assertEqual(bs.cross_level_form_conflicts({'A1': glossaries['A1']}), [])
 
 
 class ReviewSheetTest(unittest.TestCase):
@@ -264,6 +343,8 @@ class ReviewSheetTest(unittest.TestCase):
         s = self.sheet(errors=['E1'], warnings=['W1'], new_words={'Koffer': {'de': 'der Koffer, -', 'en': 'suitcase', 'forms': ['Koffer']}})
         words = s.split('## Neue Wörter')[1].split('## Prüfung')[0]
         self.assertIn('der Koffer, - — suitcase', words)
+        escaped = self.sheet(new_words={'x': {'de': 'das *Wort*_', 'en': 'a_b', 'forms': ['Wort']}})
+        self.assertIn('- das \\*Wort\\*\\_ — a\\_b', escaped)
         self.assertNotIn('Ärztin', words)
         check = s.split('## Prüfung')[1]
         self.assertLess(check.index('E1'), check.index('W1'))
@@ -297,6 +378,7 @@ class ReviewSheetTest(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         out = result.stdout.strip()
         self.assertTrue(out.endswith('A1_1.1.md'), out)
+        self.assertNotIn('..', out)
         self.assertTrue(os.path.exists(out))
 
 

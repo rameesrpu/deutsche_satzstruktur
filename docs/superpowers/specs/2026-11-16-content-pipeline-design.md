@@ -64,10 +64,10 @@ Runs on one story file (or all). Errors fail (exit 1), warnings print. It checks
 | `skill` is a skill id from the CURRICULUM.md tables | error |
 | Cases allowed so far: no `gen` before `B1.genitiv`; no `dat` object tags before `A1.dativ_praep` except in the documented exceptions (warning, not error) | error / warning |
 | Subordinate clauses (`C` tag) only from `A2.nebensatz` on | error |
-| Words not seen in any earlier chapter of the level order and not in the glossary ("ungeglosst") | warning, listed |
+| Words that no glossary form of the level or a lower level matches, i.e. cannot be tapped ("ungeglosst"; names and numbers excepted). Amended in the final review: a word seen in an earlier chapter no longer counts as known | warning, listed |
 | More than 12 new glossary words in one chapter | warning |
 | Missing `en` (see above) | error from A2, warning at A1 |
-| Content words on the blocklist (alcohol, pork, physical romance: *Bier, Wein, Sekt, Schnaps, Schwein, Schinken, Speck, Kuss, küssen, …*) in any beat | warning, with the beat |
+| Content words on the blocklist (alcohol, pork, physical romance: *Bier, Wein, Sekt, Schnaps, Schwein, Schinken, Speck, Kuss, küssen, Alkohol, …*, also inside compounds: *Rotwein, Schweinefleisch, geküsst*) in any beat | warning, with the beat |
 | Last play beat is not among the three longest of the chapter ("boss sentence") | warning |
 | A play text appears in an earlier chapter | warning |
 

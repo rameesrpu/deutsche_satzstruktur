@@ -17,7 +17,8 @@ gets the entries whose forms occur in its beats, from its own level and every lo
 (LEVEL_ORDER; a key of a higher level wins over the same key of a lower one), so an A1 word
 that comes back in an A2 chapter can be tapped there (matching rules: glossary_matches,
 mirrored by js/glossary.js). Forms that occur in no chapter of the level are reported as
-warnings (typos).
+warnings (typos), and so is a form of a higher level that is also a form of a different key
+of a lower level (this script and the app could then show different entries).
 
 Translations: a play beat or drill item may carry "en" (English); the chapter/drill file then
 gets "translations": {play text: en} (only the sentences that have one; key omitted when none).
@@ -25,10 +26,12 @@ gets "translations": {play text: en} (only the sentences that have one; key omit
 
 Images: an optional picture per chapter at data/stories/<level>/img/<name>.<ext> (webp/jpg/png/svg),
 where name is the chapter's "image": {"place": "wg-kueche"} (one picture per place, shared by every
-chapter set there) or else its chapter id; alt text from "image": {"alt": "..."}. The
-chapter file gets "image": {"src": "<path>?v=<content hash>", "alt"}. Missing alt text, a
-"image" entry without a file, files that match no chapter and files over IMAGE_MAX_KB warn
-(.txt/.md notes, e.g. the image prompt, are ignored).
+chapter set there) or else its chapter id; alt text from "image": {"alt": "..."}. The picture is
+looked up in the chapter's own level first, then in the lower levels (LEVEL_ORDER, nearest first),
+so an A2 chapter in the WG kitchen uses data/stories/A1/img/wg-kueche.svg. The chapter file gets
+"image": {"src": "<repo path of the file>?v=<content hash>", "alt"}. Missing alt text, a
+"image" entry without a file, files that match no chapter (of any level) and files over
+IMAGE_MAX_KB warn (.txt/.md notes, e.g. the image prompt, are ignored).
 
 Library `version` is a hash of the file's words, so it changes exactly when the
 content changes (browsers then reload the words, see bulkLoadLibraryCategory). The index
@@ -50,7 +53,7 @@ import os
 import re
 import sys
 
-REPO_ROOT   = os.path.join(os.path.dirname(__file__), '..')
+REPO_ROOT   = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STORIES_DIR = os.path.join(REPO_ROOT, 'data', 'stories')
 LEVELS_DIR  = os.path.join(REPO_ROOT, 'data', 'levels')
 LIBRARY_DIR = os.path.join(REPO_ROOT, 'data', 'library')
@@ -220,6 +223,32 @@ def check_glossary(glossary, where, errors):
             owner[form] = key
 
 
+def cross_level_form_conflicts(glossaries):
+    """
+    Warnings for a form of a key in a higher level that is also a form of a *different* key of a
+    lower level (still in the inherited glossary): glossary_matches and glossTokens pick the entry
+    that comes last in their dictionary, and the merged glossary here and the chapter file's
+    glossary in the app are not in the same order.
+    """
+    warnings = []
+    for level in sorted(glossaries, key=level_rank):
+        lower = {lv: g for lv, g in glossaries.items() if level_rank(lv) < level_rank(level)}
+        merged = inherited_glossary(lower, level)
+        owner = {}   # form -> (key, level) of the lower levels' entries that are still in effect
+        for lv in sorted(lower, key=level_rank):
+            for key, entry in lower[lv].items():
+                if merged.get(key) is entry and key not in glossaries[level]:
+                    for form in entry.get('forms', []):
+                        owner[form] = (key, lv)
+        for key, entry in glossaries[level].items():
+            for form in entry.get('forms', []):
+                if form in owner and owner[form][0] != key:
+                    other, lv = owner[form]
+                    warnings.append(f'{level}: glossary form "{form}" of "{key}" is also a form of '
+                                    f'"{other}" ({lv}); the build and the app may show different entries')
+    return warnings
+
+
 def unused_glossary_forms(glossary, texts):
     """Forms that occur in none of `texts` → [(key, form)]."""
     used = {(m[3], m[4]) for text in texts for m in glossary_matches(text, glossary) if m[3]}
@@ -269,14 +298,29 @@ def content_version(sentences):
     return hashlib.sha1(blob).hexdigest()[:10]
 
 
+def image_files(level):
+    """Every file in data/stories/<level>/img/, sorted."""
+    return sorted(glob.glob(os.path.join(STORIES_DIR, level, 'img', '*')))
+
+
 def chapter_images(level):
     """{name: file path} of the pictures in data/stories/<level>/img/ (first extension wins)."""
     found = {}
-    for path in sorted(glob.glob(os.path.join(STORIES_DIR, level, 'img', '*'))):
+    for path in image_files(level):
         stem, ext = os.path.splitext(os.path.basename(path))
         if ext.lower() in IMAGE_EXTS and stem not in found:
             found[stem] = path
     return found
+
+
+def inherited_images(images, level):
+    """{name: file path} a chapter of `level` can use: its own level's pictures, then the lower
+    levels' (a picture of a nearer level wins). images: {level: chapter_images(level)}."""
+    merged = {}
+    for lv in sorted(images, key=level_rank):
+        if level_rank(lv) <= level_rank(level):
+            merged.update(images[lv])
+    return merged
 
 
 def image_key(ch):
@@ -284,11 +328,17 @@ def image_key(ch):
     return (ch.get('image') or {}).get('place') or ch['id']
 
 
-def stray_images(level, keys):
-    """Files in data/stories/<level>/img/ that no chapter uses (typo, wrong extension, unused place)."""
-    images = chapter_images(level)
-    used = {images[k] for k in keys if k in images}
-    return [os.path.basename(p) for p in sorted(glob.glob(os.path.join(STORIES_DIR, level, 'img', '*')))
+def stray_images(images, files, chapters):
+    """
+    [(level, file name)] of picture files no chapter uses (typo, wrong extension, unused place),
+    counting the chapters of higher levels that borrow a lower level's picture.
+    images: {level: chapter_images}, files: {level: image_files}, chapters: {level: [chapter]}.
+    """
+    used = set()
+    for level, chs in chapters.items():
+        visible = inherited_images(images, level)
+        used |= {visible[image_key(ch)] for ch in chs if image_key(ch) in visible}
+    return [(level, os.path.basename(p)) for level in sorted(files, key=level_rank) for p in files[level]
             if p not in used and not p.endswith(IMAGE_NOTES)]
 
 
@@ -300,7 +350,7 @@ def chapter_image(level, ch, images, warnings):
     path = images.get(key)
     if not path:
         if meta:
-            warnings.append(f'{where}: "image" given but no img/{key}.* file')
+            warnings.append(f'{where}: "image" given but no img/{key}.* file (in {level} or a lower level)')
         return None
     with open(path, 'rb') as f:
         blob = f.read()
@@ -374,6 +424,7 @@ def build():
     # One glossary per level, from all of its story files
     glossaries = level_glossaries(stories, errors)
     chapter_glossaries = {level: inherited_glossary(glossaries, level) for level in glossaries}
+    warnings += cross_level_form_conflicts(glossaries)
     for level, glossary in glossaries.items():
         check_glossary(glossary, level, errors)
         texts = [b.get('read') or b.get('play') or '' for story in stories if story['level'] == level
@@ -382,10 +433,10 @@ def build():
             warnings.append(f'{level}: glossary form "{form}" ("{key}") never appears in a chapter')
 
     images = {level: chapter_images(level) for level in glossaries}
-    for level in images:
-        keys = [image_key(ch) for story in stories if story['level'] == level for ch in story['chapters']]
-        for name in stray_images(level, keys):
-            warnings.append(f'{level}: img/{name} is used by no chapter (expected <place or chapter id>{"|".join(IMAGE_EXTS)})')
+    chapters = {level: [ch for story in stories if story['level'] == level for ch in story['chapters']]
+                for level in glossaries}
+    for level, name in stray_images(images, {level: image_files(level) for level in glossaries}, chapters):
+        warnings.append(f'{level}: img/{name} is used by no chapter (expected <place or chapter id>{"|".join(IMAGE_EXTS)})')
 
     for story in stories:
         level = story['level']
@@ -407,7 +458,7 @@ def build():
             translations = collect_translations(ch['beats'])
             if translations:
                 extra['translations'] = translations
-            image = chapter_image(level, ch, images.get(level, {}), warnings)
+            image = chapter_image(level, ch, inherited_images(images, level), warnings)
             if image:
                 extra['image'] = image
             version = write_set(name, level, label, texts, library, extra)

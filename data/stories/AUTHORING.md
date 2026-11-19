@@ -52,7 +52,9 @@ Write 8–12 lines in English:
 - what happens, in story order, and who is there;
 - which running jokes or clues appear (the bible's character rules, the chapter row's arc beat);
 - the hook at the end (cliffhanger, punchline or clue);
-- the place picture: an existing place (`ls data/stories/<level>/img/`) or `new: <place-name>`.
+- the place picture: an existing place (`ls data/stories/*/img/`: the build looks in the chapter's
+  own level first, then in the lower levels, so an A2 chapter can use `A1/img/wg-kueche.svg`) or
+  `new: <place-name>`.
 
 Show the outline to the owner and wait for approval. Apply their changes. Do not write beats before
 the owner has approved the outline.
@@ -146,15 +148,18 @@ A drill item (A1 5.2):
 ## 6. Glossary
 
 Add an entry to the story file's `glossary` for **every word a learner at this point has not met**:
-every new ordinary word, nouns included. A word counts as met when it appears in an earlier chapter
-(story order, lower levels first). All story files of a level form one dictionary, so define a
-word once, in the story where it first appears.
+every word that no glossary form of your level or a lower level matches yet, nouns included: only
+a matched word can be tapped, so a word that appeared in an earlier chapter without a matching form
+still needs one (the checker lists it as `ungeglosst`). All story files of a level form one
+dictionary, so define a word once, in the story where it first appears.
 - Key: the dictionary form without article (`Apotheke`, `aufsetzen`).
 - `de`: nouns with article and plural; verbs as infinitive, `|` after a separable prefix,
   irregular forms in brackets (`aus|sehen (sieht aus)`).
 - `en`: the English meaning in this context.
 - `forms`: the words exactly as they appear in the chapter beats (case-sensitive; a capitalised
-  word at a sentence start also matches its lower-case form). A separable verb is written
+  word also matches its lower-case form, but not the other way round). Write a form in lower case
+  unless the word is always capitalised (nouns, formal *Ihre*): a stored `"Früher"` never matches
+  *früher* inside a sentence, `"früher"` matches both. A separable verb is written
   `"setzt … auf"` (with the character `…`): it matches when the particle ends the clause later.
   A form may belong to only one entry of the level (build error).
 - New forms of a word you already glossed go into that entry's `forms` (*fahre* next to *fährt*).
@@ -216,7 +221,9 @@ Run these from the repo root, in this order:
    persons, skill order, unglossed words (`ungeglosst: …`), more than 12 new glossary words, missing
    `en`, content words (alcohol, pork, romance), the boss sentence, play texts repeated from earlier
    chapters; `not on the word list: …` once `data/wordlists/<level>.txt` exists.
-   An `ungeglosst` word is a new ordinary word (glossary entry, step 6) or a name (`names.txt`).
+   An `ungeglosst` word is one no glossary form matches (it cannot be tapped), even when an earlier
+   chapter used it: a new ordinary word or a new form (glossary entry, step 6) or a name (`names.txt`).
+   A content word warning stays even when the word has a glossary entry.
 3. `python3 scripts/audit_library.py`
    Prints `Scanned N files, N sentences, N words: 0 problem(s).` and exits 0 when clean; otherwise it
    lists words that game mode cannot place and exits 1 (usually a wrong tag).
@@ -275,7 +282,8 @@ git add data/stories/<level>/<nn>_<slug>.json data/stories/names.txt data/levels
 git commit -m "Add <level> chapter <id> <title>"
 ```
 Also add a new picture and its prompt, `data/stories/<level>/img/<place>.svg` (or `.webp`) plus
-`data/stories/<level>/img/<place>.txt` with the drawing prompt (CURRICULUM.md → Chapter pictures),
+`data/stories/<level>/img/<place>.txt` with the drawing prompt (CURRICULUM.md → Chapter pictures);
+a place that already has a picture in a lower level needs no copy (the build uses that file),
 STORY_BIBLE.md if you added characters, and this guide if you added an owner correction. A chapter
 whose row says `new: <place>` may ship without a picture (no `image` key): say so in step 10.
 Do not push.

@@ -100,7 +100,9 @@ room, the Praxis), shared by every chapter set there. A chapter picks its place:
 ```
 - File: `data/stories/<level>/img/<place>.webp` (also `.jpg`, `.png`, `.svg`); place names are lowercase
   with `-` (`wg-kueche`, `indischer-laden`). Reuse an existing place before drawing a new one
-  (`ls data/stories/A1/img/`). Without `place`, the build looks for `img/<chapter id>.*`.
+  (`ls data/stories/*/img/`). The build looks in the chapter's own level first, then in the lower
+  levels (an A2 chapter in the WG kitchen uses `data/stories/A1/img/wg-kueche.svg`; no copy).
+  Without `place`, the build looks for `img/<chapter id>.*`.
 - Shown on the chapter's first narration card and at the top of the 📖 reader; no picture, no box.
 - `alt`: a short simple German phrase naming the place ("Die Küche in der WG."); use the same alt
   for every chapter at that place.

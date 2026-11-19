@@ -14,7 +14,7 @@
         { "read": "Nach A1 kommt jetzt A2. Für die Approbation muss ihr Deutsch sehr gut sein. Sehr, sehr gut." },
         { "read": "Auf dem Tisch in der Küche liegt eine Brezel von Max: „Viel Glück!“ Und Faris schreibt: „Viel Spaß heute! Und vergiss nicht: Nur Deutsch!“" },
         { "read": "Die Sprachschule ist in der Stadt. Ayisha ist zehn Minuten zu früh. Natürlich. Dann kommt der Lehrer. Er heißt Vogel. Wie ein Vogel! Ayisha liebt Vögel. Sie mag ihn sofort." },
-        { "speaker": "Herr Vogel", "play": "Hier sprechen wir nur Deutsch.", "tags": "X V.wir S.wir X O.n.akk", "en": "In here we only speak German." },
+        { "speaker": "Herr Vogel", "play": "Hier sprechen wir nur Deutsch.", "tags": "X V.wir S.wir X O.n.akk", "en": "Here we only speak German." },
         { "read": "Ayisha muss lachen. Diesen Satz kennt sie schon." },
         { "read": "Vor ihr sitzen Olena aus der Ukraine und Linh aus Vietnam. Olena ist Lehrerin. Linh studiert Informatik. Und sie gähnt. Schon um neun Uhr." },
         { "read": "Neben Ayisha sitzt ein Mann mit einer Thermoskanne. Er trägt eine Krawatte. Im Deutschkurs." },
@@ -112,6 +112,8 @@
     "Nachbar": {"de": "der Nachbar, -n", "en": "neighbour", "forms": ["Nachbarn"]},
     "aufgeschrieben": {"de": "aufgeschrieben (auf|schreiben)", "en": "written down", "forms": ["aufgeschrieben"]},
     "ihrer": {"de": "ihrer (ihr)", "en": "her, their (after a dative preposition: aus ihrer Tasche)", "forms": ["ihrer"]},
-    "genommen": {"de": "genommen (nehmen)", "en": "taken", "forms": ["genommen"]}
+    "genommen": {"de": "genommen (nehmen)", "en": "taken", "forms": ["genommen"]},
+    "heben": {"de": "heben", "en": "to raise, to lift (die Hand heben: to put up your hand)", "forms": ["hebt"]},
+    "summen": {"de": "summen", "en": "to hum", "forms": ["summt"]}
   }
 }
