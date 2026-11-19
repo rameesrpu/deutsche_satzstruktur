@@ -3,6 +3,16 @@
   "category": "4.1 Übung: möchten",
   "chapter": "4.1",
   "skill": "A1.moechten",
+  "translations": {
+    "Ich möchte einen Tee.": "I'd like a tea.",
+    "Möchtest du Wasser?": "Would you like some water?",
+    "Lea möchte eine Pizza.": "Lea would like a pizza.",
+    "Wir möchten zahlen.": "We'd like to pay.",
+    "Was möchtet ihr essen?": "What would you like to eat?",
+    "Max möchte zwei Brezeln.": "Max would like two pretzels.",
+    "Möchten Sie einen Kaffee?": "Would you like a coffee?",
+    "Ich möchte die Rechnung, bitte.": "I'd like the bill, please."
+  },
   "sentences": [
     "Ich möchte einen Tee.",
     "Möchtest du Wasser?",

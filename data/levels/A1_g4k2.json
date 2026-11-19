@@ -364,7 +364,8 @@
         "Siehst",
         "sehe",
         "sieht",
-        "sehen"
+        "sehen",
+        "seht"
       ]
     },
     "sie": {
@@ -781,6 +782,13 @@
         "ja"
       ]
     },
+    "Ihnen": {
+      "de": "Ihnen",
+      "en": "you, to you (formal)",
+      "forms": [
+        "Ihnen"
+      ]
+    },
     "ich": {
       "de": "ich",
       "en": "I",
@@ -1107,6 +1115,23 @@
         "Nummern"
       ]
     }
+  },
+  "translations": {
+    "Ayisha kauft heute groß ein.": "Ayisha is doing a big shop today.",
+    "Hier sieht alles gut aus!": "Everything looks good here!",
+    "Sie sind der Mann vom Flughafen!": "You're the man from the airport!",
+    "Und Sie sind die Frau vom Automaten!": "And you're the woman from the machine!",
+    "Sie können den Reis mitnehmen.": "You can take the rice.",
+    "Nein, das sieht nicht fair aus.": "No, that doesn't seem fair.",
+    "Sie sprechen Malayalam!": "You speak Malayalam!",
+    "Sie lernen so schneller.": "You'll learn faster this way.",
+    "Ich heiße übrigens Faris.": "By the way, my name is Faris.",
+    "Ich bin Ayisha.": "I'm Ayisha.",
+    "Kommst du auch aus Kerala?": "Are you from Kerala too?",
+    "Das glaube ich nicht!": "I don't believe that!",
+    "Der Verkäufer packt den Reis ein.": "The shopkeeper packs up the rice.",
+    "Kommst du am Sonntag mit?": "Are you coming on Sunday?",
+    "Ich komme gern mit!": "I'd love to come along!"
   },
   "image": {
     "src": "data/stories/A1/img/indischer-laden.svg?v=feda684a6c",

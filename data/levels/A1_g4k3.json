@@ -320,7 +320,8 @@
         "Siehst",
         "sehe",
         "sieht",
-        "sehen"
+        "sehen",
+        "seht"
       ]
     },
     "bleiben": {
@@ -328,7 +329,8 @@
       "en": "to stay; (bleibt stehen) stops",
       "forms": [
         "bleibt",
-        "Bleib"
+        "Bleib",
+        "bleibe"
       ]
     },
     "stehen": {
@@ -763,6 +765,13 @@
         "Tante"
       ]
     },
+    "Pazhampori": {
+      "de": "das Pazhampori",
+      "en": "pazhampori (fried banana fritters from Kerala)",
+      "forms": [
+        "Pazhampori"
+      ]
+    },
     "dabei": {
       "de": "dabei",
       "en": "with her, there",
@@ -820,7 +829,8 @@
         "möchten",
         "möchte",
         "Möchtest",
-        "Möchtet"
+        "Möchtet",
+        "möchtet"
       ]
     },
     "Wasser": {
@@ -1002,6 +1012,22 @@
         "dreimal"
       ]
     }
+  },
+  "translations": {
+    "Der Park ist groß, und die Leute sind nett.": "The park is big, and the people are nice.",
+    "Spielst du Cricket, oder schaust du nur zu?": "Do you play cricket, or do you just watch?",
+    "Ich spiele, denn ich bin sehr gut.": "I'm playing, because I'm very good.",
+    "Das sagst du, aber ich glaube es nicht.": "That's what you say, but I don't believe it.",
+    "Ich spiele nicht, denn ich esse.": "I'm not playing, because I'm eating.",
+    "Lea und Max schauen zu.": "Lea and Max watch.",
+    "Der Ball ist schnell, aber ich treffe ihn!": "The ball is fast, but I'll hit it!",
+    "Ayisha ist ein Profi, und Faris ist raus!": "Ayisha is a pro, and Faris is out!",
+    "Du hast Glück, oder?": "You're just lucky, right?",
+    "Nein, ich habe Talent, und du hast keine Chance!": "No, I have talent, and you don't stand a chance!",
+    "Der Chai ist heiß, und das Pazhampori ist perfekt.": "The chai is hot, and the pazhampori is perfect.",
+    "Möchtest du Chai oder Wasser?": "Would you like chai or water?",
+    "Ich nehme Chai, aber nur einen.": "I'll have chai, but just one.",
+    "Hier ist meine Nummer, für das nächste Spiel.": "Here's my number, for the next match."
   },
   "image": {
     "src": "data/stories/A1/img/park.svg?v=57f886cea7",

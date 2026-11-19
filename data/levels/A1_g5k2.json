@@ -411,6 +411,13 @@
         "fehlt"
       ]
     },
+    "Ihnen": {
+      "de": "Ihnen",
+      "en": "you, to you (formal)",
+      "forms": [
+        "Ihnen"
+      ]
+    },
     "ich": {
       "de": "ich",
       "en": "I",
@@ -539,7 +546,8 @@
         "trinken",
         "Trink",
         "Trinken",
-        "trinkt"
+        "trinkt",
+        "Trinkst"
       ]
     },
     "schlafen": {

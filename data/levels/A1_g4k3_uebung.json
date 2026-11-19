@@ -3,6 +3,16 @@
   "category": "4.3 Übung: und, aber, oder, denn",
   "chapter": "4.3",
   "skill": "A1.konnektoren",
+  "translations": {
+    "Ich koche, und du spülst.": "I'll cook, and you wash up.",
+    "Lea ist müde, aber sie arbeitet.": "Lea is tired, but she's working.",
+    "Trinkst du Tee oder Kaffee?": "Do you drink tea or coffee?",
+    "Max isst viel, denn er hat Hunger.": "Max eats a lot, because he's hungry.",
+    "Wir spielen Cricket, und ihr schaut zu.": "We play cricket, and you watch.",
+    "Ayisha kocht gut, aber nicht heute.": "Ayisha cooks well, but not today.",
+    "Ich bleibe zu Hause, denn ich bin krank.": "I'm staying home, because I'm sick.",
+    "Kommst du heute oder morgen?": "Are you coming today or tomorrow?"
+  },
   "sentences": [
     "Ich koche, und du spülst.",
     "Lea ist müde, aber sie arbeitet.",

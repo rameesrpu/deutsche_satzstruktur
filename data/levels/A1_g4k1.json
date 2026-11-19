@@ -200,6 +200,13 @@
         "heiße"
       ]
     },
+    "Masala": {
+      "de": "das Masala",
+      "en": "masala (Indian spice mix)",
+      "forms": [
+        "Masala"
+      ]
+    },
     "Haus": {
       "de": "das Haus, Häuser",
       "en": "house",
@@ -320,7 +327,8 @@
         "möchten",
         "möchte",
         "Möchtest",
-        "Möchtet"
+        "Möchtet",
+        "möchtet"
       ]
     },
     "trinken": {
@@ -330,7 +338,8 @@
         "trinken",
         "Trink",
         "Trinken",
-        "trinkt"
+        "trinkt",
+        "Trinkst"
       ]
     },
     "ich": {
@@ -338,6 +347,20 @@
       "en": "I",
       "forms": [
         "ich"
+      ]
+    },
+    "Mango-Lassi": {
+      "de": "der Mango-Lassi, -s",
+      "en": "mango lassi (Indian yoghurt drink)",
+      "forms": [
+        "Mango-Lassi"
+      ]
+    },
+    "Cola": {
+      "de": "die Cola, -s",
+      "en": "cola",
+      "forms": [
+        "Cola"
       ]
     },
     "bitte": {
@@ -405,6 +428,13 @@
       "en": "also, too",
       "forms": [
         "auch"
+      ]
+    },
+    "Naan": {
+      "de": "das Naan, -s",
+      "en": "naan (Indian flatbread)",
+      "forms": [
+        "Naan"
       ]
     },
     "zwanzig": {
@@ -742,6 +772,23 @@
         "beste"
       ]
     }
+  },
+  "translations": {
+    "Was möchten Sie trinken?": "What would you like to drink?",
+    "Ich möchte einen Mango-Lassi.": "I'd like a mango lassi.",
+    "Ich möchte eine Cola, bitte.": "I'd like a cola, please.",
+    "Ich möchte nur Wasser.": "I'd just like water.",
+    "Und was möchten Sie essen?": "And what would you like to eat?",
+    "Ich möchte das Biryani.": "I'd like the biryani.",
+    "Möchten Sie es scharf?": "Would you like it spicy?",
+    "Wir möchten auch Naan.": "We'd like some naan too.",
+    "Wie ist das Biryani?": "How's the biryani?",
+    "Es ist nicht scharf.": "It's not spicy.",
+    "Und der Reis ist falsch.": "And the rice is all wrong.",
+    "Ich möchte noch einen Teller!": "I'd like another plate!",
+    "Möchtet ihr einen Nachtisch?": "Would you two like a dessert?",
+    "Ich möchte richtiges Biryani!": "I want proper biryani!",
+    "Dann müssen Sie selbst kochen!": "Then you'll have to cook it yourself!"
   },
   "image": {
     "src": "data/stories/A1/img/restaurant.svg?v=9c42d5fe40",
