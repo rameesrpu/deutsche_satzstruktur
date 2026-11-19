@@ -146,7 +146,7 @@ export function wordChip(entry) {
 }
 
 /**
- * Glossary entries of a chapter that no earlier chapter of its level had (by headword).
+ * Glossary entries of a chapter that no earlier chapter had (by headword).
  * @param {Object<string, Object>} glossary
  * @param {Object<string, Object>[]} earlier
  * @returns {Object[]} entries in glossary order
@@ -154,6 +154,18 @@ export function wordChip(entry) {
 export function newGlossaryEntries(glossary, earlier = []) {
     const seen = new Set(earlier.flatMap(g => Object.keys(g || {})));
     return Object.entries(glossary || {}).filter(([k]) => !seen.has(k)).map(([, e]) => e);
+}
+
+/**
+ * The new words of each chapter, in story order across levels: the glossary entries no earlier
+ * chapter used (a chapter file also carries the lower levels' entries it uses, see
+ * build_stories.py), so each word is listed under the chapter where it first appeared.
+ * @param {{data: ?{glossary?: Object<string, Object>}}[]} rows  chapters in unlock order
+ * @returns {Object[][]} one list of entries per row
+ */
+export function wordsByChapter(rows) {
+    const glossaries = rows.map(r => (r.data && r.data.glossary) || {});
+    return glossaries.map((g, i) => newGlossaryEntries(g, glossaries.slice(0, i)));
 }
 
 /**
@@ -191,7 +203,7 @@ export function recapTitle(data, fallback = '') {
  * @param {ChapterRunSentence[]} p.results
  * @param {boolean} p.complete       every sentence of the chapter played
  * @param {boolean} [p.replay]       the run was "schwere Sätze nochmal"
- * @param {Object[]} [p.earlierGlossaries]  glossaries of the level's earlier chapters
+ * @param {Object[]} [p.earlierGlossaries]  glossaries of every earlier chapter (all levels)
  * @param {?{id: string, label: string, unlocked: boolean}} [p.next]
  */
 export function buildRecapModel({ chapter, results, complete, replay = false, earlierGlossaries = [], next = null }) {

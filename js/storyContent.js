@@ -230,7 +230,7 @@ export const STORY_CONTENT = {
                     "key": "g1k1",
                     "label": "1.1 Der erste Kurstag",
                     "file": "data/levels/A2_g1k1.json",
-                    "version": "ff6c39e98d",
+                    "version": "74e3730756",
                     "drillKey": "g1k1_uebung",
                     "drillLabel": "1.1 Übung: Perfekt: haben oder sein",
                     "drillFile": "data/levels/A2_g1k1_uebung.json",

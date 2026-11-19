@@ -62,7 +62,9 @@ the owner has approved the outline.
 Write the chapter's `beats` list, in story order:
 - **12–15 `play` beats** (the checker errors outside this range) plus as many `read` beats as the
   story needs.
-- About **30 % new skill**, 70 % recycled from earlier chapters.
+- About **30 % new skill**, 70 % recycled from earlier chapters. A chapter whose skill is a tense
+  itself (A2.perfekt: "Was haben Sie am Wochenende gemacht?") may go well above 30 %; recycle the
+  rest (cases, prepositions, word order) inside those sentences.
 - **Short sentences first**, longer ones later; the **last play beat is the boss sentence**, among
   the three longest of the chapter (the checker warns otherwise).
 - **Grid coverage**: the play beats and drill together use `m`, `f`, `n` and `pl`, and at least four

@@ -1,5 +1,5 @@
 import { gameSounds } from './sound.js';
-import { LEVEL_CONTENT, chapterOrder, categoryUrl, previousChapter } from './levelContent.js';
+import { LEVEL_CONTENT, categoryUrl, previousChapter, nextChapter } from './levelContent.js';
 import { LevelSelector } from './levelSelector.js';
 import { WordManager } from './wordManager.js';
 import { SentenceManager } from './sentenceManager.js';
@@ -14,7 +14,7 @@ import { chapterStartText, hideStoryCard, isStoryCardOpen } from './storyNarrati
 import { showStoryReader, hideStoryReader } from './storyReader.js';
 import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday,
     renderHome, renderPractice, renderWords } from './homeScreen.js';
-import { buildRecapModel, renderRecap, reviewRecapModel, renderReviewRecap } from './chapterRecap.js';
+import { buildRecapModel, renderRecap, reviewRecapModel, renderReviewRecap, wordsByChapter } from './chapterRecap.js';
 import { dueKeys } from './ladder.js';
 import { ReviewRunner, buildQueue, keyCategory } from './reviewRunner.js';
 import { loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge, renderSettings } from './settings.js';
@@ -1120,8 +1120,6 @@ class DeutschApp {
     async openReader(level, category) {
         const cat = LEVEL_CONTENT[level] && LEVEL_CONTENT[level].categories[category];
         if (!cat || !cat.story || cat.story.kind !== 'chapter') return;
-        const order = chapterOrder(level);
-        const idx = order.indexOf(category);
         const prev = previousChapter(level, category);
         // isUnlocked needs the previous chapter's file; "Weiterlesen" this one's
         const [data] = await Promise.all([
@@ -1130,7 +1128,7 @@ class DeutschApp {
         ]).catch(() => [null]);
         if (!data || !data.beats || !this.levelSelector.isUnlocked(level, category)) return;
 
-        const nextKey = order[idx + 1] || null;
+        const next = nextChapter(level, category);   // A1's last chapter → A2 1.1
         const pauseGame = this.gameMode.isActive && !isStoryCardOpen();
         if (pauseGame) this.gameMode.pauseForStoryCard();
         if (this.screen !== 'read') this.readReturn = this.screen;
@@ -1142,8 +1140,8 @@ class DeutschApp {
             glossary: data.glossary || {},
             image: data.image || null,
             onPlay: () => this.startChapter(level, category),
-            onNext: nextKey && this.levelSelector.isUnlocked(level, nextKey)
-                ? () => this.openReader(level, nextKey) : null,
+            onNext: next && this.levelSelector.isUnlocked(next.level, next.key)
+                ? () => this.openReader(next.level, next.key) : null,
             onClose: () => {
                 this.showScreen(this.readReturn);
                 if (pauseGame && this.gameMode.isActive && !isStoryCardOpen()) this.gameMode.closeStoryCard();
@@ -1307,10 +1305,13 @@ class DeutschApp {
         if (!root) return;
         const rows = await this.loadChapterRows();
         if (this.screen !== 'words') return;
+        // Each word under the chapter where it first appeared (chapter files also carry the
+        // lower levels' entries they use)
+        const words = wordsByChapter(rows);
         renderWords(root, {
-            chapters: rows.filter(r => r.status !== 'locked' && r.data && r.data.glossary)
-                .map(r => ({ label: r.label, entries: Object.values(r.data.glossary) }))
-                .filter(ch => ch.entries.length > 0),
+            chapters: rows.map((r, i) => ({ row: r, label: r.label, entries: words[i] }))
+                .filter(ch => ch.row.status !== 'locked' && ch.entries.length > 0)
+                .map(({ label, entries }) => ({ label, entries })),
         });
     }
 
@@ -1324,21 +1325,22 @@ class DeutschApp {
         const idx = rows.findIndex(r => r.level === level && r.key === category);
         if (idx < 0) { this.showScreen('home'); return; }
         const row = rows[idx];
-        const nextRow = rows[idx + 1] && rows[idx + 1].level === level ? rows[idx + 1] : null;
+        const next = nextChapter(level, category);   // crosses levels: A1 5.3 → A2 1.1
+        const nextRow = next ? rows.find(r => r.level === next.level && r.key === next.key) || null : null;
         const model = buildRecapModel({
             chapter: { id: row.id, label: row.label, data: row.data },
             results,
             complete: row.status === 'done',
             replay,
-            earlierGlossaries: rows.slice(0, idx).filter(r => r.level === level)
-                .map(r => (r.data && r.data.glossary) || {}),
+            // every earlier chapter, all levels: an A2 file also carries the A1 words it uses
+            earlierGlossaries: rows.slice(0, idx).map(r => (r.data && r.data.glossary) || {}),
             next: nextRow ? { id: nextRow.id, label: nextRow.label, unlocked: nextRow.status !== 'locked' } : null,
         });
         this.showScreen('end');
         const root = document.getElementById('screen-end');
         if (!root) return;
         renderRecap(root, model, {
-            next: () => this.startChapter(level, nextRow.key),
+            next: () => this.startChapter(nextRow.level, nextRow.key),
             home: () => this.showScreen('home'),
             words: () => this.showScreen('words'),
             replay: texts => this.replayHardSentences(level, category, texts),

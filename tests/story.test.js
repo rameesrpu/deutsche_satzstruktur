@@ -3,7 +3,7 @@ import { readText, REPO_ROOT } from './stubs.js';
 import { test, assertEqual } from './assert.js';
 import { beatsBefore, beatsAfterLast, nextPlayText, chapterStartText, storyStrip } from '../js/storyNarration.js';
 import { STORY_CONTENT } from '../js/storyContent.js';
-import { LEVEL_CONTENT, chapterOrder, categoryUrl, previousChapter } from '../js/levelContent.js';
+import { LEVEL_CONTENT, chapterOrder, categoryUrl, previousChapter, nextChapter } from '../js/levelContent.js';
 import { LevelSelector } from '../js/levelSelector.js';
 
 const beats = [
@@ -126,6 +126,22 @@ export function runStoryTests() {
             { level: 'A2', key: 'g1k2' });
         assertEqual(previousChapter('A2', 'g9k9', content), null, 'unknown chapter');
         assertEqual(previousChapter('A2', 'g1k1', { A2: content.A2 }), null, 'no lower level with chapters');
+    });
+
+    test('story: nextChapter steps forward within a level, then into the level above', () => {
+        const ch = key => ({ key });
+        const content = {
+            A1: [{ chapters: [ch('g1k1'), ch('g1k2')] }, { chapters: [ch('g2k1')] }],
+            A2: [{ chapters: [ch('g1k1'), ch('g1k2')] }],
+        };
+        assertEqual(nextChapter('A1', 'g1k1', content), { level: 'A1', key: 'g1k2' });
+        assertEqual(nextChapter('A1', 'g1k2', content), { level: 'A1', key: 'g2k1' }, 'into the next story');
+        assertEqual(nextChapter('A1', 'g2k1', content), { level: 'A2', key: 'g1k1' }, 'A1 last → A2 1.1');
+        assertEqual(nextChapter('A2', 'g1k2', content), null, 'the very last chapter');
+        assertEqual(nextChapter('A1', 'g2k1', { A1: content.A1, B1: [{ chapters: [ch('g1k1')] }] }),
+            { level: 'B1', key: 'g1k1' }, 'skips a level without chapters');
+        assertEqual(nextChapter('A1', 'g9k9', content), null, 'unknown chapter');
+        assertEqual(nextChapter('A1', chapterOrder('A1').at(-1)), { level: 'A2', key: chapterOrder('A2')[0] }, 'real data');
     });
 
     test('story: the first A2 chapter stays locked until the last A1 chapter is complete', () => {

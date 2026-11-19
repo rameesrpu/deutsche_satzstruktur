@@ -8,7 +8,7 @@ import { GM_UI, drawHud, getTimerColor } from './gameHud.js';
 import { GRID_CELLS } from './grammaticalConfig.js';
 import { ensureJuiceDefs, spawnConfetti, spawnFloatingText, drawFeedbackAnimation, updateFeedbackElement,
     showFinalCelebration } from './gameJuice.js';
-import { LEVEL_CONTENT, chapterOrder } from './levelContent.js';
+import { LEVEL_CONTENT, nextChapter } from './levelContent.js';
 import { updatePlayTimer } from './playScreen.js';
 import { felderLesson, lessonAutoShow } from './felderLesson.js';
 import { beatsBefore, beatsAfterLast, nextPlayText, showStoryCard, hideStoryCard,
@@ -1987,13 +1987,12 @@ export class GameMode {
             });
             return;
         }
-        const order = chapterOrder(level);
-        const nextKey = order[order.indexOf(category) + 1] || null;
+        const next = nextChapter(level, category);   // A1's last chapter → A2 1.1
         const complete = levelSelector.isChapterComplete(level, category);
         const buttons = [];
-        if (nextKey && levelSelector.isUnlocked(level, nextKey)) {
+        if (next && levelSelector.isUnlocked(next.level, next.key)) {
             buttons.push({ label: 'Nächstes Kapitel', icon: 'next', primary: true,
-                onClick: () => this.host.startChapter(level, nextKey) });
+                onClick: () => this.host.startChapter(next.level, next.key) });
         }
         buttons.push({ label: 'Übung', primary: buttons.length === 0 && complete,
             onClick: () => this.host.startChapter(level, `${category}_uebung`) });

@@ -1,6 +1,9 @@
+import { readText } from './stubs.js';
 import { test, assertEqual, assert } from './assert.js';
 import { recapStats, hardSentences, underlineParts, missReason, wordChip, newGlossaryEntries,
-    chipList, recapTitle, buildRecapModel, MAX_HARD, reviewRecapModel } from '../js/chapterRecap.js';
+    chipList, recapTitle, buildRecapModel, MAX_HARD, reviewRecapModel, wordsByChapter } from '../js/chapterRecap.js';
+import { storyChapters } from '../js/homeScreen.js';
+import { LEVEL_CONTENT } from '../js/levelContent.js';
 
 const miss = (over = {}) => ({
     start: 0, end: 1, phrase: 'Ihre Heimat', key: 'fem', cellWrong: true, caseWrong: false,
@@ -75,6 +78,30 @@ export function runChapterRecapTests() {
         assertEqual(newGlossaryEntries(g1).length, 2);
         const { chips, more } = chipList(newGlossaryEntries(g2, [g1]), 1);
         assertEqual([chips.map(c => c.label), more], [['die Tür'], 1]);
+    });
+
+    test('recap: wordsByChapter lists each word under its first chapter, across levels', () => {
+        const rows = [
+            { data: { glossary: { Haus: { de: 'das Haus' }, alt: { de: 'alt' } } } },
+            { data: null },
+            { data: { glossary: { Haus: { de: 'das Haus' }, klein: { de: 'klein' } } } },
+            { data: { glossary: { Haus: { de: 'das Haus' }, klein: { de: 'klein' }, Kurs: { de: 'der Kurs' } } } },
+        ];
+        assertEqual(wordsByChapter(rows).map(es => es.map(e => e.de)),
+            [['das Haus', 'alt'], [], ['klein'], ['der Kurs']]);
+    });
+
+    test('recap: an A2 chapter whose file carries A1 entries shows only its own new words', () => {
+        const rows = storyChapters().map(ch => ({ ...ch,
+            data: JSON.parse(readText(LEVEL_CONTENT[ch.level].categories[ch.key].file)) }));
+        const idx = rows.findIndex(r => r.level === 'A2');
+        assert(idx > 0, 'A2 comes after the A1 chapters');
+        const own = wordsByChapter(rows)[idx];
+        const inherited = Object.keys(rows[idx].data.glossary).length;
+        assert(inherited > 150, `A2 1.1 file carries the inherited A1 entries (${inherited})`);
+        assert(own.length >= 30 && own.length <= 45, `about 38 new words, got ${own.length}`);
+        assertEqual(own.some(e => e.de.startsWith('die Kehrwoche')), false, 'Kehrwoche is an A1 word');
+        assertEqual(own.some(e => e.de === 'die Sprachschule, -n'), true);
     });
 
     test('recap: title = short last line of the closing narration, else the chapter title', () => {

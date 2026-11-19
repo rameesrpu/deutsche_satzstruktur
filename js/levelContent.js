@@ -89,6 +89,12 @@ export function chapterOrder(level) {
     return (STORY_CONTENT[level] || []).flatMap(story => story.chapters.map(ch => ch.key));
 }
 
+/** Story chapters of every level with chapters, in unlock order: [{level, key}]. */
+function allChapters(content) {
+    return Object.keys(LEVEL_CONTENT).flatMap(level =>
+        (content[level] || []).flatMap(story => story.chapters.map(ch => ({ level, key: ch.key }))));
+}
+
 /**
  * The chapter a story chapter unlocks after: the one before it in its level, or for the
  * first chapter of a level the last chapter of the nearest lower level with chapters
@@ -99,14 +105,21 @@ export function chapterOrder(level) {
  * @returns {?{level: string, key: string}}
  */
 export function previousChapter(level, key, content = STORY_CONTENT) {
-    const keysOf = lv => (content[lv] || []).flatMap(story => story.chapters.map(ch => ch.key));
-    const idx = keysOf(level).indexOf(key);
-    if (idx > 0) return { level, key: keysOf(level)[idx - 1] };
-    if (idx < 0) return null;
-    const levels = Object.keys(LEVEL_CONTENT);
-    for (let i = levels.indexOf(level) - 1; i >= 0; i--) {
-        const keys = keysOf(levels[i]);
-        if (keys.length) return { level: levels[i], key: keys[keys.length - 1] };
-    }
-    return null;
+    const all = allChapters(content);
+    const idx = all.findIndex(ch => ch.level === level && ch.key === key);
+    return idx > 0 ? all[idx - 1] : null;
+}
+
+/**
+ * The chapter after a story chapter in unlock order, crossing into the next level with
+ * chapters (A1 5.3 → A2 1.1); null for the last chapter. The inverse of previousChapter.
+ * @param {string} level
+ * @param {string} key
+ * @param {Object<string, Object[]>} [content]
+ * @returns {?{level: string, key: string}}
+ */
+export function nextChapter(level, key, content = STORY_CONTENT) {
+    const all = allChapters(content);
+    const idx = all.findIndex(ch => ch.level === level && ch.key === key);
+    return idx >= 0 && idx + 1 < all.length ? all[idx + 1] : null;
 }
