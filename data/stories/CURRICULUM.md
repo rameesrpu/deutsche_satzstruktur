@@ -157,21 +157,24 @@ Skill ids are `<level>.<name>`. Chapter numbers refer to the stories in STORY_BI
 | A1.perfekt | first Perfekt (*habe gemacht, bin gefahren*), *war/hatte* | 5.3 |
 
 ### A2 — Einleben
-| Skill id | Content |
-|---|---|
-| A2.perfekt | Perfekt, full (regular, irregular, separable, *sein*/*haben*) |
-| A2.dativ | dative objects and pronouns; verbs with dative (*helfen, gefallen, gehören*) |
-| A2.dat_akk | dative + accusative in one sentence (*Ich gebe dem Patienten das Rezept.*) |
-| A2.wechselpraep | two-way prepositions: *wo?* → dative, *wohin?* → accusative |
-| A2.reflexiv | reflexive verbs (*sich freuen, sich anmelden*), *sich* in Akk vs Dat |
-| A2.nebensatz | *weil, dass, wenn, ob* (verb at the end) |
-| A2.praeteritum | *war, hatte*, modal verbs in the Präteritum |
-| A2.komparativ | comparative and superlative |
-| A2.adjektiv | adjective endings after articles (basic) |
-| A2.konj2_hoeflich | *würde, könnte, hätte gern* (polite requests) |
-| A2.futur | *werden* + infinitive; future with a time phrase |
-| A2.imperativ | imperative, all forms |
-| A2.indirekte_frage | indirect questions (*Wissen Sie, wo …?*) |
+Rows are in chapter order (STORY_BIBLE.md → A2 chapters); `scripts/check_story.py` ranks skills by
+row order, so a skill's row must come before every chapter that relies on it.
+
+| Skill id | Content | Chapter |
+|---|---|---|
+| A2.perfekt | Perfekt, full (regular, irregular, separable, *sein*/*haben*) | 1.1, 1.3 |
+| A2.reflexiv | reflexive verbs (*sich freuen, sich anmelden*), *sich* in Akk vs Dat | 1.2 |
+| A2.dativ | dative objects and pronouns; verbs with dative (*helfen, gefallen, gehören*) | 2.1 |
+| A2.dat_akk | dative + accusative in one sentence (*Ich gebe dem Patienten das Rezept.*) | 2.2 |
+| A2.adjektiv | adjective endings after articles (basic) | 2.3 |
+| A2.nebensatz | *weil, dass, wenn, ob* (verb at the end) | 3.1 |
+| A2.indirekte_frage | indirect questions (*Wissen Sie, wo …?*) | 3.2 |
+| A2.konj2_hoeflich | *würde, könnte, hätte gern* (polite requests) | 3.3 |
+| A2.wechselpraep | two-way prepositions: *wo?* → dative, *wohin?* → accusative | 4.1, 4.4 |
+| A2.komparativ | comparative and superlative | 4.2 |
+| A2.imperativ | imperative, all forms | 4.3 |
+| A2.praeteritum | *war, hatte*, modal verbs in the Präteritum | 5.1, 5.3 |
+| A2.futur | *werden* + infinitive; future with a time phrase | 5.2, 5.4 |
 
 ### B1 — Im Krankenhaus
 | Skill id | Content |
