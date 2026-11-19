@@ -99,7 +99,7 @@
     },
     "der": {
       "de": "der, die, das",
-      "en": "the",
+      "en": "the; das/der/die on its own: that, this (it, he, she)",
       "forms": [
         "der",
         "die",
@@ -117,7 +117,7 @@
     },
     "sein (Verb)": {
       "de": "sein (ist)",
-      "en": "to be",
+      "en": "to be: ich bin, du bist, er ist, wir/sie sind, ihr seid",
       "forms": [
         "ist",
         "sind",
@@ -613,7 +613,7 @@
     },
     "sie": {
       "de": "sie",
-      "en": "she, her; they",
+      "en": "she, her; they (a capital Sie at the start of a sentence can also be she or they)",
       "forms": [
         "sie"
       ]

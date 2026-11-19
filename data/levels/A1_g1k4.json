@@ -131,7 +131,7 @@
     },
     "der": {
       "de": "der, die, das",
-      "en": "the",
+      "en": "the; das/der/die on its own: that, this (it, he, she)",
       "forms": [
         "der",
         "die",
@@ -244,7 +244,7 @@
     },
     "sein (Verb)": {
       "de": "sein (ist)",
-      "en": "to be",
+      "en": "to be: ich bin, du bist, er ist, wir/sie sind, ihr seid",
       "forms": [
         "ist",
         "sind",
@@ -514,7 +514,7 @@
     },
     "ihr": {
       "de": "ihr, ihre",
-      "en": "you (plural); her, their",
+      "en": "you (plural); her, their; Ihr = your (formal)",
       "forms": [
         "ihr",
         "Ihre",

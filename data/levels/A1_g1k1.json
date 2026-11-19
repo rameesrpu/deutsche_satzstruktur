@@ -189,14 +189,14 @@
     },
     "Sie": {
       "de": "Sie",
-      "en": "you (formal)",
+      "en": "you (formal); at the start of a sentence also: she, they",
       "forms": [
         "Sie"
       ]
     },
     "sein (Verb)": {
       "de": "sein (ist)",
-      "en": "to be",
+      "en": "to be: ich bin, du bist, er ist, wir/sie sind, ihr seid",
       "forms": [
         "ist",
         "sind",
@@ -221,7 +221,7 @@
     },
     "sie": {
       "de": "sie",
-      "en": "she, her; they",
+      "en": "she, her; they (a capital Sie at the start of a sentence can also be she or they)",
       "forms": [
         "sie"
       ]
@@ -272,7 +272,7 @@
     },
     "ihr": {
       "de": "ihr, ihre",
-      "en": "you (plural); her, their",
+      "en": "you (plural); her, their; Ihr = your (formal)",
       "forms": [
         "ihr",
         "Ihre",
@@ -317,7 +317,7 @@
     },
     "der": {
       "de": "der, die, das",
-      "en": "the",
+      "en": "the; das/der/die on its own: that, this (it, he, she)",
       "forms": [
         "der",
         "die",

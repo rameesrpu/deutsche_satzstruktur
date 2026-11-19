@@ -100,3 +100,15 @@ print(json.dumps({
         });
     }
 }
+
+// A sentence-initial "Sie" also matches the formal-Sie key (the matcher folds case): the shown English must cover "she"
+test('glossary: sentence-initial Sie means she, the shown English includes she', () => {
+    const g = {
+        Sie: entry('Sie', 'you (formal); at the start of a sentence also: she, they', ['Sie']),
+        sie: entry('sie', 'she, her; they', ['sie']),
+    };
+    for (const text of ['Sie heißt Ayisha.', 'Sie ist müde, aber sie lächelt.']) {
+        const first = glossTokens(text, g).find(p => p.key);
+        assert(g[first.key].en.includes('she'), `${text}: ${first.key}`);
+    }
+});
