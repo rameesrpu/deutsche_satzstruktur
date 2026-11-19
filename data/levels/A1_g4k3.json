@@ -116,6 +116,17 @@
         "Sonntag"
       ]
     },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
+      ]
+    },
     "Sonne": {
       "de": "die Sonne",
       "en": "sun",
@@ -135,6 +146,24 @@
       "en": "but",
       "forms": [
         "aber"
+      ]
+    },
+    "es": {
+      "de": "es",
+      "en": "it",
+      "forms": [
+        "es"
+      ]
+    },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
       ]
     },
     "kalt": {
@@ -209,6 +238,15 @@
         "Snacks"
       ]
     },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
+      ]
+    },
     "Thermoskanne": {
       "de": "die Thermoskanne, -n",
       "en": "thermos flask",
@@ -221,6 +259,13 @@
       "en": "spiced milk tea",
       "forms": [
         "Chai"
+      ]
+    },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
       ]
     },
     "Cricketschläger": {
@@ -299,6 +344,13 @@
         "Moment"
       ]
     },
+    "du": {
+      "de": "du",
+      "en": "you (informal, one person)",
+      "forms": [
+        "du"
+      ]
+    },
     "Mann": {
       "de": "der Mann, Männer",
       "en": "man",
@@ -347,6 +399,13 @@
         "Spielst"
       ]
     },
+    "Cricket": {
+      "de": "das Cricket",
+      "en": "cricket (the sport)",
+      "forms": [
+        "Cricket"
+      ]
+    },
     "oder": {
       "de": "oder",
       "en": "or; (…, oder?) …, right?",
@@ -367,6 +426,13 @@
       "en": "only, just",
       "forms": [
         "nur"
+      ]
+    },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
       ]
     },
     "denn": {
@@ -445,6 +511,13 @@
         "Ball"
       ]
     },
+    "Sie": {
+      "de": "Sie",
+      "en": "you (formal)",
+      "forms": [
+        "Sie"
+      ]
+    },
     "anlaufen": {
       "de": "an|laufen",
       "en": "to take a run-up",
@@ -473,6 +546,20 @@
       "forms": [
         "treffe",
         "trifft"
+      ]
+    },
+    "ihn": {
+      "de": "ihn",
+      "en": "him, it",
+      "forms": [
+        "ihn"
+      ]
+    },
+    "er": {
+      "de": "er",
+      "en": "he, it",
+      "forms": [
+        "er"
       ]
     },
     "Wicket": {
@@ -553,7 +640,8 @@
         "hat",
         "habe",
         "haben",
-        "hast"
+        "hast",
+        "habt"
       ]
     },
     "Glück": {
@@ -561,6 +649,13 @@
       "en": "luck",
       "forms": [
         "Glück"
+      ]
+    },
+    "nein": {
+      "de": "nein",
+      "en": "no",
+      "forms": [
+        "nein"
       ]
     },
     "Talent": {
@@ -606,6 +701,13 @@
       "forms": [
         "schaut … an",
         "schauen … an"
+      ]
+    },
+    "sie": {
+      "de": "sie",
+      "en": "she, her; they",
+      "forms": [
+        "sie"
       ]
     },
     "ganz": {
@@ -762,6 +864,13 @@
         "wer"
       ]
     },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
+      ]
+    },
     "WhatsApp-Gruppe": {
       "de": "die WhatsApp-Gruppe, -n",
       "en": "WhatsApp group",
@@ -814,6 +923,14 @@
       "en": "of course",
       "forms": [
         "natürlich"
+      ]
+    },
+    "ihr": {
+      "de": "ihr, ihre",
+      "en": "you (plural); her, their",
+      "forms": [
+        "ihr",
+        "Ihre"
       ]
     },
     "Handy": {

@@ -199,11 +199,33 @@
         "großes"
       ]
     },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
+      ]
+    },
     "Laden": {
       "de": "der Laden, Läden",
       "en": "shop",
       "forms": [
         "Laden"
+      ]
+    },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
       ]
     },
     "klein": {
@@ -221,6 +243,13 @@
       "en": "but",
       "forms": [
         "aber"
+      ]
+    },
+    "er": {
+      "de": "er",
+      "en": "he, it",
+      "forms": [
+        "er"
       ]
     },
     "riechen": {
@@ -327,6 +356,20 @@
         "sehen"
       ]
     },
+    "sie": {
+      "de": "sie",
+      "en": "she, her; they",
+      "forms": [
+        "sie"
+      ]
+    },
+    "ihn": {
+      "de": "ihn",
+      "en": "him, it",
+      "forms": [
+        "ihn"
+      ]
+    },
     "letzte": {
       "de": "letzte",
       "en": "last",
@@ -378,6 +421,13 @@
         "Regal"
       ]
     },
+    "Sie": {
+      "de": "Sie",
+      "en": "you (formal)",
+      "forms": [
+        "Sie"
+      ]
+    },
     "ausstrecken": {
       "de": "aus|strecken",
       "en": "to stretch out, reach out",
@@ -391,6 +441,13 @@
       "forms": [
         "Hand",
         "Hände"
+      ]
+    },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
       ]
     },
     "von": {
@@ -420,6 +477,15 @@
       "en": "still; yet; (noch ein) another",
       "forms": [
         "noch"
+      ]
+    },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
       ]
     },
     "Mann": {
@@ -494,6 +560,13 @@
       "en": "only, just",
       "forms": [
         "nur"
+      ]
+    },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
       ]
     },
     "Kopf": {
@@ -585,6 +658,13 @@
       "en": "to take along",
       "forms": [
         "mitnehmen"
+      ]
+    },
+    "nein": {
+      "de": "nein",
+      "en": "no",
+      "forms": [
+        "nein"
       ]
     },
     "nicht": {
@@ -687,7 +767,22 @@
         "sprechen",
         "spreche",
         "spricht",
-        "gesprochen"
+        "gesprochen",
+        "sprichst"
+      ]
+    },
+    "ja": {
+      "de": "ja",
+      "en": "yes",
+      "forms": [
+        "ja"
+      ]
+    },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
       ]
     },
     "Deutsch": {
@@ -703,7 +798,8 @@
       "forms": [
         "lerne",
         "lernst",
-        "lernen"
+        "lernen",
+        "lernt"
       ]
     },
     "so": {
@@ -742,7 +838,8 @@
         "hat",
         "habe",
         "haben",
-        "hast"
+        "hast",
+        "habt"
       ]
     },
     "einfach": {
@@ -765,6 +862,20 @@
       "en": "by the way",
       "forms": [
         "übrigens"
+      ]
+    },
+    "wir": {
+      "de": "wir",
+      "en": "we",
+      "forms": [
+        "wir"
+      ]
+    },
+    "du": {
+      "de": "du",
+      "en": "you (informal, one person)",
+      "forms": [
+        "du"
       ]
     },
     "sagen": {
@@ -881,6 +992,13 @@
         "morgen"
       ]
     },
+    "Cricket": {
+      "de": "das Cricket",
+      "en": "cricket (the sport)",
+      "forms": [
+        "Cricket"
+      ]
+    },
     "Park": {
       "de": "der Park, -s",
       "en": "park",
@@ -969,6 +1087,13 @@
       "en": "to notice",
       "forms": [
         "merkt"
+      ]
+    },
+    "es": {
+      "de": "es",
+      "en": "it",
+      "forms": [
+        "es"
       ]
     },
     "Nummer": {

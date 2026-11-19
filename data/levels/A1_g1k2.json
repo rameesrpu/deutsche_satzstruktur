@@ -102,6 +102,15 @@
     }
   ],
   "glossary": {
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
+      ]
+    },
     "Stunde": {
       "de": "die Stunde, -n",
       "en": "hour",
@@ -165,6 +174,13 @@
         "Garten"
       ]
     },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
+      ]
+    },
     "im": {
       "de": "im (= in dem)",
       "en": "in the",
@@ -193,7 +209,15 @@
       "forms": [
         "wohne",
         "wohnt",
-        "wohnen"
+        "wohnen",
+        "wohnst"
+      ]
+    },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
       ]
     },
     "jetzt": {
@@ -201,6 +225,17 @@
       "en": "now",
       "forms": [
         "jetzt"
+      ]
+    },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
       ]
     },
     "Tür": {
@@ -260,6 +295,13 @@
         "lachen"
       ]
     },
+    "Hallo": {
+      "de": "Hallo!",
+      "en": "hello, hi",
+      "forms": [
+        "Hallo"
+      ]
+    },
     "heißen": {
       "de": "heißen",
       "en": "to be called",
@@ -274,7 +316,8 @@
       "forms": [
         "lerne",
         "lernst",
-        "lernen"
+        "lernen",
+        "lernt"
       ]
     },
     "Krankenpflege": {
@@ -315,6 +358,14 @@
         "Komm … rein"
       ]
     },
+    "ihr": {
+      "de": "ihr, ihre",
+      "en": "you (plural); her, their",
+      "forms": [
+        "ihr",
+        "Ihre"
+      ]
+    },
     "schon": {
       "de": "schon",
       "en": "already; (schon wieder) again!",
@@ -327,6 +378,20 @@
       "en": "(for) a long time",
       "forms": [
         "lange"
+      ]
+    },
+    "ja": {
+      "de": "ja",
+      "en": "yes",
+      "forms": [
+        "ja"
+      ]
+    },
+    "wir": {
+      "de": "wir",
+      "en": "we",
+      "forms": [
+        "wir"
       ]
     },
     "gern": {
@@ -350,6 +415,13 @@
         "Küche"
       ]
     },
+    "er": {
+      "de": "er",
+      "en": "he, it",
+      "forms": [
+        "er"
+      ]
+    },
     "haben": {
       "de": "haben",
       "en": "to have",
@@ -357,7 +429,8 @@
         "hat",
         "habe",
         "haben",
-        "hast"
+        "hast",
+        "habt"
       ]
     },
     "Mehl": {
@@ -401,7 +474,8 @@
       "en": "to work",
       "forms": [
         "arbeite",
-        "gearbeitet"
+        "gearbeitet",
+        "arbeitet"
       ]
     },
     "sehr": {
@@ -439,6 +513,13 @@
         "Uhr"
       ]
     },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
+      ]
+    },
     "Nacht": {
       "de": "die Nacht, Nächte",
       "en": "night",
@@ -468,6 +549,24 @@
       "forms": [
         "schaut … an",
         "schauen … an"
+      ]
+    },
+    "ihn": {
+      "de": "ihn",
+      "en": "him, it",
+      "forms": [
+        "ihn"
+      ]
+    },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
       ]
     },
     "Nachtdienst": {
@@ -508,6 +607,13 @@
         "zusammen"
       ]
     },
+    "du": {
+      "de": "du",
+      "en": "you (informal, one person)",
+      "forms": [
+        "du"
+      ]
+    },
     "gut": {
       "de": "gut",
       "en": "good; well",
@@ -544,6 +650,13 @@
       "en": "if, when",
       "forms": [
         "wenn"
+      ]
+    },
+    "sie": {
+      "de": "sie",
+      "en": "she, her; they",
+      "forms": [
+        "sie"
       ]
     },
     "wollen": {
@@ -650,6 +763,23 @@
         "zwölf"
       ]
     }
+  },
+  "translations": {
+    "Hier wohne ich jetzt!": "This is where I live now!",
+    "Hallo, ich heiße Lea!": "Hi, I'm Lea!",
+    "Ich lerne Krankenpflege.": "I'm training to be a nurse.",
+    "Ich komme aus Indien.": "I come from India.",
+    "Wohnt ihr schon lange hier?": "Have you been living here long?",
+    "Ja, wir wohnen gern hier.": "Yes, we like living here.",
+    "Max wohnt auch hier.": "Max lives here too.",
+    "Ich backe Brezeln.": "I bake pretzels.",
+    "Ich arbeite sehr früh.": "I work very early.",
+    "Wir kochen heute zusammen!": "We're cooking together today!",
+    "Kochst du gern?": "Do you like cooking?",
+    "Heute koche ich nicht.": "I'm not cooking today.",
+    "Ich bin sehr müde.": "I'm very tired.",
+    "Lea und Max sind nett.": "Lea and Max are nice.",
+    "Ayisha wohnt jetzt in Stuttgart.": "Ayisha lives in Stuttgart now."
   },
   "image": {
     "src": "data/stories/A1/img/wg-haus.svg?v=84f2d614f7",

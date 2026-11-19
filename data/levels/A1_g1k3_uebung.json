@@ -3,6 +3,16 @@
   "category": "1.3 Übung: der, die, das",
   "chapter": "1.3",
   "skill": "A1.artikel",
+  "translations": {
+    "Der Tisch ist neu.": "The table is new.",
+    "Die Tür ist offen.": "The door is open.",
+    "Das Bett ist bequem.": "The bed is comfortable.",
+    "Die Fenster sind groß.": "The windows are big.",
+    "Hier ist eine Lampe.": "Here is a lamp.",
+    "Wo ist der Schlüssel?": "Where is the key?",
+    "Die Stühle sind alt.": "The chairs are old.",
+    "Ein Zimmer ist frei.": "A room is available."
+  },
   "sentences": [
     "Der Tisch ist neu.",
     "Die Tür ist offen.",

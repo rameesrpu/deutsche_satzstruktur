@@ -216,7 +216,6 @@
     "Snack": {"de": "der Snack, -s", "en": "snack", "forms": ["Snacks"]},
     "Spiel": {"de": "das Spiel, -e", "en": "game, match", "forms": ["Spiel"]},
     "Sprache": {"de": "die Sprache, -n", "en": "language", "forms": ["Sprache"]},
-    "sprechen": {"de": "sprechen (spricht)", "en": "to speak", "forms": ["sprechen", "spreche", "spricht", "gesprochen"]},
     "Stadt": {"de": "die Stadt, Städte", "en": "city, town", "forms": ["Stadt"]},
     "Straßenbahn": {"de": "die Straßenbahn, -en", "en": "tram", "forms": ["Straßenbahn"]},
     "Talent": {"de": "das Talent, -e", "en": "talent", "forms": ["Talent"]},

@@ -3,6 +3,16 @@
   "category": "1.5 Übung: haben & unregelmäßige Verben",
   "chapter": "1.5",
   "skill": "A1.haben",
+  "translations": {
+    "Ich habe ein Zimmer.": "I have a room.",
+    "Du hast Zeit.": "You have time.",
+    "Frau Schäfer hat Hühner.": "Mrs Schäfer has chickens.",
+    "Wir haben eine Küche.": "We have a kitchen.",
+    "Habt ihr Brot?": "Do you have any bread?",
+    "Max isst Brezeln.": "Max is eating pretzels.",
+    "Sprichst du Deutsch?": "Do you speak German?",
+    "Ayisha liest die Hausordnung.": "Ayisha is reading the house rules."
+  },
   "sentences": [
     "Ich habe ein Zimmer.",
     "Du hast Zeit.",

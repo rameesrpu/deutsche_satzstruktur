@@ -119,6 +119,17 @@
         "öffnet"
       ]
     },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
+      ]
+    },
     "Kühlschrank": {
       "de": "der Kühlschrank, -schränke",
       "en": "fridge",
@@ -146,6 +157,17 @@
       "en": "only, just",
       "forms": [
         "nur"
+      ]
+    },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
       ]
     },
     "euer": {
@@ -221,6 +243,15 @@
         "Handy"
       ]
     },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
+      ]
+    },
     "Videoanruf": {
       "de": "der Videoanruf, -e",
       "en": "video call",
@@ -255,6 +286,21 @@
       "en": "there; here; then",
       "forms": [
         "da"
+      ]
+    },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
+      ]
+    },
+    "ihr": {
+      "de": "ihr, ihre",
+      "en": "you (plural); her, their",
+      "forms": [
+        "ihr",
+        "Ihre"
       ]
     },
     "klein": {
@@ -336,6 +382,13 @@
       "en": "bat",
       "forms": [
         "Schläger"
+      ]
+    },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
       ]
     },
     "endlich": {
@@ -454,6 +507,13 @@
         "Rückseite"
       ]
     },
+    "Sie": {
+      "de": "Sie",
+      "en": "you (formal)",
+      "forms": [
+        "Sie"
+      ]
+    },
     "werden": {
       "de": "werden (wird)",
       "en": "to become",
@@ -491,6 +551,13 @@
         "Kennst",
         "kenne",
         "kennt"
+      ]
+    },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
       ]
     },
     "früher": {
@@ -608,7 +675,8 @@
         "hat",
         "habe",
         "haben",
-        "hast"
+        "hast",
+        "habt"
       ]
     },
     "Mutter": {
@@ -760,6 +828,13 @@
       "en": "something",
       "forms": [
         "etwas"
+      ]
+    },
+    "sie": {
+      "de": "sie",
+      "en": "she, her; they",
+      "forms": [
+        "sie"
       ]
     },
     "sicher": {

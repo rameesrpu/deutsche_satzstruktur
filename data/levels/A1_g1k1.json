@@ -108,6 +108,15 @@
         "Oktober"
       ]
     },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
+      ]
+    },
     "Flugzeug": {
       "de": "das Flugzeug, -e",
       "en": "plane",
@@ -176,6 +185,24 @@
         "Frauen"
       ]
     },
+    "Sie": {
+      "de": "Sie",
+      "en": "you (formal)",
+      "forms": [
+        "Sie"
+      ]
+    },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
+      ]
+    },
     "müde": {
       "de": "müde",
       "en": "tired",
@@ -190,11 +217,25 @@
         "aber"
       ]
     },
+    "sie": {
+      "de": "sie",
+      "en": "she, her; they",
+      "forms": [
+        "sie"
+      ]
+    },
     "lächeln": {
       "de": "lächeln",
       "en": "to smile",
       "forms": [
         "lächelt"
+      ]
+    },
+    "wir": {
+      "de": "wir",
+      "en": "we",
+      "forms": [
+        "wir"
       ]
     },
     "gleich": {
@@ -227,6 +268,14 @@
         "Ärztinnen"
       ]
     },
+    "ihr": {
+      "de": "ihr, ihre",
+      "en": "you (plural); her, their",
+      "forms": [
+        "ihr",
+        "Ihre"
+      ]
+    },
     "Heimat": {
       "de": "die Heimat",
       "en": "home, homeland",
@@ -253,6 +302,24 @@
       "en": "rain",
       "forms": [
         "Regen"
+      ]
+    },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
+      ]
+    },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
       ]
     },
     "beste": {
@@ -335,6 +402,13 @@
         "Wetter"
       ]
     },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
+      ]
+    },
     "endlich": {
       "de": "endlich",
       "en": "finally, at last",
@@ -369,6 +443,13 @@
       "forms": [
         "Nachricht",
         "Nachrichten"
+      ]
+    },
+    "du": {
+      "de": "du",
+      "en": "you (informal, one person)",
+      "forms": [
+        "du"
       ]
     },
     "schon": {
@@ -540,12 +621,26 @@
         "Kopfhörern"
       ]
     },
+    "er": {
+      "de": "er",
+      "en": "he, it",
+      "forms": [
+        "er"
+      ]
+    },
     "neu": {
       "de": "neu",
       "en": "new",
       "forms": [
         "neu",
         "neue"
+      ]
+    },
+    "ja": {
+      "de": "ja",
+      "en": "yes",
+      "forms": [
+        "ja"
       ]
     },
     "schütteln": {
@@ -603,6 +698,13 @@
       "forms": [
         "Willkommen",
         "willkommen"
+      ]
+    },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
       ]
     },
     "nett": {
@@ -686,6 +788,22 @@
         "beginnt"
       ]
     }
+  },
+  "translations": {
+    "Wir sind gleich da.": "We'll be there in a moment.",
+    "Sie heißt Ayisha.": "Her name is Ayisha.",
+    "Ayisha ist Ärztin.": "Ayisha is a doctor.",
+    "Ihre Heimat ist Kerala.": "Her home is Kerala.",
+    "Das Wetter ist kalt.": "The weather is cold.",
+    "Ich bin endlich hier!": "I'm finally here!",
+    "Bist du schon da?": "Are you there yet?",
+    "Die Koffer sind sehr schwer.": "The suitcases are very heavy.",
+    "Der Automat ist kompliziert.": "The machine is complicated.",
+    "Sind Sie neu hier?": "Are you new here?",
+    "Ja, ich bin neu.": "Yes, I'm new.",
+    "Deutsch ist besser!": "German is better!",
+    "Sie sind sehr nett!": "You are very kind!",
+    "Wer ist der Mann?": "Who is that man?"
   },
   "image": {
     "src": "data/stories/A1/img/flughafen.svg?v=21ee2a46c9",

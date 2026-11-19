@@ -129,15 +129,14 @@ print(json.dumps({'a': a, 'b': b, 'errors': errors}, ensure_ascii=False))`);
     });
 
     for (const [level, stories] of Object.entries(STORY_CONTENT)) {
-        test(`story data ${level}: files without translations have no translations key`, () => {
+        test(`story data ${level}: translation keys are sentences of the file; library files carry none`, () => {
             for (const story of stories) {
                 for (const ch of story.chapters) {
                     for (const file of [ch.file, ch.drillFile]) {
                         const data = JSON.parse(readText(file));
                         const lib = JSON.parse(readText(file.replace('data/levels/', 'data/library/')));
                         assertEqual('translations' in lib, false, `${file} library untouched`);
-                        if (level === 'A1') assertEqual('translations' in data, false, `${file} translations`);
-                        else for (const t of Object.keys(data.translations || {})) {
+                        for (const t of Object.keys(data.translations || {})) {
                             assertEqual(data.sentences.includes(t), true, `${file} translation key ${t}`);
                         }
                     }

@@ -3,6 +3,17 @@
   "category": "1.1 Übung: Nominativ & sein",
   "chapter": "1.1",
   "skill": "A1.nom",
+  "translations": {
+    "Ich bin Ärztin.": "I'm a doctor.",
+    "Bist du müde?": "Are you tired?",
+    "Er ist sehr nett.": "He is very nice.",
+    "Wir sind neu hier.": "We're new here.",
+    "Ihr seid sehr laut!": "You are very loud!",
+    "Die Stadt ist schön.": "The city is beautiful.",
+    "Das Ticket ist teuer.": "The ticket is expensive.",
+    "Die Taschen sind schwer.": "The bags are heavy.",
+    "Sind Sie Frau Rahman?": "Are you Mrs Rahman?"
+  },
   "sentences": [
     "Ich bin Ärztin.",
     "Bist du müde?",

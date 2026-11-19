@@ -112,6 +112,17 @@
         "scheint"
       ]
     },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
+      ]
+    },
     "Sonne": {
       "de": "die Sonne",
       "en": "sun",
@@ -127,11 +138,30 @@
         "schauen … an"
       ]
     },
+    "ihr": {
+      "de": "ihr, ihre",
+      "en": "you (plural); her, their",
+      "forms": [
+        "ihr",
+        "Ihre"
+      ]
+    },
     "Zimmer": {
       "de": "das Zimmer, -",
       "en": "room",
       "forms": [
         "Zimmer"
+      ]
+    },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
       ]
     },
     "klein": {
@@ -174,11 +204,27 @@
         "hier"
       ]
     },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
+      ]
+    },
     "Bett": {
       "de": "das Bett, -en",
       "en": "bed",
       "forms": [
         "Bett"
+      ]
+    },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
       ]
     },
     "Tisch": {
@@ -234,6 +280,13 @@
         "Holz"
       ]
     },
+    "er": {
+      "de": "er",
+      "en": "he, it",
+      "forms": [
+        "er"
+      ]
+    },
     "riechen": {
       "de": "riechen",
       "en": "to smell",
@@ -286,6 +339,13 @@
         "Problem"
       ]
     },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
+      ]
+    },
     "Ärztin": {
       "de": "die Ärztin, -nen",
       "en": "(female) doctor",
@@ -301,6 +361,13 @@
         "Elektrikerin"
       ]
     },
+    "Sie": {
+      "de": "Sie",
+      "en": "you (formal)",
+      "forms": [
+        "Sie"
+      ]
+    },
     "drehen": {
       "de": "drehen",
       "en": "to turn",
@@ -313,6 +380,13 @@
       "en": "to press, push",
       "forms": [
         "drückt"
+      ]
+    },
+    "Klick": {
+      "de": "Klick!",
+      "en": "click (the sound of a switch)",
+      "forms": [
+        "Klick"
       ]
     },
     "Licht": {
@@ -351,6 +425,20 @@
         "geht",
         "Geh",
         "gegangen"
+      ]
+    },
+    "sie": {
+      "de": "sie",
+      "en": "she, her; they",
+      "forms": [
+        "sie"
+      ]
+    },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
       ]
     },
     "Küche": {
@@ -428,7 +516,8 @@
         "hat",
         "habe",
         "haben",
-        "hast"
+        "hast",
+        "habt"
       ]
     },
     "Frühstück": {
@@ -489,6 +578,13 @@
         "Pokal"
       ]
     },
+    "du": {
+      "de": "du",
+      "en": "you (informal, one person)",
+      "forms": [
+        "du"
+      ]
+    },
     "hungrig": {
       "de": "hungrig",
       "en": "hungry",
@@ -522,6 +618,13 @@
       "en": "tasty, delicious",
       "forms": [
         "lecker"
+      ]
+    },
+    "Biryani": {
+      "de": "das Biryani",
+      "en": "biryani (spiced rice dish from India)",
+      "forms": [
+        "Biryani"
       ]
     },
     "besser": {
@@ -617,6 +720,22 @@
         "wer"
       ]
     }
+  },
+  "translations": {
+    "Das Zimmer ist klein.": "The room is small.",
+    "Aber das Fenster ist groß.": "But the window is big.",
+    "Hier ist ein Bett.": "Here is a bed.",
+    "Und hier ist ein Tisch.": "And here is a table.",
+    "Der Schrank ist sehr alt.": "The wardrobe is very old.",
+    "Die Lampe ist kaputt.": "The lamp is broken.",
+    "Die Lampe funktioniert wieder!": "The lamp works again!",
+    "Die Küche ist sehr chaotisch.": "The kitchen is a total mess.",
+    "Da sind viele Tassen.": "There are lots of cups.",
+    "Die Teller sind schmutzig.": "The plates are dirty.",
+    "Die Brezeln sind ganz frisch!": "The pretzels are fresh!",
+    "Was ist eine Brezel?": "What's a Brezel?",
+    "Bist du hungrig?": "Are you hungry?",
+    "Ihr seid lustig!": "You two are funny!"
   },
   "image": {
     "src": "data/stories/A1/img/zimmer.svg?v=da0adb9242",

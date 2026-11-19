@@ -40,3 +40,10 @@ Möhringer
 Lukas-Krankenhaus
 Store
 Malayalam
+
+# Foreign words (not German)
+Sorry
+do
+you
+speak
+English

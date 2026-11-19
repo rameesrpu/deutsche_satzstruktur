@@ -97,11 +97,33 @@
         "Samstag"
       ]
     },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
+      ]
+    },
     "Zimmer": {
       "de": "das Zimmer, -",
       "en": "room",
       "forms": [
         "Zimmer"
+      ]
+    },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
       ]
     },
     "noch": {
@@ -132,7 +154,17 @@
         "hat",
         "habe",
         "haben",
-        "hast"
+        "hast",
+        "habt"
+      ]
+    },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
       ]
     },
     "Liste": {
@@ -140,6 +172,13 @@
       "en": "list",
       "forms": [
         "Liste"
+      ]
+    },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
       ]
     },
     "brauchen": {
@@ -171,7 +210,15 @@
       "de": "der Stuhl, Stühle",
       "en": "chair",
       "forms": [
-        "Stuhl"
+        "Stuhl",
+        "Stühle"
+      ]
+    },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
       ]
     },
     "suchen": {
@@ -236,6 +283,13 @@
         "Kommst … mit",
         "kommen … mit",
         "mitgekommen"
+      ]
+    },
+    "er": {
+      "de": "er",
+      "en": "he, it",
+      "forms": [
+        "er"
       ]
     },
     "tragen": {
@@ -307,6 +361,13 @@
         "sehe",
         "sieht",
         "sehen"
+      ]
+    },
+    "du": {
+      "de": "du",
+      "en": "you (informal, one person)",
+      "forms": [
+        "du"
       ]
     },
     "da": {
@@ -450,6 +511,13 @@
         "schauen"
       ]
     },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
+      ]
+    },
     "Einkaufswagen": {
       "de": "der Einkaufswagen, -",
       "en": "shopping trolley",
@@ -476,6 +544,13 @@
       "en": "plant",
       "forms": [
         "Pflanzen"
+      ]
+    },
+    "wir": {
+      "de": "wir",
+      "en": "we",
+      "forms": [
+        "wir"
       ]
     },
     "kein": {
@@ -528,6 +603,13 @@
       "en": "at home / (to) home",
       "forms": [
         "Hause"
+      ]
+    },
+    "sie": {
+      "de": "sie",
+      "en": "she, her; they",
+      "forms": [
+        "sie"
       ]
     },
     "alles": {

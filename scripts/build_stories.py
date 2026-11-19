@@ -351,7 +351,7 @@ def build():
     for level, glossary in glossaries.items():
         check_glossary(glossary, level, errors)
         texts = [b.get('read') or b.get('play') or '' for story in stories if story['level'] == level
-                 for ch in story['chapters'] for b in ch['beats']]
+                 for ch in story['chapters'] for b in ch['beats'] + ch['drill']]
         for key, form in unused_glossary_forms(glossary, texts):
             warnings.append(f'{level}: glossary form "{form}" ("{key}") never appears in a chapter')
 

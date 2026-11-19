@@ -3,6 +3,16 @@
   "category": "1.4 Übung: Fragen",
   "chapter": "1.4",
   "skill": "A1.fragen",
+  "translations": {
+    "Wie heißt du?": "What's your name?",
+    "Wo wohnst du?": "Where do you live?",
+    "Kommst du aus Indien?": "Are you from India?",
+    "Was lernt Lea?": "What is Lea studying?",
+    "Wohnt Max in Stuttgart?": "Does Max live in Stuttgart?",
+    "Wie ist das Wetter?": "What's the weather like?",
+    "Spielt ihr Karten?": "Do you play cards?",
+    "Woher kommen Sie?": "Where are you from?"
+  },
   "sentences": [
     "Wie heißt du?",
     "Wo wohnst du?",

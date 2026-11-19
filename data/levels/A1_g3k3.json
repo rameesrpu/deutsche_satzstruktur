@@ -117,6 +117,17 @@
         "an"
       ]
     },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
+      ]
+    },
     "Wohnungstür": {
       "de": "die Wohnungstür, -en",
       "en": "front door (of a flat)",
@@ -129,6 +140,15 @@
       "en": "to hang",
       "forms": [
         "hängt"
+      ]
+    },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
       ]
     },
     "Schild": {
@@ -168,6 +188,24 @@
         "wo"
       ]
     },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
+      ]
+    },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
+      ]
+    },
     "sehen": {
       "de": "sehen (sieht)",
       "en": "to see",
@@ -178,11 +216,25 @@
         "sehen"
       ]
     },
+    "ihn": {
+      "de": "ihn",
+      "en": "him, it",
+      "forms": [
+        "ihn"
+      ]
+    },
     "nicht": {
       "de": "nicht",
       "en": "not",
       "forms": [
         "nicht"
+      ]
+    },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
       ]
     },
     "Küche": {
@@ -296,6 +348,13 @@
         "Oma"
       ]
     },
+    "er": {
+      "de": "er",
+      "en": "he, it",
+      "forms": [
+        "er"
+      ]
+    },
     "lieben": {
       "de": "lieben",
       "en": "to love",
@@ -349,6 +408,13 @@
       "en": "bucket",
       "forms": [
         "Eimer"
+      ]
+    },
+    "Sie": {
+      "de": "Sie",
+      "en": "you (formal)",
+      "forms": [
+        "Sie"
       ]
     },
     "schauen": {
@@ -423,11 +489,25 @@
         "Türen"
       ]
     },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
+      ]
+    },
     "Herr": {
       "de": "der Herr, -en",
       "en": "Mr; gentleman",
       "forms": [
         "Herr"
+      ]
+    },
+    "wir": {
+      "de": "wir",
+      "en": "we",
+      "forms": [
+        "wir"
       ]
     },
     "finden": {
@@ -475,6 +555,13 @@
       "forms": [
         "putzt",
         "putze"
+      ]
+    },
+    "sie": {
+      "de": "sie",
+      "en": "she, her; they",
+      "forms": [
+        "sie"
       ]
     },
     "sofort": {
@@ -626,11 +713,26 @@
         "Hause"
       ]
     },
+    "ihr": {
+      "de": "ihr, ihre",
+      "en": "you (plural); her, their",
+      "forms": [
+        "ihr",
+        "Ihre"
+      ]
+    },
     "oder": {
       "de": "oder",
       "en": "or; (…, oder?) …, right?",
       "forms": [
         "oder"
+      ]
+    },
+    "nein": {
+      "de": "nein",
+      "en": "no",
+      "forms": [
+        "nein"
       ]
     },
     "ignorieren": {
@@ -771,6 +873,13 @@
       "en": "voice",
       "forms": [
         "Stimme"
+      ]
+    },
+    "Biryani": {
+      "de": "das Biryani",
+      "en": "biryani (spiced rice dish from India)",
+      "forms": [
+        "Biryani"
       ]
     }
   },

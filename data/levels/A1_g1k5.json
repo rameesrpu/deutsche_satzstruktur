@@ -113,6 +113,17 @@
         "vor"
       ]
     },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
+      ]
+    },
     "Tür": {
       "de": "die Tür, -en",
       "en": "door",
@@ -127,6 +138,15 @@
       "forms": [
         "steht",
         "stehen"
+      ]
+    },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
       ]
     },
     "Frau": {
@@ -170,7 +190,33 @@
       "de": "Grüß Gott!",
       "en": "hello (greeting in southern Germany)",
       "forms": [
-        "Grüß"
+        "Grüß",
+        "Gott"
+      ]
+    },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
+      ]
+    },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
+      ]
+    },
+    "Sie": {
+      "de": "Sie",
+      "en": "you (formal)",
+      "forms": [
+        "Sie"
       ]
     },
     "anschauen": {
@@ -209,6 +255,13 @@
         "unten"
       ]
     },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
+      ]
+    },
     "wieder": {
       "de": "wieder",
       "en": "again",
@@ -223,7 +276,8 @@
         "hat",
         "habe",
         "haben",
-        "hast"
+        "hast",
+        "habt"
       ]
     },
     "Hausordnung": {
@@ -231,6 +285,13 @@
       "en": "house rules",
       "forms": [
         "Hausordnung"
+      ]
+    },
+    "nein": {
+      "de": "nein",
+      "en": "no",
+      "forms": [
+        "nein"
       ]
     },
     "kein": {
@@ -248,6 +309,14 @@
       "forms": [
         "gibt",
         "geben"
+      ]
+    },
+    "ihr": {
+      "de": "ihr, ihre",
+      "en": "you (plural); her, their",
+      "forms": [
+        "ihr",
+        "Ihre"
       ]
     },
     "Papier": {
@@ -304,6 +373,13 @@
       "en": "here",
       "forms": [
         "hier"
+      ]
+    },
+    "wir": {
+      "de": "wir",
+      "en": "we",
+      "forms": [
+        "wir"
       ]
     },
     "Kehrwoche": {
@@ -473,12 +549,26 @@
         "Garten"
       ]
     },
+    "gack": {
+      "de": "gack",
+      "en": "cluck (sound a chicken makes)",
+      "forms": [
+        "gack"
+      ]
+    },
     "Huhn": {
       "de": "das Huhn, Hühner",
       "en": "chicken, hen",
       "forms": [
         "Hühner",
         "Hühnern"
+      ]
+    },
+    "ja": {
+      "de": "ja",
+      "en": "yes",
+      "forms": [
+        "ja"
       ]
     },
     "fünf": {
@@ -618,6 +708,13 @@
         "liest"
       ]
     },
+    "du": {
+      "de": "du",
+      "en": "you (informal, one person)",
+      "forms": [
+        "du"
+      ]
+    },
     "aber": {
       "de": "aber",
       "en": "but",
@@ -666,6 +763,13 @@
       "forms": [
         "schläft",
         "schlafen"
+      ]
+    },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
       ]
     },
     "Nacht": {
@@ -729,6 +833,23 @@
         "da"
       ]
     }
+  },
+  "translations": {
+    "Grüß Gott, ich bin Frau Schäfer.": "Grüß Gott, I'm Mrs Schäfer.",
+    "Haben Sie die Hausordnung?": "Do you have the house rules?",
+    "Nein, ich habe keine Hausordnung.": "No, I don't have any house rules.",
+    "Hier haben wir die Kehrwoche.": "Here we have the Kehrwoche.",
+    "Was ist das?": "What is that?",
+    "Ich habe leider keine Zeit.": "Unfortunately I don't have time.",
+    "Sie haben nie Zeit, Herr Brenner!": "You never have time, Mr Brenner!",
+    "Sie haben Hühner?": "You have chickens?",
+    "Ja, ich habe fünf Hühner.": "Yes, I have five chickens.",
+    "Die Hühner haben Namen.": "The chickens have names.",
+    "Ich liebe Hühner!": "I love chickens!",
+    "Essen Sie gern Eier?": "Do you like eggs?",
+    "Ayisha nimmt sechs Eier.": "Ayisha takes six eggs.",
+    "Liest du die Hausordnung?": "Are you reading the house rules?",
+    "Max schläft schon wieder.": "Max is asleep again."
   },
   "image": {
     "src": "data/stories/A1/img/wg-haus.svg?v=84f2d614f7",

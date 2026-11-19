@@ -108,6 +108,13 @@
         "vermisst"
       ]
     },
+    "Biryani": {
+      "de": "das Biryani",
+      "en": "biryani (spiced rice dish from India)",
+      "forms": [
+        "Biryani"
+      ]
+    },
     "sehr": {
       "de": "sehr",
       "en": "very",
@@ -122,7 +129,17 @@
         "hat",
         "habe",
         "haben",
-        "hast"
+        "hast",
+        "habt"
+      ]
+    },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
       ]
     },
     "Idee": {
@@ -145,6 +162,24 @@
       "en": "restaurant",
       "forms": [
         "Restaurant"
+      ]
+    },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
+      ]
+    },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
       ]
     },
     "Stadt": {
@@ -214,6 +249,13 @@
         "summt … mit"
       ]
     },
+    "Sie": {
+      "de": "Sie",
+      "en": "you (formal)",
+      "forms": [
+        "Sie"
+      ]
+    },
     "kennen": {
       "de": "kennen",
       "en": "to know (a person, a thing)",
@@ -239,12 +281,26 @@
         "Lied"
       ]
     },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
+      ]
+    },
     "anschauen": {
       "de": "an|schauen",
       "en": "to look at",
       "forms": [
         "schaut … an",
         "schauen … an"
+      ]
+    },
+    "sie": {
+      "de": "sie",
+      "en": "she, her; they",
+      "forms": [
+        "sie"
       ]
     },
     "was": {
@@ -271,6 +327,13 @@
         "trinken",
         "Trink",
         "Trinken"
+      ]
+    },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
       ]
     },
     "bitte": {
@@ -305,11 +368,32 @@
         "Iss"
       ]
     },
+    "es": {
+      "de": "es",
+      "en": "it",
+      "forms": [
+        "es"
+      ]
+    },
     "scharf": {
       "de": "scharf",
       "en": "spicy, hot",
       "forms": [
         "scharf"
+      ]
+    },
+    "ja": {
+      "de": "ja",
+      "en": "yes",
+      "forms": [
+        "ja"
+      ]
+    },
+    "wir": {
+      "de": "wir",
+      "en": "we",
+      "forms": [
+        "wir"
       ]
     },
     "auch": {
@@ -380,6 +464,17 @@
       "en": "how; like, as",
       "forms": [
         "wie"
+      ]
+    },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
       ]
     },
     "nicht": {
@@ -455,6 +550,14 @@
         "noch"
       ]
     },
+    "ihr": {
+      "de": "ihr, ihre",
+      "en": "you (plural); her, their",
+      "forms": [
+        "ihr",
+        "Ihre"
+      ]
+    },
     "Nachtisch": {
       "de": "der Nachtisch, -e",
       "en": "dessert",
@@ -483,6 +586,13 @@
       "forms": [
         "hört",
         "gehört"
+      ]
+    },
+    "er": {
+      "de": "er",
+      "en": "he, it",
+      "forms": [
+        "er"
       ]
     },
     "lachen": {

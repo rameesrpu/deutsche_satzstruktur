@@ -109,6 +109,15 @@
     }
   ],
   "glossary": {
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
+      ]
+    },
     "Woche": {
       "de": "die Woche, -n",
       "en": "week",
@@ -122,6 +131,17 @@
       "en": "later",
       "forms": [
         "später"
+      ]
+    },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
       ]
     },
     "wieder": {
@@ -160,6 +180,13 @@
         "Ruf"
       ]
     },
+    "sie": {
+      "de": "sie",
+      "en": "she, her; they",
+      "forms": [
+        "sie"
+      ]
+    },
     "was": {
       "de": "was?",
       "en": "what?",
@@ -174,7 +201,15 @@
         "hat",
         "habe",
         "haben",
-        "hast"
+        "hast",
+        "habt"
+      ]
+    },
+    "du": {
+      "de": "du",
+      "en": "you (informal, one person)",
+      "forms": [
+        "du"
       ]
     },
     "Wochenende": {
@@ -194,6 +229,13 @@
         "gemacht"
       ]
     },
+    "wir": {
+      "de": "wir",
+      "en": "we",
+      "forms": [
+        "wir"
+      ]
+    },
     "Ausflug": {
       "de": "der Ausflug, Ausflüge",
       "en": "trip, outing",
@@ -206,6 +248,17 @@
       "en": "on, onto; (auf Deutsch) in German",
       "forms": [
         "auf"
+      ]
+    },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
       ]
     },
     "schwäbisch": {
@@ -247,6 +300,13 @@
         "Kommst … mit",
         "kommen … mit",
         "mitgekommen"
+      ]
+    },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
       ]
     },
     "Leute": {
@@ -318,6 +378,13 @@
         "vielen"
       ]
     },
+    "er": {
+      "de": "er",
+      "en": "he, it",
+      "forms": [
+        "er"
+      ]
+    },
     "kommen": {
       "de": "kommen",
       "en": "to come",
@@ -357,6 +424,13 @@
       "en": "bad(ly)",
       "forms": [
         "schlecht"
+      ]
+    },
+    "Cricket": {
+      "de": "das Cricket",
+      "en": "cricket (the sport)",
+      "forms": [
+        "Cricket"
       ]
     },
     "Burg": {
@@ -427,6 +501,13 @@
         "gold"
       ]
     },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
+      ]
+    },
     "Foto": {
       "de": "das Foto, -s",
       "en": "photo",
@@ -479,6 +560,13 @@
         "mitgebracht"
       ]
     },
+    "Biryani": {
+      "de": "das Biryani",
+      "en": "biryani (spiced rice dish from India)",
+      "forms": [
+        "Biryani"
+      ]
+    },
     "von": {
       "de": "von + Dat.",
       "en": "from; of",
@@ -522,6 +610,13 @@
       "en": "(for) a long time",
       "forms": [
         "lange"
+      ]
+    },
+    "es": {
+      "de": "es",
+      "en": "it",
+      "forms": [
+        "es"
       ]
     },
     "nicht": {
@@ -623,6 +718,13 @@
         "alte",
         "altes",
         "alter"
+      ]
+    },
+    "Sie": {
+      "de": "Sie",
+      "en": "you (formal)",
+      "forms": [
+        "Sie"
       ]
     },
     "lesen": {

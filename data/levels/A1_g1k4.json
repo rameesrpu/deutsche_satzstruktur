@@ -122,6 +122,24 @@
         "alle"
       ]
     },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
+      ]
+    },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
+      ]
+    },
     "Küche": {
       "de": "die Küche, -n",
       "en": "kitchen",
@@ -153,7 +171,8 @@
         "hat",
         "habe",
         "haben",
-        "hast"
+        "hast",
+        "habt"
       ]
     },
     "Brezel": {
@@ -188,11 +207,25 @@
         "kommst"
       ]
     },
+    "du": {
+      "de": "du",
+      "en": "you (informal, one person)",
+      "forms": [
+        "du"
+      ]
+    },
     "genau": {
       "de": "genau",
       "en": "exactly",
       "forms": [
         "genau"
+      ]
+    },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
       ]
     },
     "aus": {
@@ -207,6 +240,17 @@
       "en": "where?",
       "forms": [
         "wo"
+      ]
+    },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
       ]
     },
     "im": {
@@ -258,6 +302,13 @@
         "Kokosnüssen"
       ]
     },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
+      ]
+    },
     "sehr": {
       "de": "sehr",
       "en": "very",
@@ -286,6 +337,13 @@
         "Iss"
       ]
     },
+    "es": {
+      "de": "es",
+      "en": "it",
+      "forms": [
+        "es"
+      ]
+    },
     "dort": {
       "de": "dort",
       "en": "there",
@@ -298,6 +356,13 @@
       "en": "warm",
       "forms": [
         "warm"
+      ]
+    },
+    "ja": {
+      "de": "ja",
+      "en": "yes",
+      "forms": [
+        "ja"
       ]
     },
     "immer": {
@@ -357,7 +422,8 @@
       "forms": [
         "lerne",
         "lernst",
-        "lernen"
+        "lernen",
+        "lernt"
       ]
     },
     "schon": {
@@ -379,6 +445,13 @@
       "en": "German (the language)",
       "forms": [
         "Deutsch"
+      ]
+    },
+    "nein": {
+      "de": "nein",
+      "en": "no",
+      "forms": [
+        "nein"
       ]
     },
     "erst": {
@@ -438,11 +511,26 @@
         "Brot"
       ]
     },
+    "ihr": {
+      "de": "ihr, ihre",
+      "en": "you (plural); her, their",
+      "forms": [
+        "ihr",
+        "Ihre"
+      ]
+    },
     "heute": {
       "de": "heute",
       "en": "today",
       "forms": [
         "heute"
+      ]
+    },
+    "wir": {
+      "de": "wir",
+      "en": "we",
+      "forms": [
+        "wir"
       ]
     },
     "spielen": {
@@ -477,11 +565,27 @@
         "auch"
       ]
     },
+    "Cricket": {
+      "de": "das Cricket",
+      "en": "cricket (the sport)",
+      "forms": [
+        "Cricket"
+      ]
+    },
     "fast": {
       "de": "fast",
       "en": "almost",
       "forms": [
         "fast"
+      ]
+    },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
       ]
     },
     "Profi": {
@@ -585,6 +689,13 @@
         "blass"
       ]
     },
+    "Oh": {
+      "de": "Oh!",
+      "en": "oh",
+      "forms": [
+        "Oh"
+      ]
+    },
     "Frau": {
       "de": "die Frau, -en",
       "en": "woman; Mrs",
@@ -600,6 +711,22 @@
         "Vermieterin"
       ]
     }
+  },
+  "translations": {
+    "Woher kommst du genau?": "Where exactly are you from?",
+    "Ich komme aus Payyannur.": "I'm from Payyannur.",
+    "Wo ist das?": "Where is that?",
+    "Payyannur ist in Kerala.": "Payyannur is in Kerala.",
+    "Ist es dort warm?": "Is it warm there?",
+    "Ja, es ist immer warm.": "Yes, it's always warm.",
+    "Lernst du schon lange Deutsch?": "Have you been learning German for long?",
+    "Was machst du, Max?": "What do you do, Max?",
+    "Ich backe Brot und Brezeln.": "I bake bread and pretzels.",
+    "Was macht ihr heute Abend?": "What are you two doing this evening?",
+    "Wir spielen oft Karten.": "We often play cards.",
+    "Spielst du auch Karten?": "Do you play cards too?",
+    "Nein, ich spiele Cricket.": "No, I play cricket.",
+    "Ist das wahr?": "Is that true?"
   },
   "image": {
     "src": "data/stories/A1/img/wg-kueche.svg?v=c393e00ae7",

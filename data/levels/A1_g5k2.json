@@ -122,6 +122,17 @@
         "Uhr"
       ]
     },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
+      ]
+    },
     "Praxis": {
       "de": "die Praxis, Praxen",
       "en": "(doctor's) practice, surgery",
@@ -136,11 +147,29 @@
         "von"
       ]
     },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
+      ]
+    },
     "hell": {
       "de": "hell",
       "en": "bright, light",
       "forms": [
         "hell"
+      ]
+    },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
       ]
     },
     "freundlich": {
@@ -180,6 +209,13 @@
         "zur"
       ]
     },
+    "Sie": {
+      "de": "Sie",
+      "en": "you (formal)",
+      "forms": [
+        "Sie"
+      ]
+    },
     "bei": {
       "de": "bei + Dat.",
       "en": "at, with, near",
@@ -207,6 +243,15 @@
       "forms": [
         "sitzt",
         "sitzen"
+      ]
+    },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
       ]
     },
     "Mutter": {
@@ -364,6 +409,13 @@
         "fehlt"
       ]
     },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
+      ]
+    },
     "haben": {
       "de": "haben",
       "en": "to have",
@@ -371,7 +423,8 @@
         "hat",
         "habe",
         "haben",
-        "hast"
+        "hast",
+        "habt"
       ]
     },
     "seit": {
@@ -582,6 +635,13 @@
         "hebt … auf"
       ]
     },
+    "es": {
+      "de": "es",
+      "en": "it",
+      "forms": [
+        "es"
+      ]
+    },
     "schauen": {
       "de": "schauen",
       "en": "to look",
@@ -595,6 +655,13 @@
       "en": "to put on (glasses)",
       "forms": [
         "setzt … auf"
+      ]
+    },
+    "sie": {
+      "de": "sie",
+      "en": "she, her; they",
+      "forms": [
+        "sie"
       ]
     },
     "Brille": {
@@ -703,7 +770,8 @@
       "en": "to work",
       "forms": [
         "arbeite",
-        "gearbeitet"
+        "gearbeitet",
+        "arbeitet"
       ]
     },
     "gelernt": {
@@ -824,6 +892,13 @@
         "geschrieben"
       ]
     },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
+      ]
+    },
     "Cricket-Gruppe": {
       "de": "die Cricket-Gruppe, -n",
       "en": "cricket group (chat)",
@@ -866,6 +941,13 @@
         "Samstag"
       ]
     },
+    "wir": {
+      "de": "wir",
+      "en": "we",
+      "forms": [
+        "wir"
+      ]
+    },
     "Alb": {
       "de": "die (Schwäbische) Alb",
       "en": "Swabian Jura (hills near Stuttgart)",
@@ -889,6 +971,13 @@
         "Kommst … mit",
         "kommen … mit",
         "mitgekommen"
+      ]
+    },
+    "du": {
+      "de": "du",
+      "en": "you (informal, one person)",
+      "forms": [
+        "du"
       ]
     }
   },

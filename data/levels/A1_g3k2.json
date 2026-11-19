@@ -107,6 +107,17 @@
         "mit"
       ]
     },
+    "der": {
+      "de": "der, die, das",
+      "en": "the",
+      "forms": [
+        "der",
+        "die",
+        "das",
+        "den",
+        "dem"
+      ]
+    },
     "Anmeldung": {
       "de": "die Anmeldung, -en",
       "en": "(address) registration",
@@ -198,6 +209,15 @@
         "Bank"
       ]
     },
+    "ein": {
+      "de": "ein, eine",
+      "en": "a, an",
+      "forms": [
+        "ein",
+        "eine",
+        "einem"
+      ]
+    },
     "jung": {
       "de": "jung",
       "en": "young",
@@ -237,11 +257,25 @@
         "können"
       ]
     },
+    "ich": {
+      "de": "ich",
+      "en": "I",
+      "forms": [
+        "ich"
+      ]
+    },
     "für": {
       "de": "für + Akk.",
       "en": "for",
       "forms": [
         "für"
+      ]
+    },
+    "Sie": {
+      "de": "Sie",
+      "en": "you (formal)",
+      "forms": [
+        "Sie"
       ]
     },
     "tun": {
@@ -310,7 +344,8 @@
         "hat",
         "habe",
         "haben",
-        "hast"
+        "hast",
+        "habt"
       ]
     },
     "sechs": {
@@ -340,6 +375,13 @@
       "en": "to take along",
       "forms": [
         "mitnehmen"
+      ]
+    },
+    "nein": {
+      "de": "nein",
+      "en": "no",
+      "forms": [
+        "nein"
       ]
     },
     "dürfen": {
@@ -377,6 +419,17 @@
       "en": "later",
       "forms": [
         "später"
+      ]
+    },
+    "sein (Verb)": {
+      "de": "sein (ist)",
+      "en": "to be",
+      "forms": [
+        "ist",
+        "sind",
+        "bin",
+        "seid",
+        "bist"
       ]
     },
     "fertig": {
@@ -465,6 +518,13 @@
         "Ruf"
       ]
     },
+    "du": {
+      "de": "du",
+      "en": "you (informal, one person)",
+      "forms": [
+        "du"
+      ]
+    },
     "Karte": {
       "de": "die Karte, -n",
       "en": "card",
@@ -506,6 +566,13 @@
       "en": "to wait",
       "forms": [
         "wartet"
+      ]
+    },
+    "und": {
+      "de": "und",
+      "en": "and",
+      "forms": [
+        "und"
       ]
     },
     "gern": {
@@ -594,6 +661,14 @@
         "hilft"
       ]
     },
+    "ihr": {
+      "de": "ihr, ihre",
+      "en": "you (plural); her, their",
+      "forms": [
+        "ihr",
+        "Ihre"
+      ]
+    },
     "kein": {
       "de": "kein, keine",
       "en": "no, not a",
@@ -653,6 +728,13 @@
       "forms": [
         "Drucken",
         "druckt"
+      ]
+    },
+    "in": {
+      "de": "in",
+      "en": "in, into",
+      "forms": [
+        "in"
       ]
     },
     "S-Bahn": {
@@ -818,6 +900,13 @@
         "fährt",
         "fahren",
         "gefahren"
+      ]
+    },
+    "er": {
+      "de": "er",
+      "en": "he, it",
+      "forms": [
+        "er"
       ]
     },
     "draußen": {

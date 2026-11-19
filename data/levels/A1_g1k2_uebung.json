@@ -3,6 +3,16 @@
   "category": "1.2 Übung: Verben im Präsens",
   "chapter": "1.2",
   "skill": "A1.praesens",
+  "translations": {
+    "Ich wohne in Stuttgart.": "I live in Stuttgart.",
+    "Du kommst aus Indien.": "You come from India.",
+    "Lea lernt Krankenpflege.": "Lea is training to be a nurse.",
+    "Max arbeitet sehr früh.": "Max works very early.",
+    "Wir kochen zusammen.": "We cook together.",
+    "Ihr spielt Cricket.": "You play cricket.",
+    "Die Kinder spielen draußen.": "The children are playing outside.",
+    "Woher kommst du?": "Where are you from?"
+  },
   "sentences": [
     "Ich wohne in Stuttgart.",
     "Du kommst aus Indien.",
