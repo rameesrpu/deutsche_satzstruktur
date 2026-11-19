@@ -44,7 +44,7 @@ the owner's answer or review.
 | # | Project | Plan | Status | Needs first |
 |---|---|---|---|---|
 | 1 | Production ladder, rungs 2–3 | [plan](superpowers/plans/2026-11-15-production-ladder.md) · [design](superpowers/specs/2026-11-15-production-ladder-design.md) | done (2026-11-17; on branch `production-ladder`, not merged) | – |
-| 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | in progress (7 of 7, whole-branch review running; branch `content-pipeline`) | – |
+| 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | done (2026-11-19; branch `content-pipeline`, on top of `production-ladder`, not merged) | – |
 | 3 | Ladder rungs 4–5 (Schreiben, Sprechen) | [plan](superpowers/plans/2026-11-16-ladder-write-speak.md) · [design](superpowers/specs/2026-11-16-ladder-write-speak-design.md) | not started | 1 |
 | 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | not started | 1 |
 | 4b | Preposition scene | [plan](superpowers/plans/2026-11-16-boards-preposition-scene.md) | not started | 4a |
@@ -99,6 +99,29 @@ Parked (small, known):
 - [x] Task 5: A2 chapter list — commits `eec3a50`, `57a267e` (owner stop skipped; see "Needs owner review")
 - [x] Task 6: A1 translation backfill (five story files) — commits `008f6b4`..`05147b7`, `e1bcf15`
 - [x] Task 7: Pilot chapter A2 1.1 — commits `dfd0ac1`..`6432a52`, `5ae3e23` (owner stops skipped; see "Needs owner review")
+- [x] Whole-branch review (Opus) and its fix wave — commits `585d45d`, `43a39bf`
+- [ ] Merge to `main` — the owner's step, after `production-ladder` and the review items below
+
+What the reviews changed against the plan (rulings, each can be undone):
+- The checker reports every word that has no glossary match ("ungeglosst"), capitalised or not.
+  Names, places and non-German words live in `data/stories/names.txt`.
+- All of A1 now has English translations and a glossary entry for every word, including
+  articles and pronouns ("Sie", "Ihr", "das" carry every reading in their meaning).
+- A chapter file carries the glossary entries and pictures of its own and all lower levels, so
+  A1 words can be tapped in A2 and A2 can reuse A1 pictures.
+- A2 opens when the last A1 chapter is complete; "Weiter" at the end of A1 5.3 leads to A2 1.1.
+  The Wörter screen lists each word once, under the chapter where it first appears.
+- The A2 skill table in CURRICULUM.md is now in chapter order (the checker reads the grammar
+  order from it). This changes the A2 teaching order.
+- The content blocklist also catches compounds (Rotwein, Schweinefleisch, Alkohol, geküsst).
+
+Parked (small, known):
+- The blocklist does not flag the plural "Weine" (wines), because "weine" (I cry) is allowed.
+- Subordinate clauses are found by their `C` tag only; a "weil" in a read beat is not flagged.
+- The "more than 12 new glossary words" warning fires on every chapter; recalibrate after a
+  few A2 chapters.
+- A story card with many read beats can sit under the case tray (layout); the guide limits
+  read beats to three in a row.
 
 ### 3. Ladder rungs 4–5
 
@@ -174,6 +197,28 @@ look at. Remove an item when it is checked.
   (Werkstatt) before she opens the new version, as a backup.
 - **Wording.** The recap line and the other calls listed under "What the reviews changed
   against the plan" in the tracker.
+
+### Project 2 — content pipeline (branch `content-pipeline`)
+
+- **A2 chapter list** (owner stop that was skipped): `data/stories/STORY_BIBLE.md` → "A2
+  chapters". Plots, titles, hooks; five new characters (teacher Herr Vogel; Omar, Olena, Linh,
+  Lucas) under "Others"; 9 new picture places still to be drawn.
+- **New A2 grammar order** in `data/stories/CURRICULUM.md` (A2 table, now in chapter order).
+- **Pilot chapter A2 1.1 "Der erste Kurstag"** (both owner stops skipped). Read the review sheet:
+  `python3 scripts/story_review.py data/stories/A2/01_der_sprachkurs.json 1.1`, then open
+  `out/review/A2_1.1.md`. It goes live for her as soon as A1 5.3 is complete, so read it before
+  merging. Points to judge: Lucas's learner slip "gesesst" (corrected in the next line);
+  11 of 15 sentences in the Perfekt; no picture yet (place `sprachschule`).
+- **Facts not checked against an official source** (marked "unverified" in the bible): the
+  Approbation documents and translations, the Regierungspräsidium (A2 3.1, 3.3), what a
+  Hospitation allows (2.2, 5.1), Ayisha helping a doctor informally in Hindi (5.2).
+- **Medical plausibility:** Frau Schäfer's flu with a GP home visit (2.2), the sprained ankle
+  care (5.2).
+- **Names list:** `data/stories/names.txt` — check nothing there should have a meaning shown
+  (Umma, Uppa, Malayalam, Store …).
+- **A1 German to look at:** 4.2 "Sie lernen so schneller." reads slightly odd.
+- **Open questions from the design:** read every chapter vs spot checks; Goethe word lists as
+  `data/wordlists/<level>.txt` (the checker uses them when present).
 
 ## How to run a plan from a new conversation
 
