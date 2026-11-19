@@ -235,7 +235,7 @@ class RealFilesTest(unittest.TestCase):
 
 
 class ReviewSheetTest(unittest.TestCase):
-    def sheet(self, errors=(), warnings=(), new_keys=None):
+    def sheet(self, errors=(), warnings=(), new_words=None):
         story = {'level': 'A2', 'glossary': {
             'Aerztin': {'de': 'die Ärztin, -nen', 'en': 'doctor (f.)', 'forms': ['Ärztin']},
             'Koffer': {'de': 'der Koffer, -', 'en': 'suitcase', 'forms': ['Koffer']}}}
@@ -245,7 +245,7 @@ class ReviewSheetTest(unittest.TestCase):
                         {'play': 'Ich bin Ärztin.', 'tags': 'S.ich V.ich S.f', 'en': 'I am a doctor.'},
                         {'play': 'Der Koffer ist schwer.', 'tags': 'S.m V.er X'}],
               'drill': [{'play': 'Ich bin hier.', 'tags': 'S.ich V.ich X', 'en': 'I am here.'}]}
-        return sr.review_sheet('A2', story, ch, list(errors), list(warnings), new_keys)
+        return sr.review_sheet('A2', story, ch, list(errors), list(warnings), new_words)
 
     def test_sheet_sections_and_lines(self):
         s = self.sheet()
@@ -261,13 +261,34 @@ class ReviewSheetTest(unittest.TestCase):
         self.assertIn('**Ich bin hier.** — *I am here.*', s.split('## Übung')[1])
 
     def test_new_words_and_findings(self):
-        s = self.sheet(errors=['E1'], warnings=['W1'], new_keys={'Koffer'})
+        s = self.sheet(errors=['E1'], warnings=['W1'], new_words={'Koffer': {'de': 'der Koffer, -', 'en': 'suitcase', 'forms': ['Koffer']}})
         words = s.split('## Neue Wörter')[1].split('## Prüfung')[0]
         self.assertIn('der Koffer, - — suitcase', words)
         self.assertNotIn('Ärztin', words)
         check = s.split('## Prüfung')[1]
         self.assertLess(check.index('E1'), check.index('W1'))
         self.assertNotIn('Keine Hinweise.', s)
+
+    def test_new_word_from_another_files_glossary_is_listed(self):
+        other = {'de': 'die Tasche, -n', 'en': 'bag', 'forms': ['Tasche']}
+        s = self.sheet(new_words={'Tasche': other})
+        self.assertIn('die Tasche, -n — bag', s.split('## Neue Wörter')[1])
+
+    def test_checked_chapters_resolve_new_words_across_files_and_drill(self):
+        path = os.path.join(bs.STORIES_DIR, 'A1', '01_ankunft.json')
+        first = [r for r in cs.checked_chapters([path]) if r[2]['id'] == '1.1'][0]
+        new_words = first[5]
+        story_glossary = first[1]['glossary']
+        self.assertTrue(set(new_words) - set(story_glossary), 'expected keys from other story files')
+        drill_only = cs.glossary_keys({'beats': [], 'drill': first[2]['drill']}, new_words) \
+            - cs.glossary_keys({'beats': first[2]['beats'], 'drill': []}, new_words)
+        for k in drill_only:
+            self.assertIn(k, new_words)
+
+    def test_story_text_is_escaped(self):
+        line = sr.item_line({'play': 'Das ist *toll* _so_', 'en': 'a_b *c*'})
+        self.assertEqual(line, '**Das ist \\*toll\\* \\_so\\_** — *a\\_b \\*c\\**')
+        self.assertEqual(sr.item_line({'read': '# Titel', 'speaker': 'A_B'}), '**A\\_B:** \\# Titel')
 
     def test_cli_writes_a_file_per_chapter(self):
         script = os.path.join(os.path.dirname(__file__), 'story_review.py')

@@ -242,8 +242,9 @@ def load_wordlist(level):
 def checked_chapters(paths):
     """
     Check the chapters of `paths` (all story files when empty), in context of every story file →
-    [(path, story, chapter, errors, warnings, new_keys)]. new_keys: glossary keys first used in
-    this chapter (none of the earlier chapters in story order uses them).
+    [(path, story, chapter, errors, warnings, new_words)]. new_words: {key: entry} of the merged
+    glossary (all files of this and lower levels) for the keys first used in this chapter (beats or
+    drill; none of the earlier chapters in story order uses them).
     """
     wanted = {os.path.abspath(p) for p in paths}
     files = sorted({os.path.abspath(p) for p in glob.glob(os.path.join(STORIES_DIR, '*', '*.json'))} | wanted)
@@ -272,8 +273,8 @@ def checked_chapters(paths):
                 errors, warnings = check_chapter(
                     level, ch, known, glossary, skills, wordlist=load_wordlist(level),
                     earlier_plays=earlier_plays, earlier_glossary=earlier_glossary, names=names)
-                new_keys = glossary_keys(ch, glossary) - earlier_glossary
-                result.append((path, story, ch, errors, warnings, new_keys))
+                new_words = {k: glossary[k] for k in glossary_keys(ch, glossary) - earlier_glossary}
+                result.append((path, story, ch, errors, warnings, new_words))
             known |= chapter_words(ch)
             earlier_plays |= {b['play'].strip() for b in ch['beats'] if 'play' in b}
             earlier_glossary |= glossary_keys(ch, glossary)
