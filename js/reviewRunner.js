@@ -39,7 +39,8 @@ export function keyCategory(key) {
  * @param {function(string): ?Sentence} findSentence
  * @param {function(string): number} getRung  the entry's stored rung
  * @param {function(string): boolean} [isCategoryLoaded]  the key's library category is loaded
- * @param {{voice: boolean, write: boolean, speak: boolean}} [env]  what this device supports (rungs 4 and 5)
+ * @param {{voice: boolean, write: boolean, speak: boolean}} [env]  what this device supports (rungs 4 and 5);
+ *   a missing env means rungs 4 and 5 are not offered
  * @returns {{queue: ReviewItem[], retired: string[], skipped: string[]}}
  */
 export function buildQueue(keys, findSentence, getRung, isCategoryLoaded = () => true, env) {
@@ -91,6 +92,8 @@ export class ReviewRunner {
         this.renderSpeak = renderSpeak;
         this.speakRoot = speakRoot;
         this.translationFor = translationFor;
+        /** @type {?function(): void} teardown of the write/speak screen on show */
+        this.teardown = null;
         this.active = false;
         this.queue = [];
         this.index = 0;
@@ -112,6 +115,7 @@ export class ReviewRunner {
     close() {
         if (!this.active) return;
         this.active = false;
+        this.stopScreen();
         this.app.showScreen('home');
         this.clearGame();
     }
@@ -120,12 +124,21 @@ export class ReviewRunner {
     abandon() {
         if (!this.active) return;
         this.active = false;
+        this.stopScreen();
         this.clearGame();
     }
 
     // --- internals ---
 
+    /** Stop what the write/speak screen on show still runs (microphone, timers, speech). */
+    stopScreen() {
+        const t = this.teardown;
+        this.teardown = null;
+        if (t) t();
+    }
+
     show() {
+        this.stopScreen();
         const item = this.queue[this.index];
         if (item.rung === 2) this.showOrder(item);
         else if (item.rung === 4) this.showWrite(item);
@@ -158,7 +171,7 @@ export class ReviewRunner {
     showText(item, screen, root, render) {
         this.app.showScreen(screen);
         this.clearGame();
-        render(root, {
+        this.teardown = render(root, {
             text: item.sentence.text, translation: this.translationFor(item.sentence),
             total: this.queue.length, index: this.index,
         }, {
@@ -207,6 +220,7 @@ export class ReviewRunner {
             return;
         }
         this.active = false;
+        this.stopScreen();
         this.app.showReviewRecap(this.results);
         this.clearGame();
     }

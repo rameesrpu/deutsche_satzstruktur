@@ -89,6 +89,8 @@ function marksRow(match, final) {
  * @param {{text: string, translation?: ?string, total: number, index: number, storage?: Storage, win?: object}} opts
  *   win: where SpeechRecognition is looked up (a test harness injects a fake one)
  * @param {{onDone: (ok: boolean) => void, onClose: () => void}} actions
+ * @returns {() => void}  teardown: aborts listening, clears the cue timer, cancels speech and marks the
+ *   screen finished, without calling onDone/onClose
  */
 export function renderSpeakScreen(root, { text, translation = null, total, index, storage = globalThis.localStorage, win = globalThis },
     { onDone, onClose }) {
@@ -331,4 +333,5 @@ export function renderSpeakScreen(root, { text, translation = null, total, index
     drawProgress();
     if (mode === 'ask') showPrivacy();
     else start();
+    return () => { finished = true; stopAll(); };
 }

@@ -72,6 +72,7 @@ function marksRow(result, final) {
  * @param {HTMLElement} root
  * @param {{text: string, translation?: ?string, total: number, index: number}} opts
  * @param {{onDone: (ok: boolean) => void, onClose: () => void}} actions
+ * @returns {() => void}  teardown: stops speech and marks the screen finished without calling onDone/onClose
  */
 export function renderWriteScreen(root, { text, translation = null, total, index }, { onDone, onClose }) {
     let step = { tries: 0, done: false, ok: false, reveal: false };
@@ -200,4 +201,5 @@ export function renderWriteScreen(root, { text, translation = null, total, index
     drawProgress();
     speak();
     input.focus();
+    return () => { finished = true; gameSounds.cancelPrompt(); };
 }

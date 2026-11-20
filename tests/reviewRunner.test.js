@@ -222,7 +222,7 @@ export function runReviewRunnerTests() {
         const gameMode = { articleBlank: false, ladder: null, isActive: false, start() {}, startNewSentence() {},
             stop() { this.isActive = false; } };
         const writes = [], speaks = [];
-        const translationFor = s => `EN: ${s.text}`;
+        const translationFor = s => (s.text.startsWith('Keine') ? null : `EN: ${s.text}`);
         const items = specs.map(([text, words, rung]) => {
             const s = sentence(text, words);
             const key = sentenceKey(s);
@@ -236,8 +236,10 @@ export function runReviewRunnerTests() {
             k => store.getSentence(k).rung, () => true, env);
         const runner = new ReviewRunner({ app, gameMode, progressStore: store, translationFor,
             renderOrder: () => {}, orderRoot: () => null,
-            renderWrite: (root, opts, actions) => writes.push({ root, opts, actions }), writeRoot: () => 'W',
-            renderSpeak: (root, opts, actions) => speaks.push({ root, opts, actions }), speakRoot: () => 'S' });
+            renderWrite: (root, opts, actions) => { writes.push({ root, opts, actions }); return () => calls.push(['teardown', 'write']); },
+            writeRoot: () => 'W',
+            renderSpeak: (root, opts, actions) => { speaks.push({ root, opts, actions }); return () => calls.push(['teardown', 'speak']); },
+            speakRoot: () => 'S' });
         return { store, calls, writes, speaks, queue, runner };
     }
 
@@ -272,6 +274,44 @@ export function runReviewRunnerTests() {
         assertEqual(queue[0].rung, 4);
         runner.start(queue);
         assertEqual([calls[0], writes.length, speaks.length], [['screen', 'write'], 1, 0]);
+    });
+
+    const tdCount = calls => calls.filter(c => c[0] === 'teardown').length;
+
+    test('review: abandon() during a speak item tears the screen down once', () => {
+        const { calls, queue, runner } = setupWS([['Ich gebe dem Patienten einen Tee.', give(), 5]]);
+        runner.start(queue);
+        runner.abandon();
+        assertEqual(calls.filter(c => c[0] === 'teardown'), [['teardown', 'speak']]);
+        runner.abandon();
+        assertEqual(tdCount(calls), 1);
+    });
+
+    test('review: close() tears the write screen down', () => {
+        const { calls, queue, runner } = setupWS([['Ich gebe dem Patienten einen Tee.', give(), 4]]);
+        runner.start(queue);
+        runner.close();
+        assertEqual(tdCount(calls), 1);
+    });
+
+    test('review: write then speak advances, tearing down each screen', () => {
+        const { store, calls, writes, speaks, queue, runner } = setupWS([
+            ['Ich gebe dem Patienten einen Tee.', give(), 4], ['Heute muss Ayisha im Krankenhaus arbeiten.', ayisha(), 5]]);
+        runner.start(queue);
+        writes[0].actions.onDone(true);
+        assertEqual([speaks.length, speaks[0].opts.index, speaks[0].opts.total], [1, 1, 2]);
+        assertEqual(calls.filter(c => c[0] === 'screen').map(c => c[1]), ['write', 'speak']);
+        assertEqual(tdCount(calls), 1);
+        speaks[0].actions.onDone(true);
+        assertEqual(tdCount(calls), 2);
+        assertEqual(calls.filter(c => c[0] === 'recap')[0][1].map(r => r.ok), [true, true]);
+        assertEqual(store.getSentence(queue[1].key).rung, 5);
+    });
+
+    test('review: translationFor returning null passes translation null', () => {
+        const { writes, queue, runner } = setupWS([['Keine Ahnung hier.', give(), 4]]);
+        runner.start(queue);
+        assertEqual(writes[0].opts.translation, null);
     });
 
     test('review: close() during a write item leaves the entry unchanged', () => {
