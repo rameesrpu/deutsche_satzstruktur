@@ -25,13 +25,25 @@ const MIC_ICON = '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" st
 
 /** Errors that just mean "nothing usable was heard": try again, the try does not count. */
 const QUIET_ERRORS = ['no-speech', 'no-result', 'aborted'];
+/** Errors of a refused microphone: not asked again in this page session. */
+const BLOCKED_ERRORS = ['not-allowed', 'service-not-allowed'];
+const BLOCKED_NOTE = 'Kein Zugriff aufs Mikrofon. Prüf dich selbst.';
+
+/** Set after a refused microphone; later Sprechen sentences start in the self-check (not stored). */
+let micBlocked = false;
+
+/** The line shown when recognition falls back to the self-check after `error`. */
+export function fallbackNote(error) {
+    return BLOCKED_ERRORS.includes(error) ? BLOCKED_NOTE : 'Die Erkennung geht gerade nicht. Prüf dich selbst.';
+}
 
 /**
- * @param {{available: boolean, choice: 'on'|'off'|null}} env
+ * @param {{available: boolean, choice: 'on'|'off'|null, blocked?: boolean}} env
+ *   blocked: the microphone was refused earlier in this page session
  * @returns {'ask'|'recognise'|'self'}
  */
-export function speakMode({ available, choice }) {
-    if (!available || choice === 'off') return 'self';
+export function speakMode({ available, choice, blocked = false }) {
+    if (!available || choice === 'off' || blocked) return 'self';
     return choice === 'on' ? 'recognise' : 'ask';
 }
 
@@ -94,7 +106,9 @@ function marksRow(match, final) {
  */
 export function renderSpeakScreen(root, { text, translation = null, total, index, storage = globalThis.localStorage, win = globalThis },
     { onDone, onClose }) {
-    let mode = speakMode({ available: speechAvailable(win), choice: getRecognitionChoice(storage) });
+    let mode = speakMode({ available: speechAvailable(win), choice: getRecognitionChoice(storage), blocked: micBlocked });
+    // A refused microphone earlier in this session: say why there is no recognition
+    const startNote = micBlocked && mode === 'self' && getRecognitionChoice(storage) === 'on' ? BLOCKED_NOTE : null;
     let step = { tries: 0, done: false, ok: false, fallback: false };
     let handle = null; // open listen() call
     let cueTimer = null;
@@ -226,7 +240,8 @@ export function renderSpeakScreen(root, { text, translation = null, total, index
         step = speakStep(step, match || { pass: false }, error);
         if (step.fallback) {
             mode = 'self';
-            showSelf('Die Erkennung geht gerade nicht. Prüf dich selbst.');
+            if (BLOCKED_ERRORS.includes(error)) micBlocked = true;
+            showSelf(fallbackNote(error));
             return;
         }
         if (error) {
@@ -324,7 +339,7 @@ export function renderSpeakScreen(root, { text, translation = null, total, index
             setListening(false);
             mic.focus();
         } else {
-            showSelf(null);
+            showSelf(startNote);
         }
     }
 
