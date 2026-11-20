@@ -164,7 +164,7 @@ Parked (small, known):
 ### 4a. Boards framework and body map
 
 - [x] Task 1: Box schedule and session queue — commit `1dba8b2`
-- [ ] Task 2: Board progress in the store
+- [x] Task 2: Board progress in the store — commit `7e7a4c5`
 - [ ] Task 3: Registry, Üben section, board screen shell
 - [ ] Task 4: Hotspot logic and body vocabulary
 - [ ] Task 5: Pictures and point positions — **owner stop** (approve the figure)
