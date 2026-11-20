@@ -200,7 +200,7 @@ Parked (small, known):
 
 ### 4b. Preposition scene
 
-- [ ] Task 1: Scene data and sentence logic
+- [x] Task 1: Scene data and sentence logic — commit `6b463d5`
 - [ ] Task 2: Garden picture and positions — **owner stop**
 - [ ] Task 3: Scene modes on screen
 - [ ] Task 4: Docs and ship
