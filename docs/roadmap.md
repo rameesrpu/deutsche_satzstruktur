@@ -169,7 +169,7 @@ Parked (small, known):
 - [x] Task 4: Hotspot logic and body vocabulary — commit `b1e22a8`
 - [x] Task 5: Pictures and point positions — commits `53b2b08`, `d55b43b` (owner stop skipped; see "Needs owner review")
 - [x] Task 6: Hotspot modes on screen — commit `642fed5`
-- [ ] Task 7: Docs and ship
+- [x] Task 7: Docs and ship — commit `37128da`
 
 ### 4b. Preposition scene
 
