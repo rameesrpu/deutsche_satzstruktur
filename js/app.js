@@ -24,7 +24,7 @@ import { speechAvailable } from './speechInput.js';
 /**
  * Screens (body[data-screen], see showScreen): 'home' (Lernen), 'practice' (Üben),
  * 'words' (Wörter), 'workshop' (Werkstatt: the sentence editor, Feldermodell, settings,
- * import/export), 'play' (a game started from the learner screens), 'write' (the Schreiben dictation, writeScreen.js), 'order' (the Ordnen exercise, orderScreen.js), 'read' (the story
+ * import/export), 'play' (a game started from the learner screens), 'write' (the Schreiben dictation, writeScreen.js), 'speak' (Sprechen, speakScreen.js), 'order' (the Ordnen exercise, orderScreen.js), 'read' (the story
  * reader, an overlay on the screen it was opened from), 'end' (chapter recap after a story
  * chapter on the play screen, or the "Heute üben" review recap; chapterRecap.js), 'settings' (Einstellungen from Home's gear,
  * settings.js; Lernen stays the active nav tab).
@@ -1173,7 +1173,7 @@ class DeutschApp {
      * Show one screen. Learner screens are re-rendered on every visit (progress may
      * have changed); 'workshop' and 'play' show the editor/game canvas, so it is
      * redrawn once it has its size. Leaving 'play' or 'workshop' ends a running game.
-     * @param {'home'|'practice'|'words'|'workshop'|'play'|'order'|'write'|'end'} name  ('end' is rendered by showRecap, 'order' by orderScreen.js, 'write' by writeScreen.js)
+     * @param {'home'|'practice'|'words'|'workshop'|'play'|'order'|'write'|'speak'|'end'} name  ('end' is rendered by showRecap, 'order' by orderScreen.js, 'write' by writeScreen.js, 'speak' by speakScreen.js)
      */
     showScreen(name) {
         const leavingGame = this.gameMode.isActive && name !== this.screen &&
@@ -1181,10 +1181,10 @@ class DeutschApp {
         this.screen = name; // set first: exitGame → handleGameStopped must not route again
         if (leavingGame) this.exitGame();
         // Leaving a review session for anything but its own screens (e.g. the bottom nav) ends it
-        if (this.reviewRunner.active && !['play', 'order', 'write', 'end'].includes(name)) this.reviewRunner.abandon();
+        if (this.reviewRunner.active && !['play', 'order', 'write', 'speak', 'end'].includes(name)) this.reviewRunner.abandon();
         if (name !== 'play') clearPlayChrome();
         document.body.dataset.screen = name;
-        for (const s of ['home', 'practice', 'words', 'order', 'write', 'end', 'settings']) {
+        for (const s of ['home', 'practice', 'words', 'order', 'write', 'speak', 'end', 'settings']) {
             const section = document.getElementById(`screen-${s}`);
             if (section) section.hidden = s !== name;
         }
@@ -1198,7 +1198,7 @@ class DeutschApp {
         else if (name === 'practice') this.renderPracticeScreen();
         else if (name === 'words') this.renderWordsScreen();
         else if (name === 'settings') this.renderSettingsScreen();
-        else if (name !== 'end' && name !== 'order' && name !== 'write') this.redrawAll();
+        else if (!['end', 'order', 'write', 'speak'].includes(name)) this.redrawAll();
     }
 
     /**
