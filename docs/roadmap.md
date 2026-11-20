@@ -166,7 +166,7 @@ Parked (small, known):
 - [x] Task 1: Box schedule and session queue — commit `1dba8b2`
 - [x] Task 2: Board progress in the store — commit `7e7a4c5`
 - [x] Task 3: Registry, Üben section, board screen shell — commits `562714c`, `eb9df89`
-- [ ] Task 4: Hotspot logic and body vocabulary
+- [x] Task 4: Hotspot logic and body vocabulary — commit `b1e22a8`
 - [ ] Task 5: Pictures and point positions — **owner stop** (approve the figure)
 - [ ] Task 6: Hotspot modes on screen
 - [ ] Task 7: Docs and ship
