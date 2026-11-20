@@ -11,6 +11,20 @@ export function test(name, fn) {
     }
 }
 
+const pendingTests = [];
+
+/** Async test: its result is recorded once `fn` settles; run.js awaits them (settleAsyncTests) before summary(). */
+export function testAsync(name, fn) {
+    pendingTests.push(Promise.resolve().then(fn).then(
+        () => results.push({ name, ok: true }),
+        e => results.push({ name, ok: false, error: e })));
+}
+
+/** Wait for every testAsync() registered so far. */
+export function settleAsyncTests() {
+    return Promise.all(pendingTests);
+}
+
 const show = v => JSON.stringify(v);
 
 export function assertEqual(actual, expected, message = '') {

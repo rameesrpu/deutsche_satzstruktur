@@ -116,6 +116,22 @@ export class SoundManager {
         if (this.voiceStatus === 'unknown') setTimer(() => check(true), timeoutMs);
     }
 
+    /**
+     * The voice status once it is no longer 'unknown', or 'unknown' after `timeoutMs`
+     * (detectGermanVoice may take up to 3 s on engines without voices).
+     * @returns {Promise<'unknown'|'ok'|'missing'>}
+     */
+    whenVoiceSettled({ timeoutMs = 1000, interval = 50, setTimer = setTimeout } = {}) {
+        const start = Date.now();
+        return new Promise(resolve => {
+            const poll = () => {
+                if (this.voiceStatus !== 'unknown' || Date.now() - start >= timeoutMs) resolve(this.voiceStatus);
+                else setTimer(poll, interval);
+            };
+            poll();
+        });
+    }
+
     setEnabled(on) {
         this.enabled = on;
         localStorage.setItem('gameSoundEnabled', on ? 'true' : 'false');

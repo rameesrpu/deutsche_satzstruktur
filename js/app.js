@@ -16,7 +16,7 @@ import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday,
     renderHome, renderPractice, renderWords } from './homeScreen.js';
 import { buildRecapModel, renderRecap, reviewRecapModel, renderReviewRecap, wordsByChapter } from './chapterRecap.js';
 import { dueKeys } from './ladder.js';
-import { ReviewRunner, buildQueue, keyCategory } from './reviewRunner.js';
+import { ReviewRunner, buildQueue, keyCategory, settleWithin } from './reviewRunner.js';
 import { loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge, renderSettings, ladderEnv,
     getLadderWrite, setLadderWrite, getLadderSpeak, setLadderSpeak, getRecognitionChoice, setRecognitionChoice } from './settings.js';
 import { speechAvailable } from './speechInput.js';
@@ -1424,6 +1424,8 @@ class DeutschApp {
             // Retired keys leave the ladder and skipped ones (category not loaded) stay due but are
             // left out, so the next due sentences take their places; each round only grows the sets.
             const skipped = new Set();
+            // Right after page load the German voice may not be detected yet (Schreiben needs it)
+            if (gameSounds.voiceStatus === 'unknown') await gameSounds.whenVoiceSettled({ timeoutMs: 1000 });
             const env = ladderEnv({ storage: localStorage, hasVoice: gameSounds.hasGermanVoice() });
             let queue = [];
             for (;;) {
@@ -1438,11 +1440,13 @@ class DeutschApp {
                 this.showScreen('home');
                 return;
             }
-            // Translations of the writing/speaking items (best effort: a failed fetch just shows none)
+            // Translations of the writing/speaking items (best effort: a failed fetch just shows none;
+            // a slow one is not waited for past 1.5 s — translationFor reads the data at render time,
+            // so a later item may still get it)
             const cats = new Set(queue.filter(q => q.rung >= 4).map(q => q.sentence)
                 .filter(s => LEVEL_CONTENT[s.level]?.categories[s.category])
                 .map(s => `${s.level}/${s.category}`));
-            await Promise.allSettled([...cats].map(c => this.levelSelector.loadCategoryData(...c.split('/'))));
+            await settleWithin(Promise.allSettled([...cats].map(c => this.levelSelector.loadCategoryData(...c.split('/')))), 1500);
             if (this.gameMode.isActive) this.exitGame();
             this.reviewRunner.start(queue);
         } finally {

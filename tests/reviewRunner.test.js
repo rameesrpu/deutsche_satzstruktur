@@ -2,8 +2,8 @@
 // ladder hooks it drives (articleBlank, ladder) and the play screen's ladder progress bar.
 
 import { makeLocalStorage, tagged, libWords } from './stubs.js';
-import { test, assert, assertEqual } from './assert.js';
-import { buildQueue, keyCategory, ReviewRunner } from '../js/reviewRunner.js';
+import { test, testAsync, assert, assertEqual } from './assert.js';
+import { buildQueue, keyCategory, ReviewRunner, settleWithin } from '../js/reviewRunner.js';
 import { ProgressStore, progressStore, emptyMistakes, addMistake, sentenceKey } from '../js/progressStore.js';
 import { dueKeys, startOfDay, addDays, rungEligibility } from '../js/ladder.js';
 import { GameMode } from '../js/gamemode.js';
@@ -436,5 +436,15 @@ export function runReviewRunnerTests() {
         } finally {
             gameSounds.promptSentence = saved;
         }
+    });
+    // F10: the translation prefetch cannot hold up the start
+    testAsync('review: settleWithin resolves on time when the work hangs', async () => {
+        const t0 = Date.now();
+        assertEqual(await settleWithin(new Promise(() => {}), 30), 'timeout');
+        assert(Date.now() - t0 < 500, 'did not wait for the hanging promise');
+    });
+    testAsync('review: settleWithin resolves when the work is done first', async () => {
+        assertEqual(await settleWithin(Promise.resolve(1), 1000), 'done');
+        assertEqual(await settleWithin(Promise.reject(new Error('x')), 1000), 'done');
     });
 }

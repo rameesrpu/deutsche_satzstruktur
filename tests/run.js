@@ -3,7 +3,7 @@
 
 import System from 'system';
 import { listDir, readText } from './stubs.js'; // first: installs browser stubs
-import { test, summary } from './assert.js';
+import { test, summary, settleAsyncTests } from './assert.js';
 import { runGridTests } from './grid.test.js';
 import { runGameRuleTests } from './gameRules.test.js';
 import { runLibrarySnapshot } from './snapshot.test.js';
@@ -74,4 +74,5 @@ runSpeakScreenTests();
 runReviewRunnerTests();
 runLibrarySnapshot({ update });
 
+await settleAsyncTests();
 System.exit(summary() > 0 ? 1 : 0);

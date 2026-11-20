@@ -1,4 +1,4 @@
-import { test, assertEqual } from './assert.js';
+import { test, testAsync, assert, assertEqual } from './assert.js';
 import { makeLocalStorage } from './stubs.js';
 import { SoundManager, findGermanVoice, placementSpeech, promptStartIndex } from '../js/sound.js';
 
@@ -168,5 +168,22 @@ export function runSoundTests() {
             delete globalThis.SpeechSynthesisUtterance;
             delete globalThis.speechSynthesis;
         }
+    });
+    // F5: the review start waits briefly for the voice status
+    testAsync('sound: whenVoiceSettled resolves at once when known', async () => {
+        const sm = new SoundManager();
+        sm.voiceStatus = 'ok';
+        assertEqual(await sm.whenVoiceSettled({ timeoutMs: 1000 }), 'ok');
+    });
+    testAsync('sound: whenVoiceSettled waits for the status to settle', async () => {
+        const sm = new SoundManager();
+        setTimeout(() => { sm.voiceStatus = 'missing'; }, 20);
+        assertEqual(await sm.whenVoiceSettled({ timeoutMs: 1000, interval: 5 }), 'missing');
+    });
+    testAsync('sound: whenVoiceSettled gives up after the timeout', async () => {
+        const sm = new SoundManager();
+        const t0 = Date.now();
+        assertEqual(await sm.whenVoiceSettled({ timeoutMs: 40, interval: 5 }), 'unknown');
+        assert(Date.now() - t0 < 500, 'timed out promptly');
     });
 }

@@ -69,6 +69,17 @@ export function buildQueue(keys, findSentence, getRung, isCategoryLoaded = () =>
 }
 
 /**
+ * Wait for `promise` (its result or failure is ignored) at most `ms` milliseconds.
+ * @returns {Promise<'done'|'timeout'>}
+ */
+export function settleWithin(promise, ms, setTimer = setTimeout) {
+    return new Promise(resolve => {
+        setTimer(() => resolve('timeout'), ms);
+        Promise.resolve(promise).then(() => resolve('done'), () => resolve('done'));
+    });
+}
+
+/**
  * Runs one review session. `app` provides showScreen(name), showReviewRecap(results),
  * loadReviewSentence(sentence) (make it the game's current sentence) and redrawAll().
  * Every way out goes through close() or the end of the queue, which clear the game's
