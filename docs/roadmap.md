@@ -163,7 +163,7 @@ Parked (small, known):
 
 ### 4a. Boards framework and body map
 
-- [ ] Task 1: Box schedule and session queue
+- [x] Task 1: Box schedule and session queue — commit `1dba8b2`
 - [ ] Task 2: Board progress in the store
 - [ ] Task 3: Registry, Üben section, board screen shell
 - [ ] Task 4: Hotspot logic and body vocabulary
