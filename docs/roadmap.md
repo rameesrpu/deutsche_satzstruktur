@@ -45,7 +45,7 @@ the owner's answer or review.
 |---|---|---|---|---|
 | 1 | Production ladder, rungs 2–3 | [plan](superpowers/plans/2026-11-15-production-ladder.md) · [design](superpowers/specs/2026-11-15-production-ladder-design.md) | done (2026-11-17; on branch `production-ladder`, not merged) | – |
 | 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | done (2026-11-19; branch `content-pipeline`, on top of `production-ladder`, not merged) | – |
-| 3 | Ladder rungs 4–5 (Schreiben, Sprechen) | [plan](superpowers/plans/2026-11-16-ladder-write-speak.md) · [design](superpowers/specs/2026-11-16-ladder-write-speak-design.md) | not started | 1 |
+| 3 | Ladder rungs 4–5 (Schreiben, Sprechen) | [plan](superpowers/plans/2026-11-16-ladder-write-speak.md) · [design](superpowers/specs/2026-11-16-ladder-write-speak-design.md) | done (2026-11-20; branch `ladder-write-speak`, on top of `content-pipeline`, not merged) | – |
 | 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | not started | 1 |
 | 4b | Preposition scene | [plan](superpowers/plans/2026-11-16-boards-preposition-scene.md) | not started | 4a |
 | 4c | Timeline | [plan](superpowers/plans/2026-11-16-boards-timeline.md) | not started | 4a |
@@ -131,6 +131,35 @@ Parked (small, known):
 - [x] Task 4: Schreiben screen (rung 4) — commits `f5e7adf`, `6324430`
 - [x] Task 5: Sprechen screen (rung 5) — commit `82ba1ff`
 - [x] Task 6: Runner wiring and ship — commits `f16a36d`, `fcc8b79`
+- [x] Whole-branch review (Opus) and its fix wave — commits `303ceb6`..`70e62a3`
+- [ ] Merge to `main` — the owner's step, after `content-pipeline` and the phone check below
+
+What the reviews changed against the plan (rulings, each can be undone):
+- Every sentence now enters the ladder, also the 254 of 982 library sentences with neither an
+  Ordnen model nor an article ("Wo ist Max?", "Ich sehe dich."); they start at rung 4 or 5. With
+  Schreiben and Sprechen both off (or no voice) such a sentence is skipped for the day, not retired.
+- Dictation is stricter than the design's typo rule: a one-letter slip is never forgiven in an
+  article, pronoun or determiner ("einem" for "einen"), nor when only the ending differs
+  ("gutem"/"guten", "Tisch"/"Tische"). Side effect: "Kaffe" for "Kaffee" and "heut" for "heute"
+  count as wrong.
+- Numbers 0–20 match as digits or words (the design says 0–12); "Dr."/"Doktor", "St."/"Sankt",
+  "Prof."/"Professor", "Nr."/"Nummer" are equal; "St. Lukas Krankenhaus" matches
+  "St.-Lukas-Krankenhaus".
+- Dictation and "Anhören" play even when "Aussprache" is off (the audio is the exercise). The
+  normal speech rate stays 0.95; "Langsam" is 0.7.
+- Any recognition error other than silence (offline, no microphone, refused) switches to the
+  self-check. After a refused microphone, later sentences in the same visit start in self-check.
+  The self-check shows the German sentence as well as playing it, so it works without a voice.
+- With "Sprechen üben" off, a rung-5 sentence is shown on rung 4; a pass keeps it at rung 5.
+- The session waits up to 1 s for the German voice check and up to 1.5 s for translations.
+
+Parked (small, known):
+- A sentence skipped for the day because both rungs are off still counts in the "Heute üben"
+  number and takes a slot of the daily goal.
+- The 80% rule is all-or-nothing on three-word sentences ("Ich bin neu." with "neun" heard
+  fails); the "geirrt" button covers it.
+- No on-screen (DOM) tests for the Schreiben screen; the Sprechen privacy rule has one.
+- A top pass shown on a lower rung (rung off) still counts as a top pass.
 
 ### 4a. Boards framework and body map
 
@@ -219,6 +248,37 @@ look at. Remove an item when it is checked.
 - **A1 German to look at:** 4.2 "Sie lernen so schneller." reads slightly odd.
 - **Open questions from the design:** read every chapter vs spot checks; Goethe word lists as
   `data/wordlists/<level>.txt` (the checker uses them when present).
+
+### Project 3 — ladder rungs 4–5 (branch `ladder-write-speak`)
+
+- **Phone checklist (not done by anyone yet).** Checked only in headless desktop Chrome with a fake
+  recogniser; real speech recognition, the microphone and the phone keyboard were never tried.
+  Speech recognition needs https (or localhost); over plain http on the LAN it falls back to the
+  self-check. On her Android phone:
+  1. A Schreiben sentence: the German dictation is clear at normal and "Langsam" speed; "Nochmal"
+     repeats it; it also plays with "Aussprache" off.
+  2. The ä/ö/ü/ß buttons insert at the cursor and the keyboard stays open.
+  3. The keyboard does not cover the input or "Prüfen"; Enter checks.
+  4. Gboard with an English keyboard may autocorrect German words — check, and switch Gboard to
+     German if it does.
+  5. A Sprechen sentence, first time: the privacy card appears before any microphone prompt;
+     "Einverstanden", then the mic tap brings Chrome's permission prompt.
+  6. One sentence said correctly is recognised (all ✓, "Weiter").
+  7. One misheard sentence: "Die Erkennung hat sich geirrt" plays and shows the sentence, "Ja"
+     counts it as passed.
+  8. Silence shows "Ich habe nichts gehört …"; airplane mode or a refused permission switches to
+     the self-check.
+  9. ✕ while the mic is listening stops it (the mic icon in the status bar goes away).
+  10. Einstellungen: "Schreiben üben", "Sprechen üben" and "Spracherkennung" off each take effect
+      at the next "Heute üben".
+- **Open questions from the design:** should wrong capitals of nouns count from B1 on (the FSP
+  documentation is written)? Is sending her voice to Google's recognition acceptable to her?
+- **Wording I added** (not in the design): "Ich höre zu …", "Die Erkennung geht gerade nicht. Prüf
+  dich selbst.", "Kein Zugriff aufs Mikrofon. Prüf dich selbst.", "Sprich den Satz laut. Dann tipp
+  auf „Anhören“.", mic label "Mikrofon: tippen und sprechen".
+- **Strict dictation:** the calls under "What the reviews changed" in the tracker (case endings
+  never forgiven; "Kaffe"/"heut" now wrong). Decide whether that is too strict for A1.
+- **Missed words on Sprechen** show as blanks until the third try (she sees where, not what).
 
 ## How to run a plan from a new conversation
 
