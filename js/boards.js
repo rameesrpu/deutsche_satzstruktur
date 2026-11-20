@@ -17,7 +17,7 @@ export const BOARDS = [
         ],
     },
     {
-        id: 'wechsel', title: 'Wo? Wohin?', kind: 'scene', file: 'data/boards/wechselpraepositionen.json', version: 1,
+        id: 'wechsel', title: 'Wo? Wohin?', kind: 'scene', file: 'data/boards/wechselpraepositionen.json', version: 2,
         modes: [
             { id: 'entdecken', label: 'Entdecken', scored: false },
             { id: 'verstehen', label: 'Verstehen', scored: true },

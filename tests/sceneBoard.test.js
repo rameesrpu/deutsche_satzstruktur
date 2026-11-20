@@ -119,4 +119,24 @@ export function runSceneBoardTests() {
         }
         assertEqual(sceneItemIds(set).length, 47);
     });
+
+    test('garden spots: no two closer than 5 percent, home on the grass apart from every spot', () => {
+        const close = [];
+        const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+        set.items.forEach((a, i) => set.items.slice(i + 1).forEach(b => {
+            if (dist(a.spot, b.spot) < 5) close.push(`${a.id}/${b.id}`);
+        }));
+        assertEqual(close, []);
+        assertEqual(set.items.filter(it => dist(it.spot, set.mover.home) < 5).map(it => it.id), []);
+        assertEqual(set.items.some(it => it.spot[0] === 50 && it.spot[1] === 50), false);
+    });
+
+    test('garden pictures: both files exist, under 40 KB, right viewBox, no text', () => {
+        for (const [image, viewBox] of [[set.image, '0 0 400 300'], [set.mover.image, '0 0 40 40']]) {
+            const svg = readText('data/boards/' + image);
+            assertEqual([image, new TextEncoder().encode(svg).length < 40 * 1024], [image, true]);
+            assertEqual([image, svg.includes(`viewBox="${viewBox}"`)], [image, true]);
+            assertEqual([image, /<text\b/.test(svg)], [image, false]);
+        }
+    });
 }
