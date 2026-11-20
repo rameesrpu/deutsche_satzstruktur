@@ -127,7 +127,7 @@ Parked (small, known):
 
 - [x] Task 1: Schedule to rung 5 — commit `31c855e`
 - [x] Task 2: Text matching (`textMatch.js`) — commits `f237a02`, `aea79ff`
-- [ ] Task 3: Settings and environment
+- [x] Task 3: Settings and environment — commit `7c846fe`
 - [ ] Task 4: Schreiben screen (rung 4)
 - [ ] Task 5: Sprechen screen (rung 5)
 - [ ] Task 6: Runner wiring and ship — ends with a phone checklist for the owner
