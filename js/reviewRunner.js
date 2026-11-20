@@ -31,16 +31,18 @@ export function keyCategory(key) {
 /**
  * The session queue for due keys, in their order. Each key ends up in one of three lists:
  * - `retired` (the caller takes it off the ladder): a user-made (`custom/…`) key, a sentence
- *   missing from its loaded category (chapter changed), or one with no rung it can be tested on;
- * - `skipped`: its sentence is not there because its category did not load (offline, a failed
- *   fetch) — not shown, not retired, it stays due;
+ *   missing from its loaded category (chapter changed), or one with no rung it can be tested on
+ *   on any device (structural eligibility, `rungEligibility(words)`);
+ * - `skipped` (not shown, not retired, it stays due): its sentence is not there because its category
+ *   did not load (offline, a failed fetch), or none of its rungs is available with this `env`
+ *   (e.g. Sprechen and Schreiben off);
  * - `queue`: everything else.
  * @param {string[]} keys
  * @param {function(string): ?Sentence} findSentence
  * @param {function(string): number} getRung  the entry's stored rung
  * @param {function(string): boolean} [isCategoryLoaded]  the key's library category is loaded
  * @param {{voice: boolean, write: boolean, speak: boolean}} [env]  what this device supports (rungs 4 and 5);
- *   a missing env means rungs 4 and 5 are not offered
+ *   a missing env means all features present (rungs 4 and 5 offered)
  * @returns {{queue: ReviewItem[], retired: string[], skipped: string[]}}
  */
 export function buildQueue(keys, findSentence, getRung, isCategoryLoaded = () => true, env) {
@@ -53,9 +55,14 @@ export function buildQueue(keys, findSentence, getRung, isCategoryLoaded = () =>
             skipped.push(key);
             continue;
         }
-        const eligible = sentence ? rungEligibility(sentence.words || [], env) : null;
-        const rung = eligible ? exerciseRung(getRung(key), eligible) : null;
-        if (rung === null) retired.push(key);
+        const words = sentence ? sentence.words || [] : null;
+        if (!words || exerciseRung(getRung(key), rungEligibility(words)) === null) {
+            retired.push(key);
+            continue;
+        }
+        const eligible = rungEligibility(words, env);
+        const rung = exerciseRung(getRung(key), eligible);
+        if (rung === null) skipped.push(key);
         else queue.push({ key, sentence, rung, eligible });
     }
     return { queue, retired, skipped };

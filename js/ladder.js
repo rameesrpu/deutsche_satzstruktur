@@ -18,7 +18,8 @@ export const MIGRATION_PER_DAY = 10;
 /**
  * Which rungs a sentence can be tested on: 2 = it has an Ordnen model, 3 = it has an article,
  * 4 = writing from hearing (needs a German voice and the write setting), 5 = speaking (needs speech input).
- * Without `env` rungs 4 and 5 are off.
+ * Without `env` every device feature counts as present (structural eligibility): rungs 4 and 5 are
+ * then always true — rung 5 is always possible, so every sentence can reach the top.
  * Works on copies with the legacy word types normalised, as the game sees them, so review and
  * game agree on the same sentence.
  * @param {Word[]} words
@@ -30,8 +31,8 @@ export function rungEligibility(words, env) {
     return {
         2: orderModel(normalized) !== null,
         3: hasArticle(normalized),
-        4: !!(env && env.voice && env.write),
-        5: !!(env && env.speak),
+        4: env ? !!(env.voice && env.write) : true,
+        5: env ? !!env.speak : true,
     };
 }
 
@@ -58,7 +59,7 @@ export function addDays(dayStart, n) {
  */
 export function enterLadder(entry, now, eligible) {
     if (entry && Number.isFinite(entry.rung)) return { rung: entry.rung, due: entry.due, topPasses: entry.topPasses };
-    if (!eligible[2] && !eligible[3]) return { rung: 0, due: 0, topPasses: 0 };
+    if (![2, 3, 4, 5].some(r => eligible[r])) return { rung: 0, due: 0, topPasses: 0 };
     return { rung: RUNG_FIRST, due: addDays(startOfDay(now), 1), topPasses: 0 };
 }
 
@@ -81,8 +82,9 @@ export function afterReview(entry, ok, now, eligible) {
         for (let r = shown + 1; r <= RUNG_TOP; r++) {
             if (eligible[r]) return { rung: r, due: addDays(today, PASS_DAYS[r]), topPasses: 0 };
         }
+        // No higher rung shown here (e.g. Sprechen off): keep a higher stored rung
         const passes = entry.topPasses || 0;
-        return { rung: shown, due: addDays(today, TOP_DAYS[Math.min(passes, 1)]), topPasses: passes + 1 };
+        return { rung: Math.max(entry.rung, shown), due: addDays(today, TOP_DAYS[Math.min(passes, 1)]), topPasses: passes + 1 };
     }
     let lower = shown;
     for (let r = shown - 1; r >= RUNG_FIRST; r--) if (eligible[r]) { lower = r; break; }

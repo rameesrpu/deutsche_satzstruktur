@@ -16,6 +16,8 @@ const arzt = () => tagged('Der Arzt kommt.', 'S.m S.m V.er');                 //
 const give = () => tagged('Ich gebe dem Patienten einen Tee.', 'S.ich V.ich O.m.dat O.m.dat O.m.akk O.m.akk');
 const sentence = (text, words) => ({ id: text, text, level: 'A1', category: 'k', source: 'library', words });
 const both = { 2: true, 3: true };
+/** Device without Schreiben/Sprechen: only rungs 2 and 3 can be shown. */
+const NO_WS = { voice: false, write: false, speak: false };
 
 /** Stub app and game recording what the runner does; a real ProgressStore on a fresh storage. */
 function setup(queueSpec) {
@@ -41,7 +43,7 @@ function setup(queueSpec) {
         store.recordSentence(key, emptyMistakes(), Date.now() - 2 * 86400000, rungEligibility(words));
         if (rung === 3) store.recordReview(key, true, both, Date.now() - 86400000);
         store.getSentence(key).due = 0;
-        return { key, sentence: s, rung, eligible: rungEligibility(words) };
+        return { key, sentence: s, rung, eligible: rungEligibility(words, NO_WS) };
     });
     store.save();
     const runner = new ReviewRunner({ app, gameMode, progressStore: store, renderOrder, orderRoot: () => null });
@@ -56,22 +58,36 @@ export function runReviewRunnerTests() {
         const s = sentence('Er arbeitet heute in einem Büro.', words);
         const { queue } = buildQueue(['k'], () => s, () => 2);
         assertEqual(queue[0].eligible, rungEligibility(words));
-        assertEqual(queue[0].eligible, { 2: true, 3: true, 4: false, 5: false });
+        assertEqual(queue[0].eligible, { 2: true, 3: true, 4: true, 5: true });
     });
-    test('review: rungEligibility = Ordnen model / article', () => {
-        assertEqual(rungEligibility(ayisha()), { 2: true, 3: false, 4: false, 5: false });
-        assertEqual(rungEligibility(neu()), { 2: false, 3: false, 4: false, 5: false });
-        assertEqual(rungEligibility(give()), { 2: true, 3: true, 4: false, 5: false });
+    test('review: rungEligibility = Ordnen model / article (4/5 structurally open)', () => {
+        assertEqual(rungEligibility(ayisha()), { 2: true, 3: false, 4: true, 5: true });
+        assertEqual(rungEligibility(neu()), { 2: false, 3: false, 4: true, 5: true });
+        assertEqual(rungEligibility(give()), { 2: true, 3: true, 4: true, 5: true });
     });
 
-    test('review: buildQueue retires missing and ineligible sentences, picks the shown rung', () => {
+    test('review: buildQueue retires missing sentences, picks the shown rung', () => {
         const found = { a: sentence('a', ayisha()), c: sentence('c', neu()), d: sentence('d', arzt()) };
-        const { queue, retired } = buildQueue(['a', 'b', 'c', 'd'], k => found[k] || null, () => 2);
+        const { queue, retired } = buildQueue(['a', 'b', 'c', 'd'], k => found[k] || null, () => 2, () => true, NO_WS);
         assertEqual(queue.map(q => q.key), ['a', 'd']);
-        assertEqual(retired, ['b', 'c']);
+        assertEqual(retired, ['b']);
         assertEqual(queue.map(q => q.rung), [2, 3]);
         assertEqual(queue[1].eligible, { 2: false, 3: true, 4: false, 5: false });
         assertEqual(queue[0].sentence.text, 'a');
+    });
+
+    test('review: a sentence without rungs 2/3 is queued on rung 4 or 5, not retired (F1)', () => {
+        const c = sentence('Ich bin neu.', neu());
+        const all = buildQueue(['c'], () => c, () => 2, () => true, { voice: true, write: true, speak: true });
+        assertEqual([all.queue.map(q => q.rung), all.retired, all.skipped], [[4], [], []]);
+        const speakOnly = buildQueue(['c'], () => c, () => 2, () => true, { voice: false, write: true, speak: true });
+        assertEqual(speakOnly.queue.map(q => q.rung), [5]);
+    });
+
+    test('review: no rung available on this device → skipped (stays due), not retired (F1)', () => {
+        const c = sentence('Ich bin neu.', neu());
+        const { queue, retired, skipped } = buildQueue(['c'], () => c, () => 2, () => true, NO_WS);
+        assertEqual([queue, retired, skipped], [[], [], ['c']]);
     });
 
     test('review: buildQueue skips (does not retire) a key whose category did not load', () => {
@@ -383,7 +399,7 @@ export function runReviewRunnerTests() {
             gm.recordProgress();
             return progressStore.getSentence(sentenceKey(s)).rung;
         };
-        assertEqual(play(sentence('Ich bin neu.', neu())), 0);
+        assertEqual(play(sentence('Ich bin neu.', neu())), 2); // rungs 4/5 are open to every sentence (F1)
         assertEqual(play(sentence('Der Arzt kommt.', arzt())), 2);
     }));
 

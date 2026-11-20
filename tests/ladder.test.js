@@ -102,15 +102,32 @@ export function runLadderTests() {
         assertEqual(rungEligibility(w, { voice: true, write: true, speak: true }), all5);
     });
     test('rungEligibility: Ordnen model / article', () => {
-        assertEqual(rungEligibility(tagged('Heute muss Ayisha im Krankenhaus arbeiten.', 'X M.er S.er P O.n.dat V')), { 2: true, 3: false, 4: false, 5: false });
-        assertEqual(rungEligibility(tagged('Ich bin neu.', 'S.ich V.ich X')), { 2: false, 3: false, 4: false, 5: false });
-        assertEqual(rungEligibility(tagged('Ich gebe dem Patienten einen Tee.', 'S.ich V.ich O.m.dat O.m.dat O.m.akk O.m.akk')), { 2: true, 3: true, 4: false, 5: false });
+        assertEqual(rungEligibility(tagged('Heute muss Ayisha im Krankenhaus arbeiten.', 'X M.er S.er P O.n.dat V')), { 2: true, 3: false, 4: true, 5: true });
+        assertEqual(rungEligibility(tagged('Ich bin neu.', 'S.ich V.ich X')), { 2: false, 3: false, 4: true, 5: true });
+        assertEqual(rungEligibility(tagged('Ich gebe dem Patienten einen Tee.', 'S.ich V.ich O.m.dat O.m.dat O.m.akk O.m.akk')), { 2: true, 3: true, 4: true, 5: true });
     });
     test('rungEligibility: raw legacy-typed words and normalised words agree', () => {
         const raw = () => libWords([['Er', 'subject', 'nom', 'm'], ['arbeitet', 'verb', 'nom', 'none'],
             ['heute', 'other', 'nom', 'none'], ['in', 'preposition', 'nom', 'none'],
             ['einem', 'object-dat', 'dat', 'n'], ['Büro.', 'object-dat', 'dat', 'n']]);
         assertEqual(rungEligibility(raw()), rungEligibility(raw().map(normalizeLegacyType)));
-        assertEqual(rungEligibility(raw()), { 2: true, 3: true, 4: false, 5: false });
+        assertEqual(rungEligibility(raw()), { 2: true, 3: true, 4: true, 5: true });
     });
+    // F1: every sentence can reach the top (rung 5 is always possible)
+    test('enterLadder: no Ordnen model, no article, but rungs 4/5 → rung 2', () =>
+        assertEqual(enterLadder(null, NOW, { 2: false, 3: false, 4: true, 5: true }), { rung: 2, due: day(1), topPasses: 0 }));
+    test('enterLadder: only rung 5 → rung 2', () =>
+        assertEqual(enterLadder(null, NOW, { 2: false, 3: false, 4: false, 5: true }).rung, 2));
+    test('enterLadder: nothing eligible at all → rung 0', () =>
+        assertEqual(enterLadder(null, NOW, { 2: false, 3: false, 4: false, 5: false }).rung, 0));
+    test('rungEligibility: without env rungs 4 and 5 are structurally open', () =>
+        assertEqual(rungEligibility(tagged('Ich bin neu.', 'S.ich V.ich X')), { 2: false, 3: false, 4: true, 5: true }));
+    test('exerciseRung: rung 2 entry without 2/3 → shown at 4', () =>
+        assertEqual(exerciseRung(2, { 2: false, 3: false, 4: true, 5: true }), 4));
+    // F6: a toggled-off rung does not lower the stored rung on a top pass
+    test('afterReview: rung 5 entry shown at 4 (Sprechen off) and passed stays at 5', () =>
+        assertEqual(afterReview({ rung: 5, due: 0, topPasses: 0 }, true, NOW, { 2: true, 3: true, 4: true, 5: false }),
+            { rung: 5, due: day(14), topPasses: 1 }));
+    test('afterReview: rung 5 entry shown at 4 and failed drops to 3', () =>
+        assertEqual(afterReview({ rung: 5, due: 0, topPasses: 0 }, false, NOW, { 2: true, 3: true, 4: true, 5: false }).rung, 3));
 }
