@@ -17,7 +17,7 @@
         {"id": "brust", "de": "die Brust, Brüste", "en": "chest", "spot": [50, 29]},
         {"id": "bauch", "de": "der Bauch, Bäuche", "en": "belly, abdomen", "spot": [50, 45]},
         {"id": "huefte", "de": "die Hüfte, Hüften", "en": "hip", "spot": [35.5, 52.5], "pair": true},
-        {"id": "bein", "de": "das Bein, Beine", "en": "leg", "spot": [40.7, 68.5], "pair": true},
+        {"id": "bein", "de": "das Bein, Beine", "en": "leg", "spot": [60.7, 77.5], "pair": true},
         {"id": "oberschenkel", "de": "der Oberschenkel, Oberschenkel", "en": "thigh", "spot": [42.3, 62], "pair": true},
         {"id": "knie", "de": "das Knie, Knie", "en": "knee", "spot": [39.7, 75], "pair": true},
         {"id": "unterschenkel", "de": "der Unterschenkel, Unterschenkel", "en": "lower leg", "spot": [38.3, 82], "pair": true},
@@ -35,7 +35,7 @@
         {"id": "mund", "de": "der Mund, Münder", "en": "mouth", "spot": [35.7, 74.3]},
         {"id": "lippe", "de": "die Lippe, Lippen", "en": "lip", "spot": [44, 82.5], "pair": true},
         {"id": "zahn", "de": "der Zahn, Zähne", "en": "tooth", "spot": [43.3, 72.8], "pair": true},
-        {"id": "zunge", "de": "die Zunge, Zungen", "en": "tongue", "spot": [54, 77]},
+        {"id": "zunge", "de": "die Zunge, Zungen", "en": "tongue", "spot": [53.3, 78.8]},
         {"id": "kinn", "de": "das Kinn, Kinne", "en": "chin", "spot": [50, 89.5]},
         {"id": "haare", "de": "die Haare (pl.)", "en": "hair", "spot": [50, 12.5]}
     ]},
