@@ -138,6 +138,16 @@
  */
 
 /**
+ * Schedule entry of one board item (boardSchedule.js).
+ * @typedef {Object} BoardEntry
+ * @property {number} box       0-4 (BOX_DAYS)
+ * @property {number} due       ms timestamp (local midnight) of the next review
+ * @property {number} seen      answers recorded
+ * @property {number} correct   right answers
+ * @property {number} lastSeen  ms timestamp of the last answer
+ */
+
+/**
  * localStorage `gameProgress`; also the `progress` field of a sentence export.
  * @typedef {Object} GameProgress
  * @property {number} version       format version (2)
