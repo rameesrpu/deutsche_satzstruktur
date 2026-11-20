@@ -46,7 +46,7 @@ the owner's answer or review.
 | 1 | Production ladder, rungs 2–3 | [plan](superpowers/plans/2026-11-15-production-ladder.md) · [design](superpowers/specs/2026-11-15-production-ladder-design.md) | done (2026-11-17; on branch `production-ladder`, not merged) | – |
 | 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | done (2026-11-19; branch `content-pipeline`, on top of `production-ladder`, not merged) | – |
 | 3 | Ladder rungs 4–5 (Schreiben, Sprechen) | [plan](superpowers/plans/2026-11-16-ladder-write-speak.md) · [design](superpowers/specs/2026-11-16-ladder-write-speak-design.md) | done (2026-11-20; branch `ladder-write-speak`, on top of `content-pipeline`, not merged) | – |
-| 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | not started | 1 |
+| 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | done (2026-11-20; branch `boards-body-map`, on top of `ladder-write-speak`, not merged) | 1 |
 | 4b | Preposition scene | [plan](superpowers/plans/2026-11-16-boards-preposition-scene.md) | not started | 4a |
 | 4c | Timeline | [plan](superpowers/plans/2026-11-16-boards-timeline.md) | not started | 4a |
 | 5a | Klinik: maps and terms | [plan](superpowers/plans/2026-11-16-klinik-maps-terms.md) · [design](superpowers/specs/2026-11-16-medical-track-design.md) | not started | 4a |
@@ -170,6 +170,33 @@ Parked (small, known):
 - [x] Task 5: Pictures and point positions — commits `53b2b08`, `d55b43b` (owner stop skipped; see "Needs owner review")
 - [x] Task 6: Hotspot modes on screen — commit `642fed5`
 - [x] Task 7: Docs and ship — commit `37128da`
+- [x] Whole-branch review (Opus) and its fix wave — commit `d559136`
+- [ ] Merge to `main` — the owner's step, after `ladder-write-speak` and the review items below
+
+What the reviews changed against the plan (rulings, each can be undone):
+- Progress format 3 adds `boards`. An import counts as an "old file" only below format 2, so a
+  format-2 export keeps its earned ladder rungs when merged.
+- The pain sentence uses the plural only for parts a person has several of (`pair` in the data,
+  every second one): "Meine Augen tun weh.", but always "Mein Kopf tut weh.", "Meine Brust tut weh."
+  The plan's rule would have built "Meine Köpfe tun weh." and "Meine Brüste tun weh."
+- "Die Organe" has no "Wo tut es weh?" mode ("Meine Gallenblase tut weh." is not what a patient says).
+- Unlock labels are the real chapter names: "Nach „5.1 Gute Besserung“", "Nach „5.3 Ein Ausflug“".
+- The front-view set is called "Von vorne" (the plan said "Der Körper", the board's own name).
+- A tap on the other side of the body counts for paired parts (front and back views). "Bein" has
+  its point on the right leg, and any tap on thigh, knee or lower leg counts for it.
+- Spoken prompts follow the "Aussprache" setting; the 🔊 buttons always speak.
+- "Wiederholen (n)" plays only due items, no new ones; the mode buttons add up to 5 new ones.
+- Board answers count toward the daily goal ring (design's open question 2), one per item and mode.
+- "Brust" is glossed "chest, breast" (its plural "Brüste" is shown).
+- A word counts as "gelernt" only when all its scored modes are at box 1 or higher.
+
+Parked (small, known):
+- After "Öffnen", a scored mode with nothing due says "Heute ist nichts fällig." and offers no
+  extra practice (Entdecken still works).
+- Finger, Daumen, Hand and Handgelenk are only about 6 % apart (about 22 px on the phone).
+- When "Bein" is asked and she taps the knee, the green dot is drawn on Bein's own point.
+- No on-screen (DOM) tests for the board screen or the hotspot modes; the picture is not usable
+  by keyboard.
 
 ### 4b. Preposition scene
 
@@ -279,6 +306,35 @@ look at. Remove an item when it is checked.
 - **Strict dictation:** the calls under "What the reviews changed" in the tracker (case endings
   never forgiven; "Kaffe"/"heut" now wrong). Decide whether that is too strict for A1.
 - **Missed words on Sprechen** show as blanks until the third try (she sees where, not what).
+
+### Project 4a — boards and body map (branch `boards-body-map`)
+
+- **The pictures** (owner stop that was skipped): `data/boards/img/koerper-vorne.svg`,
+  `koerper-hinten.svg`, `gesicht.svg`, `organe.svg`. "Entdecken" shows each picture with all its
+  points (tap one for its word). Check:
+  1. The mannequin is acceptable to her: neutral, no face, no gendered detail. The back view has
+     light lines for the buttocks and the back of the knees. Remove them if they feel too much.
+  2. The face has short dark hair, which reads slightly male. A different hair outline is one path.
+  3. Organs: the heart and liver are drawn in reds close to the app's "wrong" red. Mute them if
+     that confuses her. Only one kidney is clearly visible.
+  4. Anatomy, by a doctor's eye: organ positions and sides (patient's right on the viewer's left).
+- **Vocabulary.** All 51 nouns (articles and plurals) match DWDS. Notes: "der Zeh" is marked
+  regional in DWDS ("die Zehe" is standard); "die Blase" stands for the Harnblase; "die Haare (pl.)"
+  for head hair. Glosses are in `data/boards/koerper.json`.
+- **Pain sentences.** Read a few in "Wo tut es weh?": "Meine Haare tun weh." comes from the plan
+  (a grammar point, slightly odd as a complaint).
+- **Daily goal.** Board answers fill the daily ring, one per word and mode, so one picture session
+  can fill a goal of 10 (design's open question 2).
+- **Unlocks.** The body sets open after 5.1, the organs after 5.3 (the last A1 chapter).
+- **Phone checklist** (only headless desktop Chrome so far):
+  1. Üben → "Bilder" card → "Öffnen": four sets; locked ones greyed with the chapter name.
+  2. "Entdecken": tap a point, the word is spoken (with "Aussprache" on) and the label shows
+     article in colour, plural and meaning; tapping elsewhere closes it.
+  3. "Zeigen" and "Wo tut es weh?": a far tap shows "Tipp näher an die Stelle."; a tap on the right
+     part on either side counts; the fingers and thumb can be hit with a fingertip.
+  4. "Benennen": the four answers, the label and "Weiter ›" fit on the screen without scrolling.
+  5. Leave a session halfway with ✕: on reopening, the answered words are not new any more.
+  6. "Wiederholen (n)" on a later day plays only the due words.
 
 ## How to run a plan from a new conversation
 
