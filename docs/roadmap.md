@@ -167,7 +167,7 @@ Parked (small, known):
 - [x] Task 2: Board progress in the store — commit `7e7a4c5`
 - [x] Task 3: Registry, Üben section, board screen shell — commits `562714c`, `eb9df89`
 - [x] Task 4: Hotspot logic and body vocabulary — commit `b1e22a8`
-- [ ] Task 5: Pictures and point positions — **owner stop** (approve the figure)
+- [x] Task 5: Pictures and point positions — commits `53b2b08`, `d55b43b` (owner stop skipped; see "Needs owner review")
 - [ ] Task 6: Hotspot modes on screen
 - [ ] Task 7: Docs and ship
 
