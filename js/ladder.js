@@ -1,5 +1,5 @@
 // Production ladder: the pure review schedule. A sentence enters the ladder after its first play
-// (rung 2) and is reviewed on growing intervals; a mistake drops it one rung. Rung 3 is the top.
+// (rung 2) and is reviewed on growing intervals; a mistake drops it one rung. Rung 5 is the top.
 // No DOM, no storage: progressStore.js keeps the entries, this file only computes them.
 
 import { normalizeLegacyType } from './felderLesson.js';
@@ -7,7 +7,7 @@ import { orderModel } from './orderExercise.js';
 import { hasArticle } from './articleBlank.js';
 
 export const RUNG_FIRST = 2;
-export const RUNG_TOP = 3;
+export const RUNG_TOP = 5;
 /** Days until the next review after reaching a rung (by rung reached). */
 export const PASS_DAYS = { 2: 1, 3: 3, 4: 7, 5: 14 };
 /** Days after a pass at the top: the first one, then every later one. */
@@ -16,15 +16,23 @@ export const TOP_DAYS = [14, 30];
 export const MIGRATION_PER_DAY = 10;
 
 /**
- * Which rungs a sentence can be tested on: 2 = it has an Ordnen model, 3 = it has an article.
+ * Which rungs a sentence can be tested on: 2 = it has an Ordnen model, 3 = it has an article,
+ * 4 = writing from hearing (needs a German voice and the write setting), 5 = speaking (needs speech input).
+ * Without `env` rungs 4 and 5 are off.
  * Works on copies with the legacy word types normalised, as the game sees them, so review and
  * game agree on the same sentence.
  * @param {Word[]} words
- * @returns {{2: boolean, 3: boolean}}
+ * @param {{voice: boolean, write: boolean, speak: boolean}} [env]
+ * @returns {{2: boolean, 3: boolean, 4: boolean, 5: boolean}}
  */
-export function rungEligibility(words) {
+export function rungEligibility(words, env) {
     const normalized = words.map(w => normalizeLegacyType({ ...w }));
-    return { 2: orderModel(normalized) !== null, 3: hasArticle(normalized) };
+    return {
+        2: orderModel(normalized) !== null,
+        3: hasArticle(normalized),
+        4: !!(env && env.voice && env.write),
+        5: !!(env && env.speak),
+    };
 }
 
 /** Local midnight before `now` (ms). */
@@ -45,7 +53,7 @@ export function addDays(dayStart, n) {
  * Ladder state for a sentence on its first play; an entry already on the ladder is unchanged.
  * @param {?object} entry
  * @param {number} now
- * @param {{2: boolean, 3: boolean}} eligible  which rungs this sentence can be tested on
+ * @param {{2?: boolean, 3?: boolean, 4?: boolean, 5?: boolean}} eligible  which rungs this sentence can be tested on
  * @returns {{rung: number, due: number, topPasses: number}}
  */
 export function enterLadder(entry, now, eligible) {

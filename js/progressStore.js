@@ -102,10 +102,10 @@ export class ProgressStore {
      * @param {string} key  from sentenceKey()
      * @param {SentenceMistakes} mistakes  this play's wrong placements
      * @param {number} [now]
-     * @param {{2: boolean, 3: boolean}} [eligible]  which ladder rungs this sentence can be tested on
+     * @param {{2?: boolean, 3?: boolean, 4?: boolean, 5?: boolean}} [eligible]  which ladder rungs this sentence can be tested on
      * @returns {SentenceProgress}
      */
-    recordSentence(key, mistakes, now = Date.now(), eligible = { 2: true, 3: true }) {
+    recordSentence(key, mistakes, now = Date.now(), eligible = { 2: true, 3: true, 4: true, 5: true }) {
         const data = this.load();
         const entry = data.sentences[key] || {
             plays: 0, perfect: 0, perfectStreak: 0, lastPlayed: 0, lastMistakes: 0,
@@ -139,7 +139,7 @@ export class ProgressStore {
      * Record one review of a sentence on the ladder: moves its rung and due date; the play counters stay.
      * @param {string} key
      * @param {boolean} ok  answered correctly
-     * @param {{2: boolean, 3: boolean}} eligible
+     * @param {{2?: boolean, 3?: boolean, 4?: boolean, 5?: boolean}} eligible
      * @param {number} [now]
      * @returns {?SentenceProgress}  null for an unknown key or one off the ladder (rung 0:
      *   retired, user-made or never eligible), which stays as it is

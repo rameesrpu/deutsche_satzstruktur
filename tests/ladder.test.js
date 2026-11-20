@@ -76,16 +76,41 @@ export function runLadderTests() {
         const days = Object.values(s).map(e => (e.due - DAY0) / 86400000 | 0);
         assertEqual([0, 1, 2].map(d => days.filter(x => x === d).length), [5, 5, 2]);
     });
+    const all5 = { 2: true, 3: true, 4: true, 5: true };
+    test('afterReview: rung 3 → 4 in 7 days', () =>
+        assertEqual(afterReview({ rung: 3, due: 0, topPasses: 0 }, true, NOW, all5), { rung: 4, due: day(7), topPasses: 0 }));
+    test('afterReview: rung 4 → 5 in 14 days', () =>
+        assertEqual(afterReview({ rung: 4, due: 0, topPasses: 0 }, true, NOW, all5), { rung: 5, due: day(14), topPasses: 0 }));
+    test('afterReview: rung 5 top passes', () => {
+        assertEqual(afterReview({ rung: 5, due: 0, topPasses: 0 }, true, NOW, all5), { rung: 5, due: day(14), topPasses: 1 });
+        assertEqual(afterReview({ rung: 5, due: 0, topPasses: 1 }, true, NOW, all5), { rung: 5, due: day(30), topPasses: 2 });
+    });
+    test('afterReview: fail on rung 5 → rung 4 tomorrow', () =>
+        assertEqual(afterReview({ rung: 5, due: 0, topPasses: 0 }, false, NOW, all5), { rung: 4, due: day(1), topPasses: 0 }));
+    test('afterReview: fail on rung 4 skips ineligible rung 3', () =>
+        assertEqual(afterReview({ rung: 4, due: 0, topPasses: 0 }, false, NOW, { 2: true, 3: false, 4: true, 5: true }).rung, 2));
+    test('exerciseRung: rung 4 ineligible → 5; rung 5 missing → 3', () => {
+        assertEqual(exerciseRung(4, { 2: true, 3: true, 4: false, 5: true }), 5);
+        assertEqual(exerciseRung(5, { 2: true, 3: true }), 3);
+    });
+    test('afterReview: resting at old top 3 with all rungs → rung 4', () =>
+        assertEqual(afterReview({ rung: 3, due: 0, topPasses: 2 }, true, NOW, all5), { rung: 4, due: day(7), topPasses: 0 }));
+    test('rungEligibility: env gates rungs 4 and 5', () => {
+        const w = tagged('Ich gebe dem Patienten einen Tee.', 'S.ich V.ich O.m.dat O.m.dat O.m.akk O.m.akk');
+        assertEqual(rungEligibility(w, { voice: false, write: true, speak: true })[4], false);
+        assertEqual(rungEligibility(w, { voice: true, write: true, speak: false })[5], false);
+        assertEqual(rungEligibility(w, { voice: true, write: true, speak: true }), all5);
+    });
     test('rungEligibility: Ordnen model / article', () => {
-        assertEqual(rungEligibility(tagged('Heute muss Ayisha im Krankenhaus arbeiten.', 'X M.er S.er P O.n.dat V')), { 2: true, 3: false });
-        assertEqual(rungEligibility(tagged('Ich bin neu.', 'S.ich V.ich X')), { 2: false, 3: false });
-        assertEqual(rungEligibility(tagged('Ich gebe dem Patienten einen Tee.', 'S.ich V.ich O.m.dat O.m.dat O.m.akk O.m.akk')), { 2: true, 3: true });
+        assertEqual(rungEligibility(tagged('Heute muss Ayisha im Krankenhaus arbeiten.', 'X M.er S.er P O.n.dat V')), { 2: true, 3: false, 4: false, 5: false });
+        assertEqual(rungEligibility(tagged('Ich bin neu.', 'S.ich V.ich X')), { 2: false, 3: false, 4: false, 5: false });
+        assertEqual(rungEligibility(tagged('Ich gebe dem Patienten einen Tee.', 'S.ich V.ich O.m.dat O.m.dat O.m.akk O.m.akk')), { 2: true, 3: true, 4: false, 5: false });
     });
     test('rungEligibility: raw legacy-typed words and normalised words agree', () => {
         const raw = () => libWords([['Er', 'subject', 'nom', 'm'], ['arbeitet', 'verb', 'nom', 'none'],
             ['heute', 'other', 'nom', 'none'], ['in', 'preposition', 'nom', 'none'],
             ['einem', 'object-dat', 'dat', 'n'], ['Büro.', 'object-dat', 'dat', 'n']]);
         assertEqual(rungEligibility(raw()), rungEligibility(raw().map(normalizeLegacyType)));
-        assertEqual(rungEligibility(raw()), { 2: true, 3: true });
+        assertEqual(rungEligibility(raw()), { 2: true, 3: true, 4: false, 5: false });
     });
 }

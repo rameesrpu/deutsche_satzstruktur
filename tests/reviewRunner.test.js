@@ -56,12 +56,12 @@ export function runReviewRunnerTests() {
         const s = sentence('Er arbeitet heute in einem Büro.', words);
         const { queue } = buildQueue(['k'], () => s, () => 2);
         assertEqual(queue[0].eligible, rungEligibility(words));
-        assertEqual(queue[0].eligible, { 2: true, 3: true });
+        assertEqual(queue[0].eligible, { 2: true, 3: true, 4: false, 5: false });
     });
     test('review: rungEligibility = Ordnen model / article', () => {
-        assertEqual(rungEligibility(ayisha()), { 2: true, 3: false });
-        assertEqual(rungEligibility(neu()), { 2: false, 3: false });
-        assertEqual(rungEligibility(give()), { 2: true, 3: true });
+        assertEqual(rungEligibility(ayisha()), { 2: true, 3: false, 4: false, 5: false });
+        assertEqual(rungEligibility(neu()), { 2: false, 3: false, 4: false, 5: false });
+        assertEqual(rungEligibility(give()), { 2: true, 3: true, 4: false, 5: false });
     });
 
     test('review: buildQueue retires missing and ineligible sentences, picks the shown rung', () => {
@@ -70,7 +70,7 @@ export function runReviewRunnerTests() {
         assertEqual(queue.map(q => q.key), ['a', 'd']);
         assertEqual(retired, ['b', 'c']);
         assertEqual(queue.map(q => q.rung), [2, 3]);
-        assertEqual(queue[1].eligible, { 2: false, 3: true });
+        assertEqual(queue[1].eligible, { 2: false, 3: true, 4: false, 5: false });
         assertEqual(queue[0].sentence.text, 'a');
     });
 

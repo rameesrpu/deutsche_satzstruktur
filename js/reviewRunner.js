@@ -15,8 +15,8 @@ import { renderOrderScreen } from './orderScreen.js';
  * @typedef {Object} ReviewItem
  * @property {string} key            sentenceKey()
  * @property {Sentence} sentence
- * @property {2|3} rung              the rung shown (exerciseRung)
- * @property {{2: boolean, 3: boolean}} eligible
+ * @property {2|3|4|5} rung          the rung shown (exerciseRung)
+ * @property {{2?: boolean, 3?: boolean, 4?: boolean, 5?: boolean}} eligible
  */
 
 /** `level/category` of a progress key `level/category/text` (category keys have no "/"). */
@@ -36,9 +36,10 @@ export function keyCategory(key) {
  * @param {function(string): ?Sentence} findSentence
  * @param {function(string): number} getRung  the entry's stored rung
  * @param {function(string): boolean} [isCategoryLoaded]  the key's library category is loaded
+ * @param {{voice: boolean, write: boolean, speak: boolean}} [env]  what this device supports (rungs 4 and 5)
  * @returns {{queue: ReviewItem[], retired: string[], skipped: string[]}}
  */
-export function buildQueue(keys, findSentence, getRung, isCategoryLoaded = () => true) {
+export function buildQueue(keys, findSentence, getRung, isCategoryLoaded = () => true, env) {
     const queue = [];
     const retired = [];
     const skipped = [];
@@ -48,7 +49,7 @@ export function buildQueue(keys, findSentence, getRung, isCategoryLoaded = () =>
             skipped.push(key);
             continue;
         }
-        const eligible = sentence ? rungEligibility(sentence.words || []) : null;
+        const eligible = sentence ? rungEligibility(sentence.words || [], env) : null;
         const rung = eligible ? exerciseRung(getRung(key), eligible) : null;
         if (rung === null) retired.push(key);
         else queue.push({ key, sentence, rung, eligible });
