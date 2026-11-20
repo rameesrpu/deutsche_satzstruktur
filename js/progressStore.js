@@ -6,9 +6,10 @@
 
 import { enterLadder, afterReview, migrate, RUNG_FIRST } from './ladder.js';
 import { loadDailyGoal } from './settings.js';
+import { afterAnswer } from './boardSchedule.js';
 
 export const PROGRESS_KEY = 'gameProgress';
-const FORMAT_VERSION = 2;
+const FORMAT_VERSION = 3;
 
 /**
  * Stable key for a sentence: `${level}/${category}/${text}`; user-created
@@ -56,6 +57,7 @@ export function countMistakes(mistakes) {
 const emptyData = () => ({
     version: FORMAT_VERSION,
     sentences: {},
+    boards: {},
     totals: { bestScore: 0, bestStreak: 0, sentencesPlayed: 0 },
 });
 
@@ -154,6 +156,25 @@ export class ProgressStore {
         return entry;
     }
 
+    /** @returns {?BoardEntry} */
+    getBoard(key) {
+        return this.load().boards[key] || null;
+    }
+
+    /**
+     * Record one answer of a board item (boardSchedule.js).
+     * @param {string} key  `${setId}:${itemId}`-style key, chosen by the board
+     * @param {boolean} ok
+     * @param {number} [now]
+     * @returns {BoardEntry}
+     */
+    recordBoard(key, ok, now = Date.now()) {
+        const data = this.load();
+        data.boards[key] = afterAnswer(data.boards[key] || null, ok, now);
+        this.save();
+        return data.boards[key];
+    }
+
     /** Take a sentence off the ladder ("Kann ich schon"). */
     retire(key) {
         const entry = this.getSentence(key);
@@ -184,7 +205,7 @@ export class ProgressStore {
      */
     importData(imported, mode = 'merge') {
         const rawSentences = imported && typeof imported.sentences === 'object' && imported.sentences || {};
-        const oldFile = !imported || imported.version !== FORMAT_VERSION;
+        const oldFile = !imported || !(imported.version >= 2); // rungs exist since format 2
         const incoming = normalize(imported, Date.now(), loadDailyGoal(this._storage()));
         if (mode === 'replace') {
             this.data = incoming;
@@ -204,6 +225,10 @@ export class ProgressStore {
                     data.sentences[key] = entry;
                 }
             }
+            for (const [key, entry] of Object.entries(incoming.boards)) {
+                const mine = data.boards[key];
+                if (!mine || entry.lastSeen > mine.lastSeen) data.boards[key] = entry;
+            }
             for (const k of Object.keys(data.totals)) {
                 data.totals[k] = Math.max(data.totals[k], incoming.totals[k]);
             }
@@ -213,6 +238,9 @@ export class ProgressStore {
 }
 
 const isValidRung = r => r === 0 || (Number.isInteger(r) && r >= RUNG_FIRST && r <= 5);
+
+const isValidBoard = e => !!e && typeof e === 'object' && Number.isInteger(e.box) && e.box >= 0 && e.box <= 4
+    && ['due', 'seen', 'correct', 'lastSeen'].every(k => Number.isFinite(e[k]) && e[k] >= 0);
 
 /**
  * Coerce stored/imported data into a valid GameProgress (drops malformed entries); existing
@@ -224,6 +252,13 @@ function normalize(data, now, perDay) {
     const num = v => (Number.isFinite(v) && v >= 0 ? v : 0);
     if (data.totals && typeof data.totals === 'object') {
         for (const k of Object.keys(out.totals)) out.totals[k] = num(data.totals[k]);
+    }
+    if (data.boards && typeof data.boards === 'object') {
+        for (const [key, e] of Object.entries(data.boards)) {
+            if (isValidBoard(e)) {
+                out.boards[key] = { box: e.box, due: e.due, seen: e.seen, correct: e.correct, lastSeen: e.lastSeen };
+            }
+        }
     }
     if (data.sentences && typeof data.sentences === 'object') {
         for (const [key, e] of Object.entries(data.sentences)) {

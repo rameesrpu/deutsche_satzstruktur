@@ -71,7 +71,9 @@ export { startOfDay };
  */
 export function countPlayedToday(progress, now) {
     const since = startOfDay(now);
-    return Object.values(progress.sentences).filter(e => e.lastPlayed >= since).length;
+    const sentences = Object.values(progress.sentences).filter(e => e.lastPlayed >= since).length;
+    const boards = Object.values(progress.boards || {}).filter(e => e.lastSeen >= since).length;
+    return sentences + boards;
 }
 
 /**

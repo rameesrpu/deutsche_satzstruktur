@@ -46,6 +46,17 @@ export function runHomeScreenTests() {
         assertEqual(countPlayedToday(progress, now), 2);
     });
 
+    test('home: countPlayedToday also counts board items seen today', () => {
+        const now = new Date(2026, 10, 7, 15, 0).getTime();
+        const board = lastSeen => ({ box: 1, due: 0, seen: 1, correct: 1, lastSeen });
+        const progress = {
+            sentences: { a: entry({ lastPlayed: now - 1000 }), c: entry({ lastPlayed: startOfDay(now) - 1 }) },
+            boards: { x: board(now), y: board(startOfDay(now)), z: board(startOfDay(now) - 1) },
+        };
+        assertEqual(countPlayedToday(progress, now), 3);
+        assertEqual(countPlayedToday({ sentences: {} }, now), 0);
+    });
+
     test('home: review tile shows today\'s count, "Heute fertig" at 0', () => {
         assertEqual(reviewTile(4), { count: '4', label: 'Heute üben',
             title: 'Sätze von früher, eine Stufe schwerer', disabled: false });

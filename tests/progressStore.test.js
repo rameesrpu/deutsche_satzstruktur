@@ -112,11 +112,11 @@ export function runProgressStoreTests() {
         assertEqual(store.load().totals.bestStreak, 2);
     });
 
-    test('ladder: load() migrates a version 1 store to rung 2 with finite due, version 2', () => {
+    test('ladder: load() migrates a version 1 store to rung 2 with finite due, the current format', () => {
         const storage = makeLocalStorage();
         storage.setItem(PROGRESS_KEY, JSON.stringify(v1({ a: played(), b: played({ lastPlayed: 50 }) })));
         const data = new ProgressStore(storage).load();
-        assertEqual(data.version, 2);
+        assertEqual(data.version, 3);
         for (const k of ['a', 'b']) {
             assertEqual(data.sentences[k].rung, 2);
             assertEqual(Number.isFinite(data.sentences[k].due), true);
@@ -245,5 +245,69 @@ export function runProgressStoreTests() {
         const [a, b] = [store.getSentence('k'), other.getSentence('k')];
         assertEqual([b.rung, b.due, b.topPasses, b.lastReview], [a.rung, a.due, a.topPasses, a.lastReview]);
         assertEqual(b.rung, 3);
+    });
+
+    test('progress: a format-2 object without boards loads with boards {} and the same sentences', () => {
+        const ls = makeLocalStorage();
+        ls.setItem(PROGRESS_KEY, JSON.stringify({ version: 2, sentences: { k: played({ rung: 3, due: 5 }) },
+            totals: { bestScore: 1, bestStreak: 2, sentencesPlayed: 3 } }));
+        const store = new ProgressStore(ls);
+        assertEqual(store.load().boards, {});
+        assertEqual(store.getSentence('k').rung, 3);
+        assertEqual(store.load().version, 3);
+    });
+
+    test('progress: recordBoard moves the box, saves, getBoard reads it', () => {
+        const ls = makeLocalStorage();
+        const store = new ProgressStore(ls);
+        const key = 'koerper/aussen/knie:zeigen';
+        assertEqual(store.getBoard(key), null);
+        const e = store.recordBoard(key, true, NOW);
+        assertEqual([e.box, e.seen, e.correct, e.lastSeen], [1, 1, 1, NOW]);
+        assertEqual(store.getBoard(key).box, 1);
+        assertEqual(new ProgressStore(ls).getBoard(key).box, 1);
+        assertEqual(store.recordBoard(key, false, NOW + 1).box, 0);
+    });
+
+    test('progress: invalid board entries are dropped on load', () => {
+        const ls = makeLocalStorage();
+        const good = { box: 2, due: 5, seen: 3, correct: 2, lastSeen: 4 };
+        ls.setItem(PROGRESS_KEY, JSON.stringify({ version: 3, sentences: {}, boards: {
+            good, bad: { ...good, box: 9 }, frac: { ...good, box: 1.5 }, neg: { ...good, seen: -1 },
+            str: { ...good, due: 'x' }, nul: null, missing: { box: 1 },
+        } }));
+        assertEqual(Object.keys(new ProgressStore(ls).load().boards), ['good']);
+    });
+
+    test('progress: export then replace-import round-trips boards', () => {
+        const a = new ProgressStore(makeLocalStorage());
+        a.recordBoard('x:zeigen', true, NOW);
+        const b = new ProgressStore(makeLocalStorage());
+        b.recordBoard('other', true, NOW);
+        b.importData(a.exportData(), 'replace');
+        assertEqual(b.load().boards, a.load().boards);
+    });
+
+    test('progress: merge keeps the board entry with the later lastSeen', () => {
+        const a = new ProgressStore(makeLocalStorage());
+        a.recordBoard('x', true, 1000);
+        a.recordBoard('y', true, 5000);
+        const b = new ProgressStore(makeLocalStorage());
+        b.recordBoard('x', false, 2000);
+        b.recordBoard('y', false, 3000);
+        b.recordBoard('z', true, 1);
+        b.importData(a.exportData(), 'merge');
+        assertEqual(b.getBoard('x').lastSeen, 2000);
+        assertEqual(b.getBoard('y').lastSeen, 5000);
+        assertEqual(b.getBoard('z').lastSeen, 1);
+    });
+
+    test('progress: a format-2 export keeps its earned rung when merged into a format-3 store', () => {
+        const store = new ProgressStore(makeLocalStorage());
+        store.recordSentence('A1/c/s', emptyMistakes(), 100);
+        store.importData({ version: 2, totals: {}, sentences: { 'A1/c/s': played({
+            lastPlayed: 500, rung: 5, due: 777, topPasses: 1, lastReview: 400 }) } }, 'merge');
+        const e = store.getSentence('A1/c/s');
+        assertEqual([e.lastPlayed, e.rung, e.due], [500, 5, 777]);
     });
 }

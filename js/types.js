@@ -150,8 +150,9 @@
 /**
  * localStorage `gameProgress`; also the `progress` field of a sentence export.
  * @typedef {Object} GameProgress
- * @property {number} version       format version (2)
+ * @property {number} version       format version (3)
  * @property {Object<string, SentenceProgress>} sentences  keyed by sentenceKey(): level/category/text
+ * @property {Object<string, BoardEntry>} boards  board item progress (boardSchedule.js), keyed by the board's item key
  * @property {{bestScore: number, bestStreak: number, sentencesPlayed: number}} totals
  */
 
