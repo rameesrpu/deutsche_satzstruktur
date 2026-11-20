@@ -16,7 +16,7 @@ project's design and plan: `docs/superpowers/specs/`, `docs/superpowers/plans/`)
 ## Files (`js/`, ES modules — entry `app.js`; each file imports what it uses)
 - `types.js` — JSDoc typedefs only (Word, Sentence, LibraryFile, ParsedSentence, PlacementResult…; not loaded)
 - `ids.js` — `nextId()`: the one source of sentence/word ids (never use `Date.now()` as an id)
-- `sound.js` — SoundManager: Web Audio effects + German text-to-speech (`detectGermanVoice`: speech options greyed out when no German voice);
+- `sound.js` — SoundManager: Web Audio effects + German text-to-speech (`speak(text, {queue, rate, force})`; `hasGermanVoice()`; `detectGermanVoice`: speech options greyed out when no German voice);
   pure `placementSpeech()`: a correct placement speaks only its phrase ("Satz aufbauen", `gameSpeechBuildUp`, off: the growing prefix)
 - `grammaticalConfig.js` — gender/number/pronoun properties and colors
 - `levelContent.js` — `LEVEL_CONTENT`: levels → categories → sentence-list files (`data/levels/`; pre-parsed twins in `data/library/`);
@@ -24,16 +24,20 @@ project's design and plan: `docs/superpowers/specs/`, `docs/superpowers/plans/`)
 - `levelSelector.js` — level/category picker UI (story optgroups, chapters locked until the previous one is played) and sentence list
 - `storyNarration.js` — story chapters in game mode: pure beat helpers + the narration card (`showStoryCard`)
 - `glossary.js` — tap-to-translate: `glossTokens()` (pure; mirrors `glossary_matches` in build_stories.py) and the word popover
-- `ladder.js` — pure review schedule of the production ladder (also `rungEligibility(words)`: which rungs a sentence can be tested on): `enterLadder`, `afterReview(entry, ok, now, eligible)`, `exerciseRung`,
-  `dueKeys(sentences, now, cap)`, `migrate` (existing sentences join at the daily goal per day; progressStore passes it), day helpers; rungs 2–3 (3 = top), `PASS_DAYS`, `TOP_DAYS`
+- `ladder.js` — pure review schedule of the production ladder (also `rungEligibility(words, env)`: which rungs a sentence can be tested on; env `{voice, write, speak}` gates rungs 4/5): `enterLadder`, `afterReview(entry, ok, now, eligible)`, `exerciseRung`,
+  `dueKeys(sentences, now, cap)`, `migrate` (existing sentences join at the daily goal per day; progressStore passes it), day helpers; rungs 2–5 (5 = top, `RUNG_TOP`), `PASS_DAYS`, `TOP_DAYS`
 - `fieldZones.js` — pure `fieldZones(words)` → `{lead, vorfeld, verb, mittelfeld, ende}` word indices or null (not a plain main clause); built on the `felderLesson.js` clause helpers; snapshot `tests/snapshots/field-zones.json`
 - `orderExercise.js` — pure rung-2 "Ordnen" logic: `orderModel(words)` (phrase chips per field, null if not eligible), `createOrder`, `dropChip`, `isSolved`, `fieldChips`; Mittelfeld order is never tested
 - `articleBlank.js` — pure rung-3 logic: `articleIndexes`, `blankArticles(words, from)` (articles → "___" until their phrase is placed), `hasArticle`
 - `orderScreen.js` — Ordnen screen (`body[data-screen="order"]`, rung 2): `renderOrderScreen` taps chip → field slot; reuses play-screen bar/feedback classes
-- `reviewRunner.js` — `ReviewRunner`: the "Heute üben" session (queue → rung 2 on the order screen, rung 3 in GameMode with `articleBlank`/`ladder`, `progressStore.recordReview`, review recap); pure `buildQueue`, `keyCategory`
+- `textMatch.js` — pure answer matching for rungs 4–5: `tokens`, `fold` (case/umlaut folding), `compareTyped(expected, typed)` (per-word marks), `speechMatch(expected, heard)` (alternatives, `SPEECH_PASS`)
+- `speechInput.js` — Web Speech recognition wrapper: `speechAvailable(win)`, `listen({lang, maxAlternatives, win})` → promise of alternatives
+- `writeScreen.js` — Schreiben screen (`body[data-screen="write"]`, rung 4, dictation): `renderWriteScreen(root, {text, translation, total, index}, {onDone(ok), onClose})`; pure `writeStep`, `retryText`, `WRITE_TRIES`
+- `speakScreen.js` — Sprechen screen (`body[data-screen="speak"]`, rung 5): `renderSpeakScreen(root, {text, translation, total, index, storage, win}, {onDone(ok), onClose})`, recognised or self-check mode; pure `speakMode`, `speakStep`
+- `reviewRunner.js` — `ReviewRunner`: the "Heute üben" session (queue → rung 2 on the order screen, rung 3 in GameMode with `articleBlank`/`ladder`, rung 4 on the write screen, rung 5 on the speak screen (`translationFor` dep), `progressStore.recordReview`, review recap); pure `buildQueue(keys, find, getRung, isCategoryLoaded, env)`, `keyCategory`
 - `homeScreen.js` — learner screens Home (Lernen) / Üben / Wörter: pure helpers (chapter status, today's count,
   `reviewTile`/`practiceReviewButton`: the "Heute üben" tile with the due count, replacing weak spots) + `renderHome/renderPractice/renderWords`; the screen router (`showScreen`) is in app.js
-- `settings.js` — learner settings screen (Einstellungen: Ton, Aussprache, Satz aufbauen, Hörübung, Zeitdruck, Tagesziel) + daily goal / time challenge persistence; pure `parseDailyGoal`, `goalProgress`, `settingsRows`
+- `settings.js` — learner settings screen (Einstellungen: Ton, Aussprache, Satz aufbauen, Hörübung, Schreiben üben, Sprechen üben, Spracherkennung, Zeitdruck, Tagesziel) + daily goal / time challenge persistence; pure `parseDailyGoal`, `goalProgress`, `settingsRows`, `ladderEnv({storage, hasVoice})` → `{voice, write, speak}`
 - `storyReader.js` — full-screen chapter reader (📖 next to the category select, "Erst lesen" on a chapter's first card)
 - `wordManager.js` — word data model of the current sentence
 - `sentenceManager.js` — all sentences, localStorage persistence, library bulk-load
@@ -58,7 +62,7 @@ project's design and plan: `docs/superpowers/specs/`, `docs/superpowers/plans/`)
 - `renderer.js` — SVG drawing of words/connections in edit view
 - `ui.js` — UIController: editor panels and interactions
 - `app.js` — DeutschApp: wires everything together, screen router (`showScreen`: body[data-screen], bottom nav;
-  the editor is the Werkstatt screen; `order` = Ordnen; `startLadderReview`, `showReviewRecap`), backend calls, import/export. Passes GameMode a
+  the editor is the Werkstatt screen; `order` = Ordnen, `write` = Schreiben, `speak` = Sprechen; `startLadderReview`, `showReviewRecap`), backend calls, import/export. Passes GameMode a
   `host` ({sentenceManager, levelSelector, redraw, setView, updateSentenceList}); `window.app` is a debug handle only
 
 ## Data

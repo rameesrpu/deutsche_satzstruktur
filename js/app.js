@@ -17,7 +17,7 @@ import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday,
 import { buildRecapModel, renderRecap, reviewRecapModel, renderReviewRecap, wordsByChapter } from './chapterRecap.js';
 import { dueKeys } from './ladder.js';
 import { ReviewRunner, buildQueue, keyCategory } from './reviewRunner.js';
-import { loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge, renderSettings,
+import { loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge, renderSettings, ladderEnv,
     getLadderWrite, setLadderWrite, getLadderSpeak, setLadderSpeak, getRecognitionChoice, setRecognitionChoice } from './settings.js';
 import { speechAvailable } from './speechInput.js';
 
@@ -115,7 +115,9 @@ class DeutschApp {
         this.readReturn = 'home';   // screen to go back to when the reader closes
         this.dailyGoal = loadDailyGoal(); // sentences per day (Einstellungen → Tagesziel)
         // "Heute üben": the daily review session over the ladder (startLadderReview)
-        this.reviewRunner = new ReviewRunner({ app: this, gameMode: this.gameMode, progressStore });
+        this.reviewRunner = new ReviewRunner({ app: this, gameMode: this.gameMode, progressStore,
+            // English line under the dictation/speaking sentence (from the chapter file, if loaded)
+            translationFor: s => this.levelSelector.getLoadedData(s.level, s.category)?.translations?.[s.text] ?? null });
         this.reviewStarting = false; // startLadderReview is loading the library
     }
 
@@ -1422,10 +1424,11 @@ class DeutschApp {
             // Retired keys leave the ladder and skipped ones (category not loaded) stay due but are
             // left out, so the next due sentences take their places; each round only grows the sets.
             const skipped = new Set();
+            const env = ladderEnv({ storage: localStorage, hasVoice: gameSounds.hasGermanVoice() });
             let queue = [];
             for (;;) {
                 const built = buildQueue(this.dueReviewKeys(now, skipped), key => this.findSentenceByKey(key),
-                    key => progressStore.getSentence(key).rung, isCategoryLoaded);
+                    key => progressStore.getSentence(key).rung, isCategoryLoaded, env);
                 queue = built.queue;
                 if (built.retired.length === 0 && built.skipped.length === 0) break;
                 for (const key of built.retired) progressStore.retire(key);
@@ -1435,6 +1438,11 @@ class DeutschApp {
                 this.showScreen('home');
                 return;
             }
+            // Translations of the writing/speaking items (best effort: a failed fetch just shows none)
+            const cats = new Set(queue.filter(q => q.rung >= 4).map(q => q.sentence)
+                .filter(s => LEVEL_CONTENT[s.level]?.categories[s.category])
+                .map(s => `${s.level}/${s.category}`));
+            await Promise.allSettled([...cats].map(c => this.levelSelector.loadCategoryData(...c.split('/'))));
             if (this.gameMode.isActive) this.exitGame();
             this.reviewRunner.start(queue);
         } finally {

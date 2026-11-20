@@ -2,7 +2,8 @@
  * The daily review session of the production ladder ("Heute üben", see
  * docs/superpowers/specs/2026-11-15-production-ladder-design.md): plays the due sentences in
  * order, each on its rung — rung 2 on the Ordnen screen (orderScreen.js), rung 3 in the placement
- * game with its articles blanked (GameMode.articleBlank / GameMode.ladder) — records each one with
+ * game with its articles blanked (GameMode.articleBlank / GameMode.ladder), rung 4 on the Schreiben
+ * screen (writeScreen.js), rung 5 on the Sprechen screen (speakScreen.js) — records each one with
  * progressStore.recordReview and ends on the review recap. The pure helpers at the top build the
  * queue; app.js (startLadderReview) feeds it and owns the screens.
  */
@@ -10,6 +11,8 @@
 import { exerciseRung, rungEligibility } from './ladder.js';
 import { orderModel } from './orderExercise.js';
 import { renderOrderScreen } from './orderScreen.js';
+import { renderWriteScreen } from './writeScreen.js';
+import { renderSpeakScreen } from './speakScreen.js';
 
 /**
  * @typedef {Object} ReviewItem
@@ -66,16 +69,28 @@ export function buildQueue(keys, findSentence, getRung, isCategoryLoaded = () =>
 export class ReviewRunner {
     /**
      * @param {{app: Object, gameMode: GameMode, progressStore: ProgressStore,
-     *   renderOrder?: typeof renderOrderScreen, orderRoot?: function(): ?HTMLElement}} deps
-     *   renderOrder / orderRoot: the Ordnen screen (replaced in tests)
+     *   renderOrder?: typeof renderOrderScreen, orderRoot?: function(): ?HTMLElement,
+     *   renderWrite?: typeof renderWriteScreen, writeRoot?: function(): ?HTMLElement,
+     *   renderSpeak?: typeof renderSpeakScreen, speakRoot?: function(): ?HTMLElement,
+     *   translationFor?: function(Sentence): ?string}} deps
+     *   render* / *Root: the Ordnen / Schreiben / Sprechen screens (replaced in tests);
+     *   translationFor: the English line shown on rungs 4 and 5 (null: none)
      */
     constructor({ app, gameMode, progressStore, renderOrder = renderOrderScreen,
-        orderRoot = () => document.getElementById('screen-order') }) {
+        orderRoot = () => document.getElementById('screen-order'),
+        renderWrite = renderWriteScreen, writeRoot = () => document.getElementById('screen-write'),
+        renderSpeak = renderSpeakScreen, speakRoot = () => document.getElementById('screen-speak'),
+        translationFor = () => null }) {
         this.app = app;
         this.gameMode = gameMode;
         this.progressStore = progressStore;
         this.renderOrder = renderOrder;
         this.orderRoot = orderRoot;
+        this.renderWrite = renderWrite;
+        this.writeRoot = writeRoot;
+        this.renderSpeak = renderSpeak;
+        this.speakRoot = speakRoot;
+        this.translationFor = translationFor;
         this.active = false;
         this.queue = [];
         this.index = 0;
@@ -113,7 +128,9 @@ export class ReviewRunner {
     show() {
         const item = this.queue[this.index];
         if (item.rung === 2) this.showOrder(item);
-        else this.showGame(item);
+        else if (item.rung === 4) this.showWrite(item);
+        else if (item.rung === 5) this.showSpeak(item);
+        else this.showGame(item); // rung 3
     }
 
     /** True while `item` is the one on screen (callbacks of an earlier screen are ignored). */
@@ -136,6 +153,27 @@ export class ReviewRunner {
             onClose: () => { if (this.isCurrent(item)) this.close(); },
         });
     }
+
+    /** Rungs 4 (Schreiben) and 5 (Sprechen): a text screen like Ordnen; onDone(ok) records the review. */
+    showText(item, screen, root, render) {
+        this.app.showScreen(screen);
+        this.clearGame();
+        render(root, {
+            text: item.sentence.text, translation: this.translationFor(item.sentence),
+            total: this.queue.length, index: this.index,
+        }, {
+            onDone: ok => {
+                if (!this.isCurrent(item)) return;
+                this.record(item, !!ok);
+                this.next(item);
+            },
+            onClose: () => { if (this.isCurrent(item)) this.close(); },
+        });
+    }
+
+    showWrite(item) { this.showText(item, 'write', this.writeRoot(), this.renderWrite); }
+
+    showSpeak(item) { this.showText(item, 'speak', this.speakRoot(), this.renderSpeak); }
 
     showGame(item) {
         const gm = this.gameMode;

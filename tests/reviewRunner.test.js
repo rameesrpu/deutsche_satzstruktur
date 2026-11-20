@@ -208,6 +208,82 @@ export function runReviewRunnerTests() {
         assertEqual([e.rung, e.due], [2, addDays(startOfDay(Date.now()), 1)]);
     });
 
+    // Rungs 4 and 5 (Schreiben, Sprechen): stub renderers record the call
+    const ENV = { voice: true, write: true, speak: true };
+    function setupWS(specs, env = ENV) {
+        const store = new ProgressStore(makeLocalStorage());
+        const calls = [];
+        const app = {
+            showScreen: name => calls.push(['screen', name]),
+            showReviewRecap: results => calls.push(['recap', results]),
+            loadReviewSentence: () => calls.push(['load']),
+            redrawAll: () => {},
+        };
+        const gameMode = { articleBlank: false, ladder: null, isActive: false, start() {}, startNewSentence() {},
+            stop() { this.isActive = false; } };
+        const writes = [], speaks = [];
+        const translationFor = s => `EN: ${s.text}`;
+        const items = specs.map(([text, words, rung]) => {
+            const s = sentence(text, words);
+            const key = sentenceKey(s);
+            const eligible = rungEligibility(words, env);
+            store.recordSentence(key, emptyMistakes(), Date.now() - 2 * 86400000, eligible);
+            Object.assign(store.getSentence(key), { rung, due: 0 });
+            return { key, s };
+        });
+        store.save();
+        const { queue } = buildQueue(items.map(i => i.key), k => items.find(i => i.key === k).s,
+            k => store.getSentence(k).rung, () => true, env);
+        const runner = new ReviewRunner({ app, gameMode, progressStore: store, translationFor,
+            renderOrder: () => {}, orderRoot: () => null,
+            renderWrite: (root, opts, actions) => writes.push({ root, opts, actions }), writeRoot: () => 'W',
+            renderSpeak: (root, opts, actions) => speaks.push({ root, opts, actions }), speakRoot: () => 'S' });
+        return { store, calls, writes, speaks, queue, runner };
+    }
+
+    test('review: a rung 4 item opens the Schreiben screen; onDone(true) records rung 5', () => {
+        const { store, calls, writes, queue, runner } = setupWS([['Ich gebe dem Patienten einen Tee.', give(), 4]]);
+        runner.start(queue);
+        assertEqual(calls[0], ['screen', 'write']);
+        assertEqual(calls.filter(c => c[0] === 'load' || c[0] === 'start').length, 0);
+        assertEqual([writes.length, writes[0].root, writes[0].opts.text, writes[0].opts.translation,
+            writes[0].opts.total, writes[0].opts.index],
+            [1, 'W', 'Ich gebe dem Patienten einen Tee.', 'EN: Ich gebe dem Patienten einen Tee.', 1, 0]);
+        writes[0].actions.onDone(true);
+        assertEqual(store.getSentence(queue[0].key).rung, 5);
+        writes[0].actions.onDone(false); // old screen ignored
+        assertEqual(store.getSentence(queue[0].key).rung, 5);
+        assertEqual(calls.filter(c => c[0] === 'recap').length, 1);
+    });
+
+    test('review: a rung 5 item opens Sprechen; onDone(false) records rung 4 due tomorrow', () => {
+        const { store, calls, speaks, queue, runner } = setupWS([['Ich gebe dem Patienten einen Tee.', give(), 5]]);
+        runner.start(queue);
+        assertEqual(calls[0], ['screen', 'speak']);
+        assertEqual([speaks.length, speaks[0].root, speaks[0].opts.text], [1, 'S', 'Ich gebe dem Patienten einen Tee.']);
+        speaks[0].actions.onDone(false);
+        const e = store.getSentence(queue[0].key);
+        assertEqual([e.rung, e.due], [4, addDays(startOfDay(Date.now()), 1)]);
+    });
+
+    test('review: with speaking off a rung 5 entry is shown its highest eligible rung', () => {
+        const { calls, writes, speaks, queue, runner } = setupWS(
+            [['Ich gebe dem Patienten einen Tee.', give(), 5]], { voice: true, write: true, speak: false });
+        assertEqual(queue[0].rung, 4);
+        runner.start(queue);
+        assertEqual([calls[0], writes.length, speaks.length], [['screen', 'write'], 1, 0]);
+    });
+
+    test('review: close() during a write item leaves the entry unchanged', () => {
+        const { store, calls, writes, queue, runner } = setupWS([['Ich gebe dem Patienten einen Tee.', give(), 4]]);
+        const before = { ...store.getSentence(queue[0].key) };
+        runner.start(queue);
+        writes[0].actions.onClose();
+        assertEqual(store.getSentence(queue[0].key), before);
+        assertEqual(calls.pop(), ['screen', 'home']);
+        assertEqual(runner.active, false);
+    });
+
     test('progress: recordReview leaves an entry off the ladder alone', () => {
         const store = new ProgressStore(makeLocalStorage());
         store.recordSentence('custom//Mein Satz.', emptyMistakes());
