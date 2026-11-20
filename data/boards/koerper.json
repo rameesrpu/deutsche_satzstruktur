@@ -1,0 +1,17 @@
+{
+  "id": "koerper",
+  "title": "Der Körper",
+  "version": 1,
+  "kind": "hotspot",
+  "sets": [
+    { "id": "aussen", "title": "Der Körper", "image": "img/koerper-vorne.svg",
+      "unlock": { "level": "A1", "category": "g5k1", "label": "5.1 Gute Besserung" }, "items": [] },
+    { "id": "gesicht", "title": "Das Gesicht", "image": "img/gesicht.svg",
+      "unlock": { "level": "A1", "category": "g5k1", "label": "5.1 Gute Besserung" }, "items": [] },
+    { "id": "hinten", "title": "Von hinten", "image": "img/koerper-hinten.svg",
+      "unlock": { "level": "A1", "category": "g5k1", "label": "5.1 Gute Besserung" }, "items": [] },
+    { "id": "organe", "title": "Die Organe", "image": "img/organe.svg",
+      "modes": ["entdecken", "zeigen", "benennen"],
+      "unlock": { "level": "A1", "category": "g5k3", "label": "5.3 Ein Ausflug" }, "items": [] }
+  ]
+}

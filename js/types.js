@@ -138,6 +138,18 @@
  */
 
 /**
+ * A board file (data/boards/<id>.json, registered in boards.js).
+ * @typedef {Object} BoardFile
+ * @property {string} id
+ * @property {string} title
+ * @property {number} version  bump when the file changes (fetched with ?v=)
+ * @property {string} kind     picture kind, registered in boardScreen.js (KINDS)
+ * @property {{id: string, title: string, image: ?string, modes?: string[],
+ *   unlock: ?{level: string, category: string, label: string}, items: Object[]}[]} sets
+ *   `modes`: the mode ids the set offers (default: all of the board's)
+ */
+
+/**
  * Schedule entry of one board item (boardSchedule.js).
  * @typedef {Object} BoardEntry
  * @property {number} box       0-4 (BOX_DAYS)

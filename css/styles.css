@@ -3164,7 +3164,8 @@ header.screen-head-row {
 body[data-screen="end"] .app-nav,
 body[data-screen="order"] .app-nav,
 body[data-screen="write"] .app-nav,
-body[data-screen="speak"] .app-nav {
+body[data-screen="speak"] .app-nav,
+body[data-screen="board"] .app-nav {
     display: none;
 }
 
@@ -5333,4 +5334,112 @@ body[data-play-view="review"] .play-bottom {
 
 .speak-result .play-continue-row {
     margin-top: 20px;
+}
+
+/* ---- Bilder (boards, js/boards.js + js/boardScreen.js): card in Üben, body[data-screen="board"] ---- */
+.board-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+}
+
+.board-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.board-card-btn,
+.board-mode-btn,
+.board-back {
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-0);
+    color: var(--ink);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.board-card-btn.is-review {
+    background: var(--ink);
+    color: var(--surface-0);
+}
+
+.board-back {
+    align-self: flex-start;
+    margin: 8px 0;
+    border-color: transparent;
+    background: transparent;
+    padding: 0 8px 0 0;
+}
+
+.board-title {
+    margin: 8px 0 16px;
+}
+
+.board-sets {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.board-set {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-0);
+}
+
+.board-set.is-locked {
+    opacity: 0.55;
+}
+
+.board-set-btn {
+    display: block;
+    width: 100%;
+    min-height: 56px;
+    padding: 12px 16px;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.board-set.is-locked .board-set-text {
+    padding: 12px 16px;
+}
+
+.board-set-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.board-set-title {
+    font-weight: 600;
+}
+
+.board-modes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.board-note,
+.board-result {
+    margin: 24px 0 8px;
+    font-size: 18px;
+}
+
+.board-stage {
+    flex: 1;
+    min-height: 0;
 }

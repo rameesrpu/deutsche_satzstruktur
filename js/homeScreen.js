@@ -298,13 +298,19 @@ function chapterRow(ch, all, actions) {
         body, el('span', { className: 'home-chapter-go', html: icon('chevron') })));
 }
 
+/** Texts of a board's card in Üben: the progress line and, when items are due, the "Wiederholen" label. */
+export function boardCard({ learned, total, due }) {
+    return { line: `${learned} von ${total} gelernt`, reviewLabel: due > 0 ? `Wiederholen (${due})` : null };
+}
+
 /**
  * Üben: today's review, the drills of unlocked chapters, and the grammar categories.
  * @param {HTMLElement} root
- * @param {{dueToday: number, drills: {level, key, label}[], grammar: {level, label, categories: {key, label}[]}[]}} model
- * @param {{review: function(), play: function(string, string)}} actions  play(level, categoryKey)
+ * @param {{dueToday: number, drills: {level, key, label}[], grammar: {level, label, categories: {key, label}[]}[],
+ *   boards: {id: string, title: string, total: number, learned: number, due: number}[]}} model
+ * @param {{review: function(), play: function(string, string), openBoard: function(string, ({review: boolean})=)}} actions  play(level, categoryKey)
  */
-export function renderPractice(root, { dueToday, drills, grammar }, actions) {
+export function renderPractice(root, { dueToday, drills, grammar, boards = [] }, actions) {
     const listOf = (items, level) => el('ul', { className: 'home-card home-chapter-list' },
         items.map(it => el('li', { className: 'home-chapter' },
             el('button', { type: 'button', className: 'home-chapter-btn',
@@ -323,6 +329,22 @@ export function renderPractice(root, { dueToday, drills, grammar }, actions) {
         parts.push(el('section', { className: 'home-chapters' },
             el('div', { className: 'home-section-head' }, el('h3', {}, 'Übungen zu den Kapiteln')),
             listOf(drills)));
+    }
+    if (boards.length > 0) {
+        parts.push(el('section', { className: 'home-chapters' },
+            el('div', { className: 'home-section-head' }, el('h3', {}, 'Bilder')),
+            boards.map(b => {
+                const card = boardCard(b);
+                return el('div', { className: 'home-card board-card' },
+                    el('span', { className: 'home-chapter-text' },
+                        el('span', { className: 'home-chapter-title' }, b.title),
+                        el('span', { className: 'home-muted' }, card.line)),
+                    el('span', { className: 'board-card-actions' },
+                        button('board-card-btn', 'Öffnen', () => actions.openBoard(b.id)),
+                        card.reviewLabel
+                            ? button('board-card-btn is-review', card.reviewLabel, () => actions.openBoard(b.id, { review: true }))
+                            : null));
+            })));
     }
     parts.push(el('section', { className: 'home-chapters' },
         el('div', { className: 'home-section-head' }, el('h3', {}, 'Grammatik')),

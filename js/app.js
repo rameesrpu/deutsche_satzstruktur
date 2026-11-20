@@ -14,6 +14,8 @@ import { chapterStartText, hideStoryCard, isStoryCardOpen } from './storyNarrati
 import { showStoryReader, hideStoryReader } from './storyReader.js';
 import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday,
     renderHome, renderPractice, renderWords } from './homeScreen.js';
+import { BOARDS, loadBoard, boardSummary, reviewStart } from './boards.js';
+import { renderBoardScreen } from './boardScreen.js';
 import { buildRecapModel, renderRecap, reviewRecapModel, renderReviewRecap, wordsByChapter } from './chapterRecap.js';
 import { dueKeys } from './ladder.js';
 import { ReviewRunner, buildQueue, keyCategory, settleWithin } from './reviewRunner.js';
@@ -1175,9 +1177,10 @@ class DeutschApp {
      * Show one screen. Learner screens are re-rendered on every visit (progress may
      * have changed); 'workshop' and 'play' show the editor/game canvas, so it is
      * redrawn once it has its size. Leaving 'play' or 'workshop' ends a running game.
-     * @param {'home'|'practice'|'words'|'workshop'|'play'|'order'|'write'|'speak'|'end'} name  ('end' is rendered by showRecap, 'order' by orderScreen.js, 'write' by writeScreen.js, 'speak' by speakScreen.js)
+     * @param {'home'|'practice'|'words'|'workshop'|'play'|'order'|'write'|'speak'|'board'|'end'} name  ('end' is rendered by showRecap, 'order' by orderScreen.js, 'write' by writeScreen.js, 'speak' by speakScreen.js, 'board' by openBoard / boardScreen.js)
      */
     showScreen(name) {
+        if (name !== 'board' && this.boardTeardown) { this.boardTeardown(); this.boardTeardown = null; }
         const leavingGame = this.gameMode.isActive && name !== this.screen &&
             (this.screen === 'play' || this.screen === 'workshop');
         this.screen = name; // set first: exitGame → handleGameStopped must not route again
@@ -1186,12 +1189,12 @@ class DeutschApp {
         if (this.reviewRunner.active && !['play', 'order', 'write', 'speak', 'end'].includes(name)) this.reviewRunner.abandon();
         if (name !== 'play') clearPlayChrome();
         document.body.dataset.screen = name;
-        for (const s of ['home', 'practice', 'words', 'order', 'write', 'speak', 'end', 'settings']) {
+        for (const s of ['home', 'practice', 'words', 'order', 'write', 'speak', 'board', 'end', 'settings']) {
             const section = document.getElementById(`screen-${s}`);
             if (section) section.hidden = s !== name;
         }
         document.querySelectorAll('#app-nav .app-nav-btn').forEach(btn => {
-            const active = btn.dataset.screen === (name === 'settings' ? 'home' : name);
+            const active = btn.dataset.screen === (name === 'settings' ? 'home' : name === 'board' ? 'practice' : name);
             btn.classList.toggle('active', active);
             if (active) btn.setAttribute('aria-current', 'page');
             else btn.removeAttribute('aria-current');
@@ -1200,7 +1203,7 @@ class DeutschApp {
         else if (name === 'practice') this.renderPracticeScreen();
         else if (name === 'words') this.renderWordsScreen();
         else if (name === 'settings') this.renderSettingsScreen();
-        else if (!['end', 'order', 'write', 'speak'].includes(name)) this.redrawAll();
+        else if (!['end', 'order', 'write', 'speak', 'board'].includes(name)) this.redrawAll();
     }
 
     /**
@@ -1308,10 +1311,49 @@ class DeutschApp {
             drills: rows.filter(r => r.status !== 'locked')
                 .map(r => ({ level: r.level, key: r.drillKey, label: r.drillLabel })),
             grammar,
+            boards: await this.boardCards(),
         }, {
             review: () => this.startLadderReview(),
             play: (level, key) => this.startChapter(level, key),
+            openBoard: (id, opts) => this.openBoard(id, opts),
         });
+    }
+
+    /** Loaded board files for Üben (a board whose file fails to load is left out). */
+    async boardCards() {
+        if (this.screen !== 'practice') return [];
+        const now = Date.now();
+        const done = (level, key) => this.levelSelector.isChapterComplete(level, key);
+        const cards = await Promise.all(BOARDS.map(async def => {
+            try {
+                const board = await loadBoard(def.id, url => fetch(url).then(r => r.json()));
+                return { id: def.id, title: def.title, ...boardSummary(board, k => progressStore.getBoard(k), done, now) };
+            } catch (e) { return null; }
+        }));
+        return cards.filter(Boolean);
+    }
+
+    /**
+     * Open a board on the board screen. opts.review starts the first scored mode with due items.
+     * @param {string} id
+     * @param {{review?: boolean}} [opts]
+     */
+    async openBoard(id, opts = {}) {
+        try {
+            await this.loadChapterRows(); // chapter files decide which sets are unlocked
+            const board = await loadBoard(id, url => fetch(url).then(r => r.json()));
+            if (this.screen !== 'practice') return;
+            const now = Date.now();
+            const done = (level, key) => this.levelSelector.isChapterComplete(level, key);
+            const getBoard = k => progressStore.getBoard(k);
+            const start = opts.review ? reviewStart(board, getBoard, done, now) : null;
+            this.showScreen('board');
+            this.boardTeardown = renderBoardScreen(document.getElementById('screen-board'),
+                { board, isChapterComplete: done, getBoard, now, start: start || undefined },
+                { record: (key, ok) => progressStore.recordBoard(key, ok), close: () => this.showScreen('practice') });
+        } catch (e) {
+            console.error('Board konnte nicht geladen werden', e);
+        }
     }
 
     async renderWordsScreen() {
