@@ -2,7 +2,7 @@
 
 import { test, assertEqual } from './assert.js';
 import { readText } from './stubs.js';
-import { parseNoun, nearestSpot, nameOptions, painSentence, painUsesPlural, whereQuestion } from '../js/hotspotBoard.js';
+import { parseNoun, nearestSpot, nameOptions, painSentence, painUsesPlural, whereQuestion, tapPercent, labelModel } from '../js/hotspotBoard.js';
 
 const item = (id, de, extra = {}) => ({ id, de, en: id, spot: [50, 50], ...extra });
 const KOPF = item('kopf', 'der Kopf, Köpfe');
@@ -115,5 +115,16 @@ export function runHotspotBoardTests() {
             assertEqual([set.image, svg.includes('viewBox="0 0 300 400"')], [set.image, true]);
             assertEqual([set.image, /<text\b/.test(svg)], [set.image, false]);
         }
+    });
+
+    test('tapPercent: percent of the picture box at any size', () => {
+        assertEqual(tapPercent({ left: 10, top: 20, width: 200, height: 400 }, 110, 120), [50, 25]);
+        assertEqual(tapPercent({ left: 0, top: 0, width: 300, height: 400 }, 150, 40), [50, 10]);
+    });
+
+    test('labelModel: article, plural line, none for plural-only', () => {
+        assertEqual(labelModel(KNIE), { article: 'das', noun: 'Knie', gender: 'neut', plural: 'Plural: die Knie', en: 'knie', speech: 'das Knie' });
+        const haare = labelModel(item('haare', 'die Haare (pl.)'));
+        assertEqual([haare.gender, haare.plural, haare.speech], ['pl', null, 'die Haare']);
     });
 }

@@ -16,6 +16,7 @@ import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday,
     renderHome, renderPractice, renderWords } from './homeScreen.js';
 import { BOARDS, loadBoard, boardSummary, reviewStart } from './boards.js';
 import { renderBoardScreen } from './boardScreen.js';
+import './hotspotBoard.js'; // registers the 'hotspot' board kind
 import { buildRecapModel, renderRecap, reviewRecapModel, renderReviewRecap, wordsByChapter } from './chapterRecap.js';
 import { dueKeys } from './ladder.js';
 import { ReviewRunner, buildQueue, keyCategory, settleWithin } from './reviewRunner.js';
