@@ -143,7 +143,7 @@
  * @property {string} id
  * @property {string} title
  * @property {number} version  bump when the file changes (fetched with ?v=)
- * @property {string} kind     picture kind, registered in boardScreen.js (KINDS)
+ * @property {string} kind     picture kind, registered via registerKind in boards.js (KINDS)
  * @property {{id: string, title: string, image: ?string, modes?: string[], mirror?: boolean,
  *   unlock: ?{level: string, category: string, label: string}, items: Object[]}[]} sets
  *   `modes`: the mode ids the set offers (default: all of the board's); `mirror`: the picture is

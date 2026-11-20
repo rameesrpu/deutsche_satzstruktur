@@ -1,0 +1,50 @@
+{
+  "id": "wechsel",
+  "title": "Wo? Wohin?",
+  "version": 1,
+  "kind": "scene",
+  "sets": [
+    {
+      "id": "garten",
+      "title": "Im Garten",
+      "image": "img/garten.svg",
+      "unlock": {"level": "A1", "category": "g5k3", "label": "5.3 Ein Ausflug"},
+      "mover": {"de": "das Huhn, Hühner", "image": "img/huhn.svg", "home": [50, 50]},
+      "landmarks": {
+        "tisch": {"de": "der Tisch, Tische"},
+        "bank": {"de": "die Bank, Bänke"},
+        "huehnerhaus": {"de": "das Hühnerhaus, Hühnerhäuser"},
+        "zaun": {"de": "der Zaun, Zäune"},
+        "baum": {"de": "der Baum, Bäume"},
+        "kiste": {"de": "die Kiste, Kisten"},
+        "blumen": {"de": "die Blumen (pl.)"}
+      },
+      "items": [
+        {"id": "auf-tisch", "prep": "auf", "landmark": "tisch", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "springt", "wo": "sitzt"}},
+        {"id": "unter-tisch", "prep": "unter", "landmark": "tisch", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "sitzt"}},
+        {"id": "neben-tisch", "prep": "neben", "landmark": "tisch", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "steht"}},
+        {"id": "auf-bank", "prep": "auf", "landmark": "bank", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "springt", "wo": "sitzt"}},
+        {"id": "unter-bank", "prep": "unter", "landmark": "bank", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "liegt"}},
+        {"id": "hinter-bank", "prep": "hinter", "landmark": "bank", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "steht"}},
+        {"id": "in-huehnerhaus", "prep": "in", "landmark": "huehnerhaus", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "geht", "wo": "schläft"}},
+        {"id": "vor-huehnerhaus", "prep": "vor", "landmark": "huehnerhaus", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "steht"}},
+        {"id": "hinter-huehnerhaus", "prep": "hinter", "landmark": "huehnerhaus", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "steht"}},
+        {"id": "auf-huehnerhaus", "prep": "auf", "landmark": "huehnerhaus", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "fliegt", "wo": "sitzt"}},
+        {"id": "an-zaun", "prep": "an", "landmark": "zaun", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "steht"}},
+        {"id": "ueber-zaun", "prep": "über", "landmark": "zaun", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "fliegt", "wo": null}},
+        {"id": "hinter-zaun", "prep": "hinter", "landmark": "zaun", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "steht"}},
+        {"id": "vor-zaun", "prep": "vor", "landmark": "zaun", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "steht"}},
+        {"id": "auf-baum", "prep": "auf", "landmark": "baum", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "fliegt", "wo": "sitzt"}},
+        {"id": "unter-baum", "prep": "unter", "landmark": "baum", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "liegt"}},
+        {"id": "hinter-baum", "prep": "hinter", "landmark": "baum", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "steht"}},
+        {"id": "vor-baum", "prep": "vor", "landmark": "baum", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "steht"}},
+        {"id": "in-kiste", "prep": "in", "landmark": "kiste", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "springt", "wo": "sitzt"}},
+        {"id": "auf-kiste", "prep": "auf", "landmark": "kiste", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "springt", "wo": "sitzt"}},
+        {"id": "neben-kiste", "prep": "neben", "landmark": "kiste", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "steht"}},
+        {"id": "hinter-kiste", "prep": "hinter", "landmark": "kiste", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "steht"}},
+        {"id": "zwischen-blumen", "prep": "zwischen", "landmark": "blumen", "landmark2": null, "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "sitzt"}},
+        {"id": "zwischen-baum-bank", "prep": "zwischen", "landmark": "baum", "landmark2": "bank", "spot": [50, 50], "verbs": {"wohin": "läuft", "wo": "steht"}}
+      ]
+    }
+  ]
+}

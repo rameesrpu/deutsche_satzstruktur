@@ -2,7 +2,7 @@
 // meets, naming options, pain sentence, label model. DOM part (bottom): the four modes, registered
 // with boardScreen.js as kind 'hotspot'.
 
-import { registerKind } from './boardScreen.js';
+import { registerKind } from './boards.js';
 import { GRAMMAR_PALETTE } from './grammaticalConfig.js';
 
 const GENDER = { der: 'masc', die: 'fem', das: 'neut' };

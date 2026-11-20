@@ -2,7 +2,7 @@
 
 import { test, testAsync, assertEqual } from './assert.js';
 import { readText } from './stubs.js';
-import { BOARDS, boardKey, boardDef, loadBoard, isSetLocked, setModes, boardSummary, reviewStart } from '../js/boards.js';
+import { BOARDS, boardKey, boardDef, loadBoard, isSetLocked, setModes, boardSummary, reviewStart, KINDS, registerKind, itemIdsFor } from '../js/boards.js';
 import { boardCard } from '../js/homeScreen.js';
 
 const NOW = 1_000_000;
@@ -29,7 +29,27 @@ export function runBoardsTests() {
         assertEqual(file.version, def.version);
         assertEqual(file.id, def.id);
         assertEqual(file.kind, def.kind);
-        assertEqual(BOARDS.length, 1);
+        assertEqual(BOARDS.length, 2);
+    });
+
+    test('registry: every board mirrors its data file (id, kind, version)', () => {
+        for (const def of BOARDS) {
+            const file = JSON.parse(readText(def.file));
+            assertEqual([file.id, file.kind, file.version], [def.id, def.kind, def.version]);
+        }
+        assertEqual(boardDef('wechsel').modes.map(m => [m.id, m.scored]),
+            [['entdecken', false], ['verstehen', true], ['artikel', true], ['satz', true]]);
+    });
+
+    test('itemIdsFor: the kind hook decides the ids, else the item ids; summary and review follow', () => {
+        registerKind('fake', { itemIds: (set, modeId) => (modeId === 'a' ? ['x.1', 'x.2'] : ['x.1']) });
+        try {
+            const fb = { id: 'f', kind: 'fake', sets: [{ id: 's', items: [{ id: 'x' }] }] };
+            assertEqual(itemIdsFor(fb, fb.sets[0], 'a'), ['x.1', 'x.2']);
+            assertEqual(itemIdsFor(fb, fb.sets[0], 'b'), ['x.1']);
+            assertEqual(itemIdsFor(board, board.sets[0], 'zeigen'), ['kopf', 'arm']);
+            assertEqual(KINDS.fake !== undefined, true);
+        } finally { delete KINDS.fake; }
     });
 
     test('data/boards/koerper.json: four sets, real unlock labels, organe without schmerz', () => {
@@ -95,5 +115,21 @@ export function runBoardsTests() {
     test('Üben card: learned line, "Wiederholen (n)" only when due', () => {
         assertEqual(boardCard({ learned: 4, total: 20, due: 3 }), { line: '4 von 20 gelernt', reviewLabel: 'Wiederholen (3)' });
         assertEqual(boardCard({ learned: 0, total: 0, due: 0 }), { line: '0 von 0 gelernt', reviewLabel: null });
+    });
+
+    test('boardSummary and reviewStart use the kind hook (ids per mode)', () => {
+        registerKind('fake2', { itemIds: (set, modeId) => (modeId === 'a' ? ['x.1', 'x.2'] : ['x.1']) });
+        try {
+            const fb = { id: 'f', kind: 'fake2', version: 1,
+                sets: [{ id: 's', unlock: null, items: [{ id: 'x' }] }] };
+            BOARDS.splice(0, 0, { id: 'f', kind: 'fake2', modes: [
+                { id: 'a', label: 'A', scored: true }, { id: 'b', label: 'B', scored: true }] });
+            const store = {
+                [boardKey('f', 's', 'x.1', 'a')]: entry(1, NOW + 5), [boardKey('f', 's', 'x.2', 'a')]: entry(1, NOW - 1),
+                [boardKey('f', 's', 'x.1', 'b')]: entry(1, NOW + 5),
+            };
+            assertEqual(boardSummary(fb, k => store[k] || null, () => false, NOW), { total: 2, learned: 2, due: 1 });
+            assertEqual(reviewStart(fb, k => store[k] || null, () => false, NOW), { setId: 's', modeId: 'a' });
+        } finally { delete KINDS.fake2; BOARDS.splice(0, 1); }
     });
 }

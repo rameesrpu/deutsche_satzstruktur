@@ -32,6 +32,7 @@ import { runReviewRunnerTests } from './reviewRunner.test.js';
 import { runBoardScheduleTests } from './boardSchedule.test.js';
 import { runBoardsTests } from './boards.test.js';
 import { runHotspotBoardTests } from './hotspotBoard.test.js';
+import { runSceneBoardTests } from './sceneBoard.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -78,6 +79,7 @@ runReviewRunnerTests();
 runBoardScheduleTests();
 runBoardsTests();
 runHotspotBoardTests();
+runSceneBoardTests();
 runLibrarySnapshot({ update });
 
 await settleAsyncTests();

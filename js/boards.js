@@ -16,7 +16,30 @@ export const BOARDS = [
             { id: 'schmerz', label: 'Wo tut es weh?', scored: true },
         ],
     },
+    {
+        id: 'wechsel', title: 'Wo? Wohin?', kind: 'scene', file: 'data/boards/wechselpraepositionen.json', version: 1,
+        modes: [
+            { id: 'entdecken', label: 'Entdecken', scored: false },
+            { id: 'verstehen', label: 'Verstehen', scored: true },
+            { id: 'artikel', label: 'Artikel', scored: true },
+            { id: 'satz', label: 'Satz', scored: true },
+        ],
+    },
 ];
+
+/**
+ * Picture kinds, registered by the kind's module. `renderSet(root, ctx)` draws a set (and may return a teardown);
+ * an optional `itemIds(set, modeId)` lists the practice ids of a mode when they are not just the item ids.
+ * @type {Object<string, {renderSet: function(HTMLElement, Object): (void|function()), itemIds?: function(Object, string): string[]}>}
+ */
+export const KINDS = {};
+export const registerKind = (kind, impl) => { KINDS[kind] = impl; };
+
+/** The ids practised in a set's mode: the kind's `itemIds` when it has one, else the item ids. */
+export function itemIdsFor(board, set, modeId) {
+    const hook = KINDS[board.kind]?.itemIds;
+    return hook ? hook(set, modeId) : set.items.map(i => i.id);
+}
 
 export const boardKey = (boardId, setId, itemId, modeId) => `${boardId}/${setId}/${itemId}:${modeId}`;
 
@@ -59,10 +82,13 @@ export function boardSummary(board, getBoard, isChapterComplete, now) {
     for (const set of board.sets) {
         if (isSetLocked(set, isChapterComplete)) continue;
         const scored = setModes(board, set).filter(m => m.scored);
-        for (const item of set.items) {
+        const idsOf = new Map(scored.map(m => [m.id, new Set(itemIdsFor(board, set, m.id))]));
+        const all = scored.length ? [...new Set(scored.flatMap(m => [...idsOf.get(m.id)]))] : itemIdsFor(board, set, null);
+        for (const id of all) {
             total++;
-            const entries = scored.map(m => getBoard(boardKey(board.id, set.id, item.id, m.id)));
-            if (scored.length > 0 && entries.every(e => e && e.box >= 1)) learned++;
+            const entries = scored.filter(m => idsOf.get(m.id).has(id))
+                .map(m => getBoard(boardKey(board.id, set.id, id, m.id)));
+            if (entries.length > 0 && entries.every(e => e && e.box >= 1)) learned++;
             due += entries.filter(e => isDue(e, now)).length;
         }
     }
@@ -74,7 +100,7 @@ export function reviewStart(board, getBoard, isChapterComplete, now) {
     for (const set of board.sets) {
         if (isSetLocked(set, isChapterComplete)) continue;
         for (const mode of setModes(board, set).filter(m => m.scored)) {
-            if (set.items.some(it => isDue(getBoard(boardKey(board.id, set.id, it.id, mode.id)), now))) {
+            if (itemIdsFor(board, set, mode.id).some(id => isDue(getBoard(boardKey(board.id, set.id, id, mode.id)), now))) {
                 return { setId: set.id, modeId: mode.id };
             }
         }

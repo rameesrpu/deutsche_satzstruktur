@@ -8,13 +8,11 @@
 
 import { pickSession, sessionOptions } from './boardSchedule.js';
 import { createSession, currentItem, isFirstAnswer, answer, sessionDone, sessionResults } from './boardSession.js';
-import { boardKey, isSetLocked, setModes } from './boards.js';
+import { boardKey, isSetLocked, setModes, itemIdsFor, KINDS, registerKind } from './boards.js';
 import { progressSegments } from './playScreen.js';
 import { gameSounds } from './sound.js';
 
-/** @type {Object<string, {renderSet: function(HTMLElement, Object): (void|function())}>} */
-export const KINDS = {};
-export const registerKind = (kind, impl) => { KINDS[kind] = impl; };
+export { KINDS, registerKind };
 
 const CLOSE_ICON = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
     'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
@@ -108,7 +106,7 @@ export function renderBoardScreen(root, state, { record, close }) {
             drawSession();
             return;
         }
-        const ids = set.items.map(it => it.id);
+        const ids = itemIdsFor(board, set, mode.id);
         const get = id => getBoard(boardKey(board.id, set.id, id, mode.id));
         const picked = pickSession(ids, get, now, sessionOptions(review));
         view = { set, mode: mode.id, session: createSession(picked), answered: false, empty: picked.length === 0 };
