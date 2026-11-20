@@ -11,7 +11,10 @@ export const DAILY_GOAL_CHOICES = [5, 10, 20, 30];
 export const DEFAULT_DAILY_GOAL = 10;
 
 /** localStorage keys owned by this module. */
-export const SETTINGS_KEYS = { dailyGoal: 'dailyGoal', timeChallenge: 'gameTimeChallenge' };
+export const SETTINGS_KEYS = {
+    dailyGoal: 'dailyGoal', timeChallenge: 'gameTimeChallenge',
+    ladderWrite: 'ladderWrite', ladderSpeak: 'ladderSpeak', speechRecognition: 'speechRecognition',
+};
 
 // --- Pure helpers ---
 
@@ -44,12 +47,14 @@ export function goalProgress(count, goal) {
 /**
  * Rows of the learner settings screen.
  * @param {{sound: boolean, speech: boolean, buildUp: boolean, prompt: boolean, timer: boolean,
- *   voice: string}} state
+ *   voice: string, write?: boolean, speak?: boolean, recognition?: ?string, speechAvailable?: boolean}} state
  *   voice = SoundManager.voiceStatus ('unknown' | 'ok' | 'missing'); "Satz aufbauen" (buildUp)
- *   also needs Aussprache on
+ *   also needs Aussprache on; write/speak = ladder rungs 4/5 on; recognition = 'on' | 'off' | null;
+ *   speechAvailable = the browser has speech recognition
  * @returns {{key: string, label: string, help: string, checked: boolean, disabled: boolean}[]}
  */
-export function settingsRows({ sound, speech, buildUp, prompt, timer, voice }) {
+export function settingsRows({ sound, speech, buildUp, prompt, timer, voice, write = true, speak = true,
+    recognition = null, speechAvailable = false }) {
     const noVoice = voice === 'missing';
     const noBuildUp = noVoice || !speech;
     return [
@@ -61,6 +66,12 @@ export function settingsRows({ sound, speech, buildUp, prompt, timer, voice }) {
             checked: !noBuildUp && !!buildUp, disabled: noBuildUp },
         { key: 'prompt', label: 'Hörübung', help: 'Du hörst den Satz – an der Lücke stoppt er.',
             checked: !noVoice && prompt, disabled: noVoice },
+        { key: 'ladderWrite', label: 'Schreiben üben', help: 'Sätze hören und schreiben.',
+            checked: !noVoice && !!write, disabled: noVoice },
+        { key: 'ladderSpeak', label: 'Sprechen üben', help: 'Sätze laut sagen.',
+            checked: !!speak, disabled: false },
+        { key: 'speechRecognition', label: 'Spracherkennung', help: 'Die Aufnahme geht zur Erkennung an Google.',
+            checked: speechAvailable && recognition === 'on', disabled: !speechAvailable },
         { key: 'timer', label: 'Zeitdruck', help: 'Schneller platzieren gibt mehr Punkte.',
             checked: timer, disabled: false },
     ];
@@ -88,6 +99,36 @@ export function saveTimeChallenge(on, storage = globalThis.localStorage) {
     write(storage, SETTINGS_KEYS.timeChallenge, on ? 'true' : 'false');
 }
 
+export function getLadderWrite(storage = globalThis.localStorage) {
+    return read(storage, SETTINGS_KEYS.ladderWrite) !== 'false';
+}
+export function setLadderWrite(storage, on) {
+    write(storage, SETTINGS_KEYS.ladderWrite, on ? 'true' : 'false');
+}
+export function getLadderSpeak(storage = globalThis.localStorage) {
+    return read(storage, SETTINGS_KEYS.ladderSpeak) !== 'false';
+}
+export function setLadderSpeak(storage, on) {
+    write(storage, SETTINGS_KEYS.ladderSpeak, on ? 'true' : 'false');
+}
+/** @returns {'on'|'off'|null} null = not asked yet */
+export function getRecognitionChoice(storage = globalThis.localStorage) {
+    const v = read(storage, SETTINGS_KEYS.speechRecognition);
+    return v === 'on' || v === 'off' ? v : null;
+}
+export function setRecognitionChoice(storage, choice) {
+    write(storage, SETTINGS_KEYS.speechRecognition, choice === 'on' ? 'on' : 'off');
+}
+
+/**
+ * Environment for rungEligibility (ladder.js).
+ * @param {{storage?: object, hasVoice: boolean}} opts
+ * @returns {{voice: boolean, write: boolean, speak: boolean}}
+ */
+export function ladderEnv({ storage = globalThis.localStorage, hasVoice }) {
+    return { voice: !!hasVoice, write: getLadderWrite(storage), speak: getLadderSpeak(storage) };
+}
+
 // --- DOM ---
 
 const BACK_ICON = '<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
@@ -110,7 +151,8 @@ function el(tag, props = {}, ...children) {
  * Einstellungen: Ton, Aussprache, Satz aufbauen, Hörübung, Zeitdruck, Tagesziel.
  * @param {HTMLElement} root
  * @param {{sound: boolean, speech: boolean, buildUp: boolean, prompt: boolean, timer: boolean,
- *   voice: string, dailyGoal: number}} state
+ *   voice: string, dailyGoal: number, write?: boolean, speak?: boolean, recognition?: ?string,
+ *   speechAvailable?: boolean}} state
  * @param {{set: function(string, (boolean|number)), back: function()}} actions
  *   set('sound'|'speech'|'buildUp'|'prompt'|'timer', bool) or set('dailyGoal', n)
  */

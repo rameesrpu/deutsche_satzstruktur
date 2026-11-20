@@ -137,4 +137,20 @@ export function runSoundTests() {
         sm._promptFull = 'Ayisha ist Ärztin.';
         assertEqual(sm.sentenceAlreadySpoken('Ayisha ist Ärztin.'), true);
     });
+
+    test('sound: speak() passes an optional rate (default 0.95)', () => {
+        const made = [];
+        globalThis.SpeechSynthesisUtterance = function (t) { this.text = t; made.push(this); };
+        globalThis.speechSynthesis = { getVoices: () => [de], cancel() {}, speak() {} };
+        try {
+            const { sm } = detect(fakeSynth([de]));
+            sm.speechEnabled = true;
+            sm.speak('x');
+            sm.speak('y', { rate: 0.7 });
+            assertEqual(made.map(u => u.rate), [0.95, 0.7]);
+        } finally {
+            delete globalThis.SpeechSynthesisUtterance;
+            delete globalThis.speechSynthesis;
+        }
+    });
 }

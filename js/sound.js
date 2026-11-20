@@ -174,12 +174,12 @@ export class SoundManager {
      * Hearing the word at the moment of placement binds its sound to the
      * grammatical category and grid location.
      */
-    speak(text, { queue = false } = {}) {
+    speak(text, { queue = false, rate = 0.95 } = {}) {
         if (!this.speechEnabled || !this.speechAvailable || !text || !('speechSynthesis' in window)) return;
         this.lastSpoken = text; // lets callers avoid immediate repeats
         const u = new SpeechSynthesisUtterance(text);
         u.lang = 'de-DE';
-        u.rate = 0.95;
+        u.rate = rate;
         const de = this.germanVoice || findGermanVoice(speechSynthesis.getVoices());
         if (de) u.voice = de;
         // Word-level speech replaces whatever is playing (rapid placements
@@ -188,6 +188,11 @@ export class SoundManager {
         u.onboundary = () => { this.boundarySupported = true; };
         if (!queue) speechSynthesis.cancel();
         speechSynthesis.speak(u);
+    }
+
+    /** True once a German TTS voice was found. */
+    hasGermanVoice() {
+        return this.voiceStatus === 'ok';
     }
 
     /** Char offset of words[i] within words.join(' '). */

@@ -1,6 +1,8 @@
 import { test, assertEqual } from './assert.js';
 import { DAILY_GOAL_CHOICES, DEFAULT_DAILY_GOAL, SETTINGS_KEYS, parseDailyGoal, goalProgress,
-    settingsRows, loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge } from '../js/settings.js';
+    settingsRows, loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge,
+    getLadderWrite, setLadderWrite, getLadderSpeak, setLadderSpeak, getRecognitionChoice, setRecognitionChoice,
+    ladderEnv } from '../js/settings.js';
 
 function memoryStorage(init = {}) {
     const data = { ...init };
@@ -36,14 +38,15 @@ export function runSettingsTests() {
     test('settings: settingsRows greys the speech rows without a German voice', () => {
         const state = { sound: true, speech: true, buildUp: false, prompt: false, timer: true, voice: 'ok' };
         const rows = settingsRows(state);
-        assertEqual(rows.map(r => r.key), ['sound', 'speech', 'buildUp', 'prompt', 'timer']);
-        assertEqual(rows.map(r => r.label), ['Ton', 'Aussprache', 'Satz aufbauen', 'Hörübung', 'Zeitdruck']);
-        assertEqual(rows.map(r => r.checked), [true, true, false, false, true]);
-        assertEqual(rows.every(r => !r.disabled && r.help.length > 0), true);
+        assertEqual(rows.map(r => r.key), ['sound', 'speech', 'buildUp', 'prompt', 'ladderWrite', 'ladderSpeak', 'speechRecognition', 'timer']);
+        assertEqual(rows.map(r => r.label), ['Ton', 'Aussprache', 'Satz aufbauen', 'Hörübung', 'Schreiben üben', 'Sprechen üben', 'Spracherkennung', 'Zeitdruck']);
+        assertEqual(rows.map(r => r.checked), [true, true, false, false, true, true, false, true]);
+        assertEqual(rows.every(r => r.help.length > 0), true);
+        assertEqual(rows.map(r => r.disabled), [false, false, false, false, false, false, true, false]); // no recognition by default
         assertEqual(rows[2].help, 'Nach jedem Teil hörst du den Satz bis hierher.');
         const missing = settingsRows({ ...state, buildUp: true, prompt: true, voice: 'missing' });
-        assertEqual(missing.map(r => r.disabled), [false, true, true, true, false]);
-        assertEqual(missing.map(r => r.checked), [true, false, false, false, true]);
+        assertEqual(missing.map(r => r.disabled), [false, true, true, true, true, false, true, false]);
+        assertEqual(missing.map(r => r.checked), [true, false, false, false, false, true, false, true]);
         assertEqual(settingsRows({ ...state, voice: 'unknown' })[1].disabled, false);
     });
 
@@ -71,5 +74,40 @@ export function runSettingsTests() {
         const blocked = { getItem: () => { throw new Error('blocked'); }, setItem: () => { throw new Error('blocked'); } };
         assertEqual(loadDailyGoal(blocked), 10);
         saveDailyGoal(20, blocked); // must not throw
+    });
+
+    test('settings: ladder write/speak default on, recognition unasked; round-trip', () => {
+        const st = memoryStorage();
+        assertEqual([getLadderWrite(st), getLadderSpeak(st), getRecognitionChoice(st)], [true, true, null]);
+        setLadderWrite(st, false);
+        setLadderSpeak(st, false);
+        assertEqual(st.data.ladderWrite, 'false');
+        assertEqual([getLadderWrite(st), getLadderSpeak(st)], [false, false]);
+        setLadderWrite(st, true);
+        assertEqual(getLadderWrite(st), true);
+        setRecognitionChoice(st, 'on');
+        assertEqual(getRecognitionChoice(st), 'on');
+        setRecognitionChoice(st, 'off');
+        assertEqual(getRecognitionChoice(st), 'off');
+        assertEqual(getRecognitionChoice(memoryStorage({ speechRecognition: 'x' })), null);
+        assertEqual(ladderEnv({ storage: st, hasVoice: false }), { voice: false, write: true, speak: false });
+        assertEqual(ladderEnv({ storage: memoryStorage(), hasVoice: true }), { voice: true, write: true, speak: true });
+    });
+
+    test('settings: rows for Schreiben, Sprechen and Spracherkennung', () => {
+        const state = { sound: true, speech: true, buildUp: false, prompt: false, timer: false, voice: 'ok',
+            write: true, speak: false, recognition: 'on', speechAvailable: true };
+        const rows = settingsRows(state);
+        assertEqual(rows.map(r => r.label).slice(4, 7), ['Schreiben üben', 'Sprechen üben', 'Spracherkennung']);
+        assertEqual(rows.map(r => r.label)[7], 'Zeitdruck');
+        assertEqual(rows.slice(4, 7).map(r => r.key), ['ladderWrite', 'ladderSpeak', 'speechRecognition']);
+        assertEqual(rows.slice(4, 7).map(r => r.help), ['Sätze hören und schreiben.', 'Sätze laut sagen.',
+            'Die Aufnahme geht zur Erkennung an Google.']);
+        assertEqual(rows.slice(4, 7).map(r => r.checked), [true, false, true]);
+        assertEqual(rows.slice(4, 7).map(r => r.disabled), [false, false, false]);
+        const no = settingsRows({ ...state, voice: 'missing', speechAvailable: false });
+        assertEqual(no.slice(4, 7).map(r => r.disabled), [true, false, true]);
+        assertEqual(no[6].checked, false);
+        assertEqual(settingsRows({ ...state, recognition: null })[6].checked, false);
     });
 }

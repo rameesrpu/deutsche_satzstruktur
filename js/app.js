@@ -17,7 +17,9 @@ import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday,
 import { buildRecapModel, renderRecap, reviewRecapModel, renderReviewRecap, wordsByChapter } from './chapterRecap.js';
 import { dueKeys } from './ladder.js';
 import { ReviewRunner, buildQueue, keyCategory } from './reviewRunner.js';
-import { loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge, renderSettings } from './settings.js';
+import { loadDailyGoal, saveDailyGoal, loadTimeChallenge, saveTimeChallenge, renderSettings,
+    getLadderWrite, setLadderWrite, getLadderSpeak, setLadderSpeak, getRecognitionChoice, setRecognitionChoice } from './settings.js';
+import { speechAvailable } from './speechInput.js';
 
 /**
  * Screens (body[data-screen], see showScreen): 'home' (Lernen), 'practice' (Üben),
@@ -374,13 +376,17 @@ class DeutschApp {
             timer: this.gameMode.timeChallengeMode,
             voice: gameSounds.voiceStatus,
             dailyGoal: this.dailyGoal,
+            write: getLadderWrite(localStorage),
+            speak: getLadderSpeak(localStorage),
+            recognition: getRecognitionChoice(localStorage),
+            speechAvailable: speechAvailable(),
         };
     }
 
     /**
      * Change one learner setting (Werkstatt panel or Einstellungen screen), persist it
      * and update both surfaces.
-     * @param {'sound'|'speech'|'buildUp'|'prompt'|'timer'|'dailyGoal'} key
+     * @param {'sound'|'speech'|'buildUp'|'prompt'|'timer'|'dailyGoal'|'ladderWrite'|'ladderSpeak'|'speechRecognition'} key
      * @param {boolean|number} value
      */
     setLearnerSetting(key, value) {
@@ -407,6 +413,12 @@ class DeutschApp {
                     this.redrawAll();
                 }
             }
+        } else if (key === 'ladderWrite') {
+            setLadderWrite(localStorage, value);
+        } else if (key === 'ladderSpeak') {
+            setLadderSpeak(localStorage, value);
+        } else if (key === 'speechRecognition') {
+            setRecognitionChoice(localStorage, value ? 'on' : 'off');
         } else if (key === 'dailyGoal') {
             saveDailyGoal(value);
             this.dailyGoal = loadDailyGoal();
