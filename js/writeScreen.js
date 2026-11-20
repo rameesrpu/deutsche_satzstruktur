@@ -154,7 +154,7 @@ export function renderWriteScreen(root, { text, translation = null, total, index
 
     input.addEventListener('input', () => { check.disabled = input.value.trim() === ''; });
     input.addEventListener('keydown', e => {
-        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); onCheck(); }
+        if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); onCheck(); }
     });
     check.addEventListener('click', onCheck);
 
@@ -191,8 +191,7 @@ export function renderWriteScreen(root, { text, translation = null, total, index
         row.appendChild(next);
         parts.push(row);
         result.replaceChildren(...parts);
-        for (const n of [listen, input, tools]) n.hidden = true;
-        listen.hidden = false; // keep "Nochmal" to hear the sentence again
+        for (const n of [input, tools]) n.hidden = true; // the listen buttons stay to hear it again
         next.focus();
     }
 
