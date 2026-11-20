@@ -8,7 +8,7 @@
  */
 export const BOARDS = [
     {
-        id: 'koerper', title: 'Der Körper', kind: 'hotspot', file: 'data/boards/koerper.json', version: 2,
+        id: 'koerper', title: 'Der Körper', kind: 'hotspot', file: 'data/boards/koerper.json', version: 3,
         modes: [
             { id: 'entdecken', label: 'Entdecken', scored: false },
             { id: 'zeigen', label: 'Zeigen', scored: true },

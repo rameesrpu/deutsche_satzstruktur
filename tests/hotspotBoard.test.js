@@ -95,4 +95,25 @@ export function runHotspotBoardTests() {
         }
         assertEqual(file.sets[1].items.find(i => i.id === 'haare').de, 'die Haare (pl.)');
     });
+
+    test('data/boards/koerper.json: spots of a set at least 6 percent apart (nearestSpot tells them apart)', () => {
+        const file = JSON.parse(readText('data/boards/koerper.json'));
+        const close = [];
+        for (const set of file.sets) {
+            set.items.forEach((a, i) => set.items.slice(i + 1).forEach(b => {
+                if (Math.hypot(a.spot[0] - b.spot[0], a.spot[1] - b.spot[1]) < 6) close.push(`${set.id}: ${a.id}/${b.id}`);
+            }));
+        }
+        assertEqual(close, []);
+    });
+
+    test('data/boards/koerper.json: every picture exists, is a 300x400 SVG under 40 KB', () => {
+        const file = JSON.parse(readText('data/boards/koerper.json'));
+        for (const set of file.sets) {
+            const svg = readText('data/boards/' + set.image);
+            assertEqual([set.image, new TextEncoder().encode(svg).length < 40 * 1024], [set.image, true]);
+            assertEqual([set.image, svg.includes('viewBox="0 0 300 400"')], [set.image, true]);
+            assertEqual([set.image, /<text\b/.test(svg)], [set.image, false]);
+        }
+    });
 }
