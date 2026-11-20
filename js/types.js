@@ -177,3 +177,13 @@
  * @property {number} to            the rung after the review
  * @property {boolean} ok           no mistake
  */
+
+/**
+ * One spot of a hotspot board set (data/boards/koerper.json; logic in hotspotBoard.js).
+ * @typedef {Object} HotspotItem
+ * @property {string} id      lowercase ASCII, unique within the set (^[a-z0-9-]+$)
+ * @property {string} de      headword: "das Knie, Knie" or "die Haare (pl.)"
+ * @property {string} en      English meaning
+ * @property {[number, number]} spot  x, y in percent of the picture
+ * @property {boolean} [pair] a person has more than one: the pain sentence may use the plural
+ */

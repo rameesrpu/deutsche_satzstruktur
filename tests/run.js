@@ -31,6 +31,7 @@ import { runSpeakScreenTests } from './speakScreen.test.js';
 import { runReviewRunnerTests } from './reviewRunner.test.js';
 import { runBoardScheduleTests } from './boardSchedule.test.js';
 import { runBoardsTests } from './boards.test.js';
+import { runHotspotBoardTests } from './hotspotBoard.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -76,6 +77,7 @@ runSpeakScreenTests();
 runReviewRunnerTests();
 runBoardScheduleTests();
 runBoardsTests();
+runHotspotBoardTests();
 runLibrarySnapshot({ update });
 
 await settleAsyncTests();

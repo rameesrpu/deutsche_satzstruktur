@@ -46,7 +46,7 @@ export function runBoardsTests() {
         const fetchJson = async url => { urls.push(url); return { id: 'koerper' }; };
         await loadBoard('koerper', fetchJson);
         await loadBoard('koerper', fetchJson);
-        assertEqual(urls, ['data/boards/koerper.json?v=1']);
+        assertEqual(urls, ['data/boards/koerper.json?v=' + boardDef('koerper').version]);
     });
 
     test('isSetLocked: only sets with an unlock can be locked', () => {
