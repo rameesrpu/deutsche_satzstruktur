@@ -21,8 +21,8 @@ export function tokens(text) {
 /** Comparison form of one word: lower case, ä→ae ö→oe ü→ue ß→ss, digits 0–12 → German word. */
 export function fold(word) {
     const w = String(word).toLowerCase();
-    if (/^\d+$/.test(w) && Number(w) <= 12 && String(Number(w)) === w) return NUMBER_WORDS[Number(w)];
-    return w.replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss');
+    const base = /^\d+$/.test(w) && Number(w) <= 12 && String(Number(w)) === w ? NUMBER_WORDS[Number(w)] : w;
+    return base.replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss');
 }
 
 function levenshtein(a, b) {
@@ -42,7 +42,7 @@ const isUpper = w => w[0] !== w[0].toLowerCase();
 /** Status of an expected/typed pair: 'ok' | 'case' | 'typo' | 'wrong'. */
 function pairStatus(expected, typed) {
     const fe = fold(expected), ft = fold(typed);
-    if (fe === ft) return isUpper(expected) === isUpper(typed) ? 'ok' : 'case';
+    if (fe === ft) return /^\d/.test(typed) || isUpper(expected) === isUpper(typed) ? 'ok' : 'case';
     if (expected.length >= 4 && levenshtein(fe, ft) === 1) return 'typo';
     return 'wrong';
 }

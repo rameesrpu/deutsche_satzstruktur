@@ -36,6 +36,18 @@ export function runTextMatchTests() {
     });
     test('typed: digit for a number word', () => assertEqual(compareTyped('Der Termin ist um neun Uhr.', 'Der Termin ist um 9 Uhr').pass, true));
     test('typed: abbreviation', () => assertEqual(compareTyped('Dr. Kühn kommt.', 'Dr Kuehn kommt').pass, true));
+    test('typed: digits 0, 5, 10, 12 and back', () => {
+        assertEqual(compareTyped('Er kommt um zwölf Uhr.', 'Er kommt um 12 Uhr').pass, true);
+        assertEqual(compareTyped('Ich habe fünf Katzen.', 'Ich habe 5 Katzen').pass, true);
+        assertEqual(compareTyped('Es ist null Uhr zehn.', 'Es ist 0 Uhr 10').pass, true);
+        assertEqual(compareTyped('Er kommt um 12 Uhr.', 'Er kommt um zwölf Uhr').pass, true);
+        assertEqual(compareTyped('Ich habe 5 Katzen.', 'Ich habe fuenf Katzen').pass, true);
+        assertEqual(st('Neun Uhr.', '9 Uhr'), ['ok', 'ok']);
+    });
+    test('speech: digits 5 and 12', () => {
+        assertEqual(speechMatch('Ich habe fünf Katzen.', ['ich habe 5 Katzen']).ratio, 1);
+        assertEqual(speechMatch('Es ist zwölf Uhr.', ['es ist 12 Uhr']).ratio, 1);
+    });
     test('speech: all heard', () => assertEqual(speechMatch('Heute muss ich arbeiten.', ['heute muss ich arbeiten']).pass, true));
     test('speech: 4 of 5 passes, 3 of 5 fails', () => {
         assertEqual(speechMatch('Ich gehe heute zum Arzt.', ['ich gehe heute zum']).pass, true);
