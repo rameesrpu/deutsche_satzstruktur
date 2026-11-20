@@ -174,8 +174,9 @@ export class SoundManager {
      * Hearing the word at the moment of placement binds its sound to the
      * grammatical category and grid location.
      */
-    speak(text, { queue = false, rate = 0.95 } = {}) {
-        if (!this.speechEnabled || !this.speechAvailable || !text || !('speechSynthesis' in window)) return;
+    speak(text, { queue = false, rate = 0.95, force = false } = {}) {
+        // force: the exercise itself is listening (dictation), so the "Aussprache" toggle does not apply
+        if ((!this.speechEnabled && !force) || !this.speechAvailable || !text || !('speechSynthesis' in window)) return;
         this.lastSpoken = text; // lets callers avoid immediate repeats
         const u = new SpeechSynthesisUtterance(text);
         u.lang = 'de-DE';

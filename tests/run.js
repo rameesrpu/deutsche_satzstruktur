@@ -26,6 +26,7 @@ import { runOrderExerciseTests } from './orderExercise.test.js';
 import { runArticleBlankTests } from './articleBlank.test.js';
 import { runTextMatchTests } from './textMatch.test.js';
 import { runSpeechInputTests } from './speechInput.test.js';
+import { runWriteScreenTests } from './writeScreen.test.js';
 import { runReviewRunnerTests } from './reviewRunner.test.js';
 
 const update = System.programArgs.includes('--update');
@@ -67,6 +68,7 @@ runOrderExerciseTests();
 runArticleBlankTests();
 runTextMatchTests();
 runSpeechInputTests();
+runWriteScreenTests();
 runReviewRunnerTests();
 runLibrarySnapshot({ update });
 

@@ -153,4 +153,20 @@ export function runSoundTests() {
             delete globalThis.speechSynthesis;
         }
     });
+
+    test('sound: speak() with force ignores the Aussprache toggle', () => {
+        const made = [];
+        globalThis.SpeechSynthesisUtterance = function (t) { this.text = t; made.push(this); };
+        globalThis.speechSynthesis = { getVoices: () => [de], cancel() {}, speak() {} };
+        try {
+            const { sm } = detect(fakeSynth([de]));
+            sm.speechEnabled = false;
+            sm.speak('x');
+            sm.speak('y', { force: true });
+            assertEqual(made.map(u => u.text), ['y']);
+        } finally {
+            delete globalThis.SpeechSynthesisUtterance;
+            delete globalThis.speechSynthesis;
+        }
+    });
 }
