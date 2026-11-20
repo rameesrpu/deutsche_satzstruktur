@@ -2,7 +2,7 @@
 
 import { test, assertEqual } from './assert.js';
 import { afterAnswer, pickSession, setProgress } from '../js/boardSchedule.js';
-import { createSession, currentItem, answer, sessionDone, sessionResults } from '../js/boardSession.js';
+import { createSession, currentItem, isFirstAnswer, answer, sessionDone, sessionResults } from '../js/boardSession.js';
 
 const NOW = new Date(2026, 10, 16, 20, 0).getTime();
 const day = n => new Date(2026, 10, 16 + n).getTime();
@@ -64,5 +64,22 @@ export function runBoardScheduleTests() {
     test('session: left after one answer has one result', () => {
         const s = answer(createSession(['a', 'b']), true);
         assertEqual(sessionResults(s), [{ id: 'a', ok: true }]);
+    });
+
+    test('isFirstAnswer: a wrong item is recorded once, its retry is not', () => {
+        const recorded = [];
+        let s = createSession(['a', 'b']);
+        const step = ok => { if (isFirstAnswer(s)) recorded.push([currentItem(s), ok]); s = answer(s, ok); };
+        step(false); step(true); step(true); // a wrong, b right, a retried right
+        assertEqual(recorded, [['a', false], ['b', true]]);
+    });
+
+    test('isFirstAnswer: leaving after one answer leaves exactly one recorded key', () => {
+        const recorded = [];
+        let s = createSession(['a', 'b', 'c']);
+        if (isFirstAnswer(s)) recorded.push(currentItem(s));
+        s = answer(s, true);
+        assertEqual(recorded, ['a']);
+        assertEqual(isFirstAnswer(createSession([])), false);
     });
 }

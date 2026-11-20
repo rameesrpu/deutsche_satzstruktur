@@ -10,11 +10,17 @@ export function currentItem(session) {
     return session.pos < session.queue.length ? session.queue[session.pos] : null;
 }
 
+/** True when the current item has not been answered yet in this session (only that answer is recorded). */
+export function isFirstAnswer(session) {
+    const id = currentItem(session);
+    return id !== null && !Object.hasOwn(session.first, id);
+}
+
 /** Answer the current item; returns a new session. */
 export function answer(session, ok) {
     const id = currentItem(session);
     if (id === null) return session;
-    const firstTime = !(id in session.first);
+    const firstTime = !Object.hasOwn(session.first, id);
     const queue = [...session.queue];
     if (firstTime && !ok) queue.push(id);
     return {

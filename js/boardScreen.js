@@ -7,7 +7,7 @@
  */
 
 import { pickSession } from './boardSchedule.js';
-import { createSession, currentItem, answer, sessionDone, sessionResults } from './boardSession.js';
+import { createSession, currentItem, isFirstAnswer, answer, sessionDone, sessionResults } from './boardSession.js';
 import { boardKey, isSetLocked, setModes } from './boards.js';
 import { progressSegments } from './playScreen.js';
 import { gameSounds } from './sound.js';
@@ -71,8 +71,6 @@ export function renderBoardScreen(root, state, { record, close }) {
         return inner;
     };
 
-    const items = set => set.items;
-
     function showList() {
         view = { set: null, mode: null, session: null, answered: false };
         const list = el('ul', 'board-sets');
@@ -110,7 +108,7 @@ export function renderBoardScreen(root, state, { record, close }) {
             drawSession();
             return;
         }
-        const ids = items(set).map(it => it.id);
+        const ids = set.items.map(it => it.id);
         const get = id => getBoard(boardKey(board.id, set.id, id, mode.id));
         const picked = pickSession(ids, get, now);
         view = { set, mode: mode.id, session: createSession(picked), answered: false, empty: picked.length === 0 };
@@ -123,7 +121,7 @@ export function renderBoardScreen(root, state, { record, close }) {
         const kind = KINDS[board.kind];
         if (!kind) { show(topBar(), back, el('p', 'home-muted board-note', 'Dieses Bild kommt bald.')); return; }
         if (session && view.empty) {
-            const note = items(set).length === 0 ? 'Noch keine Wörter.' : 'Heute ist nichts fällig.';
+            const note = set.items.length === 0 ? 'Noch keine Wörter.' : 'Heute ist nichts fällig.';
             show(topBar(), back, el('p', 'home-muted board-note', note));
             return;
         }
@@ -141,11 +139,11 @@ export function renderBoardScreen(root, state, { record, close }) {
         const slot = el('div', 'board-continue');
         const inner = show(topBar(progress), back, stage, slot);
         const ctx = {
-            board, set, mode, itemId, items: items(set),
+            board, set, mode, itemId, items: set.items,
             onAnswer: guard(ok => {
                 if (!session || view.answered || view.session !== session) return;
                 view.answered = true;
-                record(boardKey(board.id, set.id, itemId, mode), ok);
+                if (isFirstAnswer(session)) record(boardKey(board.id, set.id, itemId, mode), ok);
                 const row = el('div', 'play-continue-row');
                 row.append(btn('play-continue', 'Weiter ›', guard(() => {
                     view.session = answer(session, ok);
