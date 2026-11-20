@@ -9,9 +9,11 @@ places each phrase in the right cell with the right case. Plain HTML/CSS/JS — 
 (`backend/`) is rarely used — **don't touch `backend/` unless asked.** What comes next and why: [docs/roadmap.md](docs/roadmap.md) (each
 project's design and plan: `docs/superpowers/specs/`, `docs/superpowers/plans/`). Work items: [docs/story-plan.md](docs/story-plan.md), the UI redesign
 [docs/redesign-plan.md](docs/redesign-plan.md) (design decisions + mockup link; grammar colors come only from
-`GRAMMAR_PALETTE` in grammaticalConfig.js) and the learning experience plan [docs/experience-plan.md](docs/experience-plan.md) (finished maintainability plan: [docs/archive/](docs/archive/)). The review ladder ("Heute üben", rungs 2–3): spec
+`GRAMMAR_PALETTE` in grammaticalConfig.js) and the learning experience plan [docs/experience-plan.md](docs/experience-plan.md) (finished maintainability plan: [docs/archive/](docs/archive/)). The review ladder ("Heute üben", rungs 2–5): spec
 [docs/superpowers/specs/2026-11-15-production-ladder-design.md](docs/superpowers/specs/2026-11-15-production-ladder-design.md), plan
-[docs/superpowers/plans/2026-11-15-production-ladder.md](docs/superpowers/plans/2026-11-15-production-ladder.md).
+[docs/superpowers/plans/2026-11-15-production-ladder.md](docs/superpowers/plans/2026-11-15-production-ladder.md); rungs 4 Schreiben and 5 Sprechen: spec
+[docs/superpowers/specs/2026-11-16-ladder-write-speak-design.md](docs/superpowers/specs/2026-11-16-ladder-write-speak-design.md), plan
+[docs/superpowers/plans/2026-11-16-ladder-write-speak.md](docs/superpowers/plans/2026-11-16-ladder-write-speak.md).
 
 ## Files (`js/`, ES modules — entry `app.js`; each file imports what it uses)
 - `types.js` — JSDoc typedefs only (Word, Sentence, LibraryFile, ParsedSentence, PlacementResult…; not loaded)

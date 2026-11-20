@@ -148,13 +148,15 @@ function el(tag, props = {}, ...children) {
 }
 
 /**
- * Einstellungen: Ton, Aussprache, Satz aufbauen, Hörübung, Zeitdruck, Tagesziel.
+ * Einstellungen: Ton, Aussprache, Satz aufbauen, Hörübung, Schreiben üben, Sprechen üben,
+ * Spracherkennung, Zeitdruck, Tagesziel.
  * @param {HTMLElement} root
  * @param {{sound: boolean, speech: boolean, buildUp: boolean, prompt: boolean, timer: boolean,
  *   voice: string, dailyGoal: number, write?: boolean, speak?: boolean, recognition?: ?string,
  *   speechAvailable?: boolean}} state
  * @param {{set: function(string, (boolean|number)), back: function()}} actions
- *   set('sound'|'speech'|'buildUp'|'prompt'|'timer', bool) or set('dailyGoal', n)
+ *   set('sound'|'speech'|'buildUp'|'prompt'|'ladderWrite'|'ladderSpeak'|'speechRecognition'|'timer', bool)
+ *   or set('dailyGoal', n)
  */
 export function renderSettings(root, state, actions) {
     const rows = settingsRows(state);
@@ -180,7 +182,7 @@ export function renderSettings(root, state, actions) {
             el('div', { className: 'home-section-head' }, el('h3', {}, 'Spiel')),
             list,
             state.voice === 'missing' ? el('p', { className: 'settings-hint' },
-                'Keine deutsche Stimme auf diesem Gerät – Aussprache und Hörübung sind aus. ' +
+                'Keine deutsche Stimme auf diesem Gerät – Aussprache, Hörübung und Schreiben üben sind aus. ' +
                 'Installiere eine deutsche Sprachausgabe oder nutze einen anderen Browser.') : null),
         el('section', { className: 'home-chapters' },
             el('div', { className: 'home-section-head' }, el('h3', {}, 'Tagesziel')),
