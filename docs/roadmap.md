@@ -125,7 +125,7 @@ Parked (small, known):
 
 ### 3. Ladder rungs 4–5
 
-- [ ] Task 1: Schedule to rung 5
+- [x] Task 1: Schedule to rung 5 — commit `31c855e`
 - [ ] Task 2: Text matching (`textMatch.js`)
 - [ ] Task 3: Settings and environment
 - [ ] Task 4: Schreiben screen (rung 4)
