@@ -1,10 +1,10 @@
 {
   "id": "koerper",
   "title": "Der Körper",
-  "version": 3,
+  "version": 4,
   "kind": "hotspot",
   "sets": [
-    {"id": "aussen", "title": "Der Körper", "image": "img/koerper-vorne.svg", "unlock": {"level": "A1", "category": "g5k1", "label": "5.1 Gute Besserung"}, "items": [
+    {"id": "aussen", "title": "Von vorne", "mirror": true, "image": "img/koerper-vorne.svg", "unlock": {"level": "A1", "category": "g5k1", "label": "5.1 Gute Besserung"}, "items": [
         {"id": "kopf", "de": "der Kopf, Köpfe", "en": "head", "spot": [50, 8]},
         {"id": "hals", "de": "der Hals, Hälse", "en": "neck, throat", "spot": [50, 16.5]},
         {"id": "schulter", "de": "die Schulter, Schultern", "en": "shoulder", "spot": [32.7, 22], "pair": true},
@@ -14,10 +14,10 @@
         {"id": "hand", "de": "die Hand, Hände", "en": "hand", "spot": [20.3, 62.5], "pair": true},
         {"id": "finger", "de": "der Finger, Finger", "en": "finger", "spot": [18.7, 68.5], "pair": true},
         {"id": "daumen", "de": "der Daumen, Daumen", "en": "thumb", "spot": [14, 64.5], "pair": true},
-        {"id": "brust", "de": "die Brust, Brüste", "en": "chest", "spot": [50, 29]},
+        {"id": "brust", "de": "die Brust, Brüste", "en": "chest, breast", "spot": [50, 29]},
         {"id": "bauch", "de": "der Bauch, Bäuche", "en": "belly, abdomen", "spot": [50, 45]},
         {"id": "huefte", "de": "die Hüfte, Hüften", "en": "hip", "spot": [35.5, 52.5], "pair": true},
-        {"id": "bein", "de": "das Bein, Beine", "en": "leg", "spot": [60.7, 77.5], "pair": true},
+        {"id": "bein", "de": "das Bein, Beine", "en": "leg", "spot": [60.7, 77.5], "pair": true, "accepts": ["oberschenkel", "knie", "unterschenkel"]},
         {"id": "oberschenkel", "de": "der Oberschenkel, Oberschenkel", "en": "thigh", "spot": [42.3, 62], "pair": true},
         {"id": "knie", "de": "das Knie, Knie", "en": "knee", "spot": [39.7, 75], "pair": true},
         {"id": "unterschenkel", "de": "der Unterschenkel, Unterschenkel", "en": "lower leg", "spot": [38.3, 82], "pair": true},
@@ -39,7 +39,7 @@
         {"id": "kinn", "de": "das Kinn, Kinne", "en": "chin", "spot": [50, 89.5]},
         {"id": "haare", "de": "die Haare (pl.)", "en": "hair", "spot": [50, 12.5]}
     ]},
-    {"id": "hinten", "title": "Von hinten", "image": "img/koerper-hinten.svg", "unlock": {"level": "A1", "category": "g5k1", "label": "5.1 Gute Besserung"}, "items": [
+    {"id": "hinten", "title": "Von hinten", "mirror": true, "image": "img/koerper-hinten.svg", "unlock": {"level": "A1", "category": "g5k1", "label": "5.1 Gute Besserung"}, "items": [
         {"id": "nacken", "de": "der Nacken, Nacken", "en": "nape of the neck", "spot": [50, 16.5]},
         {"id": "ruecken", "de": "der Rücken, Rücken", "en": "back", "spot": [50, 34]},
         {"id": "gesaess", "de": "das Gesäß, Gesäße", "en": "buttocks", "spot": [45, 56]},

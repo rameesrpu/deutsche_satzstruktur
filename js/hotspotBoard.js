@@ -28,20 +28,50 @@ export function parseNoun(de) {
 
 /**
  * The id of the item whose spot is nearest to the tap, within maxDist percent; else null (no answer).
- * @param {import('./types.js').HotspotItem[]} items
+ * @param {{id: string, spot: [number, number]}[]} items
  * @param {number} x percent of the picture width
  * @param {number} y percent of the picture height
  * @param {number} [maxDist]
  * @returns {?string}
  */
 export function nearestSpot(items, x, y, maxDist = 9) {
+    return nearestTarget(items, x, y, maxDist)?.id ?? null;
+}
+
+/** Like nearestSpot, but returns the whole target (so the caller knows which spot, e.g. which side, was met). */
+function nearestTarget(items, x, y, maxDist = 9) {
     let best = null;
     let bestDist = Infinity;
     for (const it of items) {
         const d = Math.hypot(it.spot[0] - x, it.spot[1] - y);
-        if (d < bestDist) { best = it.id; bestDist = d; }
+        if (d < bestDist) { best = it; bestDist = d; }
     }
     return bestDist <= maxDist ? best : null;
+}
+
+/**
+ * The spots a tap is tested against when `askedId` is asked: every item's spot, plus the mirrored
+ * spot `[100 - x, y]` (same id) of `pair` items in a `mirror` set. An item with `accepts` (bein) is
+ * left out unless it is the asked one, so a knee tap is never "Bein".
+ * @param {{items: import('./types.js').HotspotItem[], mirror?: boolean}} set
+ * @param {string} askedId
+ * @returns {{id: string, spot: [number, number]}[]}
+ */
+export function tapTargets(set, askedId) {
+    const targets = [];
+    for (const it of set.items) {
+        if (it.accepts && it.id !== askedId) continue;
+        targets.push({ id: it.id, spot: it.spot });
+        if (set.mirror && it.pair) targets.push({ id: it.id, spot: [100 - it.spot[0], it.spot[1]] });
+    }
+    return targets;
+}
+
+/** Whether a tap that resolved to `tappedId` answers `askedId`: itself, or one of its `accepts`. */
+export function tapIsRight(set, askedId, tappedId) {
+    if (tappedId === askedId) return true;
+    const asked = set.items.find(i => i.id === askedId);
+    return Boolean(asked && asked.accepts && asked.accepts.includes(tappedId));
 }
 
 function shuffle(list, rng) {
@@ -147,7 +177,7 @@ function drawLabel(item, ctx, colored = true) {
     const say = el('button', 'hs-say', '🔊');
     say.type = 'button';
     say.setAttribute('aria-label', 'Vorlesen');
-    say.addEventListener('click', e => { e.stopPropagation(); ctx.speak(m.speech); });
+    say.addEventListener('click', e => { e.stopPropagation(); ctx.say(m.speech); });
     box.append(word, say);
     if (m.plural) box.append(el('div', 'hs-label-plural', m.plural));
     box.append(el('div', 'hs-label-en', m.en));
@@ -163,10 +193,10 @@ function drawPicture(ctx) {
     img.draggable = false;
     wrap.append(img);
     const dots = new Map();
-    const dot = (item, cls = '') => {
+    const dot = (item, cls = '', spot = item.spot) => {
         const d = el('span', `hs-dot ${cls}`.trim());
-        d.style.left = `${item.spot[0]}%`;
-        d.style.top = `${item.spot[1]}%`;
+        d.style.left = `${spot[0]}%`;
+        d.style.top = `${spot[1]}%`;
         wrap.append(d);
         dots.set(item.id, d);
         return d;
@@ -204,7 +234,7 @@ function renderTap(root, ctx, promptText) {
     const again = el('button', 'hs-say', '🔊');
     again.type = 'button';
     again.setAttribute('aria-label', 'Vorlesen');
-    again.addEventListener('click', () => ctx.speak(promptText));
+    again.addEventListener('click', () => ctx.say(promptText));
     prompt.append(again);
     const hint = el('p', 'hs-hint');
     hint.setAttribute('aria-live', 'polite');
@@ -213,13 +243,16 @@ function renderTap(root, ctx, promptText) {
     pic.wrap.addEventListener('click', e => {
         if (answered) return;
         const [x, y] = pic.percentOf(e);
-        const id = nearestSpot(ctx.items, x, y);
-        if (!id) { hint.textContent = 'Tipp näher an die Stelle.'; return; }
+        const hit = nearestTarget(tapTargets(ctx.set, item.id), x, y);
+        if (!hit) { hint.textContent = 'Tipp näher an die Stelle.'; return; }
         answered = true;
         hint.textContent = '';
-        const ok = id === item.id;
-        pic.dot(item, ok ? 'is-right' : 'is-pulse');
-        if (!ok) pic.dot(ctx.items.find(i => i.id === id), 'is-wrong');
+        const ok = tapIsRight(ctx.set, item.id, hit.id);
+        if (ok) pic.dot(item, 'is-right', hit.id === item.id ? hit.spot : item.spot);
+        else {
+            pic.dot(item, 'is-pulse');
+            pic.dot(ctx.items.find(i => i.id === hit.id), 'is-wrong', hit.spot);
+        }
         slot.append(drawLabel(item, ctx));
         ctx.onAnswer(ok);
     });

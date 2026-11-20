@@ -2,7 +2,7 @@
 
 import { test, assertEqual } from './assert.js';
 import { readText } from './stubs.js';
-import { parseNoun, nearestSpot, nameOptions, painSentence, painUsesPlural, whereQuestion, tapPercent, labelModel } from '../js/hotspotBoard.js';
+import { parseNoun, nearestSpot, tapTargets, tapIsRight, nameOptions, painSentence, painUsesPlural, whereQuestion, tapPercent, labelModel } from '../js/hotspotBoard.js';
 
 const item = (id, de, extra = {}) => ({ id, de, en: id, spot: [50, 50], ...extra });
 const KOPF = item('kopf', 'der Kopf, Köpfe');
@@ -63,6 +63,31 @@ export function runHotspotBoardTests() {
         assertEqual(nearestSpot(items, 41, 50), 'a');
         assertEqual(nearestSpot(items, 80, 80), null);
         assertEqual(nearestSpot(items, 40, 59.5), null);
+    });
+
+    test('tapTargets: mirror sets add the other side of pair items; bein only when asked', () => {
+        const file = JSON.parse(readText('data/boards/koerper.json'));
+        const aussen = file.sets.find(s => s.id === 'aussen');
+        const gesicht = file.sets.find(s => s.id === 'gesicht');
+        assertEqual([aussen.mirror, file.sets.find(s => s.id === 'hinten').mirror, gesicht.mirror], [true, true, undefined]);
+        assertEqual(aussen.items.find(i => i.id === 'bein').accepts, ['oberschenkel', 'knie', 'unterschenkel']);
+        const knieTap = [100 - 39.7, 75];
+        const targets = tapTargets(aussen, 'knie');
+        assertEqual(targets.some(t => t.id === 'bein'), false);
+        const hit = nearestSpot(targets, ...knieTap);
+        assertEqual(hit, 'knie');
+        assertEqual(tapIsRight(aussen, 'knie', hit), true);
+        // asked bein: the bein spot is in the test, and a knee tap on either leg is right
+        const forBein = tapTargets(aussen, 'bein');
+        assertEqual(forBein.some(t => t.id === 'bein'), true);
+        assertEqual(tapIsRight(aussen, 'bein', nearestSpot(forBein, ...knieTap)), true);
+        assertEqual(tapIsRight(aussen, 'bein', nearestSpot(forBein, 39.7, 75)), true);
+        assertEqual(tapIsRight(aussen, 'bein', 'fuss'), false);
+        // one-sided items are not mirrored
+        assertEqual(targets.filter(t => t.id === 'kopf').length, 1);
+        assertEqual(targets.filter(t => t.id === 'knie').length, 2);
+        // not mirrored set: unchanged
+        assertEqual(tapTargets(gesicht, 'auge').length, gesicht.items.length);
     });
 
     test('nameOptions: four distinct ids including the asked one; smaller sets give fewer', () => {

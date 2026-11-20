@@ -144,9 +144,10 @@
  * @property {string} title
  * @property {number} version  bump when the file changes (fetched with ?v=)
  * @property {string} kind     picture kind, registered in boardScreen.js (KINDS)
- * @property {{id: string, title: string, image: ?string, modes?: string[],
+ * @property {{id: string, title: string, image: ?string, modes?: string[], mirror?: boolean,
  *   unlock: ?{level: string, category: string, label: string}, items: Object[]}[]} sets
- *   `modes`: the mode ids the set offers (default: all of the board's)
+ *   `modes`: the mode ids the set offers (default: all of the board's); `mirror`: the picture is
+ *   left-right symmetric, so tap modes also accept the mirrored spot of `pair` items
  */
 
 /**
@@ -185,5 +186,6 @@
  * @property {string} de      headword: "das Knie, Knie" or "die Haare (pl.)"
  * @property {string} en      English meaning
  * @property {[number, number]} spot  x, y in percent of the picture
- * @property {boolean} [pair] a person has more than one: the pain sentence may use the plural
+ * @property {boolean} [pair] a person has more than one: the pain sentence may use the plural; in a `mirror` set it also has a spot on the other side
+ * @property {string[]} [accepts] ids of items that also count as a right tap when this item is asked (bein: its parts)
  */

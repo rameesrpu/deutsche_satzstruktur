@@ -1,7 +1,7 @@
 // boardSchedule.js / boardSession.js: the box schedule and the session queue of boards
 
 import { test, assertEqual } from './assert.js';
-import { afterAnswer, pickSession, setProgress } from '../js/boardSchedule.js';
+import { afterAnswer, pickSession, sessionOptions, setProgress } from '../js/boardSchedule.js';
 import { createSession, currentItem, isFirstAnswer, answer, sessionDone, sessionResults } from '../js/boardSession.js';
 
 const NOW = new Date(2026, 10, 16, 20, 0).getTime();
@@ -81,5 +81,12 @@ export function runBoardScheduleTests() {
         s = answer(s, true);
         assertEqual(recorded, ['a']);
         assertEqual(isFirstAnswer(createSession([])), false);
+    });
+
+    test('sessionOptions: review sessions bring no new items, a hand-picked mode uses the default', () => {
+        const ids = ['a', 'b', 'c', 'd'];
+        const get = id => (id === 'a' ? entry(1, day(-1)) : null);
+        assertEqual(pickSession(ids, get, NOW, sessionOptions(true)), ['a']);
+        assertEqual(pickSession(ids, get, NOW, sessionOptions(false)), ['a', 'b', 'c', 'd']);
     });
 }

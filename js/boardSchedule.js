@@ -35,6 +35,9 @@ export function pickSession(ids, get, now, { size = SESSION_SIZE, newMax = NEW_P
     return [...due.map(d => d.id), ...fresh.slice(0, newMax)].slice(0, size);
 }
 
+/** pickSession options: "Wiederholen" (review) practises only what is due, no new items. */
+export const sessionOptions = review => (review ? { size: SESSION_SIZE, newMax: 0 } : {});
+
 /** Counts over the ids of a set; entries for ids not in `ids` are ignored. */
 export function setProgress(ids, get, now) {
     let learned = 0;

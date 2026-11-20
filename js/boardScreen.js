@@ -6,7 +6,7 @@
  * Reuses the play screen's top bar / progress / "Weiter" classes.
  */
 
-import { pickSession } from './boardSchedule.js';
+import { pickSession, sessionOptions } from './boardSchedule.js';
 import { createSession, currentItem, isFirstAnswer, answer, sessionDone, sessionResults } from './boardSession.js';
 import { boardKey, isSetLocked, setModes } from './boards.js';
 import { progressSegments } from './playScreen.js';
@@ -99,10 +99,10 @@ export function renderBoardScreen(root, state, { record, close }) {
         for (const mode of setModes(board, set)) {
             modes.append(btn('board-mode-btn', mode.label, () => startMode(set, mode)));
         }
-        show(topBar(), btn('board-back', '‹ Bilder', showList), el('h1', 'screen-title board-title', set.title), modes);
+        show(topBar(), btn('board-back', `‹ ${board.title}`, showList), el('h1', 'screen-title board-title', set.title), modes);
     }
 
-    function startMode(set, mode) {
+    function startMode(set, mode, review = false) {
         if (!mode.scored) {
             view = { set, mode: mode.id, session: null, answered: false };
             drawSession();
@@ -110,7 +110,7 @@ export function renderBoardScreen(root, state, { record, close }) {
         }
         const ids = set.items.map(it => it.id);
         const get = id => getBoard(boardKey(board.id, set.id, id, mode.id));
-        const picked = pickSession(ids, get, now);
+        const picked = pickSession(ids, get, now, sessionOptions(review));
         view = { set, mode: mode.id, session: createSession(picked), answered: false, empty: picked.length === 0 };
         drawSession();
     }
@@ -135,7 +135,7 @@ export function renderBoardScreen(root, state, { record, close }) {
             progress.append(...progressSegments(session.queue.length, session.pos, view.answered)
                 .map(s => el('span', `play-seg play-seg-${s}`)));
         }
-        const stage = el('div', 'board-stage');
+        const stage = el('div', `board-stage board-stage--${mode}`);
         const slot = el('div', 'board-continue');
         const inner = show(topBar(progress), back, stage, slot);
         const ctx = {
@@ -154,7 +154,10 @@ export function renderBoardScreen(root, state, { record, close }) {
                 progress.replaceChildren(...progressSegments(session.queue.length, session.pos, true)
                     .map(s => el('span', `play-seg play-seg-${s}`)));
             }),
-            speak: text => gameSounds.speak(text, { force: true }),
+            // speak: automatic speech (prompts, Entdecken taps) follows the learner's "Aussprache" setting;
+            // say: a deliberate tap on a 🔊 button always speaks
+            speak: text => gameSounds.speak(text),
+            say: text => gameSounds.speak(text, { force: true }),
         };
         kindTeardown = kind.renderSet(stage, ctx);
         return inner;
@@ -172,7 +175,7 @@ export function renderBoardScreen(root, state, { record, close }) {
     if (state.start) {
         const set = board.sets.find(s => s.id === state.start.setId);
         const mode = set && setModes(board, set).find(m => m.id === state.start.modeId);
-        if (set && mode && !isSetLocked(set, isChapterComplete)) startMode(set, mode);
+        if (set && mode && !isSetLocked(set, isChapterComplete)) startMode(set, mode, true);
         else showList();
     } else {
         showList();
