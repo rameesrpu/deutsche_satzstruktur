@@ -1,6 +1,6 @@
 // textMatch: pure typed/spoken text comparison for rungs 4 and 5 of the review ladder
 
-import { test, assertEqual } from './assert.js';
+import { test, assert, assertEqual } from './assert.js';
 import { compareTyped, speechMatch, tokens, fold, SPEECH_PASS } from '../js/textMatch.js';
 
 const st = (e, t) => compareTyped(e, t).words.map(w => w.status);
@@ -9,7 +9,7 @@ export function runTextMatchTests() {
     test('tokens/fold basics', () => {
         assertEqual(tokens('„Dr. Kühn“ kommt, E-Mail!'), ['Dr', 'Kühn', 'kommt', 'E-Mail']);
         assertEqual(tokens(null), []);
-        assertEqual(['Größe', 'Ärzte', '9', '13'].map(fold), ['groesse', 'aerzte', 'neun', '13']);
+        assertEqual(['Größe', 'Ärzte', '9', '13', '20', '21'].map(fold), ['groesse', 'aerzte', 'neun', 'dreizehn', 'zwanzig', '21']);
         assertEqual(SPEECH_PASS, 0.8);
     });
     test('typed: exact', () => assertEqual(compareTyped('Ich bin Ärztin.', 'Ich bin Ärztin').pass, true));
@@ -63,4 +63,50 @@ export function runTextMatchTests() {
     });
     test('speech: heard flags per expected word', () =>
         assertEqual(speechMatch('Ich gehe zum Arzt', ['ich gehe arzt']).words.map(w => w.heard), [true, true, false, true]));
+    // F2: a wrong case ending is wrong, not a typo
+    test('typed: wrong case endings of articles/determiners are wrong', () => {
+        const pairs = [['Er hat einen Hund.', 'Er hat einem Hund'], ['Er hat keinen Hund.', 'Er hat keinem Hund'],
+            ['Er hat meinen Hund.', 'Er hat meinem Hund'], ['Das ist das Auto einer Frau.', 'Das ist das Auto eines Frau'],
+            ['Ich gebe ihnen das Buch.', 'Ich gebe ihren das Buch']];
+        for (const [e, t] of pairs) {
+            assertEqual(compareTyped(e, t).pass, false, t);
+            assert(st(e, t).includes('wrong'), t);
+        }
+    });
+    test('typed: ending-only difference of other words is wrong', () => {
+        assertEqual(st('Ich esse guten Käse.', 'Ich esse gutem Käse'), ['ok', 'ok', 'wrong', 'ok']);
+        assertEqual(st('Ich brauche einen Tisch.', 'Ich brauche einen Tische'), ['ok', 'ok', 'ok', 'wrong']);
+    });
+    test('typed: real typos stay typos', () => {
+        assertEqual(st('Ich arbeite im Krankenhaus.', 'Ich arbeite im Krankenhous'), ['ok', 'ok', 'ok', 'typo']);
+        assertEqual(st('Der Mann kommt.', 'Der Man kommt'), ['ok', 'typo', 'ok']);
+    });
+    // F3
+    test('speech: heard words but none matched → best is the first alternative', () => {
+        const r = speechMatch('Ich bin neu.', ['hallo welt', 'hallo']);
+        assertEqual([r.best, r.ratio], ['hallo welt', 0]);
+    });
+    // F8: abbreviations, numbers 13–20, hyphenated names
+    test('typed: Dr. ↔ Doktor, St. ↔ Sankt, Prof. ↔ Professor, Nr. ↔ Nummer', () => {
+        assertEqual(compareTyped('Ruf Dr. Kühn an!', 'Ruf Doktor Kühn an').pass, true);
+        assertEqual(compareTyped('Ruf Doktor Kühn an!', 'Ruf Dr. Kühn an').pass, true);
+        assertEqual(compareTyped('Prof. Weber kommt.', 'Professor Weber kommt').pass, true);
+        assertEqual(compareTyped('Zimmer Nr. 5.', 'Zimmer Nummer fünf').pass, true);
+        assertEqual(compareTyped('Das ist St. Georg.', 'Das ist Sankt Georg').pass, true);
+    });
+    test('typed: digits 13–20 for number words and back', () => {
+        assertEqual(compareTyped('Wir treffen uns um 18 Uhr.', 'Wir treffen uns um achtzehn Uhr').pass, true);
+        assertEqual(compareTyped('Er ist zwanzig.', 'Er ist 20').pass, true);
+        assertEqual(compareTyped('Sie ist dreizehn.', 'Sie ist 13').pass, true);
+    });
+    test('typed: hyphenated name typed with spaces', () => {
+        assertEqual(compareTyped('Das ist das alte St.-Lukas-Krankenhaus.', 'Das ist das alte St. Lukas Krankenhaus').pass, true);
+        assertEqual(compareTyped('Das ist das alte St.-Lukas-Krankenhaus.', 'Das ist das alte Sankt-Lukas-Krankenhaus').pass, true);
+        assertEqual(compareTyped('Das ist das alte St.-Lukas-Krankenhaus.', 'Das ist das alte St.-Lukas-Krankenhaus').pass, true);
+        assertEqual(compareTyped('Das ist das alte St.-Lukas-Krankenhaus.', 'Das ist das alte St. Lukas').pass, false);
+    });
+    test('speech: Doktor for Dr., achtzehn for 18', () => {
+        assertEqual(speechMatch('Ruf Dr. Kühn an!', ['ruf doktor kühn an']).ratio, 1);
+        assertEqual(speechMatch('Um 18 Uhr.', ['um achtzehn uhr']).ratio, 1);
+    });
 }

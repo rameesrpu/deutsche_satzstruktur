@@ -1,15 +1,23 @@
 /**
- * Rungs 4 and 5 of the review ladder (docs/superpowers/specs/2026-11-15-production-ladder-design.md):
+ * Rungs 4 and 5 of the review ladder (docs/superpowers/specs/2026-11-16-ladder-write-speak-design.md):
  * comparing what the learner typed (Schreiben) or said (Sprechen) with the sentence.
  * Pure (no DOM), unit-tested in tests/textMatch.test.js.
- * Words are compared after `fold` (lower case, ae/oe/ue/ss, small digits as words);
- * typed text is aligned to the sentence word by word (weighted edit distance), not by set membership.
+ * Words are compared after `fold` (lower case, ae/oe/ue/ss, digits 0–20 as words, Dr/St/Prof/Nr
+ * spelled out); typed text is aligned to the sentence word by word (weighted edit distance), not by
+ * set membership. A one-letter slip counts as a typo, except in a case ending: articles, pronouns and
+ * determiners, or two words that differ only in their ending, must be exact.
  */
 
 export const SPEECH_PASS = 0.8;
 
 const NUMBER_WORDS = ['null', 'eins', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun',
-    'zehn', 'elf', 'zwölf'];
+    'zehn', 'elf', 'zwölf', 'dreizehn', 'vierzehn', 'fünfzehn', 'sechzehn', 'siebzehn', 'achtzehn',
+    'neunzehn', 'zwanzig'];
+/** Abbreviations compared as the full word (folded, without the dot). */
+const ABBREVIATIONS = { dr: 'doktor', st: 'sankt', prof: 'professor', nr: 'nummer' };
+/** Folded words whose ending carries the case: no typo tolerance. */
+const CASE_WORDS = /^(?:der|die|das|den|dem|des|(?:ein|kein|mein|dein|sein|ihr|unser|euer|eur|dies|jed|welch|manch|solch|all)(?:e|en|em|er|es|s)?|ich|mich|mir|du|dich|dir|er|ihn|ihm|sie|es|wir|uns|euch|ihnen)$/;
+const ENDINGS = ['e', 'en', 'em', 'er', 'es'];
 const EDGE_PUNCT = /^[\s.,!?;:„“"”‚‘’'()\[\]{}…«»–—-]+|[\s.,!?;:„“"”‚‘’'()\[\]{}…«»–—-]+$/g;
 
 /** Words of a text without surrounding punctuation ("Dr." → "Dr"); inner hyphens stay. */
@@ -18,11 +26,56 @@ export function tokens(text) {
     return text.split(/\s+/).map(t => t.replace(EDGE_PUNCT, '')).filter(Boolean);
 }
 
-/** Comparison form of one word: lower case, ä→ae ö→oe ü→ue ß→ss, digits 0–12 → German word. */
-export function fold(word) {
-    const w = String(word).toLowerCase();
-    const base = /^\d+$/.test(w) && Number(w) <= 12 && String(Number(w)) === w ? NUMBER_WORDS[Number(w)] : w;
+function foldPart(part) {
+    const w = part.toLowerCase().replace(/^\.+|\.+$/g, '');
+    const base = /^\d+$/.test(w) && Number(w) < NUMBER_WORDS.length && String(Number(w)) === w
+        ? NUMBER_WORDS[Number(w)] : (ABBREVIATIONS[w] || w);
     return base.replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss');
+}
+
+/**
+ * Comparison form of one word: lower case, ä→ae ö→oe ü→ue ß→ss, digits 0–20 → German word,
+ * Dr/St/Prof/Nr → Doktor/Sankt/Professor/Nummer; each part of a hyphenated word on its own
+ * ("St.-Lukas" → "sankt-lukas").
+ */
+export function fold(word) {
+    return String(word).split('-').map(foldPart).join('-');
+}
+
+/** The word and the stems left after cutting one case/plural ending off it. */
+function stems(w) {
+    const out = [w];
+    for (const end of ENDINGS) if (w.length > end.length && w.endsWith(end)) out.push(w.slice(0, -end.length));
+    return out;
+}
+
+/** True when a one-letter difference between the folded words is a grammar (case) error. */
+function caseSensitive(fe, ft) {
+    if (CASE_WORDS.test(fe)) return true;
+    const st = stems(ft);
+    return stems(fe).some(x => st.includes(x));
+}
+
+/**
+ * Merge consecutive words that together spell an expected hyphenated word ("St. Lukas Krankenhaus"
+ * for "St.-Lukas-Krankenhaus") into one, joined with "-".
+ */
+function mergeHyphenated(expected, typed) {
+    const targets = expected.filter(e => e.includes('-'))
+        .map(e => ({ folded: fold(e), parts: e.split('-').filter(Boolean).length }));
+    if (targets.length === 0) return typed;
+    const out = [];
+    for (let j = 0; j < typed.length; j++) {
+        const hit = targets.find(({ folded, parts }) => parts > 1 && j + parts <= typed.length
+            && fold(typed.slice(j, j + parts).join('-')) === folded);
+        if (hit) {
+            out.push(typed.slice(j, j + hit.parts).join('-'));
+            j += hit.parts - 1;
+        } else {
+            out.push(typed[j]);
+        }
+    }
+    return out;
 }
 
 function levenshtein(a, b) {
@@ -43,7 +96,7 @@ const isUpper = w => w[0] !== w[0].toLowerCase();
 function pairStatus(expected, typed) {
     const fe = fold(expected), ft = fold(typed);
     if (fe === ft) return /^\d/.test(typed) || isUpper(expected) === isUpper(typed) ? 'ok' : 'case';
-    if (expected.length >= 4 && levenshtein(fe, ft) === 1) return 'typo';
+    if (expected.length >= 4 && levenshtein(fe, ft) === 1 && !caseSensitive(fe, ft)) return 'typo';
     return 'wrong';
 }
 
@@ -56,7 +109,7 @@ const SUBST_COST = { ok: 0, case: 0, typo: 0.5, wrong: 1 };
  * @returns {{pass: boolean, words: {text: string, status: 'ok'|'case'|'typo'|'wrong'|'missing', typed: ?string}[], extra: string[]}}
  */
 export function compareTyped(expected, typed) {
-    const e = tokens(expected), t = tokens(typed);
+    const e = tokens(expected), t = mergeHyphenated(e, tokens(typed));
     const n = e.length, m = t.length;
     const d = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
     for (let i = 1; i <= n; i++) d[i][0] = i;
@@ -115,9 +168,11 @@ function lcsFlags(e, h) {
 export function speechMatch(expected, heard) {
     const e = tokens(expected);
     const fe = e.map(fold);
-    let best = '', ratio = 0, flags = new Array(e.length).fill(false);
-    for (const alt of Array.isArray(heard) ? heard : []) {
-        const f = lcsFlags(fe, tokens(alt).map(fold));
+    const alts = Array.isArray(heard) ? heard : [];
+    // Words were heard but none matched: still show what was heard
+    let best = alts[0] ?? '', ratio = 0, flags = new Array(e.length).fill(false);
+    for (const alt of alts) {
+        const f = lcsFlags(fe, mergeHyphenated(e, tokens(alt)).map(fold));
         const r = e.length ? f.filter(Boolean).length / e.length : 0;
         if (r > ratio) {
             best = alt; ratio = r; flags = f;
