@@ -16,27 +16,27 @@
 </g>
 <g fill="#FFFFFF" stroke="#A39C90" stroke-width="1.5" stroke-linejoin="round">
 <rect x="-2" y="70" width="404" height="6"/><rect x="-2" y="94" width="404" height="6"/>
-<path d="M2 106V64l6-7 6 7V106Z"/>
-<path d="M21 106V64l6-7 6 7V106Z"/>
-<path d="M40 106V64l6-7 6 7V106Z"/>
-<path d="M59 106V64l6-7 6 7V106Z"/>
-<path d="M78 106V64l6-7 6 7V106Z"/>
-<path d="M97 106V64l6-7 6 7V106Z"/>
-<path d="M116 106V64l6-7 6 7V106Z"/>
-<path d="M135 106V64l6-7 6 7V106Z"/>
-<path d="M154 106V64l6-7 6 7V106Z"/>
-<path d="M173 106V64l6-7 6 7V106Z"/>
-<path d="M192 106V64l6-7 6 7V106Z"/>
-<path d="M211 106V64l6-7 6 7V106Z"/>
-<path d="M230 106V64l6-7 6 7V106Z"/>
-<path d="M249 106V64l6-7 6 7V106Z"/>
-<path d="M268 106V64l6-7 6 7V106Z"/>
-<path d="M287 106V64l6-7 6 7V106Z"/>
-<path d="M306 106V64l6-7 6 7V106Z"/>
-<path d="M325 106V64l6-7 6 7V106Z"/>
-<path d="M344 106V64l6-7 6 7V106Z"/>
-<path d="M363 106V64l6-7 6 7V106Z"/>
-<path d="M382 106V64l6-7 6 7V106Z"/>
+<path d="M2 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M21 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M40 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M59 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M78 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M97 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M116 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M135 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M154 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M173 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M192 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M211 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M230 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M249 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M268 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M287 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M306 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M325 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M344 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M363 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
+<path d="M382 106V62q0-2 2-2h8q2 0 2 2V106Z"/>
 </g>
 <ellipse cx="338" cy="198" rx="50" ry="9" fill="#5E9470" opacity=".35"/>
 <g transform="translate(-14 36)"><path d="M318 92C302 86 300 60 316 52C314 28 340 14 356 24C374 12 398 26 394 48C404 62 398 90 384 94C372 108 336 106 318 92Z" fill="#F3E3B5"/>
