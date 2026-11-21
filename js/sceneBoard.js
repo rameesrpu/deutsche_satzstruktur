@@ -124,8 +124,7 @@ export const ruleHint = kind => (kind === 'wohin' ? 'Wohin? → Akkusativ' : 'Wo
 /** The kind's practice ids for the scored modes. */
 export const itemIds = set => sceneItemIds(set);
 
-/** The hen is 8 % of the garden's width wide (square); the garden is 400×300 units. */
-export const HEN_WIDTH = 8;
+/** The garden is 400×300 units (the hen is 8 % of its width, set in CSS). */
 const GARDEN = [400, 300];
 
 /**
@@ -423,6 +422,7 @@ function renderEntdecken(root, ctx) {
         moving = true;
         const wohinId = showItem(item, 'wohin');
         scene.walk(sceneAction(ctx.set, wohinId), () => {
+            if (dead) return;
             moving = false;
             if (!item.verbs.wo) return;
             next.append(btn('play-continue', 'Weiter ›', () => {

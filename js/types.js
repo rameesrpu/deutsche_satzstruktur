@@ -151,6 +151,33 @@
  */
 
 /**
+ * One place of a scene board set (data/boards/wechselpraepositionen.json; logic in sceneBoard.js).
+ * @typedef {Object} SceneLandmark
+ * @property {string} de        noun, "der Tisch, Tische" (article first; "(pl.)" for plural-only)
+ * @property {number[]} [front] [x, y, w, h] in percent of the picture: the landmark's front part; a "hinter"
+ *   item redraws the picture clipped to this rect over the hen, so the landmark covers it
+ */
+
+/**
+ * One position of a scene board set: where the mover goes (Wohin? Akkusativ) or rests (Wo? Dativ).
+ * @typedef {Object} SceneItem
+ * @property {string} id         unique within the set, "<prep>-<landmark>"
+ * @property {string} prep       auf, in, an, unter, über, vor, hinter, neben, zwischen
+ * @property {string} landmark   key of set.landmarks
+ * @property {?string} landmark2 second landmark ("zwischen"), both articles change together; else null
+ * @property {number[]} spot     [x, y] in percent: the hen's feet
+ * @property {{wohin: string, wo: ?string}} verbs  `wo: null` = movement only (never asked as Wo?)
+ */
+
+/**
+ * A scene board set: `BoardFile.sets[]` entry of kind `scene`.
+ * @typedef {Object} SceneSet
+ * @property {{de: string, image: string, home: number[]}} mover  the moving figure (separate SVG; `home` = start spot in percent)
+ * @property {Object<string, SceneLandmark>} landmarks
+ * @property {SceneItem[]} items
+ */
+
+/**
  * Schedule entry of one board item (boardSchedule.js).
  * @typedef {Object} BoardEntry
  * @property {number} box       0-4 (BOX_DAYS)
