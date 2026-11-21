@@ -298,7 +298,7 @@ Parked (small, known):
 ### 5b. Klinik: Anamnese, Arztbrief, FSP
 
 - [x] Task 1: Sort exercise — commit `ebaf5d6`
-- [ ] Task 2: Anamnese sections and questions — **owner stop** (doctor's review)
+- [x] Task 2: Anamnese sections and questions — commit `82f6b5f` (owner stop skipped; see "Needs owner review")
 - [ ] Task 3: Cases and the interview — **owner stop** (doctor's review)
 - [ ] Task 4: Arztbrief
 - [ ] Task 5: FSP practice run — **owner stop** (doctor's review)
@@ -573,3 +573,12 @@ Picture-based practice on the Üben screen with its own five-box schedule.
   2. The route is vertical; tick a station, reload the page: the tick stays.
   3. Paare: the 12 tiles fit on the screen with long words (Nasennebenhöhlenentzündung).
   4. The ward: taps inside a room (patient room, corridor ends) answer that room; ✕ returns to Klinik.
+
+### Project 5b — Klinik: Anamnese, Arztbrief, FSP (branch `klinik-anamnese-fsp`)
+
+Medical content in this project is **not yet checked by a doctor**.
+
+- **Anamnese questions** (owner stop that was skipped; doctor's review): read
+  [docs/review/5b-anamnese-fragen.md](review/5b-anamnese-fragen.md) — 50 questions in 7 sections,
+  German with English. Ask: are these the questions a German doctor asks, and is each in the right
+  section? Four questions count in two sections (`also`); others could too (Nachtschweiß, Stuhlgang).
