@@ -297,7 +297,7 @@ Parked (small, known):
 
 ### 5b. Klinik: Anamnese, Arztbrief, FSP
 
-- [ ] Task 1: Sort exercise
+- [x] Task 1: Sort exercise — commit `ebaf5d6`
 - [ ] Task 2: Anamnese sections and questions — **owner stop** (doctor's review)
 - [ ] Task 3: Cases and the interview — **owner stop** (doctor's review)
 - [ ] Task 4: Arztbrief
