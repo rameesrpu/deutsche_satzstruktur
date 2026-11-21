@@ -49,7 +49,7 @@ the owner's answer or review.
 | 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | done (2026-11-20; branch `boards-body-map`, on top of `ladder-write-speak`, not merged) | 1 |
 | 4b | Preposition scene | [plan](superpowers/plans/2026-11-16-boards-preposition-scene.md) | done (2026-11-21; branch `boards-preposition-scene`, on top of `boards-body-map`, not merged) | 4a |
 | 4c | Timeline | [plan](superpowers/plans/2026-11-16-boards-timeline.md) | done (2026-11-21; branch `boards-timeline`, on top of `boards-preposition-scene`, not merged) | 4a |
-| 5a | Klinik: maps and terms | [plan](superpowers/plans/2026-11-16-klinik-maps-terms.md) · [design](superpowers/specs/2026-11-16-medical-track-design.md) | not started | 4a |
+| 5a | Klinik: maps and terms | [plan](superpowers/plans/2026-11-16-klinik-maps-terms.md) · [design](superpowers/specs/2026-11-16-medical-track-design.md) | done (2026-11-21; branch `klinik-maps-terms`, on top of `boards-timeline`, not merged) | 4a |
 | 5b | Klinik: Anamnese, Arztbrief, FSP | [plan](superpowers/plans/2026-11-16-klinik-anamnese-fsp.md) | not started | 5a (better after 2 and 3) |
 
 Recommended order: 1 → 2 → 3 → 4a → 4b → 4c → 5a → 5b. Project 2 touches only scripts and
@@ -263,8 +263,34 @@ Parked (small, known):
 - [x] Task 1: Research the path — commit `69ec6d5` (owner stop skipped; see "Needs owner review")
 - [x] Task 2: Klinik screen and route — commit `9fb5404`
 - [x] Task 3: Term pairs board — commits `fd94aee`, `ddb9c83`, `1a53984`
-- [ ] Task 4: The ward — **owner stop**
-- [ ] Task 5: Docs and ship
+- [x] Task 4: The ward — commits `7b44343`, `2a57f4f` (owner stop skipped; see "Needs owner review")
+- [x] Task 5: Docs and ship — this commit ("Document the Klinik area, bump versions")
+- [ ] Whole-branch review (Opus) and its fix wave
+- [ ] Merge to `main` — the owner's step, after `boards-timeline` and the review items below
+
+What the reviews changed against the plan (rulings, each can be undone):
+- Her path is the third-country one: Kenntnisprüfung is the default (legal default since 1.11.2026,
+  RPS Anlage 6); Gutachten, Berufserlaubnis and Anerkennungsberatung are optional stations.
+- A Kammer station was added after the Approbation; there are no Hospitation or visa stations
+  (no official BW source read covers them).
+- The station id stays `fachsprachpruefung` (plan), the title is the official spelling "Fachsprachenprüfung".
+- A Klinik tile whose board is not in `BOARDS` behaves like "Kommt bald" (tiles of unregistered boards).
+- A board opened from Klinik closes back to Klinik (from Üben it closes to Üben).
+- Term pairs: articles may be confirmed by Duden/DWDS when DocCheck prints none; Pschyrembel needs a login.
+  Dropped: Karzinom — Krebs (false equation); changed: Thrombose → Thrombus; Rhinitis, Zephalgie and
+  Synkope use the source's everyday word (Schnupfen, Kopfschmerzen, Ohnmacht). 51 pairs in 8 sets.
+- Landscape hotspot pictures through a set flag `wide: true` (4:3), used by the ward floor plan.
+- Ward rooms and team boxes have per-item `area` rects (a tap inside a large room answers it; smallest nested area wins).
+- Pflegefachkraft kept (the protected titles are Pflegefachfrau/-mann, but job ads use Pflegefachkraft).
+
+Parked (small, known):
+- The route file load failure is silent; the route scroll position is lost on re-render; Üben shows
+  "Klinik" as heading and card title.
+- Paare rounds never mix sets; the 3-item "Niere und Blase" set makes a 6-tile round.
+- The board set list shows no board title; the station and fachbegriffe boards are also listed under Üben → Bilder.
+- Entdecken does not show a room's extent; team.svg area rects were not compared against the drawing.
+- The blue-grey doctor boxes in team.svg are near the masculine blue (small areas; owner sheet).
+- No on-screen (DOM) tests for the Klinik screen and the pairs modes; the pure helpers have tests.
 
 ### 5b. Klinik: Anamnese, Arztbrief, FSP
 
@@ -532,3 +558,15 @@ Picture-based practice on the Üben screen with its own five-box schedule.
   Check: is this her path; the open doubts at the end of the sheet (waiting times 8–10 vs 4–5 months;
   whether a Berufserlaubnis needs the FSP first; fees); Hospitation and visa are not stations.
   Licensing facts, checked 2026-11-21 against official pages only; not legal advice.
+- **Term pairs:** read [docs/review/5a-fachbegriffe.md](review/5a-fachbegriffe.md) (all 51 pairs by set,
+  with sources, dropped and changed pairs). Not yet checked by a doctor. Check: the definition-only pairs
+  (Hypotonie, Hämaturie, Insomnie), Appendizitis ("fälschlich" in DocCheck), the articles confirmed only by
+  Duden/DWDS, and a pass against Pschyrembel (not reachable without a login).
+- **The ward:** read [docs/review/5a-station.md](review/5a-station.md). Check: the pictures (floor plan and
+  team diagram), the vocabulary (ask your wife whether a Stuttgart hospital says it this way),
+  Pflegefachkraft vs Pflegefachfrau, the ward manager's level in the team diagram, and the blue-grey doctor boxes.
+- **Phone checklist for 5a (not done by anyone yet):**
+  1. Üben → Klinik: the tiles show; unfinished ones say "Kommt bald".
+  2. The route is vertical; tick a station, reload the page: the tick stays.
+  3. Paare: the 12 tiles fit on the screen with long words (Nasennebenhöhlenentzündung).
+  4. The ward: taps inside a room (patient room, corridor ends) answer that room; ✕ returns to Klinik.

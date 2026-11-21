@@ -17,7 +17,9 @@ project's design and plan: `docs/superpowers/specs/`, `docs/superpowers/plans/`)
 [docs/superpowers/specs/2026-11-16-spatial-boards-design.md](docs/superpowers/specs/2026-11-16-spatial-boards-design.md), plan 4a (framework + body map)
 [docs/superpowers/plans/2026-11-16-boards-body-map.md](docs/superpowers/plans/2026-11-16-boards-body-map.md), plan 4b (preposition scene)
 [docs/superpowers/plans/2026-11-16-boards-preposition-scene.md](docs/superpowers/plans/2026-11-16-boards-preposition-scene.md), plan 4c (timeline)
-[docs/superpowers/plans/2026-11-16-boards-timeline.md](docs/superpowers/plans/2026-11-16-boards-timeline.md).
+[docs/superpowers/plans/2026-11-16-boards-timeline.md](docs/superpowers/plans/2026-11-16-boards-timeline.md); Klinik (medical track, 5a maps and terms): spec
+[docs/superpowers/specs/2026-11-16-medical-track-design.md](docs/superpowers/specs/2026-11-16-medical-track-design.md), plan
+[docs/superpowers/plans/2026-11-16-klinik-maps-terms.md](docs/superpowers/plans/2026-11-16-klinik-maps-terms.md).
 
 ## Files (`js/`, ES modules — entry `app.js`; each file imports what it uses)
 - `types.js` — JSDoc typedefs only (Word, Sentence, LibraryFile, ParsedSentence, PlacementResult…; not loaded)
@@ -72,6 +74,8 @@ project's design and plan: `docs/superpowers/specs/`, `docs/superpowers/plans/`)
 - `hotspotBoard.js` — board kind `hotspot` (body map; also the ward `station`: rooms floor plan + team diagram, modes from its BOARDS entry): pure noun parsing, nearest-spot hit test (a tap far from every spot is "no answer"), naming options, `painSentence(item, usePlural)` (`pair` items drive the plural pain sentence via `painUsesPlural`), `tapTargets`/`tapIsRight` (mirror sets accept the other side of `pair` items; `accepts` lets bein take its parts); modes Entdecken, Zeigen, Benennen, Wo tut es weh?
 - `sceneBoard.js` — board kind `scene` (Wo? Wohin?, preposition scene): pure `sceneSentence`/`articleBlank`/`sentenceSegments` builders (the blank covers a contracted word: `ins`/`im`, `an den`/`am`; two landmarks change together), `itemIds` hook (movement-only items have no Wo? id); the hen walks (arrow = Wohin?) or rests (dot = Wo?), "hinter" by occlusion; modes Entdecken, Verstehen, Artikel, Satz
 - `timelineBoard.js` — board kind `timeline` (Die Zeit): pure `timeSentence`/`clampFrame`/`clampSentence`/`auxHint`, `itemIds` hook (Wann? ids `<verb>.past|now|future`), no picture file (line and clamp in HTML/CSS); modes Wann?, Klammer, haben oder sein?
+- `klinik.js` — Klinik screen (`body[data-screen="klinik"]`, from the Üben card "Klinik"): `KLINIK_ROUTE_FILE`, `KLINIK_ROUTE_VERSION` (must equal `data/medical/approbation.json` `version`; a test checks it), `KLINIK_STORAGE_KEY` (`klinikRoute`, ticked station ids), `KLINIK_TILES` (a tile whose board is not in `BOARDS` or is `soon` shows "Kommt bald"); pure `tileMode`, `routeState(stations, doneIds)`, `toggleStation`, `loadDone`/`saveDone`; `renderKlinik` (tiles), `renderRoute` (vertical route, station cards German + English line, official source link and `checked` date); boards opened from Klinik close back to Klinik
+- `pairsBoard.js` — board kind `pairs` (Fachsprache ↔ Alltagssprache): pure `choiceOptions(items, id, side, rng)`, `pairRound(items, rng)`, `isPair`, `displayOf`/`speechOf` (article + noun, no "(pl.)"); modes Paare (match tiles), Für den Patienten (fach → alltag), Für die Kollegin (alltag → fach)
 - `renderer.js` — SVG drawing of words/connections in edit view
 - `ui.js` — UIController: editor panels and interactions
 - `app.js` — DeutschApp: wires everything together, screen router (`showScreen`: body[data-screen], bottom nav;
@@ -98,6 +102,11 @@ project's design and plan: `docs/superpowers/specs/`, `docs/superpowers/plans/`)
   Scene sets (`kind: "scene"`): `mover` (`de`, `image`, `home`), `landmarks` (`de`, optional `front` rect for "hinter" occlusion),
   items with `prep`, `landmark`, `landmark2`, `spot` and `verbs` (`wo: null` = movement only, e.g. über den Zaun).
   Timeline sets (`kind: "timeline"`): `items` are verbs with `inf`, `aux`, `partizip`, `wrong`, `person`, `subject`, `finite`, optional `particle`, `rest`.
+- Klinik (medical track): `data/medical/approbation.json` = `{version, region, stations}`, a station is
+  `{id, title, what (de), en, terms:[{de,en}], documents, duration, cost, authority, optional, source (official https URL), checked (YYYY-MM-DD)}`.
+  **Route data needs an official source URL and a `checked` date per station**, no statement about licensing/exams/authorities without them; bump `version` and `KLINIK_ROUTE_VERSION` in `js/klinik.js` together (a test checks they are equal).
+  Sources, quotes and doubts: [docs/medical-sources.md](docs/medical-sources.md); owner review sheets in `docs/review/5a-*.md`. Medical content is "not yet checked by a doctor".
+  Board kind `pairs` (`data/boards/fachbegriffe.json`): items `{id, fach, alltag, en, twin?}` (`fach`/`alltag` with article, `(pl.)` marks plural-only; `twin` = id of the opposite pair, e.g. Hyper-/Hypotonie, preferred as a wrong option); a term pair needs a dictionary source (DocCheck Flexikon; articles also Duden/DWDS), unconfirmable pairs are dropped, not guessed.
 - Grammar library files are generated by `scripts/build_library_data.py` from the export in `data/saved/`
   (keep it in git — it's the build source); manual word fixes go in `scripts/library_corrections.py`
   (applied on rebuild).
