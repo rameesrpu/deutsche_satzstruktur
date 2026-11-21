@@ -58,7 +58,7 @@ decision.
 
 ### 1. Production ladder, rungs 2–3
 
-Branch `production-ladder` (not merged, not pushed).
+Branch `production-ladder` (pushed and merged to `main` 2026-11-21).
 
 - [x] Task 1: Schedule (`ladder.js`) — commit `287b795`
 - [x] Task 2: Progress store, format version 2 — commit `80f681b`
