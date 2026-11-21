@@ -47,7 +47,7 @@ the owner's answer or review.
 | 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | done (2026-11-19; branch `content-pipeline`, on top of `production-ladder`, not merged) | – |
 | 3 | Ladder rungs 4–5 (Schreiben, Sprechen) | [plan](superpowers/plans/2026-11-16-ladder-write-speak.md) · [design](superpowers/specs/2026-11-16-ladder-write-speak-design.md) | done (2026-11-20; branch `ladder-write-speak`, on top of `content-pipeline`, not merged) | – |
 | 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | done (2026-11-20; branch `boards-body-map`, on top of `ladder-write-speak`, not merged) | 1 |
-| 4b | Preposition scene | [plan](superpowers/plans/2026-11-16-boards-preposition-scene.md) | not started | 4a |
+| 4b | Preposition scene | [plan](superpowers/plans/2026-11-16-boards-preposition-scene.md) | done (2026-11-21; branch `boards-preposition-scene`, on top of `boards-body-map`, not merged) | 4a |
 | 4c | Timeline | [plan](superpowers/plans/2026-11-16-boards-timeline.md) | not started | 4a |
 | 5a | Klinik: maps and terms | [plan](superpowers/plans/2026-11-16-klinik-maps-terms.md) · [design](superpowers/specs/2026-11-16-medical-track-design.md) | not started | 4a |
 | 5b | Klinik: Anamnese, Arztbrief, FSP | [plan](superpowers/plans/2026-11-16-klinik-anamnese-fsp.md) | not started | 5a (better after 2 and 3) |
@@ -204,6 +204,26 @@ Parked (small, known):
 - [x] Task 2: Garden picture and positions — commits `8878d8d`, `4bdddab`, `f301711` (owner stop skipped; see "Needs owner review")
 - [x] Task 3: Scene modes on screen — commit `25d34d9`
 - [x] Task 4: Docs and ship — commit `e28c8ef`
+- [x] Whole-branch review (Opus) and its fix wave — commit `e955a66`
+- [ ] Merge to `main` — the owner's step, after `boards-body-map` and the review items below
+
+What the reviews changed against the plan (rulings, each can be undone):
+- When the Dativ form contracts and the Akkusativ does not, the blank covers the preposition too:
+  "Das Huhn läuft ___ Zaun." with "an den" / "am".
+- "hinter" is drawn by hiding the hen's lower half behind the landmark (a clipped copy of the
+  picture over the hen), not by a 50 % transparent hen. The data has a `front` rect per landmark.
+- The board's kinds registry moved into `js/boards.js` (with the `itemIds` hook), so the pure
+  summary can use it. Each Wohin? and Wo? sentence is its own practice item: 47 in the garden.
+- The garden unlocks after "5.3 Ein Ausflug" (the plan's label said "Beim Arzt 5.3").
+- A board whose sets are all locked shows "Nach „<chapter>“" on Üben instead of "0 von 0 gelernt"
+  (both boards).
+- A sentence counts as "gelernt" only when Verstehen, Artikel and Satz are all at box 1 or higher.
+
+Parked (small, known):
+- After a wrong preposition in "Satz", the article step shows the sentence with the right
+  preposition (the wrong button is marked red; the score is already wrong).
+- A faint edge can show around the hiding overlay of the bench, box and hen house.
+- The tree trunk and wood outlines use the plural ochre's ink colour (small areas only).
 
 ### 4c. Timeline
 
@@ -335,6 +355,31 @@ look at. Remove an item when it is checked.
   4. "Benennen": the four answers, the label and "Weiter ›" fit on the screen without scrolling.
   5. Leave a session halfway with ✕: on reopening, the answered words are not new any more.
   6. "Wiederholen (n)" on a later day plays only the due words.
+
+### Project 4b — preposition scene (branch `boards-preposition-scene`)
+
+- **The garden and the hen** (owner stop that was skipped): `data/boards/img/garten.svg`,
+  `huhn.svg`. Open "Wo? Wohin?" → "Im Garten" → "Entdecken" and tap every point. Check:
+  1. Each hen position reads as its phrase at a glance. Weakest: "hinter dem Zaun" (only the
+     head shows above the palings; could read as "auf"), "hinter dem Hühnerhaus" and "hinter dem
+     Baum" (the hen peeks out beside the wall or trunk, about 10 px of head on the phone),
+     "unter dem Baum" (could read as "neben").
+  2. Is the hen's look right for her (she likes chickens)? One hen only, so sentences stay clear.
+  3. The garden is a generic garden; Frau Schäfer's is not described in the story bible.
+- **Words.** "das Hühnerhaus" is in Duden; "der Hühnerstall" is the more common word. Swap if
+  she prefers it (data file, one landmark).
+- **German to read once:** the 47 sentences come from `js/sceneBoard.js`, e.g. "Das Huhn fliegt
+  auf das Hühnerhaus." (written German; "aufs" is common in speech but the plan allows only
+  ins/im/ans/am).
+- **Phone checklist:**
+  1. Üben before 5.3: the "Wo? Wohin?" card says "Nach „5.3 Ein Ausflug“".
+  2. "Entdecken": tap a place, the hen walks along a dotted arrow, the Wohin? sentence is spoken;
+     "Weiter ›" shows it sitting with a dot and the Wo? sentence.
+  3. "Verstehen": a tap between points says "Tipp auf einen Punkt."; taps while the hen walks do
+     nothing.
+  4. "Artikel" and "Satz": the buttons fit, "Weiter ›" is visible without scrolling, the rule
+     line "Wohin? → Akkusativ" / "Wo? → Dativ" appears after the answer.
+  5. With Android's "Animationen entfernen" (remove animations) on, the hen jumps instead of walking.
 
 ## How to run a plan from a new conversation
 
