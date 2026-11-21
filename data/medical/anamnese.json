@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "sections": [
     {
       "id": "beschwerden",
@@ -69,7 +69,8 @@
         { "id": "g-nachtschweiss", "de": "Haben Sie Nachtschweiß?", "en": "Do you have night sweats?" },
         { "id": "g-schlaf", "de": "Schlafen Sie gut?", "en": "Do you sleep well?" },
         { "id": "g-stuhlgang", "de": "Hat sich Ihr Stuhlgang verändert?", "en": "Have your bowel movements changed?" },
-        { "id": "g-wasserlassen", "de": "Haben Sie Beschwerden beim Wasserlassen?", "en": "Do you have any problems when passing urine?" }
+        { "id": "g-wasserlassen", "de": "Haben Sie Beschwerden beim Wasserlassen?", "en": "Do you have any problems when passing urine?" },
+        { "id": "g-periode", "de": "Wann war Ihre letzte Regelblutung?", "en": "When was your last menstrual period?" }
       ]
     },
     {

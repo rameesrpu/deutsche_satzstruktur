@@ -184,9 +184,11 @@ function runCaseTests(anamnese) {
     }
 
     const bauch = JSON.parse(readText('data/medical/faelle/bauchschmerzen.json'));
-    test('faelle/bauchschmerzen: all seven sections, 10–12 steps, 10–12 letter sentences, documentation per section', () => {
+    test('faelle/bauchschmerzen: all seven sections, 10–14 steps, 10–12 letter sentences, documentation per section', () => {
         assertEqual(new Set(bauch.interview.map(s => s.section)).size, 7);
-        assert(bauch.interview.length >= 10 && bauch.interview.length <= 12, `${bauch.interview.length} steps`);
+        // 10–12 in the brief; up to 14 by controller ruling (period, bowel and urine questions)
+        assert(bauch.interview.length >= 10 && bauch.interview.length <= 14, `${bauch.interview.length} steps`);
+        for (const q of ['g-periode', 'g-stuhlgang', 'g-wasserlassen']) assert(bauch.interview.some(s => s.question === q), q);
         assert(bauch.brief.length >= 10 && bauch.brief.length <= 12, `${bauch.brief.length} sentences`);
         assertEqual(new Set(bauch.brief.map(b => b.section)).size, 5);
         assertEqual(bauch.dokumentation.map(d => d.section), anamnese.sections.map(s => s.id));

@@ -9,7 +9,7 @@ export const KLINIK_ROUTE_FILE = 'data/medical/approbation.json';
 export const KLINIK_ROUTE_VERSION = 1; // mirrors the file's `version`; part of the URL as ?v=
 export const KLINIK_STORAGE_KEY = 'klinikRoute';
 export const ANAMNESE_FILE = 'data/medical/anamnese.json';
-export const ANAMNESE_VERSION = 1; // mirrors the file's `version`; part of the URL as ?v=
+export const ANAMNESE_VERSION = 2; // mirrors the file's `version`; part of the URL as ?v=
 export const QUESTION_SORT_TITLE = 'Wohin gehört die Frage?';
 
 /** @type {{id: string, title: string, level: ?string, open: 'route'|'board'|'anamnese'|'soon', boardId: ?string}[]} */

@@ -2,7 +2,7 @@
 
 **Anamnese: Fragen nach Abschnitt (Anamnese questions by section): review sheet (plan 5b, Task 2)**
 
-Klinik → Anamnese → *Fragen sortieren*. The learner gets 10 random questions and sorts each into one of the seven sections of the Anamnese. A question marked *auch* (also) is accepted in a second section as well. Data: `data/medical/anamnese.json` (version 1). All questions use the formal *Sie* form.
+Klinik → Anamnese → *Fragen sortieren*. The learner gets 10 random questions and sorts each into one of the seven sections of the Anamnese. A question marked *auch* (also) is accepted in a second section as well. Data: `data/medical/anamnese.json` (version 2). All questions use the formal *Sie* form.
 
 ## Questions for the doctor
 
@@ -59,6 +59,7 @@ Klinik → Anamnese → *Fragen sortieren*. The learner gets 10 random questions
 - Schlafen Sie gut? — Do you sleep well?
 - Hat sich Ihr Stuhlgang verändert? — Have your bowel movements changed?
 - Haben Sie Beschwerden beim Wasserlassen? — Do you have any problems when passing urine?
+- Wann war Ihre letzte Regelblutung? — When was your last menstrual period? *(added in version 2, for women; controller ruling)*
 
 ## 6. Familienanamnese (Family history)
 
