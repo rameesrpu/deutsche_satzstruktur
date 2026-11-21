@@ -1,0 +1,58 @@
+{
+  "id": "zeit",
+  "title": "Die Zeit",
+  "version": 1,
+  "kind": "timeline",
+  "sets": [
+    {
+      "id": "perfekt-1",
+      "title": "Perfekt 1",
+      "unlock": {"level": "A1", "category": "g5k3", "label": "5.3 Ein Ausflug"},
+      "items": [
+        {"id": "machen", "inf": "machen", "en": "make, do", "aux": "haben", "partizip": "gemacht", "wrong": ["gemachen", "machte"], "person": "ich", "subject": "ich", "finite": "mache", "rest": "die Hausaufgaben"},
+        {"id": "kochen", "inf": "kochen", "en": "cook", "aux": "haben", "partizip": "gekocht", "wrong": ["gekochen", "kochte"], "person": "er", "subject": "Ayisha", "finite": "kocht", "rest": "Biryani"},
+        {"id": "kaufen", "inf": "kaufen", "en": "buy", "aux": "haben", "partizip": "gekauft", "wrong": ["gekaufen", "kaufte"], "person": "wir", "subject": "wir", "finite": "kaufen", "rest": "Brot"},
+        {"id": "lernen", "inf": "lernen", "en": "learn", "aux": "haben", "partizip": "gelernt", "wrong": ["gelernen", "lernte"], "person": "ich", "subject": "ich", "finite": "lerne", "rest": "Deutsch"},
+        {"id": "arbeiten", "inf": "arbeiten", "en": "work", "aux": "haben", "partizip": "gearbeitet", "wrong": ["gearbeiten", "arbeitete"], "person": "er", "subject": "Faris", "finite": "arbeitet", "rest": "lange"},
+        {"id": "spielen", "inf": "spielen", "en": "play", "aux": "haben", "partizip": "gespielt", "wrong": ["gespielen", "spielte"], "person": "wir", "subject": "wir", "finite": "spielen", "rest": "Cricket"},
+        {"id": "essen", "inf": "essen", "en": "eat", "aux": "haben", "partizip": "gegessen", "wrong": ["geessen", "aß"], "person": "du", "subject": "du", "finite": "isst", "rest": "eine Brezel"},
+        {"id": "trinken", "inf": "trinken", "en": "drink", "aux": "haben", "partizip": "getrunken", "wrong": ["getrinkt", "trank"], "person": "er", "subject": "Lea", "finite": "trinkt", "rest": "Tee"},
+        {"id": "sehen", "inf": "sehen", "en": "see", "aux": "haben", "partizip": "gesehen", "wrong": ["geseht", "sah"], "person": "ich", "subject": "ich", "finite": "sehe", "rest": "die Hühner"},
+        {"id": "gehen", "inf": "gehen", "en": "go, walk", "aux": "sein", "partizip": "gegangen", "wrong": ["gegeht", "ging"], "person": "wir", "subject": "wir", "finite": "gehen", "rest": "in den Park"},
+        {"id": "fahren", "inf": "fahren", "en": "drive, travel", "aux": "sein", "partizip": "gefahren", "wrong": ["gefahrt", "fuhr"], "person": "er", "subject": "Max", "finite": "fährt", "rest": "nach Hause"},
+        {"id": "kommen", "inf": "kommen", "en": "come", "aux": "sein", "partizip": "gekommen", "wrong": ["gekommt", "kam"], "person": "ihr", "subject": "ihr", "finite": "kommt", "rest": "spät"}
+      ]
+    },
+    {
+      "id": "perfekt-2",
+      "title": "Perfekt 2",
+      "unlock": {"level": "A2", "category": "g1k1", "label": "A2 1.1 Der erste Kurstag"},
+      "items": [
+        {"id": "schlafen", "inf": "schlafen", "en": "sleep", "aux": "haben", "partizip": "geschlafen", "wrong": ["geschlaft", "schlief"], "person": "ich", "subject": "ich", "finite": "schlafe", "rest": "lange"},
+        {"id": "lesen", "inf": "lesen", "en": "read", "aux": "haben", "partizip": "gelesen", "wrong": ["gelest", "las"], "person": "er", "subject": "Ayisha", "finite": "liest", "rest": "ein Buch"},
+        {"id": "schreiben", "inf": "schreiben", "en": "write", "aux": "haben", "partizip": "geschrieben", "wrong": ["geschreibt", "schrieb"], "person": "du", "subject": "du", "finite": "schreibst", "rest": "eine E-Mail"},
+        {"id": "sprechen", "inf": "sprechen", "en": "speak", "aux": "haben", "partizip": "gesprochen", "wrong": ["gesprecht", "sprach"], "person": "wir", "subject": "wir", "finite": "sprechen", "rest": "Deutsch"},
+        {"id": "nehmen", "inf": "nehmen", "en": "take", "aux": "haben", "partizip": "genommen", "wrong": ["genehmt", "nahm"], "person": "ich", "subject": "ich", "finite": "nehme", "rest": "die S-Bahn"},
+        {"id": "finden", "inf": "finden", "en": "find", "aux": "haben", "partizip": "gefunden", "wrong": ["gefindet", "fand"], "person": "er", "subject": "Ayisha", "finite": "findet", "rest": "ein Foto"},
+        {"id": "helfen", "inf": "helfen", "en": "help", "aux": "haben", "partizip": "geholfen", "wrong": ["gehelft", "half"], "person": "er", "subject": "Faris", "finite": "hilft", "rest": "Ayisha"},
+        {"id": "anrufen", "inf": "anrufen", "en": "call (phone)", "aux": "haben", "partizip": "angerufen", "wrong": ["angeruft", "geanruft"], "person": "ich", "subject": "ich", "finite": "rufe", "particle": "an", "rest": "meine Mutter"},
+        {"id": "einkaufen", "inf": "einkaufen", "en": "shop", "aux": "haben", "partizip": "eingekauft", "wrong": ["eingekaufen", "geeinkauft"], "person": "wir", "subject": "wir", "finite": "kaufen", "particle": "ein", "rest": "im Kerala Store"},
+        {"id": "aufstehen", "inf": "aufstehen", "en": "get up", "aux": "sein", "partizip": "aufgestanden", "wrong": ["aufgesteht", "geaufstanden"], "person": "er", "subject": "Max", "finite": "steht", "particle": "auf", "rest": "um drei Uhr"},
+        {"id": "ankommen", "inf": "ankommen", "en": "arrive", "aux": "sein", "partizip": "angekommen", "wrong": ["angekommt", "geankommen"], "person": "ich", "subject": "ich", "finite": "komme", "particle": "an", "rest": "in Stuttgart"},
+        {"id": "fliegen", "inf": "fliegen", "en": "fly", "aux": "sein", "partizip": "geflogen", "wrong": ["gefliegt", "flog"], "person": "er", "subject": "Ayisha", "finite": "fliegt", "rest": "nach Deutschland"},
+        {"id": "laufen", "inf": "laufen", "en": "run, walk", "aux": "sein", "partizip": "gelaufen", "wrong": ["gelauft", "lief"], "person": "du", "subject": "du", "finite": "läufst", "rest": "zum Bus"},
+        {"id": "bleiben", "inf": "bleiben", "en": "stay", "aux": "sein", "partizip": "geblieben", "wrong": ["gebleibt", "blieb"], "person": "wir", "subject": "wir", "finite": "bleiben", "rest": "zu Hause"},
+        {"id": "sein", "inf": "sein", "en": "be", "aux": "sein", "partizip": "gewesen", "wrong": ["geseint", "war"], "person": "ich", "subject": "ich", "finite": "bin", "rest": "müde"},
+        {"id": "werden", "inf": "werden", "en": "become", "aux": "sein", "partizip": "geworden", "wrong": ["gewerdet", "wurde"], "person": "er", "subject": "Lea", "finite": "wird", "rest": "krank"},
+        {"id": "besuchen", "inf": "besuchen", "en": "visit", "aux": "haben", "partizip": "besucht", "wrong": ["gebesucht", "besuchte"], "person": "wir", "subject": "wir", "finite": "besuchen", "rest": "Frau Schäfer"},
+        {"id": "verstehen", "inf": "verstehen", "en": "understand", "aux": "haben", "partizip": "verstanden", "wrong": ["geverstanden", "verstehte"], "person": "ich", "subject": "ich", "finite": "verstehe", "rest": "alles"},
+        {"id": "bekommen", "inf": "bekommen", "en": "get, receive", "aux": "haben", "partizip": "bekommen", "wrong": ["gebekommen", "bekam"], "person": "er", "subject": "Ayisha", "finite": "bekommt", "rest": "einen Brief"},
+        {"id": "vergessen", "inf": "vergessen", "en": "forget", "aux": "haben", "partizip": "vergessen", "wrong": ["gevergessen", "vergaß"], "person": "er", "subject": "Max", "finite": "vergisst", "rest": "die Kehrwoche"},
+        {"id": "studieren", "inf": "studieren", "en": "study (at university)", "aux": "haben", "partizip": "studiert", "wrong": ["gestudiert", "studierte"], "person": "du", "subject": "du", "finite": "studierst", "rest": "in Stuttgart"},
+        {"id": "telefonieren", "inf": "telefonieren", "en": "phone", "aux": "haben", "partizip": "telefoniert", "wrong": ["getelefoniert", "telefonierte"], "person": "ich", "subject": "ich", "finite": "telefoniere", "rest": "mit Umma"},
+        {"id": "aufwachen", "inf": "aufwachen", "en": "wake up", "aux": "sein", "partizip": "aufgewacht", "wrong": ["aufgewachen", "geaufwacht"], "person": "ich", "subject": "ich", "finite": "wache", "particle": "auf", "rest": "früh"},
+        {"id": "einschlafen", "inf": "einschlafen", "en": "fall asleep", "aux": "sein", "partizip": "eingeschlafen", "wrong": ["eingeschlaft", "geeinschlafen"], "person": "er", "subject": "Lea", "finite": "schläft", "particle": "ein", "rest": "schnell"}
+      ]
+    }
+  ]
+}

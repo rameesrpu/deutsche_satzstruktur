@@ -29,7 +29,7 @@ export function runBoardsTests() {
         assertEqual(file.version, def.version);
         assertEqual(file.id, def.id);
         assertEqual(file.kind, def.kind);
-        assertEqual(BOARDS.length, 2);
+        assertEqual(BOARDS.length, 3);
     });
 
     test('registry: every board mirrors its data file (id, kind, version)', () => {

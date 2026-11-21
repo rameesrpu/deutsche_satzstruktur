@@ -25,6 +25,14 @@ export const BOARDS = [
             { id: 'satz', label: 'Satz', scored: true },
         ],
     },
+    {
+        id: 'zeit', title: 'Die Zeit', kind: 'timeline', file: 'data/boards/zeit.json', version: 1,
+        modes: [
+            { id: 'wann', label: 'Wann?', scored: true },
+            { id: 'klammer', label: 'Klammer', scored: true },
+            { id: 'hilfsverb', label: 'haben oder sein?', scored: true },
+        ],
+    },
 ];
 
 /**
