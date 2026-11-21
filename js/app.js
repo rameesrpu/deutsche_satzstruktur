@@ -18,6 +18,7 @@ import { BOARDS, loadBoard, boardSummary, reviewStart } from './boards.js';
 import { renderBoardScreen } from './boardScreen.js';
 import './hotspotBoard.js'; // registers the 'hotspot' board kind
 import './sceneBoard.js'; // registers the 'scene' board kind
+import './timelineBoard.js'; // registers the 'timeline' board kind
 import { buildRecapModel, renderRecap, reviewRecapModel, renderReviewRecap, wordsByChapter } from './chapterRecap.js';
 import { dueKeys } from './ladder.js';
 import { ReviewRunner, buildQueue, keyCategory, settleWithin } from './reviewRunner.js';

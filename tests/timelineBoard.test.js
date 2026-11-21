@@ -2,7 +2,7 @@
 
 import { test, assertEqual } from './assert.js';
 import { readText } from './stubs.js';
-import { AUX, timeSentence, timelineItemIds, clampFrame, clampSentence, auxHint } from '../js/timelineBoard.js';
+import { AUX, timeSentence, timelineItemIds, clampFrame, clampSentence, auxHint, once, zoneAt, clampGeometry } from '../js/timelineBoard.js';
 import { BOARDS } from '../js/boards.js';
 
 const file = JSON.parse(readText('data/boards/zeit.json'));
@@ -62,6 +62,30 @@ export function runTimelineBoardTests() {
         assertEqual(auxHint(verb('bleiben')), 'sein und bleiben: immer mit sein');
         assertEqual(auxHint(verb('fahren')), 'Bewegung oder Veränderung → sein');
         assertEqual(auxHint(verb('kochen')), 'Alle anderen → haben');
+    });
+
+    test('once: only the first call runs', () => {
+        let n = 0;
+        const f = once(() => ++n);
+        f(); f(); f();
+        assertEqual(n, 1);
+    });
+
+    test('zoneAt: the zone under the point, null outside every zone', () => {
+        const rects = { past: { left: 0, top: 0, right: 100, bottom: 100 }, now: { left: 110, top: 0, right: 210, bottom: 100 } };
+        assertEqual(zoneAt(rects, 50, 50), 'past');
+        assertEqual(zoneAt(rects, 150, 10), 'now');
+        assertEqual(zoneAt(rects, 105, 50), null);
+        assertEqual(zoneAt(rects, 50, 150), null);
+    });
+
+    test('clampGeometry: open bar has a break, closed one is joined; wrapped gaps route via the right margin', () => {
+        const [a1, a2] = clampGeometry({ x: 20, y: 30 }, { x: 120, y: 30 }, 300, true);
+        assertEqual([a1, a2], ['M20,30 L20,4 L60,4', 'M80,4 L120,4 L120,30']);
+        const [c1, c2] = clampGeometry({ x: 20, y: 30 }, { x: 120, y: 30 }, 300, false);
+        assertEqual([c1, c2], ['M20,30 L20,9 L70,9', 'M70,9 L120,9 L120,30']);
+        const [, w2] = clampGeometry({ x: 20, y: 30 }, { x: 120, y: 80 }, 300, false);
+        assertEqual(w2.includes('L294,9 L294,73 L120,73 L120,80'), true);
     });
 
     test('timelineItemIds: wann has three per verb, other modes one', () => {

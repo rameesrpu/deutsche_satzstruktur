@@ -74,6 +74,7 @@
     --gram-wir:    #556070;
     --gram-ihr:    #2E8288;
     --gram-none:   #8B8F96;
+    --verb-klammer: #4F46E5;   /* Klammer: the indigo of the field model's verb slots (LK/RK) */
 
     /* ---- Header (solid ink bars, e.g. story card heading) ---- */
     --header-bg: var(--ink);
@@ -5665,3 +5666,160 @@ body[data-play-view="review"] .play-bottom {
 .sc-next { justify-content: center; min-height: 52px; }
 .sc-sentence .hs-prompt-text { font-weight: 500; }   /* the article (the answer) stands out in bold */
 .sc-sentence .hs-prompt-text b { font-weight: 800; }
+
+/* ---- Bilder: time board, Die Zeit (js/timelineBoard.js) ---- */
+.tl-stage { display: flex; flex-direction: column; gap: 12px; }
+
+.tl-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface-0);
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+.tl-card-text { min-width: 0; overflow-wrap: anywhere; }
+.tl-card-home { min-height: 76px; display: flex; flex-direction: column; justify-content: center; }
+.tl-drag { cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+.tl-drag.is-dragging { cursor: grabbing; position: relative; z-index: 5; box-shadow: 0 6px 18px rgba(30, 31, 36, 0.18); }
+.tl-drag.is-settled { cursor: default; padding: 8px 6px; font-size: 14px; flex-direction: column; }
+.tl-drag.is-settled .hs-say { display: none; }
+.tl-sentence { background: var(--surface-1); }
+.tl-hint { margin: 0; }
+
+/* the timeline: a line with three zones, a dot at Jetzt */
+.tl-line {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    padding-top: 6px;
+}
+.tl-line::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 44px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--ink-300);
+}
+.tl-zone {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-height: 150px;
+    padding: 8px 4px;
+    border: 1.5px dashed var(--ink-300);
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+.tl-zone:disabled { cursor: default; }
+.tl-zone-label { font-size: 13px; font-weight: 700; color: var(--ink-700); }
+.tl-zone-slot { width: 100%; margin-top: 24px; }
+.tl-dot {
+    position: absolute;
+    left: 50%; top: 34px;
+    width: 16px; height: 16px;
+    margin-left: -8px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 3px solid var(--paper-read);
+    box-shadow: 0 0 0 1.5px var(--ink-700);
+}
+.tl-zone.is-right { border-style: solid; border-color: var(--success-500); background: var(--success-bg); }
+.tl-zone.is-wrong { border-style: solid; border-color: var(--danger-500); background: var(--danger-bg); }
+.tl-zone.is-pulse { border-style: solid; border-color: var(--info-500); background: var(--info-bg); }
+
+/* klammer: the sentence with two gaps; an SVG clamp (arms + bar) joins them above the text */
+.tl-frame {
+    position: relative;
+    padding: 28px 12px 12px 6px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 2.3;
+    text-align: left;
+}
+.tl-clamp { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.tl-clamp-arm {
+    fill: none;
+    stroke: var(--verb-klammer);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.55;
+}
+.tl-frame.is-closed .tl-clamp-arm { stroke-width: 4; opacity: 1; }
+.tl-gap {
+    display: inline-block;
+    min-width: 3.2em;
+    padding: 0 6px;
+    border: 1.5px dashed var(--verb-klammer);
+    border-radius: var(--radius-sm);
+    background: var(--surface-1);
+    text-align: center;
+    line-height: 1.7;
+    vertical-align: baseline;
+}
+.tl-gap.is-right { border-style: solid; background: var(--success-bg); }
+.tl-gap.is-fixed { border-style: solid; border-color: var(--danger-500); background: var(--danger-bg); }
+.tl-closing { margin-top: 4px; }
+
+/* hilfsverb: infinitive card and two bins */
+.tl-verb { flex-direction: column; gap: 2px; padding: 18px 14px; }
+.tl-verb-inf { font-size: 26px; font-weight: 800; }
+.tl-verb-en { font-size: 15px; font-weight: 500; color: var(--ink-soft); }
+.tl-bins { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tl-bin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 110px;
+    border: 1.5px dashed var(--ink-300);
+    border-radius: var(--radius-lg);
+    background: var(--paper-read);
+    color: var(--ink);
+    font: inherit;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+.tl-bin:disabled { cursor: default; }
+.tl-bin-label { font-size: 24px; font-weight: 800; }
+.tl-bin-arrow { width: 44px; height: 14px; }
+.tl-bin-dot { fill: var(--ink-700); }
+.tl-bin-line { stroke: var(--ink-700); stroke-width: 2; }
+.tl-bin-head { fill: var(--ink-700); }
+.tl-bin.is-right { border-style: solid; border-color: var(--success-500); background: var(--success-bg); }
+.tl-bin.is-wrong { border-style: solid; border-color: var(--danger-500); background: var(--danger-bg); }
+.tl-bin.is-pulse { border-style: solid; border-color: var(--info-500); background: var(--info-bg); }
+
+@media (prefers-reduced-motion: no-preference) {
+    .tl-drag { transition: transform 0.18s ease-out; }
+    .tl-drag.is-dragging { transition: none; }
+    .tl-card.is-bounce { animation: tl-bounce 0.5s ease-out; }
+    .tl-zone.is-pulse, .tl-bin.is-pulse { animation: tl-pulse 1.2s ease-out infinite; }
+    .tl-clamp-arm { transition: stroke-width 0.25s ease, opacity 0.25s ease; }
+    @keyframes tl-bounce {
+        0% { transform: translateY(40px); }
+        40% { transform: translateY(-8px); }
+        70% { transform: translateY(3px); }
+        100% { transform: translateY(0); }
+    }
+    @keyframes tl-pulse {
+        0% { box-shadow: 0 0 0 0 var(--info-500); }
+        100% { box-shadow: 0 0 0 12px transparent; }
+    }
+}
+.tl-nowrap { white-space: nowrap; }
