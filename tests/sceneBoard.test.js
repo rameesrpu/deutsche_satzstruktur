@@ -131,6 +131,17 @@ export function runSceneBoardTests() {
         assertEqual(set.items.some(it => it.spot[0] === 50 && it.spot[1] === 50), false);
     });
 
+    test('garden front rects: 4 numbers within 0–100, one on every hinter landmark', () => {
+        for (const [key, lm] of Object.entries(set.landmarks)) {
+            if (!lm.front) continue;
+            const [x, y, w, h] = lm.front;
+            assertEqual([key, lm.front.length === 4 && lm.front.every(n => typeof n === 'number')], [key, true]);
+            assertEqual([key, x >= 0 && y >= 0 && w > 0 && h > 0 && x + w <= 100 && y + h <= 100], [key, true]);
+        }
+        const missing = set.items.filter(it => it.prep === 'hinter' && !set.landmarks[it.landmark].front).map(it => it.id);
+        assertEqual(missing, []);
+    });
+
     test('garden pictures: both files exist, under 40 KB, right viewBox, no text', () => {
         for (const [image, viewBox] of [[set.image, '0 0 400 300'], [set.mover.image, '0 0 40 40']]) {
             const svg = readText('data/boards/' + image);

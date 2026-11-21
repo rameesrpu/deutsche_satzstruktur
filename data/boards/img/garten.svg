@@ -38,23 +38,22 @@
 <path d="M363 106V64l6-7 6 7V106Z"/>
 <path d="M382 106V64l6-7 6 7V106Z"/>
 </g>
-<ellipse cx="356" cy="196" rx="42" ry="9" fill="#5E9470" opacity=".35"/>
-<g transform="translate(0 24)"><path d="M318 92C302 86 300 60 316 52C314 28 340 14 356 24C374 12 398 26 394 48C404 62 398 90 384 94C372 108 336 106 318 92Z" fill="#F3E3B5"/>
-<path d="M318 92C302 86 300 60 316 52C314 28 340 14 356 24C374 12 398 26 394 48C404 62 398 90 384 94C372 108 336 106 318 92Z" fill="#5E9470" opacity=".55" stroke="#5E9470" stroke-width="2"/></g>
-<path d="M344 196V96h16v100Z" fill="#755512" opacity=".85"/>
-<path d="M320 90H352" stroke="#755512" stroke-width="5" stroke-linecap="round" opacity=".85"/>
-<g fill="none" stroke="#5E9470" stroke-width="1.5" stroke-linecap="round"><path d="M364 64q6 4 12 0M372 96q6 4 12 0M330 62q6 4 12 0"/></g>
-<rect x="12" y="166" width="84" height="56" fill="#D9D2C4" stroke="#A39C90" stroke-width="1.5"/>
-<g stroke="#A39C90" stroke-width="1"><path d="M12 180H36M72 180H96M12 194H36M72 194H96M12 208H36M72 208H96"/></g>
-<path d="M2 170L54 134L106 170Z" fill="#3B3A37" stroke="#3B3A37" stroke-width="3" stroke-linejoin="round"/>
-<path d="M36 222V190a18 10 0 0 1 36 0V222Z" fill="#3B3A37"/>
-<path d="M72 222V186L86 192V226Z" fill="#F3E3B5" stroke="#755512" stroke-width="1.5" stroke-linejoin="round"/>
-<path d="M34 222H74L80 232H28Z" fill="#F3E3B5" stroke="#755512" stroke-width="1.5" stroke-linejoin="round"/>
-<rect x="80" y="172" width="10" height="10" fill="#FBF9F4" stroke="#A39C90"/>
-<ellipse cx="145" cy="226" rx="44" ry="5" fill="#5E9470" opacity=".3"/>
+<ellipse cx="338" cy="198" rx="50" ry="9" fill="#5E9470" opacity=".35"/>
+<g transform="translate(-14 36)"><path d="M318 92C302 86 300 60 316 52C314 28 340 14 356 24C374 12 398 26 394 48C404 62 398 90 384 94C372 108 336 106 318 92Z" fill="#F3E3B5"/>
+<path d="M318 92C302 86 300 60 316 52C314 28 340 14 356 24C374 12 398 26 394 48C404 62 398 90 384 94C372 108 336 106 318 92Z" fill="#5E9470" opacity=".55" stroke="#5E9470" stroke-width="2"/>
+<path d="M350 64q6 4 12 0M358 96q6 4 12 0M316 62q6 4 12 0" fill="none" stroke="#5E9470" stroke-width="1.5" stroke-linecap="round"/></g>
+<path d="M330 198V108h16v90Z" fill="#755512" opacity=".85"/>
+<path d="M304 104H338" stroke="#755512" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+<rect x="10" y="166" width="82" height="56" fill="#D9D2C4" stroke="#A39C90" stroke-width="1.5"/>
+<g stroke="#A39C90" stroke-width="1"><path d="M10 180H32M68 180H92M10 194H32M68 194H92M10 208H32M68 208H92"/></g>
+<path d="M0 170L51 134L102 170Z" fill="#3B3A37" stroke="#3B3A37" stroke-width="3" stroke-linejoin="round"/>
+<path d="M32 222V190a18 10 0 0 1 36 0V222Z" fill="#3B3A37"/>
+<path d="M68 222V186L82 192V226Z" fill="#F3E3B5" stroke="#755512" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M30 222H70L76 232H24Z" fill="#F3E3B5" stroke="#755512" stroke-width="1.5" stroke-linejoin="round"/>
+<ellipse cx="155" cy="226" rx="40" ry="5" fill="#5E9470" opacity=".3"/>
 <g fill="#F3E3B5" stroke="#755512" stroke-width="1.5" stroke-linejoin="round">
-<path d="M112 186H124V226H112ZM166 186H178V226H166Z"/>
-<path d="M100 180H190V188H100Z"/>
+<path d="M126 186H136V226H126ZM174 186H184V226H174Z"/>
+<path d="M120 180H190V188H120Z"/>
 </g>
 <ellipse cx="259" cy="208" rx="42" ry="4" fill="#5E9470" opacity=".3"/>
 <g fill="#F3E3B5" stroke="#755512" stroke-width="1.5" stroke-linejoin="round">
@@ -63,13 +62,12 @@
 <path d="M228 176H234V208H228ZM284 176H290V208H284Z"/>
 <path d="M220 170H298V177H220Z"/>
 </g>
-<ellipse cx="260" cy="286" rx="48" ry="5" fill="#5E9470" opacity=".3"/>
+<ellipse cx="258" cy="286" rx="48" ry="5" fill="#5E9470" opacity=".3"/>
 <g stroke="#755512" stroke-width="1.5" stroke-linejoin="round">
 <path d="M214 236H290V286H214Z" fill="#F3E3B5"/>
 <path d="M221 243H283V286H221Z" fill="#3B3A37"/>
-<path d="M214 236H290L306 220H230Z" fill="#F3E3B5"/>
-<path d="M290 236L306 220V270L290 286Z" fill="#F8F1E2"/>
-<path d="M222 228H298M290 254L306 238" fill="none"/>
+<path d="M214 236H290L298 226H222Z" fill="#F3E3B5"/>
+<path d="M290 236L298 226V276L290 286Z" fill="#F8F1E2"/>
 </g>
 <ellipse cx="135" cy="282" rx="52" ry="13" fill="#CDC6B9" stroke="#A39C90" stroke-width="1.2"/>
 <g stroke="#5E9470" stroke-width="1.6" stroke-linecap="round">
