@@ -260,7 +260,7 @@ Parked (small, known):
 
 ### 5a. Klinik: maps and terms
 
-- [ ] Task 1: Research the path — **owner stop** (needs web access; check official sources)
+- [x] Task 1: Research the path — commit `69ec6d5` (owner stop skipped; see "Needs owner review")
 - [ ] Task 2: Klinik screen and route
 - [ ] Task 3: Term pairs board
 - [ ] Task 4: The ward — **owner stop**
@@ -521,3 +521,14 @@ Picture-based practice on the Üben screen with its own five-box schedule.
 
 - [story-plan.md](story-plan.md): S3 (narrated story mode) is still open.
 - [experience-plan.md](experience-plan.md), [redesign-plan.md](redesign-plan.md): done.
+
+### Project 5a — Klinik: maps and terms (branch `klinik-maps-terms`)
+
+- **The path to the Approbation** (owner stop that was skipped): read
+  [docs/review/5a-approbation-route.md](review/5a-approbation-route.md) (German with English, with
+  every source link) and `docs/medical-sources.md`. Assumed path: Indian degree → B2 → Antrag at the
+  Regierungspräsidium Stuttgart (Referat 98) → Fachsprachenprüfung (LÄK BW) → Kenntnisprüfung (the
+  default for third-country degrees since 1.11.2026) → Approbation → Ärztekammer → Weiterbildung.
+  Check: is this her path; the open doubts at the end of the sheet (waiting times 8–10 vs 4–5 months;
+  whether a Berufserlaubnis needs the FSP first; fees); Hospitation and visa are not stations.
+  Licensing facts, checked 2026-11-21 against official pages only; not legal advice.
