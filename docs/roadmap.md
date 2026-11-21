@@ -14,7 +14,7 @@ else may change.
 
 **Who it is for:** one learner, the owner's wife. A doctor from Kerala, complete beginner in
 German, moving to Stuttgart. She needs everyday German, then a hospitation or job, the German
-medical system, and later the Fachsprachprüfung (FSP: B2 general, C1 medical). She uses an
+medical system, and later the Fachsprachenprüfung (FSP: B2 general, C1 medical). She uses an
 Android phone. There is no date yet.
 
 **Decisions (owner, 2026-11-15):**
@@ -287,7 +287,7 @@ Parked (small, known):
 - The route file load failure is silent; the route scroll position is lost on re-render; Üben shows
   "Klinik" as heading and card title.
 - Paare rounds never mix sets; the 3-item "Niere und Blase" set makes a 6-tile round.
-- The board set list shows no board title; the station and fachbegriffe boards are also listed under Üben → Bilder.
+- The station and fachbegriffe boards are also listed under Üben → Bilder.
 - Entdecken does not show a room's extent; team.svg area rects were not compared against the drawing.
 - The blue-grey doctor boxes in team.svg are near the masculine blue (small areas; owner sheet).
 - No on-screen (DOM) tests for the Klinik screen and the pairs modes; the pure helpers have tests.

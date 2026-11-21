@@ -2,7 +2,7 @@
 
 import { test, assertEqual } from './assert.js';
 import { readText } from './stubs.js';
-import { KLINIK_ROUTE_VERSION, routeState, toggleStation, tileMode, KLINIK_TILES } from '../js/klinik.js';
+import { KLINIK_ROUTE_VERSION, routeState, toggleStation, tileMode, routeNote, KLINIK_TILES } from '../js/klinik.js';
 
 const stations = [
     { id: 'a', title: 'A', checked: '2026-11-21' },
@@ -38,9 +38,14 @@ export function runKlinikTests() {
 
     test('KLINIK_TILES: six tiles in order', () => {
         assertEqual(KLINIK_TILES.map(t => t.title), ['Der Weg zur Approbation', 'Fachsprache und Alltagssprache',
-            'Die Station', 'Anamnese', 'Arztbrief', 'Fachsprachprüfung']);
+            'Die Station', 'Anamnese', 'Arztbrief', 'Fachsprachenprüfung']);
         assertEqual(KLINIK_TILES.map(t => t.open), ['route', 'board', 'board', 'soon', 'soon', 'soon']);
         assertEqual(KLINIK_TILES.map(t => t.level), [null, null, null, 'ab B1', 'ab B2', 'ab B2']);
+    });
+
+    test('routeNote: progress, or a notice when the route is missing', () => {
+        assertEqual(routeNote(routeState(stations, ['a'])), '1 von 2 Schritten');
+        assertEqual(routeNote(null), 'Gerade nicht verfügbar.');
     });
 
     test('tileMode: a board tile without a registered board is soon', () => {

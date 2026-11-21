@@ -14,7 +14,7 @@
     --line:       #E6E1D6;   /* Linie: borders */
     --ink:        #1E1F24;   /* Tinte: text + primary buttons */
     --ink-soft:   #6E6B66;   /* Leise: secondary text */
-    --pair-fach:   #E4E7EE;  /* Paare: medical-term card (neutral cool grey, not a gender colour) */
+    --pair-fach:   #DCDFD8;  /* Paare: medical-term card (neutral greige, away from every grammar tint) */
     --pair-alltag: #EEE8DA;  /* Paare: everyday-word card (neutral sand) */
 
     /* ---- Accent = ink (no brand hue; the grammar colors are the only strong colors) ---- */
@@ -5845,6 +5845,7 @@ body[data-play-view="review"] .play-bottom {
     min-width: 44px; min-height: 44px; border: 0; background: transparent;
     color: var(--ink); cursor: pointer; border-radius: 12px;
 }
+.klinik-back { padding: 0 12px; }
 .klinik-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .klinik-tile {
     display: flex; flex-direction: column; align-items: flex-start; gap: 6px;

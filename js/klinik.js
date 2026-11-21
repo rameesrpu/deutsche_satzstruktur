@@ -13,8 +13,13 @@ export const KLINIK_TILES = [
     { id: 'station', title: 'Die Station', level: null, open: 'board', boardId: 'station' },
     { id: 'anamnese', title: 'Anamnese', level: 'ab B1', open: 'soon', boardId: null },
     { id: 'arztbrief', title: 'Arztbrief', level: 'ab B2', open: 'soon', boardId: null },
-    { id: 'fsp', title: 'Fachsprachprüfung', level: 'ab B2', open: 'soon', boardId: null },
+    { id: 'fsp', title: 'Fachsprachenprüfung', level: 'ab B2', open: 'soon', boardId: null },
 ];
+
+/** Note under the route tile: the progress, or a short notice when the route file is missing. */
+export function routeNote(route) {
+    return route ? `${route.doneCount} von ${route.total} Schritten` : 'Gerade nicht verfügbar.';
+}
 
 /** A board tile whose board is not registered yet behaves like a 'soon' tile. */
 export function tileMode(tile, knownBoardIds) {
@@ -77,12 +82,12 @@ const el = (tag, cls, text) => {
 const CLOSE_ICON = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
     'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 
-function topBar(title, label, onClick) {
+function topBar(title, label, onClick, back = false) {
     const bar = el('div', 'klinik-bar');
-    const b = el('button', 'klinik-close');
+    const b = el('button', back ? 'board-back klinik-back' : 'klinik-close');
     b.type = 'button';
     b.setAttribute('aria-label', label);
-    b.innerHTML = CLOSE_ICON;
+    if (back) b.textContent = '‹ Klinik'; else b.innerHTML = CLOSE_ICON;
     b.addEventListener('click', onClick);
     bar.append(b, el('h1', 'klinik-title', title));
     return bar;
@@ -90,7 +95,7 @@ function topBar(title, label, onClick) {
 
 /**
  * @param {HTMLElement} root
- * @param {{tiles: {id, title, level, open, boardId}[], route: ReturnType<typeof routeState>, boardIds?: string[]}} state
+ * @param {{tiles: {id, title, level, open, boardId}[], route: ?ReturnType<typeof routeState>, boardIds?: string[]}} state
  * @param {{openRoute: function(), openBoard: function(string), close: function()}} actions
  */
 export function renderKlinik(root, state, actions) {
@@ -109,8 +114,9 @@ export function renderKlinik(root, state, actions) {
             b.disabled = true;
             b.append(el('span', 'klinik-tile-note', 'Kommt bald'));
         } else if (mode === 'route') {
-            b.append(el('span', 'klinik-tile-note', `${state.route.doneCount} von ${state.route.total} Schritten`));
-            b.addEventListener('click', () => actions.openRoute());
+            b.append(el('span', 'klinik-tile-note', routeNote(state.route)));
+            if (state.route) b.addEventListener('click', () => actions.openRoute());
+            else { b.classList.add('is-soon'); b.disabled = true; }
         } else {
             b.addEventListener('click', () => actions.openBoard(tile.boardId));
         }
@@ -129,7 +135,7 @@ export function renderKlinik(root, state, actions) {
 export function renderRoute(root, state, actions, openId = null) {
     const { route } = state;
     const inner = el('div', 'screen-inner klinik-inner');
-    inner.append(topBar('Der Weg zur Approbation', 'Zurück', actions.back));
+    inner.append(topBar('Der Weg zur Approbation', 'Zurück', actions.back, true));
     inner.append(el('p', 'klinik-count', `${route.doneCount} von ${route.total} Schritten`));
     const list = el('ol', 'route-list');
     for (const row of route.stations) {

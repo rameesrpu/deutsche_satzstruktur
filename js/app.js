@@ -1367,17 +1367,21 @@ class DeutschApp {
     async openKlinik(view = 'tiles') {
         const root = document.getElementById('screen-klinik');
         if (!root) return;
-        let stations;
-        try {
-            const file = await fetch(`${KLINIK_ROUTE_FILE}?v=${KLINIK_ROUTE_VERSION}`).then(r => r.json());
-            stations = file.stations;
-        } catch (e) {
-            console.error('Klinik-Weg konnte nicht geladen werden', e);
-            return;
+        if (this.klinikStations === undefined) {
+            // fetched once; a missing route file leaves null and the tiles still open
+            try {
+                const r = await fetch(`${KLINIK_ROUTE_FILE}?v=${KLINIK_ROUTE_VERSION}`);
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                this.klinikStations = (await r.json()).stations;
+            } catch (e) {
+                console.error('Klinik-Weg konnte nicht geladen werden', e);
+                this.klinikStations = null;
+            }
         }
+        const stations = this.klinikStations;
         if (this.screen !== 'practice' && this.screen !== 'klinik' && this.screen !== 'board') return;
         this.showScreen('klinik');
-        const route = () => routeState(stations, loadDone(localStorage));
+        const route = () => (stations ? routeState(stations, loadDone(localStorage)) : null);
         const tiles = () => renderKlinik(root, { tiles: KLINIK_TILES, route: route(), boardIds: BOARDS.map(b => b.id) }, {
             openRoute: () => routeView(),
             openBoard: id => this.openBoard(id),
@@ -1387,7 +1391,7 @@ class DeutschApp {
             toggle: id => { saveDone(localStorage, toggleStation(loadDone(localStorage), id)); routeView(id); },
             back: tiles,
         }, openId);
-        if (view === 'route') routeView(); else tiles();
+        if (view === 'route' && stations) routeView(); else tiles();
     }
 
     async renderWordsScreen() {
