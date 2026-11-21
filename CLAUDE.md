@@ -92,7 +92,7 @@ project's design and plan: `docs/superpowers/specs/`, `docs/superpowers/plans/`)
 - Writing or revising a chapter: follow [data/stories/AUTHORING.md](data/stories/AUTHORING.md) step by step
   (project skill `write-chapter` in `.claude/skills/`; two owner stops: outline, review sheet).
 - Boards (picture practice): `data/boards/<id>.json` (`version`, `kind`, `sets` with optional `modes`/`unlock`, items with
-  `pair: true` for parts a person has several of, `accepts` ids that also answer an item; a set's `mirror: true` = symmetric picture, tap modes accept the mirrored spot; `wide: true` = landscape 400×300 hotspot picture, else 300×400) and pictures `data/boards/img/<name>.svg` (no text, ≤ 40 KB, `.txt` = the drawing brief).
+  `pair: true` for parts a person has several of, `accepts` ids that also answer an item; `area: [x, y, w, h]` percent rect = the item's whole drawn place answers a tap, smallest nested area wins, e.g. ward rooms; a set's `mirror: true` = symmetric picture, tap modes accept the mirrored spot; `wide: true` = landscape 400×300 hotspot picture, else 300×400) and pictures `data/boards/img/<name>.svg` (no text, ≤ 40 KB, `.txt` = the drawing brief).
   Adding a board: data file + picture(s), a `BOARDS` entry in `js/boards.js` (version must equal the file's — a test checks it; bump both on edit),
   and a kind renderer registered with `registerKind` if the `kind` is new (`hotspotBoard.js` is the model; a kind may define `itemIds(set, modeId)` when its practice ids are not the item ids, as `sceneBoard.js` does).
   Scene sets (`kind: "scene"`): `mover` (`de`, `image`, `home`), `landmarks` (`de`, optional `front` rect for "hinter" occlusion),

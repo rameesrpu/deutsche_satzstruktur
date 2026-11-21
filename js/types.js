@@ -238,4 +238,6 @@
  * @property {[number, number]} spot  x, y in percent of the picture
  * @property {boolean} [pair] a person has more than one: the pain sentence may use the plural; in a `mirror` set it also has a spot on the other side
  * @property {string[]} [accepts] ids of items that also count as a right tap when this item is asked (bein: its parts)
+ * @property {number[]} [area] [x, y, w, h] percent rect of the drawn place (a ward room): a tap inside it answers this item
+ *   whatever the distance to the spot (the smallest area wins when areas nest); outside every area the nearest spot within 9 % answers
  */

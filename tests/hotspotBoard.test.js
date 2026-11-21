@@ -2,7 +2,7 @@
 
 import { test, assertEqual } from './assert.js';
 import { readText } from './stubs.js';
-import { parseNoun, nearestSpot, tapTargets, tapIsRight, nameOptions, painSentence, painUsesPlural, whereQuestion, tapPercent, labelModel, picClass } from '../js/hotspotBoard.js';
+import { parseNoun, nearestSpot, inArea, tapTargets, tapIsRight, nameOptions, painSentence, painUsesPlural, whereQuestion, tapPercent, labelModel, picClass } from '../js/hotspotBoard.js';
 import { BOARDS } from '../js/boards.js';
 
 // Every hotspot board file in the registry
@@ -168,7 +168,7 @@ export function runHotspotBoardTests() {
 
     test('data/boards/station.json: rooms and team vocabulary', () => {
         const file = JSON.parse(readText('data/boards/station.json'));
-        assertEqual([file.id, file.kind, file.version], ['station', 'hotspot', 1]);
+        assertEqual([file.id, file.kind, file.version], ['station', 'hotspot', 2]);
         assertEqual(file.sets.map(s => [s.id, s.title, s.image, !!s.wide]),
             [['raeume', 'Die Räume', 'img/station.svg', true], ['team', 'Das Team', 'img/team.svg', false]]);
         const de = id => file.sets.flatMap(s => s.items).find(i => i.id === id);
@@ -180,6 +180,51 @@ export function runHotspotBoardTests() {
         assertEqual(whereQuestion(de('flur')), 'Wo ist der Flur?');
         // no body parts here: no pair or mirror flags, no locks (the Klinik tile opens it)
         assertEqual(file.sets.some(s => s.mirror || s.unlock || s.items.some(i => i.pair || i.accepts)), false);
+    });
+
+    test('nearestSpot: a tap inside an area answers its item, the smallest nested area wins, else the nearest spot', () => {
+        const items = [
+            item('flur', 'der Flur', { spot: [60, 50], area: [0, 40, 100, 20] }),
+            item('eingang', 'der Eingang', { spot: [5, 50], area: [0, 45, 10, 10] }),
+            item('bad', 'das Bad', { spot: [45, 77], area: [40, 60, 10, 30] }),
+            item('zimmer', 'das Zimmer', { spot: [76, 77] }),
+        ];
+        assertEqual(nearestSpot(items, 2, 41), 'flur');       // 58 from the corridor spot, inside its area
+        assertEqual(nearestSpot(items, 4, 50), 'eingang');    // nested in the corridor: the smaller area
+        assertEqual(nearestSpot(items, 49, 77), 'bad');
+        assertEqual(nearestSpot(items, 51, 77), 'bad');       // outside every area: nearest spot within 9 %
+        assertEqual(nearestSpot(items, 60, 92), null);        // outside every area and far from every spot
+        assertEqual(nearestSpot(items, 70, 77), 'zimmer');    // no area: the old 9 % rule
+        assertEqual([inArea([0, 40, 100, 20], 100, 60), inArea([0, 40, 100, 20], 100.1, 60)], [true, false]);
+    });
+
+    test('station rooms and team boxes: centre and corners resolve to their own item, in every tap mode', () => {
+        const file = JSON.parse(readText('data/boards/station.json'));
+        const wrong = [];
+        for (const set of file.sets) {
+            for (const it of set.items) {
+                const [x, y, w, h] = it.area;
+                assertEqual([it.id, inArea(it.area, ...it.spot), x >= 0 && y >= 0 && x + w <= 100 && y + h <= 100], [it.id, true, true]);
+                const points = [[x + w / 2, y + h / 2], [x + 1, y + 1], [x + w - 1, y + 1], [x + 1, y + h - 1], [x + w - 1, y + h - 1]];
+                for (const [px, py] of points) {
+                    if (nearestSpot(set.items, px, py) !== it.id) wrong.push(`${it.id} entdecken ${px},${py}`);
+                    if (nearestSpot(tapTargets(set, it.id), px, py) !== it.id) wrong.push(`${it.id} zeigen ${px},${py}`);
+                }
+            }
+        }
+        assertEqual(wrong, []);
+        const raeume = file.sets[0].items;
+        // the bathroom wall is at x 53.75 %: 52 is still the bathroom, 55 the patient room
+        assertEqual([nearestSpot(raeume, 52, 77), nearestSpot(raeume, 55, 77), nearestSpot(raeume, 90, 95)], ['bad', 'patientenzimmer', 'patientenzimmer']);
+        assertEqual([nearestSpot(raeume, 20, 50), nearestSpot(raeume, 95, 50), nearestSpot(raeume, 5, 50)], ['flur', 'flur', 'eingang']);
+        assertEqual([nearestSpot(raeume, 40, 5), nearestSpot(raeume, 40, 40)], ['stationszimmer', 'stationszimmer']);
+    });
+
+    test('body map: no areas, so taps keep the nearest-spot rule', () => {
+        const file = JSON.parse(readText('data/boards/koerper.json'));
+        assertEqual(file.sets.some(s => s.items.some(i => i.area)), false);
+        const aussen = file.sets.find(s => s.id === 'aussen');
+        assertEqual(tapTargets(aussen, 'kopf').some(t => 'area' in t), false);
     });
 
     test('picClass: a wide set gets the landscape picture box', () => {

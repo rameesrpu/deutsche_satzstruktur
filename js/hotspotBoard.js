@@ -27,8 +27,10 @@ export function parseNoun(de) {
 }
 
 /**
- * The id of the item whose spot is nearest to the tap, within maxDist percent; else null (no answer).
- * @param {{id: string, spot: [number, number]}[]} items
+ * The id of the item a tap answers: an item whose `area` holds the tap (the smallest one when
+ * areas nest, e.g. the entrance inside the corridor); else the nearest spot within maxDist
+ * percent; else null (no answer).
+ * @param {{id: string, spot: [number, number], area?: number[]}[]} items
  * @param {number} x percent of the picture width
  * @param {number} y percent of the picture height
  * @param {number} [maxDist]
@@ -38,8 +40,17 @@ export function nearestSpot(items, x, y, maxDist = 9) {
     return nearestTarget(items, x, y, maxDist)?.id ?? null;
 }
 
+/** Whether [x, y] lies in an [x, y, w, h] percent rect (edges included). */
+export const inArea = (area, x, y) =>
+    x >= area[0] && x <= area[0] + area[2] && y >= area[1] && y <= area[1] + area[3];
+
 /** Like nearestSpot, but returns the whole target (so the caller knows which spot, e.g. which side, was met). */
 function nearestTarget(items, x, y, maxDist = 9) {
+    let inside = null;
+    for (const it of items) {
+        if (it.area && inArea(it.area, x, y) && (!inside || it.area[2] * it.area[3] < inside.area[2] * inside.area[3])) inside = it;
+    }
+    if (inside) return inside;
     let best = null;
     let bestDist = Infinity;
     for (const it of items) {
@@ -61,7 +72,7 @@ export function tapTargets(set, askedId) {
     const targets = [];
     for (const it of set.items) {
         if (it.accepts && it.id !== askedId) continue;
-        targets.push({ id: it.id, spot: it.spot });
+        targets.push(it.area ? { id: it.id, spot: it.spot, area: it.area } : { id: it.id, spot: it.spot });
         if (set.mirror && it.pair) targets.push({ id: it.id, spot: [100 - it.spot[0], it.spot[1]] });
     }
     return targets;
