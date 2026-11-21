@@ -262,7 +262,7 @@ Parked (small, known):
 
 - [x] Task 1: Research the path — commit `69ec6d5` (owner stop skipped; see "Needs owner review")
 - [x] Task 2: Klinik screen and route — commit `9fb5404`
-- [ ] Task 3: Term pairs board
+- [x] Task 3: Term pairs board — commits `fd94aee`, `ddb9c83`, `1a53984`
 - [ ] Task 4: The ward — **owner stop**
 - [ ] Task 5: Docs and ship
 
