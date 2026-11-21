@@ -303,7 +303,7 @@ Parked (small, known):
 - [x] Task 4: Arztbrief — commit `f8c6adf`
 - [x] Task 5: FSP practice run — commit `32db25b` (owner stop skipped; see "Needs owner review")
 - [x] Task 6: Docs and ship — commit `86b2c6d` ("Document Anamnese, Arztbrief and FSP practice, bump versions")
-- [ ] Whole-branch review (Opus) and its fix wave
+- [x] Whole-branch review (Opus) and its fix wave — commit `c07a577`
 - [ ] Merge to `main` — the owner's step, after `klinik-maps-terms` and the review items below
 
 What the reviews changed against the plan (rulings, each can be undone):
@@ -322,6 +322,7 @@ What the reviews changed against the plan (rulings, each can be undone):
 - `Anhören` (part 3 and the 🔊 buttons) always speaks; the automatic speech follows "Aussprache".
 
 Parked (small, known):
+- The part-3 model answer keeps speaking after "Weiter" to the summary; it stops at "Fertig" or ✕.
 - Nested interactive markup in sort zones; empty zones are not validated; no DOM tests for the sort, case and exam screens (pure helpers have tests).
 - `also` is applied inconsistently across the question list (Nachtschweiß, Stuhlgang could count twice); the question list is cached as null after a failed fetch until reload.
 - `formState` and `interviewSteps` filter bad data differently; no test that `wrong` questions are wrong beyond the section check.
