@@ -16,6 +16,7 @@ import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday,
     renderHome, renderPractice, renderWords } from './homeScreen.js';
 import { BOARDS, loadBoard, boardSummary, reviewStart } from './boards.js';
 import { renderBoardScreen } from './boardScreen.js';
+import { KLINIK_TILES, KLINIK_ROUTE_FILE, KLINIK_ROUTE_VERSION, routeState, toggleStation, loadDone, saveDone, renderKlinik, renderRoute } from './klinik.js';
 import './hotspotBoard.js'; // registers the 'hotspot' board kind
 import './sceneBoard.js'; // registers the 'scene' board kind
 import './timelineBoard.js'; // registers the 'timeline' board kind
@@ -1180,7 +1181,7 @@ class DeutschApp {
      * Show one screen. Learner screens are re-rendered on every visit (progress may
      * have changed); 'workshop' and 'play' show the editor/game canvas, so it is
      * redrawn once it has its size. Leaving 'play' or 'workshop' ends a running game.
-     * @param {'home'|'practice'|'words'|'workshop'|'play'|'order'|'write'|'speak'|'board'|'end'} name  ('end' is rendered by showRecap, 'order' by orderScreen.js, 'write' by writeScreen.js, 'speak' by speakScreen.js, 'board' by openBoard / boardScreen.js)
+     * @param {'home'|'practice'|'words'|'workshop'|'play'|'order'|'write'|'speak'|'board'|'klinik'|'end'} name  ('end' is rendered by showRecap, 'order' by orderScreen.js, 'write' by writeScreen.js, 'speak' by speakScreen.js, 'board' by openBoard / boardScreen.js)
      */
     showScreen(name) {
         if (name !== 'board' && this.boardTeardown) { this.boardTeardown(); this.boardTeardown = null; }
@@ -1192,12 +1193,12 @@ class DeutschApp {
         if (this.reviewRunner.active && !['play', 'order', 'write', 'speak', 'end'].includes(name)) this.reviewRunner.abandon();
         if (name !== 'play') clearPlayChrome();
         document.body.dataset.screen = name;
-        for (const s of ['home', 'practice', 'words', 'order', 'write', 'speak', 'board', 'end', 'settings']) {
+        for (const s of ['home', 'practice', 'words', 'order', 'write', 'speak', 'board', 'klinik', 'end', 'settings']) {
             const section = document.getElementById(`screen-${s}`);
             if (section) section.hidden = s !== name;
         }
         document.querySelectorAll('#app-nav .app-nav-btn').forEach(btn => {
-            const active = btn.dataset.screen === (name === 'settings' ? 'home' : name === 'board' ? 'practice' : name);
+            const active = btn.dataset.screen === (name === 'settings' ? 'home' : name === 'board' || name === 'klinik' ? 'practice' : name);
             btn.classList.toggle('active', active);
             if (active) btn.setAttribute('aria-current', 'page');
             else btn.removeAttribute('aria-current');
@@ -1206,7 +1207,7 @@ class DeutschApp {
         else if (name === 'practice') this.renderPracticeScreen();
         else if (name === 'words') this.renderWordsScreen();
         else if (name === 'settings') this.renderSettingsScreen();
-        else if (!['end', 'order', 'write', 'speak', 'board'].includes(name)) this.redrawAll();
+        else if (!['end', 'order', 'write', 'speak', 'board', 'klinik'].includes(name)) this.redrawAll();
     }
 
     /**
@@ -1319,6 +1320,7 @@ class DeutschApp {
             review: () => this.startLadderReview(),
             play: (level, key) => this.startChapter(level, key),
             openBoard: (id, opts) => this.openBoard(id, opts),
+            openKlinik: () => this.openKlinik(),
         });
     }
 
@@ -1345,7 +1347,7 @@ class DeutschApp {
         try {
             await this.loadChapterRows(); // chapter files decide which sets are unlocked
             const board = await loadBoard(id, url => fetch(url).then(r => r.json()));
-            if (this.screen !== 'practice') return;
+            if (this.screen !== 'practice' && this.screen !== 'klinik') return;
             const now = Date.now();
             const done = (level, key) => this.levelSelector.isChapterComplete(level, key);
             const getBoard = k => progressStore.getBoard(k);
@@ -1357,6 +1359,33 @@ class DeutschApp {
         } catch (e) {
             console.error('Board konnte nicht geladen werden', e);
         }
+    }
+
+    /** Klinik screen: tiles; "Der Weg zur Approbation" opens the route view in the same section. */
+    async openKlinik(view = 'tiles') {
+        const root = document.getElementById('screen-klinik');
+        if (!root) return;
+        let stations;
+        try {
+            const file = await fetch(`${KLINIK_ROUTE_FILE}?v=${KLINIK_ROUTE_VERSION}`).then(r => r.json());
+            stations = file.stations;
+        } catch (e) {
+            console.error('Klinik-Weg konnte nicht geladen werden', e);
+            return;
+        }
+        if (this.screen !== 'practice' && this.screen !== 'klinik') return;
+        this.showScreen('klinik');
+        const route = () => routeState(stations, loadDone(localStorage));
+        const tiles = () => renderKlinik(root, { tiles: KLINIK_TILES, route: route(), boardIds: BOARDS.map(b => b.id) }, {
+            openRoute: () => routeView(),
+            openBoard: id => this.openBoard(id),
+            close: () => this.showScreen('practice'),
+        });
+        const routeView = (openId = null) => renderRoute(root, { stations, route: route() }, {
+            toggle: id => { saveDone(localStorage, toggleStation(loadDone(localStorage), id)); routeView(id); },
+            back: tiles,
+        }, openId);
+        if (view === 'route') routeView(); else tiles();
     }
 
     async renderWordsScreen() {

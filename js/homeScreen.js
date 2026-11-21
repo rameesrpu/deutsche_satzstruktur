@@ -309,7 +309,7 @@ export function boardCard({ learned, total, due, lockedLabel = null }) {
  * @param {HTMLElement} root
  * @param {{dueToday: number, drills: {level, key, label}[], grammar: {level, label, categories: {key, label}[]}[],
  *   boards: {id: string, title: string, total: number, learned: number, due: number}[]}} model
- * @param {{review: function(), play: function(string, string), openBoard: function(string, ({review: boolean})=)}} actions  play(level, categoryKey)
+ * @param {{review: function(), play: function(string, string), openBoard: function(string, ({review: boolean})=), openKlinik: function()}} actions  play(level, categoryKey)
  */
 export function renderPractice(root, { dueToday, drills, grammar, boards = [] }, actions) {
     const listOf = (items, level) => el('ul', { className: 'home-card home-chapter-list' },
@@ -331,6 +331,14 @@ export function renderPractice(root, { dueToday, drills, grammar, boards = [] },
             el('div', { className: 'home-section-head' }, el('h3', {}, 'Übungen zu den Kapiteln')),
             listOf(drills)));
     }
+    parts.push(el('section', { className: 'home-chapters' },
+        el('div', { className: 'home-section-head' }, el('h3', {}, 'Klinik')),
+        el('div', { className: 'home-card board-card' },
+            el('span', { className: 'home-chapter-text' },
+                el('span', { className: 'home-chapter-title' }, 'Klinik'),
+                el('span', { className: 'home-muted' }, 'Der Weg ins Krankenhaus')),
+            el('span', { className: 'board-card-actions' },
+                button('board-card-btn', 'Öffnen', () => actions.openKlinik())))));
     if (boards.length > 0) {
         parts.push(el('section', { className: 'home-chapters' },
             el('div', { className: 'home-section-head' }, el('h3', {}, 'Bilder')),

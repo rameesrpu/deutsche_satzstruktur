@@ -3166,6 +3166,7 @@ body[data-screen="end"] .app-nav,
 body[data-screen="order"] .app-nav,
 body[data-screen="write"] .app-nav,
 body[data-screen="speak"] .app-nav,
+body[data-screen="klinik"] .app-nav,
 body[data-screen="board"] .app-nav {
     display: none;
 }
@@ -5824,3 +5825,60 @@ body[data-play-view="review"] .play-bottom {
     }
 }
 .tl-nowrap { white-space: nowrap; }
+
+/* ---- Klinik (js/klinik.js): tiles and the route to the Approbation, body[data-screen="klinik"] ---- */
+.klinik-bar { display: flex; align-items: center; gap: 8px; margin: 8px 0 12px; }
+.klinik-title { margin: 0; font-size: 1.25rem; }
+.klinik-close {
+    min-width: 44px; min-height: 44px; border: 0; background: transparent;
+    color: var(--ink); cursor: pointer; border-radius: 12px;
+}
+.klinik-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.klinik-tile {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+    min-height: 112px; padding: 14px; text-align: left; font: inherit;
+    border: 1px solid var(--line); border-radius: 16px;
+    background: var(--surface-0); color: var(--ink); cursor: pointer;
+}
+.klinik-tile-title { font-weight: 700; }
+.klinik-tile-level, .klinik-tile-note { font-size: 0.85rem; color: var(--ink-soft); }
+.klinik-tile.is-soon { opacity: 0.55; cursor: default; }
+.klinik-count { margin: 0 0 12px; font-weight: 600; }
+.klinik-stand { margin: 12px 0 0; font-size: 0.8rem; color: var(--ink-soft); }
+.route-list { list-style: none; margin: 0; padding: 0 0 0 14px; position: relative; }
+.route-list::before {
+    content: ''; position: absolute; left: 25px; top: 20px; bottom: 20px;
+    width: 2px; background: var(--line);
+}
+.route-item { position: relative; }
+.route-head {
+    display: flex; align-items: center; gap: 12px; width: 100%; min-height: 48px;
+    padding: 4px 0; border: 0; background: transparent; color: var(--ink);
+    font: inherit; text-align: left; cursor: pointer;
+}
+.route-node {
+    flex: none; width: 24px; height: 24px; border-radius: 50%; position: relative;
+    box-sizing: border-box; border: 2px solid var(--ink-soft); background: var(--surface-0);
+}
+.route-item.is-done .route-node { background: var(--success-500); border-color: var(--success-500); }
+.route-item.is-next .route-node { box-shadow: 0 0 0 4px var(--success-bg); border-color: var(--success-600); }
+.route-item.is-optional .route-node { border-style: dashed; }
+.route-name { font-weight: 600; }
+.route-tag {
+    margin-left: auto; font-size: 0.75rem; color: var(--ink-soft);
+    border: 1px dashed var(--line); border-radius: 999px; padding: 2px 8px; white-space: nowrap;
+}
+.route-card {
+    margin: 4px 0 12px 36px; padding: 14px; border: 1px solid var(--line);
+    border-radius: 14px; background: var(--surface-0);
+}
+.route-card p { margin: 0 0 8px; }
+.route-en { color: var(--ink-soft); font-size: 0.9rem; }
+.route-label { margin: 10px 0 4px; font-size: 0.85rem; }
+.route-facts { margin: 0 0 8px; padding-left: 18px; }
+.route-source { display: inline-block; margin: 4px 0 10px; min-height: 24px; color: var(--ink); }
+.route-done {
+    display: block; min-height: 44px; padding: 0 16px; border: 1px solid var(--line);
+    border-radius: 12px; background: var(--ink); color: var(--surface-0);
+    font: inherit; font-weight: 600; cursor: pointer;
+}
