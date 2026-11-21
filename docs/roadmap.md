@@ -48,7 +48,7 @@ the owner's answer or review.
 | 3 | Ladder rungs 4–5 (Schreiben, Sprechen) | [plan](superpowers/plans/2026-11-16-ladder-write-speak.md) · [design](superpowers/specs/2026-11-16-ladder-write-speak-design.md) | done (2026-11-20; branch `ladder-write-speak`, on top of `content-pipeline`, not merged) | – |
 | 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | done (2026-11-20; branch `boards-body-map`, on top of `ladder-write-speak`, not merged) | 1 |
 | 4b | Preposition scene | [plan](superpowers/plans/2026-11-16-boards-preposition-scene.md) | done (2026-11-21; branch `boards-preposition-scene`, on top of `boards-body-map`, not merged) | 4a |
-| 4c | Timeline | [plan](superpowers/plans/2026-11-16-boards-timeline.md) | not started | 4a |
+| 4c | Timeline | [plan](superpowers/plans/2026-11-16-boards-timeline.md) | done (2026-11-21; branch `boards-timeline`, on top of `boards-preposition-scene`, not merged) | 4a |
 | 5a | Klinik: maps and terms | [plan](superpowers/plans/2026-11-16-klinik-maps-terms.md) · [design](superpowers/specs/2026-11-16-medical-track-design.md) | not started | 4a |
 | 5b | Klinik: Anamnese, Arztbrief, FSP | [plan](superpowers/plans/2026-11-16-klinik-anamnese-fsp.md) | not started | 5a (better after 2 and 3) |
 
@@ -227,9 +227,30 @@ Parked (small, known):
 
 ### 4c. Timeline
 
-- [ ] Task 1: Verb data and sentence logic
-- [ ] Task 2: Timeline modes on screen
-- [ ] Task 3: Docs and ship
+- [x] Task 1: Verb data and sentence logic — commit `0f99093`
+- [x] Task 2: Timeline modes on screen — commit `edf4a07`
+- [x] Task 3: Docs and ship — this commit ("Document the timeline board, bump versions")
+- [ ] Whole-branch review (Opus) and its fix wave
+- [ ] Merge to `main` — the owner's step, after `boards-preposition-scene` and the review items below
+
+What the reviews changed against the plan (rulings, each can be undone):
+- Unlock labels are the real chapter names: "Nach „5.3 Ein Ausflug“" (Perfekt 1) and "Nach „A2 1.1 Der
+  erste Kurstag“" (Perfekt 2; the plan said "Beim Arzt 5.3" and "Der Sprachkurs 1.1"). The A2 chapter
+  exists now, so Perfekt 2 opens after it.
+- Each verb's id is its infinitive. Wann? practises each verb in all three zones: 36 cards in Perfekt 1
+  plus 12 Klammer/haben-oder-sein items, so the Üben card counts 48 in "n von N gelernt".
+- In Klammer a wrong choice shows the right form in the gap (red frame); the wrong form stays only on
+  its button.
+- The clamp uses the field model's verb indigo, now the token `--verb-klammer`.
+
+Parked (small, known):
+- After an answer in Wann? the card can still be dragged; it snaps back and does not answer again.
+- The drag of a card onto a zone was written but checked only by reading the code; tapping a zone was
+  checked on screen.
+- When the Klammer sentence wraps to two lines, the bar runs out to the right margin and back between
+  the lines.
+- No on-screen (DOM) tests for the timeline modes; the pure helpers (`once`, `zoneAt`,
+  `clampGeometry`) have tests.
 
 ### 5a. Klinik: maps and terms
 
@@ -380,6 +401,24 @@ look at. Remove an item when it is checked.
   4. "Artikel" and "Satz": the buttons fit, "Weiter ›" is visible without scrolling, the rule
      line "Wohin? → Akkusativ" / "Wo? → Dativ" appears after the answer.
   5. With Android's "Animationen entfernen" (remove animations) on, the hen jumps instead of walking.
+
+### Project 4c — timeline (branch `boards-timeline`)
+
+- **German to read once:** the 108 Wann? sentences and 36 Perfekt sentences come from
+  `js/timelineBoard.js` (e.g. "Gestern habe ich meine Mutter angerufen.", "Wir sind gestern in den
+  Park gegangen."). Subjects and objects come from the story (Ayisha, Faris, Lea, Max, Frau Schäfer,
+  Kerala Store, Umma).
+- **Wrong participles** offered as choices (e.g. "gegeht", "geeinkauft", "verstehte"): check none is
+  accidentally right or too silly.
+- **Phone checklist:**
+  1. Üben: the "Die Zeit" card; before 5.3 it says "Nach „5.3 Ein Ausflug“".
+  2. "Wann?": tap a zone and also drag the card onto one (the drag was never tried); a wrong zone
+     bounces the card and the right one pulses; a "Morgen" card shows "Morgen + Präsens = Zukunft".
+  3. "Klammer": the longest sentence (einkaufen, "im Kerala Store") wraps and the clamp still joins
+     both gaps — judge whether the bar looks clear.
+  4. "haben oder sein?": the sein bin's arrow reads as "movement or change"; the hint and the Perfekt
+     sentence show after the answer.
+  5. With "Animationen entfernen" on, nothing animates.
 
 ## How to run a plan from a new conversation
 
