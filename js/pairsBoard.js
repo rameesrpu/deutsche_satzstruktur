@@ -50,11 +50,12 @@ export function pairRound(items, rng = Math.random) {
 
 export const isPair = (a, b) => a.itemId === b.itemId && a.side !== b.side;
 
-/** The words as spoken: no "(pl.)". */
-export function speechOf(headword) {
+/** A headword as shown and spoken: article and noun, no "(pl.)" marker (as the body map shows plural-only nouns). */
+export function displayOf(headword) {
     const n = parseNoun(headword);
     return `${n.article} ${n.noun}`;
 }
+export const speechOf = displayOf;
 
 // ---- DOM part ----
 
@@ -92,14 +93,13 @@ function renderPaare(root, ctx) {
         again.hidden = true;
         note.textContent = '';
         grid.replaceChildren(...tiles.map(t => {
-            const b = el('button', `pr-tile pr-tile--${t.side}`, t.text);
+            const b = el('button', `pr-tile pr-tile--${t.side}`, displayOf(t.text));
             b.type = 'button';
             b.lang = 'de';
             b.addEventListener('click', () => pick(t, b));
             buttons.set(t.key, b);
             return b;
         }));
-        grid._tiles = tiles;
     };
     const pick = (t, b) => {
         if (busy || b.disabled) return;
@@ -110,7 +110,7 @@ function renderPaare(root, ctx) {
         if (isPair(first.t, t)) {
             for (const x of [first.b, b]) { x.classList.remove('is-selected'); x.classList.add('is-matched'); x.disabled = true; }
             const item = ctx.items.find(i => i.id === t.itemId);
-            note.textContent = `${item.fach} = ${item.alltag} (${item.en})`;
+            note.textContent = `${displayOf(item.fach)} = ${displayOf(item.alltag)} (${item.en})`;
             ctx.speak(speechOf(item.fach));
             if (--left === 0) again.hidden = false;
         } else {
@@ -136,7 +136,7 @@ function renderChoice(root, ctx) {
     const item = ctx.items.find(i => i.id === ctx.itemId);
     const all = allItemsTagged(ctx);
     const prompt = el('div', 'pr-prompt');
-    const word = el('div', 'pr-word', item[asked]);
+    const word = el('div', 'pr-word', displayOf(item[asked]));
     word.lang = 'de';
     const say = el('button', 'hs-say', '🔊');
     say.type = 'button';
@@ -148,7 +148,7 @@ function renderChoice(root, ctx) {
     const buttons = new Map();
     for (const id of choiceOptions(all, item.id, shown)) {
         const o = all.find(i => i.id === id);
-        const b = el('button', 'hs-option pr-option', o[shown]);
+        const b = el('button', 'hs-option pr-option', displayOf(o[shown]));
         b.type = 'button';
         b.lang = 'de';
         b.addEventListener('click', () => {
@@ -160,7 +160,7 @@ function renderChoice(root, ctx) {
             const box = el('div', 'hs-label');
             const words = el('div', 'hs-label-word');
             words.lang = 'de';
-            words.textContent = `${item.fach} = ${item.alltag}`;
+            words.textContent = `${displayOf(item.fach)} = ${displayOf(item.alltag)}`;
             box.append(words, el('div', 'hs-label-en', item.en));
             slot.append(box);
             ctx.speak(`${speechOf(item.fach)}. ${speechOf(item.alltag)}`);

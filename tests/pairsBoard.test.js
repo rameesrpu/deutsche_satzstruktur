@@ -2,7 +2,7 @@
 
 import { test, assertEqual } from './assert.js';
 import { readText } from './stubs.js';
-import { choiceOptions, pairRound, isPair } from '../js/pairsBoard.js';
+import { choiceOptions, pairRound, isPair, displayOf, speechOf } from '../js/pairsBoard.js';
 import { BOARDS } from '../js/boards.js';
 import { KLINIK_TILES, tileMode } from '../js/klinik.js';
 import { parseNoun } from '../js/hotspotBoard.js';
@@ -73,5 +73,24 @@ export function runPairsBoardTests() {
     test('Klinik tile Fachsprache und Alltagssprache is active once the board is registered', () => {
         const tile = KLINIK_TILES.find(t => t.id === 'fachbegriffe');
         assertEqual(tileMode(tile, BOARDS.map(b => b.id)), 'board');
+    });
+
+    test('plural-only headwords parse as plural-only and show/speak without "(pl.)"', () => {
+        const file = JSON.parse(readText('data/boards/fachbegriffe.json'));
+        const items = file.sets.flatMap(s => s.items);
+        const words = ['die Kopfschmerzen (pl.)', 'die Nierensteine (pl.)', 'die Schmerzmittel (pl.)'];
+        for (const w of words) {
+            assertEqual(items.some(i => i.fach === w || i.alltag === w), true);
+            const n = parseNoun(w);
+            assertEqual([n.pluralOnly, n.gender, n.article], [true, 'pl', 'die']);
+        }
+        assertEqual(displayOf('die Kopfschmerzen (pl.)'), 'die Kopfschmerzen');
+        assertEqual(speechOf('die Schmerzmittel (pl.)'), 'die Schmerzmittel');
+        assertEqual(speechOf('die Nierensteine (pl.)').includes('pl'), false);
+        assertEqual(displayOf('die Appendizitis'), 'die Appendizitis');
+        for (const i of items) {
+            assertEqual(displayOf(i.fach).includes('('), false);
+            assertEqual(displayOf(i.alltag).includes('('), false);
+        }
     });
 }
