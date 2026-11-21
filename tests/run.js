@@ -37,6 +37,7 @@ import { runTimelineBoardTests } from './timelineBoard.test.js';
 import { runPairsBoardTests } from './pairsBoard.test.js';
 import { runKlinikTests } from './klinik.test.js';
 import { runSortExerciseTests } from './sortExercise.test.js';
+import { runCaseFlowTests } from './caseFlow.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -88,6 +89,7 @@ runTimelineBoardTests();
 runPairsBoardTests();
 runKlinikTests();
 runSortExerciseTests();
+runCaseFlowTests();
 runLibrarySnapshot({ update });
 
 await settleAsyncTests();

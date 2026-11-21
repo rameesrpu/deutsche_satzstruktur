@@ -1,17 +1,22 @@
 // Klinik (body[data-screen="klinik"]): tiles of the hospital section and the route view of the
 // path to the Approbation. Pure helpers first (routeState, toggleStation, tileMode), then the renderers.
 // The route file is data/medical/approbation.json (stations with their sources and check dates).
+// The Anamnese tile opens a menu (renderAnamneseMenu); "Fragen sortieren" sorts standard questions
+// from data/medical/anamnese.json into the Anamnese sections (questionSortModel, on the sort screen).
 
 export const KLINIK_ROUTE_FILE = 'data/medical/approbation.json';
 export const KLINIK_ROUTE_VERSION = 1; // mirrors the file's `version`; part of the URL as ?v=
 export const KLINIK_STORAGE_KEY = 'klinikRoute';
+export const ANAMNESE_FILE = 'data/medical/anamnese.json';
+export const ANAMNESE_VERSION = 1; // mirrors the file's `version`; part of the URL as ?v=
+export const QUESTION_SORT_TITLE = 'Wohin gehört die Frage?';
 
-/** @type {{id: string, title: string, level: ?string, open: 'route'|'board'|'soon', boardId: ?string}[]} */
+/** @type {{id: string, title: string, level: ?string, open: 'route'|'board'|'anamnese'|'soon', boardId: ?string}[]} */
 export const KLINIK_TILES = [
     { id: 'weg', title: 'Der Weg zur Approbation', level: null, open: 'route', boardId: null },
     { id: 'fachbegriffe', title: 'Fachsprache und Alltagssprache', level: null, open: 'board', boardId: 'fachbegriffe' },
     { id: 'station', title: 'Die Station', level: null, open: 'board', boardId: 'station' },
-    { id: 'anamnese', title: 'Anamnese', level: 'ab B1', open: 'soon', boardId: null },
+    { id: 'anamnese', title: 'Anamnese', level: 'ab B1', open: 'anamnese', boardId: null },
     { id: 'arztbrief', title: 'Arztbrief', level: 'ab B2', open: 'soon', boardId: null },
     { id: 'fsp', title: 'Fachsprachenprüfung', level: 'ab B2', open: 'soon', boardId: null },
 ];
@@ -25,6 +30,29 @@ export function routeNote(route) {
 export function tileMode(tile, knownBoardIds) {
     if (tile.open === 'board' && !knownBoardIds.includes(tile.boardId)) return 'soon';
     return tile.open;
+}
+
+/**
+ * "Fragen sortieren": `size` random questions as chips, the sections as zones. A chip's zones are its
+ * own section first (auto-place target), then its `also` sections.
+ * @param {{sections: {id: string, title: string, questions: {id: string, de: string, en: string, also?: string[]}[]}[]}} anamnese
+ * @param {() => number} [rng]
+ * @param {number} [size]
+ * @returns {import('./sortExercise.js').SortModel}
+ */
+export function questionSortModel(anamnese, rng = Math.random, size = 10) {
+    const all = anamnese.sections.flatMap(s => s.questions.map(q => ({
+        id: q.id, text: q.de, en: q.en, zones: [s.id, ...(q.also || []).filter(a => a !== s.id)],
+    })));
+    for (let i = all.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [all[i], all[j]] = [all[j], all[i]];
+    }
+    return {
+        title: QUESTION_SORT_TITLE,
+        zones: anamnese.sections.map(s => ({ id: s.id, title: s.title })),
+        chips: all.slice(0, size),
+    };
 }
 
 const formatDate = iso => {
@@ -96,7 +124,7 @@ function topBar(title, label, onClick, back = false) {
 /**
  * @param {HTMLElement} root
  * @param {{tiles: {id, title, level, open, boardId}[], route: ?ReturnType<typeof routeState>, boardIds?: string[]}} state
- * @param {{openRoute: function(), openBoard: function(string), close: function()}} actions
+ * @param {{openRoute: function(), openBoard: function(string), openAnamnese: function(), close: function()}} actions
  */
 export function renderKlinik(root, state, actions) {
     const known = state.boardIds || [];
@@ -117,11 +145,37 @@ export function renderKlinik(root, state, actions) {
             b.append(el('span', 'klinik-tile-note', routeNote(state.route)));
             if (state.route) b.addEventListener('click', () => actions.openRoute());
             else { b.classList.add('is-soon'); b.disabled = true; }
+        } else if (mode === 'anamnese') {
+            b.addEventListener('click', () => actions.openAnamnese());
         } else {
             b.addEventListener('click', () => actions.openBoard(tile.boardId));
         }
         grid.append(b);
     }
+    inner.append(grid);
+    root.replaceChildren(inner);
+}
+
+/**
+ * Anamnese menu: the exercises of the Anamnese tile. Without the question file the buttons are off.
+ * @param {HTMLElement} root
+ * @param {{available: boolean}} state
+ * @param {{sortQuestions: function(), back: function()}} actions
+ */
+export function renderAnamneseMenu(root, state, actions) {
+    const inner = el('div', 'screen-inner klinik-inner');
+    inner.append(topBar('Anamnese', 'Zurück', actions.back, true));
+    const grid = el('div', 'klinik-tiles');
+    const b = el('button', 'klinik-tile');
+    b.type = 'button';
+    b.append(el('span', 'klinik-tile-title', 'Fragen sortieren'));
+    if (state.available) b.addEventListener('click', () => actions.sortQuestions());
+    else {
+        b.classList.add('is-soon');
+        b.disabled = true;
+        b.append(el('span', 'klinik-tile-note', 'Gerade nicht verfügbar.'));
+    }
+    grid.append(b);
     inner.append(grid);
     root.replaceChildren(inner);
 }

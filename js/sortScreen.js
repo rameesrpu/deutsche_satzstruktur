@@ -76,7 +76,13 @@ export function renderSortScreen(root, { model, total, index, hint: hintFor }, {
                 if (c.en) {
                     placed.tabIndex = 0;
                     placed.setAttribute('role', 'button');
-                    const show = e => { e.stopPropagation(); info = info === c.id ? null : c.id; draw(); };
+                    // with a tray chip selected, a tap on a placed chip drops onto its zone; else it shows the English
+                    const show = e => {
+                        e.stopPropagation();
+                        if (selected !== null) { onZone(z.id); return; }
+                        info = info === c.id ? null : c.id;
+                        draw();
+                    };
                     placed.addEventListener('click', show);
                     placed.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(e); } });
                 }

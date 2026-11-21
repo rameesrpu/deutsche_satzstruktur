@@ -16,7 +16,8 @@ import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday,
     renderHome, renderPractice, renderWords } from './homeScreen.js';
 import { BOARDS, loadBoard, boardSummary, reviewStart } from './boards.js';
 import { renderBoardScreen } from './boardScreen.js';
-import { KLINIK_TILES, KLINIK_ROUTE_FILE, KLINIK_ROUTE_VERSION, routeState, toggleStation, loadDone, saveDone, renderKlinik, renderRoute } from './klinik.js';
+import { KLINIK_TILES, KLINIK_ROUTE_FILE, KLINIK_ROUTE_VERSION, ANAMNESE_FILE, ANAMNESE_VERSION, routeState, toggleStation, loadDone, saveDone, renderKlinik, renderRoute, renderAnamneseMenu, questionSortModel } from './klinik.js';
+import { renderSortScreen } from './sortScreen.js';
 import './hotspotBoard.js'; // registers the 'hotspot' board kind
 import './sceneBoard.js'; // registers the 'scene' board kind
 import './timelineBoard.js'; // registers the 'timeline' board kind
@@ -1363,7 +1364,11 @@ class DeutschApp {
         }
     }
 
-    /** Klinik screen: tiles; "Der Weg zur Approbation" opens the route view in the same section. */
+    /**
+     * Klinik screen: tiles; "Der Weg zur Approbation" opens the route view and "Anamnese" its menu in
+     * the same section. "Fragen sortieren" runs on the sort screen and comes back to the Anamnese menu.
+     * @param {'tiles'|'route'|'anamnese'} [view]
+     */
     async openKlinik(view = 'tiles') {
         const root = document.getElementById('screen-klinik');
         if (!root) return;
@@ -1378,20 +1383,44 @@ class DeutschApp {
                 this.klinikStations = null;
             }
         }
+        if (view === 'anamnese' && this.anamneseData === undefined) {
+            // fetched once, like the route; null turns the menu's buttons off
+            try {
+                const r = await fetch(`${ANAMNESE_FILE}?v=${ANAMNESE_VERSION}`);
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                this.anamneseData = await r.json();
+            } catch (e) {
+                console.error('Anamnese-Fragen konnten nicht geladen werden', e);
+                this.anamneseData = null;
+            }
+        }
         const stations = this.klinikStations;
-        if (this.screen !== 'practice' && this.screen !== 'klinik' && this.screen !== 'board') return;
+        if (!['practice', 'klinik', 'board', 'sort'].includes(this.screen)) return;
         this.showScreen('klinik');
         const route = () => (stations ? routeState(stations, loadDone(localStorage)) : null);
         const tiles = () => renderKlinik(root, { tiles: KLINIK_TILES, route: route(), boardIds: BOARDS.map(b => b.id) }, {
             openRoute: () => routeView(),
             openBoard: id => this.openBoard(id),
+            openAnamnese: () => this.openKlinik('anamnese'),
             close: () => this.showScreen('practice'),
+        });
+        const anamnese = this.anamneseData;
+        const anamneseMenu = () => renderAnamneseMenu(root, { available: !!anamnese }, {
+            sortQuestions: () => {
+                this.showScreen('sort');
+                const back = () => this.openKlinik('anamnese');
+                renderSortScreen(document.getElementById('screen-sort'),
+                    { model: questionSortModel(anamnese), total: 1, index: 0 }, { onDone: back, onClose: back });
+            },
+            back: tiles,
         });
         const routeView = (openId = null) => renderRoute(root, { stations, route: route() }, {
             toggle: id => { saveDone(localStorage, toggleStation(loadDone(localStorage), id)); routeView(id); },
             back: tiles,
         }, openId);
-        if (view === 'route' && stations) routeView(); else tiles();
+        if (view === 'route' && stations) routeView();
+        else if (view === 'anamnese') anamneseMenu();
+        else tiles();
     }
 
     async renderWordsScreen() {

@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "sections": [
+    {
+      "id": "beschwerden",
+      "title": "Aktuelle Beschwerden",
+      "en": "Presenting complaint",
+      "questions": [
+        { "id": "b-grund", "de": "Was führt Sie zu uns?", "en": "What brings you to us?" },
+        { "id": "b-seit", "de": "Seit wann haben Sie die Beschwerden?", "en": "Since when have you had the symptoms?" },
+        { "id": "b-wo", "de": "Wo genau tut es weh?", "en": "Where exactly does it hurt?" },
+        { "id": "b-art", "de": "Können Sie den Schmerz beschreiben?", "en": "Can you describe the pain?" },
+        { "id": "b-skala", "de": "Wie stark sind die Schmerzen auf einer Skala von eins bis zehn?", "en": "How bad is the pain on a scale from one to ten?" },
+        { "id": "b-ausstrahlung", "de": "Strahlen die Schmerzen aus?", "en": "Does the pain spread anywhere?" },
+        { "id": "b-begleit", "de": "Haben Sie noch andere Beschwerden, zum Beispiel Übelkeit oder Erbrechen?", "en": "Do you have any other symptoms, for example nausea or vomiting?" },
+        { "id": "b-frueher", "de": "Hatten Sie solche Beschwerden schon einmal?", "en": "Have you had symptoms like these before?", "also": ["vorerkrankungen"] }
+      ]
+    },
+    {
+      "id": "vorerkrankungen",
+      "title": "Vorerkrankungen und Operationen",
+      "en": "Past medical and surgical history",
+      "questions": [
+        { "id": "v-vorerkrankungen", "de": "Haben Sie Vorerkrankungen?", "en": "Do you have any previous illnesses?" },
+        { "id": "v-operiert", "de": "Wurden Sie schon einmal operiert?", "en": "Have you ever had an operation?" },
+        { "id": "v-chronisch", "de": "Haben Sie chronische Erkrankungen, zum Beispiel Bluthochdruck oder Diabetes?", "en": "Do you have any chronic illnesses, for example high blood pressure or diabetes?" },
+        { "id": "v-krankenhaus", "de": "Waren Sie schon einmal im Krankenhaus?", "en": "Have you ever been in hospital?" },
+        { "id": "v-unfall", "de": "Hatten Sie schon einmal einen Unfall?", "en": "Have you ever had an accident?" },
+        { "id": "v-behandlung", "de": "Sind Sie zurzeit wegen einer anderen Erkrankung in Behandlung?", "en": "Are you currently being treated for another illness?" },
+        { "id": "v-impfung", "de": "Ist Ihr Impfschutz gegen Tetanus aktuell?", "en": "Is your tetanus vaccination up to date?" }
+      ]
+    },
+    {
+      "id": "medikamente",
+      "title": "Medikamente",
+      "en": "Medication",
+      "questions": [
+        { "id": "m-regelmaessig", "de": "Nehmen Sie regelmäßig Medikamente ein?", "en": "Do you take any medication regularly?" },
+        { "id": "m-welche", "de": "Welche Medikamente nehmen Sie, und in welcher Dosierung?", "en": "Which medication do you take, and at what dose?" },
+        { "id": "m-wie-oft", "de": "Wie oft am Tag nehmen Sie das Medikament ein?", "en": "How many times a day do you take the medication?" },
+        { "id": "m-rezeptfrei", "de": "Nehmen Sie auch Medikamente ohne Rezept ein, zum Beispiel Schmerzmittel?", "en": "Do you also take medication without a prescription, for example painkillers?" },
+        { "id": "m-blutverduenner", "de": "Nehmen Sie blutverdünnende Medikamente ein?", "en": "Do you take any blood thinners?" },
+        { "id": "m-pille", "de": "Nehmen Sie die Pille oder andere Hormone ein?", "en": "Do you take the contraceptive pill or other hormones?" },
+        { "id": "m-schon-genommen", "de": "Haben Sie gegen die Beschwerden schon etwas eingenommen?", "en": "Have you already taken anything for the symptoms?", "also": ["beschwerden"] }
+      ]
+    },
+    {
+      "id": "allergien",
+      "title": "Allergien",
+      "en": "Allergies",
+      "questions": [
+        { "id": "a-allergien", "de": "Haben Sie Allergien?", "en": "Do you have any allergies?" },
+        { "id": "a-medikamente", "de": "Sind Sie gegen Medikamente allergisch?", "en": "Are you allergic to any medication?" },
+        { "id": "a-penicillin", "de": "Vertragen Sie Penicillin und andere Antibiotika?", "en": "Can you tolerate penicillin and other antibiotics?" },
+        { "id": "a-reaktion", "de": "Wie äußert sich die Allergie?", "en": "How does the allergy show itself?" },
+        { "id": "a-lebensmittel", "de": "Vertragen Sie bestimmte Lebensmittel nicht?", "en": "Are there any foods you cannot tolerate?" },
+        { "id": "a-latex", "de": "Sind Sie gegen Pflaster oder Latex allergisch?", "en": "Are you allergic to plasters or latex?" },
+        { "id": "a-kontrastmittel", "de": "Haben Sie schon einmal auf ein Kontrastmittel reagiert?", "en": "Have you ever reacted to a contrast agent?" }
+      ]
+    },
+    {
+      "id": "vegetativ",
+      "title": "Vegetative Anamnese",
+      "en": "General symptoms (appetite, weight, sleep, bowels, bladder)",
+      "questions": [
+        { "id": "g-appetit", "de": "Wie ist Ihr Appetit?", "en": "How is your appetite?" },
+        { "id": "g-gewicht", "de": "Haben Sie in letzter Zeit ungewollt ab- oder zugenommen?", "en": "Have you lost or gained weight recently without meaning to?" },
+        { "id": "g-fieber", "de": "Haben Sie Fieber?", "en": "Do you have a fever?", "also": ["beschwerden"] },
+        { "id": "g-nachtschweiss", "de": "Haben Sie Nachtschweiß?", "en": "Do you have night sweats?" },
+        { "id": "g-schlaf", "de": "Schlafen Sie gut?", "en": "Do you sleep well?" },
+        { "id": "g-stuhlgang", "de": "Hat sich Ihr Stuhlgang verändert?", "en": "Have your bowel movements changed?" },
+        { "id": "g-wasserlassen", "de": "Haben Sie Beschwerden beim Wasserlassen?", "en": "Do you have any problems when passing urine?" }
+      ]
+    },
+    {
+      "id": "familie",
+      "title": "Familienanamnese",
+      "en": "Family history",
+      "questions": [
+        { "id": "f-erkrankungen", "de": "Gibt es Erkrankungen in Ihrer Familie?", "en": "Are there any illnesses in your family?" },
+        { "id": "f-eltern", "de": "Leben Ihre Eltern noch?", "en": "Are your parents still alive?" },
+        { "id": "f-eltern-gesund", "de": "Sind Ihre Eltern und Geschwister gesund?", "en": "Are your parents and siblings healthy?" },
+        { "id": "f-herz", "de": "Hatte jemand in Ihrer Familie einen Herzinfarkt oder einen Schlaganfall?", "en": "Has anyone in your family had a heart attack or a stroke?" },
+        { "id": "f-krebs", "de": "Gibt es in Ihrer Familie Krebserkrankungen?", "en": "Is there any cancer in your family?" },
+        { "id": "f-diabetes", "de": "Gibt es in Ihrer Familie Diabetes oder Bluthochdruck?", "en": "Is there any diabetes or high blood pressure in your family?" }
+      ]
+    },
+    {
+      "id": "sozial",
+      "title": "Sozialanamnese",
+      "en": "Social history",
+      "questions": [
+        { "id": "s-beruf", "de": "Was machen Sie beruflich?", "en": "What do you do for a living?" },
+        { "id": "s-rauchen", "de": "Rauchen Sie?", "en": "Do you smoke?" },
+        { "id": "s-alkohol", "de": "Trinken Sie Alkohol?", "en": "Do you drink alcohol?" },
+        { "id": "s-drogen", "de": "Nehmen Sie Drogen?", "en": "Do you take any drugs?" },
+        { "id": "s-wohnen", "de": "Mit wem wohnen Sie zusammen?", "en": "Who do you live with?" },
+        { "id": "s-familienstand", "de": "Sind Sie verheiratet?", "en": "Are you married?" },
+        { "id": "s-kinder", "de": "Haben Sie Kinder?", "en": "Do you have children?", "also": ["familie"] },
+        { "id": "s-sport", "de": "Treiben Sie Sport?", "en": "Do you do any sport?" }
+      ]
+    }
+  ]
+}
