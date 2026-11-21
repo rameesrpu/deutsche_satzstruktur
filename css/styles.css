@@ -3168,6 +3168,7 @@ body[data-screen="end"] .app-nav,
 body[data-screen="order"] .app-nav,
 body[data-screen="write"] .app-nav,
 body[data-screen="speak"] .app-nav,
+body[data-screen="sort"] .app-nav,
 body[data-screen="klinik"] .app-nav,
 body[data-screen="board"] .app-nav {
     display: none;
@@ -5917,3 +5918,19 @@ body[data-play-view="review"] .play-bottom {
 .pr-options { display: grid; grid-template-columns: 1fr; gap: 8px; }
 .pr-option { padding: 8px 10px; overflow-wrap: anywhere; hyphens: auto; }
 .pr-again[hidden] { display: none; }
+
+/* ---- Sort screen (js/sortScreen.js): body[data-screen="sort"]; zones stacked, tray below ---- */
+.sort-zones {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 8px 0 16px;
+}
+
+.sort-zone {
+    min-height: 64px;
+}
+
+.sort-zone .order-placed[role="button"] {
+    cursor: pointer;
+}

@@ -1182,7 +1182,7 @@ class DeutschApp {
      * Show one screen. Learner screens are re-rendered on every visit (progress may
      * have changed); 'workshop' and 'play' show the editor/game canvas, so it is
      * redrawn once it has its size. Leaving 'play' or 'workshop' ends a running game.
-     * @param {'home'|'practice'|'words'|'workshop'|'play'|'order'|'write'|'speak'|'board'|'klinik'|'end'} name  ('end' is rendered by showRecap, 'order' by orderScreen.js, 'write' by writeScreen.js, 'speak' by speakScreen.js, 'board' by openBoard / boardScreen.js)
+     * @param {'home'|'practice'|'words'|'workshop'|'play'|'order'|'write'|'speak'|'sort'|'board'|'klinik'|'end'} name  ('end' is rendered by showRecap, 'order' by orderScreen.js, 'write' by writeScreen.js, 'speak' by speakScreen.js, 'sort' by sortScreen.js (the opener calls renderSortScreen), 'board' by openBoard / boardScreen.js)
      */
     showScreen(name) {
         if (name !== 'board' && this.boardTeardown) { this.boardTeardown(); this.boardTeardown = null; }
@@ -1194,7 +1194,7 @@ class DeutschApp {
         if (this.reviewRunner.active && !['play', 'order', 'write', 'speak', 'end'].includes(name)) this.reviewRunner.abandon();
         if (name !== 'play') clearPlayChrome();
         document.body.dataset.screen = name;
-        for (const s of ['home', 'practice', 'words', 'order', 'write', 'speak', 'board', 'klinik', 'end', 'settings']) {
+        for (const s of ['home', 'practice', 'words', 'order', 'write', 'speak', 'sort', 'board', 'klinik', 'end', 'settings']) {
             const section = document.getElementById(`screen-${s}`);
             if (section) section.hidden = s !== name;
         }
@@ -1208,7 +1208,7 @@ class DeutschApp {
         else if (name === 'practice') this.renderPracticeScreen();
         else if (name === 'words') this.renderWordsScreen();
         else if (name === 'settings') this.renderSettingsScreen();
-        else if (!['end', 'order', 'write', 'speak', 'board', 'klinik'].includes(name)) this.redrawAll();
+        else if (!['end', 'order', 'write', 'speak', 'sort', 'board', 'klinik'].includes(name)) this.redrawAll();
     }
 
     /**

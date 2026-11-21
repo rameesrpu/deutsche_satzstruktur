@@ -36,6 +36,7 @@ import { runSceneBoardTests } from './sceneBoard.test.js';
 import { runTimelineBoardTests } from './timelineBoard.test.js';
 import { runPairsBoardTests } from './pairsBoard.test.js';
 import { runKlinikTests } from './klinik.test.js';
+import { runSortExerciseTests } from './sortExercise.test.js';
 
 const update = System.programArgs.includes('--update');
 
@@ -86,6 +87,7 @@ runSceneBoardTests();
 runTimelineBoardTests();
 runPairsBoardTests();
 runKlinikTests();
+runSortExerciseTests();
 runLibrarySnapshot({ update });
 
 await settleAsyncTests();
