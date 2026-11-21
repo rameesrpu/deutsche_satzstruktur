@@ -299,7 +299,7 @@ Parked (small, known):
 
 - [x] Task 1: Sort exercise — commit `ebaf5d6`
 - [x] Task 2: Anamnese sections and questions — commit `82f6b5f` (owner stop skipped; see "Needs owner review")
-- [ ] Task 3: Cases and the interview — **owner stop** (doctor's review)
+- [x] Task 3: Cases and the interview — commits `18a574d`, `e587097` (owner stop skipped; see "Needs owner review")
 - [ ] Task 4: Arztbrief
 - [ ] Task 5: FSP practice run — **owner stop** (doctor's review)
 - [ ] Task 6: Docs and ship
@@ -582,3 +582,8 @@ Medical content in this project is **not yet checked by a doctor**.
   [docs/review/5b-anamnese-fragen.md](review/5b-anamnese-fragen.md) — 50 questions in 7 sections,
   German with English. Ask: are these the questions a German doctor asks, and is each in the right
   section? Four questions count in two sections (`also`); others could too (Nachtschweiß, Stuhlgang).
+- **First case "Bauchschmerzen"** (owner stop that was skipped; doctor's review): read
+  [docs/review/5b-fall-bauchschmerzen.md](review/5b-fall-bauchschmerzen.md) — a 24-year-old student
+  (woman) with suspected appendicitis: 13 interview steps (the plan said 10–12; the last period, stool
+  and urine were added), notes, the Arztbrief, the documentation and the presentation, German with
+  English. Check: medical plausibility, wording a German doctor uses, B1 patient answers.
