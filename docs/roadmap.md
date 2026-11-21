@@ -264,8 +264,8 @@ Parked (small, known):
 - [x] Task 2: Klinik screen and route — commit `9fb5404`
 - [x] Task 3: Term pairs board — commits `fd94aee`, `ddb9c83`, `1a53984`
 - [x] Task 4: The ward — commits `7b44343`, `2a57f4f` (owner stop skipped; see "Needs owner review")
-- [x] Task 5: Docs and ship — this commit ("Document the Klinik area, bump versions")
-- [ ] Whole-branch review (Opus) and its fix wave
+- [x] Task 5: Docs and ship — commit `2a5a2f9`
+- [x] Whole-branch review (Opus) and its fix wave — commits `3640bdd`, `1e3bbad`
 - [ ] Merge to `main` — the owner's step, after `boards-timeline` and the review items below
 
 What the reviews changed against the plan (rulings, each can be undone):
@@ -273,7 +273,8 @@ What the reviews changed against the plan (rulings, each can be undone):
   RPS Anlage 6); Gutachten, Berufserlaubnis and Anerkennungsberatung are optional stations.
 - A Kammer station was added after the Approbation; there are no Hospitation or visa stations
   (no official BW source read covers them).
-- The station id stays `fachsprachpruefung` (plan), the title is the official spelling "Fachsprachenprüfung".
+- The station id stays `fachsprachpruefung` (plan); the UI spells the official "Fachsprachenprüfung"
+  everywhere, also on the Klinik tile (the plan wrote "Fachsprachprüfung").
 - A Klinik tile whose board is not in `BOARDS` behaves like "Kommt bald" (tiles of unregistered boards).
 - A board opened from Klinik closes back to Klinik (from Üben it closes to Üben).
 - Term pairs: articles may be confirmed by Duden/DWDS when DocCheck prints none; Pschyrembel needs a login.
@@ -282,14 +283,16 @@ What the reviews changed against the plan (rulings, each can be undone):
 - Landscape hotspot pictures through a set flag `wide: true` (4:3), used by the ward floor plan.
 - Ward rooms and team boxes have per-item `area` rects (a tap inside a large room answers it; smallest nested area wins).
 - Pflegefachkraft kept (the protected titles are Pflegefachfrau/-mann, but job ads use Pflegefachkraft).
+- If the route file cannot load, the Klinik tiles still show; the route tile reads "Gerade nicht verfügbar."
+- The Paare card colours (and the doctor boxes in team.svg) are a neutral greige, away from the gender tints.
+- The route and the two boards show no level ("ab …"); only the 5b tiles do (the spec asks every part to state one).
 
 Parked (small, known):
-- The route file load failure is silent; the route scroll position is lost on re-render; Üben shows
+- After a failed route load the route stays unavailable until a reload; the route scroll position is lost on re-render; Üben shows
   "Klinik" as heading and card title.
 - Paare rounds never mix sets; the 3-item "Niere und Blase" set makes a 6-tile round.
 - The station and fachbegriffe boards are also listed under Üben → Bilder.
 - Entdecken does not show a room's extent; team.svg area rects were not compared against the drawing.
-- The blue-grey doctor boxes in team.svg are near the masculine blue (small areas; owner sheet).
 - No on-screen (DOM) tests for the Klinik screen and the pairs modes; the pure helpers have tests.
 
 ### 5b. Klinik: Anamnese, Arztbrief, FSP
