@@ -2,7 +2,11 @@
 
 import { test, assertEqual } from './assert.js';
 import { readText } from './stubs.js';
-import { parseNoun, nearestSpot, tapTargets, tapIsRight, nameOptions, painSentence, painUsesPlural, whereQuestion, tapPercent, labelModel } from '../js/hotspotBoard.js';
+import { parseNoun, nearestSpot, tapTargets, tapIsRight, nameOptions, painSentence, painUsesPlural, whereQuestion, tapPercent, labelModel, picClass } from '../js/hotspotBoard.js';
+import { BOARDS } from '../js/boards.js';
+
+// Every hotspot board file in the registry
+const hotspotFiles = () => BOARDS.filter(b => b.kind === 'hotspot').map(b => JSON.parse(readText(b.file)));
 
 const item = (id, de, extra = {}) => ({ id, de, en: id, spot: [50, 50], ...extra });
 const KOPF = item('kopf', 'der Kopf, Köpfe');
@@ -121,25 +125,66 @@ export function runHotspotBoardTests() {
         assertEqual(file.sets[1].items.find(i => i.id === 'haare').de, 'die Haare (pl.)');
     });
 
-    test('data/boards/koerper.json: spots of a set at least 6 percent apart (nearestSpot tells them apart)', () => {
-        const file = JSON.parse(readText('data/boards/koerper.json'));
+    test('hotspot boards: spots of a set at least 6 percent apart (nearestSpot tells them apart)', () => {
         const close = [];
-        for (const set of file.sets) {
-            set.items.forEach((a, i) => set.items.slice(i + 1).forEach(b => {
-                if (Math.hypot(a.spot[0] - b.spot[0], a.spot[1] - b.spot[1]) < 6) close.push(`${set.id}: ${a.id}/${b.id}`);
-            }));
+        for (const file of hotspotFiles()) {
+            for (const set of file.sets) {
+                set.items.forEach((a, i) => set.items.slice(i + 1).forEach(b => {
+                    if (Math.hypot(a.spot[0] - b.spot[0], a.spot[1] - b.spot[1]) < 6) close.push(`${file.id}/${set.id}: ${a.id}/${b.id}`);
+                }));
+            }
         }
         assertEqual(close, []);
     });
 
-    test('data/boards/koerper.json: every picture exists, is a 300x400 SVG under 40 KB', () => {
-        const file = JSON.parse(readText('data/boards/koerper.json'));
-        for (const set of file.sets) {
-            const svg = readText('data/boards/' + set.image);
-            assertEqual([set.image, new TextEncoder().encode(svg).length < 40 * 1024], [set.image, true]);
-            assertEqual([set.image, svg.includes('viewBox="0 0 300 400"')], [set.image, true]);
-            assertEqual([set.image, /<text\b/.test(svg)], [set.image, false]);
+    test('hotspot boards: every item parses, ids unique, spots in 0-100', () => {
+        const files = hotspotFiles();
+        assertEqual(files.map(f => f.id), ['koerper', 'station']);
+        for (const file of files) {
+            assertEqual(Number.isInteger(file.version) && file.version > 0, true);
+            for (const set of file.sets) {
+                const ids = set.items.map(i => i.id);
+                assertEqual([set.id, new Set(ids).size], [set.id, ids.length]);
+                for (const it of set.items) {
+                    assertEqual([it.id, /^[a-z0-9-]+$/.test(it.id), it.en.length > 0], [it.id, true, true]);
+                    assertEqual([it.id, it.spot.length === 2 && it.spot.every(n => typeof n === 'number' && n >= 0 && n <= 100)], [it.id, true]);
+                    assertEqual([it.id, parseNoun(it.de).noun.length > 0], [it.id, true]);
+                }
+            }
         }
+    });
+
+    test('hotspot boards: every picture exists, no text, under 40 KB; 300x400, or 400x300 in a wide set', () => {
+        for (const file of hotspotFiles()) {
+            for (const set of file.sets) {
+                const svg = readText('data/boards/' + set.image);
+                const box = set.wide ? 'viewBox="0 0 400 300"' : 'viewBox="0 0 300 400"';
+                assertEqual([set.image, new TextEncoder().encode(svg).length < 40 * 1024], [set.image, true]);
+                assertEqual([set.image, svg.includes(box)], [set.image, true]);
+                assertEqual([set.image, /<text\b/.test(svg)], [set.image, false]);
+            }
+        }
+    });
+
+    test('data/boards/station.json: rooms and team vocabulary', () => {
+        const file = JSON.parse(readText('data/boards/station.json'));
+        assertEqual([file.id, file.kind, file.version], ['station', 'hotspot', 1]);
+        assertEqual(file.sets.map(s => [s.id, s.title, s.image, !!s.wide]),
+            [['raeume', 'Die Räume', 'img/station.svg', true], ['team', 'Das Team', 'img/team.svg', false]]);
+        const de = id => file.sets.flatMap(s => s.items).find(i => i.id === id);
+        assertEqual(file.sets.map(s => s.items.length), [12, 8]);
+        assertEqual(de('stationszimmer').de, 'das Stationszimmer, Stationszimmer');
+        assertEqual(de('lager').de, 'das Lager, Lager');
+        assertEqual(de('auszubildender').de, 'der Auszubildende, Auszubildenden');
+        assertEqual(labelModel(de('auszubildender')).plural, 'Plural: die Auszubildenden');
+        assertEqual(whereQuestion(de('flur')), 'Wo ist der Flur?');
+        // no body parts here: no pair or mirror flags, no locks (the Klinik tile opens it)
+        assertEqual(file.sets.some(s => s.mirror || s.unlock || s.items.some(i => i.pair || i.accepts)), false);
+    });
+
+    test('picClass: a wide set gets the landscape picture box', () => {
+        assertEqual(picClass({}), 'hs-pic');
+        assertEqual(picClass({ wide: true }), 'hs-pic hs-pic--wide');
     });
 
     test('tapPercent: percent of the picture box at any size', () => {

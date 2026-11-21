@@ -41,6 +41,14 @@ export const BOARDS = [
             { id: 'kollegin', label: 'Für die Kollegin', scored: true },
         ],
     },
+    {
+        id: 'station', title: 'Die Station', kind: 'hotspot', file: 'data/boards/station.json', version: 1,
+        modes: [
+            { id: 'entdecken', label: 'Entdecken', scored: false },
+            { id: 'zeigen', label: 'Zeigen', scored: true },
+            { id: 'benennen', label: 'Benennen', scored: true },
+        ],
+    },
 ];
 
 /**

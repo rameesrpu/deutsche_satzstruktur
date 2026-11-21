@@ -1,0 +1,32 @@
+{
+  "id": "station",
+  "title": "Die Station",
+  "version": 1,
+  "kind": "hotspot",
+  "sets": [
+    {"id": "raeume", "title": "Die Räume", "image": "img/station.svg", "wide": true, "items": [
+        {"id": "stationszimmer", "de": "das Stationszimmer, Stationszimmer", "en": "nurses' station", "spot": [39.5, 23]},
+        {"id": "arztzimmer", "de": "das Arztzimmer, Arztzimmer", "en": "doctors' office", "spot": [58, 23]},
+        {"id": "patientenzimmer", "de": "das Patientenzimmer, Patientenzimmer", "en": "patient room", "spot": [76, 77]},
+        {"id": "untersuchungszimmer", "de": "das Untersuchungszimmer, Untersuchungszimmer", "en": "examination room", "spot": [74.5, 23]},
+        {"id": "flur", "de": "der Flur, Flure", "en": "corridor", "spot": [62.5, 50]},
+        {"id": "aufzug", "de": "der Aufzug, Aufzüge", "en": "lift", "spot": [23, 23]},
+        {"id": "treppenhaus", "de": "das Treppenhaus, Treppenhäuser", "en": "stairwell", "spot": [10, 23]},
+        {"id": "aufenthaltsraum", "de": "der Aufenthaltsraum, Aufenthaltsräume", "en": "day room", "spot": [28.5, 77]},
+        {"id": "lager", "de": "das Lager, Lager", "en": "store room", "spot": [90, 23]},
+        {"id": "teekueche", "de": "die Teeküche, Teeküchen", "en": "staff kitchenette", "spot": [10, 77]},
+        {"id": "bad", "de": "das Bad, Bäder", "en": "bathroom", "spot": [46.8, 77]},
+        {"id": "eingang", "de": "der Eingang, Eingänge", "en": "entrance", "spot": [5, 50]}
+    ]},
+    {"id": "team", "title": "Das Team", "image": "img/team.svg", "items": [
+        {"id": "chefaerztin", "de": "die Chefärztin, Chefärztinnen", "en": "head of department", "spot": [26.7, 10]},
+        {"id": "oberarzt", "de": "der Oberarzt, Oberärzte", "en": "senior physician", "spot": [26.7, 27.5]},
+        {"id": "fachaerztin", "de": "die Fachärztin, Fachärztinnen", "en": "specialist", "spot": [26.7, 45]},
+        {"id": "assistenzarzt", "de": "der Assistenzarzt, Assistenzärzte", "en": "junior doctor", "spot": [26.7, 62.5]},
+        {"id": "stationsleitung", "de": "die Stationsleitung, Stationsleitungen", "en": "ward manager", "spot": [73.3, 10]},
+        {"id": "pflegefachkraft", "de": "die Pflegefachkraft, Pflegefachkräfte", "en": "nurse", "spot": [73.3, 27.5]},
+        {"id": "auszubildender", "de": "der Auszubildende, Auszubildenden", "en": "trainee", "spot": [73.3, 45]},
+        {"id": "hospitantin", "de": "die Hospitantin, Hospitantinnen", "en": "observer (her first role)", "spot": [50, 82.5]}
+    ]}
+  ]
+}

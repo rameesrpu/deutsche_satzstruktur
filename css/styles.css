@@ -5468,6 +5468,16 @@ body[data-play-view="review"] .play-bottom {
     width: min(100%, 31dvh);
 }
 
+.hs-pic--wide {   /* a landscape 4:3 picture (the ward floor plan): same height budget */
+    width: min(100%, calc(48vh * 4 / 3));
+    width: min(100%, calc(48dvh * 4 / 3));
+    aspect-ratio: 4 / 3;
+}
+.board-stage--benennen .hs-pic--wide {
+    width: min(100%, calc(41vh * 4 / 3));
+    width: min(100%, calc(41dvh * 4 / 3));
+}
+
 .hs-img {
     display: block;
     width: 100%;

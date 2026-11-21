@@ -1,6 +1,6 @@
 // hotspotBoard: the picture-spot board kind (body map). Pure part: noun parsing, which spot a tap
-// meets, naming options, pain sentence, label model. DOM part (bottom): the four modes, registered
-// with boardScreen.js as kind 'hotspot'.
+// meets, naming options, pain sentence, label model. DOM part (bottom): the modes (a board offers the
+// ones its BOARDS entry lists), registered with boardScreen.js as kind 'hotspot'.
 
 import { registerKind } from './boards.js';
 import { GRAMMAR_PALETTE } from './grammaticalConfig.js';
@@ -158,6 +158,13 @@ export function labelModel(item) {
     };
 }
 
+/**
+ * The picture box class: 3:4 portrait, or 4:3 landscape for a `wide` set (the ward floor plan).
+ * @param {{wide?: boolean}} set
+ * @returns {string}
+ */
+export const picClass = set => (set.wide ? 'hs-pic hs-pic--wide' : 'hs-pic');
+
 // ---- DOM part ----
 
 const el = (tag, cls, text) => {
@@ -186,7 +193,7 @@ function drawLabel(item, ctx, colored = true) {
 
 /** Picture box (3:4) with the point layer; returns helpers. */
 function drawPicture(ctx) {
-    const wrap = el('div', 'hs-pic');
+    const wrap = el('div', picClass(ctx.set));
     const img = el('img', 'hs-img');
     img.src = `data/boards/${ctx.set.image}?v=${ctx.board.version}`;
     img.alt = '';

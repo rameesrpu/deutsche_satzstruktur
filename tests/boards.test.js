@@ -29,7 +29,16 @@ export function runBoardsTests() {
         assertEqual(file.version, def.version);
         assertEqual(file.id, def.id);
         assertEqual(file.kind, def.kind);
-        assertEqual(BOARDS.length, 4);
+        assertEqual(BOARDS.length, 5);
+    });
+
+    test('registry: station is a hotspot board with three modes (no pain sentence), offered by every set', () => {
+        const def = boardDef('station');
+        assertEqual([def.title, def.kind, def.file], ['Die Station', 'hotspot', 'data/boards/station.json']);
+        assertEqual(def.modes.map(m => [m.id, m.label, m.scored]),
+            [['entdecken', 'Entdecken', false], ['zeigen', 'Zeigen', true], ['benennen', 'Benennen', true]]);
+        const file = JSON.parse(readText(def.file));
+        for (const set of file.sets) assertEqual(setModes(file, set).map(m => m.id), ['entdecken', 'zeigen', 'benennen']);
     });
 
     test('registry: every board mirrors its data file (id, kind, version)', () => {

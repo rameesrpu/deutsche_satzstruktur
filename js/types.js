@@ -144,10 +144,11 @@
  * @property {string} title
  * @property {number} version  bump when the file changes (fetched with ?v=)
  * @property {string} kind     picture kind, registered via registerKind in boards.js (KINDS)
- * @property {{id: string, title: string, image: ?string, modes?: string[], mirror?: boolean,
+ * @property {{id: string, title: string, image: ?string, modes?: string[], mirror?: boolean, wide?: boolean,
  *   unlock: ?{level: string, category: string, label: string}, items: Object[]}[]} sets
  *   `modes`: the mode ids the set offers (default: all of the board's); `mirror`: the picture is
- *   left-right symmetric, so tap modes also accept the mirrored spot of `pair` items
+ *   left-right symmetric, so tap modes also accept the mirrored spot of `pair` items; `wide`: a hotspot
+ *   picture in landscape 4:3 (viewBox 0 0 400 300) instead of portrait 3:4
  */
 
 /**
