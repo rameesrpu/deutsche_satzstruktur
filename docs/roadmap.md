@@ -261,7 +261,7 @@ Parked (small, known):
 ### 5a. Klinik: maps and terms
 
 - [x] Task 1: Research the path — commit `69ec6d5` (owner stop skipped; see "Needs owner review")
-- [ ] Task 2: Klinik screen and route
+- [x] Task 2: Klinik screen and route — commit `9fb5404`
 - [ ] Task 3: Term pairs board
 - [ ] Task 4: The ward — **owner stop**
 - [ ] Task 5: Docs and ship
