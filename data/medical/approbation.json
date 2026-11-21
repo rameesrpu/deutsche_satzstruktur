@@ -1,0 +1,239 @@
+{
+  "version": 1,
+  "region": "Baden-Württemberg",
+  "stations": [
+    {
+      "id": "deutsch-b2",
+      "title": "Deutsch B2",
+      "what": "Zuerst brauchen Sie allgemeine Deutschkenntnisse auf dem Niveau B2. Dafür gibt es ein Sprachzertifikat, zum Beispiel vom Goethe-Institut, von telc oder vom ÖSD. Stellen Sie den Antrag erst, wenn Sie dieses Zertifikat haben.",
+      "en": "First you need general German at level B2. You prove it with a language certificate, for example from the Goethe-Institut, telc or ÖSD. Apply only once you have this certificate.",
+      "terms": [
+        { "de": "das Sprachzertifikat", "en": "language certificate" },
+        { "de": "der Gemeinsame Europäische Referenzrahmen (GER)", "en": "Common European Framework of Reference (CEFR)" },
+        { "de": "der Nachweis über deutsche Sprachkenntnisse", "en": "proof of German language skills" }
+      ],
+      "documents": [
+        "Sprachzertifikat B2 (Prüfungsanbieter mit Vollmitgliedschaft in der ALTE, z. B. Goethe-Institut, telc, ÖSD)"
+      ],
+      "duration": null,
+      "cost": null,
+      "authority": "Prüfungsanbieter (z. B. Goethe-Institut, telc, ÖSD)",
+      "optional": false,
+      "source": "https://rp.baden-wuerttemberg.de/fileadmin/RP-Internet/Themenportal/Schule_und_Bildung/Berufliche_Ausbildung/Aerztin_Arzt_Ausbildung_Approbation/_DocumentLibraries/Documents/LPA_Arzt_Appr_Antrag_nonEU_Anl1.pdf",
+      "checked": "2026-11-21"
+    },
+    {
+      "id": "beratung",
+      "title": "Anerkennungsberatung",
+      "what": "Eine Anerkennungsberatungsstelle hilft Ihnen kostenlos bei Fragen zum Antrag. Wenn Sie noch im Ausland wohnen, kann der Beratungsnachweis zeigen, dass Sie in Baden-Württemberg arbeiten möchten.",
+      "en": "A recognition counselling service helps you with questions about the application, free of charge. If you still live abroad, the counselling certificate can show that you intend to work in Baden-Württemberg.",
+      "terms": [
+        { "de": "die Anerkennungsberatungsstelle", "en": "recognition counselling service" },
+        { "de": "der Beratungsnachweis", "en": "proof of counselling" },
+        { "de": "die Zuständigkeit", "en": "responsibility (which authority handles the case)" }
+      ],
+      "documents": [
+        "Beratungsnachweis nach § 1a Anerkennungsberatungsgesetz Baden-Württemberg (nur wenn Sie noch im Ausland wohnen, als eine von mehreren Möglichkeiten)"
+      ],
+      "duration": null,
+      "cost": "kostenlos",
+      "authority": "Anerkennungsberatungsstelle (z. B. IQ Netzwerk Baden-Württemberg, Zentrale Servicestelle Berufsanerkennung der Bundesagentur für Arbeit)",
+      "optional": true,
+      "source": "https://rp.baden-wuerttemberg.de/fileadmin/RP-Internet/Themenportal/Schule_und_Bildung/Berufliche_Ausbildung/Aerztin_Arzt_Ausbildung_Approbation/_DocumentLibraries/Documents/LPA_Arzt_Appr_Antrag_nonEU_Anl1.pdf",
+      "checked": "2026-11-21"
+    },
+    {
+      "id": "antrag",
+      "title": "Antrag auf Approbation",
+      "what": "Sie stellen den Antrag auf Approbation beim Regierungspräsidium Stuttgart und schicken alle Unterlagen per Post. Mit dem Antrag melden Sie sich auch zur Kenntnisprüfung an. Das ganze Verfahren dauert oft lange, im letzten Jahr im Durchschnitt rund drei Jahre.",
+      "en": "You apply for the Approbation (full licence) at the Regierungspräsidium Stuttgart and send all documents by post. With the application you also register for the Kenntnisprüfung. The whole procedure often takes a long time: last year about three years on average.",
+      "terms": [
+        { "de": "der Antrag auf Erteilung der Approbation", "en": "application for the full medical licence" },
+        { "de": "die Unterlagen", "en": "documents" },
+        { "de": "die Eingangsbestätigung", "en": "acknowledgement of receipt" },
+        { "de": "die einfache Kopie", "en": "plain copy" },
+        { "de": "der beeidigte Übersetzer", "en": "sworn translator" }
+      ],
+      "documents": [
+        "Antragsformular",
+        "Meldebescheinigung (Hauptwohnung in Baden-Württemberg) oder, wenn Sie im Ausland wohnen, Beratungsnachweis, Nachweis familiärer Bindungen oder Stellenzusage (Anlage 3)",
+        "gültiger Reisepass oder Personalausweis",
+        "tabellarischer Lebenslauf in deutscher Sprache",
+        "Nachweis einer Namensänderung (falls zutreffend)",
+        "Geburtsurkunde oder anderer amtlicher Namensnachweis (falls erforderlich)",
+        "Zeugnis oder Diplom über das abgeschlossene Medizinstudium",
+        "Fächerindex (Fächerübersicht)",
+        "Nachweis über die vollständig abgeschlossene praktische Ausbildungsphase (z. B. Internatur, Rotating Internship)",
+        "Nachweis über die Berechtigung zur Ausübung des Arztberufes im Ausbildungsstaat",
+        "Nachweis über deutsche Sprachkenntnisse (B2)",
+        "Anmeldung zur Kenntnisprüfung (Anlage 4)",
+        "Certificate of Good Standing (CoGS) / berufsrechtliche Unbedenklichkeitsbescheinigung (kann nachgereicht werden)",
+        "Polizeiliches Führungszeugnis / Strafregisterauszug (Ausland) (kann nachgereicht werden)",
+        "Ärztliche Bescheinigung (Anlage 2) (kann nachgereicht werden)"
+      ],
+      "duration": "Gesamtverfahren im letzten Jahr im Durchschnitt rund drei Jahre",
+      "cost": null,
+      "authority": "Regierungspräsidium Stuttgart, Referat 98, Landesanerkennungsstelle für Gesundheitsberufe (LAfG BW)",
+      "optional": false,
+      "source": "https://rp.baden-wuerttemberg.de/fileadmin/RP-Internet/Themenportal/Schule_und_Bildung/Berufliche_Ausbildung/Aerztin_Arzt_Ausbildung_Approbation/_DocumentLibraries/Documents/LPA_Arzt_Appr_Antrag_nonEU_Anl1.pdf",
+      "checked": "2026-11-21"
+    },
+    {
+      "id": "gutachten",
+      "title": "Gleichwertigkeitsprüfung (Gutachten)",
+      "what": "Statt der Kenntnisprüfung können Sie eine dokumentenbasierte Gleichwertigkeitsprüfung wählen. Dann vergleicht ein Gutachten Ihr Studium mit dem deutschen Medizinstudium. Sie müssen das innerhalb von vier Wochen nach dem Antrag erklären, und bei wesentlichen Unterschieden brauchen Sie trotzdem die Kenntnisprüfung.",
+      "en": "Instead of the Kenntnisprüfung you can choose a document-based equivalence check. An expert report then compares your degree with the German medical degree. You must declare this within four weeks of applying, and if there are substantial differences you still need the Kenntnisprüfung.",
+      "terms": [
+        { "de": "die dokumentenbasierte Gleichwertigkeitsprüfung", "en": "document-based equivalence check" },
+        { "de": "das Gutachten", "en": "expert report" },
+        { "de": "die wesentlichen Unterschiede", "en": "substantial differences" },
+        { "de": "das Curriculum (der Studienplan)", "en": "curriculum" },
+        { "de": "die Kostenübernahmeerklärung", "en": "declaration to pay the costs" }
+      ],
+      "documents": [
+        "Erklärung im Antragsformular (bei Antragstellung oder innerhalb von vier Wochen nach Eingang des Antrags)",
+        "Curriculum (Studienplan) mit Bestätigung der Hochschule",
+        "Nachweise über Berufserfahrung und Fortbildungen (falls vorhanden)",
+        "Kostenübernahmeerklärung (Anlage 5)"
+      ],
+      "duration": "bis zu 15 Monate für das Gutachten",
+      "cost": "in der Regel bis zu 2.500 € (Vorschuss bis zu 2.000 €)",
+      "authority": "Regierungspräsidium Stuttgart; Gutachten in der Regel von der Gutachtenstelle für Gesundheitsberufe (GfG)",
+      "optional": true,
+      "source": "https://rp.baden-wuerttemberg.de/fileadmin/RP-Internet/Themenportal/Schule_und_Bildung/Berufliche_Ausbildung/Aerztin_Arzt_Ausbildung_Approbation/_DocumentLibraries/Documents/LPA_Arzt_Appr_Antrag_nonEU_Anl6.pdf",
+      "checked": "2026-11-21"
+    },
+    {
+      "id": "fachsprachpruefung",
+      "title": "Fachsprachenprüfung",
+      "what": "In der Fachsprachenprüfung zeigen Sie, dass Sie als Ärztin auf Deutsch arbeiten können. Sie dauert 60 Minuten und hat drei Teile: Arzt-Patienten-Gespräch, Dokumentation und Arzt-Arzt-Gespräch. Das Regierungspräsidium meldet Sie an, Sie müssen sich nicht selbst anmelden.",
+      "en": "In the medical language exam you show that you can work as a doctor in German. It lasts 60 minutes and has three parts: doctor–patient conversation, documentation and doctor–doctor conversation. The Regierungspräsidium registers you; you do not register yourself.",
+      "terms": [
+        { "de": "die Fachsprachenprüfung", "en": "medical language exam" },
+        { "de": "das Arzt-Patienten-Gespräch", "en": "doctor–patient conversation" },
+        { "de": "die Dokumentation", "en": "documentation (written report)" },
+        { "de": "das Arzt-Arzt-Gespräch", "en": "doctor–doctor conversation" },
+        { "de": "die Prüfungsgebühr", "en": "exam fee" },
+        { "de": "die Bezirksärztekammer", "en": "district medical chamber" }
+      ],
+      "documents": [
+        "keine eigene Anmeldung; die Landesärztekammer schickt eine Bestätigung und einen Gebührenbescheid, die Einladung kommt nach Zahlung der Prüfungsgebühr"
+      ],
+      "duration": "Wartezeit ca. 4 bis 6 Monate; Prüfung 60 Minuten (drei Teile, jeweils ca. 20 Minuten)",
+      "cost": "420 € (jede Wiederholung 420 €)",
+      "authority": "Landesärztekammer Baden-Württemberg (Prüfung bei den Bezirksärztekammern, im Auftrag des Regierungspräsidiums Stuttgart)",
+      "optional": false,
+      "source": "https://www.aerztekammer-bw.de/fachsprachenpruefung",
+      "checked": "2026-11-21"
+    },
+    {
+      "id": "berufserlaubnis",
+      "title": "Berufserlaubnis",
+      "what": "Mit einer Berufserlaubnis dürfen Sie schon vor der Approbation als Ärztin arbeiten, aber nur unter Aufsicht und höchstens zwei Jahre. Sie ist freiwillig und für die Approbation nicht nötig. Sie brauchen dafür eine Stellenzusage eines Arbeitgebers in Baden-Württemberg.",
+      "en": "With a temporary permit you may work as a doctor before the Approbation, but only under supervision and for at most two years. It is voluntary and not needed for the Approbation. You need a job offer from an employer in Baden-Württemberg.",
+      "terms": [
+        { "de": "die Berufserlaubnis", "en": "temporary permit to practise" },
+        { "de": "unter Aufsicht", "en": "under supervision" },
+        { "de": "die Stellenzusage", "en": "job offer" },
+        { "de": "befristet", "en": "time-limited" }
+      ],
+      "documents": [
+        "Stellenzusage eines Arbeitgebers in Baden-Württemberg (Anlage 3)",
+        "laufender Antrag auf Approbation"
+      ],
+      "duration": "höchstens zwei Jahre",
+      "cost": "250 € (bis zu einem Jahr) oder 350 € (über ein Jahr)",
+      "authority": "Regierungspräsidium Stuttgart, Referat 98, Landesanerkennungsstelle für Gesundheitsberufe (LAfG BW)",
+      "optional": true,
+      "source": "https://rp.baden-wuerttemberg.de/fileadmin/RP-Internet/Themenportal/Schule_und_Bildung/Berufliche_Ausbildung/Aerztin_Arzt_Ausbildung_Approbation/_DocumentLibraries/Documents/LPA_Arzt_Appr_Antrag_nonEU_Anl1.pdf",
+      "checked": "2026-11-21"
+    },
+    {
+      "id": "kenntnispruefung",
+      "title": "Kenntnisprüfung",
+      "what": "In der Kenntnisprüfung zeigen Sie Ihr medizinisches Wissen auf Deutsch, vor allem in Innerer Medizin und Chirurgie. Es ist eine mündlich-praktische Prüfung mit Patientenvorstellung und dauert 60 bis 90 Minuten. Sie kommt nach der bestandenen Fachsprachenprüfung und kann zweimal wiederholt werden.",
+      "en": "In the knowledge exam you show your medical knowledge in German, mainly internal medicine and surgery. It is an oral-practical exam with a patient presentation and lasts 60 to 90 minutes. It comes after the passed medical language exam and can be repeated twice.",
+      "terms": [
+        { "de": "die Kenntnisprüfung", "en": "knowledge exam (equivalence exam)" },
+        { "de": "die mündlich-praktische Prüfung", "en": "oral-practical exam" },
+        { "de": "die Patientenvorstellung", "en": "patient presentation" },
+        { "de": "der Patientenbericht", "en": "written patient report" },
+        { "de": "der Prüfungsversuch", "en": "exam attempt" }
+      ],
+      "documents": [
+        "Anmeldung zur Kenntnisprüfung (Anlage 4, schon mit dem Antrag)",
+        "bestandene Fachsprachenprüfung"
+      ],
+      "duration": "Wartezeit ca. 8 bis 10 Monate; Prüfung 60 bis 90 Minuten, dazu Zeit für Untersuchung und Patientenbericht",
+      "cost": "1.100 € pro Prüfungsversuch",
+      "authority": "Landesärztekammer Baden-Württemberg (Anmeldung durch das Regierungspräsidium Stuttgart)",
+      "optional": false,
+      "source": "https://rp.baden-wuerttemberg.de/fileadmin/RP-Internet/Themenportal/Schule_und_Bildung/Berufliche_Ausbildung/Aerztin_Arzt_Ausbildung_Approbation/_DocumentLibraries/Documents/LPA_Arzt_Appr_Antrag_nonEU_Anl6.pdf",
+      "checked": "2026-11-21"
+    },
+    {
+      "id": "approbation",
+      "title": "Approbation",
+      "what": "Wenn alle Voraussetzungen erfüllt sind, bekommen Sie die Approbation. Damit dürfen Sie unbefristet in ganz Deutschland als Ärztin arbeiten. Vorher fordert das Regierungspräsidium noch ein deutsches Führungszeugnis an.",
+      "en": "When all requirements are met, you receive the Approbation. With it you may work as a doctor in all of Germany without a time limit. Before that, the Regierungspräsidium asks for a German certificate of good conduct.",
+      "terms": [
+        { "de": "die Approbation", "en": "full licence to practise medicine" },
+        { "de": "das Führungszeugnis", "en": "certificate of good conduct (police record)" },
+        { "de": "die gesundheitliche Eignung", "en": "health fitness" },
+        { "de": "die Zuverlässigkeit", "en": "reliability (good character)" }
+      ],
+      "documents": [
+        "Polizeiliches Führungszeugnis (Deutschland), Belegart „OB“, erst nach Aufforderung beantragen",
+        "Ärztliche Bescheinigung (Anlage 2), nicht älter als drei Monate",
+        "Certificate of Good Standing und Führungszeugnisse aus dem Ausland, nicht älter als drei Monate"
+      ],
+      "duration": null,
+      "cost": "450 €",
+      "authority": "Regierungspräsidium Stuttgart, Referat 98, Landesanerkennungsstelle für Gesundheitsberufe (LAfG BW)",
+      "optional": false,
+      "source": "https://rp.baden-wuerttemberg.de/fileadmin/RP-Internet/Themenportal/Schule_und_Bildung/Berufliche_Ausbildung/Aerztin_Arzt_Ausbildung_Approbation/_DocumentLibraries/Documents/LPA_Arzt_Appr_Antrag_nonEU_Anl1.pdf",
+      "checked": "2026-11-21"
+    },
+    {
+      "id": "kammer",
+      "title": "Meldung bei der Ärztekammer",
+      "what": "Wenn Sie in Baden-Württemberg als Ärztin arbeiten, werden Sie Mitglied der Ärztekammer. Sie melden sich innerhalb eines Monats nach Beginn der Arbeit mit dem Meldebogen. Zuständig ist die Bezirksärztekammer an Ihrem Arbeitsort.",
+      "en": "When you work as a doctor in Baden-Württemberg, you become a member of the medical chamber. You register within one month of starting work, using the registration form. The district chamber where you work is responsible.",
+      "terms": [
+        { "de": "die Kammermitgliedschaft", "en": "chamber membership" },
+        { "de": "der Meldebogen", "en": "registration form" },
+        { "de": "die Bezirksärztekammer", "en": "district medical chamber" },
+        { "de": "der Arbeitsort", "en": "place of work" }
+      ],
+      "documents": [
+        "Meldebogen (online oder als PDF der Bezirksärztekammer)"
+      ],
+      "duration": "innerhalb eines Monats nach Beginn der Tätigkeit",
+      "cost": null,
+      "authority": "Bezirksärztekammer am Arbeitsort (Landesärztekammer Baden-Württemberg)",
+      "optional": false,
+      "source": "https://www.aerztekammer-bw.de/mitglied-werden",
+      "checked": "2026-11-21"
+    },
+    {
+      "id": "weiterbildung",
+      "title": "Weiterbildung zur Fachärztin",
+      "what": "Nach der Approbation können Sie die Weiterbildung zur Fachärztin beginnen. Sie arbeiten dann an einer zugelassenen Weiterbildungsstätte unter einer befugten Ärztin oder einem befugten Arzt. Am Ende steht eine Prüfung, und Sie bekommen die Facharztbezeichnung.",
+      "en": "After the Approbation you can start specialist training. You then work at an approved training site under an authorised doctor. At the end there is an exam, and you receive the specialist title.",
+      "terms": [
+        { "de": "die Weiterbildung", "en": "specialist training (residency)" },
+        { "de": "die Weiterbildungsstätte", "en": "approved training site" },
+        { "de": "der/die Weiterbildungsbefugte", "en": "authorised trainer" },
+        { "de": "die Weiterbildungsordnung", "en": "specialist training regulations" },
+        { "de": "die Facharztbezeichnung", "en": "specialist title" }
+      ],
+      "documents": [],
+      "duration": null,
+      "cost": null,
+      "authority": "Landesärztekammer Baden-Württemberg",
+      "optional": false,
+      "source": "https://www.bundesaerztekammer.de/themen/aerzte/aus-fort-und-weiterbildung/aerztliche-weiterbildung",
+      "checked": "2026-11-21"
+    }
+  ]
+}
