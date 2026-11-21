@@ -19,7 +19,7 @@ import { renderBoardScreen } from './boardScreen.js';
 import { KLINIK_TILES, KLINIK_ROUTE_FILE, KLINIK_ROUTE_VERSION, ANAMNESE_FILE, ANAMNESE_VERSION, routeState, toggleStation, loadDone, saveDone, renderKlinik, renderRoute, renderAnamneseMenu, renderCaseList, renderLetter, questionSortModel } from './klinik.js';
 import { renderSortScreen } from './sortScreen.js';
 import { CASES_INDEX_FILE, CASES_INDEX_VERSION, caseUrl, briefSortModel, briefHint, letterSections } from './caseFlow.js';
-import { renderInterview } from './caseScreen.js';
+import { renderInterview, renderExam } from './caseScreen.js';
 import './hotspotBoard.js'; // registers the 'hotspot' board kind
 import './sceneBoard.js'; // registers the 'scene' board kind
 import './timelineBoard.js'; // registers the 'timeline' board kind
@@ -1371,7 +1371,8 @@ class DeutschApp {
      * Klinik screen: tiles; "Der Weg zur Approbation" opens the route view and "Anamnese" its menu in
      * the same section. "Fragen sortieren" runs on the sort screen and comes back to the Anamnese menu;
      * "Gespräch" lists the cases (view 'gespraech'), a case runs on the case screen (openCase).
-     * @param {'tiles'|'route'|'anamnese'|'gespraech'|'arztbrief'} [view]
+     * "Fachsprachenprüfung" lists the cases too (view 'fsp'); the practice run is openExam.
+     * @param {'tiles'|'route'|'anamnese'|'gespraech'|'arztbrief'|'fsp'} [view]
      */
     async openKlinik(view = 'tiles') {
         const root = document.getElementById('screen-klinik');
@@ -1387,7 +1388,7 @@ class DeutschApp {
                 this.klinikStations = null;
             }
         }
-        if ((view === 'anamnese' || view === 'gespraech') && this.anamneseData === undefined) {
+        if (['anamnese', 'gespraech', 'fsp'].includes(view) && this.anamneseData === undefined) {
             // fetched once, like the route; null turns the menu's buttons off
             try {
                 const r = await fetch(`${ANAMNESE_FILE}?v=${ANAMNESE_VERSION}`);
@@ -1398,7 +1399,7 @@ class DeutschApp {
                 this.anamneseData = null;
             }
         }
-        if (['anamnese', 'gespraech', 'arztbrief'].includes(view) && this.caseIndex === undefined) {
+        if (['anamnese', 'gespraech', 'arztbrief', 'fsp'].includes(view) && this.caseIndex === undefined) {
             try {
                 const r = await fetch(`${CASES_INDEX_FILE}?v=${CASES_INDEX_VERSION}`);
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -1417,6 +1418,7 @@ class DeutschApp {
             openBoard: id => this.openBoard(id),
             openAnamnese: () => this.openKlinik('anamnese'),
             openArztbrief: () => this.openKlinik('arztbrief'),
+            openFsp: () => this.openKlinik('fsp'),
             close: () => this.showScreen('practice'),
         });
         const anamnese = this.anamneseData;
@@ -1427,6 +1429,10 @@ class DeutschApp {
         });
         const briefList = () => renderCaseList(root, { title: 'Arztbrief', backLabel: 'Klinik', cases }, {
             openCase: id => this.openBrief(cases.find(c => c.id === id)),
+            back: tiles,
+        });
+        const examList = () => renderCaseList(root, { title: 'Fachsprachenprüfung', backLabel: 'Klinik', cases }, {
+            openCase: id => this.openExam(cases.find(c => c.id === id)),
             back: tiles,
         });
         const anamneseMenu = () => renderAnamneseMenu(root, { available: !!anamnese, cases }, {
@@ -1447,6 +1453,7 @@ class DeutschApp {
         else if (view === 'anamnese') anamneseMenu();
         else if (view === 'gespraech' && anamnese && cases.length) caseList();
         else if (view === 'arztbrief' && cases.length) briefList();
+        else if (view === 'fsp' && anamnese && cases.length) examList();
         else tiles();
     }
 
@@ -1499,6 +1506,22 @@ class DeutschApp {
         this.caseTeardown = renderInterview(document.getElementById('screen-case'),
             { caseData: this.caseFiles[entry.id], anamnese: this.anamneseData, clock: null },
             { onDone: back, onClose: back });
+    }
+
+    /**
+     * One case's Fachsprachenprüfung practice run on the case screen (renderExam); a run in progress
+     * is resumed from its draft. Back to the FSP case list when finished or closed.
+     * @param {{id: string, version: number}} entry  from data/medical/faelle/index.json
+     */
+    async openExam(entry) {
+        if (!entry || !this.anamneseData) return;
+        if (!await this.loadCaseFile(entry)) return;
+        if (this.screen !== 'klinik') return;
+        this.showScreen('case');
+        const back = () => this.openKlinik('fsp');
+        this.caseTeardown = renderExam(document.getElementById('screen-case'),
+            { caseData: this.caseFiles[entry.id], anamnese: this.anamneseData, storage: localStorage },
+            { onClose: back });
     }
 
     async renderWordsScreen() {

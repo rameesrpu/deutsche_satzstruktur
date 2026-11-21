@@ -1,10 +1,11 @@
 // caseFlow: the Anamnese data file (sections and standard questions), the case files and the
-// pure interview logic (js/caseFlow.js)
+// pure interview logic and the FSP practice run (js/caseFlow.js)
 
 import { test, assert, assertEqual } from './assert.js';
-import { readText, listDir } from './stubs.js';
+import { readText, listDir, makeLocalStorage } from './stubs.js';
 import { ANAMNESE_VERSION } from '../js/klinik.js';
-import { CASES_INDEX_VERSION, BRIEF_SECTIONS, briefSortModel, briefHint, letterSections, interviewSteps, formState, interviewScore, germanStrings } from '../js/caseFlow.js';
+import { CASES_INDEX_VERSION, BRIEF_SECTIONS, briefSortModel, briefHint, letterSections, interviewSteps, formState, interviewScore, germanStrings,
+    EXAM_PARTS, RATINGS, examState, examSummary, examSections, draftKey, loadDraft, saveDraft, clearDraft } from '../js/caseFlow.js';
 
 const SECTIONS = [
     ['beschwerden', 'Aktuelle Beschwerden'], ['vorerkrankungen', 'Vorerkrankungen und Operationen'],
@@ -24,9 +25,11 @@ export function runCaseFlowTests() {
         for (const s of data.sections) assert(typeof s.en === 'string' && s.en.trim() !== '', `${s.id}: en`);
     });
 
-    test('anamnese.json: 6 to 8 questions per section', () => {
+    // 6–8 per section; Aktuelle Beschwerden up to 10 (Task 5: Belastung/Ruhe and the cause of a fall)
+    test('anamnese.json: 6 to 8 questions per section (Aktuelle Beschwerden up to 10)', () => {
         for (const s of data.sections) {
-            assert(s.questions.length >= 6 && s.questions.length <= 8, `${s.id}: ${s.questions.length} questions`);
+            const max = s.id === 'beschwerden' ? 10 : 8;
+            assert(s.questions.length >= 6 && s.questions.length <= max, `${s.id}: ${s.questions.length} questions`);
         }
     });
 
@@ -166,6 +169,8 @@ function runCaseTests(anamnese) {
                 for (const w of step.wrong) {
                     assert(questionSection.has(w), `wrong ${w}`);
                     assert(w !== step.question, `wrong ${w} is the question`);
+                    // a wrong question really is wrong: not one of the step's section (directly or via `also`)
+                    assert(!questionSection.get(w).includes(step.section), `wrong ${w} belongs to ${step.section}`);
                 }
                 assertEqual(step.distractors.length, 2);
             }
@@ -218,5 +223,107 @@ function runCaseTests(anamnese) {
         assertEqual(bauch.dokumentation.map(d => d.section), anamnese.sections.map(s => s.id));
         assertEqual(bauch.level, 'B1');
         assertEqual(bauch.patient.age, 24);
+    });
+
+    for (const [id, level, age] of [['brustschmerzen', 'B2', 58], ['handgelenk', 'B1', 67]]) {
+        const c = JSON.parse(readText(`data/medical/faelle/${id}.json`));
+        test(`faelle/${id}: level ${level}, age ${age}, 10–14 steps, 10–13 letter sentences in all five sections`, () => {
+            assertEqual([c.level, c.patient.age], [level, age]);
+            assert(c.interview.length >= 10 && c.interview.length <= 14, `${c.interview.length} steps`);
+            assert(c.brief.length >= 10 && c.brief.length <= 13, `${c.brief.length} sentences`);
+            assertEqual(new Set(c.brief.map(b => b.section)).size, 5);
+            // documentation: one model per section the interview covers, in Anamnese order
+            const covered = anamnese.sections.map(s => s.id).filter(s => c.interview.some(e => e.section === s));
+            assertEqual(c.dokumentation.map(d => d.section), covered);
+        });
+    }
+    const brust = JSON.parse(readText('data/medical/faelle/brustschmerzen.json'));
+    const hand = JSON.parse(readText('data/medical/faelle/handgelenk.json'));
+    test('faelle/brustschmerzen: the red-flag questions (Ausstrahlung, Belastung/Ruhe, Begleitsymptome, Herzinfarkt in der Familie, Rauchen)', () => {
+        for (const q of ['b-ausstrahlung', 'b-belastung', 'b-begleit', 'f-herz', 's-rauchen', 's-alkohol']) {
+            assert(brust.interview.some(s => s.question === q), q);
+        }
+    });
+    test('faelle/handgelenk: why she fell, blood thinners, osteoporosis; no Vegetative Anamnese', () => {
+        for (const q of ['b-sturz', 'm-blutverduenner', 'v-osteoporose', 's-alkohol']) {
+            assert(hand.interview.some(s => s.question === q), q);
+        }
+        assert(!hand.interview.some(s => s.section === 'vegetativ'));
+        assert(formState(hand, anamnese, hand.interview.length).find(f => f.id === 'vegetativ').empty);
+    });
+
+    runExamTests(anamnese);
+}
+
+function runExamTests(anamnese) {
+    const MIN = 60000;
+    test('EXAM_PARTS: the three parts of the Fachsprachprüfung, 20 minutes each', () => {
+        assertEqual(EXAM_PARTS, [
+            { id: 'gespraech', title: 'Arzt-Patienten-Gespräch', minutes: 20 },
+            { id: 'dokumentation', title: 'Dokumentation', minutes: 20 },
+            { id: 'vorstellung', title: 'Arzt-Arzt-Gespräch', minutes: 20 },
+        ]);
+        assertEqual(RATINGS, ['Passt', 'Teilweise', 'Noch nicht']);
+    });
+
+    test('examState: no draft → part 0 with the full 20 minutes, no texts', () => {
+        const s = examState(null, 1000);
+        assertEqual([s.part, s.remainingMs, s.texts], [0, 20 * MIN, {}]);
+        assertEqual(s.startedAt, 1000);
+    });
+
+    test('examState: a draft with 5 minutes elapsed → 15 minutes left and the saved texts', () => {
+        const draft = { part: 1, startedAt: 500, elapsedMs: 5 * MIN, texts: { beschwerden: 'Seit gestern Bauchschmerzen.' } };
+        const s = examState(draft, 10 * 3600000); // time away does not count
+        assertEqual([s.part, s.remainingMs, s.startedAt], [1, 15 * MIN, 500]);
+        assertEqual(s.texts, { beschwerden: 'Seit gestern Bauchschmerzen.' });
+    });
+
+    test('examState: running out goes below zero (the clock only turns red), bad drafts start over', () => {
+        assertEqual(examState({ part: 2, startedAt: 1, elapsedMs: 25 * MIN, texts: {} }, 2).remainingMs, -5 * MIN);
+        for (const bad of [{}, { part: 7 }, { part: 'x', elapsedMs: -3, texts: 'no' }, 'oops']) {
+            const s = examState(bad, 9);
+            assertEqual([s.part, s.remainingMs, s.texts], [0, 20 * MIN, {}]);
+        }
+        const s = examState({ part: 1, startedAt: 1, elapsedMs: 0, texts: { a: 'x', b: 3 }, ratings: [0, 'x', 2], score: { questions: 1, facts: 2, total: 3 } }, 2);
+        assertEqual(s.texts, { a: 'x' });
+        assertEqual(s.ratings, [0, null, 2]);
+        assertEqual(s.score, { questions: 1, facts: 2, total: 3 });
+        assertEqual(examState({ part: 3, startedAt: 1, elapsedMs: 0, texts: {} }, 2).part, 3); // the summary
+    });
+
+    test('draft: leave in part 2 and return → same part, texts and time left', () => {
+        const storage = makeLocalStorage();
+        assertEqual(draftKey('bauchschmerzen'), 'fspDraft/bauchschmerzen');
+        assertEqual(loadDraft(storage, 'bauchschmerzen'), null);
+        saveDraft(storage, 'bauchschmerzen', { part: 1, startedAt: 100, elapsedMs: 7 * MIN, texts: { sozial: 'Studentin.' } });
+        const back = examState(loadDraft(storage, 'bauchschmerzen'), 99999999);
+        assertEqual([back.part, back.remainingMs, back.texts], [1, 13 * MIN, { sozial: 'Studentin.' }]);
+        clearDraft(storage, 'bauchschmerzen');
+        assertEqual(loadDraft(storage, 'bauchschmerzen'), null);
+        storage.setItem('fspDraft/x', '{broken');
+        assertEqual(loadDraft(storage, 'x'), null);
+        const throwing = { getItem() { throw new Error('blocked'); }, setItem() { throw new Error('blocked'); }, removeItem() { throw new Error('blocked'); } };
+        assertEqual(loadDraft(throwing, 'x'), null);
+        saveDraft(throwing, 'x', {}); // no throw
+        clearDraft(throwing, 'x');
+    });
+
+    test('examSummary: three lines, one per part', () => {
+        const { lines } = examSummary({ questions: 11, facts: 12, total: 13 }, [0, 0, 1, 2, 0, null, 1], 1);
+        assertEqual(lines, [
+            'Arzt-Patienten-Gespräch: 11 von 13 Fragen, 12 von 13 Notizen beim ersten Versuch',
+            'Dokumentation: 3 × Passt, 2 × Teilweise, 1 × Noch nicht',
+            'Arzt-Arzt-Gespräch: Teilweise',
+        ]);
+        assertEqual(examSummary(null, [], null).lines.length, 3);
+    });
+
+    test('examSections: the Anamnese sections that have a model text, in Anamnese order', () => {
+        const c = { dokumentation: [{ section: 'sozial', model: 'S', en: 's' }, { section: 'beschwerden', model: 'B', en: 'b' }] };
+        assertEqual(examSections(c, anamnese), [
+            { id: 'beschwerden', title: 'Aktuelle Beschwerden', model: 'B', en: 'b' },
+            { id: 'sozial', title: 'Sozialanamnese', model: 'S', en: 's' },
+        ]);
     });
 }

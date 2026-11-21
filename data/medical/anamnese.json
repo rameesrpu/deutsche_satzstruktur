@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "sections": [
     {
       "id": "beschwerden",
@@ -13,6 +13,8 @@
         { "id": "b-skala", "de": "Wie stark sind die Schmerzen auf einer Skala von eins bis zehn?", "en": "How bad is the pain on a scale from one to ten?" },
         { "id": "b-ausstrahlung", "de": "Strahlen die Schmerzen aus?", "en": "Does the pain spread anywhere?" },
         { "id": "b-begleit", "de": "Haben Sie noch andere Beschwerden, zum Beispiel Übelkeit oder Erbrechen?", "en": "Do you have any other symptoms, for example nausea or vomiting?" },
+        { "id": "b-belastung", "de": "Treten die Schmerzen bei Belastung auf oder auch in Ruhe?", "en": "Does the pain come on with exertion, or also at rest?" },
+        { "id": "b-sturz", "de": "War Ihnen vor dem Sturz schwindelig, oder waren Sie kurz bewusstlos?", "en": "Were you dizzy before the fall, or did you pass out for a moment?" },
         { "id": "b-frueher", "de": "Hatten Sie solche Beschwerden schon einmal?", "en": "Have you had symptoms like these before?", "also": ["vorerkrankungen"] }
       ]
     },
@@ -27,6 +29,7 @@
         { "id": "v-krankenhaus", "de": "Waren Sie schon einmal im Krankenhaus?", "en": "Have you ever been in hospital?" },
         { "id": "v-unfall", "de": "Hatten Sie schon einmal einen Unfall?", "en": "Have you ever had an accident?" },
         { "id": "v-behandlung", "de": "Sind Sie zurzeit wegen einer anderen Erkrankung in Behandlung?", "en": "Are you currently being treated for another illness?" },
+        { "id": "v-osteoporose", "de": "Ist bei Ihnen eine Osteoporose bekannt?", "en": "Have you been diagnosed with osteoporosis?" },
         { "id": "v-impfung", "de": "Ist Ihr Impfschutz gegen Tetanus aktuell?", "en": "Is your tetanus vaccination up to date?" }
       ]
     },

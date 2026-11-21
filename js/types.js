@@ -268,3 +268,18 @@
  * @property {{de: string, en: string}} fact    the note that belongs in the form
  * @property {[{de: string, en: string}, {de: string, en: string}]} distractors  notes that do not follow from the answer
  */
+
+/**
+ * A Fachsprachenprüfung practice run in progress: localStorage `fspDraft/<caseId>` (caseFlow.js
+ * examState/loadDraft/saveDraft; deleted at the end). Ratings are RATINGS indexes (0 Passt, 1 Teilweise, 2 Noch nicht).
+ * @typedef {Object} ExamDraft
+ * @property {number} part       0–2 = EXAM_PARTS index, 3 = the summary
+ * @property {number} startedAt  when the run began (ms)
+ * @property {number} elapsedMs  time spent in the current part (counts only while the part is open)
+ * @property {Object<string, string>} texts  part 2: her text per Anamnese section id
+ * @property {?{questions: number, facts: number, total: number}} [score]  part 1 first-try counts
+ * @property {(?number)[]} [ratings]  part 2: one rating per section of examSections()
+ * @property {boolean} [compared]     part 2: `Vergleichen` was tapped (texts are final)
+ * @property {boolean} [presented]    part 3: `Ich bin fertig` was tapped
+ * @property {?number} [talkRating]   part 3 rating
+ */

@@ -1,14 +1,18 @@
 /**
- * Case screen (body[data-screen="case"]): the Anamnese interview ("Gespräch", FSP part 1).
+ * Case screen (body[data-screen="case"]): the Anamnese interview ("Gespräch", FSP part 1), and
+ * renderExam, the Fachsprachenprüfung practice run (interview, Dokumentation, Arzt-Arzt-Gespräch).
  * Top: patient card. Middle: the Anamnesebogen, seven labelled boxes filling as she goes. Bottom
  * (sticky): per step the section and three questions; the right one is spoken, the patient's answer
  * appears as a bubble and is spoken; then three notes, the right one moves into its box.
  * Spoken prompts follow the "Aussprache" setting; the 🔊 buttons always speak. Without a German
  * voice everything still appears as text. Tapping a German sentence shows its English.
  * Logic in caseFlow.js; free of routing (the caller decides what onDone / onClose do).
+ * The clock counts down from `minutes` minus `elapsedMs` and only while the screen is open; running
+ * out turns it red, nothing is cut off.
  */
 
-import { interviewSteps, formState, interviewScore, scoreLine, patientLine } from './caseFlow.js';
+import { interviewSteps, formState, interviewScore, scoreLine, patientLine, EXAM_PARTS, RATINGS, examState, examSummary,
+    examSections, loadDraft, saveDraft, clearDraft } from './caseFlow.js';
 import { progressSegments } from './playScreen.js';
 import { gameSounds } from './sound.js';
 
@@ -31,12 +35,39 @@ const clockText = ms => {
 };
 
 /**
- * @param {HTMLElement} root
- * @param {{caseData: import('./types.js').Case, anamnese: Object, clock: ?{minutes: number}, rng?: () => number}} opts
- * @param {{onDone: (score: {questions: number, facts: number, total: number}) => void, onClose: () => void}} actions
- * @returns {() => void} teardown (stops the clock)
+ * A countdown that runs from creation until stop(). `elapsed()` = `elapsedMs` passed in plus the time
+ * it ran; `draw()` writes the time left into `el` (red when it has run out).
+ * @param {{minutes: number, elapsedMs?: number}} clock
  */
-export function renderInterview(root, { caseData, anamnese, clock = null, rng = Math.random }, { onDone, onClose }) {
+function countdown({ minutes, elapsedMs = 0 }) {
+    let base = Number.isFinite(elapsedMs) && elapsedMs > 0 ? elapsedMs : 0;
+    let since = Date.now();
+    let running = true;
+    const c = {
+        el: el('span', 'case-clock'),
+        elapsed: () => base + (running ? Date.now() - since : 0),
+        stop() { if (running) { base = c.elapsed(); running = false; } c.draw(); },
+        draw() {
+            const left = minutes * 60000 - c.elapsed();
+            c.el.textContent = clockText(left);
+            c.el.classList.toggle('is-over', left <= 0);
+        },
+    };
+    c.el.setAttribute('role', 'timer');
+    c.el.setAttribute('aria-label', 'Restzeit');
+    c.draw();
+    return c;
+}
+
+/**
+ * @param {HTMLElement} root
+ * @param {{caseData: import('./types.js').Case, anamnese: Object, clock: ?{minutes: number, elapsedMs?: number},
+ *   heading?: string, rng?: () => number}} opts  `heading`: a line above the patient card (the exam part)
+ * @param {{onDone: (score: {questions: number, facts: number, total: number}, time: {elapsedMs: number}) => void,
+ *   onClose: (time: {elapsedMs: number}) => void}} actions  `elapsedMs`: the clock's time so far (0 without a clock)
+ * @returns {() => number} teardown: stops the clock, returns its elapsed ms
+ */
+export function renderInterview(root, { caseData, anamnese, clock = null, heading = '', rng = Math.random }, { onDone, onClose }) {
     const steps = interviewSteps(caseData, anamnese, rng);
     const results = [];
     let index = 0;
@@ -48,23 +79,25 @@ export function renderInterview(root, { caseData, anamnese, clock = null, rng = 
     let shake = null; // the wrong option just tapped
     const openEn = new Set(); // keys of sentences showing their English
     let finished = false;
-    const finish = fn => (...args) => { if (!finished) { finished = true; teardown(); fn(...args); } };
+    const finish = fn => (...args) => { if (!finished) { finished = true; const elapsedMs = teardown(); fn(...args, { elapsedMs }); } };
     const done = finish(onDone);
     const closeScreen = finish(onClose);
     const voice = () => gameSounds.hasGermanVoice();
     const say = (text, o) => { try { gameSounds.speak(text, o); } catch (e) { /* no speech: text only */ } };
 
     let timer = null;
-    const startedAt = Date.now();
-    const clockEl = clock ? el('span', 'case-clock') : null;
+    const clk = clock ? countdown(clock) : null;
+    const clockEl = clk ? clk.el : null;
     function tick() {
-        if (!clockEl) return;
+        if (!clk) return;
         if (!inner.isConnected) { teardown(); return; } // the screen was replaced without close
-        const left = clock.minutes * 60000 - (Date.now() - startedAt);
-        clockEl.textContent = clockText(left);
-        clockEl.classList.toggle('is-over', left <= 0);
+        clk.draw();
     }
-    function teardown() { if (timer) { clearInterval(timer); timer = null; } }
+    function teardown() {
+        if (timer) { clearInterval(timer); timer = null; }
+        if (clk) clk.stop();
+        return clk ? clk.elapsed() : 0;
+    }
 
     const inner = el('div', 'case-inner');
     const feedback = el('div', 'play-feedback play-feedback-wrong');
@@ -189,7 +222,7 @@ export function renderInterview(root, { caseData, anamnese, clock = null, rng = 
             }
         }
 
-        inner.replaceChildren(bar, patient, form, panel);
+        inner.replaceChildren(bar, ...(heading ? [el('p', 'exam-part', heading)] : []), patient, form, panel);
         if (root.firstChild !== inner) root.replaceChildren(inner);
         if (newBox && newBox.scrollIntoView) newBox.scrollIntoView({ block: 'nearest' });
         newNote = null;
@@ -234,10 +267,299 @@ export function renderInterview(root, { caseData, anamnese, clock = null, rng = 
         tried = new Set();
         hint = null;
         phase = index < steps.length ? 'ask' : 'end';
+        if (phase === 'end') teardown(); // the clock stops with the last note
         draw();
     }
 
     draw();
-    if (clockEl) { tick(); timer = setInterval(tick, 1000); }
+    if (clk && phase !== 'end') { tick(); timer = setInterval(tick, 1000); }
+    return teardown;
+}
+
+// --- Fachsprachenprüfung practice run ---
+
+/** A German text that shows its English on tap (toggled in place, no redraw). */
+function tapText(de, en, cls = '') {
+    const wrap = el('div', `case-sentence ${cls}`.trim());
+    const b = el('button', 'case-de', de);
+    b.type = 'button';
+    b.setAttribute('aria-expanded', 'false');
+    const e = el('div', 'case-en', en || '');
+    e.hidden = true;
+    b.addEventListener('click', () => {
+        e.hidden = !e.hidden;
+        b.setAttribute('aria-expanded', String(!e.hidden));
+    });
+    wrap.append(b);
+    if (en) wrap.append(e);
+    return wrap;
+}
+
+/** The three self-rating buttons; `onPick(i)` with the RATINGS index. */
+function ratingRow(selected, onPick) {
+    const row = el('div', 'exam-ratings');
+    row.setAttribute('role', 'group');
+    row.setAttribute('aria-label', 'Selbsteinschätzung');
+    RATINGS.forEach((r, i) => {
+        const b = el('button', 'exam-rating', r);
+        b.type = 'button';
+        b.dataset.rating = String(i);
+        b.setAttribute('aria-pressed', String(selected === i));
+        if (selected === i) b.classList.add('is-selected');
+        b.addEventListener('click', () => onPick(i));
+        row.append(b);
+    });
+    return row;
+}
+
+const SAVE_DELAY_MS = 600;
+
+/**
+ * The Fachsprachenprüfung practice run on one case: three parts of EXAM_PARTS, each with its clock,
+ * then the summary. Part 1 = renderInterview with the clock; part 2 = one textarea per Anamnesebogen
+ * section that has a model, then `Vergleichen`: her text above the model per section, each rated;
+ * part 3 = the presentation skeleton, `Ich bin fertig` → the model (spoken, `Anhören` with a German
+ * voice) and one rating; end = examSummary and `Fertig`. The run is kept in `fspDraft/<caseId>`
+ * (saved as she types and on leaving, so she can come back: same part, texts and time; the clock
+ * counts only while a part is open) and deleted with `Fertig`.
+ * @param {HTMLElement} root
+ * @param {{caseData: import('./types.js').Case, anamnese: Object, storage: Storage, rng?: () => number}} opts
+ * @param {{onClose: () => void}} actions
+ * @returns {() => void} teardown (saves the draft and stops the clock)
+ */
+export function renderExam(root, { caseData, anamnese, storage, rng = Math.random }, { onClose }) {
+    const id = caseData.id;
+    const st = examState(loadDraft(storage, id), Date.now());
+    const draft = {
+        part: st.part, startedAt: st.startedAt, elapsedMs: st.elapsedMs, texts: st.texts,
+        score: st.score, ratings: st.ratings, compared: st.compared, presented: st.presented, talkRating: st.talkRating,
+    };
+    const sections = examSections(caseData, anamnese);
+    const voice = () => gameSounds.hasGermanVoice();
+    const say = (text, o) => { try { gameSounds.speak(text, o); } catch (e) { /* no speech: text only */ } };
+    let clk = null; // parts 2 and 3
+    let timer = null;
+    let interview = null; // teardown of part 1
+    let saveTimer = null;
+    let closed = false;
+    let inner = null;
+
+    function save() {
+        if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
+        if (closed) return;
+        if (clk) draft.elapsedMs = clk.elapsed();
+        saveDraft(storage, id, draft);
+    }
+    const saveSoon = () => { if (saveTimer) clearTimeout(saveTimer); saveTimer = setTimeout(save, SAVE_DELAY_MS); };
+    function stopClock() {
+        if (timer) { clearInterval(timer); timer = null; }
+        if (clk) { clk.stop(); draft.elapsedMs = clk.elapsed(); }
+    }
+    function teardown() {
+        if (closed) return;
+        if (interview) { draft.elapsedMs = interview(); interview = null; }
+        if (timer) { clearInterval(timer); timer = null; }
+        save();
+        if (clk) clk.stop();
+        closed = true;
+    }
+    function leave() { teardown(); onClose(); }
+    function finish() {
+        if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
+        stopClock();
+        closed = true;
+        clearDraft(storage, id);
+        onClose();
+    }
+    function goTo(part) {
+        stopClock();
+        clk = null;
+        draft.part = part;
+        draft.elapsedMs = 0;
+        save();
+        root.scrollTop = 0;
+        show();
+    }
+
+    function startClock(running) {
+        clk = countdown({ minutes: EXAM_PARTS[draft.part].minutes, elapsedMs: draft.elapsedMs });
+        if (!running) { clk.stop(); return; }
+        timer = setInterval(() => {
+            if (!inner || !inner.isConnected) { teardown(); return; } // the screen was replaced without close
+            clk.draw();
+        }, 1000);
+    }
+
+    /** Top bar (close, the three parts, clock), part heading and patient line. */
+    function frame() {
+        inner = el('div', 'case-inner exam-inner');
+        const bar = el('div', 'play-bar');
+        const close = el('button', 'play-close');
+        close.type = 'button';
+        close.setAttribute('aria-label', 'Beenden');
+        close.title = 'Beenden';
+        close.innerHTML = CLOSE_ICON;
+        close.addEventListener('click', () => (draft.part >= EXAM_PARTS.length ? finish() : leave()));
+        const progress = el('div', 'play-progress');
+        progress.setAttribute('role', 'progressbar');
+        progress.setAttribute('aria-label', 'Fortschritt');
+        const atEnd = draft.part >= EXAM_PARTS.length;
+        for (const s of progressSegments(EXAM_PARTS.length, Math.min(draft.part, EXAM_PARTS.length - 1), atEnd)) {
+            progress.append(el('span', `play-seg play-seg-${s}`));
+        }
+        bar.append(close, progress);
+        if (clk) bar.append(clk.el);
+        inner.append(bar);
+        if (!atEnd) inner.append(el('p', 'exam-part', partHeading(draft.part)));
+        const patient = el('section', 'case-patient');
+        patient.setAttribute('aria-label', 'Patientin');
+        patient.append(tapText(patientLine(caseData.patient), caseData.patient.en, 'case-patient-line'));
+        inner.append(patient);
+        root.replaceChildren(inner);
+        return inner;
+    }
+
+    const partHeading = i => `Teil ${i + 1} von ${EXAM_PARTS.length}: ${EXAM_PARTS[i].title}`;
+
+    function continueButton(label, enabled, onClick) {
+        const row = el('div', 'play-continue-row');
+        const b = el('button', 'play-continue', label);
+        b.type = 'button';
+        b.disabled = !enabled;
+        b.addEventListener('click', onClick);
+        row.append(b);
+        return row;
+    }
+
+    function showInterview() {
+        inner = null;
+        interview = renderInterview(root, {
+            caseData, anamnese, rng, heading: partHeading(0),
+            clock: { minutes: EXAM_PARTS[0].minutes, elapsedMs: draft.elapsedMs },
+        }, {
+            onDone: score => { interview = null; draft.score = score; goTo(1); },
+            onClose: ({ elapsedMs }) => { interview = null; draft.elapsedMs = elapsedMs; leave(); },
+        });
+    }
+
+    function showDocumentation() {
+        startClock(!draft.compared);
+        const page = frame();
+        const notes = draft.score ? formState(caseData, anamnese, caseData.interview.length) : [];
+        const list = el('div', 'exam-sections');
+        sections.forEach((sec, i) => {
+            const box = el('section', 'exam-section');
+            box.dataset.section = sec.id;
+            box.append(el('h2', 'exam-label', sec.title));
+            const mine = draft.texts[sec.id] || '';
+            if (!draft.compared) {
+                const own = notes.find(n => n.id === sec.id);
+                if (own && own.notes.length) {
+                    const ul = el('ul', 'exam-notes');
+                    own.notes.forEach(n => ul.append(el('li', '', n)));
+                    box.append(ul);
+                }
+                const input = el('textarea', 'exam-input');
+                input.rows = 3;
+                input.value = mine;
+                input.setAttribute('aria-label', sec.title);
+                input.spellcheck = false;
+                const grow = () => { input.style.height = 'auto'; input.style.height = `${input.scrollHeight + 2}px`; };
+                input.addEventListener('input', () => { draft.texts[sec.id] = input.value; grow(); saveSoon(); });
+                input.addEventListener('blur', save);
+                box.append(input);
+                requestAnimationFrame(grow);
+            } else {
+                box.append(el('div', 'exam-tag', 'Ihr Text'));
+                box.append(mine.trim() ? el('p', 'exam-mine', mine) : el('p', 'exam-mine is-empty', '–'));
+                box.append(el('div', 'exam-tag', 'Mustertext'));
+                box.append(tapText(sec.model, sec.en, 'exam-model'));
+                box.append(ratingRow(draft.ratings[i] ?? null, r => {
+                    draft.ratings[i] = r;
+                    save();
+                    for (const b of box.querySelectorAll('.exam-rating')) {
+                        const on = b.dataset.rating === String(r);
+                        b.classList.toggle('is-selected', on);
+                        b.setAttribute('aria-pressed', String(on));
+                    }
+                    next.querySelector('button').disabled = !allRated();
+                }));
+            }
+            list.append(box);
+        });
+        page.append(list);
+        const allRated = () => sections.every((_, i) => draft.ratings[i] != null);
+        const next = draft.compared
+            ? continueButton('Weiter', allRated(), () => goTo(2))
+            : continueButton('Vergleichen', true, () => {
+                stopClock();
+                draft.compared = true;
+                draft.ratings = sections.map(() => null);
+                save();
+                root.scrollTop = 0;
+                show();
+            });
+        page.append(next);
+    }
+
+    function showPresentation() {
+        startClock(!draft.presented);
+        const page = frame();
+        const box = el('section', 'exam-section');
+        box.append(el('h2', 'exam-label', 'Vorstellung'));
+        box.append(tapText(caseData.vorstellung.skeleton, caseData.vorstellung.skeletonEn, 'exam-skeleton'));
+        page.append(box);
+        if (!draft.presented) {
+            page.append(continueButton('Ich bin fertig', true, () => {
+                stopClock();
+                draft.presented = true;
+                save();
+                show();
+                say(caseData.vorstellung.model);
+            }));
+            return;
+        }
+        const model = el('section', 'exam-section');
+        const head = el('div', 'exam-model-head');
+        head.append(el('h2', 'exam-label', 'Mustertext'));
+        if (voice()) {
+            const listen = el('button', 'write-btn exam-listen', '🔊 Anhören');
+            listen.type = 'button';
+            listen.addEventListener('click', () => say(caseData.vorstellung.model, { force: true }));
+            head.append(listen);
+        }
+        model.append(head, tapText(caseData.vorstellung.model, caseData.vorstellung.modelEn, 'exam-model'));
+        const next = continueButton('Weiter', draft.talkRating != null, () => goTo(3));
+        model.append(ratingRow(draft.talkRating, r => {
+            draft.talkRating = r;
+            save();
+            for (const b of model.querySelectorAll('.exam-rating')) {
+                const on = b.dataset.rating === String(r);
+                b.classList.toggle('is-selected', on);
+                b.setAttribute('aria-pressed', String(on));
+            }
+            next.querySelector('button').disabled = false;
+        }));
+        page.append(model, next);
+    }
+
+    function showSummary() {
+        const page = frame();
+        const box = el('section', 'exam-section exam-summary');
+        box.append(el('h2', 'exam-label', 'Fachsprachenprüfung'));
+        for (const line of examSummary(draft.score, draft.ratings, draft.talkRating).lines) box.append(el('p', 'exam-line', line));
+        page.append(box, continueButton('Fertig', true, finish));
+    }
+
+    function show() {
+        if (draft.part === 0) showInterview();
+        else if (draft.part === 1) showDocumentation();
+        else if (draft.part === 2) showPresentation();
+        else showSummary();
+    }
+
+    save(); // a new run is kept from the start
+    root.scrollTop = 0;
+    show();
     return teardown;
 }

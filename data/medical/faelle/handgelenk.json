@@ -1,0 +1,457 @@
+{
+  "version": 1,
+  "id": "handgelenk",
+  "title": "Sturz auf die Hand",
+  "level": "B1",
+  "patient": {
+    "name": "Ingrid Wagner",
+    "age": 67,
+    "job": "Lehrerin im Ruhestand",
+    "en": "Ingrid Wagner, 67 years old, retired teacher"
+  },
+  "interview": [
+    {
+      "section": "beschwerden",
+      "question": "b-grund",
+      "wrong": [
+        "g-appetit",
+        "f-herz"
+      ],
+      "answer": {
+        "de": "Ich bin heute Morgen auf dem Eis ausgerutscht und auf die rechte Hand gefallen. Ich hatte den Arm ausgestreckt.",
+        "en": "I slipped on the ice this morning and fell onto my right hand. I had my arm stretched out."
+      },
+      "fact": {
+        "de": "heute Morgen Sturz auf Glatteis auf die ausgestreckte rechte Hand",
+        "en": "fell on ice this morning onto her outstretched right hand"
+      },
+      "distractors": [
+        {
+          "de": "Sturz auf die linke Schulter",
+          "en": "fall onto her left shoulder"
+        },
+        {
+          "de": "Sturz vor drei Tagen",
+          "en": "fall three days ago"
+        }
+      ]
+    },
+    {
+      "section": "beschwerden",
+      "question": "b-sturz",
+      "wrong": [
+        "m-pille",
+        "s-sport"
+      ],
+      "answer": {
+        "de": "Nein, mir war nicht schwindelig. Ich bin einfach ausgerutscht. Ich war die ganze Zeit wach.",
+        "en": "No, I wasn't dizzy. I just slipped. I was awake the whole time."
+      },
+      "fact": {
+        "de": "kein Schwindel, keine Bewusstlosigkeit; Ausrutschen auf Glätte",
+        "en": "no dizziness, no loss of consciousness; slipped on ice"
+      },
+      "distractors": [
+        {
+          "de": "Schwindel vor dem Sturz",
+          "en": "dizzy before the fall"
+        },
+        {
+          "de": "kurze Bewusstlosigkeit",
+          "en": "brief loss of consciousness"
+        }
+      ]
+    },
+    {
+      "section": "beschwerden",
+      "question": "b-wo",
+      "wrong": [
+        "v-krankenhaus",
+        "a-kontrastmittel"
+      ],
+      "answer": {
+        "de": "Hier am rechten Handgelenk. Es ist ganz dick geworden, und ich kann die Hand kaum bewegen.",
+        "en": "Here at my right wrist. It has become very swollen and I can hardly move my hand."
+      },
+      "fact": {
+        "de": "rechtes Handgelenk geschwollen, Beweglichkeit stark eingeschränkt",
+        "en": "right wrist swollen, movement very limited"
+      },
+      "distractors": [
+        {
+          "de": "linkes Handgelenk",
+          "en": "left wrist"
+        },
+        {
+          "de": "Schmerzen im rechten Ellenbogen",
+          "en": "pain in the right elbow"
+        }
+      ]
+    },
+    {
+      "section": "beschwerden",
+      "question": "b-skala",
+      "wrong": [
+        "f-eltern-gesund",
+        "m-wie-oft"
+      ],
+      "answer": {
+        "de": "Acht. Wenn ich die Hand bewege, ist es noch schlimmer.",
+        "en": "Eight. When I move my hand, it is even worse."
+      },
+      "fact": {
+        "de": "Schmerzstärke 8/10, stärker bei Bewegung",
+        "en": "pain 8/10, worse on movement"
+      },
+      "distractors": [
+        {
+          "de": "Schmerzstärke 3/10",
+          "en": "pain 3/10"
+        },
+        {
+          "de": "besser bei Bewegung",
+          "en": "better on movement"
+        }
+      ]
+    },
+    {
+      "section": "beschwerden",
+      "question": "b-begleit",
+      "wrong": [
+        "s-drogen",
+        "a-medikamente"
+      ],
+      "answer": {
+        "de": "Nein. Den Kopf habe ich nicht angeschlagen, und sonst tut mir nichts weh.",
+        "en": "No. I didn't hit my head, and nothing else hurts."
+      },
+      "fact": {
+        "de": "kein Kopfanprall, keine weiteren Verletzungen",
+        "en": "did not hit her head, no other injuries"
+      },
+      "distractors": [
+        {
+          "de": "Kopfschmerzen nach Kopfanprall",
+          "en": "headache after hitting her head"
+        },
+        {
+          "de": "Übelkeit und Erbrechen",
+          "en": "nausea and vomiting"
+        }
+      ]
+    },
+    {
+      "section": "vorerkrankungen",
+      "question": "v-chronisch",
+      "wrong": [
+        "g-wasserlassen",
+        "s-beruf"
+      ],
+      "answer": {
+        "de": "Ich habe Vorhofflimmern, schon seit fünf Jahren. Sonst bin ich gesund.",
+        "en": "I have atrial fibrillation, for five years now. Otherwise I am healthy."
+      },
+      "fact": {
+        "de": "Vorhofflimmern seit 5 Jahren",
+        "en": "atrial fibrillation for 5 years"
+      },
+      "distractors": [
+        {
+          "de": "Diabetes mellitus Typ 2",
+          "en": "type 2 diabetes"
+        },
+        {
+          "de": "keine Vorerkrankungen",
+          "en": "no previous illnesses"
+        }
+      ]
+    },
+    {
+      "section": "vorerkrankungen",
+      "question": "v-osteoporose",
+      "wrong": [
+        "f-krebs",
+        "a-latex"
+      ],
+      "answer": {
+        "de": "Das weiß ich nicht. Meine Knochen wurden noch nie untersucht.",
+        "en": "I don't know. My bones have never been checked."
+      },
+      "fact": {
+        "de": "Osteoporose nicht bekannt, bisher keine Knochendichtemessung",
+        "en": "no known osteoporosis, bone density never measured"
+      },
+      "distractors": [
+        {
+          "de": "bekannte Osteoporose unter Therapie",
+          "en": "known osteoporosis, being treated"
+        },
+        {
+          "de": "Z. n. Schenkelhalsfraktur",
+          "en": "status after a hip fracture"
+        }
+      ]
+    },
+    {
+      "section": "medikamente",
+      "question": "m-blutverduenner",
+      "wrong": [
+        "b-ausstrahlung",
+        "s-kinder"
+      ],
+      "answer": {
+        "de": "Ja, für das Herz. Ich nehme Apixaban, fünf Milligramm, morgens und abends. Die Tablette von heute Morgen habe ich schon genommen.",
+        "en": "Yes, for my heart. I take apixaban, five milligrams, morning and evening. I have already taken this morning's tablet."
+      },
+      "fact": {
+        "de": "Apixaban 5 mg 1-0-1, letzte Einnahme heute Morgen",
+        "en": "apixaban 5 mg morning and evening, last dose this morning"
+      },
+      "distractors": [
+        {
+          "de": "keine Antikoagulation",
+          "en": "no anticoagulation"
+        },
+        {
+          "de": "Phenprocoumon (Marcumar) nach INR",
+          "en": "phenprocoumon (Marcumar) adjusted to the INR"
+        }
+      ]
+    },
+    {
+      "section": "medikamente",
+      "question": "m-schon-genommen",
+      "wrong": [
+        "v-unfall",
+        "g-fieber"
+      ],
+      "answer": {
+        "de": "Ja, zu Hause eine Paracetamol. Das hat aber kaum geholfen.",
+        "en": "Yes, one paracetamol at home. But it hardly helped."
+      },
+      "fact": {
+        "de": "einmalig Paracetamol, kaum Besserung",
+        "en": "paracetamol once, hardly any relief"
+      },
+      "distractors": [
+        {
+          "de": "Ibuprofen 600 mg, deutliche Besserung",
+          "en": "ibuprofen 600 mg, clearly better"
+        },
+        {
+          "de": "noch nichts eingenommen",
+          "en": "has not taken anything yet"
+        }
+      ]
+    },
+    {
+      "section": "allergien",
+      "question": "a-allergien",
+      "wrong": [
+        "b-art",
+        "f-diabetes"
+      ],
+      "answer": {
+        "de": "Ja, gegen Penicillin. Davon bekomme ich einen Ausschlag.",
+        "en": "Yes, to penicillin. It gives me a rash."
+      },
+      "fact": {
+        "de": "Penicillinallergie (Hautausschlag)",
+        "en": "penicillin allergy (rash)"
+      },
+      "distractors": [
+        {
+          "de": "keine Allergien bekannt",
+          "en": "no known allergies"
+        },
+        {
+          "de": "Pflasterallergie",
+          "en": "allergy to plasters"
+        }
+      ]
+    },
+    {
+      "section": "familie",
+      "question": "f-erkrankungen",
+      "wrong": [
+        "g-gewicht",
+        "s-rauchen"
+      ],
+      "answer": {
+        "de": "Meine Mutter hatte Osteoporose. Sie hat sich mit 75 den Oberschenkelhals gebrochen.",
+        "en": "My mother had osteoporosis. She broke her hip at 75."
+      },
+      "fact": {
+        "de": "Mutter: Osteoporose, Schenkelhalsfraktur mit 75 Jahren",
+        "en": "mother: osteoporosis, hip fracture at 75"
+      },
+      "distractors": [
+        {
+          "de": "Vater: Herzinfarkt",
+          "en": "father: heart attack"
+        },
+        {
+          "de": "Familienanamnese unauffällig",
+          "en": "nothing of note in the family history"
+        }
+      ]
+    },
+    {
+      "section": "sozial",
+      "question": "s-wohnen",
+      "wrong": [
+        "v-operiert",
+        "m-regelmaessig"
+      ],
+      "answer": {
+        "de": "Ich wohne allein, seit mein Mann gestorben ist. Meine Tochter wohnt aber in der Nähe.",
+        "en": "I have lived alone since my husband died. But my daughter lives nearby."
+      },
+      "fact": {
+        "de": "verwitwet, lebt allein; Tochter wohnt in der Nähe",
+        "en": "widowed, lives alone; daughter lives nearby"
+      },
+      "distractors": [
+        {
+          "de": "lebt im Pflegeheim",
+          "en": "lives in a care home"
+        },
+        {
+          "de": "lebt mit dem Ehemann zusammen",
+          "en": "lives with her husband"
+        }
+      ]
+    },
+    {
+      "section": "sozial",
+      "question": "s-alkohol",
+      "wrong": [
+        "b-seit",
+        "a-lebensmittel"
+      ],
+      "answer": {
+        "de": "Nein, ich trinke keinen Alkohol. Ich rauche auch nicht.",
+        "en": "No, I don't drink alcohol. I don't smoke either."
+      },
+      "fact": {
+        "de": "kein Alkohol, Nichtraucherin",
+        "en": "no alcohol, non-smoker"
+      },
+      "distractors": [
+        {
+          "de": "Raucherin, 20 Zigaretten am Tag",
+          "en": "smoker, 20 cigarettes a day"
+        },
+        {
+          "de": "täglicher Alkoholkonsum",
+          "en": "drinks alcohol every day"
+        }
+      ]
+    }
+  ],
+  "brief": [
+    {
+      "section": "diagnosen",
+      "de": "Distale Radiusfraktur rechts vom Extensionstyp (Colles-Fraktur)",
+      "en": "Distal radius fracture on the right, extension type (Colles fracture)"
+    },
+    {
+      "section": "diagnosen",
+      "de": "Vorhofflimmern unter oraler Antikoagulation mit Apixaban",
+      "en": "Atrial fibrillation on oral anticoagulation with apixaban"
+    },
+    {
+      "section": "anamnese",
+      "de": "Die Patientin stellte sich nach einem Sturz auf Glatteis mit Abfangen auf die ausgestreckte rechte Hand vor.",
+      "en": "The patient presented after a fall on ice in which she caught herself on her outstretched right hand."
+    },
+    {
+      "section": "anamnese",
+      "de": "Schwindel, eine Bewusstlosigkeit und ein Kopfanprall wurden verneint.",
+      "en": "She denied dizziness, loss of consciousness and hitting her head."
+    },
+    {
+      "section": "anamnese",
+      "de": "Eine Osteoporose war bisher nicht bekannt; die Mutter hatte eine Schenkelhalsfraktur.",
+      "en": "Osteoporosis was not known so far; her mother had a hip fracture."
+    },
+    {
+      "section": "befund",
+      "de": "Klinisch zeigten sich eine Schwellung und eine Fourchette-Fehlstellung des rechten Handgelenks mit Druckschmerz über dem distalen Radius.",
+      "en": "On examination the right wrist was swollen with a dinner-fork deformity and tender over the distal radius."
+    },
+    {
+      "section": "befund",
+      "de": "Durchblutung, Motorik und Sensibilität der Finger waren intakt.",
+      "en": "Blood flow, movement and feeling in the fingers were intact."
+    },
+    {
+      "section": "befund",
+      "de": "Röntgenologisch zeigte sich eine dislozierte extraartikuläre distale Radiusfraktur.",
+      "en": "The X-ray showed a displaced distal radius fracture outside the joint."
+    },
+    {
+      "section": "therapie",
+      "de": "In Bruchspaltanästhesie erfolgte die geschlossene Reposition mit Anlage einer dorsalen Unterarmgipsschiene.",
+      "en": "Under a haematoma block the fracture was set without surgery and a dorsal forearm plaster splint was put on."
+    },
+    {
+      "section": "therapie",
+      "de": "Die Röntgenkontrolle nach Reposition zeigte eine regelrechte Stellung.",
+      "en": "The X-ray after setting the fracture showed correct alignment."
+    },
+    {
+      "section": "empfehlung",
+      "de": "Wir empfehlen Röntgenkontrollen nach einer und nach zwei Wochen sowie eine Ruhigstellung für insgesamt fünf bis sechs Wochen.",
+      "en": "We recommend X-ray checks after one and after two weeks and keeping the wrist immobilised for five to six weeks in all."
+    },
+    {
+      "section": "empfehlung",
+      "de": "Bei zunehmender Schwellung, Taubheitsgefühl oder Verfärbung der Finger sollte sich die Patientin sofort wieder vorstellen.",
+      "en": "If the swelling increases, or the fingers become numb or change colour, the patient should come back at once."
+    },
+    {
+      "section": "empfehlung",
+      "de": "Bei Verdacht auf eine osteoporotische Fraktur empfehlen wir eine Osteoporose-Diagnostik mit Knochendichtemessung (DXA).",
+      "en": "As this may be an osteoporotic fracture, we recommend tests for osteoporosis with a bone density scan (DXA)."
+    }
+  ],
+  "dokumentation": [
+    {
+      "section": "beschwerden",
+      "model": "Die Patientin ist heute Morgen auf Glatteis ausgerutscht und hat sich mit der ausgestreckten rechten Hand abgefangen. Kein Schwindel, keine Bewusstlosigkeit, kein Kopfanprall, keine weiteren Verletzungen. Seitdem starke Schmerzen im rechten Handgelenk, Schmerzstärke 8/10, stärker bei Bewegung; Schwellung und deutlich eingeschränkte Beweglichkeit.",
+      "en": "The patient slipped on ice this morning and caught herself with her outstretched right hand. No dizziness, no loss of consciousness, did not hit her head, no other injuries. Since then severe pain in the right wrist, pain 8/10, worse on movement; swelling and clearly limited movement."
+    },
+    {
+      "section": "vorerkrankungen",
+      "model": "Vorhofflimmern seit fünf Jahren. Osteoporose nicht bekannt, bisher keine Knochendichtemessung.",
+      "en": "Atrial fibrillation for five years. No known osteoporosis, bone density never measured."
+    },
+    {
+      "section": "medikamente",
+      "model": "Apixaban 5 mg 1-0-1, letzte Einnahme heute Morgen. Einmalig Paracetamol ohne wesentliche Besserung.",
+      "en": "Apixaban 5 mg morning and evening, last dose this morning. Paracetamol once without much relief."
+    },
+    {
+      "section": "allergien",
+      "model": "Penicillinallergie (Exanthem).",
+      "en": "Penicillin allergy (rash)."
+    },
+    {
+      "section": "familie",
+      "model": "Mutter: Osteoporose mit Schenkelhalsfraktur im Alter von 75 Jahren.",
+      "en": "Mother: osteoporosis with a hip fracture at the age of 75."
+    },
+    {
+      "section": "sozial",
+      "model": "Lehrerin im Ruhestand, verwitwet, lebt allein; die Tochter wohnt in der Nähe. Kein Alkohol, Nichtraucherin.",
+      "en": "Retired teacher, widowed, lives alone; her daughter lives nearby. No alcohol, non-smoker."
+    }
+  ],
+  "vorstellung": {
+    "skeleton": "Ich möchte Ihnen Frau … vorstellen, eine …-jährige … . Sie ist heute … und hat sich mit … abgefangen. Schwindel, Bewusstlosigkeit und Kopfanprall … . Jetzt hat sie … . An Vorerkrankungen ist … bekannt, dafür nimmt sie … ; die letzte Einnahme war … . Sie hat eine Allergie gegen … . Eine Osteoporose … , die Mutter hatte … . Sie lebt … . Mein Verdacht ist … . Differenzialdiagnostisch kommen … in Frage. Ich würde … .",
+    "skeletonEn": "I would like to present Ms …, a …-year-old … . Today she … and caught herself with … . Dizziness, loss of consciousness and hitting her head … . Now she has … . A known previous illness is … , for which she takes … ; the last dose was … . She is allergic to … . Osteoporosis … , her mother had … . She lives … . My suspected diagnosis is … . Differential diagnoses are … . I would … .",
+    "model": "Ich möchte Ihnen Frau Ingrid Wagner vorstellen, eine 67-jährige Lehrerin im Ruhestand. Sie ist heute Morgen auf Glatteis ausgerutscht und hat sich mit der ausgestreckten rechten Hand abgefangen. Schwindel, Bewusstlosigkeit und Kopfanprall verneint sie. Jetzt hat sie starke Schmerzen im rechten Handgelenk, 8 von 10; das Handgelenk ist geschwollen und kaum beweglich. An Vorerkrankungen ist ein Vorhofflimmern bekannt, dafür nimmt sie Apixaban 5 mg zweimal täglich; die letzte Einnahme war heute Morgen. Sie hat eine Allergie gegen Penicillin. Eine Osteoporose ist nicht bekannt, die Mutter hatte aber eine Schenkelhalsfraktur. Sie lebt allein, ihre Tochter wohnt in der Nähe. Mein Verdacht ist eine distale Radiusfraktur rechts. Differenzialdiagnostisch kommen eine Skaphoidfraktur oder eine Bandverletzung des Handgelenks in Frage. Ich würde Durchblutung, Motorik und Sensibilität prüfen, das Handgelenk in zwei Ebenen röntgen, eine Schmerztherapie beginnen und den Arm ruhigstellen und hochlagern. Wegen der Antikoagulation muss vor einer möglichen Operation die letzte Apixaban-Einnahme beachtet werden. Außerdem sollte eine Osteoporose-Diagnostik folgen.",
+    "modelEn": "I would like to present Ms Ingrid Wagner, a 67-year-old retired teacher. This morning she slipped on ice and caught herself with her outstretched right hand. She denies dizziness, loss of consciousness and hitting her head. Now she has severe pain in the right wrist, 8 out of 10; the wrist is swollen and she can hardly move it. A known previous illness is atrial fibrillation, for which she takes apixaban 5 mg twice a day; the last dose was this morning. She is allergic to penicillin. Osteoporosis is not known, but her mother had a hip fracture. She lives alone; her daughter lives nearby. My suspected diagnosis is a distal radius fracture on the right. Differential diagnoses are a scaphoid fracture or a ligament injury of the wrist. I would check blood flow, movement and feeling, X-ray the wrist in two planes, start pain relief, and immobilise and raise the arm. Because of the anticoagulation, the last apixaban dose must be taken into account before any operation. Tests for osteoporosis should also follow."
+  }
+}

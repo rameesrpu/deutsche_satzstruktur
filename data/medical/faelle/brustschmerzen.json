@@ -1,0 +1,462 @@
+{
+  "version": 1,
+  "id": "brustschmerzen",
+  "title": "Brustschmerzen",
+  "level": "B2",
+  "patient": {
+    "name": "Thomas Keller",
+    "age": 58,
+    "job": "Busfahrer",
+    "en": "Thomas Keller, 58 years old, bus driver"
+  },
+  "interview": [
+    {
+      "section": "beschwerden",
+      "question": "b-grund",
+      "wrong": [
+        "g-schlaf",
+        "a-latex"
+      ],
+      "answer": {
+        "de": "Ich habe seit zwei Wochen Schmerzen in der Brust. Sie kommen immer, wenn ich mich anstrenge.",
+        "en": "I have had pain in my chest for two weeks. It always comes when I exert myself."
+      },
+      "fact": {
+        "de": "seit 2 Wochen Brustschmerzen bei Anstrengung",
+        "en": "chest pain on exertion for 2 weeks"
+      },
+      "distractors": [
+        {
+          "de": "seit 2 Tagen Oberbauchschmerzen nach dem Essen",
+          "en": "upper abdominal pain after meals for 2 days"
+        },
+        {
+          "de": "Brustschmerzen seit 2 Jahren",
+          "en": "chest pain for 2 years"
+        }
+      ]
+    },
+    {
+      "section": "beschwerden",
+      "question": "b-art",
+      "wrong": [
+        "s-kinder",
+        "m-pille"
+      ],
+      "answer": {
+        "de": "Es drückt, wie ein schweres Gewicht auf der Brust. Hier in der Mitte.",
+        "en": "It presses, like a heavy weight on my chest. Here in the middle."
+      },
+      "fact": {
+        "de": "drückender Schmerz retrosternal",
+        "en": "pressing pain behind the breastbone"
+      },
+      "distractors": [
+        {
+          "de": "stechender Schmerz, stärker beim Einatmen",
+          "en": "stabbing pain, worse when breathing in"
+        },
+        {
+          "de": "Schmerz nur bei Druck auf die Rippen",
+          "en": "pain only when pressing on the ribs"
+        }
+      ]
+    },
+    {
+      "section": "beschwerden",
+      "question": "b-ausstrahlung",
+      "wrong": [
+        "f-krebs",
+        "v-impfung"
+      ],
+      "answer": {
+        "de": "Ja, manchmal in den linken Arm und in den Hals.",
+        "en": "Yes, sometimes into my left arm and my neck."
+      },
+      "fact": {
+        "de": "Ausstrahlung in den linken Arm und den Hals",
+        "en": "spreading to the left arm and the neck"
+      },
+      "distractors": [
+        {
+          "de": "keine Ausstrahlung",
+          "en": "does not spread"
+        },
+        {
+          "de": "Ausstrahlung in den Rücken zwischen die Schulterblätter",
+          "en": "spreading to the back between the shoulder blades"
+        }
+      ]
+    },
+    {
+      "section": "beschwerden",
+      "question": "b-belastung",
+      "wrong": [
+        "a-lebensmittel",
+        "s-familienstand"
+      ],
+      "answer": {
+        "de": "Nur bei Belastung, zum Beispiel auf der Treppe. Wenn ich stehen bleibe, ist es nach drei, vier Minuten weg. In Ruhe habe ich keine Schmerzen.",
+        "en": "Only with exertion, for example on the stairs. When I stop, it goes away after three or four minutes. At rest I have no pain."
+      },
+      "fact": {
+        "de": "nur bei Belastung, in Ruhe nach wenigen Minuten rückläufig, kein Ruheschmerz",
+        "en": "only on exertion, goes away after a few minutes of rest, no pain at rest"
+      },
+      "distractors": [
+        {
+          "de": "Schmerzen auch in Ruhe und nachts",
+          "en": "pain also at rest and at night"
+        },
+        {
+          "de": "Besserung bei Belastung",
+          "en": "better with exertion"
+        }
+      ]
+    },
+    {
+      "section": "beschwerden",
+      "question": "b-skala",
+      "wrong": [
+        "f-eltern",
+        "m-wie-oft"
+      ],
+      "answer": {
+        "de": "Ungefähr fünf. Es ist immer gleich, es wird nicht schlimmer.",
+        "en": "About five. It is always the same, it is not getting worse."
+      },
+      "fact": {
+        "de": "Schmerzstärke 5/10, seit 2 Wochen gleichbleibend",
+        "en": "pain 5/10, unchanged for 2 weeks"
+      },
+      "distractors": [
+        {
+          "de": "Schmerzstärke 9/10, zunehmend",
+          "en": "pain 9/10, getting worse"
+        },
+        {
+          "de": "Schmerzstärke 2/10",
+          "en": "pain 2/10"
+        }
+      ]
+    },
+    {
+      "section": "beschwerden",
+      "question": "b-begleit",
+      "wrong": [
+        "v-unfall",
+        "a-penicillin"
+      ],
+      "answer": {
+        "de": "Ja, ich bekomme dann schlecht Luft und ich schwitze. Übel ist mir nicht.",
+        "en": "Yes, then I can't breathe well and I sweat. I don't feel sick."
+      },
+      "fact": {
+        "de": "begleitend Dyspnoe und Schwitzen, keine Übelkeit",
+        "en": "with shortness of breath and sweating, no nausea"
+      },
+      "distractors": [
+        {
+          "de": "Übelkeit und Erbrechen",
+          "en": "nausea and vomiting"
+        },
+        {
+          "de": "Husten mit Fieber",
+          "en": "cough with fever"
+        }
+      ]
+    },
+    {
+      "section": "vorerkrankungen",
+      "question": "v-chronisch",
+      "wrong": [
+        "s-sport",
+        "g-stuhlgang"
+      ],
+      "answer": {
+        "de": "Ich habe seit zehn Jahren hohen Blutdruck. Und mein Cholesterin ist zu hoch.",
+        "en": "I have had high blood pressure for ten years. And my cholesterol is too high."
+      },
+      "fact": {
+        "de": "arterielle Hypertonie seit 10 Jahren, Hypercholesterinämie",
+        "en": "high blood pressure for 10 years, high cholesterol"
+      },
+      "distractors": [
+        {
+          "de": "Diabetes mellitus Typ 2",
+          "en": "type 2 diabetes"
+        },
+        {
+          "de": "Z. n. Herzinfarkt",
+          "en": "status after a heart attack"
+        }
+      ]
+    },
+    {
+      "section": "medikamente",
+      "question": "m-welche",
+      "wrong": [
+        "f-diabetes",
+        "b-sturz"
+      ],
+      "answer": {
+        "de": "Ramipril, fünf Milligramm, jeden Morgen. Die Tablette gegen das Cholesterin nehme ich seit einem halben Jahr nicht mehr.",
+        "en": "Ramipril, five milligrams, every morning. I stopped taking the cholesterol tablet half a year ago."
+      },
+      "fact": {
+        "de": "Ramipril 5 mg 1-0-0; Statin vor 6 Monaten selbst abgesetzt",
+        "en": "ramipril 5 mg in the morning; stopped his statin himself 6 months ago"
+      },
+      "distractors": [
+        {
+          "de": "keine Dauermedikation",
+          "en": "no regular medication"
+        },
+        {
+          "de": "ASS 100 mg 1-0-0",
+          "en": "aspirin 100 mg in the morning"
+        }
+      ]
+    },
+    {
+      "section": "allergien",
+      "question": "a-kontrastmittel",
+      "wrong": [
+        "b-wo",
+        "s-wohnen"
+      ],
+      "answer": {
+        "de": "Nein, das hatte ich noch nie. Andere Allergien habe ich auch nicht.",
+        "en": "No, I have never had that. I don't have any other allergies either."
+      },
+      "fact": {
+        "de": "keine Allergien, keine Kontrastmittelreaktion bekannt",
+        "en": "no allergies, no known reaction to contrast agent"
+      },
+      "distractors": [
+        {
+          "de": "Jodallergie",
+          "en": "iodine allergy"
+        },
+        {
+          "de": "Penicillinallergie",
+          "en": "penicillin allergy"
+        }
+      ]
+    },
+    {
+      "section": "vegetativ",
+      "question": "g-gewicht",
+      "wrong": [
+        "v-operiert",
+        "m-rezeptfrei"
+      ],
+      "answer": {
+        "de": "Nein, mein Gewicht ist gleich. Aber ich bin zu dick: 98 Kilo bei 1,78 Meter.",
+        "en": "No, my weight is the same. But I am too heavy: 98 kilos at 1.78 metres."
+      },
+      "fact": {
+        "de": "Gewicht konstant, Adipositas (BMI ca. 31)",
+        "en": "weight stable, obesity (BMI about 31)"
+      },
+      "distractors": [
+        {
+          "de": "ungewollter Gewichtsverlust von 5 kg",
+          "en": "unintended weight loss of 5 kg"
+        },
+        {
+          "de": "Untergewicht",
+          "en": "underweight"
+        }
+      ]
+    },
+    {
+      "section": "familie",
+      "question": "f-herz",
+      "wrong": [
+        "b-seit",
+        "a-reaktion"
+      ],
+      "answer": {
+        "de": "Ja, mein Vater hatte mit 52 Jahren einen Herzinfarkt. Er ist daran gestorben.",
+        "en": "Yes, my father had a heart attack at 52. He died of it."
+      },
+      "fact": {
+        "de": "Vater: Herzinfarkt mit 52 Jahren, verstorben",
+        "en": "father: heart attack at 52, died"
+      },
+      "distractors": [
+        {
+          "de": "Mutter: Schlaganfall mit 85 Jahren",
+          "en": "mother: stroke at 85"
+        },
+        {
+          "de": "keine Herz-Kreislauf-Erkrankungen in der Familie",
+          "en": "no heart or circulation disease in the family"
+        }
+      ]
+    },
+    {
+      "section": "sozial",
+      "question": "s-rauchen",
+      "wrong": [
+        "v-behandlung",
+        "g-nachtschweiss"
+      ],
+      "answer": {
+        "de": "Ja, seit 35 Jahren. Ungefähr eine Schachtel am Tag.",
+        "en": "Yes, for 35 years. About one pack a day."
+      },
+      "fact": {
+        "de": "Raucher, ca. 35 Packungsjahre",
+        "en": "smoker, about 35 pack-years"
+      },
+      "distractors": [
+        {
+          "de": "Nichtraucher",
+          "en": "non-smoker"
+        },
+        {
+          "de": "Ex-Raucher seit 10 Jahren",
+          "en": "ex-smoker for 10 years"
+        }
+      ]
+    },
+    {
+      "section": "sozial",
+      "question": "s-alkohol",
+      "wrong": [
+        "a-allergien",
+        "m-schon-genommen"
+      ],
+      "answer": {
+        "de": "Selten. Vielleicht ein Bier am Wochenende.",
+        "en": "Rarely. Maybe one beer at the weekend."
+      },
+      "fact": {
+        "de": "gelegentlicher Alkoholkonsum",
+        "en": "occasional alcohol"
+      },
+      "distractors": [
+        {
+          "de": "täglicher Alkoholkonsum",
+          "en": "drinks alcohol every day"
+        },
+        {
+          "de": "kein Alkohol",
+          "en": "no alcohol"
+        }
+      ]
+    }
+  ],
+  "brief": [
+    {
+      "section": "diagnosen",
+      "de": "Koronare Herzkrankheit mit stabiler Angina pectoris",
+      "en": "Coronary heart disease with stable angina pectoris"
+    },
+    {
+      "section": "diagnosen",
+      "de": "Kardiovaskuläre Risikofaktoren: Nikotinabusus, arterielle Hypertonie, Hypercholesterinämie, Adipositas, positive Familienanamnese",
+      "en": "Cardiovascular risk factors: smoking, high blood pressure, high cholesterol, obesity, positive family history"
+    },
+    {
+      "section": "anamnese",
+      "de": "Herr Keller stellte sich mit seit zwei Wochen bestehenden, belastungsabhängigen retrosternalen Druckschmerzen vor.",
+      "en": "Mr Keller presented with pressing pain behind the breastbone on exertion for two weeks."
+    },
+    {
+      "section": "anamnese",
+      "de": "Die Schmerzen strahlten in den linken Arm und den Hals aus und bildeten sich in Ruhe innerhalb weniger Minuten zurück.",
+      "en": "The pain spread to the left arm and the neck and went away within a few minutes at rest."
+    },
+    {
+      "section": "anamnese",
+      "de": "Begleitend bestanden Dyspnoe und Schwitzen; Ruheschmerzen wurden verneint.",
+      "en": "There was also shortness of breath and sweating; he denied pain at rest."
+    },
+    {
+      "section": "befund",
+      "de": "Das Ruhe-EKG zeigte einen Sinusrhythmus ohne Ischämiezeichen.",
+      "en": "The resting ECG showed sinus rhythm without signs of ischaemia."
+    },
+    {
+      "section": "befund",
+      "de": "Das hochsensitive Troponin T war im Verlauf zweimal negativ.",
+      "en": "The high-sensitivity troponin T was negative twice."
+    },
+    {
+      "section": "befund",
+      "de": "In der Koronarangiografie zeigte sich eine hochgradige Stenose des Ramus interventricularis anterior (RIVA).",
+      "en": "Coronary angiography showed a severe narrowing of the left anterior descending artery (LAD)."
+    },
+    {
+      "section": "therapie",
+      "de": "In gleicher Sitzung erfolgte eine PCI mit Implantation eines medikamentenfreisetzenden Stents (DES).",
+      "en": "In the same session a PCI was performed and a drug-eluting stent was placed."
+    },
+    {
+      "section": "therapie",
+      "de": "Wir begannen eine duale Thrombozytenaggregationshemmung mit ASS und Clopidogrel sowie eine hochdosierte Statintherapie; der Verlauf war komplikationslos.",
+      "en": "We started dual antiplatelet therapy with aspirin and clopidogrel and a high-dose statin; the course was without complications."
+    },
+    {
+      "section": "empfehlung",
+      "de": "Wir empfehlen die Einnahme von Clopidogrel für sechs Monate und von ASS dauerhaft.",
+      "en": "We recommend taking clopidogrel for six months and aspirin for life."
+    },
+    {
+      "section": "empfehlung",
+      "de": "Ein Rauchstopp wird dringend empfohlen.",
+      "en": "We strongly recommend that he stops smoking."
+    },
+    {
+      "section": "empfehlung",
+      "de": "Vor der Rückkehr an den Arbeitsplatz als Busfahrer sollte die Fahreignung kardiologisch beurteilt werden.",
+      "en": "Before he goes back to work as a bus driver, a cardiologist should assess his fitness to drive."
+    }
+  ],
+  "dokumentation": [
+    {
+      "section": "beschwerden",
+      "model": "Der Patient klagt über seit zwei Wochen bestehende, belastungsabhängige, drückende retrosternale Schmerzen mit Ausstrahlung in den linken Arm und den Hals. Die Schmerzen bessern sich in Ruhe innerhalb weniger Minuten, kein Ruheschmerz. Schmerzstärke 5/10, seit Beginn gleichbleibend. Begleitend Dyspnoe und Schwitzen, keine Übelkeit.",
+      "en": "The patient reports pressing pain behind the breastbone on exertion for two weeks, spreading to the left arm and the neck. The pain gets better within a few minutes at rest, no pain at rest. Pain 5/10, unchanged since it began. With shortness of breath and sweating, no nausea."
+    },
+    {
+      "section": "vorerkrankungen",
+      "model": "Arterielle Hypertonie seit zehn Jahren, Hypercholesterinämie.",
+      "en": "High blood pressure for ten years, high cholesterol."
+    },
+    {
+      "section": "medikamente",
+      "model": "Ramipril 5 mg 1-0-0. Statin vor sechs Monaten eigenständig abgesetzt.",
+      "en": "Ramipril 5 mg in the morning. Stopped his statin on his own six months ago."
+    },
+    {
+      "section": "allergien",
+      "model": "Keine Allergien bekannt, keine Kontrastmittelreaktion.",
+      "en": "No known allergies, no reaction to contrast agent."
+    },
+    {
+      "section": "vegetativ",
+      "model": "Gewicht konstant, Adipositas (98 kg bei 1,78 m, BMI ca. 31).",
+      "en": "Weight stable, obesity (98 kg at 1.78 m, BMI about 31)."
+    },
+    {
+      "section": "familie",
+      "model": "Vater: Herzinfarkt mit 52 Jahren, daran verstorben.",
+      "en": "Father: heart attack at 52, died of it."
+    },
+    {
+      "section": "sozial",
+      "model": "Busfahrer. Nikotinabusus mit ca. 35 Packungsjahren. Gelegentlicher Alkoholkonsum.",
+      "en": "Bus driver. Smoker with about 35 pack-years. Occasional alcohol."
+    }
+  ],
+  "vorstellung": {
+    "skeleton": "Ich möchte Ihnen Herrn … vorstellen, einen …-jährigen … . Er kam heute wegen … zu uns. Die Schmerzen bestehen seit … , treten bei … auf und strahlen in … aus. In Ruhe … . Begleitend … . An Vorerkrankungen sind … bekannt. Er nimmt … ; das Statin … . Allergien … . Weitere kardiovaskuläre Risikofaktoren sind … . Mein Verdacht ist … . Differenzialdiagnostisch … . Ich würde … veranlassen.",
+    "skeletonEn": "I would like to present Mr …, a …-year-old … . He came to us today because of … . The pain has been there since … , comes on with … and spreads to … . At rest … . Also … . Known previous illnesses are … . He takes … ; the statin … . Allergies … . Further cardiovascular risk factors are … . My suspected diagnosis is … . As differential diagnoses … . I would arrange … .",
+    "model": "Ich möchte Ihnen Herrn Thomas Keller vorstellen, einen 58-jährigen Busfahrer. Er kam heute wegen Brustschmerzen zu uns. Die Schmerzen bestehen seit zwei Wochen, treten bei Belastung auf, sind drückend, liegen hinter dem Brustbein und strahlen in den linken Arm und den Hals aus. In Ruhe bessern sie sich innerhalb weniger Minuten, Ruheschmerzen hat er nicht. Begleitend bestehen Luftnot und Schwitzen. An Vorerkrankungen sind eine arterielle Hypertonie und eine Hypercholesterinämie bekannt. Er nimmt Ramipril 5 mg; das Statin hat er vor sechs Monaten selbst abgesetzt. Allergien sind nicht bekannt. Weitere kardiovaskuläre Risikofaktoren sind ein Nikotinabusus mit etwa 35 Packungsjahren, eine Adipositas und eine positive Familienanamnese: Sein Vater hatte mit 52 Jahren einen Herzinfarkt. Mein Verdacht ist eine stabile Angina pectoris bei koronarer Herzkrankheit. Differenzialdiagnostisch muss vor allem ein akutes Koronarsyndrom ausgeschlossen werden; außerdem kommen eine Lungenembolie, eine Refluxkrankheit oder muskuloskelettale Schmerzen in Frage. Ich würde ein Ruhe-EKG, ein Labor mit hochsensitivem Troponin, Blutbild, Elektrolyten, Blutfetten und HbA1c sowie eine Echokardiografie veranlassen und je nach Ergebnis eine weitere Ischämiediagnostik oder eine Koronarangiografie planen.",
+    "modelEn": "I would like to present Mr Thomas Keller, a 58-year-old bus driver. He came to us today because of chest pain. The pain has been there for two weeks, comes on with exertion, is pressing, lies behind the breastbone and spreads to the left arm and the neck. At rest it gets better within a few minutes; he has no pain at rest. He also has shortness of breath and sweating. Known previous illnesses are high blood pressure and high cholesterol. He takes ramipril 5 mg; he stopped his statin himself six months ago. No known allergies. Further cardiovascular risk factors are smoking with about 35 pack-years, obesity and a positive family history: his father had a heart attack at 52. My suspected diagnosis is stable angina pectoris due to coronary heart disease. Above all, an acute coronary syndrome must be ruled out; other differential diagnoses are a pulmonary embolism, reflux disease or musculoskeletal pain. I would arrange a resting ECG, blood tests with high-sensitivity troponin, full blood count, electrolytes, blood lipids and HbA1c, and an echocardiogram, and depending on the results plan further ischaemia testing or a coronary angiography."
+  }
+}

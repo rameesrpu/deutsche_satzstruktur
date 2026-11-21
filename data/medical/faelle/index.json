@@ -1,6 +1,8 @@
 {
-  "version": 1,
+  "version": 2,
   "cases": [
-    { "id": "bauchschmerzen", "title": "Bauchschmerzen", "level": "B1", "version": 3 }
+    { "id": "bauchschmerzen", "title": "Bauchschmerzen", "level": "B1", "version": 3 },
+    { "id": "brustschmerzen", "title": "Brustschmerzen", "level": "B2", "version": 1 },
+    { "id": "handgelenk", "title": "Sturz auf die Hand", "level": "B1", "version": 1 }
   ]
 }

@@ -39,7 +39,7 @@ export function runKlinikTests() {
     test('KLINIK_TILES: six tiles in order', () => {
         assertEqual(KLINIK_TILES.map(t => t.title), ['Der Weg zur Approbation', 'Fachsprache und Alltagssprache',
             'Die Station', 'Anamnese', 'Arztbrief', 'Fachsprachenprüfung']);
-        assertEqual(KLINIK_TILES.map(t => t.open), ['route', 'board', 'board', 'anamnese', 'arztbrief', 'soon']);
+        assertEqual(KLINIK_TILES.map(t => t.open), ['route', 'board', 'board', 'anamnese', 'arztbrief', 'fsp']);
         assertEqual(KLINIK_TILES.map(t => t.level), [null, null, null, 'ab B1', 'ab B2', 'ab B2']);
     });
 

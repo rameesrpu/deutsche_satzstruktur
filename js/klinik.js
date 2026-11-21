@@ -4,22 +4,23 @@
 // The Anamnese tile opens a menu (renderAnamneseMenu); "Fragen sortieren" sorts standard questions
 // from data/medical/anamnese.json into the Anamnese sections (questionSortModel, on the sort screen);
 // "Gespräch" lists the cases of data/medical/faelle/index.json (renderCaseList; the interview is caseScreen.js).
+// The Arztbrief and Fachsprachenprüfung tiles list the cases too (the practice run is renderExam, caseScreen.js).
 
 export const KLINIK_ROUTE_FILE = 'data/medical/approbation.json';
 export const KLINIK_ROUTE_VERSION = 1; // mirrors the file's `version`; part of the URL as ?v=
 export const KLINIK_STORAGE_KEY = 'klinikRoute';
 export const ANAMNESE_FILE = 'data/medical/anamnese.json';
-export const ANAMNESE_VERSION = 2; // mirrors the file's `version`; part of the URL as ?v=
+export const ANAMNESE_VERSION = 3; // mirrors the file's `version`; part of the URL as ?v=
 export const QUESTION_SORT_TITLE = 'Wohin gehört die Frage?';
 
-/** @type {{id: string, title: string, level: ?string, open: 'route'|'board'|'anamnese'|'arztbrief'|'soon', boardId: ?string}[]} */
+/** @type {{id: string, title: string, level: ?string, open: 'route'|'board'|'anamnese'|'arztbrief'|'fsp'|'soon', boardId: ?string}[]} */
 export const KLINIK_TILES = [
     { id: 'weg', title: 'Der Weg zur Approbation', level: null, open: 'route', boardId: null },
     { id: 'fachbegriffe', title: 'Fachsprache und Alltagssprache', level: null, open: 'board', boardId: 'fachbegriffe' },
     { id: 'station', title: 'Die Station', level: null, open: 'board', boardId: 'station' },
     { id: 'anamnese', title: 'Anamnese', level: 'ab B1', open: 'anamnese', boardId: null },
     { id: 'arztbrief', title: 'Arztbrief', level: 'ab B2', open: 'arztbrief', boardId: null },
-    { id: 'fsp', title: 'Fachsprachenprüfung', level: 'ab B2', open: 'soon', boardId: null },
+    { id: 'fsp', title: 'Fachsprachenprüfung', level: 'ab B2', open: 'fsp', boardId: null },
 ];
 
 /** Note under the route tile: the progress, or a short notice when the route file is missing. */
@@ -125,7 +126,7 @@ function topBar(title, label, onClick, back = false) {
 /**
  * @param {HTMLElement} root
  * @param {{tiles: {id, title, level, open, boardId}[], route: ?ReturnType<typeof routeState>, boardIds?: string[]}} state
- * @param {{openRoute: function(), openBoard: function(string), openAnamnese: function(), openArztbrief: function(), close: function()}} actions
+ * @param {{openRoute: function(), openBoard: function(string), openAnamnese: function(), openArztbrief: function(), openFsp: function(), close: function()}} actions
  */
 export function renderKlinik(root, state, actions) {
     const known = state.boardIds || [];
@@ -150,6 +151,8 @@ export function renderKlinik(root, state, actions) {
             b.addEventListener('click', () => actions.openAnamnese());
         } else if (mode === 'arztbrief') {
             b.addEventListener('click', () => actions.openArztbrief());
+        } else if (mode === 'fsp') {
+            b.addEventListener('click', () => actions.openFsp());
         } else {
             b.addEventListener('click', () => actions.openBoard(tile.boardId));
         }

@@ -4,7 +4,7 @@
 
 export const CASES_DIR = 'data/medical/faelle';
 export const CASES_INDEX_FILE = `${CASES_DIR}/index.json`;
-export const CASES_INDEX_VERSION = 1; // mirrors index.json's `version`; part of the URL as ?v=
+export const CASES_INDEX_VERSION = 2; // mirrors index.json's `version`; part of the URL as ?v=
 
 /** URL of a case file; `version` comes from its index.json entry (mirrors the file). */
 export const caseUrl = entry => `${CASES_DIR}/${entry.id}.json?v=${entry.version}`;
@@ -132,4 +132,94 @@ export function germanStrings(c) {
         { de: v.skeleton, en: v.skeletonEn },
         { de: v.model, en: v.modelEn },
     ].map(p => ({ de: p.de, en: p.en }));
+}
+
+// --- Fachsprachenprüfung practice run (renderExam in caseScreen.js) ---
+// Format verified in docs/medical-sources.md ("Fachsprachprüfung format", LÄK BW): three parts of
+// about twenty minutes each.
+
+export const EXAM_PARTS = [
+    { id: 'gespraech', title: 'Arzt-Patienten-Gespräch', minutes: 20 },
+    { id: 'dokumentation', title: 'Dokumentation', minutes: 20 },
+    { id: 'vorstellung', title: 'Arzt-Arzt-Gespräch', minutes: 20 },
+];
+
+/** Self-rating after a model text (index = the stored value). */
+export const RATINGS = ['Passt', 'Teilweise', 'Noch nicht'];
+
+/** localStorage key of a run in progress. */
+export const draftKey = caseId => `fspDraft/${caseId}`;
+
+const isObj = v => !!v && typeof v === 'object' && !Array.isArray(v);
+const isRating = v => Number.isInteger(v) && v >= 0 && v < RATINGS.length;
+
+/**
+ * Where a run stands. `draft` = the stored `fspDraft/<caseId>`: {part, startedAt, elapsedMs, texts}
+ * plus what the run collected so far (score of part 1, `ratings` of part 2, `compared`, `presented`,
+ * `talkRating` of part 3). `elapsedMs` is the time spent in the current part; it is saved on leaving,
+ * so time away does not count. part 3 = the summary. A missing or broken draft starts over at part 0.
+ * `remainingMs` can go below zero: running out only turns the clock red.
+ * @param {?Object} draft
+ * @param {number} now  start time of a new run
+ */
+export function examState(draft, now) {
+    const ok = isObj(draft) && Number.isInteger(draft.part) && draft.part >= 0 && draft.part <= EXAM_PARTS.length;
+    const d = ok ? draft : {};
+    const part = ok ? d.part : 0;
+    const elapsedMs = ok && Number.isFinite(d.elapsedMs) && d.elapsedMs > 0 ? d.elapsedMs : 0;
+    const texts = {};
+    if (isObj(d.texts)) for (const [k, v] of Object.entries(d.texts)) if (typeof v === 'string') texts[k] = v;
+    const score = isObj(d.score) && ['questions', 'facts', 'total'].every(k => Number.isInteger(d.score[k])) ? d.score : null;
+    return {
+        part,
+        startedAt: ok && Number.isFinite(d.startedAt) ? d.startedAt : now,
+        elapsedMs,
+        remainingMs: part < EXAM_PARTS.length ? EXAM_PARTS[part].minutes * 60000 - elapsedMs : 0,
+        texts,
+        score,
+        ratings: Array.isArray(d.ratings) ? d.ratings.map(r => (isRating(r) ? r : null)) : [],
+        compared: d.compared === true,
+        presented: d.presented === true,
+        talkRating: isRating(d.talkRating) ? d.talkRating : null,
+    };
+}
+
+export function loadDraft(storage, caseId) {
+    try {
+        const v = JSON.parse(storage.getItem(draftKey(caseId)));
+        return isObj(v) ? v : null;
+    } catch (e) { return null; }
+}
+
+export function saveDraft(storage, caseId, draft) {
+    try { storage.setItem(draftKey(caseId), JSON.stringify(draft)); } catch (e) { /* private mode */ }
+}
+
+export function clearDraft(storage, caseId) {
+    try { storage.removeItem(draftKey(caseId)); } catch (e) { /* private mode */ }
+}
+
+/** Part 2: the Anamnesebogen sections that have a model text, in Anamnese order. */
+export function examSections(caseData, anamnese) {
+    return anamnese.sections
+        .map(s => ({ s, d: caseData.dokumentation.find(x => x.section === s.id) }))
+        .filter(x => x.d)
+        .map(({ s, d }) => ({ id: s.id, title: s.title, model: d.model, en: d.en }));
+}
+
+/**
+ * The end of the run: one line per part.
+ * @param {?{questions: number, facts: number, total: number}} score  part 1 (first-try counts)
+ * @param {(?number)[]} docRatings  part 2, a RATINGS index per section (null = not rated)
+ * @param {?number} talkRating  part 3
+ */
+export function examSummary(score, docRatings, talkRating) {
+    const counts = RATINGS.map((r, i) => `${docRatings.filter(x => x === i).length} × ${r}`).join(', ');
+    return {
+        lines: [
+            `${EXAM_PARTS[0].title}: ${score ? scoreLine(score) : '–'}`,
+            `${EXAM_PARTS[1].title}: ${counts}`,
+            `${EXAM_PARTS[2].title}: ${isRating(talkRating) ? RATINGS[talkRating] : '–'}`,
+        ],
+    };
 }

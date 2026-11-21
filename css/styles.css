@@ -6143,3 +6143,91 @@ body[data-play-view="review"] .play-bottom {
     line-height: 1.4;
     color: var(--ink);
 }
+
+/* ---- FSP practice run (js/caseScreen.js renderExam), on the case screen ---- */
+.exam-inner { padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); }
+.exam-part {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+}
+/* sections stack and flow with the page (no inner scroll boxes) */
+.exam-sections { display: flex; flex-direction: column; gap: 10px; }
+.exam-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-1);
+}
+.exam-label {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+.exam-notes {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 14px;
+    line-height: 1.35;
+    color: var(--ink-soft);
+}
+.exam-input {
+    display: block;
+    width: 100%;
+    min-height: 72px;
+    padding: 8px 10px;
+    border: 1.5px solid var(--ink-400);
+    border-radius: var(--radius-md);
+    background: var(--surface-0);
+    color: var(--ink);
+    font-family: var(--font-sentence);
+    font-size: 16px;
+    line-height: 1.4;
+    resize: none;
+    overflow: hidden;
+}
+.exam-input:focus { outline: none; border-color: var(--ink); box-shadow: var(--ring); }
+.exam-tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-soft);
+}
+.exam-mine,
+.exam-model,
+.exam-skeleton {
+    margin: 0;
+    font-family: var(--font-sentence);
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.exam-mine.is-empty { color: var(--ink-soft); }
+.exam-model { padding: 8px 10px; border-radius: var(--radius-sm); background: var(--surface-0); }
+.exam-model-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.exam-listen { min-height: 40px; }
+.exam-ratings { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
+.exam-rating {
+    flex: 1 1 0;
+    min-height: 44px;
+    padding: 6px 8px;
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-0);
+    color: var(--ink);
+    font: 600 15px var(--font-ui);
+    touch-action: manipulation;
+}
+.exam-rating:hover { transform: none; background: var(--paper-read); }
+.exam-rating.is-selected { background: var(--ink); border-color: var(--ink); color: var(--btn-primary-fg); }
+.exam-line { margin: 0; font-size: 16px; line-height: 1.45; color: var(--ink); }
+.exam-inner > .play-continue-row { margin-top: 4px; }
