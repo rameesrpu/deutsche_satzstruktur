@@ -90,9 +90,33 @@ export function runTimelineBoardTests() {
 
     test('timelineItemIds: wann has three per verb, other modes one', () => {
         assertEqual(timelineItemIds(set1, 'wann').length, 36);
-        assertEqual(timelineItemIds(set1, 'wann').slice(0, 3), ['machen.past', 'machen.now', 'machen.future']);
+        assertEqual(timelineItemIds(set1, 'wann').slice(0, 4), ['machen.past', 'kochen.now', 'gehen.future', 'kaufen.past']);
         assertEqual(timelineItemIds(set1, 'klammer').length, 12);
         assertEqual(timelineItemIds(set1, 'hilfsverb')[0], 'machen');
+    });
+
+    test('timelineItemIds: wann lists every verb x zone once, rotated, never three in a row of one verb', () => {
+        for (const set of file.sets) {
+            const ids = timelineItemIds(set, 'wann');
+            const want = set.items.flatMap(v => ['past', 'now', 'future'].map(z => `${v.id}.${z}`));
+            assertEqual([...ids].sort(), want.sort());
+            assertEqual(new Set(ids).size, ids.length);
+            for (let i = 0; i + 2 < ids.length; i++) {
+                assertEqual(new Set(ids.slice(i, i + 3).map(x => x.split('.')[0])).size > 1, true);
+            }
+            // first pass: one zone per verb, rotating
+            assertEqual(ids.slice(0, 3).map(x => x.split('.')[1]), ['past', 'now', 'future']);
+        }
+    });
+
+    test('data/boards/zeit.json: haben and sein verbs are spread out', () => {
+        assertEqual(set1.items.some((v, i) => i && v.aux === 'sein' && set1.items[i - 1].aux === 'sein'), false);
+        for (const set of file.sets) {
+            for (let i = 0; i + 2 < set.items.length; i++) {
+                if (set === set1) continue;   // 9 haben / 3 sein: a run of three haben cannot be avoided
+                assertEqual(new Set(set.items.slice(i, i + 3).map(v => v.aux)).size > 1, true);
+            }
+        }
     });
 
     test('data/boards/zeit.json: registry entry, sets, verbs', () => {

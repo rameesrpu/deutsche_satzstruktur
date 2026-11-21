@@ -22,11 +22,11 @@ export function timeSentence(verb, zone) {
     return join(lead, verb.finite, verb.subject, verb.rest, verb.particle) + '.';
 }
 
-/** Practice ids of a mode: wann has one per verb and zone (`<id>.past|now|future`), the others one per verb. */
+/** Practice ids of a mode: wann has one per verb and zone (`<id>.past|now|future`, zones rotated per verb), the others one per verb. */
 export function timelineItemIds(set, modeId) {
-    return modeId === 'wann'
-        ? set.items.flatMap(v => ZONES.map(z => `${v.id}.${z}`))
-        : set.items.map(v => v.id);
+    if (modeId !== 'wann') return set.items.map(v => v.id);
+    // three passes; the zone rotates per verb (verb i, pass p: zone (i + p) mod 3), so the order gives nothing away
+    return [0, 1, 2].flatMap(p => set.items.map((v, i) => `${v.id}.${ZONES[(i + p) % 3]}`));
 }
 
 /** The Perfekt sentence in the bracket order: Subject, auxiliary, "gestern ...", participle. */
@@ -172,8 +172,11 @@ function renderWann(root, ctx) {
     home.append(card);
 
     let dead = false;
+    let answered = false;
     const choose = once(picked => {
         if (dead) return;
+        answered = true;
+        drag = null;
         const ok = picked === zone;
         for (const b of Object.values(zones)) b.disabled = true;
         card.classList.remove('is-dragging');
@@ -195,7 +198,7 @@ function renderWann(root, ctx) {
     // drag the card onto a zone (pointer events); a release outside every zone snaps back and does nothing
     let drag = null;
     card.addEventListener('pointerdown', e => {
-        if (dead || e.target.closest('button') || drag) return;
+        if (dead || answered || e.target.closest('button') || drag) return;
         drag = { x: e.clientX, y: e.clientY, id: e.pointerId, moved: false };
         if (card.setPointerCapture) card.setPointerCapture(e.pointerId);
     });
@@ -213,7 +216,7 @@ function renderWann(root, ctx) {
         drag = null;
         card.classList.remove('is-dragging');
         card.style.transform = '';
-        if (!moved || e.type === 'pointercancel') return;
+        if (!moved || e.type !== 'pointerup') return;
         const rects = {};
         for (const z of ZONES) rects[z] = zones[z].getBoundingClientRect();
         const hit = zoneAt(rects, e.clientX, e.clientY);
@@ -221,6 +224,7 @@ function renderWann(root, ctx) {
     };
     card.addEventListener('pointerup', release);
     card.addEventListener('pointercancel', release);
+    card.addEventListener('lostpointercapture', release);
 
     root.replaceChildren(home, line, hint);
     ctx.speak(text);
@@ -237,8 +241,13 @@ function renderKlammer(root, ctx) {
     const barA = svgEl('path', { class: 'tl-clamp-arm' });
     const barB = svgEl('path', { class: 'tl-clamp-arm' });
     svg.append(barA, barB);
-    const gap1 = el('span', 'tl-gap', '');
-    const gap2 = el('span', 'tl-gap', '');
+    const emptyGap = () => {
+        const g = el('span', 'tl-gap', '?');
+        g.setAttribute('aria-label', 'Lücke');
+        return g;
+    };
+    const gap1 = emptyGap();
+    const gap2 = emptyGap();
     const words = el('span', 'tl-frame-text');
     const tail = el('span', 'tl-nowrap');   // the full stop never wraps alone
     tail.append(gap2, '.');
@@ -290,6 +299,7 @@ function renderKlammer(root, ctx) {
     // the gap shows the right form; a wrong pick is marked on its button only, never put into the sentence
     const fill = (gap, label, right) => {
         gap.textContent = label;
+        gap.removeAttribute('aria-label');
         gap.classList.add(right ? 'is-right' : 'is-fixed');
         layout();
     };
@@ -300,7 +310,7 @@ function renderKlammer(root, ctx) {
         return right;
     };
     const partStep = () => {
-        choices.replaceChildren(options(frame.partOptions, (label, b, buttons) => {
+        choices.append(options(frame.partOptions, (label, b, buttons) => {
             const right = mark(buttons, b, frame.partAnswer);
             ok = ok && right;
             fill(gap2, frame.partAnswer, right);
@@ -326,7 +336,6 @@ function renderKlammer(root, ctx) {
         }));
     };
     auxStep();
-    gap1.classList.add('is-open');
 
     root.replaceChildren(box, choices, closing, hint);
     layout();

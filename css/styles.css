@@ -5771,6 +5771,7 @@ body[data-play-view="review"] .play-bottom {
     line-height: 1.7;
     vertical-align: baseline;
 }
+.tl-gap:not(.is-right):not(.is-fixed) { color: var(--ink-soft); font-weight: 700; }
 .tl-gap.is-right { border-style: solid; background: var(--success-bg); }
 .tl-gap.is-fixed { border-style: solid; border-color: var(--danger-500); background: var(--danger-bg); }
 .tl-closing { margin-top: 4px; }

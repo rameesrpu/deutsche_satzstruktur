@@ -178,6 +178,28 @@
  */
 
 /**
+ * One verb of a timeline board set (data/boards/zeit.json; logic in timelineBoard.js).
+ * @typedef {Object} TimelineVerb
+ * @property {string} id         unique, equals `inf`
+ * @property {string} inf        infinitive
+ * @property {string} en         English meaning
+ * @property {'haben'|'sein'} aux  Perfekt auxiliary
+ * @property {string} partizip   participle
+ * @property {[string, string]} wrong  two wrong participles (Klammer)
+ * @property {'ich'|'du'|'er'|'wir'|'ihr'} person  person of `subject` (names are `er`)
+ * @property {string} subject    the sentence subject as written
+ * @property {string} finite     present-tense finite form
+ * @property {string} [particle] separable particle (goes to the end in the Präsens)
+ * @property {string} rest       the rest of the sentence (may be empty)
+ */
+
+/**
+ * A timeline board set: `BoardFile.sets[]` entry of kind `timeline`.
+ * @typedef {Object} TimelineSet
+ * @property {TimelineVerb[]} items
+ */
+
+/**
  * Schedule entry of one board item (boardSchedule.js).
  * @typedef {Object} BoardEntry
  * @property {number} box       0-4 (BOX_DAYS)

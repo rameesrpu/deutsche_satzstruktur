@@ -230,7 +230,7 @@ Parked (small, known):
 - [x] Task 1: Verb data and sentence logic — commit `0f99093`
 - [x] Task 2: Timeline modes on screen — commit `edf4a07`
 - [x] Task 3: Docs and ship — this commit ("Document the timeline board, bump versions")
-- [ ] Whole-branch review (Opus) and its fix wave
+- [x] Whole-branch review (Opus) and its fix wave — fix wave: "Fix timeline item order and Klammer feedback"
 - [ ] Merge to `main` — the owner's step, after `boards-preposition-scene` and the review items below
 
 What the reviews changed against the plan (rulings, each can be undone):
@@ -242,9 +242,15 @@ What the reviews changed against the plan (rulings, each can be undone):
 - In Klammer a wrong choice shows the right form in the gap (red frame); the wrong form stays only on
   its button.
 - The clamp uses the field model's verb indigo, now the token `--verb-klammer`.
+- Wann? cards rotate the zone per verb (first pass: one zone per verb, then the others) and the verb list
+  alternates haben and sein, so she cannot answer from the order; in Klammer the helper-verb buttons stay
+  on screen, marked, while she picks the participle.
 
 Parked (small, known):
-- After an answer in Wann? the card can still be dragged; it snaps back and does not answer again.
+- After a past or now card in Wann? the result is colour only (no rule line; new copy needs the owner).
+- The settled card sits inside the zone button (nested button markup; its 🔊 is hidden).
+- haben oder sein? and Klammer say nothing before the answer; the infinitive card has no 🔊.
+- New items are not shuffled by the session (`pickSession`), on every board; this board orders its own list instead.
 - The drag of a card onto a zone was written but checked only by reading the code; tapping a zone was
   checked on screen.
 - When the Klammer sentence wraps to two lines, the bar runs out to the right margin and back between
@@ -408,6 +414,11 @@ look at. Remove an item when it is checked.
   `js/timelineBoard.js` (e.g. "Gestern habe ich meine Mutter angerufen.", "Wir sind gestern in den
   Park gegangen."). Subjects and objects come from the story (Ayisha, Faris, Lea, Max, Frau Schäfer,
   Kerala Store, Umma).
+  Sentences whose meaning may be odd although grammatical: "Jetzt steht Max um drei Uhr auf." (now +
+  clock time), "Jetzt vergisst Max die Kehrwoche.", "Jetzt wird Lea krank.", "Gestern hast du in Stuttgart
+  studiert." / "Morgen studierst du in Stuttgart." (studieren = being enrolled), "Jetzt schlafe ich lange.",
+  "Jetzt arbeitet Faris lange.", "Gestern bin ich müde gewesen." (people usually say "war"). The rests come
+  from the plan; change them in zeit.json if she prefers.
 - **Wrong participles** offered as choices (e.g. "gegeht", "geeinkauft", "verstehte"): check none is
   accidentally right or too silly.
 - **Phone checklist:**

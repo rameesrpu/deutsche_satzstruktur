@@ -26,7 +26,7 @@ export const BOARDS = [
         ],
     },
     {
-        id: 'zeit', title: 'Die Zeit', kind: 'timeline', file: 'data/boards/zeit.json', version: 1,
+        id: 'zeit', title: 'Die Zeit', kind: 'timeline', file: 'data/boards/zeit.json', version: 2,
         modes: [
             { id: 'wann', label: 'Wann?', scored: true },
             { id: 'klammer', label: 'Klammer', scored: true },
