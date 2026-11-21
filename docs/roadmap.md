@@ -203,7 +203,7 @@ Parked (small, known):
 - [x] Task 1: Scene data and sentence logic — commit `6b463d5`
 - [x] Task 2: Garden picture and positions — commits `8878d8d`, `4bdddab`, `f301711` (owner stop skipped; see "Needs owner review")
 - [x] Task 3: Scene modes on screen — commit `25d34d9`
-- [ ] Task 4: Docs and ship
+- [x] Task 4: Docs and ship — commit `e28c8ef`
 
 ### 4c. Timeline
 
