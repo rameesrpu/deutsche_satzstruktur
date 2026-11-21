@@ -34,7 +34,7 @@ export const BOARDS = [
         ],
     },
     {
-        id: 'fachbegriffe', title: 'Fachsprache und Alltagssprache', kind: 'pairs', file: 'data/boards/fachbegriffe.json', version: 1,
+        id: 'fachbegriffe', title: 'Fachsprache und Alltagssprache', kind: 'pairs', file: 'data/boards/fachbegriffe.json', version: 2,
         modes: [
             { id: 'paare', label: 'Paare', scored: false },
             { id: 'patient', label: 'Für den Patienten', scored: true },

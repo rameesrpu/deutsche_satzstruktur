@@ -1,7 +1,7 @@
 {
  "id": "fachbegriffe",
  "kind": "pairs",
- "version": 1,
+ "version": 2,
  "sets": [
   {
    "id": "herz",
@@ -11,7 +11,15 @@
      "id": "hypertonie",
      "fach": "die Hypertonie",
      "alltag": "der Bluthochdruck",
-     "en": "high blood pressure"
+     "en": "high blood pressure",
+     "twin": "hypotonie"
+    },
+    {
+     "id": "hypotonie",
+     "fach": "die Hypotonie",
+     "alltag": "der niedrige Blutdruck",
+     "en": "low blood pressure",
+     "twin": "hypertonie"
     },
     {
      "id": "infarkt",
@@ -30,6 +38,18 @@
      "fach": "die Tachykardie",
      "alltag": "das Herzrasen",
      "en": "racing heart"
+    },
+    {
+     "id": "apoplex",
+     "fach": "der Apoplex",
+     "alltag": "der Schlaganfall",
+     "en": "stroke"
+    },
+    {
+     "id": "thrombus",
+     "fach": "der Thrombus",
+     "alltag": "das Blutgerinnsel",
+     "en": "blood clot"
     },
     {
      "id": "anaemie",
@@ -58,8 +78,8 @@
     {
      "id": "rhinitis",
      "fach": "die Rhinitis",
-     "alltag": "die Nasenschleimhautentzündung",
-     "en": "rhinitis (inflamed nasal lining)"
+     "alltag": "der Schnupfen",
+     "en": "runny nose"
     },
     {
      "id": "tonsillitis",
@@ -170,6 +190,12 @@
      "en": "bladder infection"
     },
     {
+     "id": "nephrolithiasis",
+     "fach": "die Nephrolithiasis",
+     "alltag": "die Nierensteine (pl.)",
+     "en": "kidney stones"
+    },
+    {
      "id": "haematurie",
      "fach": "die Hämaturie",
      "alltag": "das Blut im Urin",
@@ -228,14 +254,14 @@
     {
      "id": "zephalgie",
      "fach": "die Zephalgie",
-     "alltag": "das Kopfweh",
+     "alltag": "die Kopfschmerzen (pl.)",
      "en": "headache"
     },
     {
      "id": "synkope",
      "fach": "die Synkope",
-     "alltag": "der Kreislaufkollaps",
-     "en": "fainting, circulatory collapse"
+     "alltag": "die Ohnmacht",
+     "en": "fainting"
     },
     {
      "id": "commotio",
@@ -322,6 +348,12 @@
      "fach": "die Analgetika (pl.)",
      "alltag": "die Schmerzmittel (pl.)",
      "en": "painkillers"
+    },
+    {
+     "id": "injektion",
+     "fach": "die Injektion",
+     "alltag": "die Spritze",
+     "en": "injection"
     },
     {
      "id": "sonografie",
