@@ -1,0 +1,341 @@
+{
+ "id": "fachbegriffe",
+ "kind": "pairs",
+ "version": 1,
+ "sets": [
+  {
+   "id": "herz",
+   "title": "Herz und Kreislauf",
+   "items": [
+    {
+     "id": "hypertonie",
+     "fach": "die Hypertonie",
+     "alltag": "der Bluthochdruck",
+     "en": "high blood pressure"
+    },
+    {
+     "id": "infarkt",
+     "fach": "der Myokardinfarkt",
+     "alltag": "der Herzinfarkt",
+     "en": "heart attack"
+    },
+    {
+     "id": "herzinsuff",
+     "fach": "die Herzinsuffizienz",
+     "alltag": "die Herzschwäche",
+     "en": "heart failure"
+    },
+    {
+     "id": "tachykardie",
+     "fach": "die Tachykardie",
+     "alltag": "das Herzrasen",
+     "en": "racing heart"
+    },
+    {
+     "id": "anaemie",
+     "fach": "die Anämie",
+     "alltag": "die Blutarmut",
+     "en": "anaemia"
+    }
+   ]
+  },
+  {
+   "id": "atmung",
+   "title": "Atmung",
+   "items": [
+    {
+     "id": "pneumonie",
+     "fach": "die Pneumonie",
+     "alltag": "die Lungenentzündung",
+     "en": "pneumonia"
+    },
+    {
+     "id": "dyspnoe",
+     "fach": "die Dyspnoe",
+     "alltag": "die Atemnot",
+     "en": "shortness of breath"
+    },
+    {
+     "id": "rhinitis",
+     "fach": "die Rhinitis",
+     "alltag": "die Nasenschleimhautentzündung",
+     "en": "rhinitis (inflamed nasal lining)"
+    },
+    {
+     "id": "tonsillitis",
+     "fach": "die Tonsillitis",
+     "alltag": "die Mandelentzündung",
+     "en": "tonsillitis"
+    },
+    {
+     "id": "sinusitis",
+     "fach": "die Sinusitis",
+     "alltag": "die Nasennebenhöhlenentzündung",
+     "en": "sinusitis"
+    }
+   ]
+  },
+  {
+   "id": "verdauung",
+   "title": "Verdauung",
+   "items": [
+    {
+     "id": "appendizitis",
+     "fach": "die Appendizitis",
+     "alltag": "die Blinddarmentzündung",
+     "en": "appendicitis"
+    },
+    {
+     "id": "gastritis",
+     "fach": "die Gastritis",
+     "alltag": "die Magenschleimhautentzündung",
+     "en": "gastritis"
+    },
+    {
+     "id": "diarrhoe",
+     "fach": "die Diarrhö",
+     "alltag": "der Durchfall",
+     "en": "diarrhoea",
+     "twin": "obstipation"
+    },
+    {
+     "id": "obstipation",
+     "fach": "die Obstipation",
+     "alltag": "die Verstopfung",
+     "en": "constipation",
+     "twin": "diarrhoe"
+    },
+    {
+     "id": "emesis",
+     "fach": "die Emesis",
+     "alltag": "das Erbrechen",
+     "en": "vomiting",
+     "twin": "nausea"
+    },
+    {
+     "id": "nausea",
+     "fach": "die Nausea",
+     "alltag": "die Übelkeit",
+     "en": "nausea",
+     "twin": "emesis"
+    },
+    {
+     "id": "hepatitis",
+     "fach": "die Hepatitis",
+     "alltag": "die Leberentzündung",
+     "en": "hepatitis"
+    },
+    {
+     "id": "ikterus",
+     "fach": "der Ikterus",
+     "alltag": "die Gelbsucht",
+     "en": "jaundice"
+    },
+    {
+     "id": "ulcus",
+     "fach": "das Ulcus ventriculi",
+     "alltag": "das Magengeschwür",
+     "en": "stomach ulcer"
+    },
+    {
+     "id": "dysphagie",
+     "fach": "die Dysphagie",
+     "alltag": "die Schluckstörung",
+     "en": "difficulty swallowing"
+    },
+    {
+     "id": "koloskopie",
+     "fach": "die Koloskopie",
+     "alltag": "die Darmspiegelung",
+     "en": "colonoscopy",
+     "twin": "gastroskopie"
+    },
+    {
+     "id": "gastroskopie",
+     "fach": "die Gastroskopie",
+     "alltag": "die Magenspiegelung",
+     "en": "gastroscopy",
+     "twin": "koloskopie"
+    }
+   ]
+  },
+  {
+   "id": "niere",
+   "title": "Niere und Blase",
+   "items": [
+    {
+     "id": "zystitis",
+     "fach": "die Zystitis",
+     "alltag": "die Blasenentzündung",
+     "en": "bladder infection"
+    },
+    {
+     "id": "haematurie",
+     "fach": "die Hämaturie",
+     "alltag": "das Blut im Urin",
+     "en": "blood in the urine"
+    }
+   ]
+  },
+  {
+   "id": "bewegung",
+   "title": "Knochen und Gelenke",
+   "items": [
+    {
+     "id": "fraktur",
+     "fach": "die Fraktur",
+     "alltag": "der Knochenbruch",
+     "en": "fracture"
+    },
+    {
+     "id": "arthrose",
+     "fach": "die Arthrose",
+     "alltag": "der Gelenkverschleiß",
+     "en": "osteoarthritis",
+     "twin": "arthritis"
+    },
+    {
+     "id": "arthritis",
+     "fach": "die Arthritis",
+     "alltag": "die Gelenkentzündung",
+     "en": "arthritis",
+     "twin": "arthrose"
+    },
+    {
+     "id": "distorsion",
+     "fach": "die Distorsion",
+     "alltag": "die Verstauchung",
+     "en": "sprain"
+    },
+    {
+     "id": "osteoporose",
+     "fach": "die Osteoporose",
+     "alltag": "der Knochenschwund",
+     "en": "osteoporosis"
+    },
+    {
+     "id": "lumbago",
+     "fach": "die Lumbago",
+     "alltag": "der Hexenschuss",
+     "en": "lumbago"
+    }
+   ]
+  },
+  {
+   "id": "kopf",
+   "title": "Kopf und Nerven",
+   "items": [
+    {
+     "id": "zephalgie",
+     "fach": "die Zephalgie",
+     "alltag": "das Kopfweh",
+     "en": "headache"
+    },
+    {
+     "id": "synkope",
+     "fach": "die Synkope",
+     "alltag": "der Kreislaufkollaps",
+     "en": "fainting, circulatory collapse"
+    },
+    {
+     "id": "commotio",
+     "fach": "die Commotio cerebri",
+     "alltag": "die Gehirnerschütterung",
+     "en": "concussion"
+    },
+    {
+     "id": "insomnie",
+     "fach": "die Insomnie",
+     "alltag": "die Schlafstörung",
+     "en": "insomnia"
+    }
+   ]
+  },
+  {
+   "id": "haut",
+   "title": "Haut",
+   "items": [
+    {
+     "id": "exanthem",
+     "fach": "das Exanthem",
+     "alltag": "der Hautausschlag",
+     "en": "rash"
+    },
+    {
+     "id": "pruritus",
+     "fach": "der Pruritus",
+     "alltag": "der Juckreiz",
+     "en": "itching"
+    },
+    {
+     "id": "oedem",
+     "fach": "das Ödem",
+     "alltag": "die Wassereinlagerung",
+     "en": "oedema"
+    },
+    {
+     "id": "haematom",
+     "fach": "das Hämatom",
+     "alltag": "der blaue Fleck",
+     "en": "bruise"
+    },
+    {
+     "id": "urtikaria",
+     "fach": "die Urtikaria",
+     "alltag": "die Nesselsucht",
+     "en": "hives"
+    }
+   ]
+  },
+  {
+   "id": "allgemein",
+   "title": "Allgemeines",
+   "items": [
+    {
+     "id": "diabetes",
+     "fach": "der Diabetes mellitus",
+     "alltag": "die Zuckerkrankheit",
+     "en": "diabetes"
+    },
+    {
+     "id": "adipositas",
+     "fach": "die Adipositas",
+     "alltag": "die Fettleibigkeit",
+     "en": "obesity"
+    },
+    {
+     "id": "hyperthyreose",
+     "fach": "die Hyperthyreose",
+     "alltag": "die Schilddrüsenüberfunktion",
+     "en": "overactive thyroid",
+     "twin": "hypothyreose"
+    },
+    {
+     "id": "hypothyreose",
+     "fach": "die Hypothyreose",
+     "alltag": "die Schilddrüsenunterfunktion",
+     "en": "underactive thyroid",
+     "twin": "hyperthyreose"
+    },
+    {
+     "id": "analgetika",
+     "fach": "die Analgetika (pl.)",
+     "alltag": "die Schmerzmittel (pl.)",
+     "en": "painkillers"
+    },
+    {
+     "id": "sonografie",
+     "fach": "die Sonografie",
+     "alltag": "der Ultraschall",
+     "en": "ultrasound"
+    },
+    {
+     "id": "anamnese",
+     "fach": "die Anamnese",
+     "alltag": "die Krankengeschichte",
+     "en": "medical history"
+    }
+   ]
+  }
+ ]
+}

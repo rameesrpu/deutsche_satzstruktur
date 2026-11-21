@@ -20,6 +20,7 @@ import { KLINIK_TILES, KLINIK_ROUTE_FILE, KLINIK_ROUTE_VERSION, routeState, togg
 import './hotspotBoard.js'; // registers the 'hotspot' board kind
 import './sceneBoard.js'; // registers the 'scene' board kind
 import './timelineBoard.js'; // registers the 'timeline' board kind
+import './pairsBoard.js'; // registers the 'pairs' board kind
 import { buildRecapModel, renderRecap, reviewRecapModel, renderReviewRecap, wordsByChapter } from './chapterRecap.js';
 import { dueKeys } from './ladder.js';
 import { ReviewRunner, buildQueue, keyCategory, settleWithin } from './reviewRunner.js';
@@ -1344,6 +1345,7 @@ class DeutschApp {
      * @param {{review?: boolean}} [opts]
      */
     async openBoard(id, opts = {}) {
+        const from = this.screen; // a board opened from Klinik closes back to Klinik
         try {
             await this.loadChapterRows(); // chapter files decide which sets are unlocked
             const board = await loadBoard(id, url => fetch(url).then(r => r.json()));
@@ -1355,7 +1357,7 @@ class DeutschApp {
             this.showScreen('board');
             this.boardTeardown = renderBoardScreen(document.getElementById('screen-board'),
                 { board, isChapterComplete: done, getBoard, now, start: start || undefined },
-                { record: (key, ok) => progressStore.recordBoard(key, ok), close: () => this.showScreen('practice') });
+                { record: (key, ok) => progressStore.recordBoard(key, ok), close: () => (from === 'klinik' ? this.openKlinik() : this.showScreen('practice')) });
         } catch (e) {
             console.error('Board konnte nicht geladen werden', e);
         }
@@ -1373,7 +1375,7 @@ class DeutschApp {
             console.error('Klinik-Weg konnte nicht geladen werden', e);
             return;
         }
-        if (this.screen !== 'practice' && this.screen !== 'klinik') return;
+        if (this.screen !== 'practice' && this.screen !== 'klinik' && this.screen !== 'board') return;
         this.showScreen('klinik');
         const route = () => routeState(stations, loadDone(localStorage));
         const tiles = () => renderKlinik(root, { tiles: KLINIK_TILES, route: route(), boardIds: BOARDS.map(b => b.id) }, {

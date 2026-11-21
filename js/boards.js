@@ -33,6 +33,14 @@ export const BOARDS = [
             { id: 'hilfsverb', label: 'haben oder sein?', scored: true },
         ],
     },
+    {
+        id: 'fachbegriffe', title: 'Fachsprache und Alltagssprache', kind: 'pairs', file: 'data/boards/fachbegriffe.json', version: 1,
+        modes: [
+            { id: 'paare', label: 'Paare', scored: false },
+            { id: 'patient', label: 'Für den Patienten', scored: true },
+            { id: 'kollegin', label: 'Für die Kollegin', scored: true },
+        ],
+    },
 ];
 
 /**

@@ -1,7 +1,8 @@
 // klinik: pure route state, toggling and the tile list of the Klinik screen
 
 import { test, assertEqual } from './assert.js';
-import { routeState, toggleStation, tileMode, KLINIK_TILES } from '../js/klinik.js';
+import { readText } from './stubs.js';
+import { KLINIK_ROUTE_VERSION, routeState, toggleStation, tileMode, KLINIK_TILES } from '../js/klinik.js';
 
 const stations = [
     { id: 'a', title: 'A', checked: '2026-11-21' },
@@ -10,6 +11,10 @@ const stations = [
 ];
 
 export function runKlinikTests() {
+    test('KLINIK_ROUTE_VERSION mirrors the route file version', () => {
+        assertEqual(JSON.parse(readText('data/medical/approbation.json')).version, KLINIK_ROUTE_VERSION);
+    });
+
     test('routeState: counts required stations, marks the next one, ignores unknown ids', () => {
         const r = routeState(stations, ['a', 'zzz']);
         assertEqual(r.total, 2);
