@@ -18,6 +18,37 @@ export const BRIEF_SECTIONS = [
     { id: 'empfehlung', title: 'Empfehlung' },
 ];
 
+/**
+ * "Arztbrief sortieren": one chip per brief sentence (id = its index in the file), the five sections as zones.
+ * @param {import('./types.js').Case} caseData
+ * @returns {import('./sortExercise.js').SortModel}
+ */
+export function briefSortModel(caseData) {
+    return {
+        title: `Arztbrief: ${caseData.title}`,
+        zones: BRIEF_SECTIONS.map(z => ({ id: z.id, title: z.title })),
+        chips: caseData.brief.map((b, i) => ({ id: String(i), text: b.de, en: b.en, zones: [b.section] })),
+    };
+}
+
+const BRIEF_HINTS = {
+    diagnosen: 'Eine Diagnose steht ganz oben.',
+    anamnese: 'Das hat die Patientin erzählt: Anamnese.',
+    befund: 'Das hat die Ärztin festgestellt: Befund.',
+    therapie: 'Das wurde gemacht: Therapie und Verlauf.',
+    empfehlung: 'Das soll danach passieren: Empfehlung.',
+};
+
+/** Hint after a wrong drop: fixed text by the chip's right section (its first zone). */
+export const briefHint = (chip, zoneId) => BRIEF_HINTS[chip.zones[0]] || '';
+
+/** The finished letter: the sections that have sentences, each with its sentences in the file's order. */
+export function letterSections(caseData) {
+    return BRIEF_SECTIONS
+        .map(z => ({ id: z.id, title: z.title, sentences: caseData.brief.filter(b => b.section === z.id).map(b => b.de) }))
+        .filter(z => z.sentences.length > 0);
+}
+
 /** Patient card line: "Lena Hoffmann, 24 Jahre, Studentin". */
 export const patientLine = p => `${p.name}, ${p.age} Jahre, ${p.job}`;
 

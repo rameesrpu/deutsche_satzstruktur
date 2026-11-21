@@ -4,7 +4,7 @@
 import { test, assert, assertEqual } from './assert.js';
 import { readText, listDir } from './stubs.js';
 import { ANAMNESE_VERSION } from '../js/klinik.js';
-import { CASES_INDEX_VERSION, BRIEF_SECTIONS, interviewSteps, formState, interviewScore, germanStrings } from '../js/caseFlow.js';
+import { CASES_INDEX_VERSION, BRIEF_SECTIONS, briefSortModel, briefHint, letterSections, interviewSteps, formState, interviewScore, germanStrings } from '../js/caseFlow.js';
 
 const SECTIONS = [
     ['beschwerden', 'Aktuelle Beschwerden'], ['vorerkrankungen', 'Vorerkrankungen und Operationen'],
@@ -183,13 +183,37 @@ function runCaseTests(anamnese) {
         });
     }
 
+    test('briefSortModel: one chip per sentence (id = index), five zones, title', () => {
+        const c = { ...SMALL_CASE, title: 'X', brief: [
+            { section: 'diagnosen', de: 'A', en: 'a' }, { section: 'befund', de: 'B', en: 'b' }] };
+        const m = briefSortModel(c);
+        assertEqual(m.title, 'Arztbrief: X');
+        assertEqual(m.zones.map(z => z.id), BRIEF_SECTIONS.map(z => z.id));
+        assertEqual(m.chips, [{ id: '0', text: 'A', en: 'a', zones: ['diagnosen'] },
+            { id: '1', text: 'B', en: 'b', zones: ['befund'] }]);
+    });
+
+    test('briefHint: fixed hint by the chip\'s right section', () => {
+        const hints = { diagnosen: 'Eine Diagnose steht ganz oben.', anamnese: 'Das hat die Patientin erzählt: Anamnese.',
+            befund: 'Das hat die Ärztin festgestellt: Befund.', therapie: 'Das wurde gemacht: Therapie und Verlauf.',
+            empfehlung: 'Das soll danach passieren: Empfehlung.' };
+        for (const [id, text] of Object.entries(hints)) assertEqual(briefHint({ zones: [id] }, 'befund'), text);
+    });
+
+    test('letterSections: five headings, sentences in the file\'s order, empty sections left out', () => {
+        const c = { ...SMALL_CASE, brief: [{ section: 'befund', de: 'B', en: 'b' }, { section: 'diagnosen', de: 'A', en: 'a' },
+            { section: 'befund', de: 'C', en: 'c' }] };
+        assertEqual(letterSections(c), [{ id: 'diagnosen', title: 'Diagnosen', sentences: ['A'] },
+            { id: 'befund', title: 'Befund', sentences: ['B', 'C'] }]);
+    });
+
     const bauch = JSON.parse(readText('data/medical/faelle/bauchschmerzen.json'));
-    test('faelle/bauchschmerzen: all seven sections, 10–14 steps, 10–12 letter sentences, documentation per section', () => {
+    test('faelle/bauchschmerzen: all seven sections, 10–14 steps, 10–13 letter sentences, documentation per section', () => {
         assertEqual(new Set(bauch.interview.map(s => s.section)).size, 7);
-        // 10–12 in the brief; up to 14 by controller ruling (period, bowel and urine questions)
+        // 10–13 in the brief (the period sentence is Anamnese); up to 14 by controller ruling (period, bowel and urine questions)
         assert(bauch.interview.length >= 10 && bauch.interview.length <= 14, `${bauch.interview.length} steps`);
         for (const q of ['g-periode', 'g-stuhlgang', 'g-wasserlassen']) assert(bauch.interview.some(s => s.question === q), q);
-        assert(bauch.brief.length >= 10 && bauch.brief.length <= 12, `${bauch.brief.length} sentences`);
+        assert(bauch.brief.length >= 10 && bauch.brief.length <= 13, `${bauch.brief.length} sentences`);
         assertEqual(new Set(bauch.brief.map(b => b.section)).size, 5);
         assertEqual(bauch.dokumentation.map(d => d.section), anamnese.sections.map(s => s.id));
         assertEqual(bauch.level, 'B1');

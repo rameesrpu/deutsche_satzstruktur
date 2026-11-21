@@ -39,7 +39,10 @@ export function renderSortScreen(root, { model, total, index, hint: hintFor }, {
     const feedbackSlot = el('div', 'play-feedback-slot');
     const feedback = el('div', 'play-feedback play-feedback-wrong');
     feedbackSlot.appendChild(feedback);
-    inner.appendChild(feedbackSlot);
+    // The dock (hint + tray) sticks to the bottom of the screen so the tray stays reachable as the zones grow.
+    const dock = el('div', 'sort-dock');
+    dock.appendChild(feedbackSlot);
+    inner.appendChild(dock);
     feedback.setAttribute('role', 'status');
     feedback.setAttribute('aria-live', 'polite');
 
@@ -121,9 +124,10 @@ export function renderSortScreen(root, { model, total, index, hint: hintFor }, {
             }
         }
 
-        for (const node of [...inner.children]) if (node !== feedbackSlot) node.remove();
+        for (const node of [...inner.children]) if (node !== dock) node.remove();
+        for (const node of [...dock.children]) if (node !== feedbackSlot) node.remove();
         inner.prepend(bar, prompt, zones);
-        inner.append(bottom);
+        dock.append(bottom);
         if (root.firstChild !== inner) root.replaceChildren(inner);
     }
 

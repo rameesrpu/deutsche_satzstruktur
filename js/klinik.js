@@ -12,13 +12,13 @@ export const ANAMNESE_FILE = 'data/medical/anamnese.json';
 export const ANAMNESE_VERSION = 2; // mirrors the file's `version`; part of the URL as ?v=
 export const QUESTION_SORT_TITLE = 'Wohin gehört die Frage?';
 
-/** @type {{id: string, title: string, level: ?string, open: 'route'|'board'|'anamnese'|'soon', boardId: ?string}[]} */
+/** @type {{id: string, title: string, level: ?string, open: 'route'|'board'|'anamnese'|'arztbrief'|'soon', boardId: ?string}[]} */
 export const KLINIK_TILES = [
     { id: 'weg', title: 'Der Weg zur Approbation', level: null, open: 'route', boardId: null },
     { id: 'fachbegriffe', title: 'Fachsprache und Alltagssprache', level: null, open: 'board', boardId: 'fachbegriffe' },
     { id: 'station', title: 'Die Station', level: null, open: 'board', boardId: 'station' },
     { id: 'anamnese', title: 'Anamnese', level: 'ab B1', open: 'anamnese', boardId: null },
-    { id: 'arztbrief', title: 'Arztbrief', level: 'ab B2', open: 'soon', boardId: null },
+    { id: 'arztbrief', title: 'Arztbrief', level: 'ab B2', open: 'arztbrief', boardId: null },
     { id: 'fsp', title: 'Fachsprachenprüfung', level: 'ab B2', open: 'soon', boardId: null },
 ];
 
@@ -125,7 +125,7 @@ function topBar(title, label, onClick, back = false) {
 /**
  * @param {HTMLElement} root
  * @param {{tiles: {id, title, level, open, boardId}[], route: ?ReturnType<typeof routeState>, boardIds?: string[]}} state
- * @param {{openRoute: function(), openBoard: function(string), openAnamnese: function(), close: function()}} actions
+ * @param {{openRoute: function(), openBoard: function(string), openAnamnese: function(), openArztbrief: function(), close: function()}} actions
  */
 export function renderKlinik(root, state, actions) {
     const known = state.boardIds || [];
@@ -148,6 +148,8 @@ export function renderKlinik(root, state, actions) {
             else { b.classList.add('is-soon'); b.disabled = true; }
         } else if (mode === 'anamnese') {
             b.addEventListener('click', () => actions.openAnamnese());
+        } else if (mode === 'arztbrief') {
+            b.addEventListener('click', () => actions.openArztbrief());
         } else {
             b.addEventListener('click', () => actions.openBoard(tile.boardId));
         }
@@ -194,15 +196,36 @@ export function renderAnamneseMenu(root, state, actions) {
 /**
  * The cases of one exercise ("Gespräch"): one tile per case with its level.
  * @param {HTMLElement} root
- * @param {{title: string, cases: {id: string, title: string, level: string}[]}} state
+ * @param {{title: string, backLabel?: string, cases: {id: string, title: string, level: string}[]}} state
  * @param {{openCase: function(string), back: function()}} actions
  */
 export function renderCaseList(root, state, actions) {
     const inner = el('div', 'screen-inner klinik-inner');
-    inner.append(topBar(state.title, 'Zurück', actions.back, 'Anamnese'));
+    inner.append(topBar(state.title, 'Zurück', actions.back, state.backLabel || 'Anamnese'));
     const grid = el('div', 'klinik-tiles');
     for (const c of state.cases) grid.append(menuTile(c.title, true, () => actions.openCase(c.id), c.level));
     inner.append(grid);
+    root.replaceChildren(inner);
+}
+
+/**
+ * The finished Arztbrief as one page: heading per section, its sentences as paragraphs.
+ * @param {HTMLElement} root
+ * @param {{title: string, sections: {id: string, title: string, sentences: string[]}[]}} state
+ * @param {{done: function()}} actions
+ */
+export function renderLetter(root, state, actions) {
+    const inner = el('div', 'screen-inner klinik-inner');
+    const page = el('article', 'letter-page');
+    page.append(el('h2', 'letter-title', state.title));
+    for (const sec of state.sections) {
+        page.append(el('h3', 'letter-heading', sec.title));
+        for (const t of sec.sentences) page.append(el('p', 'letter-text', t));
+    }
+    const done = el('button', 'play-continue letter-done', 'Fertig');
+    done.type = 'button';
+    done.addEventListener('click', () => actions.done());
+    inner.append(page, done);
     root.replaceChildren(inner);
 }
 

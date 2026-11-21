@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "id": "bauchschmerzen",
   "title": "Bauchschmerzen",
   "level": "B1",
@@ -128,9 +128,10 @@
     { "section": "anamnese", "de": "Die Patientin stellte sich mit seit dem Vorabend bestehenden Bauchschmerzen vor.", "en": "The patient presented with abdominal pain that had started the evening before." },
     { "section": "anamnese", "de": "Die Schmerzen begannen periumbilikal und wanderten im Verlauf in den rechten Unterbauch.", "en": "The pain started around the navel and later moved to the right lower abdomen." },
     { "section": "anamnese", "de": "Begleitend bestanden Übelkeit, Appetitlosigkeit, einmaliges Erbrechen sowie Fieber bis 38,2 °C; Stuhlgang und Miktion waren unauffällig.", "en": "There was also nausea, loss of appetite, one episode of vomiting and fever up to 38.2 °C; bowel movements and urination were normal." },
+    { "section": "anamnese", "de": "Die letzte Menstruation lag zwei Wochen zurück.", "en": "The last menstrual period was two weeks ago." },
     { "section": "befund", "de": "Klinisch zeigte sich ein Druckschmerz über dem McBurney-Punkt mit positivem Loslassschmerz.", "en": "On examination there was tenderness over McBurney's point with positive rebound tenderness." },
     { "section": "befund", "de": "Laborchemisch fanden sich eine Leukozytose von 14,2/nl und ein CRP von 45 mg/l.", "en": "Blood tests showed a raised white cell count of 14.2/nl and a CRP of 45 mg/l." },
-    { "section": "befund", "de": "Die letzte Menstruation lag zwei Wochen zurück, das β-HCG war negativ.", "en": "The last menstrual period was two weeks ago; the β-HCG was negative." },
+    { "section": "befund", "de": "Das β-HCG war negativ.", "en": "The β-HCG was negative." },
     { "section": "befund", "de": "Sonografisch stellte sich eine verdickte, nicht komprimierbare Appendix dar.", "en": "Ultrasound showed a thickened, non-compressible appendix." },
     { "section": "therapie", "de": "Am Aufnahmetag führten wir eine laparoskopische Appendektomie durch.", "en": "On the day of admission we performed a laparoscopic appendectomy." },
     { "section": "therapie", "de": "Der postoperative Verlauf war komplikationslos.", "en": "The course after the operation was without complications." },

@@ -16,9 +16,9 @@ import { storyChapters, chapterStatuses, sentenceStats, countPlayedToday,
     renderHome, renderPractice, renderWords } from './homeScreen.js';
 import { BOARDS, loadBoard, boardSummary, reviewStart } from './boards.js';
 import { renderBoardScreen } from './boardScreen.js';
-import { KLINIK_TILES, KLINIK_ROUTE_FILE, KLINIK_ROUTE_VERSION, ANAMNESE_FILE, ANAMNESE_VERSION, routeState, toggleStation, loadDone, saveDone, renderKlinik, renderRoute, renderAnamneseMenu, renderCaseList, questionSortModel } from './klinik.js';
+import { KLINIK_TILES, KLINIK_ROUTE_FILE, KLINIK_ROUTE_VERSION, ANAMNESE_FILE, ANAMNESE_VERSION, routeState, toggleStation, loadDone, saveDone, renderKlinik, renderRoute, renderAnamneseMenu, renderCaseList, renderLetter, questionSortModel } from './klinik.js';
 import { renderSortScreen } from './sortScreen.js';
-import { CASES_INDEX_FILE, CASES_INDEX_VERSION, caseUrl } from './caseFlow.js';
+import { CASES_INDEX_FILE, CASES_INDEX_VERSION, caseUrl, briefSortModel, briefHint, letterSections } from './caseFlow.js';
 import { renderInterview } from './caseScreen.js';
 import './hotspotBoard.js'; // registers the 'hotspot' board kind
 import './sceneBoard.js'; // registers the 'scene' board kind
@@ -1371,7 +1371,7 @@ class DeutschApp {
      * Klinik screen: tiles; "Der Weg zur Approbation" opens the route view and "Anamnese" its menu in
      * the same section. "Fragen sortieren" runs on the sort screen and comes back to the Anamnese menu;
      * "Gespräch" lists the cases (view 'gespraech'), a case runs on the case screen (openCase).
-     * @param {'tiles'|'route'|'anamnese'|'gespraech'} [view]
+     * @param {'tiles'|'route'|'anamnese'|'gespraech'|'arztbrief'} [view]
      */
     async openKlinik(view = 'tiles') {
         const root = document.getElementById('screen-klinik');
@@ -1398,7 +1398,7 @@ class DeutschApp {
                 this.anamneseData = null;
             }
         }
-        if ((view === 'anamnese' || view === 'gespraech') && this.caseIndex === undefined) {
+        if (['anamnese', 'gespraech', 'arztbrief'].includes(view) && this.caseIndex === undefined) {
             try {
                 const r = await fetch(`${CASES_INDEX_FILE}?v=${CASES_INDEX_VERSION}`);
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -1416,6 +1416,7 @@ class DeutschApp {
             openRoute: () => routeView(),
             openBoard: id => this.openBoard(id),
             openAnamnese: () => this.openKlinik('anamnese'),
+            openArztbrief: () => this.openKlinik('arztbrief'),
             close: () => this.showScreen('practice'),
         });
         const anamnese = this.anamneseData;
@@ -1423,6 +1424,10 @@ class DeutschApp {
         const caseList = () => renderCaseList(root, { title: 'Gespräch', cases }, {
             openCase: id => this.openCase(cases.find(c => c.id === id)),
             back: () => anamneseMenu(),
+        });
+        const briefList = () => renderCaseList(root, { title: 'Arztbrief', backLabel: 'Klinik', cases }, {
+            openCase: id => this.openBrief(cases.find(c => c.id === id)),
+            back: tiles,
         });
         const anamneseMenu = () => renderAnamneseMenu(root, { available: !!anamnese, cases }, {
             openCases: caseList,
@@ -1441,7 +1446,43 @@ class DeutschApp {
         if (view === 'route' && stations) routeView();
         else if (view === 'anamnese') anamneseMenu();
         else if (view === 'gespraech' && anamnese && cases.length) caseList();
+        else if (view === 'arztbrief' && cases.length) briefList();
         else tiles();
+    }
+
+    /**
+     * One case's Arztbrief: sentences sorted into the five sections on the sort screen, then the finished
+     * letter; back to the Arztbrief case list when done or closed.
+     * @param {{id: string, version: number}} entry
+     */
+    async openBrief(entry) {
+        const caseData = entry && await this.loadCaseFile(entry);
+        if (!caseData || this.screen !== 'klinik') return;
+        const back = () => this.openKlinik('arztbrief');
+        this.showScreen('sort');
+        const root = document.getElementById('screen-sort');
+        const letter = () => {
+            root.scrollTop = 0;
+            renderLetter(root, { title: `Arztbrief: ${caseData.title}`, sections: letterSections(caseData) }, { done: back });
+        };
+        renderSortScreen(root, { model: briefSortModel(caseData), total: 1, index: 0, hint: briefHint },
+            { onDone: letter, onClose: back });
+    }
+
+    /** Fetches a case file once (version from index.json in the URL); null when it fails. */
+    async loadCaseFile(entry) {
+        this.caseFiles = this.caseFiles || {};
+        if (!this.caseFiles[entry.id]) {
+            try {
+                const r = await fetch(caseUrl(entry));
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                this.caseFiles[entry.id] = await r.json();
+            } catch (e) {
+                console.error('Fall konnte nicht geladen werden', e);
+                return null;
+            }
+        }
+        return this.caseFiles[entry.id];
     }
 
     /**
@@ -1451,17 +1492,7 @@ class DeutschApp {
      */
     async openCase(entry) {
         if (!entry || !this.anamneseData) return;
-        this.caseFiles = this.caseFiles || {};
-        if (!this.caseFiles[entry.id]) {
-            try {
-                const r = await fetch(caseUrl(entry));
-                if (!r.ok) throw new Error(`HTTP ${r.status}`);
-                this.caseFiles[entry.id] = await r.json();
-            } catch (e) {
-                console.error('Fall konnte nicht geladen werden', e);
-                return;
-            }
-        }
+        if (!await this.loadCaseFile(entry)) return;
         if (this.screen !== 'klinik') return;
         this.showScreen('case');
         const back = () => this.openKlinik('gespraech');

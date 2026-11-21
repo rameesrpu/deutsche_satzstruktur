@@ -5932,6 +5932,36 @@ body[data-play-view="review"] .play-bottom {
     min-height: 64px;
 }
 
+.sort-dock {
+    position: sticky;
+    bottom: 0;
+    margin-top: auto;
+    max-height: 38vh;
+    overflow-y: auto;
+    padding: 8px 0 calc(8px + env(safe-area-inset-bottom, 0px));
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+}
+.sort-dock .order-tray { padding-top: 4px; }
+.sort-dock .play-feedback-slot { min-height: 0; padding: 0 0 8px; }
+.sort-dock .play-feedback-slot:has(.play-feedback[hidden]) { padding: 0; }
+
+/* Arztbrief letter page (js/klinik.js renderLetter) */
+.letter-page {
+    margin: 0 0 16px;
+    padding: 20px 18px;
+    background: var(--surface-0);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+    font-family: var(--font-sentence);
+    color: var(--ink);
+}
+.letter-title { margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-size: 1.2rem; }
+.letter-heading { margin: 16px 0 4px; font-size: 1rem; font-weight: 700; }
+.letter-text { margin: 0 0 6px; font-size: 1rem; line-height: 1.5; overflow-wrap: anywhere; }
+.letter-done { align-self: stretch; }
+
 .sort-zone .order-placed[role="button"] {
     cursor: pointer;
 }

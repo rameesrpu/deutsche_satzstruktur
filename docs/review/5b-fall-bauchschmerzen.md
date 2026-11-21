@@ -2,7 +2,7 @@
 
 **Fall „Bauchschmerzen“ (case "abdominal pain"): review sheet (plan 5b, Task 3)**
 
-Klinik → Anamnese → *Gespräch* → Bauchschmerzen. Level B1. Data: `data/medical/faelle/bauchschmerzen.json` (version 2). Invented patient, invented teaching content — not medical advice. The suspected diagnosis is acute appendicitis.
+Klinik → Anamnese → *Gespräch* → Bauchschmerzen. Level B1. Data: `data/medical/faelle/bauchschmerzen.json` (version 3). Invented patient, invented teaching content — not medical advice. The suspected diagnosis is acute appendicitis.
 
 How the interview works: for each step the learner sees the section and three questions (one right, two wrong). After the right question the patient answers (shown and spoken). Then three notes: she taps the one that follows from the answer, and it goes into the Anamnesebogen. The letter (*Arztbrief*), the documentation and the presentation are used by later exercises (Arztbrief sorting, FSP practice run).
 
@@ -155,12 +155,13 @@ The interview has 13 steps (the plan said 10–12; one more so that the last per
 - Die Patientin stellte sich mit seit dem Vorabend bestehenden Bauchschmerzen vor. — The patient presented with abdominal pain that had started the evening before.
 - Die Schmerzen begannen periumbilikal und wanderten im Verlauf in den rechten Unterbauch. — The pain started around the navel and later moved to the right lower abdomen.
 - Begleitend bestanden Übelkeit, Appetitlosigkeit, einmaliges Erbrechen sowie Fieber bis 38,2 °C; Stuhlgang und Miktion waren unauffällig. — There was also nausea, loss of appetite, one episode of vomiting and fever up to 38.2 °C; bowel movements and urination were normal.
+- Die letzte Menstruation lag zwei Wochen zurück. — The last menstrual period was two weeks ago.
 
 ### Befund (Findings)
 
 - Klinisch zeigte sich ein Druckschmerz über dem McBurney-Punkt mit positivem Loslassschmerz. — On examination there was tenderness over McBurney's point with positive rebound tenderness.
 - Laborchemisch fanden sich eine Leukozytose von 14,2/nl und ein CRP von 45 mg/l. — Blood tests showed a raised white cell count of 14.2/nl and a CRP of 45 mg/l.
-- Die letzte Menstruation lag zwei Wochen zurück, das β-HCG war negativ. — The last menstrual period was two weeks ago; the β-HCG was negative.
+- Das β-HCG war negativ. — The β-HCG was negative.
 - Sonografisch stellte sich eine verdickte, nicht komprimierbare Appendix dar. — Ultrasound showed a thickened, non-compressible appendix.
 
 ### Therapie und Verlauf (Treatment and course)
