@@ -26,7 +26,7 @@ Please check the wording and the section of each.
 
 ## Fall „Brustschmerzen“ (chest pain; suspected stable angina pectoris)
 
-Klinik → Anamnese → *Gespräch*, Klinik → *Arztbrief* and Klinik → *Fachsprachenprüfung* → Brustschmerzen. Level B2. Data: `data/medical/faelle/brustschmerzen.json` (version 1). Invented patient, invented teaching content — not medical advice.
+Klinik → Anamnese → *Gespräch*, Klinik → *Arztbrief* and Klinik → *Fachsprachenprüfung* → Brustschmerzen. Level B2. Data: `data/medical/faelle/brustschmerzen.json` (version 2). Invented patient, invented teaching content — not medical advice.
 
 The interview has 13 steps.
 
@@ -267,7 +267,7 @@ The interview has 13 steps.
 
 ## Fall „Sturz auf die Hand“ (fall on the outstretched hand; suspected distal radius fracture)
 
-Klinik → Anamnese → *Gespräch*, Klinik → *Arztbrief* and Klinik → *Fachsprachenprüfung* → Sturz auf die Hand. Level B1. Data: `data/medical/faelle/handgelenk.json` (version 1). Invented patient, invented teaching content — not medical advice.
+Klinik → Anamnese → *Gespräch*, Klinik → *Arztbrief* and Klinik → *Fachsprachenprüfung* → Sturz auf die Hand. Level B1. Data: `data/medical/faelle/handgelenk.json` (version 2). Invented patient, invented teaching content — not medical advice.
 
 The interview has 13 steps.
 

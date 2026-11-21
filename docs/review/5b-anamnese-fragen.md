@@ -2,7 +2,7 @@
 
 **Anamnese: Fragen nach Abschnitt (Anamnese questions by section): review sheet (plan 5b, Task 2)**
 
-Klinik → Anamnese → *Fragen sortieren*. The learner gets 10 random questions and sorts each into one of the seven sections of the Anamnese. A question marked *auch* (also) is accepted in a second section as well. Data: `data/medical/anamnese.json` (version 2). All questions use the formal *Sie* form.
+Klinik → Anamnese → *Fragen sortieren*. The learner gets 10 random questions and sorts each into one of the seven sections of the Anamnese. A question marked *auch* (also) is accepted in a second section as well. Data: `data/medical/anamnese.json` (version 3; the three questions added in version 3 are on the brust/handgelenk sheet). All questions use the formal *Sie* form.
 
 ## Questions for the doctor
 

@@ -2,7 +2,7 @@
 
 **Fall „Bauchschmerzen“ (case "abdominal pain"): review sheet (plan 5b, Task 3)**
 
-Klinik → Anamnese → *Gespräch* → Bauchschmerzen. Level B1. Data: `data/medical/faelle/bauchschmerzen.json` (version 3). Invented patient, invented teaching content — not medical advice. The suspected diagnosis is acute appendicitis.
+Klinik → Anamnese → *Gespräch* → Bauchschmerzen. Level B1. Data: `data/medical/faelle/bauchschmerzen.json` (version 4). Invented patient, invented teaching content — not medical advice. The suspected diagnosis is acute appendicitis.
 
 How the interview works: for each step the learner sees the section and three questions (one right, two wrong). After the right question the patient answers (shown and spoken). Then three notes: she taps the one that follows from the answer, and it goes into the Anamnesebogen. The letter (*Arztbrief*), the documentation and the presentation are used by later exercises (Arztbrief sorting, FSP practice run).
 

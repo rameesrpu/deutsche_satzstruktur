@@ -125,7 +125,7 @@ function topBar(title, label, onClick, back = false) {
 
 /**
  * @param {HTMLElement} root
- * @param {{tiles: {id, title, level, open, boardId}[], route: ?ReturnType<typeof routeState>, boardIds?: string[]}} state
+ * @param {{tiles: {id, title, level, open, boardId}[], route: ?ReturnType<typeof routeState>, boardIds?: string[], unavailable?: string}} state
  * @param {{openRoute: function(), openBoard: function(string), openAnamnese: function(), openArztbrief: function(), openFsp: function(), close: function()}} actions
  */
 export function renderKlinik(root, state, actions) {
@@ -149,6 +149,10 @@ export function renderKlinik(root, state, actions) {
             else { b.classList.add('is-soon'); b.disabled = true; }
         } else if (mode === 'anamnese') {
             b.addEventListener('click', () => actions.openAnamnese());
+        } else if ((mode === 'arztbrief' || mode === 'fsp') && state.unavailable === mode) {
+            b.classList.add('is-soon');
+            b.disabled = true;
+            b.append(el('span', 'klinik-tile-note', 'Gerade nicht verfügbar.'));
         } else if (mode === 'arztbrief') {
             b.addEventListener('click', () => actions.openArztbrief());
         } else if (mode === 'fsp') {

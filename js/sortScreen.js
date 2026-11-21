@@ -26,6 +26,7 @@ const el = (tag, cls, text) => {
  * @param {{onDone: (mistakes: number) => void, onClose: () => void}} actions
  */
 export function renderSortScreen(root, { model, total, index, hint: hintFor }, { onDone, onClose }) {
+    root.scrollTop = 0; // a new sort opens at the top, not where the last screen ended
     let state = createSort(model);
     let selected = null;
     let hint = null;

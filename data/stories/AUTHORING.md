@@ -307,7 +307,9 @@ Anamnese interview, the Arztbrief and the FSP practice run. Not a story chapter:
 2. **Register.** Patient answers at B1; doctor questions, letter sentences and models as a German doctor writes.
    Halal; "Trinken Sie Alkohol?" is a standard question and stays.
 3. **Register the case.** Add `{id, title, level, version}` to `index.json`, raise the index `version` and
-   `CASES_INDEX_VERSION` in `js/caseFlow.js`. Editing a case: bump its `version` and its index entry.
+   `CASES_INDEX_VERSION` in `js/caseFlow.js`. Editing a case: bump its `version` and its index entry, and
+   raise the index `version` with `CASES_INDEX_VERSION` too: the case URL's `?v=` comes from the index entry,
+   so a cached `index.json` would keep serving the old case.
 4. **Review sheet.** Write `docs/review/5b-<name>.md`: the case in full, German with English, headed
    "Medical content — not yet checked by a doctor", with a "What to check" list. Add it to
    `docs/roadmap.md` under "Needs owner review".

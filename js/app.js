@@ -1413,7 +1413,7 @@ class DeutschApp {
         if (!['practice', 'klinik', 'board', 'sort', 'case'].includes(this.screen)) return;
         this.showScreen('klinik');
         const route = () => (stations ? routeState(stations, loadDone(localStorage)) : null);
-        const tiles = () => renderKlinik(root, { tiles: KLINIK_TILES, route: route(), boardIds: BOARDS.map(b => b.id) }, {
+        const tiles = (unavailable) => renderKlinik(root, { tiles: KLINIK_TILES, route: route(), boardIds: BOARDS.map(b => b.id), unavailable }, {
             openRoute: () => routeView(),
             openBoard: id => this.openBoard(id),
             openAnamnese: () => this.openKlinik('anamnese'),
@@ -1429,11 +1429,11 @@ class DeutschApp {
         });
         const briefList = () => renderCaseList(root, { title: 'Arztbrief', backLabel: 'Klinik', cases }, {
             openCase: id => this.openBrief(cases.find(c => c.id === id)),
-            back: tiles,
+            back: () => tiles(),
         });
         const examList = () => renderCaseList(root, { title: 'Fachsprachenprüfung', backLabel: 'Klinik', cases }, {
             openCase: id => this.openExam(cases.find(c => c.id === id)),
-            back: tiles,
+            back: () => tiles(),
         });
         const anamneseMenu = () => renderAnamneseMenu(root, { available: !!anamnese, cases }, {
             openCases: caseList,
@@ -1443,18 +1443,18 @@ class DeutschApp {
                 renderSortScreen(document.getElementById('screen-sort'),
                     { model: questionSortModel(anamnese), total: 1, index: 0 }, { onDone: back, onClose: back });
             },
-            back: tiles,
+            back: () => tiles(),
         });
         const routeView = (openId = null) => renderRoute(root, { stations, route: route() }, {
             toggle: id => { saveDone(localStorage, toggleStation(loadDone(localStorage), id)); routeView(id); },
-            back: tiles,
+            back: () => tiles(),
         }, openId);
         if (view === 'route' && stations) routeView();
         else if (view === 'anamnese') anamneseMenu();
         else if (view === 'gespraech' && anamnese && cases.length) caseList();
         else if (view === 'arztbrief' && cases.length) briefList();
         else if (view === 'fsp' && anamnese && cases.length) examList();
-        else tiles();
+        else tiles(['arztbrief', 'fsp'].includes(view) ? view : undefined);
     }
 
     /**

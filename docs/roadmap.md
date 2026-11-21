@@ -302,7 +302,7 @@ Parked (small, known):
 - [x] Task 3: Cases and the interview — commits `18a574d`, `e587097` (owner stop skipped; see "Needs owner review")
 - [x] Task 4: Arztbrief — commit `f8c6adf`
 - [x] Task 5: FSP practice run — commit `32db25b` (owner stop skipped; see "Needs owner review")
-- [x] Task 6: Docs and ship — commit see `git log` ("Document Anamnese, Arztbrief and FSP practice, bump versions")
+- [x] Task 6: Docs and ship — commit `86b2c6d` ("Document Anamnese, Arztbrief and FSP practice, bump versions")
 - [ ] Whole-branch review (Opus) and its fix wave
 - [ ] Merge to `main` — the owner's step, after `klinik-maps-terms` and the review items below
 
@@ -317,6 +317,7 @@ What the reviews changed against the plan (rulings, each can be undone):
 - The menstruation sentence of the first letter is filed under Anamnese; the β-HCG stays Befund.
 - The interview panel and the sort tray are sticky bottom docks with their own scroll, so questions and the form stay reachable on a phone.
 - The FSP clock is per part and resumable (time away does not count; it stops at `Vergleichen` and `Ich bin fertig`); the draft also keeps score, ratings and presented state; leaving part 1 restarts the interview but keeps the clock.
+- UI wording the implementers invented beyond the plan (one string each): sort prompt "Wohin gehört die Frage?", sort aria-label "Sortieren"; interview "Diese Frage passt jetzt nicht.", "Das steht nicht in der Antwort.", "Was notieren Sie?", "1 Fall"/"n Fälle", "‹ Anamnese", aria-label "Gespräch"; FSP run "Teil N von 3: …", "Ihr Text", "Mustertext", "Vorstellung", summary heading "Fachsprachenprüfung", aria "Restzeit", "Selbsteinschätzung".
 - "Sturz auf die Hand" is the title of the `handgelenk` case (the other titles name the complaint).
 - `Anhören` (part 3 and the 🔊 buttons) always speaks; the automatic speech follows "Aussprache".
 

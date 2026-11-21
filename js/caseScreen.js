@@ -79,7 +79,8 @@ export function renderInterview(root, { caseData, anamnese, clock = null, headin
     let shake = null; // the wrong option just tapped
     const openEn = new Set(); // keys of sentences showing their English
     let finished = false;
-    const finish = fn => (...args) => { if (!finished) { finished = true; const elapsedMs = teardown(); fn(...args, { elapsedMs }); } };
+    const stopSpeech = () => { try { gameSounds.cancelPrompt(); } catch (e) { /* no speech */ } };
+    const finish = fn => (...args) => { if (!finished) { finished = true; stopSpeech(); const elapsedMs = teardown(); fn(...args, { elapsedMs }); } };
     const done = finish(onDone);
     const closeScreen = finish(onClose);
     const voice = () => gameSounds.hasGermanVoice();
@@ -357,6 +358,7 @@ export function renderExam(root, { caseData, anamnese, storage, rng = Math.rando
     }
     function teardown() {
         if (closed) return;
+        try { gameSounds.cancelPrompt(); } catch (e) { /* no speech */ }
         if (interview) { draft.elapsedMs = interview(); interview = null; }
         if (timer) { clearInterval(timer); timer = null; }
         save();
@@ -365,6 +367,7 @@ export function renderExam(root, { caseData, anamnese, storage, rng = Math.rando
     }
     function leave() { teardown(); onClose(); }
     function finish() {
+        try { gameSounds.cancelPrompt(); } catch (e) { /* no speech */ }
         if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
         stopClock();
         closed = true;
