@@ -42,7 +42,7 @@ export const BOARDS = [
         ],
     },
     {
-        id: 'station', title: 'Die Station', kind: 'hotspot', file: 'data/boards/station.json', version: 2,
+        id: 'station', title: 'Die Station', kind: 'hotspot', file: 'data/boards/station.json', version: 3,
         modes: [
             { id: 'entdecken', label: 'Entdecken', scored: false },
             { id: 'zeigen', label: 'Zeigen', scored: true },

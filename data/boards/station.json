@@ -1,7 +1,7 @@
 {
   "id": "station",
   "title": "Die Station",
-  "version": 2,
+  "version": 3,
   "kind": "hotspot",
   "sets": [
     {"id": "raeume", "title": "Die Räume", "image": "img/station.svg", "wide": true, "items": [

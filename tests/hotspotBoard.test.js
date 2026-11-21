@@ -168,7 +168,7 @@ export function runHotspotBoardTests() {
 
     test('data/boards/station.json: rooms and team vocabulary', () => {
         const file = JSON.parse(readText('data/boards/station.json'));
-        assertEqual([file.id, file.kind, file.version], ['station', 'hotspot', 2]);
+        assertEqual([file.id, file.kind, file.version], ['station', 'hotspot', 3]);
         assertEqual(file.sets.map(s => [s.id, s.title, s.image, !!s.wide]),
             [['raeume', 'Die Räume', 'img/station.svg', true], ['team', 'Das Team', 'img/team.svg', false]]);
         const de = id => file.sets.flatMap(s => s.items).find(i => i.id === id);
