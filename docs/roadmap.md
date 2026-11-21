@@ -43,14 +43,14 @@ the owner's answer or review.
 
 | # | Project | Plan | Status | Needs first |
 |---|---|---|---|---|
-| 1 | Production ladder, rungs 2–3 | [plan](superpowers/plans/2026-11-15-production-ladder.md) · [design](superpowers/specs/2026-11-15-production-ladder-design.md) | done (2026-11-17; on branch `production-ladder`, not merged) | – |
-| 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | done (2026-11-19; branch `content-pipeline`, on top of `production-ladder`, not merged) | – |
-| 3 | Ladder rungs 4–5 (Schreiben, Sprechen) | [plan](superpowers/plans/2026-11-16-ladder-write-speak.md) · [design](superpowers/specs/2026-11-16-ladder-write-speak-design.md) | done (2026-11-20; branch `ladder-write-speak`, on top of `content-pipeline`, not merged) | – |
-| 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | done (2026-11-20; branch `boards-body-map`, on top of `ladder-write-speak`, not merged) | 1 |
-| 4b | Preposition scene | [plan](superpowers/plans/2026-11-16-boards-preposition-scene.md) | done (2026-11-21; branch `boards-preposition-scene`, on top of `boards-body-map`, not merged) | 4a |
-| 4c | Timeline | [plan](superpowers/plans/2026-11-16-boards-timeline.md) | done (2026-11-21; branch `boards-timeline`, on top of `boards-preposition-scene`, not merged) | 4a |
-| 5a | Klinik: maps and terms | [plan](superpowers/plans/2026-11-16-klinik-maps-terms.md) · [design](superpowers/specs/2026-11-16-medical-track-design.md) | done (2026-11-21; branch `klinik-maps-terms`, on top of `boards-timeline`, not merged) | 4a |
-| 5b | Klinik: Anamnese, Arztbrief, FSP | [plan](superpowers/plans/2026-11-16-klinik-anamnese-fsp.md) | done (2026-11-21; branch `klinik-anamnese-fsp`, on top of `klinik-maps-terms`, not merged) | 5a (better after 2 and 3) |
+| 1 | Production ladder, rungs 2–3 | [plan](superpowers/plans/2026-11-15-production-ladder.md) · [design](superpowers/specs/2026-11-15-production-ladder-design.md) | done (2026-11-17; on branch `production-ladder`, merged 2026-11-21) | – |
+| 2 | Content pipeline | [plan](superpowers/plans/2026-11-16-content-pipeline.md) · [design](superpowers/specs/2026-11-16-content-pipeline-design.md) | done (2026-11-19; branch `content-pipeline`, on top of `production-ladder`, merged 2026-11-21) | – |
+| 3 | Ladder rungs 4–5 (Schreiben, Sprechen) | [plan](superpowers/plans/2026-11-16-ladder-write-speak.md) · [design](superpowers/specs/2026-11-16-ladder-write-speak-design.md) | done (2026-11-20; branch `ladder-write-speak`, on top of `content-pipeline`, merged 2026-11-21) | – |
+| 4a | Boards framework and body map | [plan](superpowers/plans/2026-11-16-boards-body-map.md) · [design](superpowers/specs/2026-11-16-spatial-boards-design.md) | done (2026-11-20; branch `boards-body-map`, on top of `ladder-write-speak`, merged 2026-11-21) | 1 |
+| 4b | Preposition scene | [plan](superpowers/plans/2026-11-16-boards-preposition-scene.md) | done (2026-11-21; branch `boards-preposition-scene`, on top of `boards-body-map`, merged 2026-11-21) | 4a |
+| 4c | Timeline | [plan](superpowers/plans/2026-11-16-boards-timeline.md) | done (2026-11-21; branch `boards-timeline`, on top of `boards-preposition-scene`, merged 2026-11-21) | 4a |
+| 5a | Klinik: maps and terms | [plan](superpowers/plans/2026-11-16-klinik-maps-terms.md) · [design](superpowers/specs/2026-11-16-medical-track-design.md) | done (2026-11-21; branch `klinik-maps-terms`, on top of `boards-timeline`, merged 2026-11-21) | 4a |
+| 5b | Klinik: Anamnese, Arztbrief, FSP | [plan](superpowers/plans/2026-11-16-klinik-anamnese-fsp.md) | done (2026-11-21; branch `klinik-anamnese-fsp`, on top of `klinik-maps-terms`, merged 2026-11-21) | 5a (better after 2 and 3) |
 
 Recommended order: 1 → 2 → 3 → 4a → 4b → 4c → 5a → 5b. Project 2 touches only scripts and
 story data, so it can also run beside project 1. The order is a recommendation, not an owner
@@ -69,7 +69,7 @@ Branch `production-ladder` (not merged, not pushed).
 - [x] Task 7: Review runner, "Heute üben", recap — commits `a2a051a`, `f5aade2`
 - [x] Task 8: Docs and ship — commit `8d4e399`
 - [x] Whole-branch review (Opus) and its fix wave — commit `f023e86`
-- [ ] Merge to `main` — the owner's step, after the phone check below
+- [x] Merge to `main` — 2026-11-21 (owner's call; the review items below are still open)
 
 What the reviews changed against the plan (rulings, each can be undone):
 - The recap line reads "n von m richtig · morgen wieder", not "n von m eine Stufe weiter": at
@@ -100,7 +100,7 @@ Parked (small, known):
 - [x] Task 6: A1 translation backfill (five story files) — commits `008f6b4`..`05147b7`, `e1bcf15`
 - [x] Task 7: Pilot chapter A2 1.1 — commits `dfd0ac1`..`6432a52`, `5ae3e23` (owner stops skipped; see "Needs owner review")
 - [x] Whole-branch review (Opus) and its fix wave — commits `585d45d`, `43a39bf`
-- [ ] Merge to `main` — the owner's step, after `production-ladder` and the review items below
+- [x] Merge to `main` — 2026-11-21 (owner's call; the review items below are still open)
 
 What the reviews changed against the plan (rulings, each can be undone):
 - The checker reports every word that has no glossary match ("ungeglosst"), capitalised or not.
@@ -132,7 +132,7 @@ Parked (small, known):
 - [x] Task 5: Sprechen screen (rung 5) — commit `82ba1ff`
 - [x] Task 6: Runner wiring and ship — commits `f16a36d`, `fcc8b79`
 - [x] Whole-branch review (Opus) and its fix wave — commits `303ceb6`..`70e62a3`
-- [ ] Merge to `main` — the owner's step, after `content-pipeline` and the phone check below
+- [x] Merge to `main` — 2026-11-21 (owner's call; the review items below are still open)
 
 What the reviews changed against the plan (rulings, each can be undone):
 - Every sentence now enters the ladder, also the 254 of 982 library sentences with neither an
@@ -171,7 +171,7 @@ Parked (small, known):
 - [x] Task 6: Hotspot modes on screen — commit `642fed5`
 - [x] Task 7: Docs and ship — commit `37128da`
 - [x] Whole-branch review (Opus) and its fix wave — commit `d559136`
-- [ ] Merge to `main` — the owner's step, after `ladder-write-speak` and the review items below
+- [x] Merge to `main` — 2026-11-21 (owner's call; the review items below are still open)
 
 What the reviews changed against the plan (rulings, each can be undone):
 - Progress format 3 adds `boards`. An import counts as an "old file" only below format 2, so a
@@ -205,7 +205,7 @@ Parked (small, known):
 - [x] Task 3: Scene modes on screen — commit `25d34d9`
 - [x] Task 4: Docs and ship — commit `e28c8ef`
 - [x] Whole-branch review (Opus) and its fix wave — commit `e955a66`
-- [ ] Merge to `main` — the owner's step, after `boards-body-map` and the review items below
+- [x] Merge to `main` — 2026-11-21 (owner's call; the review items below are still open)
 
 What the reviews changed against the plan (rulings, each can be undone):
 - When the Dativ form contracts and the Akkusativ does not, the blank covers the preposition too:
@@ -231,7 +231,7 @@ Parked (small, known):
 - [x] Task 2: Timeline modes on screen — commit `edf4a07`
 - [x] Task 3: Docs and ship — this commit ("Document the timeline board, bump versions")
 - [x] Whole-branch review (Opus) and its fix wave — fix wave: "Fix timeline item order and Klammer feedback"
-- [ ] Merge to `main` — the owner's step, after `boards-preposition-scene` and the review items below
+- [x] Merge to `main` — 2026-11-21 (owner's call; the review items below are still open)
 
 What the reviews changed against the plan (rulings, each can be undone):
 - Unlock labels are the real chapter names: "Nach „5.3 Ein Ausflug“" (Perfekt 1) and "Nach „A2 1.1 Der
@@ -266,7 +266,7 @@ Parked (small, known):
 - [x] Task 4: The ward — commits `7b44343`, `2a57f4f` (owner stop skipped; see "Needs owner review")
 - [x] Task 5: Docs and ship — commit `2a5a2f9`
 - [x] Whole-branch review (Opus) and its fix wave — commits `3640bdd`, `1e3bbad`
-- [ ] Merge to `main` — the owner's step, after `boards-timeline` and the review items below
+- [x] Merge to `main` — 2026-11-21 (owner's call; the review items below are still open)
 
 What the reviews changed against the plan (rulings, each can be undone):
 - Her path is the third-country one: Kenntnisprüfung is the default (legal default since 1.11.2026,
@@ -304,7 +304,7 @@ Parked (small, known):
 - [x] Task 5: FSP practice run — commit `32db25b` (owner stop skipped; see "Needs owner review")
 - [x] Task 6: Docs and ship — commit `86b2c6d` ("Document Anamnese, Arztbrief and FSP practice, bump versions")
 - [x] Whole-branch review (Opus) and its fix wave — commit `c07a577`
-- [ ] Merge to `main` — the owner's step, after `klinik-maps-terms` and the review items below
+- [x] Merge to `main` — 2026-11-21 (owner's call; the review items below are still open)
 
 What the reviews changed against the plan (rulings, each can be undone):
 - R1: the Klinik tile `open` takes `anamnese`, `arztbrief` and `fsp` (the plan did not name the type).
