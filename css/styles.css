@@ -5575,3 +5575,93 @@ body[data-play-view="review"] .play-bottom {
 
 .hs-option.is-right { border-color: var(--success-500); background: var(--success-bg); }
 .hs-option.is-wrong { border-color: var(--danger-500); background: var(--danger-bg); }
+
+/* ---- Bilder: scene board, Wo? Wohin? (js/sceneBoard.js) ---- */
+.sc-pic {
+    position: relative;
+    width: min(100%, calc(46vh * 4 / 3));   /* leaves room for the sentence, the answers and "Weiter" */
+    width: min(100%, calc(46dvh * 4 / 3));
+    aspect-ratio: 4 / 3;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--paper-read);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.sc-pic.is-tappable { cursor: pointer; }
+
+.sc-img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    pointer-events: none;
+}
+
+.sc-img[hidden] { display: none; }
+
+.sc-hen {   /* the hen's feet are at left/top; 8 % of the garden's width */
+    position: absolute;
+    width: 8%;
+    aspect-ratio: 1;
+    user-select: none;
+    pointer-events: none;
+}
+
+.sc-arrow {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.sc-arrow-line {
+    stroke: var(--ink-700);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-dasharray: 1 7;   /* a dotted trail */
+}
+
+.sc-arrow-head {
+    fill: var(--ink-700);
+    stroke: var(--paper-read);
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+}
+
+.sc-pic .hs-dot[hidden],
+.sc-rest[hidden] { display: none; }
+.sc-pic .hs-dot.is-covered { display: none; }
+
+.sc-pic .sc-rest {   /* the hen's resting spot: a small dot at its feet */
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;
+    border: 2px solid var(--paper-read);
+    background: var(--ink-700);
+    box-shadow: none;
+}
+
+.sc-sentence { min-height: 3.2em; }   /* two lines: the sentence does not push the answers down */
+
+.sc-blank {
+    display: inline-block;
+    min-width: 2.4em;
+    border-bottom: 2px solid var(--ink-700);
+    color: transparent;
+    line-height: 1;
+}
+
+.sc-blank.is-pending { border-bottom-color: var(--line); }
+
+.sc-choices { display: flex; flex-direction: column; gap: 8px; }
+.sc-options { margin-top: 0; }
+.sc-options .hs-option:disabled:not(.is-right):not(.is-wrong) { opacity: 0.6; cursor: default; }
+.sc-next { justify-content: center; min-height: 52px; }
+.sc-sentence .hs-prompt-text { font-weight: 500; }   /* the article (the answer) stands out in bold */
+.sc-sentence .hs-prompt-text b { font-weight: 800; }

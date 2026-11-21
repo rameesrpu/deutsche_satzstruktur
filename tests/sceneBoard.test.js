@@ -3,7 +3,8 @@
 import { test, assertEqual } from './assert.js';
 import { readText } from './stubs.js';
 import { parseNoun } from '../js/hotspotBoard.js';
-import { PREPS, sceneItemIds, sceneSentence, articleBlank, prepOptions, ruleHint } from '../js/sceneBoard.js';
+import { PREPS, sceneItemIds, sceneSentence, articleBlank, prepOptions, ruleHint, sceneAction, frontClip, arrowGeometry, sentenceSegments } from '../js/sceneBoard.js';
+import { BOARDS, itemIdsFor, KINDS } from '../js/boards.js';
 
 const file = JSON.parse(readText('data/boards/wechselpraepositionen.json'));
 const set = file.sets[0];
@@ -149,5 +150,63 @@ export function runSceneBoardTests() {
             assertEqual([image, svg.includes(`viewBox="${viewBox}"`)], [image, true]);
             assertEqual([image, /<text\b/.test(svg)], [image, false]);
         }
+    });
+
+    test('scene kind registered: itemIdsFor the verstehen mode lists the 47 Wohin?/Wo? ids', () => {
+        const board = { ...BOARDS.find(b => b.id === 'wechsel') };
+        assertEqual(typeof KINDS.scene.renderSet, 'function');
+        const ids = itemIdsFor(board, file.sets[0], 'verstehen');
+        assertEqual(ids.length, 47);
+        assertEqual(ids, sceneItemIds(file.sets[0]));
+        assertEqual(ids.includes('ueber-zaun.wo'), false);
+    });
+
+    test('prepOptions: every real item id offers its own preposition among four', () => {
+        for (const it of set.items) {
+            for (const id of [`${it.id}.wohin`, `${it.id}.wo`]) {
+                const o = prepOptions(id);
+                assertEqual([id, o.length, o.includes(it.prep)], [id, 4, true]);
+            }
+        }
+    });
+
+    test('sceneAction: a walk from home for Wohin?, a rest for Wo?, front rect only for hinter', () => {
+        const w = sceneAction(set, 'hinter-bank.wohin');
+        assertEqual([w.from, w.to, w.front], [set.mover.home, set.items.find(i => i.id === 'hinter-bank').spot, set.landmarks.bank.front]);
+        const r = sceneAction(set, 'hinter-bank.wo');
+        assertEqual([r.from, r.front !== null], [null, true]);
+        assertEqual(sceneAction(set, 'auf-bank.wohin').front, null);
+    });
+
+    test('frontClip: percent rect as inset, grown by 1 px on every side', () => {
+        assertEqual(frontClip([55, 46.7, 20, 22.7]),
+            'inset(calc(46.7% - 1px) calc(25% - 1px) calc(30.6% - 1px) calc(55% - 1px))');
+    });
+
+    test('arrowGeometry: shaft ends at the head base, head tip on the spot, none for a tiny walk', () => {
+        const a = arrowGeometry([50, 50], [75, 50]);
+        assertEqual([a.x1, a.y1, a.x2, a.y2], [200, 150, 286, 150]);
+        assertEqual(a.head.startsWith('300,150 '), true);
+        assertEqual(arrowGeometry([50, 50], [50.5, 50]), null);
+    });
+
+    test('sentenceSegments: filled text equals the sentence; blanks and bold slots', () => {
+        const join = segs => segs.map(s => s.text).join('');
+        for (const it of set.items) {
+            for (const kind of it.verbs.wo ? ['wohin', 'wo'] : ['wohin']) {
+                const id = `${it.id}.${kind}`;
+                const s = sceneSentence(set, id);
+                assertEqual([id, join(sentenceSegments(set, id, { fill: s.answer }))], [id, s.text]);
+            }
+        }
+        const segs = sentenceSegments(set, 'in-huehnerhaus.wohin', { fill: 'ins' });
+        assertEqual(segs.filter(s => s.kind === 'bold').map(s => s.text), ['ins']);
+        assertEqual(join(sentenceSegments(set, 'in-huehnerhaus.wohin')), 'Das Huhn geht ___ Hühnerhaus.');
+        assertEqual(join(sentenceSegments(set, 'unter-tisch.wohin')), 'Das Huhn läuft unter ___ Tisch.');
+        assertEqual(join(sentenceSegments(set, 'unter-tisch.wohin', { prepBlank: true })), 'Das Huhn läuft ___ ___ Tisch.');
+        assertEqual(join(sentenceSegments(set, 'in-huehnerhaus.wohin', { prepBlank: true })), 'Das Huhn geht ___ ___ Hühnerhaus.');
+        const two = sentenceSegments(set, 'zwischen-baum-bank.wohin', { fill: 'den … die' });
+        assertEqual(two.filter(s => s.kind === 'bold').map(s => s.text), ['den', 'die']);
+        assertEqual(join(sentenceSegments(set, 'zwischen-baum-bank.wo')), 'Das Huhn steht zwischen ___ Baum und ___ Bank.');
     });
 }
