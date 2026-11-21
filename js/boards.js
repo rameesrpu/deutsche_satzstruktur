@@ -74,13 +74,19 @@ export function setModes(board, set) {
 
 const isDue = (e, now) => !!e && e.due <= now;
 
-/** Counts over unlocked sets and their scored modes; stored keys of items not in the data are never looked at. */
+/** Counts over unlocked sets and their scored modes (`lockedLabel`: the unlock label of the first locked set when none is open); stored keys of items not in the data are never looked at. */
 export function boardSummary(board, getBoard, isChapterComplete, now) {
     let total = 0;
     let learned = 0;
     let due = 0;
+    let unlocked = 0;
+    let firstLocked = null;
     for (const set of board.sets) {
-        if (isSetLocked(set, isChapterComplete)) continue;
+        if (isSetLocked(set, isChapterComplete)) {
+            firstLocked = firstLocked || set;
+            continue;
+        }
+        unlocked++;
         const scored = setModes(board, set).filter(m => m.scored);
         const idsOf = new Map(scored.map(m => [m.id, new Set(itemIdsFor(board, set, m.id))]));
         const all = scored.length ? [...new Set(scored.flatMap(m => [...idsOf.get(m.id)]))] : itemIdsFor(board, set, null);
@@ -92,7 +98,7 @@ export function boardSummary(board, getBoard, isChapterComplete, now) {
             due += entries.filter(e => isDue(e, now)).length;
         }
     }
-    return { total, learned, due };
+    return { total, learned, due, lockedLabel: unlocked === 0 && firstLocked ? firstLocked.unlock.label : null };
 }
 
 /** Where "Wiederholen" starts: the first unlocked set with a due item, and its first scored mode with one. */

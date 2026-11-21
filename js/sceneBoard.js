@@ -121,9 +121,6 @@ export function prepOptions(itemId, rng = Math.random) {
 
 export const ruleHint = kind => (kind === 'wohin' ? 'Wohin? → Akkusativ' : 'Wo? → Dativ');
 
-/** The kind's practice ids for the scored modes. */
-export const itemIds = set => sceneItemIds(set);
-
 /** The garden is 400×300 units (the hen is 8 % of its width, set in CSS). */
 const GARDEN = [400, 300];
 
@@ -264,16 +261,16 @@ function drawScene(ctx) {
     const restDot = el('span', 'hs-dot sc-rest');
     restDot.hidden = true;
     const quiet = new Map();
-    wrap.append(base);
+    const quietDots = [];
     for (const it of ctx.items) {
         const d = el('span', 'hs-dot is-quiet');
         d.style.left = `${it.spot[0]}%`;
         d.style.top = `${it.spot[1]}%`;
         d.hidden = true;
         quiet.set(it.id, d);
-        wrap.append(d);
+        quietDots.push(d);
     }
-    wrap.append(hen, front, arrow, restDot);
+    wrap.append(base, hen, front, ...quietDots, arrow, restDot);
 
     let timer = null;
     let anim = null;

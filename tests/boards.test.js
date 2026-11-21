@@ -85,13 +85,27 @@ export function runBoardsTests() {
             [boardKey('koerper', 'aussen', 'arm', 'zeigen')]: entry(1, NOW + 5),
         };
         const sum = boardSummary(board, k => store[k] || null, () => false, NOW);
-        assertEqual(sum, { total: 2, learned: 1, due: 1 });
+        assertEqual(sum, { total: 2, learned: 1, due: 1, lockedLabel: null });
     });
 
     test('boardSummary: stored keys of removed items are ignored; locked sets are not counted', () => {
         const store = { [boardKey('koerper', 'aussen', 'weg', 'zeigen')]: entry(1, NOW - 1) };
-        assertEqual(boardSummary(board, k => store[k] || null, () => false, NOW), { total: 2, learned: 0, due: 0 });
+        assertEqual(boardSummary(board, k => store[k] || null, () => false, NOW), { total: 2, learned: 0, due: 0, lockedLabel: null });
         assertEqual(boardSummary(board, () => null, () => true, NOW).total, 3);
+    });
+
+    test('boardSummary: lockedLabel is the first locked set label when no set is unlocked, else null', () => {
+        const locked = board.sets.filter(s => s.unlock);
+        assertEqual(locked.length > 0, true);
+        const allLocked = { ...board, sets: locked };
+        assertEqual(boardSummary(allLocked, () => null, () => false, NOW).lockedLabel, locked[0].unlock.label);
+        assertEqual(boardSummary(board, () => null, () => false, NOW).lockedLabel, null);
+        assertEqual(boardSummary(allLocked, () => null, () => true, NOW).lockedLabel, null);
+    });
+
+    test('boardCard: all locked shows "Nach ..." and no review button', () => {
+        assertEqual(boardCard({ learned: 0, total: 0, due: 0, lockedLabel: '5.1 Gute Besserung' }),
+            { line: 'Nach „5.1 Gute Besserung“', reviewLabel: null });
     });
 
     test('boardSummary: a set counts only its own scored modes (organe has no schmerz)', () => {
@@ -100,7 +114,7 @@ export function runBoardsTests() {
             [boardKey('koerper', 'organe', 'herz', 'benennen')]: entry(1, NOW + 5),
         };
         const sum = boardSummary(board, k => store[k] || null, () => true, NOW);
-        assertEqual(sum, { total: 3, learned: 1, due: 0 });
+        assertEqual(sum, { total: 3, learned: 1, due: 0, lockedLabel: null });
     });
 
     test('reviewStart: first unlocked set and scored mode with a due item', () => {
@@ -128,7 +142,7 @@ export function runBoardsTests() {
                 [boardKey('f', 's', 'x.1', 'a')]: entry(1, NOW + 5), [boardKey('f', 's', 'x.2', 'a')]: entry(1, NOW - 1),
                 [boardKey('f', 's', 'x.1', 'b')]: entry(1, NOW + 5),
             };
-            assertEqual(boardSummary(fb, k => store[k] || null, () => false, NOW), { total: 2, learned: 2, due: 1 });
+            assertEqual(boardSummary(fb, k => store[k] || null, () => false, NOW), { total: 2, learned: 2, due: 1, lockedLabel: null });
             assertEqual(reviewStart(fb, k => store[k] || null, () => false, NOW), { setId: 's', modeId: 'a' });
         } finally { delete KINDS.fake2; BOARDS.splice(0, 1); }
     });

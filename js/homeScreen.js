@@ -299,7 +299,8 @@ function chapterRow(ch, all, actions) {
 }
 
 /** Texts of a board's card in Üben: the progress line and, when items are due, the "Wiederholen" label. */
-export function boardCard({ learned, total, due }) {
+export function boardCard({ learned, total, due, lockedLabel = null }) {
+    if (lockedLabel) return { line: `Nach „${lockedLabel}“`, reviewLabel: null };
     return { line: `${learned} von ${total} gelernt`, reviewLabel: due > 0 ? `Wiederholen (${due})` : null };
 }
 
