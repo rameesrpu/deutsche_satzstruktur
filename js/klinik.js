@@ -2,7 +2,8 @@
 // path to the Approbation. Pure helpers first (routeState, toggleStation, tileMode), then the renderers.
 // The route file is data/medical/approbation.json (stations with their sources and check dates).
 // The Anamnese tile opens a menu (renderAnamneseMenu); "Fragen sortieren" sorts standard questions
-// from data/medical/anamnese.json into the Anamnese sections (questionSortModel, on the sort screen).
+// from data/medical/anamnese.json into the Anamnese sections (questionSortModel, on the sort screen);
+// "Gespräch" lists the cases of data/medical/faelle/index.json (renderCaseList; the interview is caseScreen.js).
 
 export const KLINIK_ROUTE_FILE = 'data/medical/approbation.json';
 export const KLINIK_ROUTE_VERSION = 1; // mirrors the file's `version`; part of the URL as ?v=
@@ -115,7 +116,7 @@ function topBar(title, label, onClick, back = false) {
     const b = el('button', back ? 'board-back klinik-back' : 'klinik-close');
     b.type = 'button';
     b.setAttribute('aria-label', label);
-    if (back) b.textContent = '‹ Klinik'; else b.innerHTML = CLOSE_ICON;
+    if (back) b.textContent = `‹ ${back === true ? 'Klinik' : back}`; else b.innerHTML = CLOSE_ICON;
     b.addEventListener('click', onClick);
     bar.append(b, el('h1', 'klinik-title', title));
     return bar;
@@ -156,26 +157,51 @@ export function renderKlinik(root, state, actions) {
     root.replaceChildren(inner);
 }
 
+function menuTile(title, available, onClick, note = null) {
+    const b = el('button', 'klinik-tile');
+    b.type = 'button';
+    b.append(el('span', 'klinik-tile-title', title));
+    if (available) {
+        if (note) b.append(el('span', 'klinik-tile-level', note));
+        b.addEventListener('click', onClick);
+    } else {
+        b.classList.add('is-soon');
+        b.disabled = true;
+        b.append(el('span', 'klinik-tile-note', 'Gerade nicht verfügbar.'));
+    }
+    return b;
+}
+
 /**
- * Anamnese menu: the exercises of the Anamnese tile. Without the question file the buttons are off.
+ * Anamnese menu: the exercises of the Anamnese tile. Without the question file the buttons are off;
+ * "Gespräch" also needs the case list.
  * @param {HTMLElement} root
- * @param {{available: boolean}} state
- * @param {{sortQuestions: function(), back: function()}} actions
+ * @param {{available: boolean, cases?: ?{id: string, title: string, level: string}[]}} state
+ * @param {{sortQuestions: function(), openCases: function(), back: function()}} actions
  */
 export function renderAnamneseMenu(root, state, actions) {
     const inner = el('div', 'screen-inner klinik-inner');
     inner.append(topBar('Anamnese', 'Zurück', actions.back, true));
     const grid = el('div', 'klinik-tiles');
-    const b = el('button', 'klinik-tile');
-    b.type = 'button';
-    b.append(el('span', 'klinik-tile-title', 'Fragen sortieren'));
-    if (state.available) b.addEventListener('click', () => actions.sortQuestions());
-    else {
-        b.classList.add('is-soon');
-        b.disabled = true;
-        b.append(el('span', 'klinik-tile-note', 'Gerade nicht verfügbar.'));
-    }
-    grid.append(b);
+    const cases = state.cases || [];
+    grid.append(menuTile('Fragen sortieren', state.available, () => actions.sortQuestions()),
+        menuTile('Gespräch', state.available && cases.length > 0, () => actions.openCases(),
+            cases.length === 1 ? '1 Fall' : `${cases.length} Fälle`));
+    inner.append(grid);
+    root.replaceChildren(inner);
+}
+
+/**
+ * The cases of one exercise ("Gespräch"): one tile per case with its level.
+ * @param {HTMLElement} root
+ * @param {{title: string, cases: {id: string, title: string, level: string}[]}} state
+ * @param {{openCase: function(string), back: function()}} actions
+ */
+export function renderCaseList(root, state, actions) {
+    const inner = el('div', 'screen-inner klinik-inner');
+    inner.append(topBar(state.title, 'Zurück', actions.back, 'Anamnese'));
+    const grid = el('div', 'klinik-tiles');
+    for (const c of state.cases) grid.append(menuTile(c.title, true, () => actions.openCase(c.id), c.level));
     inner.append(grid);
     root.replaceChildren(inner);
 }

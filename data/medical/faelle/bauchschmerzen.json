@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "id": "bauchschmerzen",
+  "title": "Bauchschmerzen",
+  "level": "B1",
+  "patient": { "name": "Sophie Brandt", "age": 24, "job": "Studentin", "en": "Sophie Brandt, 24 years old, student" },
+  "interview": [
+    {
+      "section": "beschwerden", "question": "b-grund", "wrong": ["g-schlaf", "f-krebs"],
+      "answer": { "de": "Ich habe starke Bauchschmerzen.", "en": "I have bad stomach pain." },
+      "fact": { "de": "starke Bauchschmerzen", "en": "severe abdominal pain" },
+      "distractors": [
+        { "de": "starke Rückenschmerzen", "en": "severe back pain" },
+        { "de": "Schmerzen in der Brust", "en": "chest pain" }
+      ]
+    },
+    {
+      "section": "beschwerden", "question": "b-wo", "wrong": ["s-wohnen", "a-latex"],
+      "answer": { "de": "Zuerst um den Bauchnabel herum. Jetzt tut es rechts unten weh.", "en": "First around the belly button. Now it hurts on the lower right." },
+      "fact": { "de": "Beginn um den Nabel, jetzt rechter Unterbauch", "en": "started around the navel, now right lower abdomen" },
+      "distractors": [
+        { "de": "linker Unterbauch", "en": "left lower abdomen" },
+        { "de": "Oberbauch, Ausstrahlung in den Rücken", "en": "upper abdomen, spreading to the back" }
+      ]
+    },
+    {
+      "section": "beschwerden", "question": "b-seit", "wrong": ["v-unfall", "m-wie-oft"],
+      "answer": { "de": "Seit gestern Abend. Heute ist es schlimmer.", "en": "Since yesterday evening. Today it is worse." },
+      "fact": { "de": "seit gestern Abend, zunehmend", "en": "since yesterday evening, getting worse" },
+      "distractors": [
+        { "de": "seit drei Wochen", "en": "for three weeks" },
+        { "de": "seit heute Morgen, besser werdend", "en": "since this morning, getting better" }
+      ]
+    },
+    {
+      "section": "beschwerden", "question": "b-skala", "wrong": ["f-herz", "s-sport"],
+      "answer": { "de": "Ungefähr sieben. Beim Gehen und beim Husten tut es mehr weh.", "en": "About seven. It hurts more when I walk and when I cough." },
+      "fact": { "de": "Schmerzstärke 7/10, stärker bei Bewegung und Husten", "en": "pain 7/10, worse on movement and coughing" },
+      "distractors": [
+        { "de": "Schmerzstärke 3/10", "en": "pain 3/10" },
+        { "de": "besser bei Bewegung", "en": "better on movement" }
+      ]
+    },
+    {
+      "section": "beschwerden", "question": "b-begleit", "wrong": ["a-kontrastmittel", "v-impfung"],
+      "answer": { "de": "Mir ist schlecht und ich habe keinen Hunger. Heute Morgen habe ich einmal erbrochen.", "en": "I feel sick and I am not hungry. This morning I vomited once." },
+      "fact": { "de": "Übelkeit, Appetitlosigkeit, einmaliges Erbrechen", "en": "nausea, loss of appetite, vomited once" },
+      "distractors": [
+        { "de": "Durchfall seit drei Tagen", "en": "diarrhoea for three days" },
+        { "de": "Blut im Erbrochenen", "en": "blood in the vomit" }
+      ]
+    },
+    {
+      "section": "vorerkrankungen", "question": "v-vorerkrankungen", "wrong": ["s-familienstand", "g-nachtschweiss"],
+      "answer": { "de": "Nein, ich bin eigentlich immer gesund.", "en": "No, I am actually always healthy." },
+      "fact": { "de": "keine Vorerkrankungen", "en": "no previous illnesses" },
+      "distractors": [
+        { "de": "Asthma bronchiale", "en": "asthma" },
+        { "de": "Diabetes mellitus Typ 1", "en": "type 1 diabetes" }
+      ]
+    },
+    {
+      "section": "vorerkrankungen", "question": "v-operiert", "wrong": ["m-blutverduenner", "f-eltern"],
+      "answer": { "de": "Nein, ich wurde noch nie operiert.", "en": "No, I have never had an operation." },
+      "fact": { "de": "keine Voroperationen", "en": "no previous operations" },
+      "distractors": [
+        { "de": "Z. n. Appendektomie", "en": "status after removal of the appendix" },
+        { "de": "Z. n. Kaiserschnitt", "en": "status after caesarean section" }
+      ]
+    },
+    {
+      "section": "medikamente", "question": "m-regelmaessig", "wrong": ["a-reaktion", "s-kinder"],
+      "answer": { "de": "Ich nehme nur die Pille, jeden Tag.", "en": "I only take the pill, every day." },
+      "fact": { "de": "orale Kontrazeption (Pille)", "en": "oral contraception (the pill)" },
+      "distractors": [
+        { "de": "keine Medikamente", "en": "no medication" },
+        { "de": "täglich Ibuprofen", "en": "ibuprofen every day" }
+      ]
+    },
+    {
+      "section": "allergien", "question": "a-allergien", "wrong": ["b-ausstrahlung", "f-diabetes"],
+      "answer": { "de": "Nein, ich habe keine Allergien.", "en": "No, I don't have any allergies." },
+      "fact": { "de": "keine Allergien bekannt", "en": "no known allergies" },
+      "distractors": [
+        { "de": "Penicillinallergie", "en": "penicillin allergy" },
+        { "de": "Latexallergie", "en": "latex allergy" }
+      ]
+    },
+    {
+      "section": "vegetativ", "question": "g-fieber", "wrong": ["v-krankenhaus", "m-welche"],
+      "answer": { "de": "Ja, ein bisschen. Heute Morgen hatte ich 38,2 Grad.", "en": "Yes, a little. This morning I had 38.2 degrees." },
+      "fact": { "de": "Fieber bis 38,2 °C", "en": "fever up to 38.2 °C" },
+      "distractors": [
+        { "de": "kein Fieber", "en": "no fever" },
+        { "de": "Schüttelfrost und Fieber über 40 °C", "en": "shivering and fever over 40 °C" }
+      ]
+    },
+    {
+      "section": "familie", "question": "f-erkrankungen", "wrong": ["b-art", "a-medikamente"],
+      "answer": { "de": "Mein Vater hat hohen Blutdruck. Sonst sind alle gesund.", "en": "My father has high blood pressure. Otherwise everyone is healthy." },
+      "fact": { "de": "Vater: arterielle Hypertonie", "en": "father: high blood pressure" },
+      "distractors": [
+        { "de": "Mutter: Darmkrebs", "en": "mother: bowel cancer" },
+        { "de": "Bruder: Morbus Crohn", "en": "brother: Crohn's disease" }
+      ]
+    },
+    {
+      "section": "sozial", "question": "s-alkohol", "wrong": ["v-chronisch", "f-eltern-gesund"],
+      "answer": { "de": "Nein, ich trinke keinen Alkohol. Ich rauche auch nicht.", "en": "No, I don't drink alcohol. I don't smoke either." },
+      "fact": { "de": "kein Alkohol, Nichtraucherin", "en": "no alcohol, non-smoker" },
+      "distractors": [
+        { "de": "Raucherin, 10 Zigaretten am Tag", "en": "smoker, 10 cigarettes a day" },
+        { "de": "regelmäßiger Alkoholkonsum", "en": "regular alcohol use" }
+      ]
+    }
+  ],
+  "brief": [
+    { "section": "diagnosen", "de": "Akute Appendizitis", "en": "Acute appendicitis" },
+    { "section": "anamnese", "de": "Die Patientin stellte sich mit seit dem Vorabend bestehenden Bauchschmerzen vor.", "en": "The patient presented with abdominal pain that had started the evening before." },
+    { "section": "anamnese", "de": "Die Schmerzen begannen periumbilikal und wanderten im Verlauf in den rechten Unterbauch.", "en": "The pain started around the navel and later moved to the right lower abdomen." },
+    { "section": "anamnese", "de": "Begleitend bestanden Übelkeit, Appetitlosigkeit, einmaliges Erbrechen sowie Fieber bis 38,2 °C.", "en": "There was also nausea, loss of appetite, one episode of vomiting and fever up to 38.2 °C." },
+    { "section": "befund", "de": "Klinisch zeigte sich ein Druckschmerz über dem McBurney-Punkt mit positivem Loslassschmerz.", "en": "On examination there was tenderness over McBurney's point with positive rebound tenderness." },
+    { "section": "befund", "de": "Laborchemisch fanden sich eine Leukozytose von 14,2/nl und ein CRP von 45 mg/l.", "en": "Blood tests showed a raised white cell count of 14.2/nl and a CRP of 45 mg/l." },
+    { "section": "befund", "de": "Der Schwangerschaftstest war negativ.", "en": "The pregnancy test was negative." },
+    { "section": "befund", "de": "Sonografisch stellte sich eine verdickte, nicht komprimierbare Appendix dar.", "en": "Ultrasound showed a thickened, non-compressible appendix." },
+    { "section": "therapie", "de": "Am Aufnahmetag führten wir eine laparoskopische Appendektomie durch.", "en": "On the day of admission we performed a laparoscopic appendectomy." },
+    { "section": "therapie", "de": "Der postoperative Verlauf war komplikationslos.", "en": "The course after the operation was without complications." },
+    { "section": "empfehlung", "de": "Wir empfehlen eine Wundkontrolle und den Fadenzug am 10. postoperativen Tag beim Hausarzt.", "en": "We recommend a wound check and removal of the stitches by the GP on the 10th day after the operation." },
+    { "section": "empfehlung", "de": "Für zwei Wochen sollte die Patientin auf schweres Heben und Sport verzichten.", "en": "For two weeks the patient should avoid heavy lifting and sport." }
+  ],
+  "dokumentation": [
+    { "section": "beschwerden", "model": "Die Patientin klagt über seit gestern Abend bestehende, zunehmende Bauchschmerzen. Die Schmerzen begannen um den Nabel und sind jetzt im rechten Unterbauch lokalisiert, Schmerzstärke 7/10, stärker bei Bewegung und Husten. Begleitend Übelkeit, Appetitlosigkeit und einmaliges Erbrechen heute Morgen.", "en": "The patient reports abdominal pain since yesterday evening, getting worse. The pain began around the navel and is now in the right lower abdomen, pain 7/10, worse on movement and coughing. Also nausea, loss of appetite and one episode of vomiting this morning." },
+    { "section": "vorerkrankungen", "model": "Keine Vorerkrankungen, keine Voroperationen.", "en": "No previous illnesses, no previous operations." },
+    { "section": "medikamente", "model": "Orale Kontrazeption, sonst keine Dauermedikation.", "en": "Oral contraception, no other regular medication." },
+    { "section": "allergien", "model": "Keine Allergien bekannt.", "en": "No known allergies." },
+    { "section": "vegetativ", "model": "Fieber bis 38,2 °C seit heute Morgen, Appetitlosigkeit.", "en": "Fever up to 38.2 °C since this morning, loss of appetite." },
+    { "section": "familie", "model": "Vater: arterielle Hypertonie. Sonst familienanamnestisch keine Besonderheiten.", "en": "Father: high blood pressure. Otherwise nothing of note in the family history." },
+    { "section": "sozial", "model": "Studentin. Kein Alkoholkonsum, Nichtraucherin.", "en": "Student. No alcohol, non-smoker." }
+  ],
+  "vorstellung": {
+    "skeleton": "Ich möchte Ihnen Frau … vorstellen, eine …-jährige … . Sie kam heute wegen … zu uns. Die Schmerzen bestehen seit … und haben sich von … nach … verlagert. Begleitend … . Vorerkrankungen und Voroperationen … . An Medikamenten nimmt sie … . Allergien … . Mein Verdacht ist … . Differenzialdiagnostisch kommen … in Frage. Ich würde … veranlassen.",
+    "skeletonEn": "I would like to present Ms …, a …-year-old … . She came to us today because of … . The pain has been there since … and has moved from … to … . Also … . Previous illnesses and operations … . As medication she takes … . Allergies … . My suspected diagnosis is … . Differential diagnoses are … . I would arrange … .",
+    "model": "Ich möchte Ihnen Frau Sophie Brandt vorstellen, eine 24-jährige Studentin. Sie kam heute wegen starker Bauchschmerzen zu uns. Die Schmerzen bestehen seit gestern Abend, nehmen zu und haben sich vom Nabel in den rechten Unterbauch verlagert. Begleitend bestehen Übelkeit, Appetitlosigkeit, einmaliges Erbrechen und Fieber bis 38,2 °C. Vorerkrankungen und Voroperationen hat sie keine. An Medikamenten nimmt sie nur die Pille. Allergien sind nicht bekannt. Mein Verdacht ist eine akute Appendizitis. Differenzialdiagnostisch kommen eine Eileiterschwangerschaft, eine Ovarialzyste oder ein Harnwegsinfekt in Frage. Ich würde eine körperliche Untersuchung, ein Labor mit Blutbild und CRP, einen Urinstatus mit Schwangerschaftstest und eine Sonografie des Abdomens veranlassen und die Kollegen der Chirurgie hinzuziehen.",
+    "modelEn": "I would like to present Ms Sophie Brandt, a 24-year-old student. She came to us today because of severe abdominal pain. The pain has been there since yesterday evening, is getting worse and has moved from the navel to the right lower abdomen. She also has nausea, loss of appetite, one episode of vomiting and fever up to 38.2 °C. She has no previous illnesses or operations. As medication she only takes the pill. No known allergies. My suspected diagnosis is acute appendicitis. Differential diagnoses are an ectopic pregnancy, an ovarian cyst or a urinary tract infection. I would arrange a physical examination, blood tests with a full blood count and CRP, a urine test with a pregnancy test and an abdominal ultrasound, and I would call in the surgical colleagues."
+  }
+}

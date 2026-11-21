@@ -241,3 +241,30 @@
  * @property {number[]} [area] [x, y, w, h] percent rect of the drawn place (a ward room): a tap inside it answers this item
  *   whatever the distance to the spot (the smallest area wins when areas nest); outside every area the nearest spot within 9 % answers
  */
+
+/**
+ * A Klinik case (data/medical/faelle/<id>.json, listed in index.json with the same id/title/level/version;
+ * logic in caseFlow.js, interview in caseScreen.js). Question ids are those of data/medical/anamnese.json.
+ * Every German string has its English (germanStrings() lists them; a test checks each).
+ * @typedef {Object} Case
+ * @property {number} version   bump on edit, together with its index.json entry
+ * @property {string} id
+ * @property {string} title
+ * @property {string} level     'B1' | 'B2'
+ * @property {{name: string, age: number, job: string, en: string}} patient  `en` = the card line in English
+ * @property {CaseStep[]} interview  in interview order; a section without a step is "nicht erhoben"
+ * @property {{section: 'diagnosen'|'anamnese'|'befund'|'therapie'|'empfehlung', de: string, en: string}[]} brief  the Arztbrief sentences
+ * @property {{section: string, model: string, en: string}[]} dokumentation  model text per Anamnese section id
+ * @property {{skeleton: string, skeletonEn: string, model: string, modelEn: string}} vorstellung  Arzt-Arzt presentation: gap skeleton (…) and model
+ */
+
+/**
+ * One interview step of a case.
+ * @typedef {Object} CaseStep
+ * @property {string} section   Anamnese section id
+ * @property {string} question  the right question id (of this section, directly or via `also`)
+ * @property {[string, string]} wrong  question ids from other sections or unfitting at this point
+ * @property {{de: string, en: string}} answer  the patient's answer (B1)
+ * @property {{de: string, en: string}} fact    the note that belongs in the form
+ * @property {[{de: string, en: string}, {de: string, en: string}]} distractors  notes that do not follow from the answer
+ */
