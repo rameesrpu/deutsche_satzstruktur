@@ -300,7 +300,7 @@ Parked (small, known):
 - [x] Task 1: Sort exercise — commit `ebaf5d6`
 - [x] Task 2: Anamnese sections and questions — commit `82f6b5f` (owner stop skipped; see "Needs owner review")
 - [x] Task 3: Cases and the interview — commits `18a574d`, `e587097` (owner stop skipped; see "Needs owner review")
-- [ ] Task 4: Arztbrief
+- [x] Task 4: Arztbrief — commit `f8c6adf`
 - [ ] Task 5: FSP practice run — **owner stop** (doctor's review)
 - [ ] Task 6: Docs and ship
 
