@@ -50,7 +50,7 @@ the owner's answer or review.
 | 4b | Preposition scene | [plan](superpowers/plans/2026-11-16-boards-preposition-scene.md) | done (2026-11-21; branch `boards-preposition-scene`, on top of `boards-body-map`, not merged) | 4a |
 | 4c | Timeline | [plan](superpowers/plans/2026-11-16-boards-timeline.md) | done (2026-11-21; branch `boards-timeline`, on top of `boards-preposition-scene`, not merged) | 4a |
 | 5a | Klinik: maps and terms | [plan](superpowers/plans/2026-11-16-klinik-maps-terms.md) · [design](superpowers/specs/2026-11-16-medical-track-design.md) | done (2026-11-21; branch `klinik-maps-terms`, on top of `boards-timeline`, not merged) | 4a |
-| 5b | Klinik: Anamnese, Arztbrief, FSP | [plan](superpowers/plans/2026-11-16-klinik-anamnese-fsp.md) | not started | 5a (better after 2 and 3) |
+| 5b | Klinik: Anamnese, Arztbrief, FSP | [plan](superpowers/plans/2026-11-16-klinik-anamnese-fsp.md) | done (2026-11-21; branch `klinik-anamnese-fsp`, on top of `klinik-maps-terms`, not merged) | 5a (better after 2 and 3) |
 
 Recommended order: 1 → 2 → 3 → 4a → 4b → 4c → 5a → 5b. Project 2 touches only scripts and
 story data, so it can also run beside project 1. The order is a recommendation, not an owner
@@ -302,7 +302,30 @@ Parked (small, known):
 - [x] Task 3: Cases and the interview — commits `18a574d`, `e587097` (owner stop skipped; see "Needs owner review")
 - [x] Task 4: Arztbrief — commit `f8c6adf`
 - [x] Task 5: FSP practice run — commit `32db25b` (owner stop skipped; see "Needs owner review")
-- [ ] Task 6: Docs and ship
+- [x] Task 6: Docs and ship — commit see `git log` ("Document Anamnese, Arztbrief and FSP practice, bump versions")
+- [ ] Whole-branch review (Opus) and its fix wave
+- [ ] Merge to `main` — the owner's step, after `klinik-maps-terms` and the review items below
+
+What the reviews changed against the plan (rulings, each can be undone):
+- R1: the Klinik tile `open` takes `anamnese`, `arztbrief` and `fsp` (the plan did not name the type).
+- R2: `dokumentation` entries and `vorstellung` carry English fields (`en`, `skeletonEn`, `modelEn`), so every German sentence has an English twin.
+- R3: `interviewSteps(case, anamnese, rng = Math.random)` takes the rng for ordering options.
+- R4: the owner stops of Tasks 2, 3 and 5 became review sheets in `docs/review/5b-*.md`.
+- R5: commit trailers name the implementer's model, as in 5a.
+- R6: the first case also asks the last period, Stuhlgang and Wasserlassen, so it has 13 steps (plan: 10–12); anamnese v3 added three questions, and Aktuelle Beschwerden may hold up to 10.
+- R7: case patients have `gender` (`f`/`m`); the Arztbrief hint and the patient card say "die Patientin"/"der Patient" by it.
+- The menstruation sentence of the first letter is filed under Anamnese; the β-HCG stays Befund.
+- The interview panel and the sort tray are sticky bottom docks with their own scroll, so questions and the form stay reachable on a phone.
+- The FSP clock is per part and resumable (time away does not count; it stops at `Vergleichen` and `Ich bin fertig`); the draft also keeps score, ratings and presented state; leaving part 1 restarts the interview but keeps the clock.
+- "Sturz auf die Hand" is the title of the `handgelenk` case (the other titles name the complaint).
+- `Anhören` (part 3 and the 🔊 buttons) always speaks; the automatic speech follows "Aussprache".
+
+Parked (small, known):
+- Nested interactive markup in sort zones; empty zones are not validated; no DOM tests for the sort, case and exam screens (pure helpers have tests).
+- `also` is applied inconsistently across the question list (Nachtschweiß, Stuhlgang could count twice); the question list is cached as null after a failed fetch until reload.
+- `formState` and `interviewSteps` filter bad data differently; no test that `wrong` questions are wrong beyond the section check.
+- No pagehide save in the exam (a reload resumes from the last save); part-2 ratings are keyed by section index.
+- The Arztbrief letter title appears twice; `briefHint` uses only the chip's first zone.
 
 ## Needs owner review
 
@@ -587,3 +610,12 @@ Medical content in this project is **not yet checked by a doctor**.
   (woman) with suspected appendicitis: 13 interview steps (the plan said 10–12; the last period, stool
   and urine were added), notes, the Arztbrief, the documentation and the presentation, German with
   English. Check: medical plausibility, wording a German doctor uses, B1 patient answers.
+- **Two more cases and the FSP practice run** (owner stop that was skipped; doctor's review): read
+  [docs/review/5b-faelle-brust-handgelenk.md](review/5b-faelle-brust-handgelenk.md) — Brustschmerzen
+  (58-year-old bus driver, B2) and Sturz auf die Hand (67-year-old, apixaban, B1), plus three new
+  questions in the Anamnese list. Check the points at the end: stable vs unstable angina, Lungenembolie not asked,
+  numbness and hand dominance not asked, "Fourchette-Fehlstellung".
+- **Phone checklist for 5b** (400×850 or a real phone): Fragen sortieren, tray reachable after many
+  placements; Gespräch with and without a German voice (text only without); Arztbrief, sorting then the
+  letter page; FSP run: leave in part 2 and come back (same part, same texts, clock where it was), the
+  comparison readable (her text above the Mustertext), `Anhören` in part 3.

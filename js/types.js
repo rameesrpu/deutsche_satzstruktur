@@ -251,7 +251,7 @@
  * @property {string} id
  * @property {string} title
  * @property {string} level     'B1' | 'B2'
- * @property {{name: string, age: number, job: string, en: string}} patient  `en` = the card line in English
+ * @property {{name: string, age: number, job: string, gender: 'f'|'m', en: string}} patient  `gender`: 'f' | 'm' (wording of the hints); `en` = the card line in English
  * @property {CaseStep[]} interview  in interview order; a section without a step is "nicht erhoben"
  * @property {{section: 'diagnosen'|'anamnese'|'befund'|'therapie'|'empfehlung', de: string, en: string}[]} brief  the Arztbrief sentences
  * @property {{section: string, model: string, en: string}[]} dokumentation  model text per Anamnese section id

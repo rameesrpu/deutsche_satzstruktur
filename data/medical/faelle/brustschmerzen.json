@@ -1,11 +1,12 @@
 {
-  "version": 1,
+  "version": 2,
   "id": "brustschmerzen",
   "title": "Brustschmerzen",
   "level": "B2",
   "patient": {
     "name": "Thomas Keller",
     "age": 58,
+    "gender": "m",
     "job": "Busfahrer",
     "en": "Thomas Keller, 58 years old, bus driver"
   },

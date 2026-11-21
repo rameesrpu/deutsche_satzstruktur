@@ -293,6 +293,27 @@ Do not push.
 To fix a chapter, drill or glossary: do step 1, skip step 2 unless the plot changes, then do steps
 3–11 for what changed. The review sheet stop (step 10) still applies.
 
+## Writing a case
+
+A Klinik case (`data/medical/faelle/<id>.json`, listed in `index.json`) is an invented patient for the
+Anamnese interview, the Arztbrief and the FSP practice run. Not a story chapter: no build script.
+
+1. **Format.** Copy `bauchschmerzen.json` and read `Case` in `js/types.js`. `patient` has `name`, `age`, `job`,
+   `gender` (`f` or `m`) and `en`. `interview` has 10–14 steps, each a question id from
+   `data/medical/anamnese.json`, `wrong` ids of questions that do not fit at that point, the patient's `answer`
+   (B1, short), the note `fact` and `distractors`. `brief` holds the Arztbrief sentences by section,
+   `dokumentation` a model text per covered Anamnese section, `vorstellung` the skeleton and the model.
+   Every German sentence has an English `en`. Patients and hospitals are invented; no medical advice.
+2. **Register.** Patient answers at B1; doctor questions, letter sentences and models as a German doctor writes.
+   Halal; "Trinken Sie Alkohol?" is a standard question and stays.
+3. **Register the case.** Add `{id, title, level, version}` to `index.json`, raise the index `version` and
+   `CASES_INDEX_VERSION` in `js/caseFlow.js`. Editing a case: bump its `version` and its index entry.
+4. **Review sheet.** Write `docs/review/5b-<name>.md`: the case in full, German with English, headed
+   "Medical content — not yet checked by a doctor", with a "What to check" list. Add it to
+   `docs/roadmap.md` under "Needs owner review".
+5. **The doctor's review.** Every case and question list is checked by a doctor before it ships. After her
+   corrections edit the JSON, bump versions, run `gjs -m tests/run.js`.
+
 ## Owner corrections
 
 Rules learned from the owner's reviews. Add new ones here.

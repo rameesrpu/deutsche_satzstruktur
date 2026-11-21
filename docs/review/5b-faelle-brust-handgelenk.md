@@ -501,3 +501,10 @@ The interview has 13 steps.
 6. **German a doctor would use:** Do the notes, the letter sentences, the documentation and the presentation sound like a German doctor (Arztbrief style, abbreviations such as „1-0-0“, „Z. n.“)?
 7. **B1 patient language:** Are the patient's answers short, natural everyday German at B1?
 8. **Wrong options:** Is each "wrong" question really wrong at that point, and each wrong note clearly not what the patient said?
+
+### Further points to check (from the implementation review)
+
+- **Brustschmerzen, stable angina:** the case lists „stabile Angina pectoris“ for pain that began two weeks ago. Pain of recent onset is arguably new-onset angina, i.e. an unstable pattern (instabile Angina / ACS). Which wording would you keep?
+- **Brustschmerzen, Lungenembolie:** it is in the differential diagnoses, but the interview does not ask about it (no question on leg swelling, long travel or immobilisation, previous thrombosis). Add a question or drop it from the differential?
+- **Handgelenk, numbness and hand dominance:** the interview has no question on numbness or tingling in the fingers (median nerve) and none on right- or left-handedness. Add them?
+- **Handgelenk, „Fourchette-Fehlstellung“:** is that the wording a German doctor would use for the typical dorsal displacement of a Colles fracture (Bajonett- or Fourchette-Stellung), and does the case use it correctly?

@@ -1472,7 +1472,7 @@ class DeutschApp {
             root.scrollTop = 0;
             renderLetter(root, { title: `Arztbrief: ${caseData.title}`, sections: letterSections(caseData) }, { done: back });
         };
-        renderSortScreen(root, { model: briefSortModel(caseData), total: 1, index: 0, hint: briefHint },
+        renderSortScreen(root, { model: briefSortModel(caseData), total: 1, index: 0, hint: (chip, zone) => briefHint(chip, zone, caseData.patient.gender) },
             { onDone: letter, onClose: back });
     }
 

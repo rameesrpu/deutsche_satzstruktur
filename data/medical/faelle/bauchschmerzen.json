@@ -1,9 +1,9 @@
 {
-  "version": 3,
+  "version": 4,
   "id": "bauchschmerzen",
   "title": "Bauchschmerzen",
   "level": "B1",
-  "patient": { "name": "Sophie Brandt", "age": 24, "job": "Studentin", "en": "Sophie Brandt, 24 years old, student" },
+  "patient": { "name": "Sophie Brandt", "age": 24, "gender": "f", "job": "Studentin", "en": "Sophie Brandt, 24 years old, student" },
   "interview": [
     {
       "section": "beschwerden", "question": "b-grund", "wrong": ["g-schlaf", "f-krebs"],

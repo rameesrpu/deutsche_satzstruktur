@@ -60,7 +60,7 @@ export function runCaseFlowTests() {
 // A small case without Familienanamnese (review focus 2)
 const SMALL_CASE = {
     id: 'test', title: 'Test', level: 'B1', version: 1,
-    patient: { name: 'Frau Test', age: 30, job: 'Lehrerin', en: 'Ms Test, 30, teacher' },
+    patient: { name: 'Frau Test', age: 30, job: 'Lehrerin', gender: 'f', en: 'Ms Test, 30, teacher' },
     interview: [
         { section: 'beschwerden', question: 'b-grund', wrong: ['s-rauchen', 'a-allergien'],
             answer: { de: 'Mir tut der Bauch weh.', en: 'My stomach hurts.' },
@@ -158,6 +158,7 @@ function runCaseTests(anamnese) {
         test(`faelle/${entry.id}: id, title, level and version match index.json`, () => {
             assertEqual([c.id, c.title, c.level, c.version], [entry.id, entry.title, entry.level, entry.version]);
             assert(typeof c.patient.name === 'string' && c.patient.age > 0 && c.patient.job && c.patient.en, 'patient');
+            assert(['f', 'm'].includes(c.patient.gender), 'patient.gender is f or m');
         });
         test(`faelle/${entry.id}: question ids exist and each question belongs to its section`, () => {
             const sectionIds = anamnese.sections.map(s => s.id);
@@ -203,6 +204,8 @@ function runCaseTests(anamnese) {
             befund: 'Das hat die Ärztin festgestellt: Befund.', therapie: 'Das wurde gemacht: Therapie und Verlauf.',
             empfehlung: 'Das soll danach passieren: Empfehlung.' };
         for (const [id, text] of Object.entries(hints)) assertEqual(briefHint({ zones: [id] }, 'befund'), text);
+        assertEqual(briefHint({ zones: ['anamnese'] }, 'befund', 'f'), 'Das hat die Patientin erzählt: Anamnese.');
+        assertEqual(briefHint({ zones: ['anamnese'] }, 'befund', 'm'), 'Das hat der Patient erzählt: Anamnese.');
     });
 
     test('letterSections: five headings, sentences in the file\'s order, empty sections left out', () => {

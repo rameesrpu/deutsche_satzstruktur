@@ -4,7 +4,7 @@
 
 export const CASES_DIR = 'data/medical/faelle';
 export const CASES_INDEX_FILE = `${CASES_DIR}/index.json`;
-export const CASES_INDEX_VERSION = 2; // mirrors index.json's `version`; part of the URL as ?v=
+export const CASES_INDEX_VERSION = 3; // mirrors index.json's `version`; part of the URL as ?v=
 
 /** URL of a case file; `version` comes from its index.json entry (mirrors the file). */
 export const caseUrl = entry => `${CASES_DIR}/${entry.id}.json?v=${entry.version}`;
@@ -33,14 +33,21 @@ export function briefSortModel(caseData) {
 
 const BRIEF_HINTS = {
     diagnosen: 'Eine Diagnose steht ganz oben.',
-    anamnese: 'Das hat die Patientin erzählt: Anamnese.',
+    anamnese: 'Das hat die Patientin erzählt: Anamnese.', // the patient's gender picks the wording, see briefHint
     befund: 'Das hat die Ärztin festgestellt: Befund.',
     therapie: 'Das wurde gemacht: Therapie und Verlauf.',
     empfehlung: 'Das soll danach passieren: Empfehlung.',
 };
 
-/** Hint after a wrong drop: fixed text by the chip's right section (its first zone). */
-export const briefHint = (chip, zoneId) => BRIEF_HINTS[chip.zones[0]] || '';
+/** "die Patientin" / "der Patient" by the case patient's `gender` ('m' = male, else female). */
+export const patientNoun = gender => (gender === 'm' ? 'der Patient' : 'die Patientin');
+
+/** Hint after a wrong drop: fixed text by the chip's right section (its first zone); `gender` = the case patient's. */
+export function briefHint(chip, zoneId, gender) {
+    const zone = chip.zones[0];
+    if (zone === 'anamnese') return `Das hat ${patientNoun(gender)} erzählt: Anamnese.`;
+    return BRIEF_HINTS[zone] || '';
+}
 
 /** The finished letter: the sections that have sentences, each with its sentences in the file's order. */
 export function letterSections(caseData) {

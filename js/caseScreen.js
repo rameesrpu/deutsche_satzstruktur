@@ -11,7 +11,7 @@
  * out turns it red, nothing is cut off.
  */
 
-import { interviewSteps, formState, interviewScore, scoreLine, patientLine, EXAM_PARTS, RATINGS, examState, examSummary,
+import { patientNoun, interviewSteps, formState, interviewScore, scoreLine, patientLine, EXAM_PARTS, RATINGS, examState, examSummary,
     examSections, loadDraft, saveDraft, clearDraft } from './caseFlow.js';
 import { progressSegments } from './playScreen.js';
 import { gameSounds } from './sound.js';
@@ -153,7 +153,7 @@ export function renderInterview(root, { caseData, anamnese, clock = null, headin
         if (clockEl) bar.append(clockEl);
 
         const patient = el('section', 'case-patient');
-        patient.setAttribute('aria-label', 'Patientin');
+        patient.setAttribute('aria-label', patientNoun(caseData.patient.gender) === 'der Patient' ? 'Patient' : 'Patientin');
         patient.append(sentence('patient', patientLine(caseData.patient), caseData.patient.en, 'case-patient-line'));
 
         const form = el('section', 'case-form');
@@ -412,7 +412,7 @@ export function renderExam(root, { caseData, anamnese, storage, rng = Math.rando
         inner.append(bar);
         if (!atEnd) inner.append(el('p', 'exam-part', partHeading(draft.part)));
         const patient = el('section', 'case-patient');
-        patient.setAttribute('aria-label', 'Patientin');
+        patient.setAttribute('aria-label', patientNoun(caseData.patient.gender) === 'der Patient' ? 'Patient' : 'Patientin');
         patient.append(tapText(patientLine(caseData.patient), caseData.patient.en, 'case-patient-line'));
         inner.append(patient);
         root.replaceChildren(inner);
